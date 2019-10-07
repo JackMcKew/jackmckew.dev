@@ -110,51 +110,33 @@
 
 
   <div>
-    <!-- wp:paragraph -->
-
-<p>Following last 2 weeks’ posts (<a href="https://jmckew.com/2019/04/12/python-for-the-finance-industry/">Python for the Finance Industry</a> &amp; <a href="https://jmckew.com/2019/04/19/portfolio-balancing-with-historical-stock-data/">Portfolio Balancing with Historical Stock Data</a>), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.</p>
+    <!-- wp:paragraph --><html><head></head><body><p>Following last 2 weeks’ posts (<a href="https://jmckew.com/2019/04/12/python-for-the-finance-industry/">Python for the Finance Industry</a> &amp; <a href="https://jmckew.com/2019/04/19/portfolio-balancing-with-historical-stock-data/">Portfolio Balancing with Historical Stock Data</a>), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>This post is to demonstrate a method in balancing portfolios that does not depend on generating random portfolios, but rather mathematically determining the extremities of boundaries for effective portfolios using the <a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html">SciPy optimize function</a> (similar to that of <a href="https://support.office.com/en-ie/article/define-and-solve-a-problem-by-using-solver-5d1a388f-079d-43ac-a7eb-f63e45925040">Excel's 'solver'</a>).</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Returning to last weeks' post when the budget allocations to assets were determined from randomly generated portfolios, it was presented on the graph below:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":268} -->
-
-<p><img alt="" class="wp-image-268" src="https://jmckew.com/wp-content/uploads/2019/04/image-2.png"></p>
+<p><img alt="" class="wp-image-268" src="https://jmckew.com/wp-content/uploads/2019/04/image-2.png"/></p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>From this plot, it can be visualized that it forms an arch line between the yellow and red crosses. This line is called the <a href="https://www.investopedia.com/terms/e/efficientfrontier.asp">efficient frontier</a>. The efficient frontier represents the set of optimal portfolios that offer the highest expected return for a defined level of risk or the lowest risk for a given level of expected return. Simply this means, all the dots (portfolios) to the right of the line will give you a higher risk for the same returns.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>First of all we must mathematically determine the portfolio with the maximum Sharpe ratio as the greater a portfolio's Sharpe ratio, the better it's risk-adjusted performance. Sharpe ratio is calculated using the formula below:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":278,"align":"center"} -->
-
 <p>::: {.wp-block-image}
 <img alt="\
-&lt;https://www.investopedia.com/terms/s/sharperatio.asp&gt;" class="wp-image-278" src="https://jmckew.com/wp-content/uploads/2019/04/chrome_dUqVqnTloj.png">
+&lt;https://www.investopedia.com/terms/s/sharperatio.asp&gt;" class="wp-image-278" src="https://jmckew.com/wp-content/uploads/2019/04/chrome_dUqVqnTloj.png"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>To find the maximum of the Sharpe Ratio programmatically we follow these steps:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>Firstly, define the formula as the function neg_sharpe_ratio (take note that to find the <a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html#constrained-minimization-of-multivariate-scalar-functions-minimize">maximum of function in SciPy</a>, we use the minimize function with an inverse sign),</li>
 <li>In the max_sharpe_ratio function, define arguments to be passed into the SciPy minimize function:<ul>
@@ -169,236 +151,196 @@
 <li>The result from the minimize function is returned as a <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult">OptimizeResult</a> type.</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">neg_sharpe_ratio</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">risk_free_rate</span><span class="ss">)</span>:
-    <span class="nv">returns</span>, <span class="nv">volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="k">return</span> <span class="o">-</span><span class="ss">(</span><span class="nv">returns</span> <span class="o">-</span> <span class="nv">risk_free_rate</span><span class="ss">)</span> <span class="o">/</span> <span class="nv">volatility</span>
-
-<span class="nv">def</span> <span class="nv">max_sharpe_ratio</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>:
-    <span class="nv">num_assets</span> <span class="o">=</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">average_returns</span><span class="ss">)</span>
-    <span class="nv">args</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">risk_free_rate</span><span class="ss">)</span>
-    <span class="nv">constraints</span> <span class="o">=</span> <span class="ss">(</span>{<span class="s1">&#39;</span><span class="s">type</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">eq</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">fun</span><span class="s1">&#39;</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">np</span>.<span class="nv">sum</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="mi">1</span>}<span class="ss">)</span>
-    <span class="nv">bound</span> <span class="o">=</span> <span class="ss">(</span><span class="mi">0</span>,<span class="mi">1</span><span class="ss">)</span>
-    <span class="nv">bounds</span> <span class="o">=</span> <span class="nv">tuple</span><span class="ss">(</span><span class="nv">bound</span> <span class="k">for</span> <span class="nv">asset</span> <span class="nv">in</span> <span class="nv">range</span><span class="ss">(</span><span class="nv">num_assets</span><span class="ss">))</span>
-    <span class="nb">result</span> <span class="o">=</span> <span class="nv">sco</span>.<span class="nv">minimize</span><span class="ss">(</span><span class="nv">neg_sharpe_ratio</span>,<span class="nv">num_assets</span><span class="o">*</span>[<span class="mi">1</span><span class="o">/</span><span class="nv">num_assets</span>,],<span class="nv">args</span><span class="o">=</span><span class="nv">args</span>,<span class="nv">method</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">SLSQP</span><span class="s1">&#39;</span>,<span class="nv">bounds</span><span class="o">=</span><span class="nv">bounds</span>,<span class="nv">constraints</span><span class="o">=</span><span class="nv">constraints</span><span class="ss">)</span>
-    <span class="k">return</span> <span class="nb">result</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">def</span> <span class="nv">neg_sharpe_ratio</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">risk_free_rate</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="nv">returns</span>, <span class="nv">volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="o">-</span><span class="ss">(</span><span class="nv">returns</span> <span class="o">-</span> <span class="nv">risk_free_rate</span><span class="ss">)</span> <span class="o">/</span> <span class="nv">volatility</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">def</span> <span class="nv">max_sharpe_ratio</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="nv">num_assets</span> <span class="o">=</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">average_returns</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">args</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">risk_free_rate</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">constraints</span> <span class="o">=</span> <span class="ss">(</span>{<span class="s1">'</span><span class="s">type</span><span class="s1">'</span>: <span class="s1">'</span><span class="s">eq</span><span class="s1">'</span>, <span class="s1">'</span><span class="s">fun</span><span class="s1">'</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">np</span>.<span class="nv">sum</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="mi">1</span>}<span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">bound</span> <span class="o">=</span> <span class="ss">(</span><span class="mi">0</span>,<span class="mi">1</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">bounds</span> <span class="o">=</span> <span class="nv">tuple</span><span class="ss">(</span><span class="nv">bound</span> <span class="k">for</span> <span class="nv">asset</span> <span class="nv">in</span> <span class="nv">range</span><span class="ss">(</span><span class="nv">num_assets</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nb">result</span> <span class="o">=</span> <span class="nv">sco</span>.<span class="nv">minimize</span><span class="ss">(</span><span class="nv">neg_sharpe_ratio</span>,<span class="nv">num_assets</span><span class="o">*</span>[<span class="mi">1</span><span class="o">/</span><span class="nv">num_assets</span>,],<span class="nv">args</span><span class="o">=</span><span class="nv">args</span>,<span class="nv">method</span><span class="o">=</span><span class="s1">'</span><span class="s">SLSQP</span><span class="s1">'</span>,<span class="nv">bounds</span><span class="o">=</span><span class="nv">bounds</span>,<span class="nv">constraints</span><span class="o">=</span><span class="nv">constraints</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="nb">result</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>Similarly to the maximum sharpe ratio we do the same for determining the minimum volatility portfolio programmatically. We minimise volatility by trying different weightings on our asset allocations to find the minima.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">portfolio_volatility</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>:
-    <span class="k">return</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>[<span class="mi">1</span>]
-
-<span class="nv">def</span> <span class="nv">min_variance</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>:
-    <span class="nv">num_assets</span> <span class="o">=</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">average_returns</span><span class="ss">)</span>
-    <span class="nv">args</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="nv">constraints</span> <span class="o">=</span> <span class="ss">(</span>{<span class="s1">&#39;</span><span class="s">type</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">eq</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">fun</span><span class="s1">&#39;</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">np</span>.<span class="nv">sum</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="mi">1</span>}<span class="ss">)</span>
-    <span class="nv">bound</span> <span class="o">=</span> <span class="ss">(</span><span class="mi">0</span>.<span class="mi">0</span>,<span class="mi">1</span>.<span class="mi">0</span><span class="ss">)</span>
-    <span class="nv">bounds</span> <span class="o">=</span> <span class="nv">tuple</span><span class="ss">(</span><span class="nv">bound</span> <span class="k">for</span> <span class="nv">asset</span> <span class="nv">in</span> <span class="nv">range</span><span class="ss">(</span><span class="nv">num_assets</span><span class="ss">))</span>
-
-    <span class="nb">result</span> <span class="o">=</span> <span class="nv">sco</span>.<span class="nv">minimize</span><span class="ss">(</span><span class="nv">portfolio_volatility</span>, <span class="nv">num_assets</span><span class="o">*</span>[<span class="mi">1</span>.<span class="o">/</span><span class="nv">num_assets</span>,], <span class="nv">args</span><span class="o">=</span><span class="nv">args</span>, <span class="nv">method</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">SLSQP</span><span class="s1">&#39;</span>, <span class="nv">bounds</span><span class="o">=</span><span class="nv">bounds</span>, <span class="nv">constraints</span><span class="o">=</span><span class="nv">constraints</span><span class="ss">)</span>
-
-    <span class="k">return</span> <span class="nb">result</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">def</span> <span class="nv">portfolio_volatility</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="k">return</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>[<span class="mi">1</span>]</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">def</span> <span class="nv">min_variance</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="nv">num_assets</span> <span class="o">=</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">average_returns</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">args</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">constraints</span> <span class="o">=</span> <span class="ss">(</span>{<span class="s1">'</span><span class="s">type</span><span class="s1">'</span>: <span class="s1">'</span><span class="s">eq</span><span class="s1">'</span>, <span class="s1">'</span><span class="s">fun</span><span class="s1">'</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">np</span>.<span class="nv">sum</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="mi">1</span>}<span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">bound</span> <span class="o">=</span> <span class="ss">(</span><span class="mi">0</span>.<span class="mi">0</span>,<span class="mi">1</span>.<span class="mi">0</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">bounds</span> <span class="o">=</span> <span class="nv">tuple</span><span class="ss">(</span><span class="nv">bound</span> <span class="k">for</span> <span class="nv">asset</span> <span class="nv">in</span> <span class="nv">range</span><span class="ss">(</span><span class="nv">num_assets</span><span class="ss">))</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nb">result</span> <span class="o">=</span> <span class="nv">sco</span>.<span class="nv">minimize</span><span class="ss">(</span><span class="nv">portfolio_volatility</span>, <span class="nv">num_assets</span><span class="o">*</span>[<span class="mi">1</span>.<span class="o">/</span><span class="nv">num_assets</span>,], <span class="nv">args</span><span class="o">=</span><span class="nv">args</span>, <span class="nv">method</span><span class="o">=</span><span class="s1">'</span><span class="s">SLSQP</span><span class="s1">'</span>, <span class="nv">bounds</span><span class="o">=</span><span class="nv">bounds</span>, <span class="nv">constraints</span><span class="o">=</span><span class="nv">constraints</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">return</span> <span class="nb">result</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>As above, we can also draw a line which depicts the efficient frontier for the portfolios for a given risk rate. Below some functions are defined for computing the efficient frontier. The first function, efficient_return is calculating the most efficient portfolio for a given target return, and the second function efficient frontier is compiling the most efficient portfolio for a range of targets.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">efficient_return</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">target</span><span class="ss">)</span>:
-    <span class="nv">num_assets</span> <span class="o">=</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">average_returns</span><span class="ss">)</span>
-    <span class="nv">args</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>
-
-    <span class="nv">def</span> <span class="nv">portfolio_return</span><span class="ss">(</span><span class="nv">weights</span><span class="ss">)</span>:
-        <span class="k">return</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>[<span class="mi">0</span>]
-
-    <span class="nv">constraints</span> <span class="o">=</span> <span class="ss">(</span>{<span class="s1">&#39;</span><span class="s">type</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">eq</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">fun</span><span class="s1">&#39;</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">portfolio_return</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="nv">target</span>},
-                   {<span class="s1">&#39;</span><span class="s">type</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">eq</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">fun</span><span class="s1">&#39;</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">np</span>.<span class="nv">sum</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="mi">1</span>}<span class="ss">)</span>
-    <span class="nv">bounds</span> <span class="o">=</span> <span class="nv">tuple</span><span class="ss">((</span><span class="mi">0</span>,<span class="mi">1</span><span class="ss">)</span> <span class="k">for</span> <span class="nv">asset</span> <span class="nv">in</span> <span class="nv">range</span><span class="ss">(</span><span class="nv">num_assets</span><span class="ss">))</span>
-    <span class="nb">result</span> <span class="o">=</span> <span class="nv">sco</span>.<span class="nv">minimize</span><span class="ss">(</span><span class="nv">portfolio_volatility</span>, <span class="nv">num_assets</span><span class="o">*</span>[<span class="mi">1</span>.<span class="o">/</span><span class="nv">num_assets</span>,], <span class="nv">args</span><span class="o">=</span><span class="nv">args</span>, <span class="nv">method</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">SLSQP</span><span class="s1">&#39;</span>, <span class="nv">bounds</span><span class="o">=</span><span class="nv">bounds</span>, <span class="nv">constraints</span><span class="o">=</span><span class="nv">constraints</span><span class="ss">)</span>
-    <span class="k">return</span> <span class="nb">result</span>
-
-
-<span class="nv">def</span> <span class="nv">efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">returns_range</span><span class="ss">)</span>:
-    <span class="nv">efficients</span> <span class="o">=</span> []
-    <span class="k">for</span> <span class="nv">ret</span> <span class="nv">in</span> <span class="nv">returns_range</span>:
-        <span class="nv">efficients</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">efficient_return</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">ret</span><span class="ss">))</span>
-    <span class="k">return</span> <span class="nv">efficients</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">def</span> <span class="nv">efficient_return</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">target</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="nv">num_assets</span> <span class="o">=</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">average_returns</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">args</span> <span class="o">=</span> <span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">def</span> <span class="nv">portfolio_return</span><span class="ss">(</span><span class="nv">weights</span><span class="ss">)</span>:</span>
+<span class="code-line">        <span class="k">return</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">weights</span>, <span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span><span class="ss">)</span>[<span class="mi">0</span>]</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">constraints</span> <span class="o">=</span> <span class="ss">(</span>{<span class="s1">'</span><span class="s">type</span><span class="s1">'</span>: <span class="s1">'</span><span class="s">eq</span><span class="s1">'</span>, <span class="s1">'</span><span class="s">fun</span><span class="s1">'</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">portfolio_return</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="nv">target</span>},</span>
+<span class="code-line">                   {<span class="s1">'</span><span class="s">type</span><span class="s1">'</span>: <span class="s1">'</span><span class="s">eq</span><span class="s1">'</span>, <span class="s1">'</span><span class="s">fun</span><span class="s1">'</span>: <span class="nv">lambda</span> <span class="nv">x</span>: <span class="nv">np</span>.<span class="nv">sum</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span> <span class="o">-</span> <span class="mi">1</span>}<span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">bounds</span> <span class="o">=</span> <span class="nv">tuple</span><span class="ss">((</span><span class="mi">0</span>,<span class="mi">1</span><span class="ss">)</span> <span class="k">for</span> <span class="nv">asset</span> <span class="nv">in</span> <span class="nv">range</span><span class="ss">(</span><span class="nv">num_assets</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nb">result</span> <span class="o">=</span> <span class="nv">sco</span>.<span class="nv">minimize</span><span class="ss">(</span><span class="nv">portfolio_volatility</span>, <span class="nv">num_assets</span><span class="o">*</span>[<span class="mi">1</span>.<span class="o">/</span><span class="nv">num_assets</span>,], <span class="nv">args</span><span class="o">=</span><span class="nv">args</span>, <span class="nv">method</span><span class="o">=</span><span class="s1">'</span><span class="s">SLSQP</span><span class="s1">'</span>, <span class="nv">bounds</span><span class="o">=</span><span class="nv">bounds</span>, <span class="nv">constraints</span><span class="o">=</span><span class="nv">constraints</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="nb">result</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">def</span> <span class="nv">efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">returns_range</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="nv">efficients</span> <span class="o">=</span> []</span>
+<span class="code-line">    <span class="k">for</span> <span class="nv">ret</span> <span class="nv">in</span> <span class="nv">returns_range</span>:</span>
+<span class="code-line">        <span class="nv">efficients</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">efficient_return</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">ret</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="nv">efficients</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>Now it's time to plot the efficient frontier on the graph with the randomly selected portfolios to check if they have been calculated correctly. It is also an opportune time to check if the maximum Sharpe ratio and minimum volatility portfolios have been calculated correctly by comparing them to the previously randomly determined portfolios.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">display_efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">num_portfolios</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>:
-    <span class="nv">results</span>, <span class="nv">weights</span> <span class="o">=</span> <span class="nv">generate_portfolios</span><span class="ss">(</span><span class="nv">num_portfolios</span>,<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>
-
-    <span class="nv">max_sharpe</span> <span class="o">=</span> <span class="nv">max_sharpe_ratio</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>
-    <span class="nv">max_sharpe_return</span>, <span class="nv">max_sharpe_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">max_sharpe</span>[<span class="s1">&#39;</span><span class="s">x</span><span class="s1">&#39;</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="nv">max_sharpe_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">max_sharpe</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span>
-
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">&quot;</span><span class="ss">)</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Return: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_return</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Volatility: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="nv">max_sharpe_allocations</span><span class="ss">)</span>
-
-    <span class="nv">min_vol</span> <span class="o">=</span> <span class="nv">min_variance</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="nv">min_vol_return</span>, <span class="nv">min_vol_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">min_vol</span>[<span class="s1">&#39;</span><span class="s">x</span><span class="s1">&#39;</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="nv">min_vol_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">min_vol</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span>
-
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">&quot;</span><span class="ss">)</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Return: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_return</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Volatility: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_volatility</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="nv">min_vol_allocations</span><span class="ss">)</span>
-
-    <span class="nv">an_vol</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">std</span><span class="ss">(</span><span class="nv">returns</span><span class="ss">)</span> <span class="o">*</span> <span class="nv">np</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="mi">253</span><span class="ss">)</span>
-    <span class="nv">an_rt</span> <span class="o">=</span> <span class="nv">average_returns</span> <span class="o">*</span> <span class="mi">253</span>
-
-    <span class="k">for</span> <span class="nv">i</span>, <span class="nv">txt</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">columns</span><span class="ss">)</span>:
-        <span class="nv">print</span><span class="ss">(</span><span class="nv">txt</span>,<span class="s2">&quot;</span><span class="s">:</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">Annuaised return</span><span class="s2">&quot;</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_rt</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">)</span>,<span class="s2">&quot;</span><span class="s">, Annualised volatility:</span><span class="s2">&quot;</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_vol</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">))</span>
-
-    <span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">10</span>, <span class="mi">7</span><span class="ss">))</span>
-    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">results</span>[<span class="mi">0</span>,:],<span class="nv">results</span>[<span class="mi">1</span>,:],<span class="nv">c</span><span class="o">=</span><span class="nv">results</span>[<span class="mi">2</span>,:],<span class="nv">cmap</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">YlGnBu</span><span class="s1">&#39;</span>, <span class="nv">marker</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">o</span><span class="s1">&#39;</span>, <span class="nv">s</span><span class="o">=</span><span class="mi">10</span>, <span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">3</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">colorbar</span><span class="ss">()</span>
-    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span>,<span class="nv">max_sharpe_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">X</span><span class="s1">&#39;</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">r</span><span class="s1">&#39;</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">Maximum Sharpe ratio</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">min_vol_volatility</span>,<span class="nv">min_vol_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">X</span><span class="s1">&#39;</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">y</span><span class="s1">&#39;</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">Minimum volatility</span><span class="s1">&#39;</span><span class="ss">)</span>
-
-    <span class="nv">target</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">linspace</span><span class="ss">(</span><span class="nv">min_vol_return</span>, <span class="nv">max</span><span class="ss">(</span><span class="nv">an_rt</span><span class="ss">)</span>, <span class="mi">50</span><span class="ss">)</span>
-    <span class="nv">efficient_portfolios</span> <span class="o">=</span> <span class="nv">efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">target</span><span class="ss">)</span>
-
-    <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span>[<span class="nv">p</span>[<span class="s1">&#39;</span><span class="s">fun</span><span class="s1">&#39;</span>] <span class="k">for</span> <span class="nv">p</span> <span class="nv">in</span> <span class="nv">efficient_portfolios</span>], <span class="nv">target</span>, <span class="nv">linestyle</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">-.</span><span class="s1">&#39;</span>, <span class="nv">color</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">white</span><span class="s1">&#39;</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">efficient frontier</span><span class="s1">&#39;</span><span class="ss">)</span>
-
-    <span class="nv">plt</span>.<span class="nv">title</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Calculated Portfolio Optimization based on Efficient Frontier</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">xlabel</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Volatility</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Returns</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">labelspacing</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span><span class="ss">)</span>
-
-<span class="nv">def</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">solution</span>,<span class="nv">stocks_df</span><span class="ss">)</span>:
-    <span class="nv">allocation</span> <span class="o">=</span> <span class="nv">pd</span>.<span class="nv">DataFrame</span><span class="ss">(</span><span class="nv">solution</span>,<span class="nv">index</span><span class="o">=</span><span class="nv">stocks_df</span>.<span class="nv">columns</span>,<span class="nv">columns</span><span class="o">=</span>[<span class="s1">&#39;</span><span class="s">allocation</span><span class="s1">&#39;</span>]<span class="ss">)</span>
-    <span class="k">return</span> <span class="nv">allocation</span>
-
-<span class="nv">returns</span> <span class="o">=</span> <span class="nv">stocks_df</span>.<span class="nv">pct_change</span><span class="ss">()</span>
-<span class="nv">average_returns</span> <span class="o">=</span> <span class="nv">returns</span>.<span class="nv">mean</span><span class="ss">()</span>
-<span class="nv">covariance_matrix</span> <span class="o">=</span> <span class="nv">returns</span>.<span class="nv">cov</span><span class="ss">()</span>
-<span class="nv">num_portfolios</span> <span class="o">=</span> <span class="mi">25000</span>
-<span class="nv">risk_free_rate</span> <span class="o">=</span> <span class="mi">0</span>.<span class="mi">01977</span>
-
-<span class="nv">display_efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">num_portfolios</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">def</span> <span class="nv">display_efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">num_portfolios</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="nv">results</span>, <span class="nv">weights</span> <span class="o">=</span> <span class="nv">generate_portfolios</span><span class="ss">(</span><span class="nv">num_portfolios</span>,<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">max_sharpe</span> <span class="o">=</span> <span class="nv">max_sharpe_ratio</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">max_sharpe_return</span>, <span class="nv">max_sharpe_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">max_sharpe</span>[<span class="s1">'</span><span class="s">x</span><span class="s1">'</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">max_sharpe_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">max_sharpe</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">"</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Return: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_return</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Volatility: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="nv">max_sharpe_allocations</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">min_vol</span> <span class="o">=</span> <span class="nv">min_variance</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">min_vol_return</span>, <span class="nv">min_vol_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">min_vol</span>[<span class="s1">'</span><span class="s">x</span><span class="s1">'</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">min_vol_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">min_vol</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="se">\n</span><span class="s">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">"</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Return: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_return</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Volatility: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_volatility</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="nv">min_vol_allocations</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">an_vol</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">std</span><span class="ss">(</span><span class="nv">returns</span><span class="ss">)</span> <span class="o">*</span> <span class="nv">np</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="mi">253</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">an_rt</span> <span class="o">=</span> <span class="nv">average_returns</span> <span class="o">*</span> <span class="mi">253</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">for</span> <span class="nv">i</span>, <span class="nv">txt</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">columns</span><span class="ss">)</span>:</span>
+<span class="code-line">        <span class="nv">print</span><span class="ss">(</span><span class="nv">txt</span>,<span class="s2">"</span><span class="s">:</span><span class="s2">"</span>,<span class="s2">"</span><span class="s">Annuaised return</span><span class="s2">"</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_rt</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">)</span>,<span class="s2">"</span><span class="s">, Annualised volatility:</span><span class="s2">"</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_vol</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">))</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">10</span>, <span class="mi">7</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">results</span>[<span class="mi">0</span>,:],<span class="nv">results</span>[<span class="mi">1</span>,:],<span class="nv">c</span><span class="o">=</span><span class="nv">results</span>[<span class="mi">2</span>,:],<span class="nv">cmap</span><span class="o">=</span><span class="s1">'</span><span class="s">YlGnBu</span><span class="s1">'</span>, <span class="nv">marker</span><span class="o">=</span><span class="s1">'</span><span class="s">o</span><span class="s1">'</span>, <span class="nv">s</span><span class="o">=</span><span class="mi">10</span>, <span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">3</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">colorbar</span><span class="ss">()</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span>,<span class="nv">max_sharpe_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">'</span><span class="s">X</span><span class="s1">'</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">'</span><span class="s">r</span><span class="s1">'</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">'</span><span class="s">Maximum Sharpe ratio</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">min_vol_volatility</span>,<span class="nv">min_vol_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">'</span><span class="s">X</span><span class="s1">'</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">'</span><span class="s">y</span><span class="s1">'</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">'</span><span class="s">Minimum volatility</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">target</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">linspace</span><span class="ss">(</span><span class="nv">min_vol_return</span>, <span class="nv">max</span><span class="ss">(</span><span class="nv">an_rt</span><span class="ss">)</span>, <span class="mi">50</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">efficient_portfolios</span> <span class="o">=</span> <span class="nv">efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">target</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span>[<span class="nv">p</span>[<span class="s1">'</span><span class="s">fun</span><span class="s1">'</span>] <span class="k">for</span> <span class="nv">p</span> <span class="nv">in</span> <span class="nv">efficient_portfolios</span>], <span class="nv">target</span>, <span class="nv">linestyle</span><span class="o">=</span><span class="s1">'</span><span class="s">-.</span><span class="s1">'</span>, <span class="nv">color</span><span class="o">=</span><span class="s1">'</span><span class="s">white</span><span class="s1">'</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">'</span><span class="s">efficient frontier</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">title</span><span class="ss">(</span><span class="s1">'</span><span class="s">Calculated Portfolio Optimization based on Efficient Frontier</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">xlabel</span><span class="ss">(</span><span class="s1">'</span><span class="s">Volatility</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">'</span><span class="s">Returns</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">labelspacing</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">def</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">solution</span>,<span class="nv">stocks_df</span><span class="ss">)</span>:</span>
+<span class="code-line">    <span class="nv">allocation</span> <span class="o">=</span> <span class="nv">pd</span>.<span class="nv">DataFrame</span><span class="ss">(</span><span class="nv">solution</span>,<span class="nv">index</span><span class="o">=</span><span class="nv">stocks_df</span>.<span class="nv">columns</span>,<span class="nv">columns</span><span class="o">=</span>[<span class="s1">'</span><span class="s">allocation</span><span class="s1">'</span>]<span class="ss">)</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="nv">allocation</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">returns</span> <span class="o">=</span> <span class="nv">stocks_df</span>.<span class="nv">pct_change</span><span class="ss">()</span></span>
+<span class="code-line"><span class="nv">average_returns</span> <span class="o">=</span> <span class="nv">returns</span>.<span class="nv">mean</span><span class="ss">()</span></span>
+<span class="code-line"><span class="nv">covariance_matrix</span> <span class="o">=</span> <span class="nv">returns</span>.<span class="nv">cov</span><span class="ss">()</span></span>
+<span class="code-line"><span class="nv">num_portfolios</span> <span class="o">=</span> <span class="mi">25000</span></span>
+<span class="code-line"><span class="nv">risk_free_rate</span> <span class="o">=</span> <span class="mi">0</span>.<span class="mi">01977</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">display_efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">num_portfolios</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:image {"id":281} -->
-
-<p><img alt="" class="wp-image-281" src="https://jmckew.com/wp-content/uploads/2019/04/Code_lDUKAxc9JU.png"></p>
+<p><img alt="" class="wp-image-281" src="https://jmckew.com/wp-content/uploads/2019/04/Code_lDUKAxc9JU.png"/></p>
 <!-- /wp:image -->
-
 <!-- wp:image {"id":282} -->
-
-<p><img alt="" class="wp-image-282" src="https://jmckew.com/wp-content/uploads/2019/04/Code_R2bA54PriC.png"></p>
+<p><img alt="" class="wp-image-282" src="https://jmckew.com/wp-content/uploads/2019/04/Code_R2bA54PriC.png"/></p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>The surprising part is that the calculated result is very close to what we have previously simulated by picking from randomly generated portfolios. The slight differences in allocations between the simulated vs calculated are in most cases less than 1%, which shows how powerful randomly estimating calculations can be albeit sometimes not reliable in small sample spaces.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Rather than plotting every randomly generated portfolio, we can plot the individual stocks on the plot with the corresponding values of each stock's return and risk. This way we can compare how diversification is lowering the risk by optimizing the allocations.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code -->
-
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">display_efficient_frontier_selected</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>:
-
-    <span class="nv">max_sharpe</span> <span class="o">=</span> <span class="nv">max_sharpe_ratio</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>
-    <span class="nv">max_sharpe_return</span>, <span class="nv">max_sharpe_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">max_sharpe</span>[<span class="s1">&#39;</span><span class="s">x</span><span class="s1">&#39;</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="nv">max_sharpe_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">max_sharpe</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span>
-
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">&quot;</span><span class="ss">)</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Return: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_return</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Volatility: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="nv">max_sharpe_allocations</span><span class="ss">)</span>
-
-    <span class="nv">min_vol</span> <span class="o">=</span> <span class="nv">min_variance</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="nv">min_vol_return</span>, <span class="nv">min_vol_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">min_vol</span>[<span class="s1">&#39;</span><span class="s">x</span><span class="s1">&#39;</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span>
-    <span class="nv">min_vol_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">min_vol</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span>
-
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">&quot;</span><span class="ss">)</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Return: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_return</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Volatility: {0:.2f}</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_volatility</span><span class="ss">))</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="nv">min_vol_allocations</span><span class="ss">)</span>
-
-    <span class="nv">an_vol</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">std</span><span class="ss">(</span><span class="nv">returns</span><span class="ss">)</span> <span class="o">*</span> <span class="nv">np</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="mi">253</span><span class="ss">)</span>
-    <span class="nv">an_rt</span> <span class="o">=</span> <span class="nv">average_returns</span> <span class="o">*</span> <span class="mi">253</span>
-
-    <span class="k">for</span> <span class="nv">i</span>, <span class="nv">txt</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">columns</span><span class="ss">)</span>:
-        <span class="nv">print</span><span class="ss">(</span><span class="nv">txt</span>,<span class="s2">&quot;</span><span class="s">:</span><span class="s2">&quot;</span>,<span class="s2">&quot;</span><span class="s">Annuaised return</span><span class="s2">&quot;</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_rt</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">)</span>,<span class="s2">&quot;</span><span class="s">, Annualised volatility:</span><span class="s2">&quot;</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_vol</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">))</span>
-
-    <span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">10</span>, <span class="mi">7</span><span class="ss">))</span>
-    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">an_vol</span>,<span class="nv">an_rt</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">o</span><span class="s1">&#39;</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">200</span><span class="ss">)</span>
-
-    <span class="k">for</span> <span class="nv">i</span>, <span class="nv">txt</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">columns</span><span class="ss">)</span>:
-        <span class="nv">plt</span>.<span class="nv">annotate</span><span class="ss">(</span><span class="nv">txt</span>, <span class="ss">(</span><span class="nv">an_vol</span>[<span class="nv">i</span>],<span class="nv">an_rt</span>[<span class="nv">i</span>]<span class="ss">)</span>, <span class="nv">xytext</span><span class="o">=</span><span class="ss">(</span><span class="mi">10</span>,<span class="mi">0</span><span class="ss">)</span>, <span class="nv">textcoords</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">offset points</span><span class="s1">&#39;</span><span class="ss">)</span>
-
-
-    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span>,<span class="nv">max_sharpe_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">X</span><span class="s1">&#39;</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">r</span><span class="s1">&#39;</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">Maximum Sharpe ratio</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">min_vol_volatility</span>,<span class="nv">min_vol_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">X</span><span class="s1">&#39;</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">y</span><span class="s1">&#39;</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">Minimum volatility</span><span class="s1">&#39;</span><span class="ss">)</span>
-
-    <span class="nv">target</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">linspace</span><span class="ss">(</span><span class="nv">min_vol_return</span>, <span class="nv">max</span><span class="ss">(</span><span class="nv">an_rt</span><span class="ss">)</span>, <span class="mi">50</span><span class="ss">)</span>
-    <span class="nv">efficient_portfolios</span> <span class="o">=</span> <span class="nv">efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">target</span><span class="ss">)</span>
-
-    <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span>[<span class="nv">p</span>[<span class="s1">&#39;</span><span class="s">fun</span><span class="s1">&#39;</span>] <span class="k">for</span> <span class="nv">p</span> <span class="nv">in</span> <span class="nv">efficient_portfolios</span>], <span class="nv">target</span>, <span class="nv">linestyle</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">-.</span><span class="s1">&#39;</span>, <span class="nv">color</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">white</span><span class="s1">&#39;</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">efficient frontier</span><span class="s1">&#39;</span><span class="ss">)</span>
-
-    <span class="nv">plt</span>.<span class="nv">title</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Calculated Portfolio Optimization based on Efficient Frontier</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">xlabel</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Volatility</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Returns</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">labelspacing</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span><span class="ss">)</span>
-
-<span class="nv">display_efficient_frontier_selected</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">def</span> <span class="nv">display_efficient_frontier_selected</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span>:</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">max_sharpe</span> <span class="o">=</span> <span class="nv">max_sharpe_ratio</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">max_sharpe_return</span>, <span class="nv">max_sharpe_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">max_sharpe</span>[<span class="s1">'</span><span class="s">x</span><span class="s1">'</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">max_sharpe_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">max_sharpe</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">"</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Return: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_return</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Volatility: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="nv">max_sharpe_allocations</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">min_vol</span> <span class="o">=</span> <span class="nv">min_variance</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">min_vol_return</span>, <span class="nv">min_vol_volatility</span> <span class="o">=</span> <span class="nv">portfolio_performance</span><span class="ss">(</span><span class="nv">min_vol</span>[<span class="s1">'</span><span class="s">x</span><span class="s1">'</span>],<span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">min_vol_allocations</span> <span class="o">=</span> <span class="nv">allocations_ef</span><span class="ss">(</span><span class="nv">min_vol</span>.<span class="nv">x</span>,<span class="nv">stocks_df</span><span class="ss">)</span>.<span class="nv">T</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="se">\n</span><span class="s">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">"</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Return: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_return</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="s2">"</span><span class="s">Volatility: {0:.2f}</span><span class="s2">"</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">min_vol_volatility</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="nv">min_vol_allocations</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">an_vol</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">std</span><span class="ss">(</span><span class="nv">returns</span><span class="ss">)</span> <span class="o">*</span> <span class="nv">np</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="mi">253</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">an_rt</span> <span class="o">=</span> <span class="nv">average_returns</span> <span class="o">*</span> <span class="mi">253</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">for</span> <span class="nv">i</span>, <span class="nv">txt</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">columns</span><span class="ss">)</span>:</span>
+<span class="code-line">        <span class="nv">print</span><span class="ss">(</span><span class="nv">txt</span>,<span class="s2">"</span><span class="s">:</span><span class="s2">"</span>,<span class="s2">"</span><span class="s">Annuaised return</span><span class="s2">"</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_rt</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">)</span>,<span class="s2">"</span><span class="s">, Annualised volatility:</span><span class="s2">"</span>,<span class="nv">round</span><span class="ss">(</span><span class="nv">an_vol</span>[<span class="nv">i</span>],<span class="mi">2</span><span class="ss">))</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">10</span>, <span class="mi">7</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">an_vol</span>,<span class="nv">an_rt</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">'</span><span class="s">o</span><span class="s1">'</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">200</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">for</span> <span class="nv">i</span>, <span class="nv">txt</span> <span class="nv">in</span> <span class="nv">enumerate</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">columns</span><span class="ss">)</span>:</span>
+<span class="code-line">        <span class="nv">plt</span>.<span class="nv">annotate</span><span class="ss">(</span><span class="nv">txt</span>, <span class="ss">(</span><span class="nv">an_vol</span>[<span class="nv">i</span>],<span class="nv">an_rt</span>[<span class="nv">i</span>]<span class="ss">)</span>, <span class="nv">xytext</span><span class="o">=</span><span class="ss">(</span><span class="mi">10</span>,<span class="mi">0</span><span class="ss">)</span>, <span class="nv">textcoords</span><span class="o">=</span><span class="s1">'</span><span class="s">offset points</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">max_sharpe_volatility</span>,<span class="nv">max_sharpe_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">'</span><span class="s">X</span><span class="s1">'</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">'</span><span class="s">r</span><span class="s1">'</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">'</span><span class="s">Maximum Sharpe ratio</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">min_vol_volatility</span>,<span class="nv">min_vol_return</span>,<span class="nv">marker</span><span class="o">=</span><span class="s1">'</span><span class="s">X</span><span class="s1">'</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">'</span><span class="s">y</span><span class="s1">'</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">400</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">'</span><span class="s">Minimum volatility</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">target</span> <span class="o">=</span> <span class="nv">np</span>.<span class="nv">linspace</span><span class="ss">(</span><span class="nv">min_vol_return</span>, <span class="nv">max</span><span class="ss">(</span><span class="nv">an_rt</span><span class="ss">)</span>, <span class="mi">50</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">efficient_portfolios</span> <span class="o">=</span> <span class="nv">efficient_frontier</span><span class="ss">(</span><span class="nv">average_returns</span>, <span class="nv">covariance_matrix</span>, <span class="nv">target</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span>[<span class="nv">p</span>[<span class="s1">'</span><span class="s">fun</span><span class="s1">'</span>] <span class="k">for</span> <span class="nv">p</span> <span class="nv">in</span> <span class="nv">efficient_portfolios</span>], <span class="nv">target</span>, <span class="nv">linestyle</span><span class="o">=</span><span class="s1">'</span><span class="s">-.</span><span class="s1">'</span>, <span class="nv">color</span><span class="o">=</span><span class="s1">'</span><span class="s">white</span><span class="s1">'</span>, <span class="nv">label</span><span class="o">=</span><span class="s1">'</span><span class="s">efficient frontier</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">title</span><span class="ss">(</span><span class="s1">'</span><span class="s">Calculated Portfolio Optimization based on Efficient Frontier</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">xlabel</span><span class="ss">(</span><span class="s1">'</span><span class="s">Volatility</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">'</span><span class="s">Returns</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">labelspacing</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span><span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">display_efficient_frontier_selected</span><span class="ss">(</span><span class="nv">average_returns</span>,<span class="nv">covariance_matrix</span>,<span class="nv">risk_free_rate</span><span class="ss">)</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:image {"id":284} -->
-
-<p><img alt="" class="wp-image-284" src="https://jmckew.com/wp-content/uploads/2019/04/Code_3sKudlcKG6.png"></p>
+<p><img alt="" class="wp-image-284" src="https://jmckew.com/wp-content/uploads/2019/04/Code_3sKudlcKG6.png"/></p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>From the plot above, the stock with the highest risk is BHP, which accompanies the highest returns. This shows that if the investor is willing to take the risk than they will be rewarded with the higher return.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>This concludes the 3 part series on Python in the finance industry, if there is any topics in particular you would like to see how software can integrate and improve a service/product please feel free to get in touch!</p>
-<!-- /wp:paragraph -->
+<!-- /wp:paragraph --></body></html>
   </div>
   <div class="tag-cloud">
     <p>

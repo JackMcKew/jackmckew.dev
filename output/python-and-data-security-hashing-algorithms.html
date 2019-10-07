@@ -111,13 +111,9 @@
 
 
   <div>
-    <!-- wp:paragraph -->
-
-<p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some way or another. Since this topic is so wide and deep, this will most likely become a series of posts as I am passionate around data security and enjoy getting stuck right into the math behind it. This post will be around hashing algorithms but future topics will include:</p>
+    <!-- wp:paragraph --><html><head></head><body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some way or another. Since this topic is so wide and deep, this will most likely become a series of posts as I am passionate around data security and enjoy getting stuck right into the math behind it. This post will be around hashing algorithms but future topics will include:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>Hashing Algorithms (this post),</li>
 <li>Modular Arithmetic and why it's used,</li>
@@ -128,54 +124,36 @@
 <li>Many more.</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:paragraph -->
-
 <p>As above, this post is dedicated to hashing algorithms and how to interface with them with Python for data security.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:heading {"level":3} -->
-
 <h3>What is a Hashing Algorithm?</h3>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>The sole purpose of a hashing algorithm is to generate a safe hash which in turn raises the questions of what is a hash and what makes it safe?</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:quote -->
-
 <blockquote>
 <p>A hash is a value computed from a base input number using a hashing function.</p>
 </blockquote>
 <!-- /wp:quote -->
-
 <!-- wp:paragraph -->
-
 <p>With a hashing function being:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:quote -->
-
 <blockquote>
 <p>A <strong>hash function</strong> is any <a href="https://en.wikipedia.org/wiki/Function_(mathematics)">function</a> that can be used to map <a href="https://en.wikipedia.org/wiki/Data_(computing)">data</a> of arbitrary size onto data of a fixed size.</p>
 <p><cite>https://en.wikipedia.org/wiki/Hash_function</cite></p>
 </blockquote>
 <!-- /wp:quote -->
-
 <!-- wp:paragraph -->
-
 <p>The hashing algorithm is intrinsically designed to be a one-way function, meaning it is impractical to revert. Although, as history has shown, as computing advances are made hashing algorithms are becoming compromised. A prime example of this being the MD5 algorithm, which was designed and used a cryptographic hash function (data security), but is now so simply reverse, that it is used for verifying data transfers.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>There are certain characteristics around what the perfect or ideal hash function for data security should possess:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>Easy/speed of computation,</li>
 <li>Impossible/impractical to regenerate source data/message (brute force as only option),</li>
@@ -183,39 +161,27 @@
 <li>Any change is source data should change the hash value (known as the avalanche effect).</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:heading {"level":3} -->
-
 <h3>What is hashing used for in practice?</h3>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>Hashing algorithms for data security in the real world is used in a variety of situations from ensuring files were successfully delivered correctly or to store sensitive/private information. If you are reading this, I can almost guarantee that you have some interface with a hashing algorithm right now! Whether it be how you're password is stored to indexing data in a database.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:heading {"level":3} -->
-
 <h3>Using hashes with Python</h3>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>This will be a simple use-case of a hashing algorithm using Python to securely convert passwords and how to verify against them (storing the hashed data is it's own beast in itself). Please note I will be utilising the <a href="https://passlib.readthedocs.io/en/stable/">passlib</a> package which contains over 30 password hashing algorithms, as well as a framework for managing existing password hashes.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>First of all we must select a hashing algorithm to use, to help with this from the team at passlib they have provided a <a href="https://passlib.readthedocs.io/en/stable/narr/quickstart.html">basic guideline of questions</a>:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list {"ordered":true} -->
-
 <ol>
 <li>
 <p>Does the hash need to be natively supported by your operating system’s <code>crypt()</code> api,\
     in order to allow inter-operation with third-party applications on the host?
-    </p></p>
+    </p><p></p>
 <ul>
 <li>If yes, the right choice is either <a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.bcrypt.html#passlib.hash.bcrypt"><code>bcrypt</code></a> for BSD variants,\
     or <a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.sha512_crypt.html#passlib.hash.sha512_crypt"><code>sha512_crypt</code></a> for Linux; since these are natively supported.</li>
@@ -233,7 +199,7 @@
 <li>
 <p>Do you want to use the latest &amp; greatest, and don’t mind increased memory usage\
     when hashing?
-    </p></p>
+    </p><p></p>
 <ul>
 <li><a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.argon2.html#passlib.hash.argon2"><code>argon2</code></a> is a next-generation hashing algorithm,\
     attempting to become the new standard. It’s design has been being slightly tweaked\
@@ -248,7 +214,7 @@
     Both have advantages, and their respective rough edges;\
     though currently the balance is in favor of bcrypt\
     (pbkdf2 can be cracked somewhat more efficiently).
-    </p></p>
+    </p><p></p>
 <ul>
 <li>If choosing bcrypt, we strongly recommend installing the <a href="https://pypi.python.org/pypi/bcrypt">bcrypt</a>\
     support library on non-BSD operating systems.</li>
@@ -259,54 +225,34 @@
 </li>
 </ol>
 <!-- /wp:list -->
-
 <!-- wp:paragraph -->
-
 <p>From this, we will use the argon2 hashing algorithm. As normal, it is best practice to set up a virtual environment (or conda environment) and install the dependencies, in this case passlib.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>First of all, import the hashing algorithm you wish to use from the passlib package:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">argon2</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">argon2</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>Following importing the hashing algorithm, to hash the password in our case is very simple and we can have a peak at what the output hash looks like:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="n">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="p">.</span><span class="n">hash</span><span class="p">(</span><span class="ss">&quot;super_secret_password&quot;</span><span class="p">)</span>
-
-<span class="n">print</span><span class="p">(</span><span class="n">hash</span><span class="p">)</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="p">.</span><span class="n">hash</span><span class="p">(</span><span class="ss">"super_secret_password"</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">print</span><span class="p">(</span><span class="n">hash</span><span class="p">)</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:quote -->
-
 <blockquote>
 <p>\$argon2i\$v=19\$m=102400,t=2,p=8\$NqY05lyrtdb6v/ee03pvrQ\$mvLTquN71JPjuC+S9QNXYA</p>
 </blockquote>
 <!-- /wp:quote -->
-
 <!-- wp:paragraph -->
-
 <p>The first section ("\$argon2i\$v=19\$m=102400,t=2,p=8\$") is the header information, showing the parameters that the algorithm used to generate the hash. While this seems as if it would make the algorithm easier to break, imagine a scenario where every password is hashed using an hashing algorithm with randomised parameters; verifying passwords would be a nightmare. Let's further break down what this represents:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>\$argon2i - the variant of Argon2 algorithm being used,</li>
 <li>\$v=19 - the version of Argon2 being used,</li>
@@ -315,83 +261,53 @@
 <li>\$mvLTquN71JPjuC+S9QNXYA - the base64-encoded hashed password (derived key), using standard base64 encoding and no padding.</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:paragraph -->
-
 <p>If we run this again, we can check that the outputs are completely different due to the randomly generated salt.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="n">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="p">.</span><span class="n">hash</span><span class="p">(</span><span class="ss">&quot;super_secret_password&quot;</span><span class="p">)</span>
-
-<span class="n">print</span><span class="p">(</span><span class="n">hash</span><span class="p">)</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="p">.</span><span class="n">hash</span><span class="p">(</span><span class="ss">"super_secret_password"</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">print</span><span class="p">(</span><span class="n">hash</span><span class="p">)</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:quote -->
-
 <blockquote>
 <p>\$argon2i\$v=19\$m=102400,t=2,p=8\$8f4/x7hXitGacy6F8N67dw\$/jPKQ98vLQCxkboxRlHa/g</p>
 </blockquote>
 <!-- /wp:quote -->
-
 <!-- wp:paragraph -->
-
 <p>Now that we've generated our new passwords, stored them away in a secure database somewhere, using a secure method of communication somehow, our user wants to login with the password they signed up with ("super_secret_password") and we have to check if this is the correct password.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>To do this with passlib, it is as simply as calling the .verify function with the plaintext and the equivalent hash which will return a boolean value determining whether of not the password is correct or not.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">argon2</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="ss">&quot;super_secret_password&quot;</span><span class="p">,</span><span class="n">hash</span><span class="p">))</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">print</span><span class="p">(</span><span class="n">argon2</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="ss">"super_secret_password"</span><span class="p">,</span><span class="n">hash</span><span class="p">))</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:quote -->
-
 <blockquote>
 <p>True</p>
 </blockquote>
 <!-- /wp:quote -->
-
 <!-- wp:paragraph -->
-
 <p>Hooray! Our password verification system works, now we would like to check that if the user inputs a incorrect password that our algorithm returns correctly (false).</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">argon2</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="ss">&quot;user_name&quot;</span><span class="p">,</span><span class="n">hash</span><span class="p">))</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">print</span><span class="p">(</span><span class="n">argon2</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="ss">"user_name"</span><span class="p">,</span><span class="n">hash</span><span class="p">))</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:quote -->
-
 <blockquote>
 <p>False</p>
 </blockquote>
 <!-- /wp:quote -->
-
 <!-- wp:heading {"level":3} -->
-
 <h3>Conclusion</h3>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>Hopefully this has given you some insight into what hashing algorithms are, how they are used and how to use them with Python. They can both be an extremely powerful tool for securing data, however, must always be revisited later on down the track as advancements are made and your system may now be compromised.</p>
-<!-- /wp:paragraph -->
+<!-- /wp:paragraph --></body></html>
   </div>
   <div class="tag-cloud">
     <p>

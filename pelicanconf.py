@@ -3,49 +3,62 @@
 from __future__ import unicode_literals
 
 RELATIVE_URLS = False
-AUTHOR = 'Jack McKew'
+AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
 SITETITLE = SITENAME
-SITESUBTITLE = 'Python enthusiast, electrical engineer and tinkerer'
-SITEURL = 'https://nifty-engelbart-ce3324.netlify.com/'
-SITELOGO = 'img/jm-photo'
+SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
+SITEURL = "https://nifty-engelbart-ce3324.netlify.com"
+SITELOGO = "img/jm-photo"
 
-THEME = 'Flex'
-STATIC_PATHS = ['img', 'static']
-FAVICON = 'img/favicon.ico'
-CUSTOM_CSS = 'static/custom.css'
+THEME = "Flex"
+STATIC_PATHS = ["img", "static"]
+FAVICON = "img/favicon.ico"
+CUSTOM_CSS = "static/custom.css"
 
 USE_FOLDER_AS_CATEGORY = False
 MAIN_MENU = True
 HOME_HIDE_TAGS = False
 
-MENUITEMS = (('Archives', '/archives.html'),
-             ('Categories', '/categories.html'),
-             ('Tags', '/tags.html'),
-             ('Sitemap', '/sitemap.xml'),)
+MENUITEMS = (
+    ("Archives", "/archives.html"),
+    ("Categories", "/categories.html"),
+    ("Tags", "/tags.html"),
+    ("Sitemap", "/sitemap.xml"),
+)
 
 SITEMAP = {
-    'format': 'xml',
-    'priorities': {
-        'articles': 0.6,
-        'indexes': 0.6,
-        'pages': 0.5,
-    },
-    'changefreqs': {
-        'articles': 'monthly',
-        'indexes': 'daily',
-        'pages': 'monthly',
-    }
+    "format": "xml",
+    "priorities": {"articles": 0.6, "indexes": 0.6, "pages": 0.5},
+    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"},
 }
+
+PLUGIN_PATHS = [
+    "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins",
+    "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
+]
+
+PLUGINS = [
+    "sitemap",
+    "better_codeblock_line_numbering",
+    "better_code_samples",
+    "deadlinks",
+    "glossary",
+    "multi_neighbors",
+    "pelican_youtube",
+    "photos",
+    # "random_article",
+    "representative_image",
+    "share_post",
+]
 
 
 DELETE_OUTPUT_DIRECTORY = False
-STATIC_PATHS = ['img', 'static', 'pdf']
-PATH = 'content'
+STATIC_PATHS = ["img", "static", "pdf"]
+PATH = "content"
 
-TIMEZONE = 'Australia/Sydney'
+TIMEZONE = "Australia/Sydney"
 
-DEFAULT_LANG = 'English'
+DEFAULT_LANG = "English"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -56,8 +69,8 @@ AUTHOR_FEED_RSS = None
 
 # Blogroll
 LINKS = (
-    ('CV/Professional', 'https://jmckew.com/cv-professional/'),
-    ('Contact', 'https://jmckew.com/contact/')
+    ("CV/Professional", "https://jmckew.com/cv-professional/"),
+    ("Contact", "https://jmckew.com/contact/"),
 )
 # LINKS = (('Pelican', 'http://getpelican.com/'),
 #          ('Python.org', 'http://python.org/'),
@@ -65,12 +78,14 @@ LINKS = (
 #          ('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('twitter', 'https://twitter.com/Jac_McQ'),
-          ('linkedin', 'https://www.linkedin.com/in/jack-mckew/'),
-          ('github', 'https://github.com/JackMcKew'),
-        )
+SOCIAL = (
+    ("twitter", "https://twitter.com/Jac_McQ"),
+    ("linkedin", "https://www.linkedin.com/in/jack-mckew/"),
+    ("github", "https://github.com/JackMcKew"),
+)
 
 DEFAULT_PAGINATION = 20
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+# RELATIVE_URLS = True
+

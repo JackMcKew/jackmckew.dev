@@ -112,23 +112,15 @@
 
 
   <div>
-    <!-- wp:paragraph -->
-
-<p>I have a habit of misplacing all kinds of remotes within the house, TV, air conditioner, fans, etc, and having a different remote for everything can be quite annoying at times. So I decided to re-use some leftover components from a previous project to make a web enabled universal remote.</p>
+    <!-- wp:paragraph --><html><head></head><body><p>I have a habit of misplacing all kinds of remotes within the house, TV, air conditioner, fans, etc, and having a different remote for everything can be quite annoying at times. So I decided to re-use some leftover components from a previous project to make a web enabled universal remote.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Since most existing remotes use infrared to send the signal from the remote to the device, I figured it would be simple enough to create a infrared signal 'decoder' and then use a infrared diode to then replicate this signal back to the device. Next consideration was what do hardware is needed to get this project up and running.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>After researching a few other DIY remote control guides on the internet, I came up with a plan to use a wifi-enabled microcontroller together with an infrared receiver and an infrared diode. After rummaging through my spare hardware box, I happened to find a spare NodeMCU (ESP8266) that I could use for this project, this brings my part list to:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>Wifi-Enabled Microcontroller (NodeMCU)</li>
 <li>A resistor to dampen the diode signal (100 ohm)</li>
@@ -137,78 +129,56 @@
 <li>Infrared diode (L-7113F3BT)</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:paragraph -->
-
 <p>Now before connecting the entire circuit together, one should always test that components work in an expected way. To achieve this for the infrared receiver, a basic program to interface between the receiver and the microcontroller is needed.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>For a basic test, an LED would light up whenever the infrared is receiving a signal. By following the circuit diagram with the corresponding code for the NodeMCU, this test for the receiver should be reproduce-able at home, please note that for other infrared receivers you will need to check the pin outs.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":108} -->
-
-<p><img alt="" class="wp-image-108" src="https://jmckew.com/wp-content/uploads/2019/01/Fritzing_FEKX395tbZ.png"></p>
+<p><img alt="" class="wp-image-108" src="https://jmckew.com/wp-content/uploads/2019/01/Fritzing_FEKX395tbZ.png"/></p>
 <!-- /wp:image -->
-
 <!-- wp:syntaxhighlighter/code {"language":"cpp"} -->
-
-<div class="highlight"><pre><span></span>#<span class="nv">define</span> <span class="nv">ledPin</span> <span class="nv">D0</span> <span class="o">//</span><span class="nv">Connection</span> <span class="nv">at</span> <span class="nv">GPIO16</span> <span class="ss">(</span><span class="nv">D0</span><span class="ss">)</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">builtin</span> <span class="nv">LED</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">NodeMCU</span> <span class="nv">board</span>
-#<span class="nv">define</span> <span class="nv">inputPin</span> <span class="nv">D5</span> <span class="o">//</span><span class="nv">Connection</span> <span class="nv">at</span> <span class="nv">GPIO14</span> <span class="ss">(</span><span class="nv">D5</span><span class="ss">)</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">infrared</span> <span class="nv">receiver</span>
-<span class="nv">int</span> <span class="nv">val</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">; // variable for reading the pin status </span>
-<span class="nv">void</span> <span class="nv">setup</span><span class="ss">()</span> 
-{ 
-   <span class="nv">pinMode</span><span class="ss">(</span><span class="nv">ledPin</span>, <span class="nv">OUTPUT</span><span class="ss">)</span><span class="c1">; // declare LED as output </span>
-   <span class="nv">pinMode</span><span class="ss">(</span><span class="nv">inputPin</span>, <span class="nv">INPUT</span><span class="ss">)</span><span class="c1">; // declare Infrared sensor as input</span>
-} 
-<span class="nv">void</span> <span class="k">loop</span><span class="ss">()</span>
-{ 
-   <span class="nv">val</span> <span class="o">=</span> <span class="nv">digitalRead</span><span class="ss">(</span><span class="nv">inputPin</span><span class="ss">)</span><span class="c1">; // read input value </span>
-   <span class="k">if</span> <span class="ss">(</span><span class="nv">val</span> <span class="o">==</span> <span class="nv">HIGH</span><span class="ss">)</span>
-   { <span class="o">//</span> <span class="nv">check</span> <span class="k">if</span> <span class="nv">the</span> <span class="nv">input</span> <span class="nv">is</span> <span class="nv">HIGH</span>
-      <span class="nv">digitalWrite</span><span class="ss">(</span><span class="nv">ledPin</span>, <span class="nv">LOW</span><span class="ss">)</span><span class="c1">; // turn LED OFF   </span>
-   } 
-   <span class="k">else</span> 
-   { 
-      <span class="nv">digitalWrite</span><span class="ss">(</span><span class="nv">ledPin</span>, <span class="nv">HIGH</span><span class="ss">)</span><span class="c1">; // turn LED ON </span>
-   }
-}
+<div class="highlight"><pre><span class="code-line"><span></span>#<span class="nv">define</span> <span class="nv">ledPin</span> <span class="nv">D0</span> <span class="o">//</span><span class="nv">Connection</span> <span class="nv">at</span> <span class="nv">GPIO16</span> <span class="ss">(</span><span class="nv">D0</span><span class="ss">)</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">builtin</span> <span class="nv">LED</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">NodeMCU</span> <span class="nv">board</span></span>
+<span class="code-line">#<span class="nv">define</span> <span class="nv">inputPin</span> <span class="nv">D5</span> <span class="o">//</span><span class="nv">Connection</span> <span class="nv">at</span> <span class="nv">GPIO14</span> <span class="ss">(</span><span class="nv">D5</span><span class="ss">)</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">infrared</span> <span class="nv">receiver</span></span>
+<span class="code-line"><span class="nv">int</span> <span class="nv">val</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">; // variable for reading the pin status </span></span>
+<span class="code-line"><span class="nv">void</span> <span class="nv">setup</span><span class="ss">()</span> </span>
+<span class="code-line">{ </span>
+<span class="code-line">   <span class="nv">pinMode</span><span class="ss">(</span><span class="nv">ledPin</span>, <span class="nv">OUTPUT</span><span class="ss">)</span><span class="c1">; // declare LED as output </span></span>
+<span class="code-line">   <span class="nv">pinMode</span><span class="ss">(</span><span class="nv">inputPin</span>, <span class="nv">INPUT</span><span class="ss">)</span><span class="c1">; // declare Infrared sensor as input</span></span>
+<span class="code-line">} </span>
+<span class="code-line"><span class="nv">void</span> <span class="k">loop</span><span class="ss">()</span></span>
+<span class="code-line">{ </span>
+<span class="code-line">   <span class="nv">val</span> <span class="o">=</span> <span class="nv">digitalRead</span><span class="ss">(</span><span class="nv">inputPin</span><span class="ss">)</span><span class="c1">; // read input value </span></span>
+<span class="code-line">   <span class="k">if</span> <span class="ss">(</span><span class="nv">val</span> <span class="o">==</span> <span class="nv">HIGH</span><span class="ss">)</span></span>
+<span class="code-line">   { <span class="o">//</span> <span class="nv">check</span> <span class="k">if</span> <span class="nv">the</span> <span class="nv">input</span> <span class="nv">is</span> <span class="nv">HIGH</span></span>
+<span class="code-line">      <span class="nv">digitalWrite</span><span class="ss">(</span><span class="nv">ledPin</span>, <span class="nv">LOW</span><span class="ss">)</span><span class="c1">; // turn LED OFF   </span></span>
+<span class="code-line">   } </span>
+<span class="code-line">   <span class="k">else</span> </span>
+<span class="code-line">   { </span>
+<span class="code-line">      <span class="nv">digitalWrite</span><span class="ss">(</span><span class="nv">ledPin</span>, <span class="nv">HIGH</span><span class="ss">)</span><span class="c1">; // turn LED ON </span></span>
+<span class="code-line">   }</span>
+<span class="code-line">}</span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>In the code above, this defines the pins that the sensor and LED are connected to, checks if the sensor is receiving a signal and then switches the builtin LED accordingly. Since the microcontroller loops without delay and an infrared remote control sends signals very quickly with delay in between, the LED only flickers when a remote is aimed at it, however proving the component works as expected.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Now that we have confirmed the receiver works as expected, we have to integrate and interface the infrared diode with the microcontroller such that we are able to send the decoded signals back at the device.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Since the NodeMCU can only pass a maximum current of 12mA through the GPIO pins, this will not be enough for the infrared diode peak spectrum which occurs at 20mA. To boost the current up from 12mA to 20mA+, it is best to use a simple transistor, for this project I had some 2N2222 transistors lying around so decided to use them. The following circuit diagram shows how the infrared diode, transistor and microcontroller integrate together.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":109} -->
-
-<p><img alt="" class="wp-image-109" src="https://jmckew.com/wp-content/uploads/2019/01/Fritzing_LqJjWJppSm.png"></p>
+<p><img alt="" class="wp-image-109" src="https://jmckew.com/wp-content/uploads/2019/01/Fritzing_LqJjWJppSm.png"/></p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Since the human eye cannot see the infrared diode turning on/off, this creates a challenge for testing this component before implementing the project. I did not create a test specifically for the diode, and will test whether it works correctly later on in some function testing of the project.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>This completes the hardware component of this project, the next part of this project will be the software. I am planning to utilise both docker and django on my home Raspberry Pi to act as a webserver that will issue commands to the microcontroller over a network to mimic the device's remote control.</p>
-<!-- /wp:paragraph -->
+<!-- /wp:paragraph --></body></html>
   </div>
   <div class="tag-cloud">
     <p>

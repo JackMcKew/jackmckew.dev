@@ -112,107 +112,91 @@
 
 
   <div>
-    <!-- wp:image {"id":74,"align":"center"} -->
-
-<p>::: {.wp-block-image}
-<img alt="" class="wp-image-74" src="https://jmckew.com/wp-content/uploads/2018/12/ezgif.com-video-to-gif-2.gif">
+    <!-- wp:image {"id":74,"align":"center"} --><html><head></head><body><p>::: {.wp-block-image}
+<img alt="" class="wp-image-74" src="https://jmckew.com/wp-content/uploads/2018/12/ezgif.com-video-to-gif-2.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can be seen below it contains 3 values: x_pos, y_pos and id. It is also useful to create a constructor so that other classes can easily construct the Finger class.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"java"} -->
-
 <p>``` {.wp-block-syntaxhighlighter-code .brush: .java; .notranslate}
 public class Finger
 {
     public float x_pos;
     public float y_pos;
     public int id;</p>
-<div class="highlight"><pre><span></span><span class="n">Finger</span><span class="p">(</span><span class="nb">float</span> <span class="n">init_x</span><span class="p">,</span><span class="nb">float</span> <span class="n">init_y</span><span class="p">,</span><span class="nb">int</span> <span class="n">init_id</span><span class="p">)</span>
-<span class="err">{</span>
-    <span class="n">x_pos</span> <span class="o">=</span> <span class="n">init_x</span><span class="p">;</span>
-    <span class="n">y_pos</span> <span class="o">=</span> <span class="n">init_y</span><span class="p">;</span>
-    <span class="n">id</span> <span class="o">=</span> <span class="n">init_id</span><span class="p">;</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">Finger</span><span class="p">(</span><span class="nb">float</span> <span class="n">init_x</span><span class="p">,</span><span class="nb">float</span> <span class="n">init_y</span><span class="p">,</span><span class="nb">int</span> <span class="n">init_id</span><span class="p">)</span></span>
+<span class="code-line"><span class="err">{</span></span>
+<span class="code-line">    <span class="n">x_pos</span> <span class="o">=</span> <span class="n">init_x</span><span class="p">;</span></span>
+<span class="code-line">    <span class="n">y_pos</span> <span class="o">=</span> <span class="n">init_y</span><span class="p">;</span></span>
+<span class="code-line">    <span class="n">id</span> <span class="o">=</span> <span class="n">init_id</span><span class="p">;</span></span>
+<span class="code-line"><span class="err">}</span></span>
 </pre></div>
-
-
 <p>}</p>
-<div class="highlight"><pre><span></span><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> <span class="o">--&gt;</span>
-
-<span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="nv">Now</span> <span class="nv">that</span> <span class="nv">we</span> <span class="nv">have</span> <span class="nv">a</span> <span class="nv">class</span> <span class="nv">to</span> <span class="nv">store</span> <span class="nv">our</span> <span class="nv">details</span> <span class="nv">on</span> <span class="nv">how</span> <span class="nv">each</span> <span class="nv">finger</span> <span class="nv">is</span> <span class="nv">touching</span> <span class="nv">the</span> <span class="nv">screen</span>, <span class="nv">we</span> <span class="nv">now</span> <span class="nv">need</span> <span class="nv">to</span> <span class="nv">interact</span> <span class="nv">with</span> <span class="nv">some</span> <span class="nv">base</span> <span class="nv">level</span> <span class="nv">Java</span>. <span class="nv">Firstly</span> <span class="nv">we</span> <span class="nv">need</span> <span class="nv">to</span> <span class="nv">extend</span> <span class="nv">a</span> <span class="nv">view</span> <span class="nv">within</span> <span class="nv">the</span> <span class="nv">Android</span> <span class="nv">application</span> <span class="nv">so</span> <span class="nv">that</span> <span class="nv">the</span> <span class="nv">application</span> <span class="nv">knows</span> <span class="nv">what</span> <span class="nv">boundaries</span> <span class="nv">to</span> <span class="nv">deal</span>, <span class="nv">in</span> <span class="nv">my</span> <span class="nv">test</span> <span class="nv">application</span>, <span class="nv">I</span><span class="s1">&#39;</span><span class="s">ve just used the entire screen as a view.</span>
-
-<span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="nv">After</span> <span class="nv">that</span> <span class="nv">an</span> <span class="nv">array</span> <span class="nv">is</span> <span class="nv">needed</span> <span class="nv">to</span> <span class="nv">store</span> <span class="nv">the</span> <span class="nv">data</span> <span class="nv">of</span> <span class="nv">multiple</span> <span class="nv">inputs</span> <span class="nv">touching</span> <span class="nv">the</span> <span class="nv">screen</span>. <span class="nv">I</span><span class="s1">&#39;</span><span class="s">ve used a TreeMap in this example as this allows for ease later on so that they are in order on how they were input, however this comes with a downside to this example as lifting a input in the middle of the order touched crashes the array, this will be fixed in a later episode.</span>
-
-<span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="nv">A</span> <span class="nv">paint</span> <span class="nv">is</span> <span class="nv">initialized</span> <span class="k">for</span> <span class="nv">both</span> <span class="nv">the</span> <span class="nv">stroke</span> <span class="nv">paint</span> <span class="k">for</span> <span class="nv">drawing</span> <span class="nv">lines</span> <span class="nv">between</span> <span class="nv">the</span> <span class="nv">touches</span> <span class="nv">and</span> <span class="nv">a</span> <span class="nv">paint</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">text</span> <span class="nv">that</span> <span class="nv">is</span> <span class="nv">to</span> <span class="nv">come</span>. <span class="nv">Generic</span> <span class="nv">constructors</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">view</span> <span class="nv">are</span> <span class="nv">also</span> <span class="nv">listed</span> <span class="nv">below</span>.
-
-<span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> {<span class="s2">&quot;</span><span class="s">language</span><span class="s2">&quot;</span>:<span class="s2">&quot;</span><span class="s">java</span><span class="s2">&quot;</span>} <span class="o">--&gt;</span>
-
-``` {.<span class="nv">wp</span><span class="o">-</span><span class="nv">block</span><span class="o">-</span><span class="nv">syntaxhighlighter</span><span class="o">-</span><span class="nv">code</span> .<span class="nv">brush</span>: .<span class="nv">java</span><span class="c1">; .notranslate}</span>
-<span class="nv">public</span> <span class="nv">class</span> <span class="nv">TouchView</span> <span class="nv">extends</span> <span class="nv">View</span> {
-<span class="nv">private</span> <span class="nv">TreeMap</span><span class="o">&lt;</span><span class="nv">Integer</span>, <span class="nv">Finger</span><span class="o">&gt;</span> <span class="nv">lineMap</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">TreeMap</span><span class="o">&lt;&gt;</span><span class="ss">()</span><span class="c1">;</span>
-
-@<span class="nv">SuppressLint</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">UseSparseArrays</span><span class="s2">&quot;</span><span class="ss">)</span>
-<span class="nv">private</span> <span class="nv">HashMap</span><span class="o">&lt;</span><span class="nv">Integer</span>, <span class="nv">Path</span><span class="o">&gt;</span> <span class="nv">fingerMap</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">HashMap</span><span class="o">&lt;&gt;</span><span class="ss">()</span><span class="c1">;</span>
-<span class="nv">private</span> <span class="nv">Paint</span> <span class="nv">myPaint</span><span class="c1">;</span>
-<span class="nv">private</span> <span class="nv">Paint</span> <span class="nv">textPaint</span><span class="c1">;</span>
-
-<span class="nv">public</span> <span class="nv">TouchView</span><span class="ss">(</span><span class="nv">Context</span> <span class="nv">context</span><span class="ss">)</span> {
-    <span class="nv">super</span><span class="ss">(</span><span class="nv">context</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">init</span><span class="ss">()</span><span class="c1">;</span>
-}
-
-<span class="nv">public</span> <span class="nv">TouchView</span><span class="ss">(</span><span class="nv">Context</span> <span class="nv">context</span>, <span class="nv">AttributeSet</span> <span class="nv">attrs</span>, <span class="nv">int</span> <span class="nv">defStyle</span><span class="ss">)</span> {
-    <span class="nv">super</span><span class="ss">(</span><span class="nv">context</span>, <span class="nv">attrs</span>, <span class="nv">defStyle</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">init</span><span class="ss">()</span><span class="c1">;</span>
-}
-
-<span class="nv">public</span> <span class="nv">TouchView</span><span class="ss">(</span><span class="nv">Context</span> <span class="nv">context</span>, <span class="nv">AttributeSet</span> <span class="nv">attrs</span><span class="ss">)</span> {
-    <span class="nv">super</span><span class="ss">(</span><span class="nv">context</span>, <span class="nv">attrs</span><span class="ss">)</span><span class="c1">;</span>
-    <span class="nv">init</span><span class="ss">()</span><span class="c1">;</span>
-}
-
-<span class="nv">private</span> <span class="nv">void</span> <span class="nv">init</span><span class="ss">()</span> {
-        <span class="nv">myPaint</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Paint</span><span class="ss">()</span><span class="c1">;</span>
-        <span class="nv">myPaint</span>.<span class="nv">setStyle</span><span class="ss">(</span><span class="nv">Paint</span>.<span class="nv">Style</span>.<span class="nv">FILL_AND_STROKE</span><span class="ss">)</span><span class="c1">;</span>
-        <span class="nv">myPaint</span>.<span class="nv">setStrokeWidth</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span><span class="c1">;</span>
-        <span class="nv">myPaint</span>.<span class="nv">setColor</span><span class="ss">(</span><span class="nv">Color</span>.<span class="nv">RED</span><span class="ss">)</span><span class="c1">;</span>
-
-        <span class="nv">textPaint</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Paint</span><span class="ss">()</span><span class="c1">;</span>
-        <span class="nv">textPaint</span>.<span class="nv">setTextSize</span><span class="ss">(</span><span class="mi">50</span><span class="ss">)</span><span class="c1">;</span>
-    }
+<div class="highlight"><pre><span class="code-line"><span></span><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">Now</span> <span class="nv">that</span> <span class="nv">we</span> <span class="nv">have</span> <span class="nv">a</span> <span class="nv">class</span> <span class="nv">to</span> <span class="nv">store</span> <span class="nv">our</span> <span class="nv">details</span> <span class="nv">on</span> <span class="nv">how</span> <span class="nv">each</span> <span class="nv">finger</span> <span class="nv">is</span> <span class="nv">touching</span> <span class="nv">the</span> <span class="nv">screen</span>, <span class="nv">we</span> <span class="nv">now</span> <span class="nv">need</span> <span class="nv">to</span> <span class="nv">interact</span> <span class="nv">with</span> <span class="nv">some</span> <span class="nv">base</span> <span class="nv">level</span> <span class="nv">Java</span>. <span class="nv">Firstly</span> <span class="nv">we</span> <span class="nv">need</span> <span class="nv">to</span> <span class="nv">extend</span> <span class="nv">a</span> <span class="nv">view</span> <span class="nv">within</span> <span class="nv">the</span> <span class="nv">Android</span> <span class="nv">application</span> <span class="nv">so</span> <span class="nv">that</span> <span class="nv">the</span> <span class="nv">application</span> <span class="nv">knows</span> <span class="nv">what</span> <span class="nv">boundaries</span> <span class="nv">to</span> <span class="nv">deal</span>, <span class="nv">in</span> <span class="nv">my</span> <span class="nv">test</span> <span class="nv">application</span>, <span class="nv">I</span><span class="s1">'</span><span class="s">ve just used the entire screen as a view.</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">After</span> <span class="nv">that</span> <span class="nv">an</span> <span class="nv">array</span> <span class="nv">is</span> <span class="nv">needed</span> <span class="nv">to</span> <span class="nv">store</span> <span class="nv">the</span> <span class="nv">data</span> <span class="nv">of</span> <span class="nv">multiple</span> <span class="nv">inputs</span> <span class="nv">touching</span> <span class="nv">the</span> <span class="nv">screen</span>. <span class="nv">I</span><span class="s1">'</span><span class="s">ve used a TreeMap in this example as this allows for ease later on so that they are in order on how they were input, however this comes with a downside to this example as lifting a input in the middle of the order touched crashes the array, this will be fixed in a later episode.</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">A</span> <span class="nv">paint</span> <span class="nv">is</span> <span class="nv">initialized</span> <span class="k">for</span> <span class="nv">both</span> <span class="nv">the</span> <span class="nv">stroke</span> <span class="nv">paint</span> <span class="k">for</span> <span class="nv">drawing</span> <span class="nv">lines</span> <span class="nv">between</span> <span class="nv">the</span> <span class="nv">touches</span> <span class="nv">and</span> <span class="nv">a</span> <span class="nv">paint</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">text</span> <span class="nv">that</span> <span class="nv">is</span> <span class="nv">to</span> <span class="nv">come</span>. <span class="nv">Generic</span> <span class="nv">constructors</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">view</span> <span class="nv">are</span> <span class="nv">also</span> <span class="nv">listed</span> <span class="nv">below</span>.</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> {<span class="s2">"</span><span class="s">language</span><span class="s2">"</span>:<span class="s2">"</span><span class="s">java</span><span class="s2">"</span>} <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">``` {.<span class="nv">wp</span><span class="o">-</span><span class="nv">block</span><span class="o">-</span><span class="nv">syntaxhighlighter</span><span class="o">-</span><span class="nv">code</span> .<span class="nv">brush</span>: .<span class="nv">java</span><span class="c1">; .notranslate}</span></span>
+<span class="code-line"><span class="nv">public</span> <span class="nv">class</span> <span class="nv">TouchView</span> <span class="nv">extends</span> <span class="nv">View</span> {</span>
+<span class="code-line"><span class="nv">private</span> <span class="nv">TreeMap</span><span class="o">&lt;</span><span class="nv">Integer</span>, <span class="nv">Finger</span><span class="o">&gt;</span> <span class="nv">lineMap</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">TreeMap</span><span class="o">&lt;&gt;</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line"></span>
+<span class="code-line">@<span class="nv">SuppressLint</span><span class="ss">(</span><span class="s2">"</span><span class="s">UseSparseArrays</span><span class="s2">"</span><span class="ss">)</span></span>
+<span class="code-line"><span class="nv">private</span> <span class="nv">HashMap</span><span class="o">&lt;</span><span class="nv">Integer</span>, <span class="nv">Path</span><span class="o">&gt;</span> <span class="nv">fingerMap</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">HashMap</span><span class="o">&lt;&gt;</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line"><span class="nv">private</span> <span class="nv">Paint</span> <span class="nv">myPaint</span><span class="c1">;</span></span>
+<span class="code-line"><span class="nv">private</span> <span class="nv">Paint</span> <span class="nv">textPaint</span><span class="c1">;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">public</span> <span class="nv">TouchView</span><span class="ss">(</span><span class="nv">Context</span> <span class="nv">context</span><span class="ss">)</span> {</span>
+<span class="code-line">    <span class="nv">super</span><span class="ss">(</span><span class="nv">context</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">    <span class="nv">init</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">public</span> <span class="nv">TouchView</span><span class="ss">(</span><span class="nv">Context</span> <span class="nv">context</span>, <span class="nv">AttributeSet</span> <span class="nv">attrs</span>, <span class="nv">int</span> <span class="nv">defStyle</span><span class="ss">)</span> {</span>
+<span class="code-line">    <span class="nv">super</span><span class="ss">(</span><span class="nv">context</span>, <span class="nv">attrs</span>, <span class="nv">defStyle</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">    <span class="nv">init</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">public</span> <span class="nv">TouchView</span><span class="ss">(</span><span class="nv">Context</span> <span class="nv">context</span>, <span class="nv">AttributeSet</span> <span class="nv">attrs</span><span class="ss">)</span> {</span>
+<span class="code-line">    <span class="nv">super</span><span class="ss">(</span><span class="nv">context</span>, <span class="nv">attrs</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">    <span class="nv">init</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">private</span> <span class="nv">void</span> <span class="nv">init</span><span class="ss">()</span> {</span>
+<span class="code-line">        <span class="nv">myPaint</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Paint</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">        <span class="nv">myPaint</span>.<span class="nv">setStyle</span><span class="ss">(</span><span class="nv">Paint</span>.<span class="nv">Style</span>.<span class="nv">FILL_AND_STROKE</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">        <span class="nv">myPaint</span>.<span class="nv">setStrokeWidth</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">        <span class="nv">myPaint</span>.<span class="nv">setColor</span><span class="ss">(</span><span class="nv">Color</span>.<span class="nv">RED</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="nv">textPaint</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Paint</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">        <span class="nv">textPaint</span>.<span class="nv">setTextSize</span><span class="ss">(</span><span class="mi">50</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">    }</span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>Now that everything is initialized and ready to draw some graphics on the screen so that the application is interactive, now we have to interface with touch events. This is done by creating a new function within our View class, that takes in a MotionEvent on the View so that we can detect different types of touch events. Documentation on this can be found (<a href="https://developer.android.com/training/graphics/opengl/touch#java">https://developer.android.com/training/graphics/opengl/touch#java</a>).</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"java"} -->
-
 <p>``` {.wp-block-syntaxhighlighter-code .brush: .java; .notranslate}
 @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -226,41 +210,39 @@ public class Finger
                 break;
             }
             case MotionEvent.ACTION_MOVE : {</p>
-<div class="highlight"><pre><span></span>            <span class="nv">int</span> <span class="nv">touchCounter</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerCount</span><span class="ss">()</span><span class="c1">;</span>
-            <span class="k">for</span> <span class="ss">(</span><span class="nv">int</span> <span class="nv">t</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">; t &lt; touchCounter; t++) {</span>
-                <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span><span class="c1">;</span>
-                <span class="nv">fingerMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span>
-                <span class="nv">lineMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span>
-                <span class="nv">fingerMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>, <span class="nv">createCirPath</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">id</span><span class="ss">))</span><span class="c1">;</span>
-                <span class="nv">lineMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>,<span class="nv">createFinger</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">id</span><span class="ss">))</span><span class="c1">;</span>
-            }
-        }
-        <span class="nv">case</span> <span class="nv">MotionEvent</span>.<span class="nv">ACTION_POINTER_DOWN</span> : {
-            <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span><span class="c1">;</span>
-            <span class="nv">fingerMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>, <span class="nv">createCirPath</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">)))</span><span class="c1">;</span>
-            <span class="nv">lineMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>,<span class="nv">createFinger</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">)))</span><span class="c1">;</span>
-            <span class="k">break</span><span class="c1">;</span>
-        }
-        <span class="nv">case</span> <span class="nv">MotionEvent</span>.<span class="nv">ACTION_POINTER_UP</span> : {
-            <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span><span class="c1">;</span>
-            <span class="nv">fingerMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span>
-            <span class="nv">lineMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span>
-            <span class="k">break</span><span class="c1">;</span>
-        }
-        <span class="nv">case</span> <span class="nv">MotionEvent</span>.<span class="nv">ACTION_UP</span> : {
-            <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="mi">0</span><span class="ss">)</span><span class="c1">;</span>
-            <span class="nv">fingerMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span>
-            <span class="nv">lineMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span>
-            <span class="k">break</span><span class="c1">;</span>
-        }
-    }
-
-    <span class="nv">invalidate</span><span class="ss">()</span><span class="c1">;</span>
-    <span class="k">return</span> <span class="nv">true</span><span class="c1">;</span>
-}
+<div class="highlight"><pre><span class="code-line"><span></span>            <span class="nv">int</span> <span class="nv">touchCounter</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerCount</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="k">for</span> <span class="ss">(</span><span class="nv">int</span> <span class="nv">t</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">; t &lt; touchCounter; t++) {</span></span>
+<span class="code-line">                <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                <span class="nv">fingerMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                <span class="nv">lineMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                <span class="nv">fingerMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>, <span class="nv">createCirPath</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">id</span><span class="ss">))</span><span class="c1">;</span></span>
+<span class="code-line">                <span class="nv">lineMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>,<span class="nv">createFinger</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">t</span><span class="ss">)</span>, <span class="nv">id</span><span class="ss">))</span><span class="c1">;</span></span>
+<span class="code-line">            }</span>
+<span class="code-line">        }</span>
+<span class="code-line">        <span class="nv">case</span> <span class="nv">MotionEvent</span>.<span class="nv">ACTION_POINTER_DOWN</span> : {</span>
+<span class="code-line">            <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="nv">fingerMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>, <span class="nv">createCirPath</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">)))</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="nv">lineMap</span>.<span class="nv">put</span><span class="ss">(</span><span class="nv">id</span>,<span class="nv">createFinger</span><span class="ss">(</span><span class="nv">event</span>.<span class="nv">getX</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">event</span>.<span class="nv">getY</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span>, <span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">)))</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="k">break</span><span class="c1">;</span></span>
+<span class="code-line">        }</span>
+<span class="code-line">        <span class="nv">case</span> <span class="nv">MotionEvent</span>.<span class="nv">ACTION_POINTER_UP</span> : {</span>
+<span class="code-line">            <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="nv">getIndex</span><span class="ss">(</span><span class="nv">event</span><span class="ss">))</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="nv">fingerMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="nv">lineMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="k">break</span><span class="c1">;</span></span>
+<span class="code-line">        }</span>
+<span class="code-line">        <span class="nv">case</span> <span class="nv">MotionEvent</span>.<span class="nv">ACTION_UP</span> : {</span>
+<span class="code-line">            <span class="nv">int</span> <span class="nv">id</span> <span class="o">=</span> <span class="nv">event</span>.<span class="nv">getPointerId</span><span class="ss">(</span><span class="mi">0</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="nv">fingerMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="nv">lineMap</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">id</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="k">break</span><span class="c1">;</span></span>
+<span class="code-line">        }</span>
+<span class="code-line">    }</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nv">invalidate</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="nv">true</span><span class="c1">;</span></span>
+<span class="code-line">}</span>
 </pre></div>
-
-
 <p>private int getIndex(MotionEvent event) {
         return (event.getAction() &amp; MotionEvent.ACTION_POINTER_INDEX_MASK) &gt;&gt; MotionEvent.ACTION_POINTER_INDEX_SHIFT;
     }</p>
@@ -268,61 +250,57 @@ public class Finger
     {
         return new Finger(x,y,id);
     }</p>
-<div class="highlight"><pre><span></span><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> <span class="o">--&gt;</span>
-
-<span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="nv">Now</span> <span class="nv">that</span> <span class="nv">we</span><span class="s1">&#39;</span><span class="s">ve created a new Finger class inside our TreeMap by the order that the screen is touched in and we</span><span class="s1">&#39;</span><span class="nv">re</span> <span class="nv">removing</span> <span class="nv">that</span> <span class="nv">class</span> <span class="nv">when</span> <span class="nv">the</span> <span class="nv">screen</span> <span class="nv">input</span> <span class="nv">has</span> <span class="nv">been</span> <span class="nv">released</span>, <span class="nv">we</span> <span class="nv">are</span> <span class="nv">now</span> <span class="nv">ready</span> <span class="nv">to</span> <span class="nv">draw</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">screen</span> <span class="nv">from</span> <span class="nv">our</span> <span class="nv">inputs</span>.
-
-<span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="nv">By</span> <span class="nv">iterating</span> <span class="nv">through</span> <span class="nv">the</span> <span class="nv">TreeMap</span>, <span class="nv">in</span> <span class="nv">each</span> <span class="k">loop</span> <span class="nv">we</span> <span class="nv">know</span> <span class="nv">what</span> <span class="nv">the</span> <span class="nv">previous</span> <span class="nv">and</span> <span class="nv">what</span> <span class="nv">the</span> <span class="k">next</span> <span class="nv">value</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">array</span> <span class="nv">we</span> <span class="nv">can</span> <span class="nv">draw</span> <span class="nv">a</span> <span class="nv">circle</span> <span class="k">for</span> <span class="nv">where</span> <span class="nv">the</span> <span class="nv">input</span> <span class="nv">is</span> <span class="nv">and</span> <span class="nv">a</span> <span class="nv">line</span> <span class="nv">between</span>. <span class="nv">This</span> <span class="nv">also</span> <span class="nv">allows</span> <span class="nv">us</span> <span class="nv">to</span> <span class="nv">determine</span> <span class="nv">whereabouts</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">point</span> <span class="nv">in</span> <span class="nv">between</span> <span class="nv">these</span> <span class="nv">two</span> <span class="nv">points</span> <span class="nv">so</span> <span class="nv">we</span> <span class="nv">can</span> <span class="nv">write</span> <span class="nv">text</span>. <span class="k">For</span> <span class="nv">this</span> <span class="nv">example</span>, <span class="nv">I</span><span class="s1">&#39;</span><span class="s">ve chosen to write the length of the distance between the two inputs to demonstrate that this can also be dynamic in nature.</span>
-
-<span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span>
-
-<span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> {<span class="s2">&quot;</span><span class="s">language</span><span class="s2">&quot;</span>:<span class="s2">&quot;</span><span class="s">java</span><span class="s2">&quot;</span>} <span class="o">--&gt;</span>
-
-``` {.<span class="nv">wp</span><span class="o">-</span><span class="nv">block</span><span class="o">-</span><span class="nv">syntaxhighlighter</span><span class="o">-</span><span class="nv">code</span> .<span class="nv">brush</span>: .<span class="nv">java</span><span class="c1">; .notranslate}</span>
-<span class="nv">private</span> <span class="nv">Path</span> <span class="nv">createCirPath</span><span class="ss">(</span><span class="nv">float</span> <span class="nv">x</span>, <span class="nv">float</span> <span class="nv">y</span>, <span class="nv">int</span> <span class="nv">id</span><span class="ss">)</span> {
-        <span class="nv">Path</span> <span class="nv">p</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Path</span><span class="ss">()</span><span class="c1">;</span>
-        <span class="nv">p</span>.<span class="nv">addCircle</span><span class="ss">(</span><span class="nv">x</span>, <span class="nv">y</span>, <span class="mi">50</span>, <span class="nv">Path</span>.<span class="nv">Direction</span>.<span class="nv">CW</span><span class="ss">)</span><span class="c1">;</span>
-        <span class="k">return</span> <span class="nv">p</span><span class="c1">;</span>
-    }
-
-    @<span class="nv">Override</span>
-    <span class="nv">protected</span> <span class="nv">void</span> <span class="nv">onDraw</span><span class="ss">(</span><span class="nv">Canvas</span> <span class="nv">canvas</span><span class="ss">)</span> {
-        <span class="k">for</span> <span class="ss">(</span><span class="nv">Integer</span> <span class="nv">key</span> : <span class="nv">fingerMap</span>.<span class="nv">keySet</span><span class="ss">())</span> {
-            <span class="nv">Path</span> <span class="nv">p</span> <span class="o">=</span> <span class="nv">fingerMap</span>.<span class="nv">get</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span><span class="c1">;</span>
-            <span class="nv">canvas</span>.<span class="nv">drawPath</span><span class="ss">(</span><span class="nv">p</span>, <span class="nv">myPaint</span><span class="ss">)</span><span class="c1">;</span>
-        }
-        <span class="k">if</span><span class="ss">(</span><span class="nv">lineMap</span>.<span class="nv">size</span><span class="ss">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="ss">)</span>
-        {
-            <span class="nv">Integer</span> <span class="nv">key</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">firstKey</span><span class="ss">()</span><span class="c1">;</span>
-            <span class="k">for</span><span class="ss">(</span><span class="nv">int</span> <span class="nv">i</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">; i &lt; lineMap.size(); i = i + 1)</span>
-            {
-                <span class="nv">Finger</span> <span class="nv">start_fin</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">get</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span><span class="c1">;</span>
-                <span class="k">if</span><span class="ss">(</span><span class="nv">key</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">!=</span> <span class="nv">lineMap</span>.<span class="nv">size</span><span class="ss">())</span> {
-                    <span class="nv">Integer</span> <span class="nv">new_key</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">higherKey</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span><span class="c1">;</span>
-                    <span class="nv">Finger</span> <span class="nv">end_fin</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">get</span><span class="ss">(</span><span class="nv">new_key</span><span class="ss">)</span><span class="c1">;</span>
-                    <span class="nv">canvas</span>.<span class="nv">drawLine</span><span class="ss">(</span><span class="nv">start_fin</span>.<span class="nv">x_pos</span>, <span class="nv">start_fin</span>.<span class="nv">y_pos</span>, <span class="nv">end_fin</span>.<span class="nv">x_pos</span>, <span class="nv">end_fin</span>.<span class="nv">y_pos</span>, <span class="nv">myPaint</span><span class="ss">)</span><span class="c1">;</span>
-                    <span class="nv">String</span> <span class="nv">lineText</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Length: </span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nv">new</span> <span class="nv">DecimalFormat</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">#.##</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">Math</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="nv">Math</span>.<span class="nv">pow</span><span class="ss">(</span><span class="nv">end_fin</span>.<span class="nv">x_pos</span> <span class="o">-</span> <span class="nv">start_fin</span>.<span class="nv">x_pos</span>,<span class="mi">2</span><span class="ss">)</span> <span class="o">+</span> <span class="nv">Math</span>.<span class="nv">pow</span><span class="ss">(</span><span class="nv">end_fin</span>.<span class="nv">y_pos</span> <span class="o">-</span> <span class="nv">start_fin</span>.<span class="nv">y_pos</span>,<span class="mi">2</span><span class="ss">)))</span><span class="c1">;</span>
-                    <span class="nv">canvas</span>.<span class="nv">drawText</span><span class="ss">(</span><span class="nv">lineText</span>,<span class="ss">((</span><span class="nv">start_fin</span>.<span class="nv">x_pos</span> <span class="o">+</span> <span class="nv">end_fin</span>.<span class="nv">x_pos</span><span class="ss">)</span> <span class="o">/</span> <span class="mi">2</span><span class="ss">)</span>, <span class="ss">((</span><span class="nv">start_fin</span>.<span class="nv">y_pos</span> <span class="o">+</span> <span class="nv">end_fin</span>.<span class="nv">y_pos</span><span class="ss">)</span> <span class="o">/</span> <span class="mi">2</span><span class="ss">)</span>,<span class="nv">textPaint</span><span class="ss">)</span><span class="c1">;</span>
-                    <span class="nv">key</span> <span class="o">=</span> <span class="nv">new_key</span><span class="c1">;</span>
-                }
-            }
-        }
-    }
+<div class="highlight"><pre><span class="code-line"><span></span><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">Now</span> <span class="nv">that</span> <span class="nv">we</span><span class="s1">'</span><span class="s">ve created a new Finger class inside our TreeMap by the order that the screen is touched in and we</span><span class="s1">'</span><span class="nv">re</span> <span class="nv">removing</span> <span class="nv">that</span> <span class="nv">class</span> <span class="nv">when</span> <span class="nv">the</span> <span class="nv">screen</span> <span class="nv">input</span> <span class="nv">has</span> <span class="nv">been</span> <span class="nv">released</span>, <span class="nv">we</span> <span class="nv">are</span> <span class="nv">now</span> <span class="nv">ready</span> <span class="nv">to</span> <span class="nv">draw</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">screen</span> <span class="nv">from</span> <span class="nv">our</span> <span class="nv">inputs</span>.</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">By</span> <span class="nv">iterating</span> <span class="nv">through</span> <span class="nv">the</span> <span class="nv">TreeMap</span>, <span class="nv">in</span> <span class="nv">each</span> <span class="k">loop</span> <span class="nv">we</span> <span class="nv">know</span> <span class="nv">what</span> <span class="nv">the</span> <span class="nv">previous</span> <span class="nv">and</span> <span class="nv">what</span> <span class="nv">the</span> <span class="k">next</span> <span class="nv">value</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">array</span> <span class="nv">we</span> <span class="nv">can</span> <span class="nv">draw</span> <span class="nv">a</span> <span class="nv">circle</span> <span class="k">for</span> <span class="nv">where</span> <span class="nv">the</span> <span class="nv">input</span> <span class="nv">is</span> <span class="nv">and</span> <span class="nv">a</span> <span class="nv">line</span> <span class="nv">between</span>. <span class="nv">This</span> <span class="nv">also</span> <span class="nv">allows</span> <span class="nv">us</span> <span class="nv">to</span> <span class="nv">determine</span> <span class="nv">whereabouts</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">point</span> <span class="nv">in</span> <span class="nv">between</span> <span class="nv">these</span> <span class="nv">two</span> <span class="nv">points</span> <span class="nv">so</span> <span class="nv">we</span> <span class="nv">can</span> <span class="nv">write</span> <span class="nv">text</span>. <span class="k">For</span> <span class="nv">this</span> <span class="nv">example</span>, <span class="nv">I</span><span class="s1">'</span><span class="s">ve chosen to write the length of the distance between the two inputs to demonstrate that this can also be dynamic in nature.</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="o">/</span><span class="nv">wp</span>:<span class="nv">paragraph</span> <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="o">&lt;!--</span> <span class="nv">wp</span>:<span class="nv">syntaxhighlighter</span><span class="o">/</span><span class="nv">code</span> {<span class="s2">"</span><span class="s">language</span><span class="s2">"</span>:<span class="s2">"</span><span class="s">java</span><span class="s2">"</span>} <span class="o">--&gt;</span></span>
+<span class="code-line"></span>
+<span class="code-line">``` {.<span class="nv">wp</span><span class="o">-</span><span class="nv">block</span><span class="o">-</span><span class="nv">syntaxhighlighter</span><span class="o">-</span><span class="nv">code</span> .<span class="nv">brush</span>: .<span class="nv">java</span><span class="c1">; .notranslate}</span></span>
+<span class="code-line"><span class="nv">private</span> <span class="nv">Path</span> <span class="nv">createCirPath</span><span class="ss">(</span><span class="nv">float</span> <span class="nv">x</span>, <span class="nv">float</span> <span class="nv">y</span>, <span class="nv">int</span> <span class="nv">id</span><span class="ss">)</span> {</span>
+<span class="code-line">        <span class="nv">Path</span> <span class="nv">p</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">Path</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">        <span class="nv">p</span>.<span class="nv">addCircle</span><span class="ss">(</span><span class="nv">x</span>, <span class="nv">y</span>, <span class="mi">50</span>, <span class="nv">Path</span>.<span class="nv">Direction</span>.<span class="nv">CW</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="nv">p</span><span class="c1">;</span></span>
+<span class="code-line">    }</span>
+<span class="code-line"></span>
+<span class="code-line">    @<span class="nv">Override</span></span>
+<span class="code-line">    <span class="nv">protected</span> <span class="nv">void</span> <span class="nv">onDraw</span><span class="ss">(</span><span class="nv">Canvas</span> <span class="nv">canvas</span><span class="ss">)</span> {</span>
+<span class="code-line">        <span class="k">for</span> <span class="ss">(</span><span class="nv">Integer</span> <span class="nv">key</span> : <span class="nv">fingerMap</span>.<span class="nv">keySet</span><span class="ss">())</span> {</span>
+<span class="code-line">            <span class="nv">Path</span> <span class="nv">p</span> <span class="o">=</span> <span class="nv">fingerMap</span>.<span class="nv">get</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="nv">canvas</span>.<span class="nv">drawPath</span><span class="ss">(</span><span class="nv">p</span>, <span class="nv">myPaint</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">        }</span>
+<span class="code-line">        <span class="k">if</span><span class="ss">(</span><span class="nv">lineMap</span>.<span class="nv">size</span><span class="ss">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="ss">)</span></span>
+<span class="code-line">        {</span>
+<span class="code-line">            <span class="nv">Integer</span> <span class="nv">key</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">firstKey</span><span class="ss">()</span><span class="c1">;</span></span>
+<span class="code-line">            <span class="k">for</span><span class="ss">(</span><span class="nv">int</span> <span class="nv">i</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">; i &lt; lineMap.size(); i = i + 1)</span></span>
+<span class="code-line">            {</span>
+<span class="code-line">                <span class="nv">Finger</span> <span class="nv">start_fin</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">get</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                <span class="k">if</span><span class="ss">(</span><span class="nv">key</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">!=</span> <span class="nv">lineMap</span>.<span class="nv">size</span><span class="ss">())</span> {</span>
+<span class="code-line">                    <span class="nv">Integer</span> <span class="nv">new_key</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">higherKey</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                    <span class="nv">Finger</span> <span class="nv">end_fin</span> <span class="o">=</span> <span class="nv">lineMap</span>.<span class="nv">get</span><span class="ss">(</span><span class="nv">new_key</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                    <span class="nv">canvas</span>.<span class="nv">drawLine</span><span class="ss">(</span><span class="nv">start_fin</span>.<span class="nv">x_pos</span>, <span class="nv">start_fin</span>.<span class="nv">y_pos</span>, <span class="nv">end_fin</span>.<span class="nv">x_pos</span>, <span class="nv">end_fin</span>.<span class="nv">y_pos</span>, <span class="nv">myPaint</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                    <span class="nv">String</span> <span class="nv">lineText</span> <span class="o">=</span> <span class="s2">"</span><span class="s">Length: </span><span class="s2">"</span> <span class="o">+</span> <span class="nv">new</span> <span class="nv">DecimalFormat</span><span class="ss">(</span><span class="s2">"</span><span class="s">#.##</span><span class="s2">"</span><span class="ss">)</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">Math</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="nv">Math</span>.<span class="nv">pow</span><span class="ss">(</span><span class="nv">end_fin</span>.<span class="nv">x_pos</span> <span class="o">-</span> <span class="nv">start_fin</span>.<span class="nv">x_pos</span>,<span class="mi">2</span><span class="ss">)</span> <span class="o">+</span> <span class="nv">Math</span>.<span class="nv">pow</span><span class="ss">(</span><span class="nv">end_fin</span>.<span class="nv">y_pos</span> <span class="o">-</span> <span class="nv">start_fin</span>.<span class="nv">y_pos</span>,<span class="mi">2</span><span class="ss">)))</span><span class="c1">;</span></span>
+<span class="code-line">                    <span class="nv">canvas</span>.<span class="nv">drawText</span><span class="ss">(</span><span class="nv">lineText</span>,<span class="ss">((</span><span class="nv">start_fin</span>.<span class="nv">x_pos</span> <span class="o">+</span> <span class="nv">end_fin</span>.<span class="nv">x_pos</span><span class="ss">)</span> <span class="o">/</span> <span class="mi">2</span><span class="ss">)</span>, <span class="ss">((</span><span class="nv">start_fin</span>.<span class="nv">y_pos</span> <span class="o">+</span> <span class="nv">end_fin</span>.<span class="nv">y_pos</span><span class="ss">)</span> <span class="o">/</span> <span class="mi">2</span><span class="ss">)</span>,<span class="nv">textPaint</span><span class="ss">)</span><span class="c1">;</span></span>
+<span class="code-line">                    <span class="nv">key</span> <span class="o">=</span> <span class="nv">new_key</span><span class="c1">;</span></span>
+<span class="code-line">                }</span>
+<span class="code-line">            }</span>
+<span class="code-line">        }</span>
+<span class="code-line">    }</span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>In summary, it is quite simple to develop multi-touch interactions between the user and the application to enhance usability and interactivity. This is part of a application that I am developing at the moment and hope to share more insights into development as I progress on.</p>
-<!-- /wp:paragraph -->
+<!-- /wp:paragraph --></body></html>
   </div>
   <div class="tag-cloud">
     <p>

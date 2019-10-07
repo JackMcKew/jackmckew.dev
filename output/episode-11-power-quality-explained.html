@@ -111,284 +111,202 @@
 
 
   <div>
-    <!-- wp:paragraph -->
-
-<p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up that I found difficult to explain clearly was power quality and it's issues. So I decided why not dedicate a blog post about it and write a basic example power factor capacitor calculator in Python.</p>
+    <!-- wp:paragraph --><html><head></head><body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up that I found difficult to explain clearly was power quality and it's issues. So I decided why not dedicate a blog post about it and write a basic example power factor capacitor calculator in Python.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Power quality is defined as "the concept of powering and grounding sensitive electronic equipment in a manner suitable for the equipment with precise wiring system and other connected equipment" by the IEEE (The Institute of Electrical and Electronics Engineers). In a simplistic view this is just trying to say that electrical equipment is to be installed/configured in a way that is operates as intended.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Quality of power is not determined by the one who produces it, it's defined by the end user of the power. Eg, like a physical product, if you buy something from a store and it's poor quality, that's being defined by the end user. Similar to that of a physical product, quality of power can be lost in a variety of forms/ways.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Issues with power quality can be categorized into three main categories:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>Harmonic voltages and currents</li>
 <li>Poor power factor</li>
 <li>Voltage instability</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:heading -->
-
 <h2>Harmonics</h2>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="k">def</span> <span class="nf">Harmonic</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> 
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
-        <span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="kp">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-
-
-<span class="n">Harmonic</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">Harmonic</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="c1"># Harmonic(3)</span>
-<span class="c1"># Harmonic(4)</span>
-<span class="c1"># Harmonic(5)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">Harmonic</span><span class="p">(</span><span class="n">i</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> </span>
+<span class="code-line">    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">):</span></span>
+<span class="code-line">        <span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="kp">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">Harmonic</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">Harmonic</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></span>
+<span class="code-line"><span class="c1"># Harmonic(3)</span></span>
+<span class="code-line"><span class="c1"># Harmonic(4)</span></span>
+<span class="code-line"><span class="c1"># Harmonic(5)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>The example above shows us the base signal (fundamental frequency), and it's first harmonic (harmonic of 2 or twice as fast as the fundamental frequency).</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":129,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-129" src="https://i0.wp.com/jmckew.com/wp-content/uploads/2019/01/Harmonic1_2.png?fit=640%2C303&amp;ssl=1">
+<img alt="" class="wp-image-129" src="https://i0.wp.com/jmckew.com/wp-content/uploads/2019/01/Harmonic1_2.png?fit=640%2C303&amp;ssl=1"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>When these two signals are superimposed on each other, they produce a distorted waveform. Electrical equipment is designed to operate at the base signal (50Hz here in Australia), and typically does not cope with distorted wave like seen below when we superimpose a base signal with it's first harmonic.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":130,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-130" src="https://i2.wp.com/jmckew.com/wp-content/uploads/2019/01/Harmonic1_2_Combined.png?fit=640%2C303&amp;ssl=1">
+<img alt="" class="wp-image-130" src="https://i2.wp.com/jmckew.com/wp-content/uploads/2019/01/Harmonic1_2_Combined.png?fit=640%2C303&amp;ssl=1"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Luckily, these issues are now easily detected and rectified by harmonic analyzers and active/passive harmonic filters.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:heading -->
-
 <h2>Power Factor</h2>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>Power factor is a measure of how effectively power is being used in an electrical system, and is defined as the ratio of real (useful) to apparent (total) power.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Real power (kW) is the power that actually powers the equipment to produce useful work (such as spinning a motor). It can also be called actual, active or working power.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Reactive power (kVAR) is the power required by (some) equipment (eg, motors), to produce a magnetic field to enable the useful work to be produce. It's necessary to operate the equipment, however you don't see any result from the reactive power.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Apparent power (kVA) is the vector sum of the real power (kW) and reactive power (kVAR) and is the total power supplied from the mains power required to produce the right amount of real power.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Suppose you are running a store, you have to spend an amount of money X (cost) on buying products to sell in the future for a larger amount of money Y, meaning your profit will be P = Y - X. X is not lost money, without spending X you will not be able to make any profit P. The profit P is comparable to the active power, the earnings Y are the equivalent of apparent power and the initial cost X is the reactive power.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":145,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-145" src="https://jmckew.com/wp-content/uploads/2019/02/CodeCogsEqn.gif">
+<img alt="" class="wp-image-145" src="https://jmckew.com/wp-content/uploads/2019/02/CodeCogsEqn.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Therefore, for a given power supply (kVA):\</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>The more cost you have (higher percentage of kVAR), the lower the ratio of kW (profit) to kVA (profit + cost), meaning a poorer power factor.</li>
 <li>The less cost you have (lower percentage of kVAR), the higher your ratio of kW (profit) to kVA (profit + cost) becomes, and the better you power factor. As your cost (kVAR) approaches zero, your power factor approaches 1 (unity).</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:heading -->
-
 <h2>Voltage Instability</h2>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>A stable voltage is when every piece of equipment connected to a network is operating under normal condition without issues, however when a fault or disturbance (harmonics) occurs in this system, the voltage becomes unstable.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Due to voltage instability, the electrical system's voltage may collapse, if the voltage is below acceptable limits. Voltage collapse may be a total or partial black, the terms voltage instability and voltage collapse are interchangeable.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>For example, if 10 generators are running to keep 10 machines working. Suddenly 3 of the generators run out of fuel, but the 10 machines keep going. This would cause a loss of generation, not being able to maintain the power required to keep all the machines working and consequentially since there is not enough power to share between any of the machines, all 10 machines will turn off, causing a total blackout.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:heading -->
-
 <h2>Capacitor Calculator - Python</h2>
 <!-- /wp:heading -->
-
 <!-- wp:paragraph -->
-
 <p>Correcting power factor from a lagging (\&lt;1) power factor, can be as simple as reducing reactive power (kVAR) in the system such that the ratio of real power (kW) to apparent power (kVA) is still as close to unity (1) as possible.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Since motors require inductive or lagging power for magnetizing before useful work beings, this brings makes the power factor of the system lagging (\&lt;1). Capacitors provide capacitive or leading reactive power that cancels out the lagging power when used for power-factor improvement. The improved power factor changes the current requirements of the system, but not the one required by the motor.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":136,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="Power factor calculation" class="wp-image-136" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-1-1.gif">
+<img alt="Power factor calculation" class="wp-image-136" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-1-1.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:image {"id":137,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="Apparent power calculation" class="wp-image-137" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-2.gif">
+<img alt="Apparent power calculation" class="wp-image-137" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-2.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:image {"id":138,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="Reactive power calculation" class="wp-image-138" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-3.gif">
+<img alt="Reactive power calculation" class="wp-image-138" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-3.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Using these formulas we can calculate just how big of a capacitor we require:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:image {"id":139,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-139" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-4.gif">
+<img alt="" class="wp-image-139" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-4.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:image {"id":140,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-140" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-5.gif">
+<img alt="" class="wp-image-140" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-5.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:image {"id":141,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-141" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-6.gif">
+<img alt="" class="wp-image-141" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-6.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:image {"id":142,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-142" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-7.gif">
+<img alt="" class="wp-image-142" src="https://jmckew.com/wp-content/uploads/2019/01/CodeCogsEqn-7.gif"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span><span class="n">pi</span>
-
-<span class="n">real_power</span> <span class="o">=</span> <span class="mf">2.2</span>     <span class="c1">#Real power in kW</span>
-<span class="n">current</span> <span class="o">=</span> <span class="mi">10</span>         <span class="c1">#Current in amps</span>
-<span class="n">voltage</span> <span class="o">=</span> <span class="mi">240</span>        <span class="c1">#Voltage in volts</span>
-<span class="n">frequency</span> <span class="o">=</span> <span class="mi">50</span>       <span class="c1">#Frequency in hertz</span>
-<span class="n">corrected_pf</span> <span class="o">=</span> <span class="mf">0.95</span>  <span class="c1">#Target power factor</span>
-
-<span class="c1">#Calculate current power factor and apparent power</span>
-<span class="n">current_pf</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">real_power</span> <span class="o">/</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span>
-<span class="n">S_current</span> <span class="o">=</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
-
-<span class="c1">#Power factors greater than 1 will give imaginary Q_current, alert user</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="c1">#Calculate current reactive power</span>
-    <span class="n">Q_current</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">S_current</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-
-    <span class="c1">#Calculate target apparent power</span>
-    <span class="n">S_corrected</span> <span class="o">=</span> <span class="n">real_power</span> <span class="o">/</span> <span class="n">corrected_pf</span>
-
-    <span class="c1">#Calculate required reactive power compensation</span>
-    <span class="n">Q_corrected</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">S_corrected</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-
-    <span class="c1">#Calculate size of capacitor required for reactive power</span>
-    <span class="n">Q_c</span> <span class="o">=</span> <span class="n">Q_current</span> <span class="o">-</span> <span class="n">Q_corrected</span>
-    <span class="n">C_f</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">Q_c</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">frequency</span><span class="o">*</span><span class="n">voltage</span><span class="p">)</span>
-
-    <span class="c1">#Print results to user</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Current power factor {0:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_pf</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Current apparent power {0:.3f} kVA&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_current</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Current reactive power {0:.3f} kVAR&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Q_current</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Capacitor required {0:.3f} Farads&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">C_f</span><span class="p">))</span>
-
-<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Current power factor &gt; 1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span><span class="n">pi</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">real_power</span> <span class="o">=</span> <span class="mf">2.2</span>     <span class="c1">#Real power in kW</span></span>
+<span class="code-line"><span class="n">current</span> <span class="o">=</span> <span class="mi">10</span>         <span class="c1">#Current in amps</span></span>
+<span class="code-line"><span class="n">voltage</span> <span class="o">=</span> <span class="mi">240</span>        <span class="c1">#Voltage in volts</span></span>
+<span class="code-line"><span class="n">frequency</span> <span class="o">=</span> <span class="mi">50</span>       <span class="c1">#Frequency in hertz</span></span>
+<span class="code-line"><span class="n">corrected_pf</span> <span class="o">=</span> <span class="mf">0.95</span>  <span class="c1">#Target power factor</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1">#Calculate current power factor and apparent power</span></span>
+<span class="code-line"><span class="n">current_pf</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">real_power</span> <span class="o">/</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">S_current</span> <span class="o">=</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c1">#Power factors greater than 1 will give imaginary Q_current, alert user</span></span>
+<span class="code-line"><span class="k">try</span><span class="p">:</span></span>
+<span class="code-line">    <span class="c1">#Calculate current reactive power</span></span>
+<span class="code-line">    <span class="n">Q_current</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">S_current</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#Calculate target apparent power</span></span>
+<span class="code-line">    <span class="n">S_corrected</span> <span class="o">=</span> <span class="n">real_power</span> <span class="o">/</span> <span class="n">corrected_pf</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#Calculate required reactive power compensation</span></span>
+<span class="code-line">    <span class="n">Q_corrected</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">S_corrected</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#Calculate size of capacitor required for reactive power</span></span>
+<span class="code-line">    <span class="n">Q_c</span> <span class="o">=</span> <span class="n">Q_current</span> <span class="o">-</span> <span class="n">Q_corrected</span></span>
+<span class="code-line">    <span class="n">C_f</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">Q_c</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">frequency</span><span class="o">*</span><span class="n">voltage</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c1">#Print results to user</span></span>
+<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Current power factor {0:.3f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_pf</span><span class="p">))</span></span>
+<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Current apparent power {0:.3f} kVA"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_current</span><span class="p">))</span></span>
+<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Current reactive power {0:.3f} kVAR"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Q_current</span><span class="p">))</span></span>
+<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Capacitor required {0:.3f} Farads"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">C_f</span><span class="p">))</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span></span>
+<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Current power factor &gt; 1"</span><span class="p">)</span></span>
 </pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
+<!-- /wp:syntaxhighlighter/code --></body></html>
   </div>
   <div class="tag-cloud">
     <p>

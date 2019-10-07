@@ -111,50 +111,36 @@
 
 
   <div>
-    <!-- wp:paragraph -->
-
-<p>This is the first post in a series of posts dedicated for\
+    <!-- wp:paragraph --><html><head></head><body><p>This is the first post in a series of posts dedicated for\
 demonstrating how Python can be applied in the finance industry. Personally,\
 the first thing that comes to mind when I think of the finance industry is the\
 stock market. For fellow Australians, our main stock exchange is the Australian\
 Securities Exchange (ASX). For those who are reading who are not familiar with\
 stocks, there is a plethora of information around stocks across the internet.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>When it comes to using Python with stocks, the very first\
 thing that you will require, is data. Thankfully, there are multitudes of\
 services out there which provide this data through application programming\
 interfaces (APIs). The data is provided through APIs in a few common formats:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li>JSON,</li>
 <li>XML,</li>
 <li>CSV.</li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:paragraph -->
-
 <p>For this post, I will be utilising the free service, Alpha Vantage, to request historical records of stock information on the ASX. For access to Alpha Vantage’s API, head to <a href="http://www.alphavantage.co/support/#api-key">http://www.alphavantage.co/support/#api-key</a> and register for a free API key. There is also documentation around testing if your API key is operational on the Alpha Vantage website.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>Now that we have access to an API in which we can extract historical records of stock information in the ASX, it’s time to manipulate and analyse the data. As in my previous post <a href="https://jmckew.com/2019/01/11/episode-8-anaconda/">Episode 8 – Anaconda</a>, I recommend setting up a virtual environment or anaconda environment to install &amp; manage dependencies of external libraries.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>The packages required for this post in the series are:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:list -->
-
 <ul>
 <li><a href="https://pandas.pydata.org/">Pandas</a> (For manipulating the data),</li>
 <li><a href="https://github.com/RomelTorres/alpha_vantage">Alpha_vantage</a> (To access the historical records through an API),</li>
@@ -163,133 +149,93 @@ interfaces (APIs). The data is provided through APIs in a few common formats:</p
 <li></li>
 </ul>
 <!-- /wp:list -->
-
 <!-- wp:paragraph -->
-
 <p>To import these libraries into our Python code the following\
 code is required:</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">alpha_vantage.timeseries</span> <span class="kn">import</span> <span class="n">TimeSeries</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">alpha_vantage.timeseries</span> <span class="kn">import</span> <span class="n">TimeSeries</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>Now that we have imported the packages required to extract,\
 process and display the data. The first step is to extract the data in a useful\
 format from the Alpha Vantage API.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:paragraph -->
-
 <p>First declare a list with all the companies ASX names with the suffix “.AX” to denominate that it’s from the ASX. After that initialise an empty pandas dataframe to be filled with the data to analyse. Now iterate over the list, calling a request through the API to request the data that is required. There are multiple formats of data to be extracted through the API which is detailed in the <a href="https://alpha-vantage.readthedocs.io/en/latest/">Alpha_Vantage documentation</a>. For this post, I have used the get_daily function from the timeseries object in alpha_vantage to extract the daily information on a stock for the past 20 years, in particular, the closing value.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="nv">companies</span> <span class="o">=</span> [<span class="s1">&#39;</span><span class="s">NAB.AX</span><span class="s1">&#39;</span>,<span class="s1">&#39;</span><span class="s">WOW.AX</span><span class="s1">&#39;</span>,<span class="s1">&#39;</span><span class="s">TLS.AX</span><span class="s1">&#39;</span>,<span class="s1">&#39;</span><span class="s">BHP.AX</span><span class="s1">&#39;</span>]
-
-<span class="nv">stocks_df</span> <span class="o">=</span> <span class="nv">pd</span>.<span class="nv">DataFrame</span><span class="ss">()</span>
-
-<span class="k">for</span> <span class="nv">company</span> <span class="nv">in</span> <span class="nv">companies</span>:
-    <span class="nv">data</span>, <span class="nv">meta_data</span> <span class="o">=</span> <span class="nv">ts</span>.<span class="nv">get_daily</span><span class="ss">(</span><span class="nv">symbol</span><span class="o">=</span><span class="nv">company</span>,<span class="nv">outputsize</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">full</span><span class="s1">&#39;</span><span class="ss">)</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="nv">data</span>.<span class="nv">head</span><span class="ss">())</span>
-    <span class="nv">stocks_df</span>[<span class="nv">company</span>] <span class="o">=</span> <span class="nv">pd</span>.<span class="nv">Series</span><span class="ss">(</span><span class="nv">data</span>[<span class="s1">&#39;</span><span class="s">4. close</span><span class="s1">&#39;</span>]<span class="ss">)</span>
-
-<span class="nv">print</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">head</span><span class="ss">())</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">companies</span> <span class="o">=</span> [<span class="s1">'</span><span class="s">NAB.AX</span><span class="s1">'</span>,<span class="s1">'</span><span class="s">WOW.AX</span><span class="s1">'</span>,<span class="s1">'</span><span class="s">TLS.AX</span><span class="s1">'</span>,<span class="s1">'</span><span class="s">BHP.AX</span><span class="s1">'</span>]</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">stocks_df</span> <span class="o">=</span> <span class="nv">pd</span>.<span class="nv">DataFrame</span><span class="ss">()</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">for</span> <span class="nv">company</span> <span class="nv">in</span> <span class="nv">companies</span>:</span>
+<span class="code-line">    <span class="nv">data</span>, <span class="nv">meta_data</span> <span class="o">=</span> <span class="nv">ts</span>.<span class="nv">get_daily</span><span class="ss">(</span><span class="nv">symbol</span><span class="o">=</span><span class="nv">company</span>,<span class="nv">outputsize</span><span class="o">=</span><span class="s1">'</span><span class="s">full</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line">    <span class="nv">print</span><span class="ss">(</span><span class="nv">data</span>.<span class="nv">head</span><span class="ss">())</span></span>
+<span class="code-line">    <span class="nv">stocks_df</span>[<span class="nv">company</span>] <span class="o">=</span> <span class="nv">pd</span>.<span class="nv">Series</span><span class="ss">(</span><span class="nv">data</span>[<span class="s1">'</span><span class="s">4. close</span><span class="s1">'</span>]<span class="ss">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">print</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">head</span><span class="ss">())</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:image {"id":257,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-257" src="https://jmckew.com/wp-content/uploads/2019/04/image.png">
+<img alt="" class="wp-image-257" src="https://jmckew.com/wp-content/uploads/2019/04/image.png"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Now that the dataframe is full of closing values for the companie’s stock’s closing values, it’s time to begin processing. First of all, for any missing data or erroneous 0 values, the ffill() function is used to fill any missing value by propagating the last valid observation forward. After that, the timestamp on each row is forced to become the index of the dataframe and converted to a datetime type.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="p">.</span><span class="k">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pd</span><span class="p">.</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">).</span><span class="n">ffill</span><span class="p">()</span>
-<span class="n">stocks_df</span><span class="p">.</span><span class="k">index</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stocks_df</span><span class="p">[</span><span class="ss">&quot;date&quot;</span><span class="p">])</span>
-<span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="ss">&quot;date&quot;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="p">.</span><span class="k">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pd</span><span class="p">.</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">).</span><span class="n">ffill</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">stocks_df</span><span class="p">.</span><span class="k">index</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stocks_df</span><span class="p">[</span><span class="ss">"date"</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="ss">"date"</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:paragraph -->
-
 <p>Now that the data has gone through it’s pre-processing phase, it’s time to begin plotting some figures. To begin, a basic figure, plotting a single for each company’s stock price over the past 20 years on a single line graph to enable comparison between the companies.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">14</span>,<span class="mi">7</span><span class="ss">))</span>
-    <span class="k">for</span> <span class="nv">column</span> <span class="nv">in</span> <span class="nv">stocks_df</span>.<span class="nv">columns</span>.<span class="nv">values</span>:
-        <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">index</span>,<span class="nv">stocks_df</span>[<span class="nv">column</span>],<span class="nv">lw</span><span class="o">=</span><span class="mi">3</span>,<span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span>,<span class="nv">label</span><span class="o">=</span><span class="nv">c</span><span class="ss">)</span>
-<span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">loc</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">upper left</span><span class="s1">&#39;</span>,<span class="nv">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="ss">)</span>
-<span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">price in $</span><span class="s1">&#39;</span><span class="ss">)</span>
-<span class="nv">plt</span>.<span class="k">show</span><span class="ss">()</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">14</span>,<span class="mi">7</span><span class="ss">))</span></span>
+<span class="code-line">    <span class="k">for</span> <span class="nv">column</span> <span class="nv">in</span> <span class="nv">stocks_df</span>.<span class="nv">columns</span>.<span class="nv">values</span>:</span>
+<span class="code-line">        <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span><span class="nv">stocks_df</span>.<span class="nv">index</span>,<span class="nv">stocks_df</span>[<span class="nv">column</span>],<span class="nv">lw</span><span class="o">=</span><span class="mi">3</span>,<span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span>,<span class="nv">label</span><span class="o">=</span><span class="nv">c</span><span class="ss">)</span></span>
+<span class="code-line"><span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">loc</span><span class="o">=</span><span class="s1">'</span><span class="s">upper left</span><span class="s1">'</span>,<span class="nv">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="ss">)</span></span>
+<span class="code-line"><span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">'</span><span class="s">price in $</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line"><span class="nv">plt</span>.<span class="k">show</span><span class="ss">()</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:image {"id":259,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-259" src="https://i2.wp.com/jmckew.com/wp-content/uploads/2019/04/Figure_1-1.png?fit=640%2C318&amp;ssl=1">
+<img alt="" class="wp-image-259" src="https://i2.wp.com/jmckew.com/wp-content/uploads/2019/04/Figure_1-1.png?fit=640%2C318&amp;ssl=1"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Another way to plot this data is to show it as the percentage change from the day before AKA daily returns. By plotting the data in this way, instead of showing the actual prices, the graph is showing the stocks’ volatility.</p>
 <!-- /wp:paragraph -->
-
 <!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-<div class="highlight"><pre><span></span><span class="nv">returns</span> <span class="o">=</span> <span class="nv">stocks_df</span>.<span class="nv">pct_change</span><span class="ss">()</span>
-
-<span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">14</span>,<span class="mi">7</span><span class="ss">))</span>
-<span class="k">for</span> <span class="nv">column</span> <span class="nv">in</span> <span class="nv">returns</span>.<span class="nv">columns</span>.<span class="nv">values</span>:
-    <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span><span class="nv">returns</span>.<span class="nv">index</span>,<span class="nv">returns</span>[<span class="nv">column</span>],<span class="nv">lw</span><span class="o">=</span><span class="mi">3</span>,<span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span>,<span class="nv">label</span><span class="o">=</span><span class="nv">c</span><span class="ss">)</span>
-<span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">loc</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">upper left</span><span class="s1">&#39;</span>,<span class="nv">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="ss">)</span>
-<span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">daily returns</span><span class="s1">&#39;</span><span class="ss">)</span>
-<span class="nv">plt</span>.<span class="k">show</span><span class="ss">()</span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">returns</span> <span class="o">=</span> <span class="nv">stocks_df</span>.<span class="nv">pct_change</span><span class="ss">()</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">14</span>,<span class="mi">7</span><span class="ss">))</span></span>
+<span class="code-line"><span class="k">for</span> <span class="nv">column</span> <span class="nv">in</span> <span class="nv">returns</span>.<span class="nv">columns</span>.<span class="nv">values</span>:</span>
+<span class="code-line">    <span class="nv">plt</span>.<span class="nv">plot</span><span class="ss">(</span><span class="nv">returns</span>.<span class="nv">index</span>,<span class="nv">returns</span>[<span class="nv">column</span>],<span class="nv">lw</span><span class="o">=</span><span class="mi">3</span>,<span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">8</span>,<span class="nv">label</span><span class="o">=</span><span class="nv">c</span><span class="ss">)</span></span>
+<span class="code-line"><span class="nv">plt</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">loc</span><span class="o">=</span><span class="s1">'</span><span class="s">upper left</span><span class="s1">'</span>,<span class="nv">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="ss">)</span></span>
+<span class="code-line"><span class="nv">plt</span>.<span class="nv">ylabel</span><span class="ss">(</span><span class="s1">'</span><span class="s">daily returns</span><span class="s1">'</span><span class="ss">)</span></span>
+<span class="code-line"><span class="nv">plt</span>.<span class="k">show</span><span class="ss">()</span></span>
 </pre></div>
-
-
 <!-- /wp:syntaxhighlighter/code -->
-
 <!-- wp:image {"id":260,"align":"center"} -->
-
 <p>::: {.wp-block-image}
-<img alt="" class="wp-image-260" src="https://i0.wp.com/jmckew.com/wp-content/uploads/2019/04/Figure_2.png?fit=640%2C318&amp;ssl=1">
+<img alt="" class="wp-image-260" src="https://i0.wp.com/jmckew.com/wp-content/uploads/2019/04/Figure_2.png?fit=640%2C318&amp;ssl=1"/>
 :::</p>
 <!-- /wp:image -->
-
 <!-- wp:paragraph -->
-
 <p>Now that we have some insight to the stocks’ data, the next\
 post in this series will demonstrate a way to calculate a balanced portfolio\
 from historical records using Modern Portfolio Theory.</p>
-<!-- /wp:paragraph -->
+<!-- /wp:paragraph --></body></html>
   </div>
   <div class="tag-cloud">
     <p>
