@@ -10,6 +10,8 @@ SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
 SITEURL = "https://nifty-engelbart-ce3324.netlify.com"
 SITELOGO = "img/jm-photo"
 
+DISPLAY_PAGES_ON_MENU = True
+
 THEME = "Flex"
 STATIC_PATHS = ["img", "static"]
 FAVICON = "img/favicon.ico"
@@ -46,15 +48,18 @@ PLUGINS = [
     "multi_neighbors",
     "pelican_youtube",
     "photos",
-    # "random_article",
     "representative_image",
     "share_post",
+    "always_modified"
 ]
 
 
 DELETE_OUTPUT_DIRECTORY = False
 STATIC_PATHS = ["img", "static", "pdf"]
 PATH = "content"
+# ARTICLE_PATHS = ['blog']
+# ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
+# ARTICLE_URL = '{date:%Y}/{slug}.html'
 
 TIMEZONE = "Australia/Sydney"
 
