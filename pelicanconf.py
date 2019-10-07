@@ -65,7 +65,7 @@ LINKS = (
 #          ('You can modify those links in your config file', '#'),)
 
 # Social widget
-OCIAL = (('twitter', 'https://twitter.com/Jac_McQ'),
+SOCIAL = (('twitter', 'https://twitter.com/Jac_McQ'),
           ('linkedin', 'https://www.linkedin.com/in/jack-mckew/'),
           ('github', 'https://github.com/JackMcKew'),
         )
