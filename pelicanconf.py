@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Jack McKew'
 SITENAME = "Jack McKew's Blog"
-SITEURL = 'https://jmckew.com'
+SITEURL = 'https://nifty-engelbart-ce3324.netlify.com/'
 
 THEME = 'Flex'
 STATIC_PATHS = ['img', 'static']
