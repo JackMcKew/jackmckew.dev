@@ -57,7 +57,9 @@ PLUGINS = [
     "photos",
     "representative_image",
     "share_post",
-    "always_modified"
+    "always_modified",
+    "dateish",
+    "readtime"
 ]
 
 

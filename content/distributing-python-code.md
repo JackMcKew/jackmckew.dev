@@ -1,7 +1,6 @@
 Title: Distributing Python Code
 Date: 2019-05-31 06:30
 Author: admin
-Category: Code Fridays
 Tags: pyinstaller, python
 Slug: distributing-python-code
 Status: published
