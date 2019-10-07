@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+        <meta charset="utf-8" />
+        <title>Episode 17 – Networking Routing & Addressing</title>
+        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
+                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
+                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
+                    <li><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://jmckew.com/episode-17-networking-routing-addressing.html" rel="bookmark"
+           title="Permalink to Episode 17 – Networking Routing & Addressing">Episode 17 – Networking Routing & Addressing</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-03-15T06:30:00+11:00">
+                Published: Fri 15 March 2019
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
+        </address>
+<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
+<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
+</footer><!-- /.post-info -->      <!-- wp:paragraph -->
+
+<p>Following last weeks post around network topologies, I believe the next topic to cover is routing and addressing. Routing is the process of selecting a path for traffic to flow through in a network while addressing is marking elements within a network. A real-world example of routing and addressing is the postal system, each element (person) is marked with an address (eg, a street address) and the mail makes it to that address from routing it from the sender to the receiver.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>While the goal for routing may be simple (“go from sender to receiver in the most efficient/quickest way possible”), the techniques used to achieve this can be very complex and confusing but when solutions are found that make a network work efficiently, it is a very rewarding experience for all users.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Routing can be broken into three broad categories:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+
+<ul>
+<li>Protocols – the medium that allows information to move through a network</li>
+<li>Algorithms – to determine paths between sender and receiver</li>
+<li>Databases – to store information that the algorithms determine</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+
+<p>The whole premise around routers in a network (<a href="https://jmckew.com/2019/03/08/episode-16-networking-basics/">Networking Basics</a>) is that they will “pass it on”, either to their smarter peers or in the correct direction. For example in a star/tree network, devices pass information to their closest ‘router’ which then decides either to pass it directly to the correct address or to another router which may have a better idea on where the information is intended on going.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+
+<h3>Protocols</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+
+<p>In industry,\
+some of the most common networking protocols are MODBUS and DNP3. Modbus being\
+a de-facto standard for interconnecting electrical equipment and DNP3\
+(Distributed Network Protocol) commonly being used in the water/electric industries\
+for their flexibility during outages or broken links in a network.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+
+<h3>Algorithms</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+
+<p>Routing\
+tables is the most prevalent type of routing algorithms with their fixed nature\
+meaning once the routing decisions for how information travels have been decided,\
+they do not change. The other type of routing algorithms (which are much more\
+exciting) are known as adaptive algorithms, which means the routing changes\
+depending on: topology, delay, load, etc, to try and reach the most efficient path\
+from sender to receiver.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+
+<h3>Databases</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+
+<p>Following\
+algorithms, databases can either hold the entire routing table and a router\
+looks up where it wants to go and it which path to take (similar to a bus\
+timetable), or, forwarding tables (technically can be apart of routing tables\
+as well) which detail the communications pathways to utilize for types of\
+traffic.</p>
+<!-- /wp:paragraph -->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

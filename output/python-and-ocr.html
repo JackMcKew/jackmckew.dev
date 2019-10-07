@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+        <meta charset="utf-8" />
+        <title>Python and OCR</title>
+        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
+                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
+                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
+                    <li><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://jmckew.com/python-and-ocr.html" rel="bookmark"
+           title="Permalink to Python and OCR">Python and OCR</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-06-28T06:30:00+10:00">
+                Published: Fri 28 June 2019
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
+        </address>
+<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
+
+</footer><!-- /.post-info -->      <!-- wp:paragraph -->
+
+<p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form of semi-structured data. OCR just like humans also has it's limitations, for example, if you were trying to read someone with really difficult handwriting, it could be a big challenge. In this post, we will use the <a href="https://opensource.google.com/projects/tesseract">Tesseract</a> engine (an open source Google project) to undertake the OCR process for us.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>First of all, as always, we must create a new virtual environment for our project to live in or use a package manager such as Anaconda (as explained in my post <a href="https://jmckew.com/2019/01/11/episode-8-anaconda/">Episode - 8: Anaconda</a>. Once initialized, we want to install a few packages to help us on our quest for OCR. Both <a href="https://pillow.readthedocs.io/en/stable/">Pillow</a> and <a href="https://pypi.org/project/pytesseract/">PyTesseract</a>, if you are using Anaconda like I did, you will want to specifically use pip, not conda, to install these packages. Further to this, you will need to install the binary of the Tesseract-OCR engine, which installation instructions can be found: <a href="https://github.com/UB-Mannheim/tesseract/wiki">https://github.com/UB-Mannheim/tesseract/wiki</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Now we are finally ready to test the engine and see if we can extract text out of an image, first of all we will start with a 'well' written example, the 'logo' of this website!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":343,"align":"center"} -->
+
+<p>::: {.wp-block-image}
+<img alt="" class="wp-image-343" src="https://jmckew.com/wp-content/uploads/2019/06/example.png">
+:::</p>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+
+<p>Of course, we have still yet to write any code, so naturally, that is the next step. As always in a python project, you will need to import all the dependencies of the project, in this case, it will be Image from the PIL (pillow) package, and pytesseract (the python wrapper around the Tesseract Engine).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code -->
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">pytesseract</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now that we have our dependencies loaded, it's time to check out the documentation behind Pillow and pytesseract to know how to operate the tools, consider these an instruction manual. The documentation for these tools can be found:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+
+<ul>
+<li><a href="https://pillow.readthedocs.io/en/stable/">Pillow</a>,</li>
+<li><a href="https://pytesseract.readthedocs.io/">PyTesseract</a>.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+
+<p>Luckily for us, the developers have made this so simple it could be a one liner:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="p">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="p">.</span><span class="k">open</span><span class="p">(</span><span class="s1">&#39;images/example.png&#39;</span><span class="p">)))</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Which outputs in the console from the example image above:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+
+<blockquote>
+<p>JACK MCKEW'S\
+BLOG\
+Python enthusiast, electrical engineer and\
+tinkerer</p>
+</blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+
+<p>Great! We can confirm that the text that the tesseract engine detected, is in fact, exactly what the example we gave it was.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>However, let's go a bit out of the way to make this a function such that it can be called more easily with the filepath to the image as a string.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">pytesseract</span>
+
+<span class="k">def</span> <span class="nf">ocr_convert_to_text</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">extracted_text</span> <span class="o">=</span> <span class="n">ocr_convert_to_text</span><span class="p">(</span><span class="s1">&#39;images/example.png&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">extracted_text</span><span class="p">)</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now we have a function that we can call with a file path to easily convert our images to text. Now let's give the tesseract engine a bit of challenge with a full page of handwritten text:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":345,"align":"center"} -->
+
+<p>::: {.wp-block-image}
+<img alt="Source" class="wp-image-345" src="https://i2.wp.com/jmckew.com/wp-content/uploads/2019/06/example_2.jpg?fit=640%2C887&amp;ssl=1">
+:::</p>
+<!-- /wp:image -->
+
+<!-- wp:quote -->
+
+<blockquote>
+<p>Ad Bb Cc Da Fe FEF Ge Hh Ii IS RR lt Hm We\
+00 PP Ag Rr SsT# Uu Vv Ww Xx 44 Le\
+Aa BS (36 72 Re bebe nme #% Ua ti ke\
+At Au Hee Bo In Fn Le Sim \$y Rep Ha Wy\
+Ye Unu Uppy bb otn tx 79 Ww 2A\
+Sr be Liki 4\
+IR AS67890\
+so cool! New |neerndtinas release of mast\
+famous APP for exhorting Printed text 40\
+handwritten "Sinyak\
+PacK mY box with. five dozen uguor Jugs\
+Don't 62 @. Earn \$ &amp; Put 12 Jar.\
+Ingredienes: Zuss, Chis, CAR Lid.\
+(Sécrez info), kndw tb. 3\
+Wo xr dA h-(H4+F 060 Cheah]\
+ChiP &amp; Dae." fava ys ie m4 mind.\
+Jackdaws uve m4 bi? sPhinx Of quare 2.\
+The five boxing withrds JumP quick.\
+How vexiegi quick date 2ebras sump!\
+{0.0} ainsa &amp; crepim pa. bau! -)</p>
+</blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+
+<p>Using the same code, we were able to determine most of the text out of the picture that the tesseract engine was given. Obviously this is not perfect, but it is a whole lot easier than typing it all in by hand.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>For a bit of another challenge and to demonstrate the capabilities, let's try some Australian number plates:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":347,"align":"center"} -->
+
+<p>::: {.wp-block-image}
+<img alt="Source" class="wp-image-347" src="https://jmckew.com/wp-content/uploads/2019/06/example_3.jpg">
+:::</p>
+<!-- /wp:image -->
+
+<!-- wp:quote -->
+
+<blockquote>
+<p>(CSE) XcB-962 (66M-059\
+X2ZH:709) EEH:133) (GAA729)</p>
+</blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+
+<p>Obviously this can and has had a big impact on the way people can utilize images to make their life easier, from scanning in your handwritten notes at school and converting straight on to the computer, to being able to add all the contact information in your phone from a business card. How can OCR help your life at work or at home? Please let me know in the comments..</p>
+<!-- /wp:paragraph -->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

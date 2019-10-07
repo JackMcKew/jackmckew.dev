@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+        <meta charset="utf-8" />
+        <title>Introduction to Pytest & Pipenv</title>
+        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
+                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
+                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
+                    <li><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://jmckew.com/introduction-to-pytest-pipenv.html" rel="bookmark"
+           title="Permalink to Introduction to Pytest & Pipenv">Introduction to Pytest & Pipenv</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-09-20T06:30:00+10:00">
+                Published: Fri 20 September 2019
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
+        </address>
+<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
+
+</footer><!-- /.post-info -->      <!-- wp:paragraph -->
+
+<p>Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the 'unit') meets its design and behaves as intended.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>This post won't go into testing structures for complex applications, but rather just a simple introduction on how to write, run and check the output of a test in Python with pytest.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>As this post is on testing, I also thought it might be quite apt for trialing out a difference package for dependency management. In the past I've used anaconda, virtualenv and just pip, but this time I wanted to try out pipenv.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Similar to my post <a href="https://jmckew.com/2019/08/30/python-project-workflow/">Python Project Workflow</a> where I used virtualenv, you must install pipenv in your base Python directory, and typically add the Scripts folder to your path for ease later on. Now all we need to do is navigate to the folder and run:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">pipenv</span> <span class="n">shell</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>This will create a virtual environment somewhere on your computer (unless specified) and create a pipfile in the current folder. The pipfile is a file that essentially describes all the packages used within the project, their version number &amp; so on. This is extremely useful when you pick it back up later on and find where you were at or if you wish to share this with others, they can generate their own virtual environment simply from the pipfile with:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">pipenv</span> <span class="n">install</span> <span class="c1">--dev</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Enough about pipenv, let's get onto trying out pytest.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>For this post I will place both my function and it's tests in the same file, however, from my understanding it's best practice to separate them, specifically keeping all tests within an aptly named 'tests' directory for your project/package.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>First off let's define the function we intend to test later:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">subtract</span><span class="ss">(</span><span class="nv">number_1</span>, <span class="nv">number_2</span><span class="ss">)</span>:
+    <span class="k">return</span> <span class="nv">number_1</span> <span class="o">-</span> <span class="nv">number_2</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now we want to test if our function returns 1 if we give it number_1 = 2 and number_2 = 1:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">def</span> <span class="nf">test_subtract</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">subtract</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>To run this test, open the pipenv shell like above in the directory of the file where you've written your tests and run:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">file_name</span><span class="p">.</span><span class="n">py</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>This will output the following:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":465,"align":"center"} -->
+
+<p>::: {.wp-block-image}
+<img alt="" class="wp-image-465" src="https://jmckew.com/wp-content/uploads/2019/09/image.png">
+:::</p>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+
+<p>Each green dot represents a single test, and we can see that our 1 test passes in 0.02 seconds.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>To get more information from pytest, use the same command with -v (verbose) option:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">file_name</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now we might want to check that it works for multiple cases, to do this we can use the parametrize functionality of pytest like so:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span> <span class="n">number_2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">number_1</span> <span class="o">-</span> <span class="n">number_2</span>
+
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;number_1, number_2, expected&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span><span class="n">number_2</span><span class="p">,</span><span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span><span class="n">number_2</span><span class="p">)</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Once run with the verbose command, we get the output:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":466,"align":"center"} -->
+
+<p>::: {.wp-block-image}
+<img alt="" class="wp-image-466" src="https://jmckew.com/wp-content/uploads/2019/09/image-1.png">
+:::</p>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+
+<p>Hopefully this post is a gentle introduction to what unit testing can be in Python.</p>
+<!-- /wp:paragraph -->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

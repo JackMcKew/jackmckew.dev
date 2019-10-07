@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+        <meta charset="utf-8" />
+        <title>Inheritance in Python</title>
+        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
+                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
+                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
+                    <li><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://jmckew.com/inheritance-in-python.html" rel="bookmark"
+           title="Permalink to Inheritance in Python">Inheritance in Python</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-09-13T06:30:00+10:00">
+                Published: Fri 13 September 2019
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
+        </address>
+<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
+
+</footer><!-- /.post-info -->      <!-- wp:paragraph -->
+
+<p>As Python is a high level, general purpose programming language, which supports users to define their own types using classes, which are most often following the concept of object-oriented programming. Object-oriented programming is a type of software design in which users not only define the data type (eg, int) of a data structure, but also the types of functions that can be applied.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Object-oriented programming is built up of a lot of concepts, to name a few:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+
+<ul>
+<li>Inheritance</li>
+<li>Abstraction</li>
+<li>Class</li>
+<li>Encapsulation</li>
+<li>so on</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+
+<p>This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>First off, we are going to start by defining our 'base' class (also known as abstract class) of our Animal with common properties:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Animal</span>():
+    <span class="n">def</span> <span class="n">__init__</span>(<span class="k">self</span>, <span class="nb">name</span>=<span class="s">&#39;Animal&#39;</span>):
+        <span class="k">self</span>.<span class="nb">name</span> = <span class="nb">name</span>
+
+    <span class="n">def</span> <span class="n">family</span>(<span class="k">self</span>):
+        <span class="nb">print</span>(<span class="s">&quot;Animal Kingdom&quot;</span>)
+
+    <span class="n">def</span> <span class="n">speak</span>(<span class="k">self</span>):
+        <span class="n">raise</span> <span class="nb">Exception</span>(<span class="s">&quot;Not implemented yet (define speak)&quot;</span>)
+
+    <span class="n">def</span> <span class="n">eat</span>(<span class="k">self</span>):
+        <span class="n">raise</span> <span class="nb">Exception</span>(<span class="s">&quot;Not implemented yet (define eat)&quot;</span>)
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now that we have our base class, we can define a subclass 'Dog' that will be able to speak if we define the function inside, but we can also see that it derives from it's parent class 'Animal' by printing out it's family.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Dog</span>(<span class="n">Animal</span>):
+    <span class="n">def</span> <span class="n">__init__</span>(<span class="k">self</span>, <span class="nb">name</span>=<span class="s">&#39;Animal&#39;</span>):
+        <span class="n">super</span>().<span class="n">__init__</span>(<span class="nb">name</span>=<span class="nb">name</span>)
+
+    <span class="n">def</span> <span class="n">speak</span>(<span class="k">self</span>):
+        <span class="nb">print</span>(<span class="s">&quot;Woof!&quot;</span>)
+
+
+<span class="n">dog</span> = <span class="n">Dog</span>(<span class="s">&quot;Jay&quot;</span>)
+<span class="n">dog</span>.<span class="n">speak</span>()
+<span class="n">dog</span>.<span class="n">family</span>()
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Which will print out:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">Woof</span><span class="o">!</span>
+<span class="n">Animal</span> <span class="n">Kingdom</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>See my post on dunders (double underscores) to get a better understanding of how the __init__ function is working: <a href="https://jmckew.com/2019/09/06/dunders-in-python/">https://jmckew.com/2019/09/06/dunders-in-python/</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">JackRussell</span>(<span class="n">Dog</span>):
+    <span class="n">def</span> <span class="n">__init__</span>(<span class="k">self</span>, <span class="nb">name</span>=<span class="s">&#39;Animal&#39;</span>):
+        <span class="n">super</span>().<span class="n">__init__</span>(<span class="nb">name</span>=<span class="nb">name</span>)
+
+<span class="n">dog_2</span> = <span class="n">JackRussell</span>(<span class="s">&#39;Jeff&#39;</span>)
+<span class="n">dog_2</span>.<span class="n">speak</span>()
+<span class="n">dog_2</span>.<span class="n">family</span>()
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Which will also print:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">Woof</span><span class="o">!</span>
+<span class="n">Animal</span> <span class="n">Kingdom</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now what if we wanted to specify the family that all of our dog classes are, we can do this by overriding their parent class (similar to how we are overriding the speak function):</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Dog</span>(<span class="n">Animal</span>):
+    <span class="n">def</span> <span class="n">__init__</span>(<span class="k">self</span>, <span class="nb">name</span>=<span class="s">&#39;Animal&#39;</span>):
+        <span class="n">super</span>().<span class="n">__init__</span>(<span class="nb">name</span>=<span class="nb">name</span>)
+
+    <span class="n">def</span> <span class="n">family</span>(<span class="k">self</span>):
+        <span class="nb">print</span>(<span class="s">&quot;Mammal&quot;</span>)
+
+    <span class="n">def</span> <span class="n">speak</span>(<span class="k">self</span>):
+        <span class="nb">print</span>(<span class="s">&quot;Woof!&quot;</span>)
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Which then when we run both the below code:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="ss">&quot;Jay&quot;</span><span class="p">)</span>
+<span class="n">dog</span><span class="p">.</span><span class="n">speak</span><span class="p">()</span>
+<span class="n">dog</span><span class="p">.</span><span class="n">family</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="n">JackRussell</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Animal&#39;</span><span class="p">):</span>
+        <span class="n">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">dog_2</span> <span class="o">=</span> <span class="n">JackRussell</span><span class="p">(</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span>
+<span class="n">dog_2</span><span class="p">.</span><span class="n">speak</span><span class="p">()</span>
+<span class="n">dog_2</span><span class="p">.</span><span class="n">family</span><span class="p">()</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>We will now get:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
+
+<div class="highlight"><pre><span></span><span class="n">Woof</span><span class="o">!</span>
+<span class="n">Mammal</span>
+<span class="n">Woof</span><span class="o">!</span>
+<span class="n">Mammal</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>You should now be comfortable in understanding how inheritance works. Normally, it's best practice to inherit only from a single parent class when creating subclasses. As multiple inheritance makes your programs less complicated and easier to manage. However, for large programs, it is very difficult to avoid multiple inheritance.</p>
+<!-- /wp:paragraph -->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

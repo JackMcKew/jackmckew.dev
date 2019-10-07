@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+        <meta charset="utf-8" />
+        <title>Python Decorators Explained</title>
+        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
+                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
+                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
+                    <li><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://jmckew.com/python-decorators-explained.html" rel="bookmark"
+           title="Permalink to Python Decorators Explained">Python Decorators Explained</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-05-24T06:30:00+10:00">
+                Published: Fri 24 May 2019
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
+        </address>
+<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
+<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
+</footer><!-- /.post-info -->      <!-- wp:paragraph -->
+
+<p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Firstly you have to understand functions within python:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">hello</span><span class="ss">(</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">Jack</span><span class="s1">&#39;</span><span class="ss">)</span>:
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="s">Hello </span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nv">name</span>
+
+<span class="nv">print</span><span class="ss">(</span><span class="nv">hello</span><span class="ss">())</span>
+# <span class="nv">output</span>: <span class="s1">&#39;</span><span class="s">Hello Jack</span><span class="s1">&#39;</span>
+
+<span class="nv">greeting</span> <span class="o">=</span> <span class="nv">hello</span>
+# <span class="nv">assign</span> <span class="nv">a</span> <span class="nv">function</span> <span class="nv">to</span> <span class="nv">a</span> <span class="nv">variable</span>, <span class="nv">with</span> <span class="nv">no</span> <span class="nv">parentheses</span> <span class="nv">as</span> <span class="nv">we</span> <span class="nv">are</span> <span class="nv">not</span> <span class="nv">calling</span> <span class="nv">it</span>
+
+<span class="nv">print</span><span class="ss">(</span><span class="nv">greeting</span><span class="ss">())</span>
+# <span class="nv">output</span>: <span class="s1">&#39;</span><span class="s">Hello Jack</span><span class="s1">&#39;</span>
+
+<span class="nv">del</span> <span class="nv">hello</span>
+<span class="nv">print</span><span class="ss">(</span><span class="nv">hello</span><span class="ss">())</span>
+# <span class="nv">output</span>: <span class="nv">NameError</span>
+
+<span class="nv">print</span><span class="ss">(</span><span class="nv">greeting</span><span class="ss">())</span>
+# <span class="nv">output</span>: <span class="s1">&#39;</span><span class="s">Hello Jack</span><span class="s1">&#39;</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>As we can see above we can give functions default arguments (the string 'Jack' for the name variable in hello). Assign functions to variables (ensuring the parentheses are not included otherwise we would be assigning to the returning value from the function. Remove previous functions now that we have 'copied' the function over.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Now to take the next step into functions within Python, by defining functions within functions:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">hello</span><span class="ss">(</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">Jack</span><span class="s1">&#39;</span><span class="ss">)</span>:
+    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">You&#39;re now inside the hello() function</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="nv">def</span> <span class="nv">greeting</span><span class="ss">()</span>:
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="s">Now you are in the greeting() function</span><span class="s2">&quot;</span>
+    <span class="nv">def</span> <span class="nv">welcome</span><span class="ss">()</span>:
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="s">Now you are in the welcome() function</span><span class="s2">&quot;</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nv">greet</span><span class="ss">())</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nv">welcome</span><span class="ss">())</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">You are now back in the hello() function</span><span class="s2">&quot;</span>
+<span class="nv">hello</span><span class="ss">()</span>
+# <span class="nv">outputs</span>: <span class="s2">&quot;</span><span class="s">You&#39;re now inside the hello() function</span><span class="s2">&quot;</span>
+#          <span class="s2">&quot;</span><span class="s">Now you are in the greeting() function</span><span class="s2">&quot;</span>
+#          <span class="s2">&quot;</span><span class="s">Now you are in the welcome() function</span><span class="s2">&quot;</span> 
+#          <span class="s2">&quot;</span><span class="s">You are now back in the hello() function</span><span class="s2">&quot;</span>
+
+<span class="nv">welcome</span><span class="ss">()</span>
+# <span class="nv">output</span>: <span class="nv">NameError</span>: <span class="nv">name</span> <span class="s1">&#39;</span><span class="s">welcome</span><span class="s1">&#39;</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">defined</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now we can make nested functions (functions within functions), the next step is, functions returning functions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">hello</span><span class="ss">(</span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">Jack</span><span class="s1">&#39;</span><span class="ss">)</span>:
+    <span class="nv">def</span> <span class="nv">greeting</span><span class="ss">()</span>:
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="s">Now you are in the greeting() function</span><span class="s2">&quot;</span>
+    <span class="nv">def</span> <span class="nv">welcome</span><span class="ss">()</span>:
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="s">Now you are in the welcome() function</span><span class="s2">&quot;</span>
+    <span class="k">if</span><span class="ss">(</span><span class="nv">name</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">Jack</span><span class="s1">&#39;</span><span class="ss">)</span>:
+        <span class="k">return</span> <span class="nv">greeting</span>
+    <span class="k">else</span>:
+        <span class="k">return</span> <span class="nv">welcome</span>
+
+<span class="nv">returned_function</span> <span class="o">=</span> <span class="nv">hello</span><span class="ss">()</span>
+<span class="nv">print</span><span class="ss">(</span><span class="nv">returned_function</span><span class="ss">)</span>
+# <span class="nv">output</span>: <span class="o">&lt;</span><span class="nv">function</span> <span class="nv">greeting</span> <span class="nv">at</span> <span class="mi">0</span><span class="nv">x7f2143c01500</span><span class="o">&gt;</span>
+
+# <span class="nv">This</span> <span class="nv">clearly</span> <span class="nv">shows</span> <span class="nv">that</span> <span class="nv">the</span> <span class="nv">returned</span> <span class="nv">function</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">greeting</span><span class="ss">()</span> <span class="nv">function</span> <span class="nv">within</span> <span class="nv">the</span> <span class="nv">hello</span><span class="ss">()</span> <span class="nv">function</span>
+
+<span class="nv">print</span><span class="ss">(</span><span class="nv">returned_function</span><span class="ss">())</span>:
+# <span class="nv">output</span>: <span class="s2">&quot;</span><span class="s">Now you are in the greeting() function</span><span class="s2">&quot;</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>From earlier, we know that if we don't include the parentheses then the function does not executed. Another extension of the way this is formatted is that we can now call hello()() which outputs "Now you are in the greeting() function".</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">hello</span><span class="ss">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">Jack</span><span class="s2">&quot;</span><span class="ss">)</span>:
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="s">Hello </span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nv">name</span>
+
+<span class="nv">def</span> <span class="nv">preFunction</span><span class="ss">(</span><span class="nv">function</span><span class="ss">)</span>:
+    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">This is the prefunction function</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nv">hello</span><span class="ss">())</span>
+
+<span class="nv">preFunction</span><span class="ss">(</span><span class="nv">hello</span><span class="ss">)</span>
+# <span class="nv">output</span>: <span class="s2">&quot;</span><span class="s">This is the prefunction function</span><span class="s2">&quot;</span>
+#         <span class="s2">&quot;</span><span class="s">Hello Jack</span><span class="s2">&quot;</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now you have all the knowledge to learn what decorators really are, they let you execute code before and after a function. The code above is actually a decorator, but let's make it more usable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">new_decorator</span><span class="ss">(</span><span class="nv">function</span><span class="ss">)</span>:
+    <span class="nv">def</span> <span class="nv">functionWrapped</span><span class="ss">()</span>:
+        <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">This is the pre function</span><span class="s2">&quot;</span><span class="ss">)</span>
+        <span class="nv">function</span><span class="ss">()</span>
+        <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">This is the post function</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="k">return</span> <span class="nv">functionWrapped</span>
+
+<span class="nv">def</span> <span class="nv">function_requiring_decoration</span><span class="ss">()</span>:
+    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">I need some decorations!</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+<span class="nv">function_requiring_decoration</span><span class="ss">()</span>
+# <span class="nv">output</span>: <span class="s2">&quot;</span><span class="s">I need some decorations</span><span class="s2">&quot;</span>
+
+<span class="nv">function_requiring_decoration</span> <span class="o">=</span> <span class="nv">new_decorator</span><span class="ss">(</span><span class="nv">function_requiring_decoration</span><span class="ss">)</span>
+# <span class="nv">Now</span> <span class="nv">our</span> <span class="nv">function</span> <span class="nv">is</span> <span class="nv">wrapped</span> <span class="nv">by</span> <span class="nv">functionWrapped</span><span class="ss">()</span>
+
+<span class="nv">function_requiring_decoration</span><span class="ss">()</span>
+# <span class="nv">output</span>: <span class="s2">&quot;</span><span class="s">This is the pre function</span><span class="s2">&quot;</span>
+#         <span class="s2">&quot;</span><span class="s">I need some decoration</span><span class="s2">&quot;</span>
+#         <span class="s2">&quot;</span><span class="s">This is the post function</span><span class="s2">&quot;</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Now you've made a decorator! We've just used what we learned previously to modify it's behaviour in one way or another. Now to make it even more concise we can just the @ symbol. Here is how we could have used the previous code with @ symbol.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="nv">@new_decorator</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">function_requiring_decoration</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">print</span><span class="p">(</span><span class="ss">&quot;I need some decorations!&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">function_requiring_decoration</span><span class="p">()</span><span class="w"></span>
+<span class="err">#</span><span class="w"> </span><span class="k">output</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;This is the pre function&quot;</span><span class="w"></span>
+<span class="err">#</span><span class="w">         </span><span class="ss">&quot;I need some decoration&quot;</span><span class="w"></span>
+<span class="err">#</span><span class="w">         </span><span class="ss">&quot;This is the post function&quot;</span><span class="w"></span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="err">@</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">short</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nl">saying</span><span class="p">:</span><span class="w"></span>
+<span class="n">function_requiring_decoration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_decorator</span><span class="p">(</span><span class="n">function_requiring_decoration</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>Hopefully now you are ready to go and explore the world of -decorators within Python, they can be used quite powerfully and allow for you to reuse code and extend capabilities. Some of the best examples for decorators are for authentication or logging, however I will not cover them as they are extensively documented over the internet.</p>
+<!-- /wp:paragraph -->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

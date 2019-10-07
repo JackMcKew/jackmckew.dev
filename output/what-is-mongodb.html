@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+        <meta charset="utf-8" />
+        <title>What is MongoDB?</title>
+        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
+                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
+                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
+                    <li><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://jmckew.com/what-is-mongodb.html" rel="bookmark"
+           title="Permalink to What is MongoDB?">What is MongoDB?</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-05-03T06:30:00+10:00">
+                Published: Fri 03 May 2019
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
+        </address>
+<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
+<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
+</footer><!-- /.post-info -->      <!-- wp:paragraph -->
+
+<p>Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>I completed their very first introductory course M001: MongoDB Basics last week, I found it very gentle in the introduction to database management and exploring data sets. This post is dedicated my take on the course and the key takeaways from my point of view.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>The course is broken into multiple chapters in which a chapter is released each week for the duration of the course. For example, the basics course was broken up into:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+
+<ul>
+<li>Intro to MongoDB, Mongo Compass and Basic Queries,</li>
+<li>Create, Read, Update and Delete (CRUD) operations and more,</li>
+<li>MongoDB queries.</li>
+<li></li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+
+<p>Following all the chapters, you are faced with a final exam which tests if you were participating/listening in the earlier chapters. If you are concerned that you may struggle, this final exam is made up of a few multiple choice questions based on querying the data sets used in the chapters.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilises JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Personally, I really enjoy the functionality within Compass with plotting geographical data, presenting data type variances across the fields in a document and many other features. I found Compass one of the most appealing features as someone that constantly seeks to gain insight from data.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Queries within MongoDB are structured like a dictionary in Python, where the field in the document is passed the key and the criteria is the value. For example, a basic query to return all documents within a MongoDB database with score equal to 7 would be:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="err">{</span><span class="n">score</span><span class="p">:</span><span class="mi">7</span><span class="err">}</span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>As a mainly Python developer, I found this to be very appealing as I find myself using dictionaries constantly when writing Python code, and by MongoDB using this format makes for an easy connection between the two.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>CRUD operations, are the fundamentals on actually using a database usefully. Through the Mongo shell you are able to add documents to the MongoDB database through JSON, XML, etc data formats.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>Projections within MongoDB are used to specify or restrict the fields to return with the filtered documents if you are specifically looking at a few fields within a densely populated document.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>In addition to the way queries are structured for filtering documents, it is also possible to use one of the many query or projection operators to further filter the documents. For example a query to return all documents with a score <strong>greater than</strong> 7 would be:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+
+<div class="highlight"><pre><span></span><span class="cp">{</span><span class="nf">score</span><span class="o">:</span> <span class="cp">{</span><span class="nv">$gte</span><span class="o">:</span> <span class="m">7</span><span class="cp">}}</span><span class="x"></span>
+</pre></div>
+
+
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+
+<p>This sums up all of the takeaways from the M001 course for MongoDB that I found. I look forward to taking more of the courses on MongoDB university to gain a greater understanding and be able to utilise MongoDB across some of my projects.</p>
+<!-- /wp:paragraph -->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

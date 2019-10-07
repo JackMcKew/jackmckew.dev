@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+        <meta charset="utf-8" />
+        <title>Explained: Voltage Drop</title>
+        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
+                <nav><ul>
+                    <li><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
+                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
+                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
+                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
+                    <li class="active"><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://jmckew.com/explained-voltage-drop.html" rel="bookmark"
+           title="Permalink to Explained: Voltage Drop">Explained: Voltage Drop</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-05-10T06:30:00+10:00">
+                Published: Fri 10 May 2019
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
+        </address>
+<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
+<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
+</footer><!-- /.post-info -->      <!-- wp:paragraph -->
+
+<p>Voltage drop is a electrical phenomenon in that wires carrying current always have resistance, or impedance to the current flow. Voltage drop is defined as the amount of loss that occurs through part of or all of a circuit due to resistance/impedance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>The most well known analogy for explaining voltage, current and voltage drop is a hose carrying water. In the garden hose, the water pressure is the voltage, the amount of water flowing is the current and the type and size of the hose makes up the resistance. Thus meaning that voltage drop is the loss of water pressure from the supply end of the hose to the output.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>When designing electrical systems within Australia and New Zealand, we are required to design to Australian standards. For voltage drop, the relevant standards as AS/NZS3000 (Wiring Rules) and AS/NZS3008 (Cable Selection). Where AS/NZS3000 nominates the limits to conform to (5% maximum from point of supply) and AS3008 dictates multiple ways that voltage drop can be calculated.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>For this post, I will demonstrate a simplified method that is outlined in AS3000 Table C7 where it specifies 'Am per %Vd' (Amp meters per % voltage drop) for each cable size:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:table -->
+
+<hr>
+<p>Cable Conductor Size   Single Phase (230V) Am per %Vd   Three Phase (400V) Am per %Vd
+  1mm\^2                 45                               90
+  1.5mm\^2               70                               140
+  2.5mm\^2               128                              256
+  4mm\^2                 205                              412
+  6mm\^2                 306                              615
+  10mm\^2                515                              1034
+  16mm\^2                818                              1643
+  25mm\^2                1289                             2588
+  35mm\^2                1773                             3560
+  50mm\^2                2377                             4772
+  70mm\^2                3342                             6712
+  95mm\^2                4445                             8927</p>
+<hr>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+
+<p>For example, a 50m run of 10mm\^2 cable carrying 3 phase 32A will result in 5% drop: 32A * 50m = 1600 / 1034 = 1.5%.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+
+<p>In future posts, I will go into the various ways that AS/NZS3008 demonstrates ways of calculating voltage drop.</p>
+<!-- /wp:paragraph -->
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
