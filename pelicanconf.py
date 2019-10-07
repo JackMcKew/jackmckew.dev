@@ -8,7 +8,7 @@ SITEURL = 'https://nifty-engelbart-ce3324.netlify.com/'
 
 THEME = 'Flex'
 STATIC_PATHS = ['img', 'static']
-FAVICON = 'img/Jack-McKew-Photo.jpg'
+FAVICON = 'img/favicon.ico'
 CUSTOM_CSS = 'static/custom.css'
 
 PATH = 'content'
@@ -25,15 +25,10 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (
-    ('All Posts', 'https://jmckew.com/all-posts/'),
-    ('CV/Professional', 'https://jmckew.com/cv-professional/'),
-    ('Contact', 'https://jmckew.com/contact/')
-)
-# LINKS = (('Pelican', 'http://getpelican.com/'),
-#          ('Python.org', 'http://python.org/'),
-#          ('Jinja2', 'http://jinja.pocoo.org/'),
-#          ('You can modify those links in your config file', '#'),)
+LINKS = (('Pelican', 'http://getpelican.com/'),
+         ('Python.org', 'http://python.org/'),
+         ('Jinja2', 'http://jinja.pocoo.org/'),
+         ('You can modify those links in your config file', '#'),)
 
 # Social widget
 SOCIAL = (('You can add links in your config file', '#'),
