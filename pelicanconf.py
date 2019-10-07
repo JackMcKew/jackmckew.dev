@@ -12,6 +12,8 @@ SITELOGO = "img/jm-photo"
 
 DISPLAY_PAGES_ON_MENU = True
 
+MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
+
 THEME = "Flex"
 STATIC_PATHS = ["img", "static"]
 FAVICON = "img/favicon.ico"
@@ -23,7 +25,7 @@ HOME_HIDE_TAGS = False
 
 MENUITEMS = (
     ("Archives", "/archives.html"),
-    ("Categories", "/categories.html"),
+    # ("Categories", "/categories.html"),
     ("Tags", "/tags.html"),
     ("Sitemap", "/sitemap.xml"),
 )
