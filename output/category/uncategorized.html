@@ -1,337 +1,160 @@
+
 <!DOCTYPE html>
 <html lang="english">
 <head>
-        <meta charset="utf-8" />
-        <title>Jack McKew's Blog - Uncategorized</title>
-        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/solid.css">
+
+    <link href="https://jmckew.com/static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+
+
+    <meta name="author" content="Jack McKew" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Jack McKew's Blog"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jmckew.com"/>
+
+  <title>Jack McKew's Blog &ndash;     Category Uncategorized
+</title>
+
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
-                <nav><ul>
-                    <li><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
-                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
-                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
-                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
-                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
-                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
-                    <li class="active"><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="https://jmckew.com/dunders-in-python.html">Dunders in Python</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2019-09-06T06:30:00+10:00">
-                Published: Fri 06 September 2019
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> <a href="https://jmckew.com/tag/python.html">python</a> </p>
-</footer><!-- /.post-info --><!-- wp:paragraph -->
-
-<p>A 'dunder' (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for vectors to understand how the magic methods can be used to make life easier.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>First of all before we get into the magic methods, let's talk about normal methods. A method in Python is a function that resides in a class. To begin with our Vector class, we initialise our class and give it a function, for example:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Vector</span>():
-
-    <span class="n">def</span> <span class="n">say_hello</span>():
-        <span class="nb">print</span>(<span class="s">&quot;Hello! I&#39;m a method&quot;</span>)
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Now to call the method, we simply call the function name along with the Vector instance we wish to use:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="n">Vector</span><span class="p">.</span><span class="n">say_hello</span><span class="p">()</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>This will print:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="n">Hello</span><span class="o">!</span> <span class="n">I</span><span class="err">&#39;</span><span class="n">m</span> <span class="n">a</span> <span class="k">method</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Now for our vector class, we want to be able to initialise it with certain constants or variables for both the magnitude and direction of our vector. We use the __init__ magic method for this, as it is invoked without any call, when an instance of a class is created.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">Vector</span>():
-    <span class="n">def</span> <span class="n">__init__</span>(<span class="k">self</span>, *<span class="n">args</span>):
-        <span class="k">self</span>.<span class="nb">values</span> = <span class="n">args</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Now when we create an instance of our Vector class, we can give it certain values that it will store in a tuple:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="n">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Which will print:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">__main__</span><span class="p">.</span><span class="n">Vector</span> <span class="k">object</span> <span class="k">at</span> <span class="mi">0</span><span class="n">x03E90530</span><span class="o">&gt;</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>But to us humans, this doesn't mean much more than we know what the name of the class is of that instance. What we really want to see when we call print on our class is the values inside it. To do this we use the __repr__ magic method:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="nv">class</span> <span class="nv">Vector</span><span class="ss">()</span>:
-    <span class="nv">def</span> <span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span>, <span class="o">*</span><span class="nv">args</span><span class="ss">)</span>:
-        <span class="nv">self</span>.<span class="nv">values</span> <span class="o">=</span> <span class="nv">args</span>
-    <span class="nv">def</span> <span class="nv">__repr__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-        <span class="k">return</span> <span class="nv">str</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">values</span><span class="ss">)</span>
-
-<span class="nv">vector_1</span> <span class="o">=</span> <span class="nv">Vector</span><span class="ss">(</span><span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span><span class="ss">)</span>
-
-<span class="nv">print</span><span class="ss">(</span><span class="nv">vector_1</span><span class="ss">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Which will print:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>This is exactly what we want! Now what if we wanted to create a Vector, but we weren't sure what values we wanted to give it yet. What would happen if we didn't give it any values? Would it default to (0,0) like we would hope?</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="n">empty_vector</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">()</span>
-
-<span class="n">print</span><span class="p">(</span><span class="n">empty_vector</span><span class="p">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Which will print:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="p">()</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Not exactly how we need it, so we would need to run a check when the class is being initialized, to ensure that there are values being provided:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="nv">class</span> <span class="nv">Vector</span><span class="ss">()</span>:
-    <span class="nv">def</span> <span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span>, <span class="o">*</span><span class="nv">args</span><span class="ss">)</span>:
-        <span class="k">if</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">args</span><span class="ss">)</span> <span class="o">==</span> <span class="mi">0</span>:
-            <span class="nv">self</span>.<span class="nv">values</span> <span class="o">=</span> <span class="ss">(</span><span class="mi">0</span>,<span class="mi">0</span><span class="ss">)</span>
-        <span class="k">else</span>: 
-            <span class="nv">self</span>.<span class="nv">values</span> <span class="o">=</span> <span class="nv">args</span>
-    <span class="nv">def</span> <span class="nv">__repr__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-        <span class="k">return</span> <span class="nv">str</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">values</span><span class="ss">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Which when initialise an empty instance of our Vector now, it will create a (0,0) vector for us!</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>Now what if we wanted to be able to check how many values were inside our vector class? To do this we can use the __len__ magic method:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="nv">class</span> <span class="nv">Vector</span><span class="ss">()</span>:
-    <span class="nv">def</span> <span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span>, <span class="o">*</span><span class="nv">args</span><span class="ss">)</span>:
-        <span class="k">if</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">args</span><span class="ss">)</span> <span class="o">==</span> <span class="mi">0</span>:
-            <span class="nv">self</span>.<span class="nv">values</span> <span class="o">=</span> <span class="ss">(</span><span class="mi">0</span>,<span class="mi">0</span><span class="ss">)</span>
-        <span class="k">else</span>: 
-            <span class="nv">self</span>.<span class="nv">values</span> <span class="o">=</span> <span class="nv">args</span>
-    <span class="nv">def</span> <span class="nv">__repr__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-        <span class="k">return</span> <span class="nv">str</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">values</span><span class="ss">)</span>
-    <span class="nv">def</span> <span class="nv">__len__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-        <span class="k">return</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">values</span><span class="ss">)</span>
-
-<span class="nv">vector_1</span> <span class="o">=</span> <span class="nv">Vector</span><span class="ss">(</span><span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span><span class="ss">)</span>
-
-<span class="nv">print</span><span class="ss">(</span><span class="nv">vector_1</span><span class="ss">)</span>
-<span class="nv">print</span><span class="ss">(</span><span class="nv">len</span><span class="ss">(</span><span class="nv">vector_1</span><span class="ss">))</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Which will print:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="mi">3</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Hopefully this post has given you insight into how dunders/magic methods could be used to super power your classes and make life much easier!</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>You can find more information and examples about dunders in Python at: <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">https://docs.python.org/3/reference/datamodel.html#special-method-names</a></p>
-<!-- /wp:paragraph -->                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/python-project-workflow.html" rel="bookmark"
-                           title="Permalink to Python Project Workflow">Python Project Workflow</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-08-30T06:30:00+10:00">
-                Published: Fri 30 August 2019
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+<body>
+  <aside>
+    <div>
+      <a href="https://jmckew.com">
+        <img src="https://jmckew.com/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="https://jmckew.com"></a></h1>
+
+
+      <nav>
+        <ul class="list">
+
+          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+          <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+          <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+          <li><a href="#" target="_blank">You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+
+
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/dunders-in-python.html#dunders-in-python">Dunders in Python</a></h2>
+    <p>
+          Posted on Fri 06 September 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>,              <a href="https://jmckew.com/tag/python.html">python</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
+
+<p>A 'dunder' (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for …</p>
+        <br>
+        <a class="btn" href="https://jmckew.com/dunders-in-python.html#dunders-in-python">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/python-project-workflow.html#python-project-workflow">Python Project Workflow</a></h2>
+    <p>
+          Posted on Fri 30 August 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>This post will go through my personal preference on project structure and workflow for creating a new project and an insight how I work on my projects from a development point of view. I will go from the very start as if I did not have Python/Git installed on …</p>
-                <a class="readmore" href="https://jmckew.com/python-project-workflow.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/python-project-workflow.html#python-project-workflow">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/looking-for-patterns-in-city-names-interactive-plotting.html#looking-for-patterns-in-city-names-interactive-plotting">Looking for Patterns in City Names & Interactive Plotting</a></h2>
+    <p>
+          Posted on Fri 16 August 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/looking-for-patterns-in-city-names-interactive-plotting.html" rel="bookmark"
-                           title="Permalink to Looking for Patterns in City Names & Interactive Plotting">Looking for Patterns in City Names & Interactive Plotting</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-08-16T06:30:00+10:00">
-                Published: Fri 16 August 2019
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Recently, I was traveling around New Zealand, and noticed in the Maori language they use letters back to back a lot like in the original Maori name for Stratford ("whakaahurangi"). So as any normal person does, I thought, well what town has the most repeated letters, and the idea for …</p>
-                <a class="readmore" href="https://jmckew.com/looking-for-patterns-in-city-names-interactive-plotting.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/looking-for-patterns-in-city-names-interactive-plotting.html#looking-for-patterns-in-city-names-interactive-plotting">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/explained-voltage-drop.html#explained-voltage-drop">Explained: Voltage Drop</a></h2>
+    <p>
+          Posted on Fri 10 May 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/explained-voltage-drop.html" rel="bookmark"
-                           title="Permalink to Explained: Voltage Drop">Explained: Voltage Drop</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-05-10T06:30:00+10:00">
-                Published: Fri 10 May 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Voltage drop is a electrical phenomenon in that wires carrying current always have resistance, or impedance to the current flow. Voltage drop is defined as the amount of loss that occurs through part of or all of a circuit due to resistance/impedance.</p>
 <!-- /wp:paragraph -->
@@ -339,52 +162,48 @@
 <!-- wp:paragraph -->
 
 <p>The most well known analogy for explaining …</p>
-                <a class="readmore" href="https://jmckew.com/explained-voltage-drop.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/explained-voltage-drop.html#explained-voltage-drop">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/episode-13-types-of-machine-learning.html#episode-13-types-of-machine-learning">Episode 14 - Types of Machine Learning</a></h2>
+    <p>
+          Posted on Fri 22 February 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/episode-13-types-of-machine-learning.html" rel="bookmark"
-                           title="Permalink to Episode 14 - Types of Machine Learning">Episode 14 - Types of Machine Learning</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-02-22T06:33:00+11:00">
-                Published: Fri 22 February 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>With AI and Machine Learning becoming the buzzwords in technology for 2018 and the real world applications now maturing to show the benefits of this technology. It can be very confusing when first entering the world of AI and machine learning with new techniques coming out every other day in …</p>
-                <a class="readmore" href="https://jmckew.com/episode-13-types-of-machine-learning.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/episode-13-types-of-machine-learning.html#episode-13-types-of-machine-learning">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/episode-13-lighting-design.html#episode-13-lighting-design">Episode 13 - Lighting Design</a></h2>
+    <p>
+          Posted on Fri 15 February 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/episode-13-lighting-design.html" rel="bookmark"
-                           title="Permalink to Episode 13 - Lighting Design">Episode 13 - Lighting Design</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-02-15T06:30:00+11:00">
-                Published: Fri 15 February 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/projects.html">Projects</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/projects.html">Projects</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Before I started in a more buildings-focused electrical engineering position, I didn't think that much went into selecting lights for buildings. Once you first get started in lighting design, it is like opening a can of worms, there is so much detail that goes into lighting design, it's unfathomable.</p>
 <!-- /wp:paragraph -->
@@ -392,100 +211,92 @@
 <!-- wp:paragraph -->
 
 <p>First …</p>
-                <a class="readmore" href="https://jmckew.com/episode-13-lighting-design.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/episode-13-lighting-design.html#episode-13-lighting-design">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/episode-11-power-quality-explained.html#episode-11-power-quality-explained">Episode 11 - Power Quality Explained</a></h2>
+    <p>
+          Posted on Fri 01 February 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/episode-11-power-quality-explained.html" rel="bookmark"
-                           title="Permalink to Episode 11 - Power Quality Explained">Episode 11 - Power Quality Explained</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-02-01T06:30:00+11:00">
-                Published: Fri 01 February 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up …</p>
-                <a class="readmore" href="https://jmckew.com/episode-11-power-quality-explained.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/episode-11-power-quality-explained.html#episode-11-power-quality-explained">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/episode-9-web-enabled-universal-remote-part-1.html#episode-9-web-enabled-universal-remote-part-1">Episode 9 - Web Enabled Universal Remote - Part 1</a></h2>
+    <p>
+          Posted on Fri 18 January 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/episode-9-web-enabled-universal-remote-part-1.html" rel="bookmark"
-                           title="Permalink to Episode 9 - Web Enabled Universal Remote - Part 1">Episode 9 - Web Enabled Universal Remote - Part 1</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-01-18T07:30:00+11:00">
-                Published: Fri 18 January 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> <a href="https://jmckew.com/tag/projects.html">Projects</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>,              <a href="https://jmckew.com/tag/projects.html">Projects</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>I have a habit of misplacing all kinds of remotes within the house, TV, air conditioner, fans, etc, and having a different remote for everything can be quite annoying at times. So I decided to re-use some leftover components from a previous project to make a web enabled universal remote …</p>
-                <a class="readmore" href="https://jmckew.com/episode-9-web-enabled-universal-remote-part-1.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/episode-9-web-enabled-universal-remote-part-1.html#episode-9-web-enabled-universal-remote-part-1">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/episode-8-anaconda.html#episode-8-anaconda">Episode 8 - Anaconda</a></h2>
+    <p>
+          Posted on Fri 11 January 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/episode-8-anaconda.html" rel="bookmark"
-                           title="Permalink to Episode 8 - Anaconda">Episode 8 - Anaconda</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-01-11T07:00:00+11:00">
-                Published: Fri 11 January 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Python is one of my favourite languages to develop in (if you haven't noticed yet). My favourite feature of Python is how easy it is to share your work with others and integrate other's code into your own projects. However as a project grows and gets older as time goes …</p>
-                <a class="readmore" href="https://jmckew.com/episode-8-anaconda.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/episode-8-anaconda.html#episode-8-anaconda">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/episode-7-planning.html#episode-7-planning">Episode 7 – Planning</a></h2>
+    <p>
+          Posted on Fri 04 January 2019 in <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/episode-7-planning.html" rel="bookmark"
-                           title="Permalink to Episode 7 – Planning">Episode 7 – Planning</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-01-04T07:30:00+11:00">
-                Published: Fri 04 January 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>With 2018 coming to an end, we welcome in the new year with the first episode of Code Fridays for 2018. Continuing with the theme of things starting a new, this episode is dedicated to a major factor or stage in any type of development, planning.</p>
 <!-- /wp:paragraph -->
@@ -493,42 +304,41 @@
 <!-- wp:paragraph -->
 
 <p>Planning is one of …</p>
-                <a class="readmore" href="https://jmckew.com/episode-7-planning.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 2
-        <a href="https://jmckew.com/category/uncategorized2.html">&raquo;</a>
-</p>
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+        <br>
+        <a class="btn" href="https://jmckew.com/episode-7-planning.html#episode-7-planning">    Continue reading
+</a>
+  </div>
+</article>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+  <div class="pagination">
+    <a class="btn float-left" href="https://jmckew.com/category/uncategorized2.html">
+      <i class="fa fa-angle-left"></i>     Older Posts
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+    </a>
+  </div>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+
+
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jmckew.com",
+  "image": "",
+  "description": ""
+}
+</script>
 
 </body>
 </html>

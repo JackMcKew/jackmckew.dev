@@ -6,6 +6,11 @@ AUTHOR = 'Jack McKew'
 SITENAME = "Jack McKew's Blog"
 SITEURL = 'https://jmckew.com'
 
+THEME = 'Flex'
+STATIC_PATHS = ['img', 'static']
+FAVICON = 'img/favicon.ico'
+CUSTOM_CSS = 'static/custom.css'
+
 PATH = 'content'
 
 TIMEZONE = 'Australia/Sydney'

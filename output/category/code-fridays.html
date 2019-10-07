@@ -1,39 +1,96 @@
+
 <!DOCTYPE html>
 <html lang="english">
 <head>
-        <meta charset="utf-8" />
-        <title>Jack McKew's Blog - Code Fridays</title>
-        <link rel="stylesheet" href="https://jmckew.com/theme/css/main.css" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/solid.css">
+
+    <link href="https://jmckew.com/static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+
+
+    <meta name="author" content="Jack McKew" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Jack McKew's Blog"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jmckew.com"/>
+
+  <title>Jack McKew's Blog &ndash;     Category Code Fridays
+</title>
+
 </head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jmckew.com">
+        <img src="https://jmckew.com/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="https://jmckew.com"></a></h1>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="https://jmckew.com/">Jack McKew's Blog </a></h1>
-                <nav><ul>
-                    <li class="active"><a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a></li>
-                    <li><a href="https://jmckew.com/category/code-fridays-projects.html">Code Fridays, Projects</a></li>
-                    <li><a href="https://jmckew.com/category/code-fridays-python.html">Code Fridays, python</a></li>
-                    <li><a href="https://jmckew.com/category/code-fridays-uncategorized.html">Code Fridays, Uncategorized</a></li>
-                    <li><a href="https://jmckew.com/category/misc.html">misc</a></li>
-                    <li><a href="https://jmckew.com/category/python.html">python</a></li>
-                    <li><a href="https://jmckew.com/category/uncategorized.html">Uncategorized</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="https://jmckew.com/intro-to-games-in-python-with-pyglet.html">Intro to Games in Python with Pyglet</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2019-10-04T06:30:00+10:00">
-                Published: Fri 04 October 2019
-        </abbr>
+      <nav>
+        <ul class="list">
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
+          <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+          <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+          <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+          <li><a href="#" target="_blank">You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
 
-</footer><!-- /.post-info --><!-- wp:paragraph -->
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+
+
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/intro-to-games-in-python-with-pyglet.html#intro-to-games-in-python-with-pyglet">Intro to Games in Python with Pyglet</a></h2>
+    <p>
+          Posted on Fri 04 October 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Recently, I've been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as:</p>
 <!-- /wp:paragraph -->
@@ -52,194 +109,25 @@
 
 <!-- wp:paragraph -->
 
-<p>Eventually, through the motivation of another side project (looking into training neural networks to learn how to play games) and inspired by this video from Code Bullet <a href="https://www.youtube.com/watch?v=r428O_CMcpI">https://www.youtube.com/watch?v=r428O_CMcpI</a>; I decided on attempting to use <a href="https://pyglet.readthedocs.io/en/stable/">Pyglet</a> to do these simulations.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>While the aforementioned simulations won't be covered in this post, this post aims to demonstrate how I adapted the <a href="https://pyglet.readthedocs.io/en/stable/programming_guide/examplegame.html">in-depth tutorial on the Pyglet website</a> (which goes through how to recreate asteroids in Pyglet) to generate vector based objects which can crash into each other.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>First off as always, start by setting up a virtual environment with your preferred method (<a href="https://jmckew.com/2019/01/11/episode-8-anaconda/">Anaconda</a> or <a href="https://jmckew.com/2019/08/30/python-project-workflow/">follow my workflow</a>), since Pyglet has no external dependencies, all you need to do is install the pyglet package.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>I won't go through all the code in the example, and how it works, I will only go through what I changed in the case to get where I wanted to go.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>To begin, and make things a bit easier, I downloaded the pyglet-master repository from GitHub (<a href="https://github.com/pyglet/pyglet">https://github.com/pyglet/pyglet</a>) so I didn't have to create and copy the file contents one by one.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>After going through the different versions with the examples > game folder, I decided all I required was the simple functionality of collision and any further into developing the game wasn't needed for this stage, so I copied out the version 3 folder.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>If we run 'asteroid.py' from within the version 3 folder, we are met with this screen</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":481,"align":"center"} -->
-
-<p>::: {.wp-block-image}
-<img alt="" class="wp-image-481" src="https://i0.wp.com/jmckew.com/wp-content/uploads/2019/10/image.png?fit=640%2C505&amp;ssl=1">
-:::</p>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-
-<p>Now since all I am trying to do is generate multiple objects (which will be shown with the player symbol to indicate direction), I can comment out the lines which give the lives, score, title and interactive player.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="err">#</span><span class="w"> </span><span class="k">Set</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="k">top</span><span class="w"> </span><span class="n">labels</span><span class="w"></span>
-<span class="err">#</span><span class="w"> </span><span class="n">score_label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pyglet</span><span class="p">.</span><span class="nc">text</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="nc">text</span><span class="o">=</span><span class="ss">&quot;Score: 0&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">575</span><span class="p">,</span><span class="w"> </span><span class="n">batch</span><span class="o">=</span><span class="n">main_batch</span><span class="p">)</span><span class="w"></span>
-<span class="err">#</span><span class="w"> </span><span class="n">level_label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pyglet</span><span class="p">.</span><span class="nc">text</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="nc">text</span><span class="o">=</span><span class="ss">&quot;Version 3: Basic Collision&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="err">#</span><span class="w">                                 </span><span class="n">x</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">575</span><span class="p">,</span><span class="w"> </span><span class="n">anchor_x</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">batch</span><span class="o">=</span><span class="n">main_batch</span><span class="p">)</span><span class="w"></span>
-
-<span class="err">#</span><span class="w"> </span><span class="k">Initialize</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="n">sprite</span><span class="w"></span>
-<span class="err">#</span><span class="w"> </span><span class="n">player_ship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">player</span><span class="p">.</span><span class="n">Player</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="n">batch</span><span class="o">=</span><span class="n">main_batch</span><span class="p">)</span><span class="w"></span>
-
-<span class="err">#</span><span class="w"> </span><span class="n">Make</span><span class="w"> </span><span class="n">three</span><span class="w"> </span><span class="n">sprites</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">remaining</span><span class="w"> </span><span class="n">lives</span><span class="w"></span>
-<span class="err">#</span><span class="w"> </span><span class="n">player_lives</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">load</span><span class="p">.</span><span class="n">player_lives</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">main_batch</span><span class="p">)</span><span class="w"></span>
-
-<span class="err">#</span><span class="w"> </span><span class="n">Make</span><span class="w"> </span><span class="n">three</span><span class="w"> </span><span class="n">asteroids</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">shoot</span><span class="w"> </span><span class="k">at</span><span class="w"> </span>
-<span class="err">#</span><span class="w"> </span><span class="n">asteroids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">load</span><span class="p">.</span><span class="n">asteroids</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">player_ship</span><span class="p">.</span><span class="k">position</span><span class="p">,</span><span class="w"> </span><span class="n">main_batch</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">asteroids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">load</span><span class="p">.</span><span class="n">asteroids</span><span class="p">(</span><span class="mi">100</span><span class="p">,(</span><span class="n">window_width</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="n">window_height</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span><span class="n">main_batch</span><span class="p">)</span><span class="w"></span>
-
-<span class="err">#</span><span class="w"> </span><span class="n">Store</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">list</span><span class="w"></span>
-<span class="err">#</span><span class="w"> </span><span class="n">game_objects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">player_ship</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">asteroids</span><span class="w"></span>
-<span class="n">game_objects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">asteroids</span><span class="w"></span>
-
-<span class="err">#</span><span class="w"> </span><span class="n">Tell</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="k">window</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="n">responds</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">events</span><span class="w"></span>
-<span class="err">#</span><span class="w"> </span><span class="n">game_window</span><span class="p">.</span><span class="n">push_handlers</span><span class="p">(</span><span class="n">player_ship</span><span class="p">.</span><span class="n">key_handler</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Now that we've done that, we need to modify the asteroids generator function to use the player sprite.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>In load.py, you can change simply the img argument to the player image sprite reference like so:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="n">new_asteroid</span> <span class="o">=</span> <span class="n">physicalobject</span><span class="p">.</span><span class="n">PhysicalObject</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">resources</span><span class="p">.</span><span class="n">player_image</span><span class="p">,</span>                                                     <span class="n">x</span><span class="o">=</span><span class="n">asteroid_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">asteroid_y</span><span class="p">,</span>                                                 <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Now if we run this, the animation will look a little off, because the objects won't be traveling the direction in the direction that the sprite is pointing. This is due to the existing velocity calculation being a random number for both the X and Y component.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>To make the player sprites move in the direction they are rotated in, and maintain the existing codebase, we will need to convert from <a href="https://www.mathsisfun.com/polar-cartesian-coordinates.html">polar notation to cartesian</a>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>To do this, we add an extra 2 functions into 'util.py' which will do this for us:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">cart2pol</span><span class="ss">(</span><span class="nv">x</span>, <span class="nv">y</span><span class="ss">)</span>:
-    <span class="nv">rho</span> <span class="o">=</span> <span class="nv">math</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="nv">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="nv">y</span><span class="o">**</span><span class="mi">2</span><span class="ss">)</span>
-    <span class="nv">phi</span> <span class="o">=</span> <span class="nv">math</span>.<span class="nv">arctan2</span><span class="ss">(</span><span class="nv">y</span>, <span class="nv">x</span><span class="ss">)</span>
-    <span class="k">return</span><span class="ss">(</span><span class="nv">rho</span>, <span class="nv">phi</span><span class="ss">)</span>
-
-<span class="nv">def</span> <span class="nv">pol2cart</span><span class="ss">(</span><span class="nv">rho</span>, <span class="nv">phi</span><span class="ss">)</span>:
-    <span class="nv">x</span> <span class="o">=</span> <span class="nv">rho</span> <span class="o">*</span> <span class="nv">math</span>.<span class="nv">sin</span><span class="ss">(</span><span class="nv">math</span>.<span class="nv">radians</span><span class="ss">(</span><span class="nv">phi</span><span class="ss">))</span>
-    <span class="nv">y</span> <span class="o">=</span> <span class="nv">rho</span> <span class="o">*</span> <span class="nv">math</span>.<span class="nv">cos</span><span class="ss">(</span><span class="nv">math</span>.<span class="nv">radians</span><span class="ss">(</span><span class="nv">phi</span><span class="ss">))</span>
-    <span class="k">return</span><span class="ss">(</span><span class="nv">x</span>, <span class="nv">y</span><span class="ss">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Note the use of radians in pol2cart, this is due to the <a href="https://www.sparknotes.com/math/trigonometry/trigonometricfunctions/section3/">affect of quadrants and trigonometric functions</a>. I won't go into detail, but it won't behave like you expect it to.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>Now to get our player sprites moving in the direction they are rotated, update the code which generates the 'asteroids' to utilise our new function:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python","lineNumbers":false} -->
-
-<div class="highlight"><pre><span></span><span class="nv">new_asteroid</span>.<span class="nv">rotation</span> <span class="o">=</span> <span class="k">random</span>.<span class="nv">randint</span><span class="ss">(</span><span class="mi">0</span>, <span class="mi">360</span><span class="ss">)</span>
-<span class="nv">new_asteroid</span>.<span class="nv">velocity_speed</span> <span class="o">=</span> <span class="k">random</span>.<span class="k">random</span><span class="ss">()</span> <span class="o">*</span> <span class="mi">40</span>
-<span class="nv">new_asteroid</span>.<span class="nv">velocity_x</span>, <span class="nv">new_asteroid</span>.<span class="nv">velocity_y</span> <span class="o">=</span> <span class="nv">util</span>.<span class="nv">pol2cart</span><span class="ss">(</span><span class="nv">new_asteroid</span>.<span class="nv">velocity_speed</span>,<span class="nv">new_asteroid</span>.<span class="nv">rotation</span><span class="ss">)</span>
-</pre></div>
-
-
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
-<p>Now when we go and run our main file again, we will met with a screen like this:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":482,"align":"center"} -->
-
-<p>::: {.wp-block-image}
-<img alt="" class="wp-image-482" src="https://i1.wp.com/jmckew.com/wp-content/uploads/2019/10/image-1.png?fit=640%2C505&amp;ssl=1">
-:::</p>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-
-<p>Where the player sprites will float around in the direction they are pointing, until they crash into another sprite, causing both of them to disappear.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<p>This is a quick intro to Pyglet, I am hoping to expand on this simulation and am positive I will be doing further write ups with it in the future.</p>
-<!-- /wp:paragraph -->                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/introduction-to-pytest-pipenv.html" rel="bookmark"
-                           title="Permalink to Introduction to Pytest & Pipenv">Introduction to Pytest & Pipenv</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-09-20T06:30:00+10:00">
-                Published: Fri 20 September 2019
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+<p>Eventually, through the motivation of …</p>
+        <br>
+        <a class="btn" href="https://jmckew.com/intro-to-games-in-python-with-pyglet.html#intro-to-games-in-python-with-pyglet">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/introduction-to-pytest-pipenv.html#introduction-to-pytest-pipenv">Introduction to Pytest & Pipenv</a></h2>
+    <p>
+          Posted on Fri 20 September 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the 'unit') meets its design and behaves as intended.</p>
 <!-- /wp:paragraph -->
@@ -247,172 +135,154 @@
 <!-- wp:paragraph -->
 
 <p>This post won't go into testing structures for complex applications, but rather …</p>
-                <a class="readmore" href="https://jmckew.com/introduction-to-pytest-pipenv.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/introduction-to-pytest-pipenv.html#introduction-to-pytest-pipenv">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/inheritance-in-python.html#inheritance-in-python">Inheritance in Python</a></h2>
+    <p>
+          Posted on Fri 13 September 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/inheritance-in-python.html" rel="bookmark"
-                           title="Permalink to Inheritance in Python">Inheritance in Python</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-09-13T06:30:00+10:00">
-                Published: Fri 13 September 2019
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>As Python is a high level, general purpose programming language, which supports users to define their own types using classes, which are most often following the concept of object-oriented programming. Object-oriented programming is a type of software design in which users not only define the data type (eg, int) of …</p>
-                <a class="readmore" href="https://jmckew.com/inheritance-in-python.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/inheritance-in-python.html#inheritance-in-python">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/hands-on-machine-learning-chapter-2.html#hands-on-machine-learning-chapter-2">Hands On Machine Learning Chapter 2</a></h2>
+    <p>
+          Posted on Fri 12 July 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/hands-on-machine-learning-chapter-2.html" rel="bookmark"
-                           title="Permalink to Hands On Machine Learning Chapter 2">Hands On Machine Learning Chapter 2</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-07-12T06:30:00+10:00">
-                Published: Fri 12 July 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Chapter 2 is an end to end machine learning project, in which you pretend to be a recently hired data scientist for a real estate company. It cannot be emphasized enough that when learning about machine learning or any topic for that matter, it is best to actually experiment with …</p>
-                <a class="readmore" href="https://jmckew.com/hands-on-machine-learning-chapter-2.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/hands-on-machine-learning-chapter-2.html#hands-on-machine-learning-chapter-2">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/python-and-ocr.html#python-and-ocr">Python and OCR</a></h2>
+    <p>
+          Posted on Fri 28 June 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/python-and-ocr.html" rel="bookmark"
-                           title="Permalink to Python and OCR">Python and OCR</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-06-28T06:30:00+10:00">
-                Published: Fri 28 June 2019
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form …</p>
-                <a class="readmore" href="https://jmckew.com/python-and-ocr.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/python-and-ocr.html#python-and-ocr">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/python-and-data-security-hashing-algorithms.html#python-and-data-security-hashing-algorithms">Python and Data Security (Hashing Algorithms)</a></h2>
+    <p>
+          Posted on Fri 21 June 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/python-and-data-security-hashing-algorithms.html" rel="bookmark"
-                           title="Permalink to Python and Data Security (Hashing Algorithms)">Python and Data Security (Hashing Algorithms)</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-06-21T06:30:00+10:00">
-                Published: Fri 21 June 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some …</p>
-                <a class="readmore" href="https://jmckew.com/python-and-data-security-hashing-algorithms.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/python-and-data-security-hashing-algorithms.html#python-and-data-security-hashing-algorithms">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/hands-on-machine-learning-chapter-1.html#hands-on-machine-learning-chapter-1">Hands On Machine Learning Chapter 1</a></h2>
+    <p>
+          Posted on Fri 14 June 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/hands-on-machine-learning-chapter-1.html" rel="bookmark"
-                           title="Permalink to Hands On Machine Learning Chapter 1">Hands On Machine Learning Chapter 1</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-06-14T06:30:00+10:00">
-                Published: Fri 14 June 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>I've recently been making my way through the book "Hands-On Machine Learning with Scikit-Learn and Tensorflow", and thought I will put a summary of the chapter as a post, along with my personal answers to each of the chapter's exercises. The book in particular is published by O'Reilly and can …</p>
-                <a class="readmore" href="https://jmckew.com/hands-on-machine-learning-chapter-1.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/hands-on-machine-learning-chapter-1.html#hands-on-machine-learning-chapter-1">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/parallel-processing-in-python.html#parallel-processing-in-python">Parallel Processing in Python</a></h2>
+    <p>
+          Posted on Fri 07 June 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/parallel-processing-in-python.html" rel="bookmark"
-                           title="Permalink to Parallel Processing in Python">Parallel Processing in Python</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-06-07T06:30:00+10:00">
-                Published: Fri 07 June 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Parallel processing is a mode of operation where the task is executed simultaneously in multiple processors in the same computer. The purpose of this is intended to reduce the overall processing time, however, there is often overhead between communicating processes. For small tasks, the overhead is detrimental to the length …</p>
-                <a class="readmore" href="https://jmckew.com/parallel-processing-in-python.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/parallel-processing-in-python.html#parallel-processing-in-python">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/distributing-python-code.html#distributing-python-code">Distributing Python Code</a></h2>
+    <p>
+          Posted on Fri 31 May 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/distributing-python-code.html" rel="bookmark"
-                           title="Permalink to Distributing Python Code">Distributing Python Code</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-05-31T06:30:00+10:00">
-                Published: Fri 31 May 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>This post will cover a way of distributing Python code such that is can be used by someone that does not have Python installed. One of the major drawbacks with Python that the gap is slowly being closed is how easy it is to distribute Python code.</p>
 <!-- /wp:paragraph -->
@@ -420,28 +290,26 @@
 <!-- wp:paragraph -->
 
 <p>At a minimum …</p>
-                <a class="readmore" href="https://jmckew.com/distributing-python-code.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+        <br>
+        <a class="btn" href="https://jmckew.com/distributing-python-code.html#distributing-python-code">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="https://jmckew.com/python-decorators-explained.html#python-decorators-explained">Python Decorators Explained</a></h2>
+    <p>
+          Posted on Fri 24 May 2019 in <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://jmckew.com/python-decorators-explained.html" rel="bookmark"
-                           title="Permalink to Python Decorators Explained">Python Decorators Explained</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-05-24T06:30:00+10:00">
-                Published: Fri 24 May 2019
-        </abbr>
+          &#8226;     Tagged with
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://jmckew.com/author/admin.html">admin</a>
-        </address>
-<p>In <a href="https://jmckew.com/category/code-fridays.html">Code Fridays</a>.</p>
-<p>tags: <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a> </p>
-</footer><!-- /.post-info -->                <!-- wp:paragraph -->
+              <a href="https://jmckew.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </header>
+  <div>
+      <!-- wp:paragraph -->
 
 <p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
 <!-- /wp:paragraph -->
@@ -449,42 +317,41 @@
 <!-- wp:paragraph -->
 
 <p>Firstly you have …</p>
-                <a class="readmore" href="https://jmckew.com/python-decorators-explained.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 3
-        <a href="https://jmckew.com/category/code-fridays2.html">&raquo;</a>
-</p>
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+        <br>
+        <a class="btn" href="https://jmckew.com/python-decorators-explained.html#python-decorators-explained">    Continue reading
+</a>
+  </div>
+</article>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+  <div class="pagination">
+    <a class="btn float-left" href="https://jmckew.com/category/code-fridays2.html">
+      <i class="fa fa-angle-left"></i>     Older Posts
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+    </a>
+  </div>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+
+
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jmckew.com",
+  "image": "",
+  "description": ""
+}
+</script>
 
 </body>
 </html>
