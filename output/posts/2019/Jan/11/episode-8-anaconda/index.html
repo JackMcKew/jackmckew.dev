@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/solid.css">
+
+    <link href="https://nifty-engelbart-ce3324.netlify.com/static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+
+
+<meta name="author" content="admin" />
+<meta name="description" content="Python is one of my favourite languages to develop in (if you haven&#39;t noticed yet). My favourite feature of Python is how easy it is to share your work with others and integrate other&#39;s code into your own projects. However as a project grows and gets older as time goes …" />
+<meta name="keywords" content="Code Fridays">
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Episode 8 - Anaconda"/>
+<meta property="og:description" content="Python is one of my favourite languages to develop in (if you haven&#39;t noticed yet). My favourite feature of Python is how easy it is to share your work with others and integrate other&#39;s code into your own projects. However as a project grows and gets older as time goes …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/2019/Jan/11/episode-8-anaconda/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-01-11 07:00:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/admin.html">
+<meta property="article:section" content="Uncategorized"/>
+<meta property="article:tag" content="Code Fridays"/>
+<meta property="og:image" content="img/jm-photo">
+
+  <title>Jack McKew's Blog &ndash; Episode 8 - Anaconda</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">
+        <img src="img/jm-photo" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+      <h1><a href="https://nifty-engelbart-ce3324.netlify.com">Jack McKew's Blog</a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
+          <li><a href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="episode-8-anaconda">Episode 8 - Anaconda</h1>
+    <p>
+          Posted on Fri 11 January 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/uncategorized.html">Uncategorized</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <!-- wp:paragraph --><html><head></head><body><p>Python is one of my favourite languages to develop in (if you haven't noticed yet). My favourite feature of Python is how easy it is to share your work with others and integrate other's code into your own projects. However as a project grows and gets older as time goes on it can be cumbersome to keep track of hundreds of dependencies that your project relies on to work. Even more so when all of these package dependencies are also being updated and changing functionality.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>One elegant solution that I always use when first starting a new project is to use Anaconda (https://www.anaconda.com/). Anaconda is a free, easy-to-install package and environment manager for Python. It is very simple to use in that when you are starting a new project, you just need to create a new environment (within the Anaconda navigator) with the python version you wish to use and then activate it. Simple as that.</p>
+<!-- /wp:paragraph -->
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">conda</span> <span class="k">create</span> <span class="c1">--name new_environment_name python=3.5 </span></span>
+</pre></div>
+<!-- /wp:syntaxhighlighter/code -->
+<!-- wp:paragraph -->
+<p>In one single line, we have just created a new environment named "new_environment_name" and specified that this environment will use Python version 3.5. Now to activate the environment it is as simple as typing "activate new_environment_name".</p>
+<!-- /wp:paragraph -->
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">activate</span> <span class="n">new_environment_name</span></span>
+</pre></div>
+<!-- /wp:syntaxhighlighter/code -->
+<!-- wp:paragraph -->
+<p>Now to see what packages are contained within our newly created environment, or to ever see what packages and their versions are listed the command is:</p>
+<!-- /wp:paragraph -->
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">conda</span> <span class="n">list</span></span>
+</pre></div>
+<!-- /wp:syntaxhighlighter/code -->
+<!-- wp:paragraph -->
+<p>Now that we have created, activated and peeked inside our newly created environment we need to add some packages that we might use! This is as simple as the command "conda install PACKAGENAME", for example we might want to install matplotlib, a widely used data visualization package. Installing matplotlib into our environment is done by the command:</p>
+<!-- /wp:paragraph -->
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">matplotlib</span></span>
+</pre></div>
+<!-- /wp:syntaxhighlighter/code -->
+<!-- wp:paragraph -->
+<p>You will note that when this runs, it also asks to install all the dependancies that matplotlib relies on and will also notify you later when you have more packages that some might clash and need to be upgraded/downgraded so that all packages have a common version to work with.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>With regards to working with certain version numbers of packages within an Anaconda environment, to install a specific version of a package, or even if you know what the minimum requirement is, can by following the table below:</p>
+<!-- /wp:paragraph -->
+<!-- wp:table {"className":"is-style-stripes"} -->
+<hr/>
+<p><strong>Constraint Type</strong> <strong>Specification</strong> <strong>Result</strong>
+  Fuzzy                      numpy=1.11              1.11.0, 1.11.1, 1.11.2, 1.11.18, etc
+  Exact                      numpy==1.11             1.11.0
+  Greater than or equal to   "numpy&gt;=1.11"          1.11.0 or higher
+  OR                         "numpy=1.11.1|1.11.3   1.11.1,1.11.3
+  AND                        "numpy&gt;=1.8,\&lt;2"       1.8, 1.9, not 2.0</p>
+<hr/>
+<!-- /wp:table -->
+<!-- wp:paragraph -->
+<p>By following these simple constraint rules, it is very easy to manage package version to maintain dependencies within your project without tearing your hair out when packages update and break your project.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Another major benefit of using Anaconda to manage your project's package dependencies is that when you're developing simultaneously with other projects and you may discover some bugs and wish to share them with your colleagues. To share all the dependencies (and their respective versions) with your colleague is as easy as generating an "environment file" and sharing the file with them so they have exactly the same environment as you. This is done by the following command:</p>
+<!-- /wp:paragraph -->
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">export</span> <span class="o">&gt;</span> <span class="n">environment</span><span class="p">.</span><span class="n">yml</span></span>
+</pre></div>
+<!-- /wp:syntaxhighlighter/code -->
+<!-- wp:paragraph -->
+<p>Similarly, if you colleague sends you their "environment file", the command to reproduce their environment is (Please note that the name of the environment is encoded within the first line of the .yml file):</p>
+<!-- /wp:paragraph -->
+<!-- wp:syntaxhighlighter/code -->
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">conda</span> <span class="n">env</span> <span class="k">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="p">.</span><span class="n">yml</span></span>
+</pre></div>
+<!-- /wp:syntaxhighlighter/code -->
+<!-- wp:paragraph -->
+<p>In Summary, Anaconda can be used to easily manage packages and dependencies across a project and fast track test/bug reproduction across multiple machines seamlessly. Personally, I would always advise to use a package manager across projects no matter the size.</p>
+<!-- /wp:paragraph --></body></html>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/code-fridays.html">Code Fridays</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://nifty-engelbart-ce3324.netlify.com",
+  "image": "img/jm-photo",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
