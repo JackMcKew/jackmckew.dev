@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/</loc>
-<lastmod>2019-10-07T17:20:18-00:00</lastmod>
+<lastmod>2019-10-07T17:34:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/archives.html</loc>
-<lastmod>2019-10-07T17:20:18-00:00</lastmod>
+<lastmod>2019-10-07T17:34:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/tags.html</loc>
-<lastmod>2019-10-07T17:20:18-00:00</lastmod>
+<lastmod>2019-10-07T17:34:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/categories.html</loc>
-<lastmod>2019-10-07T17:20:18-00:00</lastmod>
+<lastmod>2019-10-07T17:34:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -90,20 +90,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/intro-to-web-scraping.html</loc>
 <lastmod>2019-08-23T06:30:00+10:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/403.html</loc>
-<lastmod>2019-08-20T22:36:00+10:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/all-posts.html</loc>
-<lastmod>2019-08-20T22:35:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
@@ -244,20 +230,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/episode-17-networking-routing-addressing.html</loc>
 <lastmod>2019-03-15T06:30:00+11:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/228.html</loc>
-<lastmod>2019-03-13T22:04:00+11:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/199.html</loc>
-<lastmod>2019-03-13T21:18:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
