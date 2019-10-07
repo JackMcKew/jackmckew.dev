@@ -56,7 +56,6 @@ AUTHOR_FEED_RSS = None
 
 # Blogroll
 LINKS = (
-    ('All Posts', 'https://jmckew.com/all-posts/'),
     ('CV/Professional', 'https://jmckew.com/cv-professional/'),
     ('Contact', 'https://jmckew.com/contact/')
 )
@@ -66,10 +65,12 @@ LINKS = (
 #          ('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+OCIAL = (('twitter', 'https://twitter.com/Jac_McQ'),
+          ('linkedin', 'https://www.linkedin.com/in/jack-mckew/'),
+          ('github', 'https://github.com/JackMcKew'),
+        )
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 20
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
