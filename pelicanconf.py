@@ -59,7 +59,7 @@ PLUGINS = [
     "share_post",
     "always_modified",
     "dateish",
-    "readtime"
+    "pelican-readtime"
 ]
 
 
