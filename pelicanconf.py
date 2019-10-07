@@ -12,6 +12,8 @@ SITELOGO = "img/jm-photo"
 
 DISPLAY_PAGES_ON_MENU = True
 
+
+ARTICLE_URL = '{date:%Y}/{date:%m}/{date:%d}/{slug}.html'
 MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
 
 THEME = "Flex"
