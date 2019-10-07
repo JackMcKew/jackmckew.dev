@@ -8,7 +8,7 @@ SITEURL = 'https://nifty-engelbart-ce3324.netlify.com/'
 
 THEME = 'Flex'
 STATIC_PATHS = ['img', 'static']
-FAVICON = 'img/favicon.ico'
+FAVICON = 'img/jm-photo'
 CUSTOM_CSS = 'static/custom.css'
 
 PATH = 'content'
