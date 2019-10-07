@@ -28,7 +28,7 @@
 
 <meta name="author" content="admin" />
 <meta name="description" content="This post will cover a way of distributing Python code such that is can be used by someone that does not have Python installed. One of the major drawbacks with Python that the gap is slowly being closed is how easy it is to distribute Python code. At a minimum …" />
-<meta name="keywords" content="Code Fridays">
+<meta name="keywords" content="pyinstaller, python">
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
 <meta property="og:title" content="Distributing Python Code"/>
@@ -40,7 +40,8 @@
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/admin.html">
 <meta property="article:section" content="Code Fridays"/>
-<meta property="article:tag" content="Code Fridays"/>
+<meta property="article:tag" content="pyinstaller"/>
+<meta property="article:tag" content="python"/>
 <meta property="og:image" content="img/jm-photo">
 
   <title>Jack McKew's Blog &ndash; Distributing Python Code</title>
@@ -128,7 +129,7 @@
 </ul>
 <p>For this post, I will use PyInstaller as it is what I am most familiar with, please get in touch with me if you believe any other package is better suited. I have created an environment in anaconda named "pyinstall", in which I have installed PyInstaller with the command "conda install -c conda-forge pyinstaller", which includes Python 3.7.3 due to anaconda's packaging system (thereby including ctypes from the standard library).</p>
 <p>Now to use the PyInstaller package, just open Anaconda Prompt (or cmd if anaconda.exe is in your PATH). Navigate to where the python code is stored, and run the command "pyinstaller \&lt;name_of_program&gt;.py. See below for an example:</p>
-<p>![](img\distributing-python-code\cmd_PXbANiLF4N.png
+<p><img alt="" src="img\distributing-python-code\cmd_PXbANiLF4N.png"/>
 <img alt="" class="wp-image-313" src="https://i1.wp.com/jmckew.com/wp-content/uploads/2019/05/cmd_PXbANiLF4N.png?fit=640%2C364&amp;ssl=1"/></p>
 <p>This will create a build &amp; dist folder within the directory you navigated to, which contains the python application and all the required files will be put inside the dist folder which will be shipped to the user later on. There are many other settings that you can use to customize how your package gets built and more, but I won't go into that in this post.</p>
 <p><img alt="" src="img\distributing-python-code\explorer_409CFHxhyh.png"/></p>
@@ -138,7 +139,8 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/code-fridays.html">Code Fridays</a>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/pyinstaller.html">pyinstaller</a>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/python.html">python</a>
     </p>
   </div>
 

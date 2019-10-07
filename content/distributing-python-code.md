@@ -2,7 +2,7 @@ Title: Distributing Python Code
 Date: 2019-05-31 06:30
 Author: admin
 Category: Code Fridays
-Tags: Code Fridays
+Tags: pyinstaller, python
 Slug: distributing-python-code
 Status: published
 
@@ -32,7 +32,7 @@ For this post, I will use PyInstaller as it is what I am most familiar with, ple
 
 Now to use the PyInstaller package, just open Anaconda Prompt (or cmd if anaconda.exe is in your PATH). Navigate to where the python code is stored, and run the command "pyinstaller \<name\_of\_program\>.py. See below for an example:
 
-![](img\distributing-python-code\cmd_PXbANiLF4N.png
+![](img\distributing-python-code\cmd_PXbANiLF4N.png)
 ![](https://i1.wp.com/jmckew.com/wp-content/uploads/2019/05/cmd_PXbANiLF4N.png?fit=640%2C364&ssl=1){.wp-image-313}
 
 This will create a build & dist folder within the directory you navigated to, which contains the python application and all the required files will be put inside the dist folder which will be shipped to the user later on. There are many other settings that you can use to customize how your package gets built and more, but I won't go into that in this post.
