@@ -17,9 +17,9 @@ The book is broken into two major sections: Life Principles and Work Principles,
 
 On page 246, there is a summary of the life principles which are fully detailed in the preceding chapter. While I won't go into detail on Ray's perspective of the points, however I'll give a brief description on my personal takeaway. Please note the points are listed in no particular order.
 
-- 1.1 Be a hyperrealist - you need to understand, accept and work with reality to be able to appreciate and move forward with things effectively
-- 1.3 Radical transparency - while this can be a tough habit to develop, it pays itself off time and time again for both yourself and the people around you
-- 1.4 Look to nature to learn how reality works - if you haven't noticed in my blog posts, I am extremely curious about the natural way of evolution and look to bring it's methods into my everyday life and projects. I believe that Dalio also appreciates the power of evolution and is integrating it into his work (as he later describes)
+- 1.1 - Be a hyperrealist - you need to understand, accept and work with reality to be able to appreciate and move forward with things effectively
+- 1.3 - Radical transparency - while this can be a tough habit to develop, it pays itself off time and time again for both yourself and the people around you
+- 1.4 - Look to nature to learn how reality works - if you haven't noticed in my blog posts, I am extremely curious about the natural way of evolution and look to bring it's methods into my everyday life and projects. I believe that Dalio also appreciates the power of evolution and is integrating it into his work (as he later describes)
 - 2 - 5 Step process to get what you want out of life
   - Have clear goals
   - Identify and don't tolerate the problems that stand in the way of our achieving those goals
