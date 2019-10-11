@@ -1,28 +1,15 @@
 Title: Episode 5 - Android Multi-Touch
 Date: 2018-12-21 01:30
 Author: admin
-Category: Code Fridays
-Tags: Code Fridays, Projects
+Tags: android
 Slug: episode-5-android-multi-touch
 Status: published
 
-<!-- wp:image {"id":74,"align":"center"} -->
-
-::: {.wp-block-image}
-![](https://jmckew.com/wp-content/uploads/2018/12/ezgif.com-video-to-gif-2.gif){.wp-image-74}
-:::
-
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+![ezgif.com-video-to-gif-2](..\img\episode-5-android-multi-touch\ezgif.com-video-to-gif-2.gif)
 
 This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can be seen below it contains 3 values: x\_pos, y\_pos and id. It is also useful to create a constructor so that other classes can easily construct the Finger class.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"java"} -->
-
-``` {.wp-block-syntaxhighlighter-code .brush: .java; .notranslate}
+``` java
 public class Finger
 {
     public float x_pos;
@@ -38,29 +25,13 @@ public class Finger
 }
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
 Now that we have a class to store our details on how each finger is touching the screen, we now need to interact with some base level Java. Firstly we need to extend a view within the Android application so that the application knows what boundaries to deal, in my test application, I've just used the entire screen as a view.
-
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
 
 After that an array is needed to store the data of multiple inputs touching the screen. I've used a TreeMap in this example as this allows for ease later on so that they are in order on how they were input, however this comes with a downside to this example as lifting a input in the middle of the order touched crashes the array, this will be fixed in a later episode.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
 A paint is initialized for both the stroke paint for drawing lines between the touches and a paint for the text that is to come. Generic constructors for the view are also listed below.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"java"} -->
-
-``` {.wp-block-syntaxhighlighter-code .brush: .java; .notranslate}
+``` java
 public class TouchView extends View {
 private TreeMap<Integer, Finger> lineMap = new TreeMap<>();
 
@@ -95,21 +66,9 @@ private void init() {
     }
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
 Now that everything is initialized and ready to draw some graphics on the screen so that the application is interactive, now we have to interface with touch events. This is done by creating a new function within our View class, that takes in a MotionEvent on the View so that we can detect different types of touch events. Documentation on this can be found (<https://developer.android.com/training/graphics/opengl/touch#java>).
 
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"java"} -->
-
-``` {.wp-block-syntaxhighlighter-code .brush: .java; .notranslate}
+``` java
 @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -166,23 +125,11 @@ private Finger createFinger(float x, float y, int id)
     }
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
 Now that we've created a new Finger class inside our TreeMap by the order that the screen is touched in and we're removing that class when the screen input has been released, we are now ready to draw on the screen from our inputs.
-
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
 
 By iterating through the TreeMap, in each loop we know what the previous and what the next value in the array we can draw a circle for where the input is and a line between. This also allows us to determine whereabouts is the point in between these two points so we can write text. For this example, I've chosen to write the length of the distance between the two inputs to demonstrate that this can also be dynamic in nature.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"java"} -->
-
-``` {.wp-block-syntaxhighlighter-code .brush: .java; .notranslate}
+``` java
 private Path createCirPath(float x, float y, int id) {
         Path p = new Path();
         p.addCircle(x, y, 50, Path.Direction.CW);
@@ -214,10 +161,4 @@ private Path createCirPath(float x, float y, int id) {
     }
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
 In summary, it is quite simple to develop multi-touch interactions between the user and the application to enhance usability and interactivity. This is part of a application that I am developing at the moment and hope to share more insights into development as I progress on.
-
-<!-- /wp:paragraph -->

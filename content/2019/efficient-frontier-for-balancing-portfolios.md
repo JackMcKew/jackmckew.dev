@@ -1,62 +1,25 @@
 Title: Efficient Frontier for Balancing Portfolios
 Date: 2019-04-26 06:30
 Author: admin
-Category: Code Fridays
+tags: python, data, analysis
 Slug: efficient-frontier-for-balancing-portfolios
 Status: published
 
-<!-- wp:paragraph -->
-
 Following last 2 weeks’ posts ([Python for the Finance Industry](https://jmckew.com/2019/04/12/python-for-the-finance-industry/) & [Portfolio Balancing with Historical Stock Data](https://jmckew.com/2019/04/19/portfolio-balancing-with-historical-stock-data/)), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.
-
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
 
 This post is to demonstrate a method in balancing portfolios that does not depend on generating random portfolios, but rather mathematically determining the extremities of boundaries for effective portfolios using the [SciPy optimize function](https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html) (similar to that of [Excel's 'solver'](https://support.office.com/en-ie/article/define-and-solve-a-problem-by-using-solver-5d1a388f-079d-43ac-a7eb-f63e45925040)).
 
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
 Returning to last weeks' post when the budget allocations to assets were determined from randomly generated portfolios, it was presented on the graph below:
 
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":268} -->
-
-![](https://jmckew.com/wp-content/uploads/2019/04/image-2.png){.wp-image-268}
-
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+![image-20](..\img\efficient-frontier-for-balancing-portfolios\image-20.png)
 
 From this plot, it can be visualized that it forms an arch line between the yellow and red crosses. This line is called the [efficient frontier](https://www.investopedia.com/terms/e/efficientfrontier.asp). The efficient frontier represents the set of optimal portfolios that offer the highest expected return for a defined level of risk or the lowest risk for a given level of expected return. Simply this means, all the dots (portfolios) to the right of the line will give you a higher risk for the same returns.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
 First of all we must mathematically determine the portfolio with the maximum Sharpe ratio as the greater a portfolio's Sharpe ratio, the better it's risk-adjusted performance. Sharpe ratio is calculated using the formula below:
 
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":278,"align":"center"} -->
-
-::: {.wp-block-image}
-![\
-<https://www.investopedia.com/terms/s/sharperatio.asp>](https://jmckew.com/wp-content/uploads/2019/04/chrome_dUqVqnTloj.png){.wp-image-278}
-:::
-
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+![](..\img\efficient-frontier-for-balancing-portfolios\chrome_dUqVqnTloj.png)
 
 To find the maximum of the Sharpe Ratio programmatically we follow these steps:
-
-<!-- /wp:paragraph -->
-
-<!-- wp:list -->
 
 -   Firstly, define the formula as the function neg\_sharpe\_ratio (take note that to find the [maximum of function in SciPy](https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html#constrained-minimization-of-multivariate-scalar-functions-minimize), we use the minimize function with an inverse sign),
 -   In the max\_sharpe\_ratio function, define arguments to be passed into the SciPy minimize function:
@@ -68,11 +31,7 @@ To find the maximum of the Sharpe Ratio programmatically we follow these steps:
     -   Constraints: given as a dictionary, 'eq' type for equality and 'fun' for the anonymous function which limits the total summed asset allocation to 100% of the budget.
 -   The result from the minimize function is returned as a [OptimizeResult](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult) type.
 
-<!-- /wp:list -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-``` {.wp-block-syntaxhighlighter-code}
+``` python
 def neg_sharpe_ratio(weights, average_returns, covariance_matrix, risk_free_rate):
     returns, volatility = portfolio_performance(weights, average_returns, covariance_matrix)
     return -(returns - risk_free_rate) / volatility
@@ -87,17 +46,9 @@ def max_sharpe_ratio(average_returns, covariance_matrix,risk_free_rate):
     return result
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
 Similarly to the maximum sharpe ratio we do the same for determining the minimum volatility portfolio programmatically. We minimise volatility by trying different weightings on our asset allocations to find the minima.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-``` {.wp-block-syntaxhighlighter-code}
+``` python
 def portfolio_volatility(weights, average_returns, covariance_matrix):
     return portfolio_performance(weights, average_returns, covariance_matrix)[1]
 
@@ -113,17 +64,9 @@ def min_variance(average_returns, covariance_matrix):
     return result
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
 As above, we can also draw a line which depicts the efficient frontier for the portfolios for a given risk rate. Below some functions are defined for computing the efficient frontier. The first function, efficient\_return is calculating the most efficient portfolio for a given target return, and the second function efficient frontier is compiling the most efficient portfolio for a range of targets.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-``` {.wp-block-syntaxhighlighter-code}
+``` python
 def efficient_return(average_returns, covariance_matrix, target):
     num_assets = len(average_returns)
     args = (average_returns, covariance_matrix)
@@ -145,17 +88,9 @@ def efficient_frontier(average_returns, covariance_matrix, returns_range):
     return efficients
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:paragraph -->
-
 Now it's time to plot the efficient frontier on the graph with the randomly selected portfolios to check if they have been calculated correctly. It is also an opportune time to check if the maximum Sharpe ratio and minimum volatility portfolios have been calculated correctly by comparing them to the previously randomly determined portfolios.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code {"language":"python"} -->
-
-``` {.wp-block-syntaxhighlighter-code}
+``` python
 def display_efficient_frontier(average_returns,covariance_matrix,num_portfolios,risk_free_rate):
     results, weights = generate_portfolios(num_portfolios,average_returns,covariance_matrix,risk_free_rate)
 
@@ -212,35 +147,15 @@ risk_free_rate = 0.01977
 display_efficient_frontier(average_returns,covariance_matrix,num_portfolios,risk_free_rate)
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
+![Code_lDUKAxc9JU](..\img\efficient-frontier-for-balancing-portfolios\Code_lDUKAxc9JU.png)
 
-<!-- wp:image {"id":281} -->
-
-![](https://jmckew.com/wp-content/uploads/2019/04/Code_lDUKAxc9JU.png){.wp-image-281}
-
-<!-- /wp:image -->
-
-<!-- wp:image {"id":282} -->
-
-![](https://jmckew.com/wp-content/uploads/2019/04/Code_R2bA54PriC.png){.wp-image-282}
-
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+![Code_R2bA54PriC](..\img\efficient-frontier-for-balancing-portfolios\Code_R2bA54PriC.png)
 
 The surprising part is that the calculated result is very close to what we have previously simulated by picking from randomly generated portfolios. The slight differences in allocations between the simulated vs calculated are in most cases less than 1%, which shows how powerful randomly estimating calculations can be albeit sometimes not reliable in small sample spaces.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
 Rather than plotting every randomly generated portfolio, we can plot the individual stocks on the plot with the corresponding values of each stock's return and risk. This way we can compare how diversification is lowering the risk by optimizing the allocations.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:syntaxhighlighter/code -->
-
-``` {.wp-block-syntaxhighlighter-code}
+``` python
 def display_efficient_frontier_selected(average_returns,covariance_matrix,risk_free_rate):
 
     max_sharpe = max_sharpe_ratio(average_returns,covariance_matrix,risk_free_rate)
@@ -290,22 +205,8 @@ def display_efficient_frontier_selected(average_returns,covariance_matrix,risk_f
 display_efficient_frontier_selected(average_returns,covariance_matrix,risk_free_rate)
 ```
 
-<!-- /wp:syntaxhighlighter/code -->
-
-<!-- wp:image {"id":284} -->
-
-![](https://jmckew.com/wp-content/uploads/2019/04/Code_3sKudlcKG6.png){.wp-image-284}
-
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
+![Code_3sKudlcKG6](..\img\efficient-frontier-for-balancing-portfolios\Code_3sKudlcKG6.png)
 
 From the plot above, the stock with the highest risk is BHP, which accompanies the highest returns. This shows that if the investor is willing to take the risk than they will be rewarded with the higher return.
 
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
 This concludes the 3 part series on Python in the finance industry, if there is any topics in particular you would like to see how software can integrate and improve a service/product please feel free to get in touch!
-
-<!-- /wp:paragraph -->
