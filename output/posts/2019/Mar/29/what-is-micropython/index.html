@@ -26,20 +26,22 @@
 
 
 
-<meta name="author" content="admin" />
-<meta name="description" content="From the MicroPython docs\ themselves “MicroPython is a lean and efficient\ implementation of the Python 3 programming language that includes a small\ subset of the Python standard library and is optimised to run on\ microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …" />
-<meta name="keywords" content="">
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="From the MicroPython docs themselves “MicroPython is a lean and efficient implementation of the Python 3 programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …" />
+<meta name="keywords" content="python, micropython">
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
 <meta property="og:title" content="What is MicroPython?"/>
-<meta property="og:description" content="From the MicroPython docs\ themselves “MicroPython is a lean and efficient\ implementation of the Python 3 programming language that includes a small\ subset of the Python standard library and is optimised to run on\ microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …"/>
+<meta property="og:description" content="From the MicroPython docs themselves “MicroPython is a lean and efficient implementation of the Python 3 programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/2019/Mar/29/what-is-micropython/"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-03-29 06:39:00+11:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/admin.html">
-<meta property="article:section" content="Code Fridays"/>
+<meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/jack-mckew.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="micropython"/>
 <meta property="og:image" content="img/jm-photo">
 
   <title>Jack McKew's Blog &ndash; What is MicroPython?</title>
@@ -101,7 +103,7 @@
       
     <h1 id="what-is-micropython">What is MicroPython?</h1>
     <p>
-          Posted on Fri 29 March 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/code-fridays.html">Code Fridays</a>
+          Posted on Fri 29 March 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/misc.html">misc</a>
 
 
         &#8226; 2 min read
@@ -110,87 +112,44 @@
 
 
   <div>
-    <!-- wp:paragraph --><html><head></head><body><p>From the MicroPython docs\
-themselves <em>“MicroPython is a lean and efficient\
-implementation of the</em> <a href="http://www.python.org/"><em>Python 3</em></a> <em>programming language that includes a small\
-subset of the Python standard library and is optimised to run on\
-microcontrollers and in constrained environments.”.</em> But what does all this mean? Python 3 is one of\
-the most widely used, easy to write/read programming languages in the world\
-that is rapidly growing. By default Python comes with a ‘standard library’\
-which includes basic functions such as if statements, loops, printing, etc.</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p>Where MicroPython comes in is that the standard library for Python might\
-take up valuable space/computations to run as efficiently it does on a PC, so\
-MicroPython is a slice of the standard library that is able to run more\
-efficiently and take up less space on a microcontroller (RAM and space is\
-crucial when working with microcontrollers).</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
+    <body><p>From the MicroPython docs themselves <em>“MicroPython is a lean and efficient implementation of the</em> <a href="http://www.python.org/"><em>Python 3</em></a> <em>programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”.</em> But what does all this mean? Python 3 is one of the most widely used, easy to write/read programming languages in the world that is rapidly growing. By default Python comes with a ‘standard library’ which includes basic functions such as if statements, loops, printing, etc.</p>
+<p>Where MicroPython comes in is that the standard library for Python might take up valuable space/computations to run as efficiently it does on a PC, so MicroPython is a slice of the standard library that is able to run more efficiently and take up less space on a microcontroller (RAM and space is crucial when working with microcontrollers).</p>
 <p>MicroPython also comes with an interactive REPL (Read-Evaluate-Print Loop), which is an often overlooked amazing feature of MicroPython. The REPL allows you to connect to a microcontroller, execute code quickly without the need to compile or upload code. Which gives immediate feedback on whether your program is working as intended.</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading -->
 <h2><strong>Differences between MicroPython &amp; Python</strong></h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>There\
-obviously had to be some changes between Python and MicroPython to make it work\
-efficiently on processors a fraction of the power, but what are they? If you\
-are a beginner-intermediate Python programmer, you’ll only run into trouble in\
-very specific scenarios, which can be easily worked around. For example you\
-cannot delete from a list with a step greater than 1.</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p><strong>Sample\
-Python Code</strong></p>
-<!-- /wp:paragraph -->
-<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+<p>There obviously had to be some changes between Python and MicroPython to make it work efficiently on processors a fraction of the power, but what are they? If you are a beginner-intermediate Python programmer, you’ll only run into trouble in very specific scenarios, which can be easily worked around. For example you cannot delete from a list with a step greater than 1.</p>
+<p><strong>Sample Python Code</strong></p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></span>
-<span class="code-line"><span class="n">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span></span>
+<span class="code-line"><span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span></span>
 </pre></div>
-<!-- /wp:syntaxhighlighter/code -->
-<!-- wp:paragraph -->
-<p>You’d\
-expect for the output here in Python normally to be:</p>
-<!-- /wp:paragraph -->
-<!-- wp:table {"align":"center"} -->
-<hr/>
-<p><strong>Python Output</strong> <strong>MicroPython Output</strong>
-  [2,4]             TypeError: object 'range' isn't a tuple or list</p>
-<hr/>
-<!-- /wp:table -->
-<!-- wp:paragraph -->
-<p><strong>Python\
-Output                                   MicroPython\
-Output</strong></p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph {"align":"right"} -->
-<p>[2,4]                                                     TypeError: object ‘range’ isn’t a tuple or list</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p>However\
-this can be easily worked around with an explicit loop for example:</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p><strong>Sample\
-MicroPython/Python Code</strong></p>
-<!-- /wp:paragraph -->
-<!-- wp:syntaxhighlighter/code {"language":"python"} -->
-<div class="highlight"><pre><span class="code-line"><span></span><span class="nv">L</span> <span class="o">=</span> [<span class="mi">1</span>,<span class="mi">2</span>,<span class="mi">3</span>,<span class="mi">4</span>]</span>
-<span class="code-line"><span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> <span class="nv">L</span>:</span>
-<span class="code-line">    <span class="k">if</span><span class="ss">(</span><span class="nv">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="ss">)</span>:</span>
-<span class="code-line">        <span class="nv">del</span><span class="ss">(</span><span class="nv">L</span>[<span class="nv">i</span>]<span class="ss">)</span></span>
+<p>You’d expect for the output here in Python normally to be:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Python Output</strong></th>
+<th><strong>MicroPython Output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[2,4]</td>
+<td>TypeError: object 'range' isn't a tuple or list</td>
+</tr>
+</tbody>
+</table>
+<p>However this can be easily worked around with an explicit loop for example:</p>
+<p><strong>Sample MicroPython/Python Code</strong></p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></span>
+<span class="code-line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span></span>
+<span class="code-line">    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span></span>
+<span class="code-line">        <span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></span>
 </pre></div>
-<!-- /wp:syntaxhighlighter/code -->
-<!-- wp:paragraph -->
-<p>For more\
-information on differences between Python (in particular CPython) and\
-MicroPython you can find the MicroPython documentation here: <a href="http://docs.micropython.org/en/latest/genrst/index.html">http://docs.micropython.org/en/latest/genrst/index.html</a></p>
-<!-- /wp:paragraph --></body></html>
+<p>For more information on differences between Python (in particular CPython) and MicroPython you can find the MicroPython documentation here: <a href="http://docs.micropython.org/en/latest/genrst/index.html">http://docs.micropython.org/en/latest/genrst/index.html</a></p></body>
   </div>
   <div class="tag-cloud">
     <p>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/python.html">python</a>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/micropython.html">micropython</a>
     </p>
   </div>
 
