@@ -3,12 +3,15 @@
 from __future__ import unicode_literals
 
 RELATIVE_URLS = False
+_DEFAULT_LANGUAGE = 'en'
+PATH = "content"
 AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
-SITETITLE = SITENAME
+# SITETITLE = SITENAME
 SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
 SITEURL = "https://nifty-engelbart-ce3324.netlify.com"
-SITELOGO = "img/jm-photo"
+# SITEURL = "https://localhost:8000"
+
 
 DISPLAY_PAGES_ON_MENU = True
 
@@ -19,10 +22,15 @@ YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
 DAY_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/index.html' 
 
-THEME = ".themes/Flex"
-STATIC_PATHS = ["img", "static"]
-FAVICON = "img/favicon.ico"
-CUSTOM_CSS = "static/custom.css"
+THEME = "./themes/Flex"
+# STATIC_PATHS = ["content/img","static"]
+STATIC_PATHS = ["img","files","html"]
+SITELOGO = "img/jm-photo.jpg"
+# EXTRA_PATH_METADATA = {
+    # 'img/favicon.ico' : {'path' : 'favicon.ico'}
+# }
+FAVICON = "content/img/favicon.ico"
+# CUSTOM_CSS = THEME + "static/custom.css"
 
 USE_FOLDER_AS_CATEGORY = False
 MAIN_MENU = True
@@ -42,9 +50,14 @@ SITEMAP = {
 }
 
 PLUGIN_PATHS = [
-    "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins",
-    "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
+    './plugins/',
+    './plugins/pelican_youtube'
 ]
+
+# PLUGIN_PATHS = [
+#     "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins",
+#     "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
+# ]
 
 PLUGINS = [
     "sitemap",
@@ -64,8 +77,7 @@ PLUGINS = [
 
 
 DELETE_OUTPUT_DIRECTORY = False
-STATIC_PATHS = ["img", "static", "pdf"]
-PATH = "content"
+
 # ARTICLE_PATHS = ['blog']
 # ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
 # ARTICLE_URL = '{date:%Y}/{slug}.html'

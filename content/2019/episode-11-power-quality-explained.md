@@ -1,5 +1,3 @@
-
-
 Title: Episode 11 - Power Quality Explained
 Date: 2019-02-01 06:30
 Author: Jack McKew

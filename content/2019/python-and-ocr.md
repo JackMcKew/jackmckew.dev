@@ -11,7 +11,7 @@ First of all, as always, we must create a new virtual environment for our projec
 
 Now we are finally ready to test the engine and see if we can extract text out of an image, first of all we will start with a 'well' written example, the 'logo' of this website!
 
-![](..\img\python-and-ocr\example.png)
+![test_image](..\img\python-and-ocr\example.png)
 
 Of course, we have still yet to write any code, so naturally, that is the next step. As always in a python project, you will need to import all the dependencies of the project, in this case, it will be Image from the PIL (pillow) package, and pytesseract (the python wrapper around the Tesseract Engine).
 
