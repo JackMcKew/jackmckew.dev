@@ -17,12 +17,11 @@
   <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/solid.css">
 
-    <link href="https://nifty-engelbart-ce3324.netlify.com/static/custom.css" rel="stylesheet">
 
 
 
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="content/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="content/img/favicon.ico" type="image/x-icon">
 
 
 
@@ -30,11 +29,12 @@
 <meta name="description" content="Recently, I&#39;ve been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as: p5 pygame plotly panda3d bokeh many others Eventually, through the motivation of …" />
 <meta name="keywords" content="python, pyglet">
 
+
 <meta property="og:site_name" content="Jack McKew's Blog"/>
 <meta property="og:title" content="Intro to Games in Python with Pyglet"/>
 <meta property="og:description" content="Recently, I&#39;ve been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as: p5 pygame plotly panda3d bokeh many others Eventually, through the motivation of …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/2019/Oct/04/intro-to-games-in-python-with-pyglet/"/>
+<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/intro-to-games-in-python-with-pyglet/"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-10-04 06:30:00+10:00"/>
 <meta property="article:modified_time" content=""/>
@@ -42,7 +42,7 @@
 <meta property="article:section" content="misc"/>
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="pyglet"/>
-<meta property="og:image" content="img/jm-photo">
+<meta property="og:image" content="img/jm-photo.jpg">
 
   <title>Jack McKew's Blog &ndash; Intro to Games in Python with Pyglet</title>
 
@@ -51,15 +51,16 @@
   <aside>
     <div>
       <a href="https://nifty-engelbart-ce3324.netlify.com">
-        <img src="img/jm-photo" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+        <img src="img/jm-photo.jpg" alt="" title="">
       </a>
-      <h1><a href="https://nifty-engelbart-ce3324.netlify.com">Jack McKew's Blog</a></h1>
+      <h1><a href="https://nifty-engelbart-ce3324.netlify.com"></a></h1>
 
 <p>Python enthusiast, electrical engineer and tinkerer</p>
       <nav>
         <ul class="list">
-          <li><a href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
-          <li><a href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
 
         </ul>
       </nav>
@@ -128,7 +129,7 @@
 <p>To begin, and make things a bit easier, I downloaded the pyglet-master repository from GitHub (<a href="https://github.com/pyglet/pyglet">https://github.com/pyglet/pyglet</a>) so I didn't have to create and copy the file contents one by one.</p>
 <p>After going through the different versions with the examples &gt; game folder, I decided all I required was the simple functionality of collision and any further into developing the game wasn't needed for this stage, so I copied out the version 3 folder.</p>
 <p>If we run 'asteroid.py' from within the version 3 folder, we are met with this screen</p>
-<p><img alt="" src="..\img\intro-to-games-in-python-with-pyglet\image.png"/></p>
+<p><img alt="full_game_screen" src="..\img\intro-to-games-in-python-with-pyglet\image.png"/></p>
 <p>Now since all I am trying to do is generate multiple objects (which will be shown with the player symbol to indicate direction), I can comment out the lines which give the lives, score, title and interactive player.</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="c1"># Set up the two top labels</span></span>
 <span class="code-line"><span class="c1"># score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)</span></span>
@@ -177,7 +178,7 @@
 <span class="code-line"><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_x</span><span class="p">,</span> <span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_y</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">pol2cart</span><span class="p">(</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span><span class="p">,</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span><span class="p">)</span></span>
 </pre></div>
 <p>Now when we go and run our main file again, we will met with a screen like this:</p>
-<p><img alt="" src="..\img\intro-to-games-in-python-with-pyglet\image-1.png"/></p>
+<p><img alt="boids_screen" src="..\img\intro-to-games-in-python-with-pyglet\image-1.png"/></p>
 <p>Where the player sprites will float around in the direction they are pointing, until they crash into another sprite, causing both of them to disappear.</p>
 <p>This is a quick intro to Pyglet, I am hoping to expand on this simulation and am positive I will be doing further write ups with it in the future.</p></body>
   </div>
@@ -196,7 +197,7 @@
 
     <footer>
 <p>&copy;  </p>
-<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
 </p>    </footer>
   </main>
 
@@ -209,7 +210,7 @@
   "@type" : "Blog",
   "name": " Jack McKew's Blog ",
   "url" : "https://nifty-engelbart-ce3324.netlify.com",
-  "image": "img/jm-photo",
+  "image": "img/jm-photo.jpg",
   "description": ""
 }
 </script>

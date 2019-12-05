@@ -17,12 +17,11 @@
   <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/solid.css">
 
-    <link href="https://nifty-engelbart-ce3324.netlify.com/static/custom.css" rel="stylesheet">
 
 
 
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="content/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="content/img/favicon.ico" type="image/x-icon">
 
 
 
@@ -30,11 +29,12 @@
 <meta name="description" content="This is the first post in a series of posts dedicated for demonstrating how Python can be applied in the finance industry. Personally, the first thing that comes to mind when I think of the finance industry is the stock market. For fellow Australians, our main stock exchange is the …" />
 <meta name="keywords" content="python, finance">
 
+
 <meta property="og:site_name" content="Jack McKew's Blog"/>
 <meta property="og:title" content="Python for the Finance Industry"/>
 <meta property="og:description" content="This is the first post in a series of posts dedicated for demonstrating how Python can be applied in the finance industry. Personally, the first thing that comes to mind when I think of the finance industry is the stock market. For fellow Australians, our main stock exchange is the …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/2019/Apr/12/python-for-the-finance-industry/"/>
+<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/python-for-the-finance-industry/"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-04-12 06:30:00+10:00"/>
 <meta property="article:modified_time" content=""/>
@@ -42,7 +42,7 @@
 <meta property="article:section" content="misc"/>
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="finance"/>
-<meta property="og:image" content="img/jm-photo">
+<meta property="og:image" content="img/jm-photo.jpg">
 
   <title>Jack McKew's Blog &ndash; Python for the Finance Industry</title>
 
@@ -51,15 +51,16 @@
   <aside>
     <div>
       <a href="https://nifty-engelbart-ce3324.netlify.com">
-        <img src="img/jm-photo" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+        <img src="img/jm-photo.jpg" alt="" title="">
       </a>
-      <h1><a href="https://nifty-engelbart-ce3324.netlify.com">Jack McKew's Blog</a></h1>
+      <h1><a href="https://nifty-engelbart-ce3324.netlify.com"></a></h1>
 
 <p>Python enthusiast, electrical engineer and tinkerer</p>
       <nav>
         <ul class="list">
-          <li><a href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
-          <li><a href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
 
         </ul>
       </nav>
@@ -150,7 +151,7 @@ format from the Alpha Vantage API.</p>
 <span class="code-line"></span>
 <span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span></span>
 </pre></div>
-<p><img alt="" src="..\img\python-for-the-finance-industry\image2.png"/></p>
+<p><img alt="stocks_listing" src="..\img\python-for-the-finance-industry\image2.png"/></p>
 <p>Now that the dataframe is full of closing values for the companie’s stock’s closing values, it’s time to begin processing. First of all, for any missing data or erroneous 0 values, the ffill() function is used to fill any missing value by propagating the last valid observation forward. After that, the timestamp on each row is forced to become the index of the dataframe and converted to a datetime type.</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span></span>
 <span class="code-line"><span class="n">stocks_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stocks_df</span><span class="p">[</span><span class="s2">"date"</span><span class="p">])</span></span>
@@ -164,7 +165,7 @@ format from the Alpha Vantage API.</p>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'price in $'</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span>
 </pre></div>
-<p><img alt="" src="..\img\python-for-the-finance-industry\Figure_1-1.png"/>
+<p><img alt="line_graph" src="..\img\python-for-the-finance-industry\Figure_1-1.png"/>
 Another way to plot this data is to show it as the percentage change from the day before AKA daily returns. By plotting the data in this way, instead of showing the actual prices, the graph is showing the stocks’ volatility.</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span></span>
 <span class="code-line"></span>
@@ -175,7 +176,7 @@ Another way to plot this data is to show it as the percentage change from the da
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'daily returns'</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span>
 </pre></div>
-<p><img alt="" src="..\img\python-for-the-finance-industry\Figure_2.png"/>
+<p><img alt="percent_change" src="..\img\python-for-the-finance-industry\Figure_2.png"/>
 Now that we have some insight to the stocks’ data, the next post in this series will demonstrate a way to calculate a balanced portfolio from historical records using Modern Portfolio Theory.</p></body>
   </div>
   <div class="tag-cloud">
@@ -193,7 +194,7 @@ Now that we have some insight to the stocks’ data, the next post in this serie
 
     <footer>
 <p>&copy;  </p>
-<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
 </p>    </footer>
   </main>
 
@@ -206,7 +207,7 @@ Now that we have some insight to the stocks’ data, the next post in this serie
   "@type" : "Blog",
   "name": " Jack McKew's Blog ",
   "url" : "https://nifty-engelbart-ce3324.netlify.com",
-  "image": "img/jm-photo",
+  "image": "img/jm-photo.jpg",
   "description": ""
 }
 </script>
