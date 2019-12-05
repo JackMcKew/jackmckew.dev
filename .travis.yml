@@ -2,6 +2,7 @@ language: python
 branches:
   only:
   - master
+  - travis
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
