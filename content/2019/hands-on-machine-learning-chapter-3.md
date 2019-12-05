@@ -5,8 +5,6 @@ Tags: machinelearning,ai,python
 Slug: hands-on-machine-learning-chapter-3
 Status: published
 
-# Hands On Machine Learning Chapter 3
-
 Chapter 3 is focusing in on classification systems. As brought up earlier, most common supervised machine learning tasks are regression (predicting values) and classification (predicting classes). This chapter goes through the 'Hello World' of classification tasks, the MNIST dataset. The MNIST dataset is a set of 70,000 images of handwritten digits written by high school students and employees of the US Census Bureau. Thankfully each image is also labelled with the digit it represents.
 
 ![firefox_REN2sVWiQj](..\img\hands-on-machine-learning-chapter-3\firefox_REN2sVWiQj.png)

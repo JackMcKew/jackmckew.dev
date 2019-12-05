@@ -2,7 +2,6 @@ language: python
 branches:
   only:
   - master
-  - travis
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
@@ -14,4 +13,4 @@ deploy:
   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   keep_history: true
   on:
-    branch: travis
+    branch: master

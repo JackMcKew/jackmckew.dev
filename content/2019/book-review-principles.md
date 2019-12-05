@@ -5,8 +5,6 @@ Tags: bookreview, principles, habits
 Slug: book-review-principles
 Status: published
 
-# Book Review: Principles by Ray Dalio
-
 I've just finished reading [Ray Dalio's book Principles](https://www.principles.com/), and wanted to use this space to jot down some of my personal takeaways and thoughts. To give some background, Ray Dalio, founder of Bridgewater Assosciates, one of the largest hedge funds in the world, wrote this book around the unique principles that he discovered through his over forty year career that led to his and Bridgewater's success. Dalio believes that it is these principles, that are the reason behind whatever success he has had.
 
 Before I get into the thick of it, I would recommend this book to anyone that is feeling they are lacking some direction in their life. One of the organizational techniques I've picked up lately is [Bullet Journaling](https://bulletjournal.com/), and one of the takeaways I got from the book was to start prioritizing my to-dos, in comparison to what I do now which is just dump it all onto the paper.
