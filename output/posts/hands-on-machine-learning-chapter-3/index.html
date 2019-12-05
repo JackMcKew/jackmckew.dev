@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="content/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="content/img/favicon.ico" type="image/x-icon">
+
+
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="Chapter 3 is focusing in on classification systems. As brought up earlier, most common supervised machine learning tasks are regression (predicting values) and classification (predicting classes). This chapter goes through the &#39;Hello World&#39; of classification tasks, the MNIST dataset. The MNIST dataset is a set of 70,000 images of …" />
+<meta name="keywords" content="machinelearning, ai, python">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Hands On Machine Learning Chapter 3"/>
+<meta property="og:description" content="Chapter 3 is focusing in on classification systems. As brought up earlier, most common supervised machine learning tasks are regression (predicting values) and classification (predicting classes). This chapter goes through the &#39;Hello World&#39; of classification tasks, the MNIST dataset. The MNIST dataset is a set of 70,000 images of …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/hands-on-machine-learning-chapter-3/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-10-12 15:00:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/jack-mckew.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="machinelearning"/>
+<meta property="article:tag" content="ai"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="img/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; Hands On Machine Learning Chapter 3</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">
+        <img src="img/jm-photo.jpg" alt="" title="">
+      </a>
+      <h1><a href="https://nifty-engelbart-ce3324.netlify.com"></a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="hands-on-machine-learning-chapter-3">Hands On Machine Learning Chapter 3</h1>
+    <p>
+          Posted on Sat 12 October 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/misc.html">misc</a>
+
+
+        &#8226; 2 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>Chapter 3 is focusing in on classification systems. As brought up earlier, most common supervised machine learning tasks are regression (predicting values) and classification (predicting classes). This chapter goes through the 'Hello World' of classification tasks, the MNIST dataset. The MNIST dataset is a set of 70,000 images of handwritten digits written by high school students and employees of the US Census Bureau. Thankfully each image is also labelled with the digit it represents.</p>
+<p><img alt="firefox_REN2sVWiQj" src="..\img\hands-on-machine-learning-chapter-3\firefox_REN2sVWiQj.png"/></p>
+<p>Chapter 3 also introduces one of my personal favourite ways of evaluating classification performance, a confusion matrix. A confusion matrix is built up of rows and columns, rows representing the <em>actual classification</em> and columns representing the <em>predicted classification</em>. In a perfect classifier, the diagonal from left to right will be full of numbers (<em>true positives (TP) and true negatives (TN)</em> and every where else will be 0. Whenever there is a number to the upper right of the diagonal, this represents any <em>false positives</em> (FP), while the lower left of the diagonal, representing <em>false negatives</em> (FN).</p>
+<p><img alt="" src="https://miro.medium.com/max/356/1*Z54JgbS4DUwWSknhDCvNTQ.png"/></p>
+<p>Another way to assess the performance is to use the accuracy of the positive predicts, called the <em>precision</em> of the classifier.
+$$
+\frac{TP}{TP + FP}
+$$
+Another metric that goes hand-in-hand with precision is the <em>recall</em> of a classifier. Which is the ratio of true positives that are correctly classified.
+$$
+\frac{TP}{TP+FN}
+$$
+Or you can combine both precision and recall into a single metric, namely the <em>F1 score</em>. The F1 score is the <em>harmonic mean</em> of precision and recall. The harmonic mean gives much more weight to the low values, meaning the F1 score will only be high if the recall and precision are high.
+$$
+\frac{TP}{TP+\frac{FN+FP}{2}}
+$$</p>
+<h2>Precision/Recall Tradeoff</h2>
+<p>As above, when comparing precision and recall, you cannot have 100% of either, instead it is a trade off. With a precision of 100%, means all the samples classified as positive are true positives, however there may be a lot more that are now false positives. With a recall of 100%, all samples classified will include all of the true positives, however now all the false positives are included.</p>
+<p>Deciding the trade off comes down to the application. For example, if you wanted to create a classifier that detects websites that are safe for kids, you would prefer a classifier that rejects many good websites (low recall), but keeps only safe ones (high precision). On the other hand, if you wanted to create a classifier that detects threats in messages, it is probably fine to have a 25% precision, as long as it has 99% recall; meaning the authorities will get a few false alerts, but almost all threats will be identified.</p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/machinelearning.html">machinelearning</a>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/ai.html">ai</a>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://nifty-engelbart-ce3324.netlify.com",
+  "image": "img/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

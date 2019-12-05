@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="content/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="content/img/favicon.ico" type="image/x-icon">
+
+
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form …" />
+<meta name="keywords" content="python, ocr">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Python and OCR"/>
+<meta property="og:description" content="This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/python-and-ocr/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-06-28 06:30:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/jack-mckew.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="ocr"/>
+<meta property="og:image" content="img/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; Python and OCR</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">
+        <img src="img/jm-photo.jpg" alt="" title="">
+      </a>
+      <h1><a href="https://nifty-engelbart-ce3324.netlify.com"></a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="python-and-ocr">Python and OCR</h1>
+    <p>
+          Posted on Fri 28 June 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/misc.html">misc</a>
+
+
+        &#8226; 4 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form of semi-structured data. OCR just like humans also has it's limitations, for example, if you were trying to read someone with really difficult handwriting, it could be a big challenge. In this post, we will use the <a href="https://opensource.google.com/projects/tesseract">Tesseract</a> engine (an open source Google project) to undertake the OCR process for us.</p>
+<p>First of all, as always, we must create a new virtual environment for our project to live in or use a package manager such as Anaconda (as explained in my post <a href="https://jmckew.com/2019/01/11/episode-8-anaconda/">Episode - 8: Anaconda</a>. Once initialized, we want to install a few packages to help us on our quest for OCR. Both <a href="https://pillow.readthedocs.io/en/stable/">Pillow</a> and <a href="https://pypi.org/project/pytesseract/">PyTesseract</a>, if you are using Anaconda like I did, you will want to specifically use pip, not conda, to install these packages. Further to this, you will need to install the binary of the Tesseract-OCR engine, which installation instructions can be found: <a href="https://github.com/UB-Mannheim/tesseract/wiki">https://github.com/UB-Mannheim/tesseract/wiki</a>.</p>
+<p>Now we are finally ready to test the engine and see if we can extract text out of an image, first of all we will start with a 'well' written example, the 'logo' of this website!</p>
+<p><img alt="test_image" src="..\img\python-and-ocr\example.png"/></p>
+<p>Of course, we have still yet to write any code, so naturally, that is the next step. As always in a python project, you will need to import all the dependencies of the project, in this case, it will be Image from the PIL (pillow) package, and pytesseract (the python wrapper around the Tesseract Engine).</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pytesseract</span></span>
+</pre></div>
+<p>Now that we have our dependencies loaded, it's time to check out the documentation behind Pillow and pytesseract to know how to operate the tools, consider these an instruction manual. The documentation for these tools can be found:</p>
+<ul>
+<li><a href="https://pillow.readthedocs.io/en/stable/">Pillow</a>,</li>
+<li><a href="https://pytesseract.readthedocs.io/">PyTesseract</a>.</li>
+</ul>
+<p>Luckily for us, the developers have made this so simple it could be a one liner:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)))</span></span>
+</pre></div>
+<p>Which outputs in the console from the example image above:</p>
+<blockquote>
+<p>JACK MCKEW'S\
+BLOG\
+Python enthusiast, electrical engineer and\
+tinkerer</p>
+</blockquote>
+<p>Great! We can confirm that the text that the tesseract engine detected, is in fact, exactly what the example we gave it was.</p>
+<p>However, let's go a bit out of the way to make this a function such that it can be called more easily with the filepath to the image as a string.</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pytesseract</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">ocr_convert_to_text</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="n">text</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">extracted_text</span> <span class="o">=</span> <span class="n">ocr_convert_to_text</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">extracted_text</span><span class="p">)</span></span>
+</pre></div>
+<p>Now we have a function that we can call with a file path to easily convert our images to text. Now let's give the tesseract engine a bit of challenge with a full page of handwritten text:</p>
+<p><img alt="" src="..\img\python-and-ocr\example_2.jpg"/></p>
+<blockquote>
+<p>Ad Bb Cc Da Fe FEF Ge Hh Ii IS RR lt Hm We\
+00 PP Ag Rr SsT# Uu Vv Ww Xx 44 Le\
+Aa BS (36 72 Re bebe nme #% Ua ti ke\
+At Au Hee Bo In Fn Le Sim \$y Rep Ha Wy\
+Ye Unu Uppy bb otn tx 79 Ww 2A\
+Sr be Liki 4\
+IR AS67890\
+so cool! New |neerndtinas release of mast\
+famous APP for exhorting Printed text 40\
+handwritten "Sinyak\
+PacK mY box with. five dozen uguor Jugs\
+Don't 62 @. Earn \$ &amp; Put 12 Jar.\
+Ingredienes: Zuss, Chis, CAR Lid.\
+(Sécrez info), kndw tb. 3\
+Wo xr dA h-(H4+F 060 Cheah]\
+ChiP &amp; Dae." fava ys ie m4 mind.\
+Jackdaws uve m4 bi? sPhinx Of quare 2.\
+The five boxing withrds JumP quick.\
+How vexiegi quick date 2ebras sump!\
+{0.0} ainsa &amp; crepim pa. bau! -)</p>
+</blockquote>
+<p>Using the same code, we were able to determine most of the text out of the picture that the tesseract engine was given. Obviously this is not perfect, but it is a whole lot easier than typing it all in by hand.</p>
+<p>For a bit of another challenge and to demonstrate the capabilities, let's try some Australian number plates:</p>
+<p><img alt="" src="..\img\python-and-ocr\example_3.jpg"/></p>
+<blockquote>
+<p>(CSE) XcB-962 (66M-059\
+X2ZH:709) EEH:133) (GAA729)</p>
+</blockquote>
+<p>Obviously this can and has had a big impact on the way people can utilize images to make their life easier, from scanning in your handwritten notes at school and converting straight on to the computer, to being able to add all the contact information in your phone from a business card. How can OCR help your life at work or at home? Please let me know in the comments..</p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/python.html">python</a>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/ocr.html">ocr</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://nifty-engelbart-ce3324.netlify.com",
+  "image": "img/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
