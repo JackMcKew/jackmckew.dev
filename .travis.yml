@@ -5,4 +5,4 @@ branches:
 install:
 - pip install pelican
 script:
-- make publish github
+- pelican

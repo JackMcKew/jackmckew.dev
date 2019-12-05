@@ -19,7 +19,7 @@ YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
 DAY_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/index.html' 
 
-THEME = "Flex"
+THEME = ".themes/Flex"
 STATIC_PATHS = ["img", "static"]
 FAVICON = "img/favicon.ico"
 CUSTOM_CSS = "static/custom.css"
