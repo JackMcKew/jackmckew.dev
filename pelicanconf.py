@@ -16,12 +16,12 @@ SITEURL = "https://nifty-engelbart-ce3324.netlify.com"
 DISPLAY_PAGES_ON_MENU = True
 
 
-ARTICLE_URL = 'posts/{slug}/'
-ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
-# ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
-YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
-MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
-DAY_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/index.html' 
+ARTICLE_URL = 'posts/{slug}.html'
+# ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
+ARTICLE_SAVE_AS = 'posts/{slug}.html'
+# YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
+# MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
+# DAY_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/index.html' 
 
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
@@ -77,7 +77,7 @@ PLUGINS = [
 ]
 
 
-DELETE_OUTPUT_DIRECTORY = False
+DELETE_OUTPUT_DIRECTORY = True
 
 # ARTICLE_PATHS = ['blog']
 # ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
