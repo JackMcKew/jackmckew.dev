@@ -25,12 +25,16 @@ ARTICLE_SAVE_AS = 'posts/{slug}.html'
 
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
-STATIC_PATHS = ["img","files","html"]
-SITELOGO = "img/jm-photo.jpg"
+STATIC_PATHS = ["img","files","html","extra"]
+EXTRA_PATH_METADATA = {
+    'extra/favicon.ico': {'path': 'favicon.ico'},
+    'extra/jm-photo.jpg' : {'path' : 'jm-photo.jpg'}
+}
+SITELOGO = "/jm-photo.jpg"
 # EXTRA_PATH_METADATA = {
     # 'img/favicon.ico' : {'path' : 'favicon.ico'}
 # }
-FAVICON = "content/img/favicon.ico"
+FAVICON = "/favicon.ico"
 # CUSTOM_CSS = THEME + "static/custom.css"
 
 USE_FOLDER_AS_CATEGORY = False
