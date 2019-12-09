@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="content/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="content/img/favicon.ico" type="image/x-icon">
+
+
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="Following on from last week&#39;s post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily. Once we have created the executable file for our GUI (which will be located in …" />
+<meta name="keywords" content="python">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Making Executables Installable with Inno Setup"/>
+<meta property="og:description" content="Following on from last week&#39;s post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily. Once we have created the executable file for our GUI (which will be located in …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/making-executables-installable-with-inno-setup.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-11-08 06:30:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/jack-mckew.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="img/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; Making Executables Installable with Inno Setup</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">
+        <img src="img/jm-photo.jpg" alt="" title="">
+      </a>
+      <h1><a href="https://nifty-engelbart-ce3324.netlify.com"></a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="making-executables-installable-with-inno-setup">Making Executables Installable with Inno Setup</h1>
+    <p>
+          Posted on Fri 08 November 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/misc.html">misc</a>
+
+
+        &#8226; 1 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.</p>
+<p>Once we have created the executable file for our GUI (which will be located in the dist folder:</p>
+<p><img alt="explorer_QxD96RKedI" src="https://nifty-engelbart-ce3324.netlify.com/posts/img/explorer_QxD96RKedI.png"/></p>
+<p>Now we are going to use a program called Inno Setup, which can be downloaded from: http://www.jrsoftware.org/isinfo.php.</p>
+<p>After you've installed Inno Setup, run these commands:</p>
+<p>1) Select create a new script file using the Script Wizard</p>
+<p><img alt="image-20191106201014701" src="\img\making-executables-installable-with-inno-setup\Compil32_TgilJK2vqP.png"/></p>
+<p>2) Fill in the application information</p>
+<p><img alt="image-20191106201132191" src="\img\making-executables-installable-with-inno-setup\Compil32_KsdsIOEesc.png"/></p>
+<p>3) Leave defaults</p>
+<p><img alt="image-20191106201214496" src="\img\making-executables-installable-with-inno-setup\Compil32_8fAHgN6kKH.png"/></p>
+<p>4) Select the *.exe file found in the dist folder</p>
+<p><img alt="image-20191106201302960" src="\img\making-executables-installable-with-inno-setup\Compil32_udpcR1NePw.png"/></p>
+<p>5) Select shortcut choices</p>
+<p><img alt="image-20191106201331420" src="\img\making-executables-installable-with-inno-setup\Compil32_vDorhKhm29.png"/></p>
+<p>6) Add any license or information files</p>
+<p><img alt="image-20191106201402191" src="\img\making-executables-installable-with-inno-setup\Compil32_IkMbLdkdaw.png"/></p>
+<p>7) Select install mode</p>
+<p><img alt="image-20191106201440980" src="\img\making-executables-installable-with-inno-setup\Compil32_dSZd7YfJh8.png"/></p>
+<p>8) Select the languages</p>
+<p><img alt="image-20191106201500118" src="\img\making-executables-installable-with-inno-setup\Compil32_JYDCWS5x0g.png"/></p>
+<p>9) Provide compiler settings and icon for installable</p>
+<p><img alt="image-20191106201550569" src="\img\making-executables-installable-with-inno-setup\Compil32_tdbxJXiWgd.png"/></p>
+<p>10) Leave default</p>
+<p><img alt="image-20191106201611129" src="\img\making-executables-installable-with-inno-setup\Compil32_DUt3rPuZar.png"/></p>
+<p>11) Compile new script</p>
+<p><img alt="image-20191106201634021" src="\img\making-executables-installable-with-inno-setup\Compil32_8RBmOJvXus.png"/></p>
+<p>12) Share around the executable installer!</p>
+<p><img alt="image-20191106201801891" src="\img\making-executables-installable-with-inno-setup\explorer_d4QCQTi5sE.png"/></p>
+<p>Once installed, it will now act and behave like any other software installed on your computer!</p>
+<p><img alt="image-20191106201903238" src="\img\making-executables-installable-with-inno-setup\main_W1DbyAXofL.png"/></p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://nifty-engelbart-ce3324.netlify.com",
+  "image": "img/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

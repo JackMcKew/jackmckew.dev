@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://nifty-engelbart-ce3324.netlify.com/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="content/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="content/img/favicon.ico" type="image/x-icon">
+
+
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product. I completed their very first …" />
+<meta name="keywords" content="database, mongodb">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="What is MongoDB?"/>
+<meta property="og:description" content="Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product. I completed their very first …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/what-is-mongodb.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-05-03 06:30:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://nifty-engelbart-ce3324.netlify.com/author/jack-mckew.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="database"/>
+<meta property="article:tag" content="mongodb"/>
+<meta property="og:image" content="img/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; What is MongoDB?</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">
+        <img src="img/jm-photo.jpg" alt="" title="">
+      </a>
+      <h1><a href="https://nifty-engelbart-ce3324.netlify.com"></a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://nifty-engelbart-ce3324.netlify.com">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="what-is-mongodb">What is MongoDB?</h1>
+    <p>
+          Posted on Fri 03 May 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/misc.html">misc</a>
+
+
+        &#8226; 3 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.</p>
+<p>I completed their very first introductory course M001: MongoDB Basics last week, I found it very gentle in the introduction to database management and exploring data sets. This post is dedicated my take on the course and the key takeaways from my point of view.</p>
+<p>The course is broken into multiple chapters in which a chapter is released each week for the duration of the course. For example, the basics course was broken up into:</p>
+<ul>
+<li>Intro to MongoDB, Mongo Compass and Basic Queries,</li>
+<li>Create, Read, Update and Delete (CRUD) operations and more,</li>
+<li>MongoDB queries.</li>
+</ul>
+<p>Following all the chapters, you are faced with a final exam which tests if you were participating/listening in the earlier chapters. If you are concerned that you may struggle, this final exam is made up of a few multiple choice questions based on querying the data sets used in the chapters.</p>
+<p>MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilises JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.</p>
+<p>Personally, I really enjoy the functionality within Compass with plotting geographical data, presenting data type variances across the fields in a document and many other features. I found Compass one of the most appealing features as someone that constantly seeks to gain insight from data.</p>
+<p>Queries within MongoDB are structured like a dictionary in Python, where the field in the document is passed the key and the criteria is the value. For example, a basic query to return all documents within a MongoDB database with score equal to 7 would be:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="p">{</span><span class="n">score</span><span class="p">:</span><span class="mi">7</span><span class="p">}</span></span>
+</pre></div>
+<p>As a mainly Python developer, I found this to be very appealing as I find myself using dictionaries constantly when writing Python code, and by MongoDB using this format makes for an easy connection between the two.</p>
+<p>CRUD operations, are the fundamentals on actually using a database usefully. Through the Mongo shell you are able to add documents to the MongoDB database through JSON, XML, etc data formats.</p>
+<p>Projections within MongoDB are used to specify or restrict the fields to return with the filtered documents if you are specifically looking at a few fields within a densely populated document.</p>
+<p>In addition to the way queries are structured for filtering documents, it is also possible to use one of the many query or projection operators to further filter the documents. For example a query to return all documents with a score <strong>greater than</strong> 7 would be:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="p">{</span><span class="n">score</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="mi">7</span><span class="p">}}</span></span>
+</pre></div>
+<p>This sums up all of the takeaways from the M001 course for MongoDB that I found. I look forward to taking more of the courses on MongoDB university to gain a greater understanding and be able to utilise MongoDB across some of my projects.</p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/database.html">database</a>
+      <a href="https://nifty-engelbart-ce3324.netlify.com/tag/mongodb.html">mongodb</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://nifty-engelbart-ce3324.netlify.com",
+  "image": "img/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
