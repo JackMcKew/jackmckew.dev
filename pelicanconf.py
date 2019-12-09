@@ -79,7 +79,7 @@ PLUGINS = [
     "always_modified",
     "dateish",
     "post_stats",
-    "pelican_render_math"
+    "render_math"
 ]
 
 
