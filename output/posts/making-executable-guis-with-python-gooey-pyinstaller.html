@@ -179,13 +179,13 @@
 </pre></div>
 <p>By embedding the command names within the arguments we are able to use a variety of functions which may or may not be interconnected.</p>
 <p>Once this file is run will generate the following:</p>
-<p><img alt="image-20191102174048814" src="C:\Users\jackm\AppData\Roaming\Typora\typora-user-images\image-20191102174048814.png"/></p>
-<p><img alt="image-20191102174059066" src="C:\Users\jackm\AppData\Roaming\Typora\typora-user-images\image-20191102174059066.png"/></p>
+<p><img alt="image-20191102174048814" src="..\img\making-executable-guis-with-python-gooey-pyinstaller\image-20191102174048814.png"/></p>
+<p><img alt="image-20191102174059066" src="..\img\making-executable-guis-with-python-gooey-pyinstaller\image-20191102174059066.png"/></p>
 <p>Which are fully embedded within the windows file explorer system for selecting files, folders, etc.</p>
 <p>Now to package this GUI as an executable, we use <a href="https://www.pyinstaller.org/">PyInstaller</a>. By following Chris Kiehl's (Developer of Gooey) instructions on using Pyinstaller and Gooey: https://chriskiehl.com/article/packaging-gooey-with-pyinstaller. All we need to is create a build.spec file within our directory and run pyinstaller build.spec. </p>
-<p><img alt="image-20191102174521992" src="C:\Users\jackm\AppData\Roaming\Typora\typora-user-images\image-20191102174521992.png"/></p>
+<p><img alt="image-20191102174521992" src="..\img\making-executable-guis-with-python-gooey-pyinstaller\image-20191102174521992.png"/></p>
 <p>This will then generate a build folder and a dist folder within your current directory. The build folder will contain all the files used in generating the executable, which is found within the dist folder.</p>
-<p><img alt="image-20191102174758361" src="C:\Users\jackm\AppData\Roaming\Typora\typora-user-images\image-20191102174758361.png"/></p>
+<p><img alt="image-20191102174758361" src="..\img\making-executable-guis-with-python-gooey-pyinstaller\image-20191102174758361.png"/></p>
 <p>The code in it's entirety is:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">gooey</span> <span class="kn">import</span> <span class="n">Gooey</span><span class="p">,</span> <span class="n">GooeyParser</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">os</span></span>

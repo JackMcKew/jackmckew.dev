@@ -25,7 +25,7 @@ ARTICLE_SAVE_AS = 'posts/{slug}.html'
 
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
-STATIC_PATHS = ["2019","img","files","html"]
+STATIC_PATHS = ["img","files","html"]
 SITELOGO = "img/jm-photo.jpg"
 # EXTRA_PATH_METADATA = {
     # 'img/favicon.ico' : {'path' : 'favicon.ico'}
