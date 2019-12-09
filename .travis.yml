@@ -5,8 +5,10 @@ branches:
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
+- pip install ghp-import
 script:
 - python -m pelican content
+- ghp-import -n output
 deploy:
   provider: pages
   skip_cleanup: true
