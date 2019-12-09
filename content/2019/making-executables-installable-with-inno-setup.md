@@ -9,7 +9,7 @@ Following on from last week's post on making executable GUIs with Gooey, this po
 
 Once we have created the executable file for our GUI (which will be located in the dist folder:
 
-![explorer_QxD96RKedI](/img/making-executables-installable-with-inno-setup/explorer_QxD96RKedI.png)
+![explorer_QxD96RKedI]({filename}/img/making-executables-installable-with-inno-setup/explorer_QxD96RKedI.png)
 
 Now we are going to use a program called Inno Setup, which can be downloaded from: http://www.jrsoftware.org/isinfo.php.
 
