@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://jmckew.com/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://jmckew.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">
+
+
+    <link rel="shortcut icon" href="content/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="content/img/favicon.ico" type="image/x-icon">
+
+
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="Voltage drop is a electrical phenomenon in that wires carrying current always have resistance, or impedance to the current flow. Voltage drop is defined as the amount of loss that occurs through part of or all of a circuit due to resistance/impedance. The most well known analogy for explaining …" />
+<meta name="keywords" content="electrical">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Explained: Voltage Drop"/>
+<meta property="og:description" content="Voltage drop is a electrical phenomenon in that wires carrying current always have resistance, or impedance to the current flow. Voltage drop is defined as the amount of loss that occurs through part of or all of a circuit due to resistance/impedance. The most well known analogy for explaining …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jmckew.com/posts/explained-voltage-drop/"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-05-10 06:30:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jmckew.com/author/jack-mckew.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="electrical"/>
+<meta property="og:image" content="img/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; Explained: Voltage Drop</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jmckew.com">
+        <img src="img/jm-photo.jpg" alt="" title="">
+      </a>
+      <h1><a href="https://jmckew.com"></a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://jmckew.com/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://jmckew.com/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://jmckew.com">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+      <a href="https://jmckew.com/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="explained-voltage-drop">Explained: Voltage Drop</h1>
+    <p>
+          Posted on Fri 10 May 2019 in <a href="https://jmckew.com/category/misc.html">misc</a>
+
+
+        &#8226; 2 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>Voltage drop is a electrical phenomenon in that wires carrying current always have resistance, or impedance to the current flow. Voltage drop is defined as the amount of loss that occurs through part of or all of a circuit due to resistance/impedance.</p>
+<p>The most well known analogy for explaining voltage, current and voltage drop is a hose carrying water. In the garden hose, the water pressure is the voltage, the amount of water flowing is the current and the type and size of the hose makes up the resistance. Thus meaning that voltage drop is the loss of water pressure from the supply end of the hose to the output.</p>
+<p>When designing electrical systems within Australia and New Zealand, we are required to design to Australian standards. For voltage drop, the relevant standards as AS/NZS3000 (Wiring Rules) and AS/NZS3008 (Cable Selection). Where AS/NZS3000 nominates the limits to conform to (5% maximum from point of supply) and AS3008 dictates multiple ways that voltage drop can be calculated.</p>
+<p>For this post, I will demonstrate a simplified method that is outlined in AS3000 Table C7 where it specifies 'Am per %Vd' (Amp meters per % voltage drop) for each cable size: </p>
+<table>
+<thead>
+<tr>
+<th>Cable Conductor Size</th>
+<th>Single Phase (230V) Am per %Vd</th>
+<th>Three Phase (400V) Am per %Vd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1mm^2^</td>
+<td>45</td>
+<td>90</td>
+</tr>
+<tr>
+<td>1.5mm^2^</td>
+<td>70</td>
+<td>140</td>
+</tr>
+<tr>
+<td>2.5mm^2^</td>
+<td>128</td>
+<td>256</td>
+</tr>
+<tr>
+<td>4mm^2^</td>
+<td>205</td>
+<td>412</td>
+</tr>
+<tr>
+<td>6mm^2^</td>
+<td>306</td>
+<td>615</td>
+</tr>
+<tr>
+<td>10mm^2^</td>
+<td>515</td>
+<td>1034</td>
+</tr>
+<tr>
+<td>16mm^2^</td>
+<td>818</td>
+<td>1643</td>
+</tr>
+<tr>
+<td>25mm^2^</td>
+<td>1289</td>
+<td>2588</td>
+</tr>
+<tr>
+<td>35mm^2^</td>
+<td>1773</td>
+<td>3560</td>
+</tr>
+<tr>
+<td>50mm^2^</td>
+<td>2377</td>
+<td>4772</td>
+</tr>
+<tr>
+<td>70mm^2^</td>
+<td>3342</td>
+<td>6712</td>
+</tr>
+<tr>
+<td>95mm^2^</td>
+<td>4445</td>
+<td>8927</td>
+</tr>
+</tbody>
+</table>
+<p>For example, a 50m run of 10mm\^2^ cable carrying 3 phase 32A will result in 5% drop: 32A * 50m = 1600 / 1034 = 1.5%.</p>
+<p>In future posts, I will go into the various ways that AS/NZS3008 demonstrates ways of calculating voltage drop.</p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jmckew.com/tag/electrical.html">electrical</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jmckew.com",
+  "image": "img/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
