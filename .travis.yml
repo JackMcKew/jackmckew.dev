@@ -4,7 +4,8 @@ branches:
   - master
 env:
   global:
-    secure: "NUzRqLYpwGmlEynHGFekCEyk7gRO327HI4BRPMtHGc1U4KZqFehDJrpvUfgIm2G2WvDdPH908ZaN7uMUQyhhbdc4DXOVNhfKMd8Xad5cDglb2plYx916PD9Lx123rZkL2W9urspPWScni8CzapSOvkepHVY0cRg+dwFwYjdF+QrI/JB/qTC1auuhaCpArvOP4vTHYVKtSdTQCYgFiM+eERmyTd3AQV6ZbwhviI3xMT/lwtL63YHKpQ75FppVQ5ISW16PZyEc8cFUCfGa9Ztcf+ci15I2KBru1pKY4xn7EZxPuu2CBiBBlYbWyhhP0gKiFbpU6u+XOKTTJ//YUkcUcsD2S2O0mz6lBdOTfy7Eo7UzEqcpi+cNyDzhvr9XGl3kZ9VUNvuyxOE2GZlo9g7hXg7hUI9M076pe4KmoN5lRGZeD7obxCET//u2PBmhRs24NXF9PEdIMFIxqYb/uo8Y7h5TtgX7CWIPuQCLSUSYSeiDKShcJS1kaogRWBsEXgbXxEagGyOHkkJR23dBESMXcynaLocuMZz+ohcmzShOaLKdECxsv8J96ZVOAGyeImjHjh4LSoLReH8yS0DBtb2lDAsiXPc3Bw9Mw+ZFCXG9lYIBsWOBS4DVCpd2BiA+ZJnFkvzqc3b4fw/9KsMx5qvON2/vGLA1LVG9iHAxKGz+Rd8="
+  - secure: NUzRqLYpwGmlEynHGFekCEyk7gRO327HI4BRPMtHGc1U4KZqFehDJrpvUfgIm2G2WvDdPH908ZaN7uMUQyhhbdc4DXOVNhfKMd8Xad5cDglb2plYx916PD9Lx123rZkL2W9urspPWScni8CzapSOvkepHVY0cRg+dwFwYjdF+QrI/JB/qTC1auuhaCpArvOP4vTHYVKtSdTQCYgFiM+eERmyTd3AQV6ZbwhviI3xMT/lwtL63YHKpQ75FppVQ5ISW16PZyEc8cFUCfGa9Ztcf+ci15I2KBru1pKY4xn7EZxPuu2CBiBBlYbWyhhP0gKiFbpU6u+XOKTTJ//YUkcUcsD2S2O0mz6lBdOTfy7Eo7UzEqcpi+cNyDzhvr9XGl3kZ9VUNvuyxOE2GZlo9g7hXg7hUI9M076pe4KmoN5lRGZeD7obxCET//u2PBmhRs24NXF9PEdIMFIxqYb/uo8Y7h5TtgX7CWIPuQCLSUSYSeiDKShcJS1kaogRWBsEXgbXxEagGyOHkkJR23dBESMXcynaLocuMZz+ohcmzShOaLKdECxsv8J96ZVOAGyeImjHjh4LSoLReH8yS0DBtb2lDAsiXPc3Bw9Mw+ZFCXG9lYIBsWOBS4DVCpd2BiA+ZJnFkvzqc3b4fw/9KsMx5qvON2/vGLA1LVG9iHAxKGz+Rd8=
+  - secure: a47wMIKVldm9P6YcxA5/DH5/ymwDd0KkxPiiMTW7A+e7nMzVCfGfKb+3K9xsrGDo8B/glNWg46PR/LDkRaL7q9pPl+Y9YUFlMBzKSqBVeWm/q6XtdsOWMXvjxKol1nh/qE0M9lNX+1R+okr8+2qx4A6Suej1mlfblyTuy+FAZDfN1y2iplqstMRhu06WinOtQGX2n7M/jEo3uZbOugOw/l1fBzsFQAZeRfKZQQYNFsFlgudq7zmBUpYqZ400VebdJnWuiQRDKHFU39JCIcCtgwrxiwKgSRwku0Do8/lJ51ZvfAbZXvUZAAd0aG8GLdvRfxKDCD8c2Vy+t/11aG+oPHVBa5LtlEhSsxsdlrRHlx7gUbwx+YoVaoWGYYTkyVleXO6YYco1V5+Sz0tdKU+H99wHz8t84zlUxNrHzpoZE148QUTOldlotfs+N66zg9oYF6/YlFCF44Xd964ywZ0xSjKfnoqzOr4WxS9XprgzgOqL4uTFRRxCdBiafsmH6VLYnGT0V/JbUQ+mUXnENZHVGKJlMHyazbYT0TJZy8vVitHD7uUunnYdyGnboxaFoDMkFJCbB+UYCmAXz5SOMJVB2FRBHosO+aPbwt7GidcRwEDlPVju4hu/8/8irUeWROIgy/VzSWWaL9FxaUI1mcWoOm2xpPR1UO3gLI9Ou9Yj2o8=
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
@@ -12,12 +13,3 @@ install:
 script:
 - git submodule update --init --recursive
 - make publish github
-# - python -m pelican content
-# - ghp-import -p -n output
-# deploy:
-#   provider: pages
-#   skip_cleanup: true
-#   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-#   keep_history: true
-#   on:
-#     branch: master
