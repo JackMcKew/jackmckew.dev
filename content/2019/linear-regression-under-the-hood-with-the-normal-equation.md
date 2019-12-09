@@ -7,8 +7,6 @@ Status: published
 
 Let's dive deeper into how linear regression works.
 
-## Linear Regression
-
 Linear regression follows a general formula:
 $$
 \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n
