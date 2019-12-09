@@ -2,13 +2,18 @@ language: python
 branches:
   only:
   - master
+env:
+  global:
+    secure: "NUzRqLYpwGmlEynHGFekCEyk7gRO327HI4BRPMtHGc1U4KZqFehDJrpvUfgIm2G2WvDdPH908ZaN7uMUQyhhbdc4DXOVNhfKMd8Xad5cDglb2plYx916PD9Lx123rZkL2W9urspPWScni8CzapSOvkepHVY0cRg+dwFwYjdF+QrI/JB/qTC1auuhaCpArvOP4vTHYVKtSdTQCYgFiM+eERmyTd3AQV6ZbwhviI3xMT/lwtL63YHKpQ75FppVQ5ISW16PZyEc8cFUCfGa9Ztcf+ci15I2KBru1pKY4xn7EZxPuu2CBiBBlYbWyhhP0gKiFbpU6u+XOKTTJ//YUkcUcsD2S2O0mz6lBdOTfy7Eo7UzEqcpi+cNyDzhvr9XGl3kZ9VUNvuyxOE2GZlo9g7hXg7hUI9M076pe4KmoN5lRGZeD7obxCET//u2PBmhRs24NXF9PEdIMFIxqYb/uo8Y7h5TtgX7CWIPuQCLSUSYSeiDKShcJS1kaogRWBsEXgbXxEagGyOHkkJR23dBESMXcynaLocuMZz+ohcmzShOaLKdECxsv8J96ZVOAGyeImjHjh4LSoLReH8yS0DBtb2lDAsiXPc3Bw9Mw+ZFCXG9lYIBsWOBS4DVCpd2BiA+ZJnFkvzqc3b4fw/9KsMx5qvON2/vGLA1LVG9iHAxKGz+Rd8="
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
 - pip install ghp-import
 script:
-- python -m pelican content
-- ghp-import -p -n output
+- git submodule update --init --recursive
+- make publish github
+# - python -m pelican content
+# - ghp-import -p -n output
 # deploy:
 #   provider: pages
 #   skip_cleanup: true
