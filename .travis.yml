@@ -8,8 +8,15 @@ install:
 - pip install ghp-import
 script:
 - git submodule update --init --recursive
-- pelican content
-- ghp-import -n output --remote=https://$GITHUB_TOKEN@github.com/JackMcKew/jackmckew.github.io.git:gh-pages
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master
 env:
   global:
     secure: YOU/dNsbUgp2f75sZoXzI7AAq/dNszpF57ONlHvUazEDPdf4YtnZcO8/HqANS9p57inpUAAOQXAqBwwd35pGmZRa5knTsrZP9ztQGXYdon3UBcNx2zts/bN0qjCMNBcUjmP2WvQ+13YhM44tbquguztVoW3rc82eQZpRGZBpIhfqjL7omTGobJu+OZz2HbilWqy8CbVzcc0YaZ9B7sO+wDW6qYmfC9DjxMcRpJ9CY/hbmdZwpL40j3tvYTsBRWZ/GnVwRCmVMpZxULVppp041qx1iOBE3OUA1PnnLAwrGPt5iJRXVCxlQbBhsywcTENvX4tJ0ZdYBS+tnA8B94iNi9NdnbgXqfa06Ldk2Sd0chMCS8cTe8Ruvo05iNVdyCc2EXvZTLL6iOoMVDanEghIGf8fhNo6J/9sI/8eMqh6Q3AYOXaYRY8zkjeC3miP+bZuOdEFQAY9RAy+xdmfrDLCMxzyycEc+ndy4Ww2DoytszXUTmxBCFNx9/bdATJzcfdoIqg6PWgxaIT3y8gvvsJRMjcEEVbpE70mJgJ3361egg7MzyFwH2tu1FEBYa6x/B56fTRrDZh11J1xS4WwJMu57M3teEU3GOyiZAR9Zc6yOp7xCdaW0zp8f05E8WhjG2P23TzBnPB0zBJ8Ojvka1VFYw8crxV9uTofZcgguqhCZSc=
+after_deploy:
+- make publish github
