@@ -56,7 +56,7 @@ SITEMAP = {
 
 PLUGIN_PATHS = [
     './plugins/',
-    './plugins/pelican_youtube'
+    # './plugins/pelican_youtube'
 ]
 
 # PLUGIN_PATHS = [
@@ -71,13 +71,15 @@ PLUGINS = [
     "deadlinks",
     "glossary",
     "multi_neighbors",
-    "pelican_youtube",
+    "liquid_tags.notebook",
+    # "pelican_youtube",
     "photos",
     "representative_image",
     "share_post",
     "always_modified",
     "dateish",
-    "post_stats"
+    "post_stats",
+    "pelican_render_math"
 ]
 
 
