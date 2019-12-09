@@ -26,13 +26,13 @@
 
 
 <meta name="author" content="Jack McKew" />
-<meta name="description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where $\hat{y}$ is the predicted value, $n$ is the number of features, $x_i$ is the $i^{th}$ feature value and $\theta_n$ is the $n^{th}$ model parameter. This …" />
+<meta name="description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where \(\hat{y}\) is the predicted value, \(n\) is the number of features, \(x_i\) is the \(i^{th}\) feature value and \(\theta_n\) is the \(n^{th}\) model parameter. This …" />
 <meta name="keywords" content="python">
 
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
 <meta property="og:title" content="Linear Regression: Under the Hood with the Normal Equation"/>
-<meta property="og:description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where $\hat{y}$ is the predicted value, $n$ is the number of features, $x_i$ is the $i^{th}$ feature value and $\theta_n$ is the $n^{th}$ model parameter. This …"/>
+<meta property="og:description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where \(\hat{y}\) is the predicted value, \(n\) is the number of features, \(x_i\) is the \(i^{th}\) feature value and \(\theta_n\) is the \(n^{th}\) model parameter. This …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://nifty-engelbart-ce3324.netlify.com/posts/linear-regresssion-under-the-hood-with-the-normal-equation.html"/>
 <meta property="og:type" content="article"/>
@@ -106,7 +106,7 @@
           Posted on Sun 25 August 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/misc.html">misc</a>
 
 
-        &#8226; 2 min read
+        &#8226; 3 min read
     </p>
   </header>
 
@@ -114,10 +114,12 @@
   <div>
     <body><p>Let's dive deeper into how linear regression works.</p>
 <p>Linear regression follows a general formula:
-$$
+</p>
+<div class="math">$$
 \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n
-$$
-Where $\hat{y}$ is the predicted value, $n$ is the number of features, $x_i$ is the $i^{th}$ feature value and $\theta_n$ is the $n^{th}$ model parameter. This function is then vectorised which speeds up processing on a CPU, however, I won't go into that further.</p>
+$$</div>
+<p>
+Where <span class="math">\(\hat{y}\)</span> is the predicted value, <span class="math">\(n\)</span> is the number of features, <span class="math">\(x_i\)</span> is the <span class="math">\(i^{th}\)</span> feature value and <span class="math">\(\theta_n\)</span> is the <span class="math">\(n^{th}\)</span> model parameter. This function is then vectorised which speeds up processing on a CPU, however, I won't go into that further.</p>
 <p>How does the linear regression model get 'trained'? Training a linear regression model means setting the parameters such that the model best fits the training data set. To be able to do this, we need to be able to measure how good (or bad) the model fits the data. Common ways of measuring this are:</p>
 <ul>
 <li>Root Mean Square Error (RMSE)</li>
@@ -128,11 +130,13 @@ Where $\hat{y}$ is the predicted value, $n$ is the number of features, $x_i$ is 
 </ul>
 <p>From here on, we will refer to these as the cost function, and the objective is to minimise the cost function.</p>
 <h2>The Normal Equation</h2>
-<p>To find the value of $\theta$ that minimises the cost function, there is a mathematical equation that gives the result directly, named the Normal Equation
-$$
+<p>To find the value of <span class="math">\(\theta\)</span> that minimises the cost function, there is a mathematical equation that gives the result directly, named the Normal Equation
+</p>
+<div class="math">$$
 \hat{\theta} = (X^T \cdot X)^{-1}\cdot X^T \cdot y
-$$
-Where $\hat{\theta}$ is the value of $\theta$ that minimises the cost function and $y$ (once vectorised) is the vector of target values containing $y^{(1)}$ to $y^{(m)}$. </p>
+$$</div>
+<p>
+Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="math">\(\theta\)</span> that minimises the cost function and <span class="math">\(y\)</span> (once vectorised) is the vector of target values containing <span class="math">\(y^{(1)}\)</span> to <span class="math">\(y^{(m)}\)</span>. </p>
 <p>For example if this equation was run on data generated from this formula:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
 <span class="code-line"></span>
@@ -140,15 +144,15 @@ Where $\hat{\theta}$ is the value of $\theta$ that minimises the cost function a
 <span class="code-line"><span class="n">y</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></span>
 </pre></div>
 <p><img alt="10_6_2_gen" src="..\img\hands-on-machine-learning-chapter-4\10_6_2_gen.png"/></p>
-<p>Now to compute $\hat{\theta}$ with the normal equation, we can use the inv() function from NumPy's Linear algebra module:</p>
+<p>Now to compute <span class="math">\(\hat{\theta}\)</span> with the normal equation, we can use the inv() function from NumPy's Linear algebra module:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">X</span><span class="p">]</span></span>
 <span class="code-line"><span class="n">theta_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span></span>
 </pre></div>
-<p>With the actual function being $y = 6 + 2x_0 + noise$, and the equation found:</p>
+<p>With the actual function being <span class="math">\(y = 6 + 2x_0 + noise\)</span>, and the equation found:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">array</span><span class="p">([[</span> <span class="mf">5.96356419</span><span class="p">],</span></span>
 <span class="code-line">       <span class="p">[</span> <span class="mf">2.00027727</span><span class="p">]])</span></span>
 </pre></div>
-<p>Since the noise makes it impossible to recover the exact parameters of the original function now we can use $\hat{\theta}$ to make predictions:</p>
+<p>Since the noise makes it impossible to recover the exact parameters of the original function now we can use <span class="math">\(\hat{\theta}\)</span> to make predictions:</p>
 <div class="highlight"><pre><span class="code-line"><span></span><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span></span>
 </pre></div>
 <p>With y_predict being:</p>
@@ -169,7 +173,69 @@ Where $\hat{\theta}$ is the value of $\theta$ that minimises the cost function a
 <span class="code-line"> <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span></span>
 </pre></div>
 <p>Using the normal equation to train your linear regression model is linear in regards to the number of instances you wish to train on, meaning you will need to be able to fit the data set in memory.</p>
-<p>There are many other ways of to train a linear regression, some which are better suited for large number of features, these will be covered in later posts.</p></body>
+<p>There are many other ways of to train a linear regression, some which are better suited for large number of features, these will be covered in later posts.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></body>
   </div>
   <div class="tag-cloud">
     <p>

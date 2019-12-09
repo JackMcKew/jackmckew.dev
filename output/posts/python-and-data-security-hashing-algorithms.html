@@ -204,9 +204,9 @@
 <span class="code-line"><span class="k">print</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span></span>
 </pre></div>
 <blockquote>
-<p>\$argon2i\$v=19\$m=102400,t=2,p=8\$NqY05lyrtdb6v/ee03pvrQ\$mvLTquN71JPjuC+S9QNXYA</p>
+<p>\<span class="math">\(argon2i\\)</span>v=19\<span class="math">\(m=102400,t=2,p=8\\)</span>NqY05lyrtdb6v/ee03pvrQ\$mvLTquN71JPjuC+S9QNXYA</p>
 </blockquote>
-<p>The first section ("\$argon2i\$v=19\$m=102400,t=2,p=8\$") is the header information, showing the parameters that the algorithm used to generate the hash. While this seems as if it would make the algorithm easier to break, imagine a scenario where every password is hashed using an hashing algorithm with randomised parameters; verifying passwords would be a nightmare. Let's further break down what this represents:</p>
+<p>The first section ("\<span class="math">\(argon2i\\)</span>v=19\<span class="math">\(m=102400,t=2,p=8\\)</span>") is the header information, showing the parameters that the algorithm used to generate the hash. While this seems as if it would make the algorithm easier to break, imagine a scenario where every password is hashed using an hashing algorithm with randomised parameters; verifying passwords would be a nightmare. Let's further break down what this represents:</p>
 <ul>
 <li>\$argon2i - the variant of Argon2 algorithm being used,</li>
 <li>\$v=19 - the version of Argon2 being used,</li>
@@ -220,7 +220,7 @@
 <span class="code-line"><span class="k">print</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span></span>
 </pre></div>
 <blockquote>
-<p>\$argon2i\$v=19\$m=102400,t=2,p=8\$8f4/x7hXitGacy6F8N67dw\$/jPKQ98vLQCxkboxRlHa/g</p>
+<p>\<span class="math">\(argon2i\\)</span>v=19\<span class="math">\(m=102400,t=2,p=8\\)</span>8f4/x7hXitGacy6F8N67dw\$/jPKQ98vLQCxkboxRlHa/g</p>
 </blockquote>
 <p>Now that we've generated our new passwords, stored them away in a secure database somewhere, using a secure method of communication somehow, our user wants to login with the password they signed up with ("super_secret_password") and we have to check if this is the correct password.</p>
 <p>To do this with passlib, it is as simply as calling the .verify function with the plaintext and the equivalent hash which will return a boolean value determining whether of not the password is correct or not.</p>
@@ -236,7 +236,69 @@
 <p>False</p>
 </blockquote>
 <h3>Conclusion</h3>
-<p>Hopefully this has given you some insight into what hashing algorithms are, how they are used and how to use them with Python. They can both be an extremely powerful tool for securing data, however, must always be revisited later on down the track as advancements are made and your system may now be compromised.</p></body>
+<p>Hopefully this has given you some insight into what hashing algorithms are, how they are used and how to use them with Python. They can both be an extremely powerful tool for securing data, however, must always be revisited later on down the track as advancements are made and your system may now be compromised.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></body>
   </div>
   <div class="tag-cloud">
     <p>

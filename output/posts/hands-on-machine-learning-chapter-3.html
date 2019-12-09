@@ -108,7 +108,7 @@
           Posted on Sat 12 October 2019 in <a href="https://nifty-engelbart-ce3324.netlify.com/category/misc.html">misc</a>
 
 
-        &#8226; 2 min read
+        &#8226; 3 min read
     </p>
   </header>
 
@@ -119,20 +119,87 @@
 <p>Chapter 3 also introduces one of my personal favourite ways of evaluating classification performance, a confusion matrix. A confusion matrix is built up of rows and columns, rows representing the <em>actual classification</em> and columns representing the <em>predicted classification</em>. In a perfect classifier, the diagonal from left to right will be full of numbers (<em>true positives (TP) and true negatives (TN)</em> and every where else will be 0. Whenever there is a number to the upper right of the diagonal, this represents any <em>false positives</em> (FP), while the lower left of the diagonal, representing <em>false negatives</em> (FN).</p>
 <p><img alt="" src="https://miro.medium.com/max/356/1*Z54JgbS4DUwWSknhDCvNTQ.png"/></p>
 <p>Another way to assess the performance is to use the accuracy of the positive predicts, called the <em>precision</em> of the classifier.
-$$
+</p>
+<div class="math">$$
 \frac{TP}{TP + FP}
-$$
+$$</div>
+<p>
 Another metric that goes hand-in-hand with precision is the <em>recall</em> of a classifier. Which is the ratio of true positives that are correctly classified.
-$$
+</p>
+<div class="math">$$
 \frac{TP}{TP+FN}
-$$
+$$</div>
+<p>
 Or you can combine both precision and recall into a single metric, namely the <em>F1 score</em>. The F1 score is the <em>harmonic mean</em> of precision and recall. The harmonic mean gives much more weight to the low values, meaning the F1 score will only be high if the recall and precision are high.
-$$
+</p>
+<div class="math">$$
 \frac{TP}{TP+\frac{FN+FP}{2}}
-$$</p>
+$$</div>
 <h2>Precision/Recall Tradeoff</h2>
 <p>As above, when comparing precision and recall, you cannot have 100% of either, instead it is a trade off. With a precision of 100%, means all the samples classified as positive are true positives, however there may be a lot more that are now false positives. With a recall of 100%, all samples classified will include all of the true positives, however now all the false positives are included.</p>
-<p>Deciding the trade off comes down to the application. For example, if you wanted to create a classifier that detects websites that are safe for kids, you would prefer a classifier that rejects many good websites (low recall), but keeps only safe ones (high precision). On the other hand, if you wanted to create a classifier that detects threats in messages, it is probably fine to have a 25% precision, as long as it has 99% recall; meaning the authorities will get a few false alerts, but almost all threats will be identified.</p></body>
+<p>Deciding the trade off comes down to the application. For example, if you wanted to create a classifier that detects websites that are safe for kids, you would prefer a classifier that rejects many good websites (low recall), but keeps only safe ones (high precision). On the other hand, if you wanted to create a classifier that detects threats in messages, it is probably fine to have a 25% precision, as long as it has 99% recall; meaning the authorities will get a few false alerts, but almost all threats will be identified.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></body>
   </div>
   <div class="tag-cloud">
     <p>
