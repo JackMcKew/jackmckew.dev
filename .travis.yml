@@ -1,0 +1,21 @@
+language: python
+branches:
+  only:
+  - master
+install:
+- pip install --upgrade pip
+- pip install -r requirements.txt
+script:
+- git submodule update --init --recursive
+after_success:
+- ghp-import -p -n output
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: "$GITHUB_TOKEN"
+  keep_history: true
+  on:
+    branch: master
+env:
+  global:
+    secure: m13TwRV42TSAFIc/YFB8yvdwQCQTzE+NM7yLRPoMy17GWJLYEt0SztDAat3yFlqrkNJqXYcllSd75IuHb1Xu9V4xe/LIP9FcNEFJaGRrvfwxDrFYXFTWA7rQOQId5Y0bz0lqeOu4WFCbt4baaEiO2sYs6E3fENojkdbRxCxPoCF9b2tnmVVR1Nsv5uNJkYTMt4kcT/NMDMcJuV4zxLSSHM2GCV5Lp7epNlLqz2C/WAe533F5N0aFvU20rxKgkNY/4mg4rEuOphiWFnVAxy7DbkXFuVJVYGRoJ4esZD3B/LdA7fFUDvZHzwV5uQ0QcXD5vMjkvuPWE2bugcbAprJEvc5dYyYMczMUytXTnd679cHipuvE42zcD4hGStDrL9Xb1k5FNDGIWZmTkwzhzo6pqYrLWtFCKmSC22mROamJSgr0N4lu9LO/zalXI24Nabz76bQ+i/AOxS9Ce7CIsrETtwO6w6y9vvgSQs5kyJzfyLrbOjLzAGOh5TZ2gv3qmqBsImOp+Vozf7SSToYXp/fh2Y8FsqO0SWzbK3tM0bjnxLXvLEYumSHgr8U84BE26xnUI4gzO3I+1wHPggcfo8yseIq6KzHEtStVtyfhJhjm1Kfgd5croZcnoSpaImbhUqcXzigdLPQJDmOCCZfBzeeUk8rSAgFId+NP1kXiO+ef5Uw=
