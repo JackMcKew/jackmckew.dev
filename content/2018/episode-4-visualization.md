@@ -6,7 +6,7 @@ Tags: data, visualization
 Slug: episode-4-visualization
 Status: published
 
-![ezgif.com-video-to-gif-1-1](..\img\episode-4-visualisation\ezgif.com-video-to-gif-1-1.gif)
+![ezgif.com-video-to-gif-1-1](..\img\episode-4-visualization\ezgif.com-video-to-gif-1-1.gif)
 
 In an ever growing world of data, every person perceives data in their own personalized way. This calls for data analysis to be visualized in a clear straightforward way so that it is accessible by anyone may come into contact with the system.
 

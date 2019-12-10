@@ -1,5 +1,6 @@
 Title: Introduction to Pytest & Pipenv
 Date: 2019-09-20 06:30
+Category: Python
 Author: Jack McKew
 Tags: python, pytest, pipenv
 Slug: introduction-to-pytest-pipenv

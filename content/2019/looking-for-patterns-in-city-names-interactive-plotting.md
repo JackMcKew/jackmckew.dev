@@ -1,7 +1,8 @@
 Title: Looking for Patterns in City Names & Interactive Plotting
 Date: 2019-08-16 06:30
+Category: Python, Data Science
 Author: Jack McKew
-Tags: python
+Tags: python, datascience
 Slug: looking-for-patterns-in-city-names-interactive-plotting
 Status: published
 

@@ -1,5 +1,6 @@
 Title: Episode 16 - Networking Basics
 Date: 2019-03-08 06:30
+Category: Engineering
 Author: Jack McKew
 Tags: networking
 Slug: episode-16-networking-basics

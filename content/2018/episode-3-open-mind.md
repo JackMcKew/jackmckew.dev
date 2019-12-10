@@ -1,6 +1,6 @@
 Title: Episode 3 - Open Mind
 Date: 2018-12-07 03:10
-Category: Python
+Category: Python, Principles
 Author: admin
 Tags: database, selfimprovement
 Slug: episode-3-open-mind

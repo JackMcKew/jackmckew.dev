@@ -1,5 +1,6 @@
 Title: Distributing Python Code
 Date: 2019-05-31 06:30
+Category: Python
 Author: admin
 Tags: pyinstaller, python
 Slug: distributing-python-code

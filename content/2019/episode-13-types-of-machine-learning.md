@@ -1,5 +1,6 @@
 Title: Episode 14 - Types of Machine Learning
 Date: 2019-02-22 06:33
+Category: Machine Learning
 Author: Jack McKew
 Tags: machinelearning, ai
 Slug: episode-13-types-of-machine-learning

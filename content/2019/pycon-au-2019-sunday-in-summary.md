@@ -1,5 +1,6 @@
 Title: PyCon AU 2019 Sunday In Summary
 Date: 2019-08-07 06:30
+Category: Python
 Author: Jack McKew
 Tags: python, pyconau
 Slug: pycon-au-2019-sunday-in-summary

@@ -1,5 +1,6 @@
 Title: Linear Regression: Under the Hood with the Normal Equation
 Date: 2019-08-25 06:30
+Category: Data Science
 Author: Jack McKew
 Tags: python
 Slug: linear-regresssion-under-the-hood-with-the-normal-equation

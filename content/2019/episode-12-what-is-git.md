@@ -1,5 +1,6 @@
 Title: Episode 12 - What is Git?
 Date: 2019-02-08 06:30
+Category: Software Development
 Author: Jack McKew
 Tags: software, git
 Slug: episode-12-what-is-git

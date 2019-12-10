@@ -1,5 +1,6 @@
 Title: Hands On Machine Learning Chapter 2
 Date: 2019-07-12 06:30
+Category: Machine Learning
 Author: Jack McKew
 Tags: machinelearning
 Slug: hands-on-machine-learning-chapter-2

@@ -1,5 +1,6 @@
 Title: Python Project Workflow
 Date: 2019-08-30 06:30
+Category: Python, Principles
 Author: Jack McKew
 Tags: python
 Slug: python-project-workflow

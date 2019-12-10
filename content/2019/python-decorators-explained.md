@@ -1,5 +1,6 @@
 Title: Python Decorators Explained
 Date: 2019-05-24 06:30
+Category: Python
 Author: Jack McKew
 Tags: python
 Slug: python-decorators-explained

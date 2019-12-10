@@ -1,5 +1,6 @@
 Title: Parallel Processing in Python
 Date: 2019-06-07 06:30
+Category: Python
 Author: Jack McKew
 Tags: python
 Slug: parallel-processing-in-python

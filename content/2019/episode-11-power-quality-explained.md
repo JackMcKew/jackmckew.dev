@@ -1,5 +1,6 @@
 Title: Episode 11 - Power Quality Explained
 Date: 2019-02-01 06:30
+Category: Engineering
 Author: Jack McKew
 Tags: power, electrical, python
 Slug: episode-11-power-quality-explained

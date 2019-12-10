@@ -1,5 +1,6 @@
 Title: Python for the Finance Industry
 Date: 2019-04-12 06:30
+Category: Python, Data Science
 Author: Jack McKew
 Tags: python, finance
 Slug: python-for-the-finance-industry

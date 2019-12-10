@@ -1,5 +1,6 @@
 Title: Episode 15 - What is a C.T?
 Date: 2019-03-01 05:30
+Category: Engineering
 Author: Jack McKew
 Tags: electrical
 Slug: episode-15-what-is-a-c-t
