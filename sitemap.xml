@@ -4,693 +4,693 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/</loc>
-<lastmod>2019-12-10T11:18:14-00:00</lastmod>
+<loc>https://jackmckew.dev/</loc>
+<lastmod>2019-12-10T11:18:31-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/archives.html</loc>
-<lastmod>2019-12-10T11:18:14-00:00</lastmod>
+<loc>https://jackmckew.dev/archives.html</loc>
+<lastmod>2019-12-10T11:18:31-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tags.html</loc>
-<lastmod>2019-12-10T11:18:14-00:00</lastmod>
+<loc>https://jackmckew.dev/tags.html</loc>
+<lastmod>2019-12-10T11:18:31-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/categories.html</loc>
-<lastmod>2019-12-10T11:18:14-00:00</lastmod>
+<loc>https://jackmckew.dev/categories.html</loc>
+<lastmod>2019-12-10T11:18:31-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/pages/contact.html</loc>
+<loc>https://jackmckew.dev/pages/contact.html</loc>
 <lastmod>2019-03-13T22:01:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/pages/cv-professional.html</loc>
+<loc>https://jackmckew.dev/pages/cv-professional.html</loc>
 <lastmod>2019-03-13T21:18:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/making-executables-installable-with-inno-setup.html</loc>
+<loc>https://jackmckew.dev/posts/making-executables-installable-with-inno-setup.html</loc>
 <lastmod>2019-11-08T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/making-executable-guis-with-python-gooey-pyinstaller.html</loc>
+<loc>https://jackmckew.dev/posts/making-executable-guis-with-python-gooey-pyinstaller.html</loc>
 <lastmod>2019-11-01T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/hands-on-machine-learning-chapter-3.html</loc>
+<loc>https://jackmckew.dev/posts/hands-on-machine-learning-chapter-3.html</loc>
 <lastmod>2019-10-12T15:00:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/book-review-principles.html</loc>
+<loc>https://jackmckew.dev/posts/book-review-principles.html</loc>
 <lastmod>2019-10-11T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/intro-to-games-in-python-with-pyglet.html</loc>
+<loc>https://jackmckew.dev/posts/intro-to-games-in-python-with-pyglet.html</loc>
 <lastmod>2019-10-04T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/introduction-to-pytest-pipenv.html</loc>
+<loc>https://jackmckew.dev/posts/introduction-to-pytest-pipenv.html</loc>
 <lastmod>2019-09-20T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/inheritance-in-python.html</loc>
+<loc>https://jackmckew.dev/posts/inheritance-in-python.html</loc>
 <lastmod>2019-09-13T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/dunders-in-python.html</loc>
+<loc>https://jackmckew.dev/posts/dunders-in-python.html</loc>
 <lastmod>2019-09-06T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/python-project-workflow.html</loc>
+<loc>https://jackmckew.dev/posts/python-project-workflow.html</loc>
 <lastmod>2019-08-30T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/linear-regresssion-under-the-hood-with-the-normal-equation.html</loc>
+<loc>https://jackmckew.dev/posts/linear-regresssion-under-the-hood-with-the-normal-equation.html</loc>
 <lastmod>2019-08-25T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/intro-to-web-scraping.html</loc>
+<loc>https://jackmckew.dev/posts/intro-to-web-scraping.html</loc>
 <lastmod>2019-08-23T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/looking-for-patterns-in-city-names-interactive-plotting.html</loc>
+<loc>https://jackmckew.dev/posts/looking-for-patterns-in-city-names-interactive-plotting.html</loc>
 <lastmod>2019-08-16T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/pycon-au-2019-sunday-in-summary.html</loc>
+<loc>https://jackmckew.dev/posts/pycon-au-2019-sunday-in-summary.html</loc>
 <lastmod>2019-08-07T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/pycon-au-2019-saturday-in-summary.html</loc>
+<loc>https://jackmckew.dev/posts/pycon-au-2019-saturday-in-summary.html</loc>
 <lastmod>2019-08-06T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/hands-on-machine-learning-chapter-2.html</loc>
+<loc>https://jackmckew.dev/posts/hands-on-machine-learning-chapter-2.html</loc>
 <lastmod>2019-07-12T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/python-and-ocr.html</loc>
+<loc>https://jackmckew.dev/posts/python-and-ocr.html</loc>
 <lastmod>2019-06-28T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/python-and-data-security-hashing-algorithms.html</loc>
+<loc>https://jackmckew.dev/posts/python-and-data-security-hashing-algorithms.html</loc>
 <lastmod>2019-06-21T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/hands-on-machine-learning-chapter-1.html</loc>
+<loc>https://jackmckew.dev/posts/hands-on-machine-learning-chapter-1.html</loc>
 <lastmod>2019-06-14T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/parallel-processing-in-python.html</loc>
+<loc>https://jackmckew.dev/posts/parallel-processing-in-python.html</loc>
 <lastmod>2019-06-07T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/distributing-python-code.html</loc>
+<loc>https://jackmckew.dev/posts/distributing-python-code.html</loc>
 <lastmod>2019-05-31T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/python-decorators-explained.html</loc>
+<loc>https://jackmckew.dev/posts/python-decorators-explained.html</loc>
 <lastmod>2019-05-24T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/explained-voltage-drop.html</loc>
+<loc>https://jackmckew.dev/posts/explained-voltage-drop.html</loc>
 <lastmod>2019-05-10T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/what-is-mongodb.html</loc>
+<loc>https://jackmckew.dev/posts/what-is-mongodb.html</loc>
 <lastmod>2019-05-03T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/efficient-frontier-for-balancing-portfolios.html</loc>
+<loc>https://jackmckew.dev/posts/efficient-frontier-for-balancing-portfolios.html</loc>
 <lastmod>2019-04-26T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/portfolio-balancing-with-historical-stock-data.html</loc>
+<loc>https://jackmckew.dev/posts/portfolio-balancing-with-historical-stock-data.html</loc>
 <lastmod>2019-04-19T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/python-for-the-finance-industry.html</loc>
+<loc>https://jackmckew.dev/posts/python-for-the-finance-industry.html</loc>
 <lastmod>2019-04-12T06:30:00+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/how-to-program-an-esp8266-with-micropython.html</loc>
+<loc>https://jackmckew.dev/posts/how-to-program-an-esp8266-with-micropython.html</loc>
 <lastmod>2019-04-05T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/what-is-micropython.html</loc>
+<loc>https://jackmckew.dev/posts/what-is-micropython.html</loc>
 <lastmod>2019-03-29T06:39:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/introduction-to-esp32-esp8266.html</loc>
+<loc>https://jackmckew.dev/posts/introduction-to-esp32-esp8266.html</loc>
 <lastmod>2019-03-22T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-17-networking-routing-addressing.html</loc>
+<loc>https://jackmckew.dev/posts/episode-17-networking-routing-addressing.html</loc>
 <lastmod>2019-03-15T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-16-networking-basics.html</loc>
+<loc>https://jackmckew.dev/posts/episode-16-networking-basics.html</loc>
 <lastmod>2019-03-08T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-15-what-is-a-c-t.html</loc>
+<loc>https://jackmckew.dev/posts/episode-15-what-is-a-c-t.html</loc>
 <lastmod>2019-03-01T05:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-13-types-of-machine-learning.html</loc>
+<loc>https://jackmckew.dev/posts/episode-13-types-of-machine-learning.html</loc>
 <lastmod>2019-02-22T06:33:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-13-lighting-design.html</loc>
+<loc>https://jackmckew.dev/posts/episode-13-lighting-design.html</loc>
 <lastmod>2019-02-15T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-12-what-is-git.html</loc>
+<loc>https://jackmckew.dev/posts/episode-12-what-is-git.html</loc>
 <lastmod>2019-02-08T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-11-power-quality-explained.html</loc>
+<loc>https://jackmckew.dev/posts/episode-11-power-quality-explained.html</loc>
 <lastmod>2019-02-01T06:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-10-python-package-cheat-sheet.html</loc>
+<loc>https://jackmckew.dev/posts/episode-10-python-package-cheat-sheet.html</loc>
 <lastmod>2019-01-25T07:00:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-9-web-enabled-universal-remote-part-1.html</loc>
+<loc>https://jackmckew.dev/posts/episode-9-web-enabled-universal-remote-part-1.html</loc>
 <lastmod>2019-01-18T07:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-8-anaconda.html</loc>
+<loc>https://jackmckew.dev/posts/episode-8-anaconda.html</loc>
 <lastmod>2019-01-11T07:00:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-7-planning.html</loc>
+<loc>https://jackmckew.dev/posts/episode-7-planning.html</loc>
 <lastmod>2019-01-04T07:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-6-containerization.html</loc>
+<loc>https://jackmckew.dev/posts/episode-6-containerization.html</loc>
 <lastmod>2018-12-28T08:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-5-android-multi-touch.html</loc>
+<loc>https://jackmckew.dev/posts/episode-5-android-multi-touch.html</loc>
 <lastmod>2018-12-21T01:30:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-4-visualization.html</loc>
+<loc>https://jackmckew.dev/posts/episode-4-visualization.html</loc>
 <lastmod>2018-12-14T03:11:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-3-open-mind.html</loc>
+<loc>https://jackmckew.dev/posts/episode-3-open-mind.html</loc>
 <lastmod>2018-12-07T03:10:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-2-kew-it.html</loc>
+<loc>https://jackmckew.dev/posts/episode-2-kew-it.html</loc>
 <lastmod>2018-11-30T03:08:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/posts/episode-1-optimization.html</loc>
+<loc>https://jackmckew.dev/posts/episode-1-optimization.html</loc>
 <lastmod>2018-11-23T02:49:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/android.html</loc>
+<loc>https://jackmckew.dev/category/android.html</loc>
 <lastmod>2018-12-21T01:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/book-reviews.html</loc>
+<loc>https://jackmckew.dev/category/book-reviews.html</loc>
 <lastmod>2019-10-11T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/data-science.html</loc>
+<loc>https://jackmckew.dev/category/data-science.html</loc>
 <lastmod>2019-08-25T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/engineering.html</loc>
+<loc>https://jackmckew.dev/category/engineering.html</loc>
 <lastmod>2019-05-10T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/engineering-python.html</loc>
+<loc>https://jackmckew.dev/category/engineering-python.html</loc>
 <lastmod>2019-04-05T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/machine-learning.html</loc>
+<loc>https://jackmckew.dev/category/machine-learning.html</loc>
 <lastmod>2019-10-12T15:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/principles.html</loc>
+<loc>https://jackmckew.dev/category/principles.html</loc>
 <lastmod>2019-01-04T07:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/python.html</loc>
+<loc>https://jackmckew.dev/category/python.html</loc>
 <lastmod>2019-11-01T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/python-data-science.html</loc>
+<loc>https://jackmckew.dev/category/python-data-science.html</loc>
 <lastmod>2019-08-16T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/python-engineering.html</loc>
+<loc>https://jackmckew.dev/category/python-engineering.html</loc>
 <lastmod>2019-06-21T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/python-principles.html</loc>
+<loc>https://jackmckew.dev/category/python-principles.html</loc>
 <lastmod>2019-08-30T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/software-development.html</loc>
+<loc>https://jackmckew.dev/category/software-development.html</loc>
 <lastmod>2019-11-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/category/software-development-data-science.html</loc>
+<loc>https://jackmckew.dev/category/software-development-data-science.html</loc>
 <lastmod>2019-05-03T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/python.html</loc>
+<loc>https://jackmckew.dev/tag/python.html</loc>
 <lastmod>2019-11-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/machinelearning.html</loc>
+<loc>https://jackmckew.dev/tag/machinelearning.html</loc>
 <lastmod>2019-10-12T15:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/ai.html</loc>
+<loc>https://jackmckew.dev/tag/ai.html</loc>
 <lastmod>2019-10-12T15:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/bookreview.html</loc>
+<loc>https://jackmckew.dev/tag/bookreview.html</loc>
 <lastmod>2019-10-11T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/principles.html</loc>
+<loc>https://jackmckew.dev/tag/principles.html</loc>
 <lastmod>2019-10-11T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/habits.html</loc>
+<loc>https://jackmckew.dev/tag/habits.html</loc>
 <lastmod>2019-10-11T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/pyglet.html</loc>
+<loc>https://jackmckew.dev/tag/pyglet.html</loc>
 <lastmod>2019-10-04T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/pytest.html</loc>
+<loc>https://jackmckew.dev/tag/pytest.html</loc>
 <lastmod>2019-09-20T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/pipenv.html</loc>
+<loc>https://jackmckew.dev/tag/pipenv.html</loc>
 <lastmod>2019-09-20T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/datascience.html</loc>
+<loc>https://jackmckew.dev/tag/datascience.html</loc>
 <lastmod>2019-08-16T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/pyconau.html</loc>
+<loc>https://jackmckew.dev/tag/pyconau.html</loc>
 <lastmod>2019-08-07T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/ocr.html</loc>
+<loc>https://jackmckew.dev/tag/ocr.html</loc>
 <lastmod>2019-06-28T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/security.html</loc>
+<loc>https://jackmckew.dev/tag/security.html</loc>
 <lastmod>2019-06-21T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/pyinstaller.html</loc>
+<loc>https://jackmckew.dev/tag/pyinstaller.html</loc>
 <lastmod>2019-05-31T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/electrical.html</loc>
+<loc>https://jackmckew.dev/tag/electrical.html</loc>
 <lastmod>2019-05-10T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/database.html</loc>
+<loc>https://jackmckew.dev/tag/database.html</loc>
 <lastmod>2019-05-03T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/mongodb.html</loc>
+<loc>https://jackmckew.dev/tag/mongodb.html</loc>
 <lastmod>2019-05-03T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/data.html</loc>
+<loc>https://jackmckew.dev/tag/data.html</loc>
 <lastmod>2019-04-26T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/analysis.html</loc>
+<loc>https://jackmckew.dev/tag/analysis.html</loc>
 <lastmod>2019-04-26T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/finance.html</loc>
+<loc>https://jackmckew.dev/tag/finance.html</loc>
 <lastmod>2019-04-19T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/esp8266.html</loc>
+<loc>https://jackmckew.dev/tag/esp8266.html</loc>
 <lastmod>2019-04-05T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/micropython.html</loc>
+<loc>https://jackmckew.dev/tag/micropython.html</loc>
 <lastmod>2019-03-29T06:39:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/networking.html</loc>
+<loc>https://jackmckew.dev/tag/networking.html</loc>
 <lastmod>2019-03-15T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/software.html</loc>
+<loc>https://jackmckew.dev/tag/software.html</loc>
 <lastmod>2019-02-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/git.html</loc>
+<loc>https://jackmckew.dev/tag/git.html</loc>
 <lastmod>2019-02-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/power.html</loc>
+<loc>https://jackmckew.dev/tag/power.html</loc>
 <lastmod>2019-02-01T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/packaging.html</loc>
+<loc>https://jackmckew.dev/tag/packaging.html</loc>
 <lastmod>2019-01-25T07:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/electronics.html</loc>
+<loc>https://jackmckew.dev/tag/electronics.html</loc>
 <lastmod>2019-01-18T07:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/android.html</loc>
+<loc>https://jackmckew.dev/tag/android.html</loc>
 <lastmod>2018-12-21T01:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/visualization.html</loc>
+<loc>https://jackmckew.dev/tag/visualization.html</loc>
 <lastmod>2018-12-14T03:11:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/selfimprovement.html</loc>
+<loc>https://jackmckew.dev/tag/selfimprovement.html</loc>
 <lastmod>2018-12-07T03:10:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/tag/thesis.html</loc>
+<loc>https://jackmckew.dev/tag/thesis.html</loc>
 <lastmod>2018-11-30T03:08:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/author/admin.html</loc>
+<loc>https://jackmckew.dev/author/admin.html</loc>
 <lastmod>2019-09-06T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
-<loc>https://nifty-engelbart-ce3324.netlify.com/author/jack-mckew.html</loc>
+<loc>https://jackmckew.dev/author/jack-mckew.html</loc>
 <lastmod>2019-11-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
