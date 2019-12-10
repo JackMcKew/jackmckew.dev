@@ -16,6 +16,11 @@
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
 
 
 
@@ -45,8 +50,7 @@
 <meta property="og:url" content="https://jackmckew.dev"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-  <title>Jack McKew's Blog &ndash;     Authors
-</title>
+  <title>Jack McKew's BlogJack McKew's Blog Search </title>
 
 </head>
 <body>
@@ -98,22 +102,30 @@
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/sitemap.xml">Sitemap</a>
+      <a href="/search.html">Search</a>
 
 
     </nav>
 
-<article class="single">
-  <header>
-    <h1 id="authors">    Authors
-</h1>
-  </header>
-  <div>
-    <ul class="list">
-      <li><a href="https://jackmckew.dev/author/admin.html">admin</a> (12)</li>
-      <li><a href="https://jackmckew.dev/author/jack-mckew.html">Jack McKew</a> (35)</li>
-    </ul>
-  </div>
-</article>
+
+<div class="entry-content">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script type="text/javascript" src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+        <script>
+            $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch({
+                'show': 8,
+                'mode': 'json',
+                'contentLocation': 'https://jackmckew.dev/tipuesearch_content.json'
+                });
+            });
+        </script>
+    <div align="center"><input type="text" size="60" id="tipue_search_input">
+        <input type="button" id="tipue_search_button" value="Search"></div>
+    <div id="tipue_search_content"></div>
+</div>
 
     <footer>
 <p>&copy;  </p>
