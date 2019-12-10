@@ -15,6 +15,8 @@ SITEURL = "https://nifty-engelbart-ce3324.netlify.com"
 
 DISPLAY_PAGES_ON_MENU = True
 
+DISQUS_SITENAME = 'jackmckew-dev'
+
 
 ARTICLE_URL = 'posts/{slug}.html'
 # ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
