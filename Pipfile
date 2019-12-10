@@ -16,6 +16,7 @@ requests = "*"
 black = "*"
 piexif = "*"
 pillow = "*"
+pelican-ipynb = "*"
 
 [requires]
 python_version = "3.7"

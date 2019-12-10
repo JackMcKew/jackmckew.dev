@@ -84,6 +84,7 @@ PLUGINS = [
 ]
 
 MARKUP = ('md', 'ipynb')
+IPYNB_USE_METACELL = True
 
 IGNORE_FILES = [".ipynb_checkpoints"] 
 
