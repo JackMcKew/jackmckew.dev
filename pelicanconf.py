@@ -9,7 +9,7 @@ AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
 SITETITLE = SITENAME
 SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
-SITEURL = "https://nifty-engelbart-ce3324.netlify.com"
+SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://localhost:8000"
 
 
