@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="Following on from last weeks post where we analysed the amount of repeated letters within current New Zealand town names. There was still one part of that analysis that really bugged me, and if you noticed it was from the data set that was used was using the European town …" />
+<meta name="keywords" content="python">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Intro to Web Scraping"/>
+<meta property="og:description" content="Following on from last weeks post where we analysed the amount of repeated letters within current New Zealand town names. There was still one part of that analysis that really bugged me, and if you noticed it was from the data set that was used was using the European town …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/intro-to-web-scraping.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-23 06:30:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; Intro to Web Scraping</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://jackmckew.dev">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="intro-to-web-scraping">Intro to Web Scraping</h1>
+    <p>
+          Posted on Fri 23 August 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+
+
+        &#8226; 4 min read
+    </p>
+  </header>
+
+
+  <div>
+    <html lang="en"><head></head><body><p>Following on from last weeks post where we analysed the amount of <a href="https://jmckew.com/2019/08/16/looking-for-patterns-in-city-names-interactive-plotting/">repeated letters within current New Zealand town names</a>. There was still one part of that analysis that really bugged me, and if you noticed it was from the data set that was used was using the European town names not the original Maori names. This post will be dedicated to introducing web scraping where we will extract the Maori names and run a similar analysis to present an interactive graph.</p>
+<p>As like previously, let's take a look at the interactive graph before getting into how it was created.</p>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">bokeh.resources</span> <span class="kn">import</span> <span class="n">CDN</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">bokeh.embed</span> <span class="kn">import</span> <span class="n">file_html</span></span>
+<span class="code-line"><span class="n">html</span> <span class="o">=</span> <span class="n">file_html</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">CDN</span><span class="p">,</span> <span class="s2">"NZ_City_Letter_Analysis"</span><span class="p">)</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span></span>
+<span class="code-line"><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<meta charset="utf-8"/>
+<title>NZ_City_Letter_Analysis</title>
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-1.3.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+<div class="bk-root" data-root-id="1003" id="44d6f2ea-a84c-406e-98f4-090d20f0aa6f"></div>
+<script id="1114" type="application/json">
+          {"6a79ccec-7604-45e6-8eef-74d2887334ba":{"roots":{"references":[{"attributes":{},"id":"1010","type":"CategoricalScale"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1037","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1038","type":"VBar"},"selection_glyph":null,"view":{"id":"1040","type":"CDSView"}},"id":"1039","type":"GlyphRenderer"},{"attributes":{"fill_color":{"value":"#1f77b4"},"line_color":{"value":"#1f77b4"},"top":{"field":"Count"},"width":{"value":0.9},"x":{"field":"index"}},"id":"1037","type":"VBar"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1040","type":"CDSView"},{"attributes":{},"id":"1012","type":"LinearScale"},{"attributes":{},"id":"1023","type":"PanTool"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{"formatter":{"id":"1043","type":"CategoricalTickFormatter"},"ticker":{"id":"1015","type":"CategoricalTicker"}},"id":"1014","type":"CategoricalAxis"},{"attributes":{},"id":"1024","type":"WheelZoomTool"},{"attributes":{},"id":"1015","type":"CategoricalTicker"},{"attributes":{"callback":null,"data":{"Count":[10,1,0,1,4,1,6,3,5,0,4,2,3,6,6,3,0,5,2,4,4,1,3,0,1,0],"Word_Name":["Aratiatia Lakes, Aratiatia Rapids","Kaik\u016bmera Bay","Ahuroa","Aratiatia Lakes, Aratiatia Rapids","Keteketerau","Kaipara Flats","Mangangarongaro: Mangangarongaro Stream","Whatiwhatihoe","Aratiatia Lakes, Aratiatia Rapids","Ahuroa","Pukek\u0101k\u0101riki","M\u0101k\u014dhine Valley","Mangangarongaro: Mangangarongaro Stream","Mangangarongaro: Mangangarongaro Stream","Mokoroa: Mokoroa Stream","Pukepiripiri","Ahuroa","Mangangarongaro: Mangangarongaro Stream","Aratiatia Lakes, Aratiatia Rapids","Aratiatia Lakes, Aratiatia Rapids","Motukauri: Motukauri Island","Awah\u014dhonu River","Waianiwaniwa","Ahuroa","Kaik\u016bmera Bay","Ahuroa"],"index":["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]},"selected":{"id":"1049","type":"Selection"},"selection_policy":{"id":"1048","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{"overlay":{"id":"1047","type":"BoxAnnotation"}},"id":"1025","type":"BoxZoomTool"},{"attributes":{},"id":"1048","type":"UnionRenderers"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1015","type":"CategoricalTicker"}},"id":"1017","type":"Grid"},{"attributes":{},"id":"1026","type":"SaveTool"},{"attributes":{"callback":null,"tooltips":[["Word","@Word_Name"]]},"id":"1002","type":"HoverTool"},{"attributes":{"formatter":{"id":"1045","type":"BasicTickFormatter"},"ticker":{"id":"1019","type":"BasicTicker"}},"id":"1018","type":"LinearAxis"},{"attributes":{},"id":"1043","type":"CategoricalTickFormatter"},{"attributes":{},"id":"1027","type":"ResetTool"},{"attributes":{"text":"Letter Counts"},"id":"1004","type":"Title"},{"attributes":{},"id":"1019","type":"BasicTicker"},{"attributes":{},"id":"1049","type":"Selection"},{"attributes":{},"id":"1028","type":"HelpTool"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1047","type":"BoxAnnotation"},{"attributes":{"dimension":1,"ticker":{"id":"1019","type":"BasicTicker"}},"id":"1022","type":"Grid"},{"attributes":{"callback":null,"factors":["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]},"id":"1006","type":"FactorRange"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1023","type":"PanTool"},{"id":"1024","type":"WheelZoomTool"},{"id":"1025","type":"BoxZoomTool"},{"id":"1026","type":"SaveTool"},{"id":"1027","type":"ResetTool"},{"id":"1028","type":"HelpTool"},{"id":"1002","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"Count"},"width":{"value":0.9},"x":{"field":"index"}},"id":"1038","type":"VBar"},{"attributes":{"below":[{"id":"1014","type":"CategoricalAxis"}],"center":[{"id":"1017","type":"Grid"},{"id":"1022","type":"Grid"}],"left":[{"id":"1018","type":"LinearAxis"}],"plot_height":250,"renderers":[{"id":"1039","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":null,"x_range":{"id":"1006","type":"FactorRange"},"x_scale":{"id":"1010","type":"CategoricalScale"},"y_range":{"id":"1008","type":"DataRange1d"},"y_scale":{"id":"1012","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"callback":null,"start":0},"id":"1008","type":"DataRange1d"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.1"}}
+        </script>
+<script type="text/javascript">
+          (function() {
+            var fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  var docs_json = document.getElementById('1114').textContent;
+                  var render_items = [{"docid":"6a79ccec-7604-45e6-8eef-74d2887334ba","roots":{"1003":"44d6f2ea-a84c-406e-98f4-090d20f0aa6f"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    var attempts = 0;
+                    var timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        embed_document(root);
+                        clearInterval(timer);
+                      }
+                      attempts++;
+                      if (attempts > 100) {
+                        console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        clearInterval(timer);
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Similarly with most of my posts of this nature, we always begin by getting the data. To find a data set that gives us as many Maori town or place names as possible proved to be quite challenging, but luckily for Maori Language week NZhistory.gov.nz posted a table of a 1000 Maori place names, their components and the meaning. This data can be found: <a href="https://nzhistory.govt.nz/culture/maori-language-week/1000-maori-place-names">https://nzhistory.govt.nz/culture/maori-language-week/1000-maori-place-names</a>.</p>
+<p>Unlike last time however with our world city names from <a href="https://www.kaggle.com/">Kaggle</a>, this data isn't nicely supplied to us in an Excel format. While it may be possible to directly copy-paste from the website into a spreadsheet, I think this is a great way to ease into web scraping.</p>
+<h2>What is Web Scraping?</h2>
+<p>Web scraping, web harvesting or web data extraction is the process of extracting data from websites. To do this in Python, while there is multiple ways to achieve this (requests + beautiful soup, selenium, etc), my personal favourite package to use is <a href="https://scrapy.org/">Scrapy</a>. While it may be daunting to begin with from a non object-oriented basis, you will soon appreciate it more once you've begun using it.</p>
+<p>Initially the premise around the <a href="https://scrapy.org/">Scrapy</a> package is to create 'web spiders'. If we take a look of the structure of the first example on the <a href="https://scrapy.org/">Scrapy</a> website we get an understanding on how to structure our web spiders when developing:</p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">scrapy</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">class</span> <span class="nc">BlogSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">name</span> <span class="o">=</span> <span class="s1">'blogspider'</span></span>
+<span class="code-line">    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'https://blog.scrapinghub.com'</span><span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span></span>
+<span class="code-line">        <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'.post-header&gt;h2'</span><span class="p">):</span></span>
+<span class="code-line">            <span class="k">yield</span> <span class="p">{</span><span class="s1">'title'</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'a ::text'</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()}</span></span>
+<span class="code-line">        <span class="k">for</span> <span class="n">next_page</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">'a.next-posts-link'</span><span class="p">):</span></span>
+<span class="code-line">            <span class="k">yield</span> <span class="n">response</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">next_page</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">)</span></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>First of all we can see that the custom spider is essentially an extension of the scrapy.Spider class. It is to be noted that the name and start_urls variables (which are apart of the class) are special in the sense the scrapy package uses them as configuration settings. When it comes to web scraping, if you have had experience using HTML, CSS and/or Javascript, this experience will become extremely useful; that is not to say it is not possible without experience, it's just a learning curve.</p>
+<p>Following on we can see a function for parsing (also specially named) in which there are 2 loops, the first for loop is going to loop through all title's marked as headers (specifically h2) and return a dictionary with the text in the heading.</p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span>
+<span class="code-line">12</span>
+<span class="code-line">13</span>
+<span class="code-line">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">class</span> <span class="nc">NameSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">name</span> <span class="o">=</span> <span class="s1">'names'</span></span>
+<span class="code-line">    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'https://nzhistory.govt.nz/culture/maori-language-week/1000-maori-place-names/'</span><span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">response</span><span class="p">):</span></span>
+<span class="code-line">        <span class="k">def</span> <span class="nf">extract_from_table</span><span class="p">(</span><span class="n">table_row</span><span class="p">,</span><span class="n">table_col</span><span class="p">):</span></span>
+<span class="code-line">            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="n">f</span><span class="s2">"//tr[{table_row}]//td[{table_col}]//text()"</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1000</span><span class="p">):</span></span>
+<span class="code-line">            <span class="k">yield</span> <span class="p">{</span></span>
+<span class="code-line">                <span class="s1">'Place Name'</span> <span class="p">:</span> <span class="n">extract_from_table</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span></span>
+<span class="code-line">                <span class="s1">'Components'</span> <span class="p">:</span> <span class="n">extract_from_table</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span></span>
+<span class="code-line">                <span class="s1">'Meaning'</span> <span class="p">:</span> <span class="n">extract_from_table</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span></span>
+<span class="code-line">            <span class="p">}</span></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now that we have created our spider that looks through each row of the table on the webpage (more information on determining this can be found: <a href="https://docs.scrapy.org/en/latest/intro/tutorial.html">https://docs.scrapy.org/en/latest/intro/tutorial.html</a>). It's time to run the spider and take a look at the output. To run a spider you go into the directory from the command line and run 'scrapy crawl \&lt;spider name&gt;' and to store an output at the same time 'scrapy crawl \&lt;spider name&gt; -o filename.csv -t csv.</p>
+<p>Now similar to the previous post, we run a similar analysis and plot with Bokeh!</p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span>
+<span class="code-line">12</span>
+<span class="code-line">13</span>
+<span class="code-line">14</span>
+<span class="code-line">15</span>
+<span class="code-line">16</span>
+<span class="code-line">17</span>
+<span class="code-line">18</span>
+<span class="code-line">19</span>
+<span class="code-line">20</span>
+<span class="code-line">21</span>
+<span class="code-line">22</span>
+<span class="code-line">23</span>
+<span class="code-line">24</span>
+<span class="code-line">25</span>
+<span class="code-line">26</span>
+<span class="code-line">27</span>
+<span class="code-line">28</span>
+<span class="code-line">29</span>
+<span class="code-line">30</span>
+<span class="code-line">31</span>
+<span class="code-line">32</span>
+<span class="code-line">33</span>
+<span class="code-line">34</span>
+<span class="code-line">35</span>
+<span class="code-line">36</span>
+<span class="code-line">37</span>
+<span class="code-line">38</span>
+<span class="code-line">39</span>
+<span class="code-line">40</span>
+<span class="code-line">41</span>
+<span class="code-line">42</span>
+<span class="code-line">43</span>
+<span class="code-line">44</span>
+<span class="code-line">45</span>
+<span class="code-line">46</span>
+<span class="code-line">47</span>
+<span class="code-line">48</span>
+<span class="code-line">49</span>
+<span class="code-line">50</span>
+<span class="code-line">51</span>
+<span class="code-line">52</span>
+<span class="code-line">53</span>
+<span class="code-line">54</span>
+<span class="code-line">55</span>
+<span class="code-line">56</span>
+<span class="code-line">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">collections</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">operator</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">math</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">show</span><span class="p">,</span> <span class="n">output_file</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">bokeh.models.tools</span> <span class="kn">import</span> <span class="n">HoverTool</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">names_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'names.csv'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">'"'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">nz_names</span> <span class="o">=</span> <span class="n">names_df</span><span class="p">[</span><span class="s1">'Place Name'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">nz_dict</span> <span class="o">=</span> <span class="p">{</span> <span class="n">i</span> <span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nz_names</span> <span class="p">}</span></span>
+<span class="code-line"><span class="n">letters</span> <span class="o">=</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span>
+<span class="code-line"><span class="n">lcount</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">]))</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">nz_names</span><span class="p">:</span></span>
+<span class="code-line">    <span class="n">nz_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">]))</span></span>
+<span class="code-line">    <span class="n">city_dict</span> <span class="o">=</span> <span class="n">nz_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></span>
+<span class="code-line">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span></span>
+<span class="code-line">        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span></span>
+<span class="code-line">            <span class="n">city_dict</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span> <span class="o">+=</span> <span class="mi">1</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">total_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">nz_dict</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">total_df</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">T</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">max_letters_cities</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">lettercounts</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">maxletters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">]))</span></span>
+<span class="code-line"><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">letters</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">maxletters</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_letters_cities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></span>
+<span class="code-line">    <span class="n">maxletters</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">lettercounts</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span></span>
+<span class="code-line"><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Word_Name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="n">summary_df</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">output_file</span><span class="p">(</span><span class="s2">"letter_count.html"</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">hover</span> <span class="o">=</span> <span class="n">HoverTool</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">hover</span><span class="o">.</span><span class="n">tooltips</span><span class="o">=</span><span class="p">[</span></span>
+<span class="code-line">    <span class="p">(</span><span class="s1">'Word'</span><span class="p">,</span> <span class="s1">'@Word'</span><span class="p">)</span></span>
+<span class="code-line"><span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_range</span><span class="o">=</span><span class="n">summary_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Letter Counts"</span><span class="p">,</span></span>
+<span class="code-line">           <span class="n">toolbar_location</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">p</span><span class="o">.</span><span class="n">vbar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'index'</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="s1">'Count'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">p</span><span class="o">.</span><span class="n">add_tools</span><span class="p">(</span><span class="n">hover</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">p</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="bp">None</span></span>
+<span class="code-line"><span class="n">p</span><span class="o">.</span><span class="n">y_range</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></span>
+</pre></div>
+</td></tr></tbody></table></body></html>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/looking-for-patterns-in-city-names-interactive-plotting.html" title="Looking for Patterns in City Names & Interactive Plotting">
+      <i class="fa fa-angle-left"></i>     Previous Post
+
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html" title="Linear Regression: Under the Hood with the Normal Equation">
+          Next Post
+ <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

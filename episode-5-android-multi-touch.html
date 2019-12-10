@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="admin" />
+<meta name="description" content="This week&#39;s episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can …" />
+<meta name="keywords" content="android">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Episode 5 - Android Multi-Touch"/>
+<meta property="og:description" content="This week&#39;s episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/episode-5-android-multi-touch.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-12-21 01:30:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/admin.html">
+<meta property="article:section" content="Android"/>
+<meta property="article:tag" content="android"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; Episode 5 - Android Multi-Touch</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://jackmckew.dev">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="episode-5-android-multi-touch">Episode 5 - Android Multi-Touch</h1>
+    <p>
+          Posted on Fri 21 December 2018 in <a href="https://jackmckew.dev/category/android.html">Android</a>
+
+
+        &#8226; 4 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p><img alt="ezgif.com-video-to-gif-2" class="img-fluid" src="..\img\episode-5-android-multi-touch\ezgif.com-video-to-gif-2.gif"/></p>
+<p>This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can be seen below it contains 3 values: x_pos, y_pos and id. It is also useful to create a constructor so that other classes can easily construct the Finger class.</p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span>
+<span class="code-line">12</span>
+<span class="code-line">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Finger</span></span>
+<span class="code-line"><span class="o">{</span></span>
+<span class="code-line">    <span class="kd">public</span> <span class="kt">float</span> <span class="n">x_pos</span><span class="o">;</span></span>
+<span class="code-line">    <span class="kd">public</span> <span class="kt">float</span> <span class="n">y_pos</span><span class="o">;</span></span>
+<span class="code-line">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">Finger</span><span class="o">(</span><span class="kt">float</span> <span class="n">init_x</span><span class="o">,</span><span class="kt">float</span> <span class="n">init_y</span><span class="o">,</span><span class="kt">int</span> <span class="n">init_id</span><span class="o">)</span></span>
+<span class="code-line">    <span class="o">{</span></span>
+<span class="code-line">        <span class="n">x_pos</span> <span class="o">=</span> <span class="n">init_x</span><span class="o">;</span></span>
+<span class="code-line">        <span class="n">y_pos</span> <span class="o">=</span> <span class="n">init_y</span><span class="o">;</span></span>
+<span class="code-line">        <span class="n">id</span> <span class="o">=</span> <span class="n">init_id</span><span class="o">;</span></span>
+<span class="code-line">    <span class="o">}</span></span>
+<span class="code-line"><span class="o">}</span></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now that we have a class to store our details on how each finger is touching the screen, we now need to interact with some base level Java. Firstly we need to extend a view within the Android application so that the application knows what boundaries to deal, in my test application, I've just used the entire screen as a view.</p>
+<p>After that an array is needed to store the data of multiple inputs touching the screen. I've used a TreeMap in this example as this allows for ease later on so that they are in order on how they were input, however this comes with a downside to this example as lifting a input in the middle of the order touched crashes the array, this will be fixed in a later episode.</p>
+<p>A paint is initialized for both the stroke paint for drawing lines between the touches and a paint for the text that is to come. Generic constructors for the view are also listed below.</p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span>
+<span class="code-line">12</span>
+<span class="code-line">13</span>
+<span class="code-line">14</span>
+<span class="code-line">15</span>
+<span class="code-line">16</span>
+<span class="code-line">17</span>
+<span class="code-line">18</span>
+<span class="code-line">19</span>
+<span class="code-line">20</span>
+<span class="code-line">21</span>
+<span class="code-line">22</span>
+<span class="code-line">23</span>
+<span class="code-line">24</span>
+<span class="code-line">25</span>
+<span class="code-line">26</span>
+<span class="code-line">27</span>
+<span class="code-line">28</span>
+<span class="code-line">29</span>
+<span class="code-line">30</span>
+<span class="code-line">31</span>
+<span class="code-line">32</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TouchView</span> <span class="kd">extends</span> <span class="n">View</span> <span class="o">{</span></span>
+<span class="code-line"><span class="kd">private</span> <span class="n">TreeMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Finger</span><span class="o">&gt;</span> <span class="n">lineMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeMap</span><span class="o">&lt;&gt;();</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nd">@SuppressLint</span><span class="o">(</span><span class="s">"UseSparseArrays"</span><span class="o">)</span></span>
+<span class="code-line"><span class="kd">private</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Path</span><span class="o">&gt;</span> <span class="n">fingerMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span></span>
+<span class="code-line"><span class="kd">private</span> <span class="n">Paint</span> <span class="n">myPaint</span><span class="o">;</span></span>
+<span class="code-line"><span class="kd">private</span> <span class="n">Paint</span> <span class="n">textPaint</span><span class="o">;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kd">public</span> <span class="nf">TouchView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">    <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">);</span></span>
+<span class="code-line">    <span class="n">init</span><span class="o">();</span></span>
+<span class="code-line"><span class="o">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kd">public</span> <span class="nf">TouchView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">defStyle</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">    <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">defStyle</span><span class="o">);</span></span>
+<span class="code-line">    <span class="n">init</span><span class="o">();</span></span>
+<span class="code-line"><span class="o">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kd">public</span> <span class="nf">TouchView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">    <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">);</span></span>
+<span class="code-line">    <span class="n">init</span><span class="o">();</span></span>
+<span class="code-line"><span class="o">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span></span>
+<span class="code-line">        <span class="n">myPaint</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Paint</span><span class="o">();</span></span>
+<span class="code-line">        <span class="n">myPaint</span><span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="n">Paint</span><span class="o">.</span><span class="na">Style</span><span class="o">.</span><span class="na">FILL_AND_STROKE</span><span class="o">);</span></span>
+<span class="code-line">        <span class="n">myPaint</span><span class="o">.</span><span class="na">setStrokeWidth</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span></span>
+<span class="code-line">        <span class="n">myPaint</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="n">textPaint</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Paint</span><span class="o">();</span></span>
+<span class="code-line">        <span class="n">textPaint</span><span class="o">.</span><span class="na">setTextSize</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span></span>
+<span class="code-line">    <span class="o">}</span></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now that everything is initialized and ready to draw some graphics on the screen so that the application is interactive, now we have to interface with touch events. This is done by creating a new function within our View class, that takes in a MotionEvent on the View so that we can detect different types of touch events. Documentation on this can be found (<a href="https://developer.android.com/training/graphics/opengl/touch#java">https://developer.android.com/training/graphics/opengl/touch#java</a>).</p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span>
+<span class="code-line">12</span>
+<span class="code-line">13</span>
+<span class="code-line">14</span>
+<span class="code-line">15</span>
+<span class="code-line">16</span>
+<span class="code-line">17</span>
+<span class="code-line">18</span>
+<span class="code-line">19</span>
+<span class="code-line">20</span>
+<span class="code-line">21</span>
+<span class="code-line">22</span>
+<span class="code-line">23</span>
+<span class="code-line">24</span>
+<span class="code-line">25</span>
+<span class="code-line">26</span>
+<span class="code-line">27</span>
+<span class="code-line">28</span>
+<span class="code-line">29</span>
+<span class="code-line">30</span>
+<span class="code-line">31</span>
+<span class="code-line">32</span>
+<span class="code-line">33</span>
+<span class="code-line">34</span>
+<span class="code-line">35</span>
+<span class="code-line">36</span>
+<span class="code-line">37</span>
+<span class="code-line">38</span>
+<span class="code-line">39</span>
+<span class="code-line">40</span>
+<span class="code-line">41</span>
+<span class="code-line">42</span>
+<span class="code-line">43</span>
+<span class="code-line">44</span>
+<span class="code-line">45</span>
+<span class="code-line">46</span>
+<span class="code-line">47</span>
+<span class="code-line">48</span>
+<span class="code-line">49</span>
+<span class="code-line">50</span>
+<span class="code-line">51</span>
+<span class="code-line">52</span>
+<span class="code-line">53</span>
+<span class="code-line">54</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="nd">@SuppressLint</span><span class="o">(</span><span class="s">"ClickableViewAccessibility"</span><span class="o">)</span></span>
+<span class="code-line">    <span class="nd">@Override</span></span>
+<span class="code-line">    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">        <span class="kt">int</span> <span class="n">action</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">&amp;</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_MASK</span><span class="o">;</span></span>
+<span class="code-line">        <span class="k">switch</span><span class="o">(</span><span class="n">action</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span> <span class="o">:</span> <span class="o">{</span></span>
+<span class="code-line">                <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getPointerId</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
+<span class="code-line">                <span class="n">fingerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">createCirPath</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">id</span><span class="o">));</span></span>
+<span class="code-line">                <span class="n">lineMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">id</span><span class="o">,</span><span class="n">createFinger</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span><span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span><span class="n">id</span><span class="o">));</span></span>
+<span class="code-line">                <span class="k">break</span><span class="o">;</span></span>
+<span class="code-line">            <span class="o">}</span></span>
+<span class="code-line">            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_MOVE</span> <span class="o">:</span> <span class="o">{</span></span>
+<span class="code-line"></span>
+<span class="code-line">                <span class="kt">int</span> <span class="n">touchCounter</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getPointerCount</span><span class="o">();</span></span>
+<span class="code-line">                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">touchCounter</span><span class="o">;</span> <span class="n">t</span><span class="o">++)</span> <span class="o">{</span></span>
+<span class="code-line">                    <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getPointerId</span><span class="o">(</span><span class="n">t</span><span class="o">);</span></span>
+<span class="code-line">                    <span class="n">fingerMap</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">id</span><span class="o">);</span></span>
+<span class="code-line">                    <span class="n">lineMap</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">id</span><span class="o">);</span></span>
+<span class="code-line">                    <span class="n">fingerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">createCirPath</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(</span><span class="n">t</span><span class="o">),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(</span><span class="n">t</span><span class="o">),</span> <span class="n">id</span><span class="o">));</span></span>
+<span class="code-line">                    <span class="n">lineMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">id</span><span class="o">,</span><span class="n">createFinger</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(</span><span class="n">t</span><span class="o">),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(</span><span class="n">t</span><span class="o">),</span> <span class="n">id</span><span class="o">));</span></span>
+<span class="code-line">                <span class="o">}</span></span>
+<span class="code-line">            <span class="o">}</span></span>
+<span class="code-line">            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_POINTER_DOWN</span> <span class="o">:</span> <span class="o">{</span></span>
+<span class="code-line">                <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getPointerId</span><span class="o">(</span><span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">));</span></span>
+<span class="code-line">                <span class="n">fingerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">createCirPath</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(</span><span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">)),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(</span><span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">)),</span> <span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">)));</span></span>
+<span class="code-line">                <span class="n">lineMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">id</span><span class="o">,</span><span class="n">createFinger</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(</span><span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">)),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(</span><span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">)),</span> <span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">)));</span></span>
+<span class="code-line">                <span class="k">break</span><span class="o">;</span></span>
+<span class="code-line">            <span class="o">}</span></span>
+<span class="code-line">            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_POINTER_UP</span> <span class="o">:</span> <span class="o">{</span></span>
+<span class="code-line">                <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getPointerId</span><span class="o">(</span><span class="n">getIndex</span><span class="o">(</span><span class="n">event</span><span class="o">));</span></span>
+<span class="code-line">                <span class="n">fingerMap</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">id</span><span class="o">);</span></span>
+<span class="code-line">                <span class="n">lineMap</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">id</span><span class="o">);</span></span>
+<span class="code-line">                <span class="k">break</span><span class="o">;</span></span>
+<span class="code-line">            <span class="o">}</span></span>
+<span class="code-line">            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span> <span class="o">:</span> <span class="o">{</span></span>
+<span class="code-line">                <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getPointerId</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span></span>
+<span class="code-line">                <span class="n">fingerMap</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">id</span><span class="o">);</span></span>
+<span class="code-line">                <span class="n">lineMap</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">id</span><span class="o">);</span></span>
+<span class="code-line">                <span class="k">break</span><span class="o">;</span></span>
+<span class="code-line">            <span class="o">}</span></span>
+<span class="code-line">        <span class="o">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">        <span class="n">invalidate</span><span class="o">();</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span></span>
+<span class="code-line">    <span class="o">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kd">private</span> <span class="kt">int</span> <span class="nf">getIndex</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">&amp;</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_POINTER_INDEX_MASK</span><span class="o">)</span> <span class="o">&gt;&gt;</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_POINTER_INDEX_SHIFT</span><span class="o">;</span></span>
+<span class="code-line">    <span class="o">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kd">private</span> <span class="n">Finger</span> <span class="nf">createFinger</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">id</span><span class="o">)</span></span>
+<span class="code-line">    <span class="o">{</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="k">new</span> <span class="n">Finger</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">,</span><span class="n">id</span><span class="o">);</span></span>
+<span class="code-line">    <span class="o">}</span></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>Now that we've created a new Finger class inside our TreeMap by the order that the screen is touched in and we're removing that class when the screen input has been released, we are now ready to draw on the screen from our inputs.</p>
+<p>By iterating through the TreeMap, in each loop we know what the previous and what the next value in the array we can draw a circle for where the input is and a line between. This also allows us to determine whereabouts is the point in between these two points so we can write text. For this example, I've chosen to write the length of the distance between the two inputs to demonstrate that this can also be dynamic in nature.</p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<span class="code-line"> 2</span>
+<span class="code-line"> 3</span>
+<span class="code-line"> 4</span>
+<span class="code-line"> 5</span>
+<span class="code-line"> 6</span>
+<span class="code-line"> 7</span>
+<span class="code-line"> 8</span>
+<span class="code-line"> 9</span>
+<span class="code-line">10</span>
+<span class="code-line">11</span>
+<span class="code-line">12</span>
+<span class="code-line">13</span>
+<span class="code-line">14</span>
+<span class="code-line">15</span>
+<span class="code-line">16</span>
+<span class="code-line">17</span>
+<span class="code-line">18</span>
+<span class="code-line">19</span>
+<span class="code-line">20</span>
+<span class="code-line">21</span>
+<span class="code-line">22</span>
+<span class="code-line">23</span>
+<span class="code-line">24</span>
+<span class="code-line">25</span>
+<span class="code-line">26</span>
+<span class="code-line">27</span>
+<span class="code-line">28</span>
+<span class="code-line">29</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kd">private</span> <span class="n">Path</span> <span class="nf">createCirPath</span><span class="o">(</span><span class="kt">float</span> <span class="n">x</span><span class="o">,</span> <span class="kt">float</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">        <span class="n">Path</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="o">();</span></span>
+<span class="code-line">        <span class="n">p</span><span class="o">.</span><span class="na">addCircle</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="n">Path</span><span class="o">.</span><span class="na">Direction</span><span class="o">.</span><span class="na">CW</span><span class="o">);</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="n">p</span><span class="o">;</span></span>
+<span class="code-line">    <span class="o">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="nd">@Override</span></span>
+<span class="code-line">    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onDraw</span><span class="o">(</span><span class="n">Canvas</span> <span class="n">canvas</span><span class="o">)</span> <span class="o">{</span></span>
+<span class="code-line">        <span class="k">for</span> <span class="o">(</span><span class="n">Integer</span> <span class="n">key</span> <span class="o">:</span> <span class="n">fingerMap</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span></span>
+<span class="code-line">            <span class="n">Path</span> <span class="n">p</span> <span class="o">=</span> <span class="n">fingerMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span></span>
+<span class="code-line">            <span class="n">canvas</span><span class="o">.</span><span class="na">drawPath</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">myPaint</span><span class="o">);</span></span>
+<span class="code-line">        <span class="o">}</span></span>
+<span class="code-line">        <span class="k">if</span><span class="o">(</span><span class="n">lineMap</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span></span>
+<span class="code-line">        <span class="o">{</span></span>
+<span class="code-line">            <span class="n">Integer</span> <span class="n">key</span> <span class="o">=</span> <span class="n">lineMap</span><span class="o">.</span><span class="na">firstKey</span><span class="o">();</span></span>
+<span class="code-line">            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lineMap</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span></span>
+<span class="code-line">            <span class="o">{</span></span>
+<span class="code-line">                <span class="n">Finger</span> <span class="n">start_fin</span> <span class="o">=</span> <span class="n">lineMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span></span>
+<span class="code-line">                <span class="k">if</span><span class="o">(</span><span class="n">key</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">!=</span> <span class="n">lineMap</span><span class="o">.</span><span class="na">size</span><span class="o">())</span> <span class="o">{</span></span>
+<span class="code-line">                    <span class="n">Integer</span> <span class="n">new_key</span> <span class="o">=</span> <span class="n">lineMap</span><span class="o">.</span><span class="na">higherKey</span><span class="o">(</span><span class="n">key</span><span class="o">);</span></span>
+<span class="code-line">                    <span class="n">Finger</span> <span class="n">end_fin</span> <span class="o">=</span> <span class="n">lineMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">new_key</span><span class="o">);</span></span>
+<span class="code-line">                    <span class="n">canvas</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span><span class="n">start_fin</span><span class="o">.</span><span class="na">x_pos</span><span class="o">,</span> <span class="n">start_fin</span><span class="o">.</span><span class="na">y_pos</span><span class="o">,</span> <span class="n">end_fin</span><span class="o">.</span><span class="na">x_pos</span><span class="o">,</span> <span class="n">end_fin</span><span class="o">.</span><span class="na">y_pos</span><span class="o">,</span> <span class="n">myPaint</span><span class="o">);</span></span>
+<span class="code-line">                    <span class="n">String</span> <span class="n">lineText</span> <span class="o">=</span> <span class="s">"Length: "</span> <span class="o">+</span> <span class="k">new</span> <span class="n">DecimalFormat</span><span class="o">(</span><span class="s">"#.##"</span><span class="o">).</span><span class="na">format</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">end_fin</span><span class="o">.</span><span class="na">x_pos</span> <span class="o">-</span> <span class="n">start_fin</span><span class="o">.</span><span class="na">x_pos</span><span class="o">,</span><span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">end_fin</span><span class="o">.</span><span class="na">y_pos</span> <span class="o">-</span> <span class="n">start_fin</span><span class="o">.</span><span class="na">y_pos</span><span class="o">,</span><span class="mi">2</span><span class="o">)));</span></span>
+<span class="code-line">                    <span class="n">canvas</span><span class="o">.</span><span class="na">drawText</span><span class="o">(</span><span class="n">lineText</span><span class="o">,((</span><span class="n">start_fin</span><span class="o">.</span><span class="na">x_pos</span> <span class="o">+</span> <span class="n">end_fin</span><span class="o">.</span><span class="na">x_pos</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">),</span> <span class="o">((</span><span class="n">start_fin</span><span class="o">.</span><span class="na">y_pos</span> <span class="o">+</span> <span class="n">end_fin</span><span class="o">.</span><span class="na">y_pos</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">),</span><span class="n">textPaint</span><span class="o">);</span></span>
+<span class="code-line">                    <span class="n">key</span> <span class="o">=</span> <span class="n">new_key</span><span class="o">;</span></span>
+<span class="code-line">                <span class="o">}</span></span>
+<span class="code-line">            <span class="o">}</span></span>
+<span class="code-line">        <span class="o">}</span></span>
+<span class="code-line">    <span class="o">}</span></span>
+</pre></div>
+</td></tr></tbody></table>
+<p>In summary, it is quite simple to develop multi-touch interactions between the user and the application to enhance usability and interactivity. This is part of a application that I am developing at the moment and hope to share more insights into development as I progress on.</p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/android.html">android</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/episode-4-visualization.html" title="Episode 4 - Visualization">
+      <i class="fa fa-angle-left"></i>     Previous Post
+
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/episode-6-containerization.html" title="Episode 6 - Containerization">
+          Next Post
+ <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

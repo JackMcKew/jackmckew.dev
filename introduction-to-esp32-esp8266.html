@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="What is an ESP32/ESP8266? The ESP32 and ESP8266 are low-cost Wi-Fi modules, which are perfect for DIY Internet of Things (IoT) projects. They both come with general purpose input/output pins (GPIOs), support a variety of protocols such as SPI, I2C, UART and many more. The most attractive part …" />
+<meta name="keywords" content="esp8266">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Introduction to ESP32/ESP8266"/>
+<meta property="og:description" content="What is an ESP32/ESP8266? The ESP32 and ESP8266 are low-cost Wi-Fi modules, which are perfect for DIY Internet of Things (IoT) projects. They both come with general purpose input/output pins (GPIOs), support a variety of protocols such as SPI, I2C, UART and many more. The most attractive part …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/introduction-to-esp32-esp8266.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-03-22 06:30:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Engineering"/>
+<meta property="article:tag" content="esp8266"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; Introduction to ESP32/ESP8266</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://jackmckew.dev">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="introduction-to-esp32-esp8266">Introduction to ESP32/ESP8266</h1>
+    <p>
+          Posted on Fri 22 March 2019 in <a href="https://jackmckew.dev/category/engineering.html">Engineering</a>
+
+
+        &#8226; 3 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><h2>What is an ESP32/ESP8266?</h2>
+<p>The ESP32 and ESP8266 are low-cost Wi-Fi modules, which are perfect for DIY Internet of Things (IoT) projects. They both come with general purpose input/output pins (GPIOs), support a variety of protocols such as SPI, I2C, UART and many more. The most attractive part of the ESP range is that they come with wireless networking included, separating them from their Arduino microcontroller counterparts. All in all, the ESP series allows you to easily control/monitor devices remotely using Wi-Fi for a very low price.</p>
+<h3>ESP32 vs ESP8266</h3>
+<p>The ESP32 is the later ‘model’ of the ESP8266. It added a whole suite of new functionality such as: touch sensitive pins, built-in temperature and hall effect sensors and upgraded from single core CPU to a dual core, faster Wi-FI, more GPIOs and now supports Bluetooth and BLE (Bluetooth Low Energy). While both boards are very low-cost, the ESP32 costs slightly more, the ESP8266 (here in Australia) costs around \~\<span class="math">\(10AU, and the ESP32 around \~\\)</span>22AU.</p>
+<p><img alt="\
+**ESP8266**\
+" class="img-fluid" src="https://lh5.googleusercontent.com/YEn9Lm0l_QN1jP9Ea6uZmsv35BVp1tqf5hzIZxX3FrVzfZ1MeN6k5pgU-gR6sWmydMCJr0s0pgN8yDBWOQ3-7FqAmAd2ic81lL-QyWsL_Vmu7DAObpqPS3KbeOCC6-ZVT_yV8F9x"/></p>
+<p><img alt="\
+**ESP32**\
+" class="img-fluid" src="https://lh4.googleusercontent.com/yDWgNpn3xMkKX994_b1IzbLWxbo83S2DDKlgS9y4wVbp37ADfVuJwF2EX6H_UWEzcmHfxe_cuABMR920dr0Ebx5WNOwtj0mhoIZjPwiBQcEp0HI1_ZeB4RoL9xaDqCDd4h9651Cv"/></p>
+<h2>Flavours of ESP boards</h2>
+<p>There are currently many different varieties of ESP flavours you can buy off the shelf, while if you are more into developing the board around your ESP module (the pictures above) you can simply just purchase the relevant ESP module, or if you are like me and don’t want to bother soldering and developing your own board there is a solutions for you!\</p>
+<h3>ESP32 Development Boards</h3>
+<h4>ESP32 Thing - Sparkfun</h4>
+<p><img alt="" class="img-fluid" src="https://lh4.googleusercontent.com/KbaOiY3Ua8m_lSgC-RJu8arkN7Ao77SkRh8GBIqHYs13cJz4QD50ZNfJ7LzQh8OLUvmOvbwI1aABuY5airc2IlLBnV23U-I6PoX14HuFPBe4xHEEh8RR11TWp0ZTaINXCUoYJNC4"/></p>
+<p>The ESP32 Thing comes with all the functionalities to easily communication and program the ESP32 with your computer (including a on-board USB-Serial). It also features a LiPo charger, so your ESP32 project can use rechargeable batteries without having to solder any terminals and make it easy to replace/disconnect the battery pack.</p>
+<h4>Espressif ESP32 Development Board - Developer Edition</h4>
+<p><img alt="" class="img-fluid" src="https://lh4.googleusercontent.com/nEUzBIo2o0em3J1qshFFcl5j8nhsyrQ3u6hMco2gW590xiJhmjhOd7dRu8IUcCzu5yuKfOS43gEOaHSsNYRGIvLKSc1Yb3MjRL8vIZT5LNkTXud_DWZqL7paMXOPYx9eLzR2fPgX"/></p>
+<p>If you’re not confident on soldering the header pins on the Sparkfun Thing board, then the Espressif board comes with that done for you! The header pins are also nicely spaced out so if you are a breadboard enthusiast, you can just plug and play on your breadboard and start connecting all your header wires.</p>
+<h3>ESP8266 Development Boards</h3>
+<h4>NodeMCU</h4>
+<p><img alt="" class="img-fluid" src="https://lh4.googleusercontent.com/8uW0VTOhEuA6ILjpw2C2Mfv34emw8jjj9rIpuWjbedNzku76cVO6hBoScNNPpx1Ei0P4ci31B0gYeaO2hfvOER1v67J1PXAfkey9cFzvPWIU4qPL4Q3bb3vcnK5GBlIZu8hr2ujm"/></p>
+<p>The NodeMCU is my personal favourite ESP flavour board because it is friendly to your breadboard, has an on-board USB-Serial and can be powered by USB. This all means that you can test and develop your board straight out of the box without fiddling around with soldering pins, voltages or getting any extra components (except a Micro-usb cable).</p>
+<h4>Adafruit Huzzah ESP8266 Breakout</h4>
+<p><img alt="" class="img-fluid" src="https://lh6.googleusercontent.com/BN-_9XEuEPYw5wl_AiDR5OfcwF2ulK7SQMrpnmglXTe41m7ssb22kARsw8zyzmBJFeFQgHXG4jZQu1RN4Lj0itUJgeqqosQN7zZ4pzavsBPtguSzM819r2W7l-uBixDY4ZwRHDqq"/></p>
+<p>The Huzzah board is Adafruits answer to other development boards that weren’t friendly to breadboards, didn’t have on-board voltage regulators and weren’t CE or FCC emitter certified. The Huzzah board comes with all these functionalities, although unlike the NodeMCU you will need to get a USB-Serial cable to able to program your Huzzah board.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/esp8266.html">esp8266</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/episode-17-networking-routing-addressing.html" title="Episode 17 – Networking Routing & Addressing">
+      <i class="fa fa-angle-left"></i>     Previous Post
+
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/what-is-micropython.html" title="What is MicroPython?">
+          Next Post
+ <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
