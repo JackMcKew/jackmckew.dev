@@ -16,7 +16,10 @@
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
 
 
 
@@ -93,6 +96,12 @@
             </i>
           </a></li>
       </ul>
+      <form action="/">
+        <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required></div>
+        <div style="clear: both;"></div>
+      </form>
+      
+      <div id="tipue_search_content"></div>
     </div>
 
 
@@ -202,9 +211,9 @@
 <p><img alt="Reactive power calculation" class="img-fluid wp-image-138" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-3.gif"/></p>
 <p>Using these formulas we can calculate just how big of a capacitor we require:</p>
 <p><img alt="" class="img-fluid wp-image-139" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
-<p><img alt="" class="wp-image-140 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
+<p><img alt="" class="img-fluid wp-image-140" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
 <p><img alt="" class="img-fluid wp-image-141" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
-<p><img alt="" class="wp-image-142 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-7.gif"/></p>
+<p><img alt="" class="img-fluid wp-image-142" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-7.gif"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
 <table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
@@ -337,5 +346,13 @@
 }
 </script>
 
+<script>
+  $(document).ready(function() {
+        $('#tipue_search_input').tipuesearch({
+            'mode': 'json',
+            'contentLocation': 'tipuesearch_content.json'
+        });
+  });
+</script>
 </body>
 </html>
