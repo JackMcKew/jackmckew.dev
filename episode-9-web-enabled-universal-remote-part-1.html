@@ -103,17 +103,7 @@
   <main>
 
     <nav>
-        <form class="navbar-form navbar-right" role="search" action="https://jackmckew.dev/search.html" onsubmit="return validateForm(this.elements['q'].value);">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="fa
-                    fa-search fa-fw"></i></button>
-              </span>
-            </div>
-          </div>
-        </form>
+      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -154,7 +144,7 @@
 <p>For a basic test, an LED would light up whenever the infrared is receiving a signal. By following the circuit diagram with the corresponding code for the NodeMCU, this test for the receiver should be reproduce-able at home, please note that for other infrared receivers you will need to check the pin outs.<!-- /wp:paragraph --></p>
 <!-- wp:image {"id":108} -->
 <p><img alt="" class="img-fluid" src="../img/episode-9-web-enabled-universal-remote-part-1/Fritzing_FEKX395tbZ.png"/></p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -259,5 +249,10 @@
 }
 </script>
 
+  <script>
+      $(document).ready(function() {
+           $('#tipue_search_input').tipuesearch();
+      });
+  </script>
 </body>
 </html>

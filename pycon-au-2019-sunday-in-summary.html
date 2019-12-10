@@ -104,17 +104,7 @@
   <main>
 
     <nav>
-        <form class="navbar-form navbar-right" role="search" action="https://jackmckew.dev/search.html" onsubmit="return validateForm(this.elements['q'].value);">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="fa
-                    fa-search fa-fw"></i></button>
-              </span>
-            </div>
-          </div>
-        </form>
+      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -256,5 +246,10 @@
 }
 </script>
 
+  <script>
+      $(document).ready(function() {
+           $('#tipue_search_input').tipuesearch();
+      });
+  </script>
 </body>
 </html>

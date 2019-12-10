@@ -105,17 +105,7 @@
   <main>
 
     <nav>
-        <form class="navbar-form navbar-right" role="search" action="https://jackmckew.dev/search.html" onsubmit="return validateForm(this.elements['q'].value);">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="fa
-                    fa-search fa-fw"></i></button>
-              </span>
-            </div>
-          </div>
-        </form>
+      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -153,7 +143,7 @@
 </ul>
 <h2>Harmonics</h2>
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -218,12 +208,12 @@
 <p><img alt="Apparent power calculation" class="img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-2.gif"/></p>
 <p><img alt="Reactive power calculation" class="img-fluid wp-image-138" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-3.gif"/></p>
 <p>Using these formulas we can calculate just how big of a capacitor we require:</p>
-<p><img alt="" class="wp-image-139 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
-<p><img alt="" class="wp-image-140 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
-<p><img alt="" class="wp-image-141 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
-<p><img alt="" class="wp-image-142 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-7.gif"/></p>
+<p><img alt="" class="img-fluid wp-image-139" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
+<p><img alt="" class="img-fluid wp-image-140" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
+<p><img alt="" class="img-fluid wp-image-141" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
+<p><img alt="" class="img-fluid wp-image-142" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-7.gif"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -354,5 +344,10 @@
 }
 </script>
 
+  <script>
+      $(document).ready(function() {
+           $('#tipue_search_input').tipuesearch();
+      });
+  </script>
 </body>
 </html>
