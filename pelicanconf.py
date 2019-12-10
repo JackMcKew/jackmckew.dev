@@ -72,7 +72,7 @@ PLUGINS = [
     "glossary",
     "multi_neighbors",
     "liquid_tags.notebook",
-    "pelican-ipynb.markup",
+    # "pelican-ipynb.markup",
     # "pelican_youtube",
     "photos",
     "representative_image",
@@ -83,10 +83,11 @@ PLUGINS = [
     "render_math"
 ]
 
-MARKUP = ('md', 'ipynb')
-IPYNB_USE_METACELL = True
+# MARKUP = ('md', 'ipynb')
+MARKUP = ('md', )
+# IPYNB_USE_METACELL = True
 
-IGNORE_FILES = [".ipynb_checkpoints"] 
+# IGNORE_FILES = [".ipynb_checkpoints"] 
 
 DELETE_OUTPUT_DIRECTORY = True
 
