@@ -1,319 +1,218 @@
-
 <!DOCTYPE html>
 <html lang="english">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
-
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+          <title>Jack McKew's Blog - Dunders in Python</title>
+        <meta charset="utf-8" />
 
 
 
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-131173168-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="admin" />
-<meta name="description" content="A &#39;dunder&#39; (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for …" />
-<meta name="keywords" content="python">
-
-
-<meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="Dunders in Python"/>
-<meta property="og:description" content="A &#39;dunder&#39; (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for …"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/dunders-in-python.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-09-06 06:30:00+10:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://jackmckew.dev/author/admin.html">
-<meta property="article:section" content="Python"/>
-<meta property="article:tag" content="python"/>
-<meta property="og:image" content="/jm-photo.jpg">
-
-  <title>Jack McKew's Blog &ndash; Dunders in Python</title>
+    <meta name="tags" content="python" />
 
 </head>
-<body>
-  <aside>
-    <div>
-      <a href="https://jackmckew.dev">
-        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
-      </a>
-      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-<p>Python enthusiast, electrical engineer and tinkerer</p>
-      <nav>
-        <ul class="list">
-
-            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-
-        </ul>
-      </nav>
-
-      <ul class="social">
-          <li>
-            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
-            <i class="fab fa-twitter">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href="https://jackmckew.dev">    Home
-</a>
-
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
-      <a href="/sitemap.xml">Sitemap</a>
-
-
-    </nav>
-
-<article class="single">
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jackmckew.dev/">Jack McKew's Blog <strong>Python enthusiast, electrical engineer and tinkerer</strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="/archives.html">Archives</a></li>
+            <li><a href="/categories.html">Categories</a></li>
+            <li><a href="/tags.html">Tags</a></li>
+            <li><a href="/sitemap.xml">Sitemap</a></li>
+            <li><a href="https://jackmckew.dev/pages/contact.html">Contact</a></li>
+            <li><a href="https://jackmckew.dev/pages/cv-professional.html">CV/Professional</a></li>
+            <li><a href="https://jackmckew.dev/category/android.html">Android</a></li>
+            <li><a href="https://jackmckew.dev/category/book-reviews.html">Book Reviews</a></li>
+            <li><a href="https://jackmckew.dev/category/data-science.html">Data Science</a></li>
+            <li><a href="https://jackmckew.dev/category/engineering.html">Engineering</a></li>
+            <li><a href="https://jackmckew.dev/category/engineering-python.html">Engineering, Python</a></li>
+            <li><a href="https://jackmckew.dev/category/machine-learning.html">Machine Learning</a></li>
+            <li><a href="https://jackmckew.dev/category/principles.html">Principles</a></li>
+            <li class="active"><a href="https://jackmckew.dev/category/python.html">Python</a></li>
+            <li><a href="https://jackmckew.dev/category/python-data-science.html">Python, Data Science</a></li>
+            <li><a href="https://jackmckew.dev/category/python-engineering.html">Python, Engineering</a></li>
+            <li><a href="https://jackmckew.dev/category/python-principles.html">Python, Principles</a></li>
+            <li><a href="https://jackmckew.dev/category/software-development.html">Software Development</a></li>
+            <li><a href="https://jackmckew.dev/category/software-development-data-science.html">Software Development, Data Science</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
   <header>
-      
-    <h1 id="dunders-in-python">Dunders in Python</h1>
-    <p>
-          Posted on Fri 06 September 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
-
-
-        &#8226; 3 min read
-    </p>
+    <h2 class="entry-title">
+      <a href="https://jackmckew.dev/dunders-in-python.html" rel="bookmark"
+         title="Permalink to Dunders in Python">Dunders in Python</a></h2>
+ 
   </header>
-
-
-  <div>
-    <body><p>A 'dunder' (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for vectors to understand how the magic methods can be used to make life easier.</p>
+  <footer class="post-info">
+    <time class="published" datetime="2019-09-06T06:30:00+10:00">
+      Fri 06 September 2019
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="https://jackmckew.dev/author/admin.html">admin</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://jackmckew.dev/category/python.html">Python</a>
+    </div>
+    <div class="tags">
+        Tags:
+            <a href="https://jackmckew.dev/tag/python.html">python</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>A 'dunder' (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for vectors to understand how the magic methods can be used to make life easier.</p>
 <p>First of all before we get into the magic methods, let's talk about normal methods. A method in Python is a function that resides in a class. To begin with our Vector class, we initialise our class and give it a function, for example:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">():</span></span>
-<span class="code-line">        <span class="k">print</span><span class="p">(</span><span class="s2">"Hello! I'm a method"</span><span class="p">)</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello! I&#39;m a method&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Now to call the method, we simply call the function name along with the Vector instance we wish to use:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Vector</span><span class="o">.</span><span class="n">say_hello</span><span class="p">()</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">.</span><span class="n">say_hello</span><span class="p">()</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>This will print:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Hello</span><span class="o">!</span> <span class="n">I</span><span class="err">'</span><span class="n">m</span> <span class="n">a</span> <span class="k">method</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Hello</span><span class="o">!</span> <span class="n">I</span><span class="err">&#39;</span><span class="n">m</span> <span class="n">a</span> <span class="k">method</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Now for our vector class, we want to be able to initialise it with certain constants or variables for both the magnitude and direction of our vector. We use the __init__ magic method for this, as it is invoked without any call, when an instance of a class is created.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span></span>
-<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Now when we create an instance of our Vector class, we can give it certain values that it will store in a tuple:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Which will print:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Vector</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x03E90530</span><span class="o">&gt;</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Vector</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x03E90530</span><span class="o">&gt;</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>But to us humans, this doesn't mean much more than we know what the name of the class is of that instance. What we really want to see when we call print on our class is the values inside it. To do this we use the __repr__ magic method:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span>
-<span class="code-line">8</span>
-<span class="code-line">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span></span>
-<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Which will print:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>This is exactly what we want! Now what if we wanted to create a Vector, but we weren't sure what values we wanted to give it yet. What would happen if we didn't give it any values? Would it default to (0,0) like we would hope?</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">empty_vector</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">()</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">empty_vector</span><span class="p">)</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">empty_vector</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">empty_vector</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Which will print:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="p">()</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">()</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Not exactly how we need it, so we would need to run a check when the class is being initialized, to ensure that there are values being provided:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span>
-<span class="code-line">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></span>
-<span class="code-line">            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span></span>
-<span class="code-line">        <span class="k">else</span><span class="p">:</span> </span>
-<span class="code-line">            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Which when initialise an empty instance of our Vector now, it will create a (0,0) vector for us!</p>
 <p>Now what if we wanted to be able to check how many values were inside our vector class? To do this we can use the __len__ magic method&gt;:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span>
-<span class="code-line">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></span>
-<span class="code-line">            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span></span>
-<span class="code-line">        <span class="k">else</span><span class="p">:</span> </span>
-<span class="code-line">            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vector_1</span><span class="p">))</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">vector_1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vector_1</span><span class="p">))</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Which will print:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></span>
-<span class="code-line"><span class="mi">3</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Hopefully this post has given you insight into how dunders/magic methods could be used to super power your classes and make life much easier!</p>
-<p>You can find more information and examples about dunders in Python at: &lt;https://docs.python.org/3/reference/datamodel.html#special-method-names</p></body>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="https://jackmckew.dev/tag/python.html">python</a>
-    </p>
-  </div>
-
-
-  <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/python-project-workflow.html" title="Python Project Workflow">
-      <i class="fa fa-angle-left"></i>     Previous Post
-
-    </a>
-    <a class="btn float-right" href="https://jackmckew.dev/inheritance-in-python.html" title="Inheritance in Python">
-          Next Post
- <i class="fa fa-angle-right"></i>
-    </a>
-  </div>
-
-
-
-<!-- Disqus -->
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'jackmckew-dev';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>
-        Please enable JavaScript to view comments.
-
-</noscript>
-<!-- End Disqus -->
-</article>
-
-    <footer>
-<p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Jack McKew's Blog ",
-  "url" : "https://jackmckew.dev",
-  "image": "/jm-photo.jpg",
-  "description": ""
-}
-</script>
-
+<p>You can find more information and examples about dunders in Python at: &lt;https://docs.python.org/3/reference/datamodel.html#special-method-names</p>
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>

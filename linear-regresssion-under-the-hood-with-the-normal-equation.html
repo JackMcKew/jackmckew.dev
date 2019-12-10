@@ -1,136 +1,70 @@
-
 <!DOCTYPE html>
 <html lang="english">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
-
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+          <title>Jack McKew's Blog - Linear Regression: Under the Hood with the Normal Equation</title>
+        <meta charset="utf-8" />
 
 
 
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-131173168-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="Jack McKew" />
-<meta name="description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where \(\hat{y}\) is the predicted value, \(n\) is the number of features, \(x_i\) is the \(i^{th}\) feature value and \(\theta_n\) is the \(n^{th}\) model parameter. This …" />
-<meta name="keywords" content="python">
-
-
-<meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="Linear Regression: Under the Hood with the Normal Equation"/>
-<meta property="og:description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where \(\hat{y}\) is the predicted value, \(n\) is the number of features, \(x_i\) is the \(i^{th}\) feature value and \(\theta_n\) is the \(n^{th}\) model parameter. This …"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-08-25 06:30:00+10:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
-<meta property="article:section" content="Data Science"/>
-<meta property="article:tag" content="python"/>
-<meta property="og:image" content="/jm-photo.jpg">
-
-  <title>Jack McKew's Blog &ndash; Linear Regression: Under the Hood with the Normal Equation</title>
+    <meta name="tags" content="python" />
 
 </head>
-<body>
-  <aside>
-    <div>
-      <a href="https://jackmckew.dev">
-        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
-      </a>
-      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-<p>Python enthusiast, electrical engineer and tinkerer</p>
-      <nav>
-        <ul class="list">
-
-            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-
-        </ul>
-      </nav>
-
-      <ul class="social">
-          <li>
-            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
-            <i class="fab fa-twitter">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href="https://jackmckew.dev">    Home
-</a>
-
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
-      <a href="/sitemap.xml">Sitemap</a>
-
-
-    </nav>
-
-<article class="single">
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://jackmckew.dev/">Jack McKew's Blog <strong>Python enthusiast, electrical engineer and tinkerer</strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="/archives.html">Archives</a></li>
+            <li><a href="/categories.html">Categories</a></li>
+            <li><a href="/tags.html">Tags</a></li>
+            <li><a href="/sitemap.xml">Sitemap</a></li>
+            <li><a href="https://jackmckew.dev/pages/contact.html">Contact</a></li>
+            <li><a href="https://jackmckew.dev/pages/cv-professional.html">CV/Professional</a></li>
+            <li><a href="https://jackmckew.dev/category/android.html">Android</a></li>
+            <li><a href="https://jackmckew.dev/category/book-reviews.html">Book Reviews</a></li>
+            <li class="active"><a href="https://jackmckew.dev/category/data-science.html">Data Science</a></li>
+            <li><a href="https://jackmckew.dev/category/engineering.html">Engineering</a></li>
+            <li><a href="https://jackmckew.dev/category/engineering-python.html">Engineering, Python</a></li>
+            <li><a href="https://jackmckew.dev/category/machine-learning.html">Machine Learning</a></li>
+            <li><a href="https://jackmckew.dev/category/principles.html">Principles</a></li>
+            <li><a href="https://jackmckew.dev/category/python.html">Python</a></li>
+            <li><a href="https://jackmckew.dev/category/python-data-science.html">Python, Data Science</a></li>
+            <li><a href="https://jackmckew.dev/category/python-engineering.html">Python, Engineering</a></li>
+            <li><a href="https://jackmckew.dev/category/python-principles.html">Python, Principles</a></li>
+            <li><a href="https://jackmckew.dev/category/software-development.html">Software Development</a></li>
+            <li><a href="https://jackmckew.dev/category/software-development-data-science.html">Software Development, Data Science</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
   <header>
-      
-    <h1 id="linear-regresssion-under-the-hood-with-the-normal-equation">Linear Regression: Under the Hood with the Normal Equation</h1>
-    <p>
-          Posted on Sun 25 August 2019 in <a href="https://jackmckew.dev/category/data-science.html">Data Science</a>
-
-
-        &#8226; 3 min read
-    </p>
+    <h2 class="entry-title">
+      <a href="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html" rel="bookmark"
+         title="Permalink to Linear Regression: Under the Hood with the Normal Equation">Linear Regression: Under the Hood with the Normal Equation</a></h2>
+ 
   </header>
-
-
-  <div>
-    <body><p>Let's dive deeper into how linear regression works.</p>
+  <footer class="post-info">
+    <time class="published" datetime="2019-08-25T06:30:00+10:00">
+      Sun 25 August 2019
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="https://jackmckew.dev/author/jack-mckew.html">Jack McKew</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://jackmckew.dev/category/data-science.html">Data Science</a>
+    </div>
+    <div class="tags">
+        Tags:
+            <a href="https://jackmckew.dev/tag/python.html">python</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>Let's dive deeper into how linear regression works.</p>
 <p>Linear regression follows a general formula:
-</p>
-<div class="math">$$
+$$
 \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n
-$$</div>
-<p>
-Where <span class="math">\(\hat{y}\)</span> is the predicted value, <span class="math">\(n\)</span> is the number of features, <span class="math">\(x_i\)</span> is the <span class="math">\(i^{th}\)</span> feature value and <span class="math">\(\theta_n\)</span> is the <span class="math">\(n^{th}\)</span> model parameter. This function is then vectorised which speeds up processing on a CPU, however, I won't go into that further.</p>
+$$
+Where $\hat{y}$ is the predicted value, $n$ is the number of features, $x_i$ is the $i^{th}$ feature value and $\theta_n$ is the $n^{th}$ model parameter. This function is then vectorised which speeds up processing on a CPU, however, I won't go into that further.</p>
 <p>How does the linear regression model get 'trained'? Training a linear regression model means setting the parameters such that the model best fits the training data set. To be able to do this, we need to be able to measure how good (or bad) the model fits the data. Common ways of measuring this are:</p>
 <ul>
 <li>Root Mean Square Error (RMSE)</li>
@@ -141,188 +75,81 @@ Where <span class="math">\(\hat{y}\)</span> is the predicted value, <span class=
 </ul>
 <p>From here on, we will refer to these as the cost function, and the objective is to minimise the cost function.</p>
 <h2>The Normal Equation</h2>
-<p>To find the value of <span class="math">\(\theta\)</span> that minimises the cost function, there is a mathematical equation that gives the result directly, named the Normal Equation
-</p>
-<div class="math">$$
+<p>To find the value of $\theta$ that minimises the cost function, there is a mathematical equation that gives the result directly, named the Normal Equation
+$$
 \hat{\theta} = (X^T \cdot X)^{-1}\cdot X^T \cdot y
-$$</div>
-<p>
-Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="math">\(\theta\)</span> that minimises the cost function and <span class="math">\(y\)</span> (once vectorised) is the vector of target values containing <span class="math">\(y^{(1)}\)</span> to <span class="math">\(y^{(m)}\)</span>. </p>
+$$
+Where $\hat{\theta}$ is the value of $\theta$ that minimises the cost function and $y$ (once vectorised) is the vector of target values containing $y^{(1)}$ to $y^{(m)}$. </p>
 <p>For example if this equation was run on data generated from this formula:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">X</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">y</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
-<p><img alt="10_6_2_gen" class="img-fluid" src="..\img\hands-on-machine-learning-chapter-4\10_6_2_gen.png"/></p>
-<p>Now to compute <span class="math">\(\hat{\theta}\)</span> with the normal equation, we can use the inv() function from NumPy's Linear algebra module:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">X</span><span class="p">]</span></span>
-<span class="code-line"><span class="n">theta_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span></span>
+</td></tr></table>
+
+<p><img alt="10_6_2_gen" src="..\img\hands-on-machine-learning-chapter-4\10_6_2_gen.png"></p>
+<p>Now to compute $\hat{\theta}$ with the normal equation, we can use the inv() function from NumPy's Linear algebra module:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">X</span><span class="p">]</span>
+<span class="n">theta_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
-<p>With the actual function being <span class="math">\(y = 6 + 2x_0 + noise\)</span>, and the equation found:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">array</span><span class="p">([[</span> <span class="mf">5.96356419</span><span class="p">],</span></span>
-<span class="code-line">       <span class="p">[</span> <span class="mf">2.00027727</span><span class="p">]])</span></span>
+</td></tr></table>
+
+<p>With the actual function being $y = 6 + 2x_0 + noise$, and the equation found:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span> <span class="mf">5.96356419</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">2.00027727</span><span class="p">]])</span>
 </pre></div>
-</td></tr></tbody></table>
-<p>Since the noise makes it impossible to recover the exact parameters of the original function now we can use <span class="math">\(\hat{\theta}\)</span> to make predictions:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span></span>
+</td></tr></table>
+
+<p>Since the noise makes it impossible to recover the exact parameters of the original function now we can use $\hat{\theta}$ to make predictions:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>With y_predict being:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span></span>
-<span class="code-line"> <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span>
 </pre></div>
-</td></tr></tbody></table>
-<p><img alt="10_6_2_gen_solved" class="img-fluid" src="..\img\hands-on-machine-learning-chapter-4\10_6_2_gen_solved.png"/></p>
+</td></tr></table>
+
+<p><img alt="10_6_2_gen_solved" src="..\img\hands-on-machine-learning-chapter-4\10_6_2_gen_solved.png"></p>
 <p>The equivalent code using Scikit-Learn would look like:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span></span>
-<span class="code-line"><span class="n">lin_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">lin_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">lin_reg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">lin_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">))</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lin_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lin_reg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lin_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">))</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>And it finds:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="p">[</span> <span class="mf">5.96356419</span><span class="p">]</span> <span class="p">[[</span> <span class="mf">2.00027727</span><span class="p">]]</span></span>
-<span class="code-line"><span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span></span>
-<span class="code-line"> <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mf">5.96356419</span><span class="p">]</span> <span class="p">[[</span> <span class="mf">2.00027727</span><span class="p">]]</span>
+<span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></table>
+
 <p>Using the normal equation to train your linear regression model is linear in regards to the number of instances you wish to train on, meaning you will need to be able to fit the data set in memory.</p>
 <p>There are many other ways of to train a linear regression, some which are better suited for large number of features, these will be covered in later posts.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script></body>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="https://jackmckew.dev/tag/python.html">python</a>
-    </p>
-  </div>
-
-
-  <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/intro-to-web-scraping.html" title="Intro to Web Scraping">
-      <i class="fa fa-angle-left"></i>     Previous Post
-
-    </a>
-    <a class="btn float-right" href="https://jackmckew.dev/python-project-workflow.html" title="Python Project Workflow">
-          Next Post
- <i class="fa fa-angle-right"></i>
-    </a>
-  </div>
-
-
-
-<!-- Disqus -->
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'jackmckew-dev';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>
-        Please enable JavaScript to view comments.
-
-</noscript>
-<!-- End Disqus -->
-</article>
-
-    <footer>
-<p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Jack McKew's Blog ",
-  "url" : "https://jackmckew.dev",
-  "image": "/jm-photo.jpg",
-  "description": ""
-}
-</script>
-
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>
