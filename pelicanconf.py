@@ -11,7 +11,7 @@ SITETITLE = SITENAME
 SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
 SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
-# SITEURL = "https://localhost:8000"
+# SITEURL = "localhost:8000"
 
 
 DISPLAY_PAGES_ON_MENU = True

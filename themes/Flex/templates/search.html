@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}
-  Seach {{ super() }}
-{% endblock title %}
-
-{% block head_description %}
-  Search results:
-{% endblock head_description %}
+{% block title %} &ndash; {{ _('Search') }}{% endblock %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch.css"/>
@@ -29,14 +23,17 @@
   </script>
 {% endblock extra_js %}
 
-{% block top_center %}
-  <h1>
-    Search Results
-  </h1>
-{% endblock %}
-
 {% block content %}
+<article class="single">
+  <header>
+    <h1 id="search-results">{{ _('Search Results:') }}</h1>
+  </header>
   <div>
-    <div id="tipue_search_content"></div>
+    <ul class="list">
+        <div>
+            <div id="tipue_search_content"></div>
+        </div>
+    </ul>
   </div>
-{% endblock content %}
+</article>
+{% endblock %}
