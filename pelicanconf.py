@@ -20,9 +20,9 @@ DISQUS_SITENAME = 'jackmckew-dev'
 GOOGLE_ANALYTICS = 'UA-131173168-2'
 
 
-ARTICLE_URL = 'posts/{slug}.html'
+ARTICLE_URL = '{slug}.html'
 # ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
-ARTICLE_SAVE_AS = 'posts/{slug}.html'
+ARTICLE_SAVE_AS = '{slug}.html'
 # YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
 # MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
 # DAY_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/index.html' 
@@ -30,6 +30,7 @@ ARTICLE_SAVE_AS = 'posts/{slug}.html'
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
 STATIC_PATHS = ["img","files","html","extra"]
+# STATIC_SAVE_AS = "{dirname}"
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     'extra/jm-photo.jpg' : {'path' : 'jm-photo.jpg'},
@@ -85,7 +86,8 @@ PLUGINS = [
     "always_modified",
     "dateish",
     "post_stats",
-    "render_math"
+    "render_math",
+    "autostatic"
 ]
 
 # MARKUP = ('md', 'ipynb')
