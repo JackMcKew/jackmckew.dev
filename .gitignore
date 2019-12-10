@@ -4,3 +4,7 @@
 *.zip
 *.csv
 *.json
+Pipfile
+Pipfile.lock
+deprecated
+__pycache__
