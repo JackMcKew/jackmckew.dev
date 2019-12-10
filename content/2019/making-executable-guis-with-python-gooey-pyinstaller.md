@@ -1,5 +1,6 @@
 Title: Making Executable GUIs with Python, Gooey & Pyinstaller
 Date: 2019-11-01 06:30
+Category: Python
 Author: Jack McKew
 Tags: python
 Slug: making-executable-guis-with-python-gooey-pyinstaller

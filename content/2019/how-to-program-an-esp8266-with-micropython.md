@@ -1,4 +1,5 @@
 Title: How to Program an ESP8266 with MicroPython
+Category: Engineering, Python
 Date: 2019-04-05 06:30
 Author: Jack McKew
 Tags: electrical, esp8266

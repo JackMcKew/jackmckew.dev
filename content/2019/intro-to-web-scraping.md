@@ -1,5 +1,6 @@
 Title: Intro to Web Scraping
 Date: 2019-08-23 06:30
+Category: Python
 Author: Jack McKew
 Tags: python
 Slug: intro-to-web-scraping

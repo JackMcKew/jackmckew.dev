@@ -1,5 +1,6 @@
 Title: Book Review: Principles by Ray Dalio
 Date: 2019-10-11 06:30
+Category: Book Reviews
 Author: Jack McKew
 Tags: bookreview, principles, habits
 Slug: book-review-principles

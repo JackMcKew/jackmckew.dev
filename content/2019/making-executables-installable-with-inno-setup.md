@@ -1,5 +1,6 @@
 Title: Making Executables Installable with Inno Setup
 Date: 2019-11-08 06:30
+Category: Software Development
 Author: Jack McKew
 Tags: python
 Slug: making-executables-installable-with-inno-setup

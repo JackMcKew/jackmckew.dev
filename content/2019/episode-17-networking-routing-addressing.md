@@ -1,5 +1,6 @@
 Title: Episode 17 – Networking Routing & Addressing
 Date: 2019-03-15 06:30
+Category: Engineering
 Author: Jack McKew
 Tags: networking
 Slug: episode-17-networking-routing-addressing

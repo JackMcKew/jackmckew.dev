@@ -1,5 +1,6 @@
 Title: What is MongoDB?
 Date: 2019-05-03 06:30
+Category: Software Development, Data Science
 Author: Jack McKew
 Tags: database, mongodb
 Slug: what-is-mongodb

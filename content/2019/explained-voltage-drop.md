@@ -1,5 +1,6 @@
 Title: Explained: Voltage Drop
 Date: 2019-05-10 06:30
+Category: Engineering
 Author: Jack McKew
 Tags: electrical
 Slug: explained-voltage-drop

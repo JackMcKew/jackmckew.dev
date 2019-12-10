@@ -1,5 +1,6 @@
 Title: Python and OCR
 Date: 2019-06-28 06:30
+Category: Python
 Author: Jack McKew
 Tags: python, ocr
 Slug: python-and-ocr

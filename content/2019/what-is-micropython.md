@@ -1,5 +1,6 @@
 Title: What is MicroPython?
 Date: 2019-03-29 06:39
+Category: Python
 Author: Jack McKew
 Tags: python, micropython
 Slug: what-is-micropython

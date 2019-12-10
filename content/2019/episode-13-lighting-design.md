@@ -1,5 +1,6 @@
 Title: Episode 13 - Lighting Design
 Date: 2019-02-15 06:30
+Category: Engineering
 Author: Jack McKew
 Tags: electrical
 Slug: episode-13-lighting-design

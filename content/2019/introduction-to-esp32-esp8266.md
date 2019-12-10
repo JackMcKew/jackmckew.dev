@@ -1,5 +1,6 @@
 Title: Introduction to ESP32/ESP8266
 Date: 2019-03-22 06:30
+Category: Engineering
 Author: Jack McKew
 Tags: esp8266
 Slug: introduction-to-esp32-esp8266

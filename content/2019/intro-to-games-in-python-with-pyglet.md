@@ -1,5 +1,6 @@
 Title: Intro to Games in Python with Pyglet
 Date: 2019-10-04 06:30
+Category: Python
 Author: Jack McKew
 Tags: python, pyglet
 Slug: intro-to-games-in-python-with-pyglet

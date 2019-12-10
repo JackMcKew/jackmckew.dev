@@ -1,7 +1,8 @@
 Title: Episode 10 - Python Package Cheat Sheet
 Date: 2019-01-25 07:00
+Category: Python
 Author: Jack McKew
-Category: python, packaging
+Tags: python, packaging
 Slug: episode-10-python-package-cheat-sheet
 Status: published
 

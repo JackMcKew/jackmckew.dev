@@ -1,5 +1,6 @@
 Title: Portfolio Balancing with Historical Stock Data
 Date: 2019-04-19 06:30
+Category: Python, Data Science
 Author: Jack McKew
 Tags: finance, python
 Slug: portfolio-balancing-with-historical-stock-data

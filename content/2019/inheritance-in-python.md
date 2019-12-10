@@ -1,5 +1,6 @@
 Title: Inheritance in Python
 Date: 2019-09-13 06:30
+Category: Python
 Author: Jack McKew
 Tags: python
 Slug: inheritance-in-python

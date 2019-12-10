@@ -1,5 +1,6 @@
 Title: Python and Data Security (Hashing Algorithms)
 Date: 2019-06-21 06:30
+Category: Python, Engineering
 Author: Jack McKew
 Tags: python, security
 Slug: python-and-data-security-hashing-algorithms
