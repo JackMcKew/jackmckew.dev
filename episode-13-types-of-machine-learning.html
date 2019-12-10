@@ -104,6 +104,17 @@
   <main>
 
     <nav>
+        <form class="navbar-form navbar-right" role="search" action="https://jackmckew.dev/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="fa
+                    fa-search fa-fw"></i></button>
+              </span>
+            </div>
+          </div>
+        </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -112,18 +123,6 @@
       <a href="/tags.html">Tags</a>
       <a href="/sitemap.xml">Sitemap</a>
       <a href="/search.html">Search</a>
-
-      <form class="navbar-form navbar-right" role="search" action="https://jackmckew.dev/search.html" onsubmit="return validateForm(this.elements['q'].value);">
-        <div class="form-group">
-          <div class="input-group">
-            <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit"><i class="fa
-                  fa-search fa-fw"></i></button>
-            </span>
-          </div>
-        </div>
-      </form>
 
 
     </nav>
@@ -151,7 +150,7 @@
 </ul>
 <h3>Supervised Learning</h3>
 <p>Most practical machine learning algorithms use supervised learning. Supervised learning is where you have one or more input variables (x) and output variable(s) (y), and you use an algorithm to learn the mapping function from the input to the output.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>y = f(x)</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>y = f(x)</span>
 </pre></div>
 </td></tr></tbody></table>
 <p>The end goal of this algorithm is to approximate the mapping function accurately such that then you have a new data input (x), you can predict what the result (y) for that data would be.</p>

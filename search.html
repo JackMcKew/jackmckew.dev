@@ -50,7 +50,7 @@
 <meta property="og:url" content="https://jackmckew.dev"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-  <title>Jack McKew's Blog  Seach 
+  <title>Jack McKew's Blog &ndash;     Search
 </title>
 
 </head>
@@ -96,6 +96,17 @@
   <main>
 
     <nav>
+        <form class="navbar-form navbar-right" role="search" action="https://jackmckew.dev/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="fa
+                    fa-search fa-fw"></i></button>
+              </span>
+            </div>
+          </div>
+        </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -105,24 +116,22 @@
       <a href="/sitemap.xml">Sitemap</a>
       <a href="/search.html">Search</a>
 
-      <form class="navbar-form navbar-right" role="search" action="https://jackmckew.dev/search.html" onsubmit="return validateForm(this.elements['q'].value);">
-        <div class="form-group">
-          <div class="input-group">
-            <input type="text" name="q" id="tipue_search_input" class="form-control search-query" placeholder="Search" required />
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit"><i class="fa
-                  fa-search fa-fw"></i></button>
-            </span>
-          </div>
-        </div>
-      </form>
-
 
     </nav>
 
+<article class="single">
+  <header>
+    <h1 id="search-results">    Search Results:
+</h1>
+  </header>
   <div>
-    <div id="tipue_search_content"></div>
+    <ul class="list">
+        <div>
+            <div id="tipue_search_content"></div>
+        </div>
+    </ul>
   </div>
+</article>
 
     <footer>
 <p>&copy;  </p>
