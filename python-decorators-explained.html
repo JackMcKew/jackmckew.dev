@@ -16,10 +16,7 @@
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+
 
 
 
@@ -94,12 +91,6 @@
             </i>
           </a></li>
       </ul>
-      <form action="/">
-        <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required></div>
-        <div style="clear: both;"></div>
-      </form>
-      
-      <div id="tipue_search_content"></div>
     </div>
 
 
@@ -134,7 +125,7 @@
   <div>
     <body><p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
 <p>Firstly you have to understand functions within python:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -173,7 +164,7 @@
 </td></tr></tbody></table>
 <p>As we can see above we can give functions default arguments (the string 'Jack' for the name variable in hello). Assign functions to variables (ensuring the parentheses are not included otherwise we would be assigning to the returning value from the function. Remove previous functions now that we have 'copied' the function over.</p>
 <p>Now to take the next step into functions within Python, by defining functions within functions:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -209,7 +200,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now we can make nested functions (functions within functions), the next step is, functions returning functions.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -247,7 +238,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>From earlier, we know that if we don't include the parentheses then the function does not executed. Another extension of the way this is formatted is that we can now call hello()() which outputs "Now you are in the greeting() function".</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -269,7 +260,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now you have all the knowledge to learn what decorators really are, they let you execute code before and after a function. The code above is actually a decorator, but let's make it more usable.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -311,7 +302,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now you've made a decorator! We've just used what we learned previously to modify it's behaviour in one way or another. Now to make it even more concise we can just the @ symbol. Here is how we could have used the previous code with @ symbol.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -393,13 +384,5 @@
 }
 </script>
 
-<script>
-  $(document).ready(function() {
-        $('#tipue_search_input').tipuesearch({
-            'mode': 'json',
-            'contentLocation': 'tipuesearch_content.json'
-        });
-  });
-</script>
 </body>
 </html>

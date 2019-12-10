@@ -16,10 +16,7 @@
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+
 
 
 
@@ -95,12 +92,6 @@
             </i>
           </a></li>
       </ul>
-      <form action="/">
-        <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required></div>
-        <div style="clear: both;"></div>
-      </form>
-      
-      <div id="tipue_search_content"></div>
     </div>
 
 
@@ -305,13 +296,5 @@
 }
 </script>
 
-<script>
-  $(document).ready(function() {
-        $('#tipue_search_input').tipuesearch({
-            'mode': 'json',
-            'contentLocation': 'tipuesearch_content.json'
-        });
-  });
-</script>
 </body>
 </html>

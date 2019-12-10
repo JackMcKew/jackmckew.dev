@@ -16,10 +16,7 @@
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+
 
 
 
@@ -95,12 +92,6 @@
             </i>
           </a></li>
       </ul>
-      <form action="/">
-        <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required></div>
-        <div style="clear: both;"></div>
-      </form>
-      
-      <div id="tipue_search_content"></div>
     </div>
 
 
@@ -142,7 +133,7 @@
 </ul>
 <h3>Supervised Learning</h3>
 <p>Most practical machine learning algorithms use supervised learning. Supervised learning is where you have one or more input variables (x) and output variable(s) (y), and you use an algorithm to learn the mapping function from the input to the output.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>y = f(x)</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>y = f(x)</span>
 </pre></div>
 </td></tr></tbody></table>
 <p>The end goal of this algorithm is to approximate the mapping function accurately such that then you have a new data input (x), you can predict what the result (y) for that data would be.</p>
@@ -213,13 +204,5 @@
 }
 </script>
 
-<script>
-  $(document).ready(function() {
-        $('#tipue_search_input').tipuesearch({
-            'mode': 'json',
-            'contentLocation': 'tipuesearch_content.json'
-        });
-  });
-</script>
 </body>
 </html>

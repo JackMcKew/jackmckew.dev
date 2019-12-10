@@ -16,10 +16,7 @@
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+
 
 
 
@@ -94,12 +91,6 @@
             </i>
           </a></li>
       </ul>
-      <form action="/">
-        <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required></div>
-        <div style="clear: both;"></div>
-      </form>
-      
-      <div id="tipue_search_content"></div>
     </div>
 
 
@@ -143,7 +134,7 @@
 </ul>
 <p>This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.</p>
 <p>First off, we are going to start by defining our 'base' class (also known as abstract class) of our Animal with common properties:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -169,7 +160,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now that we have our base class, we can define a subclass 'Dog' that will be able to speak if we define the function inside, but we can also see that it derives from it's parent class 'Animal' by printing out it's family.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -193,14 +184,14 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Which will print out:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Woof</span><span class="err">!</span></span>
 <span class="code-line"><span class="n">Animal</span> <span class="n">Kingdom</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>See my post on dunders (double underscores) to get a better understanding of how the __init__ function is working: <a href="https://jmckew.com/2019/09/06/dunders-in-python/">https://jmckew.com/2019/09/06/dunders-in-python/</a></p>
 <p>Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -216,13 +207,13 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Which will also print:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Woof</span><span class="err">!</span></span>
 <span class="code-line"><span class="n">Animal</span> <span class="n">Kingdom</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Now what if we wanted to specify the family that all of our dog classes are, we can do this by overriding their parent class (similar to how we are overriding the speak function):</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -242,7 +233,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Which then when we run both the below code:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -266,7 +257,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>We will now get:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Woof</span><span class="err">!</span></span>
@@ -334,13 +325,5 @@
 }
 </script>
 
-<script>
-  $(document).ready(function() {
-        $('#tipue_search_input').tipuesearch({
-            'mode': 'json',
-            'contentLocation': 'tipuesearch_content.json'
-        });
-  });
-</script>
 </body>
 </html>

@@ -16,10 +16,7 @@
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+
 
 
 
@@ -95,12 +92,6 @@
             </i>
           </a></li>
       </ul>
-      <form action="/">
-        <div class="tipue_search_right"><input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required></div>
-        <div style="clear: both;"></div>
-      </form>
-      
-      <div id="tipue_search_content"></div>
     </div>
 
 
@@ -139,7 +130,7 @@
 <h2><strong>Differences between MicroPython &amp; Python</strong></h2>
 <p>There obviously had to be some changes between Python and MicroPython to make it work efficiently on processors a fraction of the power, but what are they? If you are a beginner-intermediate Python programmer, you’ll only run into trouble in very specific scenarios, which can be easily worked around. For example you cannot delete from a list with a step greater than 1.</p>
 <p><strong>Sample Python Code</strong></p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></span>
 <span class="code-line"><span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span></span>
@@ -163,7 +154,7 @@
 </table>
 <p>However this can be easily worked around with an explicit loop for example:</p>
 <p><strong>Sample MicroPython/Python Code</strong></p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></span>
@@ -232,13 +223,5 @@
 }
 </script>
 
-<script>
-  $(document).ready(function() {
-        $('#tipue_search_input').tipuesearch({
-            'mode': 'json',
-            'contentLocation': 'tipuesearch_content.json'
-        });
-  });
-</script>
 </body>
 </html>
