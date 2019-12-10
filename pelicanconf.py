@@ -52,6 +52,7 @@ MENUITEMS = (
     ("Categories", "/categories.html"),
     ("Tags", "/tags.html"),
     ("Sitemap", "/sitemap.xml"),
+    ("Search","/search.html")
 )
 
 SITEMAP = {
@@ -83,12 +84,14 @@ PLUGINS = [
     "representative_image",
     "share_post",
     'show_source',
-    'tipue_search.tipue_search',
+    'tipue_search',
     "dateish",
     "post_stats",
     "render_math",
     "autostatic"
 ]
+
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search'))
 
 # MARKUP = ('md', 'ipynb')
 MARKUP = ('md', )
