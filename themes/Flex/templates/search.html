@@ -4,6 +4,7 @@
 
 {% block extra_css %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 {% endblock %}
 
 {% block extra_js %}
@@ -24,16 +25,15 @@
 {% endblock extra_js %}
 
 {% block content %}
-<article class="single">
-  <header>
-    <h1 id="search-results">{{ _('Search Results:') }}</h1>
-  </header>
-  <div>
-    <ul class="list">
-        <div>
-            <div id="tipue_search_content"></div>
-        </div>
-    </ul>
-  </div>
-</article>
+<div>
+    <header>
+        <h1 id="search-results">{{ _('Search Results:') }}</h1>
+    </header>
+    <div id="tipue_search_content"></div>
+</div>
+<script>
+        $(document).ready(function() {
+             $('#tipue_search_input').tipuesearch();
+        });
+    </script>
 {% endblock %}
