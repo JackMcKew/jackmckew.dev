@@ -1,67 +1,130 @@
+
 <!DOCTYPE html>
 <html lang="english">
 <head>
-          <title>Jack McKew's Blog - PyCon AU 2019 Sunday In Summary</title>
-        <meta charset="utf-8" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
 
 
 
 
-    <meta name="tags" content="python" />
-    <meta name="tags" content="pyconau" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Jack McKew" />
+<meta name="description" content="This is a follow on from my last post PyCon AU 2019 Saturday In Summary. Day 2 The real costs of Open Source Sustainability \@vmbrasseur The key takeaway that I got from this talk, was the typical reaction for problems which are far away from yourself or out of your …" />
+<meta name="keywords" content="python, pyconau">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="PyCon AU 2019 Sunday In Summary"/>
+<meta property="og:description" content="This is a follow on from my last post PyCon AU 2019 Saturday In Summary. Day 2 The real costs of Open Source Sustainability \@vmbrasseur The key takeaway that I got from this talk, was the typical reaction for problems which are far away from yourself or out of your …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/pycon-au-2019-sunday-in-summary.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-07 06:30:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="pyconau"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+  <title>Jack McKew's Blog &ndash; PyCon AU 2019 Sunday In Summary</title>
 
 </head>
+<body>
+  <aside>
+    <div>
+      <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="https://jackmckew.dev/">Jack McKew's Blog <strong>Python enthusiast, electrical engineer and tinkerer</strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="/archives.html">Archives</a></li>
-            <li><a href="/categories.html">Categories</a></li>
-            <li><a href="/tags.html">Tags</a></li>
-            <li><a href="/sitemap.xml">Sitemap</a></li>
-            <li><a href="https://jackmckew.dev/pages/contact.html">Contact</a></li>
-            <li><a href="https://jackmckew.dev/pages/cv-professional.html">CV/Professional</a></li>
-            <li><a href="https://jackmckew.dev/category/android.html">Android</a></li>
-            <li><a href="https://jackmckew.dev/category/book-reviews.html">Book Reviews</a></li>
-            <li><a href="https://jackmckew.dev/category/data-science.html">Data Science</a></li>
-            <li><a href="https://jackmckew.dev/category/engineering.html">Engineering</a></li>
-            <li><a href="https://jackmckew.dev/category/engineering-python.html">Engineering, Python</a></li>
-            <li><a href="https://jackmckew.dev/category/machine-learning.html">Machine Learning</a></li>
-            <li><a href="https://jackmckew.dev/category/principles.html">Principles</a></li>
-            <li class="active"><a href="https://jackmckew.dev/category/python.html">Python</a></li>
-            <li><a href="https://jackmckew.dev/category/python-data-science.html">Python, Data Science</a></li>
-            <li><a href="https://jackmckew.dev/category/python-engineering.html">Python, Engineering</a></li>
-            <li><a href="https://jackmckew.dev/category/python-principles.html">Python, Principles</a></li>
-            <li><a href="https://jackmckew.dev/category/software-development.html">Software Development</a></li>
-            <li><a href="https://jackmckew.dev/category/software-development-data-science.html">Software Development, Data Science</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content" class="body">
+<p>Python enthusiast, electrical engineer and tinkerer</p>
+      <nav>
+        <ul class="list">
+
+            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+            <i class="fab fa-twitter">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://jackmckew.dev">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/sitemap.xml">Sitemap</a>
+
+
+    </nav>
+
+<article class="single">
   <header>
-    <h2 class="entry-title">
-      <a href="https://jackmckew.dev/pycon-au-2019-sunday-in-summary.html" rel="bookmark"
-         title="Permalink to PyCon AU 2019 Sunday In Summary">PyCon AU 2019 Sunday In Summary</a></h2>
- 
+      
+    <h1 id="pycon-au-2019-sunday-in-summary">PyCon AU 2019 Sunday In Summary</h1>
+    <p>
+          Posted on Wed 07 August 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+
+
+        &#8226; 4 min read
+    </p>
   </header>
-  <footer class="post-info">
-    <time class="published" datetime="2019-08-07T06:30:00+10:00">
-      Wed 07 August 2019
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="https://jackmckew.dev/author/jack-mckew.html">Jack McKew</a>
-    </address>
-    <div class="category">
-        Category: <a href="https://jackmckew.dev/category/python.html">Python</a>
-    </div>
-    <div class="tags">
-        Tags:
-            <a href="https://jackmckew.dev/tag/python.html">python</a>
-            <a href="https://jackmckew.dev/tag/pyconau.html">pyconau</a>
-    </div>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <p>This is a follow on from my last post <a href="https://jmckew.com/2019/08/06/pycon-au-2019-saturday-in-summary/">PyCon AU 2019 Saturday In Summary</a>.</p>
+
+
+  <div>
+    <body><p>This is a follow on from my last post <a href="https://jmckew.com/2019/08/06/pycon-au-2019-saturday-in-summary/">PyCon AU 2019 Saturday In Summary</a>.</p>
 <h2><a href="https://2019.pycon-au.org/schedule/sunday/">Day 2</a></h2>
 <h3><a href="https://2019.pycon-au.org/talks/vicky">The real costs of Open Source Sustainability</a> <a href="https://twitter.com/vmbrasseur">\@vmbrasseur</a></h3>
 <p>The key takeaway that I got from this talk, was the typical reaction for problems which are far away from yourself or out of your control is to donate money. Vicky spoke about how sometimes money is not the solution to problems, specifically, for open source projects. Ways you can contribute can be summed up using the term Time, Talent, Treasure.</p>
@@ -116,14 +179,65 @@
 <li><a href="https://www.youtube.com/watch?v=aeZOVaULoNI&amp;list=PLs4CJRBY5F1LKqauI3V4E_xflt6Gow611&amp;index=38">Tunnel Snakes Rule! Bringing the many worlds of Python together</a>,</li>
 <li><a href="https://www.youtube.com/watch?v=HHrVBKZLolg&amp;list=PLs4CJRBY5F1LKqauI3V4E_xflt6Gow611&amp;index=40">"Goodbye Print Statements, Hello Debugger!" - Nina Zakharenko</a>,</li>
 <li><a href="https://www.youtube.com/watch?v=lW5ZJcrjYLw&amp;list=PLs4CJRBY5F1LKqauI3V4E_xflt6Gow611&amp;index=59">"Insights into Social Media Data using Entropy Theory" - Mars Geldard</a>.</li>
-</ul>
-  </div><!-- /.entry-content -->
-</section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+</ul></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+      <a href="https://jackmckew.dev/tag/pyconau.html">pyconau</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/pycon-au-2019-saturday-in-summary.html" title="PyCon AU 2019 Saturday In Summary">
+      <i class="fa fa-angle-left"></i>     Previous Post
+
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/looking-for-patterns-in-city-names-interactive-plotting.html" title="Looking for Patterns in City Names & Interactive Plotting">
+          Next Post
+ <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script>
+
 </body>
 </html>
