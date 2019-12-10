@@ -74,16 +74,16 @@ PLUGINS = [
     "sitemap",
     "better_codeblock_line_numbering",
     "better_code_samples",
+    "bootstrapify",
     "deadlinks",
-    "glossary",
-    "multi_neighbors",
+    "more_categories",
+    "neighbors",
+    "pelican-ert",
     "liquid_tags.notebook",
-    # "pelican-ipynb.markup",
-    # "pelican_youtube",
-    "photos",
     "representative_image",
     "share_post",
-    "always_modified",
+    'show_source',
+    'tipue_search.tipue_search',
     "dateish",
     "post_stats",
     "render_math",
@@ -92,6 +92,14 @@ PLUGINS = [
 
 # MARKUP = ('md', 'ipynb')
 MARKUP = ('md', )
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums' : 'True'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
 # IPYNB_USE_METACELL = True
 
 # IGNORE_FILES = [".ipynb_checkpoints"] 

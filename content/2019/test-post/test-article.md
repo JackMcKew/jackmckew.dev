@@ -6,5 +6,6 @@ Tags: python
 Slug: test-article
 Status: published
 
-{static img\cf08591b-7f2b-47bd-8d0c-8a4d27c0d72d-original.png}
+![cf08591b-7f2b-47bd-8d0c-8a4d27c0d72d-original](
+{static img/cf08591b-7f2b-47bd-8d0c-8a4d27c0d72d-original.png})
 
