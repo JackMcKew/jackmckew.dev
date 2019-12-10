@@ -10,14 +10,7 @@ Following on from last weeks post where we analysed the amount of [repeated lett
 
 As like previously, let's take a look at the interactive graph before getting into how it was created.
 
-<iframe src="..\html\intro-to-web-scraping\letter_count.html"
-    sandbox="allow-same-origin allow-scripts"
-    width="100%"
-    height="500"
-    scrolling="no"
-    seamless="seamless"
-    frameborder="0">
-</iframe>
+{% notebook intro-to-web-scraping/scraping_analysis.ipynb cells[-1:] %}
 
 Similarly with most of my posts of this nature, we always begin by getting the data. To find a data set that gives us as many Maori town or place names as possible proved to be quite challenging, but luckily for Maori Language week NZhistory.gov.nz posted a table of a 1000 Maori place names, their components and the meaning. This data can be found: <https://nzhistory.govt.nz/culture/maori-language-week/1000-maori-place-names>.
 
