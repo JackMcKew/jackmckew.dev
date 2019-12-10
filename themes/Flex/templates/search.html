@@ -1,23 +1,42 @@
 {% extends "base.html" %}
-{% block title %}{{ SITENAME }} Search {% endblock %}
-{% block content %}
 
-<div class="entry-content">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js">
-    </script>
-    <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch_set.js"></script>
-    <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch.min.js"></script>
-        <script>
-            $(document).ready(function() {
-            $('#tipue_search_input').tipuesearch({
-                'show': 8,
-                'mode': 'json',
-                'contentLocation': '{{ SITEURL }}/tipuesearch_content.json'
-                });
-            });
-        </script>
-    <div align="center"><input type="text" size="60" id="tipue_search_input">
-        <input type="button" id="tipue_search_button" value="Search"></div>
-    <div id="tipue_search_content"></div>
-</div>
+{% block title %}
+  Seach {{ super() }}
+{% endblock title %}
+
+{% block head_description %}
+  Search results:
+{% endblock head_description %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch.css"/>
 {% endblock %}
+
+{% block extra_js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch_content.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch_set.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch({
+          'mode' : 'json',
+          'show': 10,
+          'newWindow': false,
+          'contentLocation': '{{ SITEURL }}/tipuesearch_content.json'
+      });
+    });
+  </script>
+{% endblock extra_js %}
+
+{% block top_center %}
+  <h1>
+    Search Results
+  </h1>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <div id="tipue_search_content"></div>
+  </div>
+{% endblock content %}

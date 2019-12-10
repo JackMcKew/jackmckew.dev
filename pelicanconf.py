@@ -71,6 +71,8 @@ PLUGIN_PATHS = [
 #     "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
 # ]
 
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search'))
+
 PLUGINS = [
     "sitemap",
     "better_codeblock_line_numbering",
@@ -90,8 +92,6 @@ PLUGINS = [
     "render_math",
     "autostatic"
 ]
-
-DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search'))
 
 # MARKUP = ('md', 'ipynb')
 MARKUP = ('md', )
