@@ -1,4 +1,0 @@
-Markdown
-nose
-nose-exclude
-nose-summary-report

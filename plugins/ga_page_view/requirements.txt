@@ -1,4 +1,0 @@
-parsedatetime
-google-api-python-client
-oauth2client
-PyOpenSSL
