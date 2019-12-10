@@ -5,7 +5,6 @@ branches:
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
-- apt-get install imagemagick
 script:
 - git submodule update --init --recursive
 - pelican content
