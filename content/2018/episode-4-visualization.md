@@ -1,5 +1,6 @@
 Title: Episode 4 - Visualization
 Date: 2018-12-14 03:11
+Category: Python
 Author: admin
 Tags: data, visualization
 Slug: episode-4-visualization

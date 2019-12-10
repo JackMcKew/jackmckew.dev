@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/</loc>
-<lastmod>2019-12-09T23:56:44-00:00</lastmod>
+<lastmod>2019-12-10T00:07:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/archives.html</loc>
-<lastmod>2019-12-09T23:56:44-00:00</lastmod>
+<lastmod>2019-12-10T00:07:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/tags.html</loc>
-<lastmod>2019-12-09T23:56:44-00:00</lastmod>
+<lastmod>2019-12-10T00:07:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/categories.html</loc>
-<lastmod>2019-12-09T23:56:44-00:00</lastmod>
+<lastmod>2019-12-10T00:07:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -368,6 +368,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://nifty-engelbart-ce3324.netlify.com/category/android.html</loc>
+<lastmod>2018-12-21T01:30:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://nifty-engelbart-ce3324.netlify.com/category/engineering.html</loc>
+<lastmod>2018-11-30T03:08:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/category/misc.html</loc>
 <lastmod>2019-11-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
@@ -375,8 +389,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://nifty-engelbart-ce3324.netlify.com/category/python.html</loc>
+<lastmod>2018-12-14T03:11:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
 <loc>https://nifty-engelbart-ce3324.netlify.com/category/python-packaging.html</loc>
 <lastmod>2019-01-25T07:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://nifty-engelbart-ce3324.netlify.com/category/software-development.html</loc>
+<lastmod>2018-12-28T08:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>

@@ -1,9 +1,9 @@
 Title: Episode 1 - Optimization
 Date: 2018-11-23 02:49
+Category: Python
 Author: admin
 Tags: data, analysis
 Slug: episode-1-optimization
-Status: published
 
 Recently I had to opportunity to optimize some workflows that involved heavy data processing, before the users were completing calculations/statistics by hand on up to 10 million rows in Excel, causing many complications (and crashes).
 

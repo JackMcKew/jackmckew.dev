@@ -1,5 +1,6 @@
 Title: Episode 6 - Containerization
 Date: 2018-12-28 08:30
+Category: Software Development
 Author: admin
 Slug: episode-6-containerization
 Status: published
