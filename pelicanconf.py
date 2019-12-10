@@ -9,7 +9,8 @@ AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
 SITETITLE = SITENAME
 SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
-SITEURL = "https://jackmckew.dev"
+# SITEURL = "https://jackmckew.dev"
+SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
 # SITEURL = "https://localhost:8000"
 
 
@@ -31,7 +32,8 @@ THEME = "./themes/Flex"
 STATIC_PATHS = ["img","files","html","extra"]
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
-    'extra/jm-photo.jpg' : {'path' : 'jm-photo.jpg'}
+    'extra/jm-photo.jpg' : {'path' : 'jm-photo.jpg'},
+    'extra/CNAME' : {'path' : 'CNAME'}
 }
 SITELOGO = "/jm-photo.jpg"
 # EXTRA_PATH_METADATA = {
