@@ -117,6 +117,8 @@ main nav {
     padding: 14px 0;
     border-bottom: 1px solid #eee;
     margin: 0 4% 2%;
+    display: flex;
+    align-items: center;
 }
 
 main .translations a,
