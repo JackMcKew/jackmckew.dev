@@ -21,6 +21,7 @@
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
   <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css"/>
   <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
@@ -97,7 +98,7 @@
   <main>
 
     <nav>
-        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+      <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
           <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
       </form>
       <a href="https://jackmckew.dev">    Home
@@ -112,8 +113,7 @@
 
     </nav>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js">
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
 <script type="text/javascript" src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
 <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
@@ -130,8 +130,9 @@ $(document).ready(function() {
 
 <section id="content" class="body">
 
-<div align="center"><input type="text" size="60" id="tipue_search_input">
-<input type="button" id="tipue_search_button" value="Search"></div>
+<div class="tipue_search_group">
+<input type="text" name="q" id="tipue_search_input">
+<button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
 <div id="tipue_search_content"></div>
 
 </section>

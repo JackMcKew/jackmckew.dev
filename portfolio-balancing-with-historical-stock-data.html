@@ -21,6 +21,7 @@
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
   <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css"/>
   <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
@@ -105,7 +106,7 @@
   <main>
 
     <nav>
-        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+      <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
           <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
       </form>
       <a href="https://jackmckew.dev">    Home
@@ -149,7 +150,7 @@
 <li>Pick the desired solution.</li>
 </ol>
 <p>To generate random portfolios, we define a function such that we can pass it differing variables as to tweak our outcomes in the future.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -187,7 +188,7 @@
 <p><img alt="\
 Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https://cdn-images-1.medium.com/max/1600/1*IabrYvsgHE07z2CJwoE9Zw.jpeg"/></p>
 <p><a href="https://medium.com/@bbrenyah">Bernard Brenyah</a>, whom I mentioned at the beginning of the post, has provided a clear explanation of how the above formula can be expressed in matrix calculation in one of <a href="https://medium.com/python-data/assessing-risks-and-return-with-probabilities-of-events-with-python-c564d9be4db4">his blog post</a>s. In which we just take the matrix calculation and multiply by 253 for number of trading days in Australia.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -199,7 +200,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 </pre></div>
 </td></tr></tbody></table>
 <p>Now that we have X number of randomly generated portfolios, all ranked against one another, it's time to plot so that our results can be visualized.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -273,7 +274,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 </pre></div>
 </td></tr></tbody></table>
 <p>Using the above function 'display_random_efficient_frontier', this will determine our max sharpe ratio portfolio generated and the minimum volatility portfolio with their respective returns. Now it is entirely up to the trader on how much risk they are willing to take on board with their portfolio. With the settings below in conjunction with the previously defined functions and stock data to generate the portfolios (risk free rate determined from <a href="http://www.worldgovernmentbonds.com/country/australia/">this website</a>).</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
