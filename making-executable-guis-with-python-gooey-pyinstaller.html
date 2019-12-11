@@ -91,11 +91,13 @@
     </aside>
     <main>
          <nav>
-            <form class="navbar-form navbar-left" action="/search.html" role="search">
-                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
-                <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-            </form>
-            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
+            <div>
+                <form class="navbar-form navbar-left" action="/search.html" role="search">
+                    <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                </form>
+                <a href="https://jackmckew.dev"> Home </a>                 <a href="/archives.html">Archives</a>                 <a href="/categories.html">Categories</a>                 <a href="/tags.html">Tags</a>                 <a href="/sitemap.xml">Sitemap</a>                 <a href="/search.html">Search</a>               </div>
+        </nav>
  <article class="single">
   <header>
       
@@ -109,9 +111,9 @@
 
 
   <div>
-    </head><body><p>Today we will go through how to go from a python script to packaged executable with a guided user interface (GUI) for users. First off we still start by writing the scripts that we would like to share with others to be able to use, especially for users that may be uncomfortable in a programming environment and would feel at home with a GUI.</p>
+    <body><p>Today we will go through how to go from a python script to packaged executable with a guided user interface (GUI) for users. First off we still start by writing the scripts that we would like to share with others to be able to use, especially for users that may be uncomfortable in a programming environment and would feel at home with a GUI.</p>
 <p>My personal favourite part about <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, is that you are essentially creating a command line interface (CLI) tool, which Gooey then uses to generate a GUI. This eliminates having two separate code bases to facilitate CLI &amp; GUI users, which can be very painful at times.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -168,7 +170,7 @@
 </td></tr></tbody></table>
 <p>The 2 functions defined above are for getting information of selected files, or returning a list of files found within a folder (and subfolders).</p>
 <p>Now to use <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, we need to define a 'main' function for parsing the arguments for the GUI to generate controls. As Gooey is based on the argparse library, if you have previously built CLI tools with argparse, the migration to Gooey is quite simplistic. However as there is always edge cases, ensure to check your tools functionality once you have developed it.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -216,7 +218,7 @@
 <p>By using the Gooey decorator we are able to define many different layout options for our GUI. Since we are trying to enable users to use multiple scripts which are different and separate, I personally like to the optional columns layout, but there are many other types of layouts which can be seen here: https://github.com/chriskiehl/Gooey#layout-customization.</p>
 <p>Following this we create our argument parsing function, and in which we define parsers, subparsers and add the arguments. This post will not be covering how to write CLIs, but it is on the list for future posts.</p>
 <p>To complete the script, we need to put in the functionality at startup.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -239,7 +241,7 @@
 <p>This will then generate a build folder and a dist folder within your current directory. The build folder will contain all the files used in generating the executable, which is found within the dist folder.</p>
 <p><img alt="image-20191102174758361" class="img-fluid" src="..\img\making-executable-guis-with-python-gooey-pyinstaller\image-20191102174758361.png"/></p>
 <p>The code in it's entirety is:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -361,7 +363,7 @@
 <span class="code-line">    <span class="k">elif</span> <span class="n">conf</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s1">'folder'</span><span class="p">:</span></span>
 <span class="code-line">        <span class="k">print</span><span class="p">(</span><span class="n">get_files_in_folder</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span><span class="n">conf</span><span class="o">.</span><span class="n">file_type</span><span class="p">))</span></span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></tbody></table></body>
   </div>
   <div class="tag-cloud">
     <p>
