@@ -1,4 +1,4 @@
-  
+   
 <!DOCTYPE html>
 <html lang="english">
 
@@ -37,7 +37,7 @@
 <meta property="og:url" content="https://jackmckew.dev"/>
 <meta property="og:image" content="/jm-photo.jpg">
  
-    <title>Jack McKew's Blog &ndash;  Tag security </title>
+    <title>Jack McKew's Blog Search - Jack McKew's Blog </title>
 
  </head>
 
@@ -86,30 +86,22 @@
     <main>
          <nav>
             <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
- 
+ <script>
+    $(document).ready(function() {
+        $('#tipue_search_input').tipuesearch({
+            'show': 10,
+            'mode': 'json',
+            'contentLocation': 'https://jackmckew.dev/tipuesearch_content.js'
+        });
+    });
+</script>
 
-<article>
-  <header>
-    <h2><a href="https://jackmckew.dev/python-and-data-security-hashing-algorithms.html#python-and-data-security-hashing-algorithms">Python and Data Security (Hashing Algorithms)</a></h2>
-    <p>
-       Posted on Fri 21 June 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a> 
-
-          &#8226;  Tagged with 
-              <a href="https://jackmckew.dev/tag/python.html">python</a>,              <a href="https://jackmckew.dev/tag/security.html">security</a>
-        &#8226; 5 min read
-    </p>
-  </header>
-  <div>
-      <body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some …</p></body>
-        <br>
-        <a class="btn" href="https://jackmckew.dev/python-and-data-security-hashing-algorithms.html#python-and-data-security-hashing-algorithms"> Continue reading </a>
-  </div>
+<article class="single">
+    <header>
+        <h1 id="categories"> Search Results </h1>
+    </header>
+    <div id="tipue_search_content"></div>
 </article>
-
-  <div class="pagination">
-  </div>
-
-
 
 
         <footer>
