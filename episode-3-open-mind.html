@@ -106,9 +106,10 @@
   <main>
 
     <nav>
-      <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
-          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
-      </form>
+      <div class="tipue_search_group">
+        <input type="text" name="q" id="tipue_search_input">
+        <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+      <div id="tipue_search_content"></div> 
       <a href="https://jackmckew.dev">    Home
 </a>
 
