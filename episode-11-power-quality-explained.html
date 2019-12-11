@@ -122,7 +122,7 @@
 </ul>
 <h2>Harmonics</h2>
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -185,14 +185,14 @@
 <p>Since motors require inductive or lagging power for magnetizing before useful work beings, this brings makes the power factor of the system lagging (\&lt;1). Capacitors provide capacitive or leading reactive power that cancels out the lagging power when used for power-factor improvement. The improved power factor changes the current requirements of the system, but not the one required by the motor.</p>
 <p><img alt="" class="wp-image-136 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-1-1.gif"/></p>
 <p><img alt="Apparent power calculation" class="img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-2.gif"/></p>
-<p><img alt="Reactive power calculation" class="img-fluid wp-image-138" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-3.gif"/></p>
+<p><img alt="Reactive power calculation" class="wp-image-138 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-3.gif"/></p>
 <p>Using these formulas we can calculate just how big of a capacitor we require:</p>
-<p><img alt="" class="img-fluid wp-image-139" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
+<p><img alt="" class="wp-image-139 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
 <p><img alt="" class="img-fluid wp-image-140" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
-<p><img alt="" class="img-fluid wp-image-141" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
+<p><img alt="" class="wp-image-141 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
 <p><img alt="" class="img-fluid wp-image-142" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-7.gif"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
