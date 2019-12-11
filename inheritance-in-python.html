@@ -11,15 +11,12 @@
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/jquery.min.js"></script>
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
-    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-
-       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -94,12 +91,10 @@
     <main>
          <nav>
             <form class="navbar-form navbar-left" action="/search.html" role="search">
-                <div class="tipue_search_group">
-                    <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
-                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-                    <a href="https://jackmckew.dev"> Home </a>                     <a href="/archives.html">Archives</a>                     <a href="/categories.html">Categories</a>                     <a href="/tags.html">Tags</a>                     <a href="/sitemap.xml">Sitemap</a>                     <a href="/search.html">Search</a>                   </div>
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+                <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
             </form>
-        </nav>
+            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
  <article class="single">
   <header>
       
@@ -113,7 +108,7 @@
 
 
   <div>
-    <body><p>As Python is a high level, general purpose programming language, which supports users to define their own types using classes, which are most often following the concept of object-oriented programming. Object-oriented programming is a type of software design in which users not only define the data type (eg, int) of a data structure, but also the types of functions that can be applied.</p>
+    </head><body><p>As Python is a high level, general purpose programming language, which supports users to define their own types using classes, which are most often following the concept of object-oriented programming. Object-oriented programming is a type of software design in which users not only define the data type (eg, int) of a data structure, but also the types of functions that can be applied.</p>
 <p>Object-oriented programming is built up of a lot of concepts, to name a few:</p>
 <ul>
 <li>Inheritance</li>
@@ -124,7 +119,7 @@
 </ul>
 <p>This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.</p>
 <p>First off, we are going to start by defining our 'base' class (also known as abstract class) of our Animal with common properties:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -150,7 +145,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now that we have our base class, we can define a subclass 'Dog' that will be able to speak if we define the function inside, but we can also see that it derives from it's parent class 'Animal' by printing out it's family.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -174,14 +169,14 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Which will print out:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Woof</span><span class="err">!</span></span>
 <span class="code-line"><span class="n">Animal</span> <span class="n">Kingdom</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>See my post on dunders (double underscores) to get a better understanding of how the __init__ function is working: <a href="https://jmckew.com/2019/09/06/dunders-in-python/">https://jmckew.com/2019/09/06/dunders-in-python/</a></p>
 <p>Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -197,13 +192,13 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Which will also print:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Woof</span><span class="err">!</span></span>
 <span class="code-line"><span class="n">Animal</span> <span class="n">Kingdom</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Now what if we wanted to specify the family that all of our dog classes are, we can do this by overriding their parent class (similar to how we are overriding the speak function):</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -223,7 +218,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Which then when we run both the below code:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -247,7 +242,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>We will now get:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">Woof</span><span class="err">!</span></span>
@@ -256,7 +251,7 @@
 <span class="code-line"><span class="n">Mammal</span></span>
 </pre></div>
 </td></tr></tbody></table>
-<p>You should now be comfortable in understanding how inheritance works. Normally, it's best practice to inherit only from a single parent class when creating subclasses. As multiple inheritance makes your programs less complicated and easier to manage. However, for large programs, it is very difficult to avoid multiple inheritance.</p></body>
+<p>You should now be comfortable in understanding how inheritance works. Normally, it's best practice to inherit only from a single parent class when creating subclasses. As multiple inheritance makes your programs less complicated and easier to manage. However, for large programs, it is very difficult to avoid multiple inheritance.</p>
   </div>
   <div class="tag-cloud">
     <p>

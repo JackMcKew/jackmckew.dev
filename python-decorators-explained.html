@@ -11,15 +11,12 @@
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/jquery.min.js"></script>
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
-    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-
-       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -94,12 +91,10 @@
     <main>
          <nav>
             <form class="navbar-form navbar-left" action="/search.html" role="search">
-                <div class="tipue_search_group">
-                    <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
-                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-                    <a href="https://jackmckew.dev"> Home </a>                     <a href="/archives.html">Archives</a>                     <a href="/categories.html">Categories</a>                     <a href="/tags.html">Tags</a>                     <a href="/sitemap.xml">Sitemap</a>                     <a href="/search.html">Search</a>                   </div>
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+                <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
             </form>
-        </nav>
+            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
  <article class="single">
   <header>
       
@@ -113,9 +108,9 @@
 
 
   <div>
-    <body><p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
+    </head><body><p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
 <p>Firstly you have to understand functions within python:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -154,7 +149,7 @@
 </td></tr></tbody></table>
 <p>As we can see above we can give functions default arguments (the string 'Jack' for the name variable in hello). Assign functions to variables (ensuring the parentheses are not included otherwise we would be assigning to the returning value from the function. Remove previous functions now that we have 'copied' the function over.</p>
 <p>Now to take the next step into functions within Python, by defining functions within functions:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -190,7 +185,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now we can make nested functions (functions within functions), the next step is, functions returning functions.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -228,7 +223,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>From earlier, we know that if we don't include the parentheses then the function does not executed. Another extension of the way this is formatted is that we can now call hello()() which outputs "Now you are in the greeting() function".</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -250,7 +245,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now you have all the knowledge to learn what decorators really are, they let you execute code before and after a function. The code above is actually a decorator, but let's make it more usable.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -292,7 +287,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now you've made a decorator! We've just used what we learned previously to modify it's behaviour in one way or another. Now to make it even more concise we can just the @ symbol. Here is how we could have used the previous code with @ symbol.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -315,7 +310,7 @@
 <span class="code-line"><span class="n">function_requiring_decoration</span> <span class="o">=</span> <span class="n">new_decorator</span><span class="p">(</span><span class="n">function_requiring_decoration</span><span class="p">)</span></span>
 </pre></div>
 </td></tr></tbody></table>
-<p>Hopefully now you are ready to go and explore the world of -decorators within Python, they can be used quite powerfully and allow for you to reuse code and extend capabilities. Some of the best examples for decorators are for authentication or logging, however I will not cover them as they are extensively documented over the internet.</p></body>
+<p>Hopefully now you are ready to go and explore the world of -decorators within Python, they can be used quite powerfully and allow for you to reuse code and extend capabilities. Some of the best examples for decorators are for authentication or logging, however I will not cover them as they are extensively documented over the internet.</p>
   </div>
   <div class="tag-cloud">
     <p>
