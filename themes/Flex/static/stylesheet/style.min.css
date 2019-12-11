@@ -116,7 +116,8 @@ main nav {
     font-size: .72em;
     padding: 14px 0;
     border-bottom: 1px solid #eee;
-    margin: 0 4% 2%
+    margin: 0 4% 2%;
+    display: -webkit-box
 }
 
 main .translations a,
