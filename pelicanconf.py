@@ -52,7 +52,7 @@ MENUITEMS = (
     ("Categories", "/categories.html"),
     ("Tags", "/tags.html"),
     ("Sitemap", "/sitemap.xml"),
-    ("Search","/search.html")
+    # ("Search","/search.html")
 )
 
 SITEMAP = {
@@ -71,7 +71,7 @@ PLUGIN_PATHS = [
 #     "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
 # ]
 
-DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives','search'))
 
 PLUGINS = [
     "sitemap",
