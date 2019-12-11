@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -104,7 +105,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -131,7 +134,7 @@
 
 
   <div>
-    <body><p>One of the biggest skills in any career path comes solely from knowing where to look and what to look for when breaking down a problem. The same principle applies for Python programming. Since there are millions of different packages out there that all serve different purposes, it is often difficult to even know if there is a package out there that will solve your problem.</p>
+    </head><body><p>One of the biggest skills in any career path comes solely from knowing where to look and what to look for when breaking down a problem. The same principle applies for Python programming. Since there are millions of different packages out there that all serve different purposes, it is often difficult to even know if there is a package out there that will solve your problem.</p>
 <p>I will be updating this table in the future as well as I personally find more and more solutions to my problems, and hope to share this insight with everyone. I will not be including packages from Python's standard library.</p>
 <table class="table table-striped">
 <thead>
@@ -243,7 +246,7 @@
 <td>GUI Development</td>
 </tr>
 </tbody>
-</table></body>
+</table>
   </div>
   <div class="tag-cloud">
     <p>

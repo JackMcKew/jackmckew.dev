@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -104,7 +105,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -131,11 +134,11 @@
 
 
   <div>
-    <body><p>Yesterday, I submitted my Electrical Engineering honours thesis.</p>
+    </head><body><p>Yesterday, I submitted my Electrical Engineering honours thesis.</p>
 <p>My project consisted of creating a hardware/software solution to schedule appliances in home to minimize energy costs through time of use pricing.</p>
 <p>The hardware is a "black box" that monitors power usage of appliances and logs this data through Wi-Fi to a database hosted locally.</p>
 <p>The software utilized an multi-objective evolutionary algorithm to then determine what the most beneficial time for each of the appliances to run. By using python for these computations, directly when the results are determined, a control strategy sends control messages back out to the "black boxes" to control the appliances automatically.</p>
-<p>By scheduling appliances in this manner, showed up to 50% reduction in cost of energy daily. As this can be scaled to any size of implementation, this project could show significant savings in cost of energy for any building/business. The project has an estimated payback period of 5 months, comparable to that of solar with 4-5 years.</p></body>
+<p>By scheduling appliances in this manner, showed up to 50% reduction in cost of energy daily. As this can be scaled to any size of implementation, this project could show significant savings in cost of energy for any building/business. The project has an estimated payback period of 5 months, comparable to that of solar with 4-5 years.</p>
   </div>
   <div class="tag-cloud">
     <p>

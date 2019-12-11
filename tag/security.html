@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -96,7 +97,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -125,7 +128,7 @@
     </p>
   </header>
   <div>
-      <body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some …</p></body>
+      </head><body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/python-and-data-security-hashing-algorithms.html#python-and-data-security-hashing-algorithms">    Continue reading
 </a>

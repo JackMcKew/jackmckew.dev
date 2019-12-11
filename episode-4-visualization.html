@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -104,7 +105,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -131,10 +134,10 @@
 
 
   <div>
-    <body><p><img alt="ezgif.com-video-to-gif-1-1" class="img-fluid" src="..\img\episode-4-visualization\ezgif.com-video-to-gif-1-1.gif"/></p>
+    </head><body><p><img alt="ezgif.com-video-to-gif-1-1" class="img-fluid" src="..\img\episode-4-visualization\ezgif.com-video-to-gif-1-1.gif"/></p>
 <p>In an ever growing world of data, every person perceives data in their own personalized way. This calls for data analysis to be visualized in a clear straightforward way so that it is accessible by anyone may come into contact with the system.</p>
 <p>By further making the data analysis system interactive, this adds an extreme amount of personalization to the analysis. Allowing the user to interact with the data set in their own way.</p>
-<p>With the help of python, it was simple to create an interactive map from a data set containing geographic co-ordinates allowing users to visually determine where they would like to select their data set from. This can then be embedding into any web browser or mobile device allowing for extreme flexibility and interactivity.</p></body>
+<p>With the help of python, it was simple to create an interactive map from a data set containing geographic co-ordinates allowing users to visually determine where they would like to select their data set from. This can then be embedding into any web browser or mobile device allowing for extreme flexibility and interactivity.</p>
   </div>
   <div class="tag-cloud">
     <p>

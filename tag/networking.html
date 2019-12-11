@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -96,7 +97,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -125,7 +128,7 @@
     </p>
   </header>
   <div>
-      <body><p>Following last weeks post around network topologies, I believe the next topic to cover is routing and addressing. Routing is the process of selecting a path for traffic to flow through in a network while addressing is marking elements within a network. A real-world example of routing and addressing is …</p></body>
+      </head><body><p>Following last weeks post around network topologies, I believe the next topic to cover is routing and addressing. Routing is the process of selecting a path for traffic to flow through in a network while addressing is marking elements within a network. A real-world example of routing and addressing is …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-17-networking-routing-addressing.html#episode-17-networking-routing-addressing">    Continue reading
 </a>
@@ -147,7 +150,7 @@
   </header>
   <div>
         <img src="..\img\episode-16-networking-basics\nettopo.gif">
-      <body><p>A network is defined as “A network is a collection of computers, servers, mainframes, network devices, peripherals, or other devices connected to one another to allow the sharing of data”. There are various configurations of networks for specific design scenarios as represented in:</p>
+      </head><body><p>A network is defined as “A network is a collection of computers, servers, mainframes, network devices, peripherals, or other devices connected to one another to allow the sharing of data”. There are various configurations of networks for specific design scenarios as represented in:</p>
 <p><img alt="network_topologies" class="img-fluid" src="..\img\episode-16-networking-basics\nettopo.gif"/></p>
 <p>Typical residential home networks are configured in …</p></body>
         <br>

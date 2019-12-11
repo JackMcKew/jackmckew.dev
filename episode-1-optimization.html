@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -104,7 +105,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -131,8 +134,8 @@
 
 
   <div>
-    <body><p>Recently I had to opportunity to optimize some workflows that involved heavy data processing, before the users were completing calculations/statistics by hand on up to 10 million rows in Excel, causing many complications (and crashes).</p>
-<p>With the use of Python this data analysis has been reduced to a matter of seconds speeding up workflows in some cases down from a whole working day to a matter of seconds allowing users to work on more important tasks and almost eliminating risk of human error.</p></body>
+    </head><body><p>Recently I had to opportunity to optimize some workflows that involved heavy data processing, before the users were completing calculations/statistics by hand on up to 10 million rows in Excel, causing many complications (and crashes).</p>
+<p>With the use of Python this data analysis has been reduced to a matter of seconds speeding up workflows in some cases down from a whole working day to a matter of seconds allowing users to work on more important tasks and almost eliminating risk of human error.</p>
   </div>
   <div class="tag-cloud">
     <p>

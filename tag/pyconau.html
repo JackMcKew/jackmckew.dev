@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -96,7 +97,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -125,7 +128,7 @@
     </p>
   </header>
   <div>
-      <body><p>This is a follow on from my last post <a href="https://jmckew.com/2019/08/06/pycon-au-2019-saturday-in-summary/">PyCon AU 2019 Saturday In Summary</a>.</p>
+      </head><body><p>This is a follow on from my last post <a href="https://jmckew.com/2019/08/06/pycon-au-2019-saturday-in-summary/">PyCon AU 2019 Saturday In Summary</a>.</p>
 <h2><a href="https://2019.pycon-au.org/schedule/sunday/">Day 2</a></h2>
 <h3><a href="https://2019.pycon-au.org/talks/vicky">The real costs of Open Source Sustainability</a> <a href="https://twitter.com/vmbrasseur">\@vmbrasseur</a></h3>
 <p>The key takeaway that I got from this talk, was the typical reaction for problems which are far away from yourself or out of your …</p></body>
@@ -150,7 +153,7 @@
   </header>
   <div>
         <img src="..\img\pycon-au-2019-saturday-in-summary\image1.png">
-      <body><p>My first ever conference, learning things I'd never even think of, meeting lots of new people and making my to-do list full of new things to learn. All this happened over the weekend at <a href="https://2019.pycon-au.org/">PyConAU 2019</a>. This post is dedicated to all the fantastic people I met that gave me …</p></body>
+      </head><body><p>My first ever conference, learning things I'd never even think of, meeting lots of new people and making my to-do list full of new things to learn. All this happened over the weekend at <a href="https://2019.pycon-au.org/">PyConAU 2019</a>. This post is dedicated to all the fantastic people I met that gave me …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/pycon-au-2019-saturday-in-summary.html#pycon-au-2019-saturday-in-summary">    Continue reading
 </a>

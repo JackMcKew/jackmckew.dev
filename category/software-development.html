@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -96,7 +97,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -126,7 +129,7 @@
   </header>
   <div>
         <img src="..\img\making-executables-installable-with-inno-setup\explorer_QxD96RKedI.png">
-      <body><p>Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.</p>
+      </head><body><p>Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.</p>
 <p>Once we have created the executable file for our GUI (which will be located in …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html#making-executables-installable-with-inno-setup">    Continue reading
@@ -148,7 +151,7 @@
     </p>
   </header>
   <div>
-      <body><p>Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.</p>
+      </head><body><p>Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.</p>
 <p>I completed their very first …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/what-is-mongodb.html#what-is-mongodb">    Continue reading
@@ -170,7 +173,7 @@
     </p>
   </header>
   <div>
-      <body><p>One of the biggest issues when working on any project regardless of what industry, discipline or context, as soon as a new 'version' of design or update comes along, the issue of version control appears. When this change(s) come along in the life cycle of a project, it is …</p></body>
+      </head><body><p>One of the biggest issues when working on any project regardless of what industry, discipline or context, as soon as a new 'version' of design or update comes along, the issue of version control appears. When this change(s) come along in the life cycle of a project, it is …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-12-what-is-git.html#episode-12-what-is-git">    Continue reading
 </a>
@@ -189,7 +192,7 @@
     </p>
   </header>
   <div>
-      <body><p>Recently I was researching into ways to more efficiently and effectively distribute software and I stumbled across containerization of applications. Containerization of application is when an application is run on an OS-level virtualization without spinning up an entire virtual machine for the application.</p>
+      </head><body><p>Recently I was researching into ways to more efficiently and effectively distribute software and I stumbled across containerization of applications. Containerization of application is when an application is run on an OS-level virtualization without spinning up an entire virtual machine for the application.</p>
 <p>Previously the way I had been distributing …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-6-containerization.html#episode-6-containerization">    Continue reading

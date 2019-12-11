@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -103,7 +104,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -130,7 +133,7 @@
 
 
   <div>
-    <body><p>Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.</p>
+    </head><body><p>Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.</p>
 <p>Once we have created the executable file for our GUI (which will be located in the dist folder:</p>
 <p><img alt="explorer_QxD96RKedI" class="img-fluid" src="..\img\making-executables-installable-with-inno-setup\explorer_QxD96RKedI.png"/></p>
 <p>Now we are going to use a program called Inno Setup, which can be downloaded from: http://www.jrsoftware.org/isinfo.php.</p>
@@ -160,7 +163,7 @@
 <p>12) Share around the executable installer!</p>
 <p><img alt="image-20191106201801891" class="img-fluid" src="..\img\making-executables-installable-with-inno-setup\explorer_d4QCQTi5sE.png"/></p>
 <p>Once installed, it will now act and behave like any other software installed on your computer!</p>
-<p><img alt="image-20191106201903238" class="img-fluid" src="..\img\making-executables-installable-with-inno-setup\main_W1DbyAXofL.png"/></p></body>
+<p><img alt="image-20191106201903238" class="img-fluid" src="..\img\making-executables-installable-with-inno-setup\main_W1DbyAXofL.png"/></p>
   </div>
   <div class="tag-cloud">
     <p>

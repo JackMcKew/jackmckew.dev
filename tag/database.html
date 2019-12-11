@@ -20,7 +20,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
   <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/> 
+  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
+  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
 
 
 
@@ -96,7 +97,9 @@
   <main>
 
     <nav>
-      <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required><button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
       <a href="https://jackmckew.dev">    Home
 </a>
 
@@ -125,7 +128,7 @@
     </p>
   </header>
   <div>
-      <body><p>Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.</p>
+      </head><body><p>Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.</p>
 <p>I completed their very first …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/what-is-mongodb.html#what-is-mongodb">    Continue reading
@@ -147,7 +150,7 @@
     </p>
   </header>
   <div>
-      <body><p>While it always may seem to be easiest to keep using what you've always used in the past, sometimes it pays off to keep an open mind about how you approach problems.</p>
+      </head><body><p>While it always may seem to be easiest to keep using what you've always used in the past, sometimes it pays off to keep an open mind about how you approach problems.</p>
 <p>Recently was asked to create a database with minute interval data from 600-700 data recording stations for up …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-3-open-mind.html#episode-3-open-mind">    Continue reading
