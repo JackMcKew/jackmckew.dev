@@ -114,7 +114,7 @@ main nav {
     text-align: center;
     text-transform: uppercase;
     font-size: .72em;
-    padding: 14px 0 6%;
+    padding: 14px 0;
     border-bottom: 1px solid #eee;
     margin: 0 4% 2%;
 }
