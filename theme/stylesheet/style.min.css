@@ -373,7 +373,7 @@ ul.list li {
 
 ul.social {
     font-size: 1.6em;
-    padding-top: 20px
+    padding-top: 0px
 }
 
 ul.social li {
@@ -511,7 +511,7 @@ a.sc-flickr {
         display: block
     }
     aside div ul.social {
-        padding-top: 32px
+        padding-top: 0px
     }
     main {
         width: 75vw;
