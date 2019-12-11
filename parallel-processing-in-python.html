@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch.min.js"></script>
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
@@ -108,7 +109,7 @@
 
 
   <div>
-    <body><p>Parallel processing is a mode of operation where the task is executed simultaneously in multiple processors in the same computer. The purpose of this is intended to reduce the overall processing time, however, there is often overhead between communicating processes. For small tasks, the overhead is detrimental to the length of processing, increasing the overall time taken.</p>
+    </head><body><p>Parallel processing is a mode of operation where the task is executed simultaneously in multiple processors in the same computer. The purpose of this is intended to reduce the overall processing time, however, there is often overhead between communicating processes. For small tasks, the overhead is detrimental to the length of processing, increasing the overall time taken.</p>
 <p>For this post we will be using the multiprocessing package in Python. Multiprocessing is apart of the standard library within Python and is a package that supports spawning processes using an API similar to the threading module (also apart of the standard library). The main benefit of the multiprocessing package, is that it disregards the global interpreter lock (GIL), by using sub processes instead of threads.</p>
 <p>The number of processors or threads in your computer dictates the maximum number of processes you can run at a time. To add flexibility to your program when it may be run across multiple machines, it is good practice to make use of the cpu_count() function apart of the multiprocessing, as shown below (please note f strings were only introduced in Python 3.6).</p>
 <table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
@@ -206,7 +207,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>With the result being: [76, 40, 76, 27, 64, 94, 30, 71, 70, 40].</p>
-<p>By utilizing the multiprocessing package in Python or parallel computing concepts in general, you will now be able to dramatically increase computation times (for large processes).</p></body>
+<p>By utilizing the multiprocessing package in Python or parallel computing concepts in general, you will now be able to dramatically increase computation times (for large processes).</p>
   </div>
   <div class="tag-cloud">
     <p>
