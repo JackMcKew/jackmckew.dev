@@ -37,6 +37,7 @@
   <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.js"></script>
   <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch_set.js"></script>
   <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.css"/>
+  <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/normalize.css"/>
   <script src="{{ SITEURL }}/tipuesearch_content.js"></script> 
 
   {% if CUSTOM_CSS %}
@@ -177,7 +178,7 @@
 
     {% if MAIN_MENU %}
     <nav>
-        <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
+      <form id="searchform" action="/search" onsubmit="return (this.elements['q'].value.length > 0)">
           <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
       </form>
       <a href="{{ SITEURL }}">{{ _('Home') }}</a>
