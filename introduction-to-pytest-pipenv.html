@@ -1,36 +1,26 @@
-
+  
 <!DOCTYPE html>
 <html lang="english">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css"/>
-  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
-
-
-
-
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-<!-- Google Analytics -->
+       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -40,9 +30,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
 <meta name="description" content="Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the &#39;unit&#39;) meets its design and behaves as intended. This post won&#39;t go into testing structures for complex applications, but rather …" />
 <meta name="keywords" content="python, pytest, pipenv">
 
@@ -62,74 +50,64 @@
 <meta property="article:tag" content="pipenv"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-  <title>Jack McKew's Blog &ndash; Introduction to Pytest &amp; Pipenv</title>
+    <title>Jack McKew's Blog &ndash; Introduction to Pytest &amp; Pipenv</title>
 
-</head>
+ </head>
+
 <body>
-  <aside>
-    <div>
-      <a href="https://jackmckew.dev">
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-<p>Python enthusiast, electrical engineer and tinkerer</p>
-      <nav>
-        <ul class="list">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>             <nav>
+                <ul class="list">
+                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                  </ul>
+            </nav>
 
-            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-
-        </ul>
-      </nav>
-
-      <ul class="social">
-          <li>
-            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
-            <i class="fab fa-twitter">
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
-            <i class="fab fa-linkedin">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
-            <i class="fab fa-github">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
             </i>
-          </a></li>
-      </ul>
-    </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
 
-  </aside>
-  <main>
-
-    <nav>
-      <div class="tipue_search_group">
-        <input type="text" name="q" id="tipue_search_input">
-        <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-      <div id="tipue_search_content"></div> 
-      <a href="https://jackmckew.dev">    Home
-</a>
-
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
-      <a href="/sitemap.xml">Sitemap</a>
-      <a href="/search.html">Search</a>
-
-
-    </nav>
-
-<article class="single">
+    </aside>
+    <main>
+         <nav>
+            <form class="navbar-form navbar-left" action="/search.html" role="search">
+                <div class="tipue_search_group">
+                    <input type="text" name="q" id="tipue_search_input">
+                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                </div>
+            </form>
+            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
+ <article class="single">
   <header>
       
     <h1 id="introduction-to-pytest-pipenv">Introduction to Pytest & Pipenv</h1>
     <p>
-          Posted on Fri 20 September 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
-
+       Posted on Fri 20 September 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a> 
 
         &#8226; 2 min read
     </p>
@@ -137,27 +115,27 @@
 
 
   <div>
-    </head><body><p>Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the 'unit') meets its design and behaves as intended.</p>
+    <body><p>Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the 'unit') meets its design and behaves as intended.</p>
 <p>This post won't go into testing structures for complex applications, but rather just a simple introduction on how to write, run and check the output of a test in Python with pytest.</p>
 <p>As this post is on testing, I also thought it might be quite apt for trialing out a difference package for dependency management. In the past I've used anaconda, virtualenv and just pip, but this time I wanted to try out pipenv.</p>
 <p>Similar to my post <a href="https://jmckew.com/2019/08/30/python-project-workflow/">Python Project Workflow</a> where I used virtualenv, you must install pipenv in your base Python directory, and typically add the Scripts folder to your path for ease later on. Now all we need to do is navigate to the folder and run:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pipenv</span> <span class="n">shell</span></span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pipenv</span> <span class="n">shell</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>This will create a virtual environment somewhere on your computer (unless specified) and create a pipfile in the current folder. The pipfile is a file that essentially describes all the packages used within the project, their version number &amp; so on. This is extremely useful when you pick it back up later on and find where you were at or if you wish to share this with others, they can generate their own virtual environment simply from the pipfile with:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pipenv</span> <span class="n">install</span> <span class="o">--</span><span class="n">dev</span></span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pipenv</span> <span class="n">install</span> <span class="o">--</span><span class="n">dev</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Enough about pipenv, let's get onto trying out pytest.</p>
 <p>For this post I will place both my function and it's tests in the same file, however, from my understanding it's best practice to separate them, specifically keeping all tests within an aptly named 'tests' directory for your project/package.</p>
 <p>First off let's define the function we intend to test later:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span> <span class="n">number_2</span><span class="p">):</span></span>
 <span class="code-line">    <span class="k">return</span> <span class="n">number_1</span> <span class="o">-</span> <span class="n">number_2</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Now we want to test if our function returns 1 if we give it number_1 = 2 and number_2 = 1:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">pytest</span></span>
@@ -167,18 +145,18 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>To run this test, open the pipenv shell like above in the directory of the file where you've written your tests and run:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span></span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>This will output the following:</p>
 <p><img alt="" class="img-fluid" src="..\img\introduction-to-pytest-pipenv\image0.png"/></p>
 <p>Each green dot represents a single test, and we can see that our 1 test passes in 0.02 seconds.</p>
 <p>To get more information from pytest, use the same command with -v (verbose) option:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span></span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Now we might want to check that it works for multiple cases, to do this we can use the parametrize functionality of pytest like so:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -207,7 +185,7 @@
 </td></tr></tbody></table>
 <p>Once run with the verbose command, we get the output:</p>
 <p><img alt="" class="img-fluid" src="..\img\introduction-to-pytest-pipenv\image-10.png"/></p>
-<p>Hopefully this post is a gentle introduction to what unit testing can be in Python.</p>
+<p>Hopefully this post is a gentle introduction to what unit testing can be in Python.</p></body>
   </div>
   <div class="tag-cloud">
     <p>
@@ -220,12 +198,10 @@
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/inheritance-in-python.html" title="Inheritance in Python">
-      <i class="fa fa-angle-left"></i>     Previous Post
-
+      <i class="fa fa-angle-left"></i>  Previous Post 
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/intro-to-games-in-python-with-pyglet.html" title="Intro to Games in Python with Pyglet">
-          Next Post
- <i class="fa fa-angle-right"></i>
+       Next Post  <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
@@ -242,22 +218,17 @@
     })();
 </script>
 <noscript>
-        Please enable JavaScript to view comments.
-
+     Please enable JavaScript to view comments. 
 </noscript>
 <!-- End Disqus -->
 </article>
 
-    <footer>
-<p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
+        <footer>
+ <p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+    </main>
 
-
-
-
-<script type="application/ld+json">
+   <script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -266,12 +237,11 @@
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>
-
-  <script>
-      $(document).ready(function() {
-           $('#tipue_search_input').tipuesearch();
-      });
-  </script>
+</script>      <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
 </body>
+
 </html>

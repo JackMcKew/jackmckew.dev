@@ -1,36 +1,26 @@
-
+  
 <!DOCTYPE html>
 <html lang="english">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css"/>
-  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
-
-
-
-
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-<!-- Google Analytics -->
+       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -40,9 +30,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
 <meta name="description" content="This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form …" />
 <meta name="keywords" content="python, ocr">
 
@@ -61,74 +49,64 @@
 <meta property="article:tag" content="ocr"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-  <title>Jack McKew's Blog &ndash; Python and OCR</title>
+    <title>Jack McKew's Blog &ndash; Python and OCR</title>
 
-</head>
+ </head>
+
 <body>
-  <aside>
-    <div>
-      <a href="https://jackmckew.dev">
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-<p>Python enthusiast, electrical engineer and tinkerer</p>
-      <nav>
-        <ul class="list">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>             <nav>
+                <ul class="list">
+                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                  </ul>
+            </nav>
 
-            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-
-        </ul>
-      </nav>
-
-      <ul class="social">
-          <li>
-            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
-            <i class="fab fa-twitter">
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
-            <i class="fab fa-linkedin">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
-            <i class="fab fa-github">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
             </i>
-          </a></li>
-      </ul>
-    </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
 
-  </aside>
-  <main>
-
-    <nav>
-      <div class="tipue_search_group">
-        <input type="text" name="q" id="tipue_search_input">
-        <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-      <div id="tipue_search_content"></div> 
-      <a href="https://jackmckew.dev">    Home
-</a>
-
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
-      <a href="/sitemap.xml">Sitemap</a>
-      <a href="/search.html">Search</a>
-
-
-    </nav>
-
-<article class="single">
+    </aside>
+    <main>
+         <nav>
+            <form class="navbar-form navbar-left" action="/search.html" role="search">
+                <div class="tipue_search_group">
+                    <input type="text" name="q" id="tipue_search_input">
+                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                </div>
+            </form>
+            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
+ <article class="single">
   <header>
       
     <h1 id="python-and-ocr">Python and OCR</h1>
     <p>
-          Posted on Fri 28 June 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
-
+       Posted on Fri 28 June 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a> 
 
         &#8226; 4 min read
     </p>
@@ -136,12 +114,12 @@
 
 
   <div>
-    </head><body><p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form of semi-structured data. OCR just like humans also has it's limitations, for example, if you were trying to read someone with really difficult handwriting, it could be a big challenge. In this post, we will use the <a href="https://opensource.google.com/projects/tesseract">Tesseract</a> engine (an open source Google project) to undertake the OCR process for us.</p>
+    <body><p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form of semi-structured data. OCR just like humans also has it's limitations, for example, if you were trying to read someone with really difficult handwriting, it could be a big challenge. In this post, we will use the <a href="https://opensource.google.com/projects/tesseract">Tesseract</a> engine (an open source Google project) to undertake the OCR process for us.</p>
 <p>First of all, as always, we must create a new virtual environment for our project to live in or use a package manager such as Anaconda (as explained in my post <a href="https://jmckew.com/2019/01/11/episode-8-anaconda/">Episode - 8: Anaconda</a>. Once initialized, we want to install a few packages to help us on our quest for OCR. Both <a href="https://pillow.readthedocs.io/en/stable/">Pillow</a> and <a href="https://pypi.org/project/pytesseract/">PyTesseract</a>, if you are using Anaconda like I did, you will want to specifically use pip, not conda, to install these packages. Further to this, you will need to install the binary of the Tesseract-OCR engine, which installation instructions can be found: <a href="https://github.com/UB-Mannheim/tesseract/wiki">https://github.com/UB-Mannheim/tesseract/wiki</a>.</p>
 <p>Now we are finally ready to test the engine and see if we can extract text out of an image, first of all we will start with a 'well' written example, the 'logo' of this website!</p>
 <p><img alt="test_image" class="img-fluid" src="..\img\python-and-ocr\example.png"/></p>
 <p>Of course, we have still yet to write any code, so naturally, that is the next step. As always in a python project, you will need to import all the dependencies of the project, in this case, it will be Image from the PIL (pillow) package, and pytesseract (the python wrapper around the Tesseract Engine).</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">pytesseract</span></span>
 </pre></div>
@@ -152,7 +130,7 @@
 <li><a href="https://pytesseract.readthedocs.io/">PyTesseract</a>.</li>
 </ul>
 <p>Luckily for us, the developers have made this so simple it could be a one liner:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)))</span></span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)))</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Which outputs in the console from the example image above:</p>
@@ -164,7 +142,7 @@ tinkerer</p>
 </blockquote>
 <p>Great! We can confirm that the text that the tesseract engine detected, is in fact, exactly what the example we gave it was.</p>
 <p>However, let's go a bit out of the way to make this a function such that it can be called more easily with the filepath to the image as a string.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -278,7 +256,7 @@ X2ZH:709) EEH:133) (GAA729)</p>
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
+</script></body>
   </div>
   <div class="tag-cloud">
     <p>
@@ -290,12 +268,10 @@ X2ZH:709) EEH:133) (GAA729)</p>
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/python-and-data-security-hashing-algorithms.html" title="Python and Data Security (Hashing Algorithms)">
-      <i class="fa fa-angle-left"></i>     Previous Post
-
+      <i class="fa fa-angle-left"></i>  Previous Post 
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/hands-on-machine-learning-chapter-2.html" title="Hands On Machine Learning Chapter 2">
-          Next Post
- <i class="fa fa-angle-right"></i>
+       Next Post  <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
@@ -312,22 +288,17 @@ X2ZH:709) EEH:133) (GAA729)</p>
     })();
 </script>
 <noscript>
-        Please enable JavaScript to view comments.
-
+     Please enable JavaScript to view comments. 
 </noscript>
 <!-- End Disqus -->
 </article>
 
-    <footer>
-<p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
+        <footer>
+ <p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+    </main>
 
-
-
-
-<script type="application/ld+json">
+   <script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -336,12 +307,11 @@ X2ZH:709) EEH:133) (GAA729)</p>
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>
-
-  <script>
-      $(document).ready(function() {
-           $('#tipue_search_input').tipuesearch();
-      });
-  </script>
+</script>      <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
 </body>
+
 </html>

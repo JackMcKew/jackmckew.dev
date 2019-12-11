@@ -1,36 +1,26 @@
-
+  
 <!DOCTYPE html>
 <html lang="english">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css"/>
-  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
-
-
-
-
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-<!-- Google Analytics -->
+       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -40,9 +30,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
 <meta name="description" content="One of the biggest issues when working on any project regardless of what industry, discipline or context, as soon as a new &#39;version&#39; of design or update comes along, the issue of version control appears. When this change(s) come along in the life cycle of a project, it is …" />
 <meta name="keywords" content="software, git">
 
@@ -61,74 +49,64 @@
 <meta property="article:tag" content="git"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-  <title>Jack McKew's Blog &ndash; Episode 12 - What is Git?</title>
+    <title>Jack McKew's Blog &ndash; Episode 12 - What is Git?</title>
 
-</head>
+ </head>
+
 <body>
-  <aside>
-    <div>
-      <a href="https://jackmckew.dev">
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-<p>Python enthusiast, electrical engineer and tinkerer</p>
-      <nav>
-        <ul class="list">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>             <nav>
+                <ul class="list">
+                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                  </ul>
+            </nav>
 
-            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-
-        </ul>
-      </nav>
-
-      <ul class="social">
-          <li>
-            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
-            <i class="fab fa-twitter">
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
-            <i class="fab fa-linkedin">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
-            <i class="fab fa-github">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
             </i>
-          </a></li>
-      </ul>
-    </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
 
-  </aside>
-  <main>
-
-    <nav>
-      <div class="tipue_search_group">
-        <input type="text" name="q" id="tipue_search_input">
-        <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-      <div id="tipue_search_content"></div> 
-      <a href="https://jackmckew.dev">    Home
-</a>
-
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
-      <a href="/sitemap.xml">Sitemap</a>
-      <a href="/search.html">Search</a>
-
-
-    </nav>
-
-<article class="single">
+    </aside>
+    <main>
+         <nav>
+            <form class="navbar-form navbar-left" action="/search.html" role="search">
+                <div class="tipue_search_group">
+                    <input type="text" name="q" id="tipue_search_input">
+                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                </div>
+            </form>
+            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
+ <article class="single">
   <header>
       
     <h1 id="episode-12-what-is-git">Episode 12 - What is Git?</h1>
     <p>
-          Posted on Fri 08 February 2019 in <a href="https://jackmckew.dev/category/software-development.html">Software Development</a>
-
+       Posted on Fri 08 February 2019 in <a href="https://jackmckew.dev/category/software-development.html">Software Development</a> 
 
         &#8226; 2 min read
     </p>
@@ -136,7 +114,7 @@
 
 
   <div>
-    </head><body><p>One of the biggest issues when working on any project regardless of what industry, discipline or context, as soon as a new 'version' of design or update comes along, the issue of version control appears. When this change(s) come along in the life cycle of a project, it is within everyone involved's best interests to maintain some type of version control, to manage and track changes between versions.</p>
+    <body><p>One of the biggest issues when working on any project regardless of what industry, discipline or context, as soon as a new 'version' of design or update comes along, the issue of version control appears. When this change(s) come along in the life cycle of a project, it is within everyone involved's best interests to maintain some type of version control, to manage and track changes between versions.</p>
 <p>When it comes to software development version control, the most well-known and commonly used system is Git. Git is a actively maintained open source project originally developed by Linus Torvalds (creator of the Linux OS kernel) in 2005. Multitudes of software projects depend on git for version control, including both commercial and open source.</p>
 <p>Git has a distributed architecture, meaning rather than having one single location for the full version history of the project, every developer's working copy of the project is also a location that can contain the full history. This also comes with the benefit that if one developer happens to lose the entire project, it can be restored from other developers (pending they have/are working on the latest version).</p>
 <h3>Flexibility</h3>
@@ -147,7 +125,7 @@
 <h3>Use-case</h3>
 <p>Bob wants to implement a new feature to the project he is working on in anticipation of the upcoming 3.0 release, and commits the new feature with descriptive messages. After being inspired by the new feature, he works on a second new feature and commits those modifications as well.</p>
 <p>Naturally, these two new features are logged as separate entities within the change history of the project. Bob then returns back to version 2.6 of the same project to fix a problem that only affects version 2.6. This allow Bob (and his team) to distribute that fix release (version 2.6.1), before version 3.0 is ready.</p>
-<p>Bob can then return to the upcoming version 3.0 'branch' to continue implementing new features. Since Bob has his own copy of the entire project, all of these changes can occur without an network access, thus being reliable and fast. To submit all these committed features and fixes to the remote copy of the project, it simply done by the use of the 'push' command.</p>
+<p>Bob can then return to the upcoming version 3.0 'branch' to continue implementing new features. Since Bob has his own copy of the entire project, all of these changes can occur without an network access, thus being reliable and fast. To submit all these committed features and fixes to the remote copy of the project, it simply done by the use of the 'push' command.</p></body>
   </div>
   <div class="tag-cloud">
     <p>
@@ -159,12 +137,10 @@
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/episode-11-power-quality-explained.html" title="Episode 11 - Power Quality Explained">
-      <i class="fa fa-angle-left"></i>     Previous Post
-
+      <i class="fa fa-angle-left"></i>  Previous Post 
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/episode-13-lighting-design.html" title="Episode 13 - Lighting Design">
-          Next Post
- <i class="fa fa-angle-right"></i>
+       Next Post  <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
@@ -181,22 +157,17 @@
     })();
 </script>
 <noscript>
-        Please enable JavaScript to view comments.
-
+     Please enable JavaScript to view comments. 
 </noscript>
 <!-- End Disqus -->
 </article>
 
-    <footer>
-<p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
+        <footer>
+ <p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+    </main>
 
-
-
-
-<script type="application/ld+json">
+   <script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -205,12 +176,11 @@
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>
-
-  <script>
-      $(document).ready(function() {
-           $('#tipue_search_input').tipuesearch();
-      });
-  </script>
+</script>      <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
 </body>
+
 </html>

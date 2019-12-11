@@ -1,36 +1,26 @@
-
+  
 <!DOCTYPE html>
 <html lang="english">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-  <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css"/>
-  <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/normalize.css"/>
-  <script src="https://jackmckew.dev/tipuesearch_content.js"></script> 
-
-
-
-
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-<!-- Google Analytics -->
+       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -40,9 +30,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="admin" />
+<!-- End Google Analytics -->   <meta name="author" content="admin" />
 <meta name="description" content="Recently I was researching into ways to more efficiently and effectively distribute software and I stumbled across containerization of applications. Containerization of application is when an application is run on an OS-level virtualization without spinning up an entire virtual machine for the application. Previously the way I had been distributing …" />
 <meta name="keywords" content="">
 
@@ -59,74 +47,64 @@
 <meta property="article:section" content="Software Development"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-  <title>Jack McKew's Blog &ndash; Episode 6 - Containerization</title>
+    <title>Jack McKew's Blog &ndash; Episode 6 - Containerization</title>
 
-</head>
+ </head>
+
 <body>
-  <aside>
-    <div>
-      <a href="https://jackmckew.dev">
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-      <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-<p>Python enthusiast, electrical engineer and tinkerer</p>
-      <nav>
-        <ul class="list">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>             <nav>
+                <ul class="list">
+                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                  </ul>
+            </nav>
 
-            <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-            <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-
-        </ul>
-      </nav>
-
-      <ul class="social">
-          <li>
-            <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
-            <i class="fab fa-twitter">
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
-            <i class="fab fa-linkedin">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
             </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
-            <i class="fab fa-github">
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
             </i>
-          </a></li>
-      </ul>
-    </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
 
-  </aside>
-  <main>
-
-    <nav>
-      <div class="tipue_search_group">
-        <input type="text" name="q" id="tipue_search_input">
-        <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-      <div id="tipue_search_content"></div> 
-      <a href="https://jackmckew.dev">    Home
-</a>
-
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
-      <a href="/sitemap.xml">Sitemap</a>
-      <a href="/search.html">Search</a>
-
-
-    </nav>
-
-<article class="single">
+    </aside>
+    <main>
+         <nav>
+            <form class="navbar-form navbar-left" action="/search.html" role="search">
+                <div class="tipue_search_group">
+                    <input type="text" name="q" id="tipue_search_input">
+                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                </div>
+            </form>
+            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
+ <article class="single">
   <header>
       
     <h1 id="episode-6-containerization">Episode 6 - Containerization</h1>
     <p>
-          Posted on Fri 28 December 2018 in <a href="https://jackmckew.dev/category/software-development.html">Software Development</a>
-
+       Posted on Fri 28 December 2018 in <a href="https://jackmckew.dev/category/software-development.html">Software Development</a> 
 
         &#8226; 2 min read
     </p>
@@ -134,11 +112,11 @@
 
 
   <div>
-    </head><body><p>Recently I was researching into ways to more efficiently and effectively distribute software and I stumbled across containerization of applications. Containerization of application is when an application is run on an OS-level virtualization without spinning up an entire virtual machine for the application.</p>
+    <body><p>Recently I was researching into ways to more efficiently and effectively distribute software and I stumbled across containerization of applications. Containerization of application is when an application is run on an OS-level virtualization without spinning up an entire virtual machine for the application.</p>
 <p>Previously the way I had been distributing software I had been developing in my preferred language (Python) was by using PyInstaller (https://pyinstaller.readthedocs.io/en/stable/). However I was running into issues with distributing a single executable throughout users, although since the software was only used by a small userbase at this stage, I was able to continue to use PyInstaller. I started researching containerization as in the future the software I will be developing will be used by a larger userbase. This will hopefully be more effective at managing versions and distributing updates to said userbase.</p>
 <p>Most other professionals in the software space have been constantly mentioning the use of Docker (https://www.docker.com/), I am now integrating my projects into Docker and have had no issues thus far.</p>
 <p>By utilizing OS-level containerization this also allows the developer to run on any OS they wish. For multiple projects of mine, I had been intending to use influxDB (https://www.influxdata.com/), however was limited to a strictly Windows only network. I see Docker as a solution to this problem, by being able to create a linux based container to run an instance of an influxDB that can be spun up within a Windows environment and communicate back to the Windows users in the network.</p>
-<p>Lastly, I'd like to wish a happy holidays to everyone reading and will be bringing more weekly content in the new year. Please do not hesitate to comment below if there is any topics/projects that you would like for me to research and write about my findings.</p>
+<p>Lastly, I'd like to wish a happy holidays to everyone reading and will be bringing more weekly content in the new year. Please do not hesitate to comment below if there is any topics/projects that you would like for me to research and write about my findings.</p></body>
   </div>
   <div class="tag-cloud">
     <p>
@@ -148,12 +126,10 @@
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/episode-5-android-multi-touch.html" title="Episode 5 - Android Multi-Touch">
-      <i class="fa fa-angle-left"></i>     Previous Post
-
+      <i class="fa fa-angle-left"></i>  Previous Post 
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/episode-7-planning.html" title="Episode 7 – Planning">
-          Next Post
- <i class="fa fa-angle-right"></i>
+       Next Post  <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
@@ -170,22 +146,17 @@
     })();
 </script>
 <noscript>
-        Please enable JavaScript to view comments.
-
+     Please enable JavaScript to view comments. 
 </noscript>
 <!-- End Disqus -->
 </article>
 
-    <footer>
-<p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
+        <footer>
+ <p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+    </main>
 
-
-
-
-<script type="application/ld+json">
+   <script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -194,12 +165,11 @@
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>
-
-  <script>
-      $(document).ready(function() {
-           $('#tipue_search_input').tipuesearch();
-      });
-  </script>
+</script>      <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
 </body>
+
 </html>
