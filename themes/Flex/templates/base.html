@@ -20,15 +20,13 @@
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome.css"> {% if DIRECT_TEMPLATES %}
+    <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/jquery.min.js"></script>
     <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.js"></script>
     <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.css" />
-    <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/normalize.css" />
     <script src="{{ SITEURL }}/tipuesearch_content.js"></script>
-
-    {% if CUSTOM_CSS %}
+    {% endif %} {% if CUSTOM_CSS %}
     <link href="{{ SITEURL }}/{{ CUSTOM_CSS }}" rel="stylesheet"> {% endif %} {% if FEED_ALL_ATOM %}
     <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom"> {% endif %} {% if FEED_ALL_RSS %}
     <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS"> {% endif %} {% if FAVICON %}
@@ -117,16 +115,16 @@
         </script>
         {% endif %} {% if MAIN_MENU %}
         <nav>
+            {% if 'search' in DIRECT_TEMPLATES %}
             <form class="navbar-form navbar-left" action="/search.html" role="search">
-                <div class="tipue_search_group">
-                    <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
-                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-                    <a href="{{ SITEURL }}">{{ _('Home') }}</a> {% for title, link in MENUITEMS %}
-                    <a href="{{ link }}">{{ title }}</a> {% endfor %} {% if FEED_ALL_ATOM %}
-                    <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a> {% endif %} {% if FEED_ALL_RSS %}
-                    <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a> {% endif %}
-                </div>
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+                <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
             </form>
+            {% endif %}
+            <a href="{{ SITEURL }}">{{ _('Home') }}</a> {% for title, link in MENUITEMS %}
+            <a href="{{ link }}">{{ title }}</a> {% endfor %} {% if FEED_ALL_ATOM %}
+            <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a> {% endif %} {% if FEED_ALL_RSS %}
+            <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a> {% endif %}
         </nav>
         {% endif %} {% block content %} {% endblock %}
 
