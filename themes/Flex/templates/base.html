@@ -118,10 +118,8 @@
         <nav>
             {% if 'search' in DIRECT_TEMPLATES %}
             <form class="navbar-form navbar-left form-inline" action="/search.html" role="search">
-                <div class="tipue_search_group">
-                    <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
-                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-                </div>
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+                <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
             </form>
             {% endif %}
             <a href="{{ SITEURL }}">{{ _('Home') }}</a> {% for title, link in MENUITEMS %}
