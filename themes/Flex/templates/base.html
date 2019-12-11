@@ -116,16 +116,18 @@
         </script>
         {% endif %} {% if MAIN_MENU %}
         <nav>
-            {% if 'search' in DIRECT_TEMPLATES %}
-            <form class="navbar-form navbar-left" action="/search.html" role="search">
-                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
-                <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-            </form>
-            {% endif %}
-            <a href="{{ SITEURL }}">{{ _('Home') }}</a> {% for title, link in MENUITEMS %}
-            <a href="{{ link }}">{{ title }}</a> {% endfor %} {% if FEED_ALL_ATOM %}
-            <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a> {% endif %} {% if FEED_ALL_RSS %}
-            <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a> {% endif %}
+            <div>
+                {% if 'search' in DIRECT_TEMPLATES %}
+                <form class="navbar-form navbar-left" action="/search.html" role="search">
+                    <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+                    <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                </form>
+                {% endif %}
+                <a href="{{ SITEURL }}">{{ _('Home') }}</a> {% for title, link in MENUITEMS %}
+                <a href="{{ link }}">{{ title }}</a> {% endfor %} {% if FEED_ALL_ATOM %}
+                <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a> {% endif %} {% if FEED_ALL_RSS %}
+                <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a> {% endif %}
+            </div>
         </nav>
         {% endif %} {% block content %} {% endblock %}
 
