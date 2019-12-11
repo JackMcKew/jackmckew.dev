@@ -92,13 +92,13 @@
     </aside>
     <main>
          <nav>
-            <div>
-                <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <form class="navbar-form navbar-left form-inline" action="/search.html" role="search">
+                <div class="tipue_search_group">
                     <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
                     <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
-                </form>
-                <a href="https://jackmckew.dev"> Home </a>                 <a href="/archives.html">Archives</a>                 <a href="/categories.html">Categories</a>                 <a href="/tags.html">Tags</a>                 <a href="/sitemap.xml">Sitemap</a>                 <a href="/search.html">Search</a>               </div>
-        </nav>
+                </div>
+            </form>
+            <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="/search.html">Search</a>           </nav>
  <article class="single">
   <header>
       
@@ -112,7 +112,7 @@
 
 
   <div>
-    <body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some way or another. Since this topic is so wide and deep, this will most likely become a series of posts as I am passionate around data security and enjoy getting stuck right into the math behind it. This post will be around hashing algorithms but future topics will include:</p>
+    </head><body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some way or another. Since this topic is so wide and deep, this will most likely become a series of posts as I am passionate around data security and enjoy getting stuck right into the math behind it. This post will be around hashing algorithms but future topics will include:</p>
 <ul>
 <li>Hashing Algorithms (this post),</li>
 <li>Modular Arithmetic and why it's used,</li>
@@ -149,7 +149,7 @@
 <ol>
 <li>Does the hash need to be natively supported by your operating system’s <code>crypt()</code> api,\
     in order to allow inter-operation with third-party applications on the host?
-    <p></p></li>
+    </li></ol>
 <li>
 <p>If yes, the right choice is either <a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.bcrypt.html#passlib.hash.bcrypt"><code>bcrypt</code></a> for BSD variants,\
         or <a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.sha512_crypt.html#passlib.hash.sha512_crypt"><code>sha512_crypt</code></a> for Linux; since these are natively supported.</p>
@@ -168,7 +168,7 @@
 <li>
 <p>Do you want to use the latest &amp; greatest, and don’t mind increased memory usage\
     when hashing?
-    </p><p></p>
+    </p></li>
 <ul>
 <li><a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.argon2.html#passlib.hash.argon2"><code>argon2</code></a> is a next-generation hashing algorithm,\
     attempting to become the new standard. It’s design has been being slightly tweaked\
@@ -177,13 +177,13 @@
     support library.</li>
 <li>If you want something secure, but more battle tested, continue...</li>
 </ul>
-</li>
+
 <li>
 <p>The top choices left are <a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.bcrypt.html#passlib.hash.bcrypt"><code>bcrypt</code></a> and <a href="https://passlib.readthedocs.io/en/stable/lib/passlib.hash.pbkdf2_digest.html#passlib.hash.pbkdf2_sha256"><code>pbkdf2_sha256</code></a>.\
     Both have advantages, and their respective rough edges;\
     though currently the balance is in favor of bcrypt\
     (pbkdf2 can be cracked somewhat more efficiently).
-    </p><p></p>
+    </p></li>
 <ul>
 <li>If choosing bcrypt, we strongly recommend installing the <a href="https://pypi.python.org/pypi/bcrypt">bcrypt</a>\
     support library on non-BSD operating systems.</li>
@@ -191,8 +191,8 @@
     you will probably want to install <a href="https://pypi.python.org/pypi/fastpbkdf2">fastpbk2</a>\
     support library.</li>
 </ul>
-</li>
-</ol>
+
+
 <p>From this, we will use the argon2 hashing algorithm. As normal, it is best practice to set up a virtual environment (or conda environment) and install the dependencies, in this case passlib.</p>
 <p>First of all, import the hashing algorithm you wish to use from the passlib package:</p>
 <table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">argon2</span></span>
@@ -306,7 +306,7 @@
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script></body>
+</script>
   </div>
   <div class="tag-cloud">
     <p>
