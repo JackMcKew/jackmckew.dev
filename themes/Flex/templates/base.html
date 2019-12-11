@@ -121,12 +121,12 @@
                 <div class="tipue_search_group">
                     <input type="text" name="q" id="tipue_search_input">
                     <button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                    <a href="{{ SITEURL }}">{{ _('Home') }}</a> {% for title, link in MENUITEMS %}
+                    <a href="{{ link }}">{{ title }}</a> {% endfor %} {% if FEED_ALL_ATOM %}
+                    <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a> {% endif %} {% if FEED_ALL_RSS %}
+                    <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a> {% endif %}
                 </div>
             </form>
-            <a href="{{ SITEURL }}">{{ _('Home') }}</a> {% for title, link in MENUITEMS %}
-            <a href="{{ link }}">{{ title }}</a> {% endfor %} {% if FEED_ALL_ATOM %}
-            <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a> {% endif %} {% if FEED_ALL_RSS %}
-            <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a> {% endif %}
         </nav>
         {% endif %} {% block content %} {% endblock %}
 
