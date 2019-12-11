@@ -72,7 +72,7 @@
             <h1><a href="{{ SITEURL }}">{{ SITETITLE }}</a></h1>
 
             {% if SITESUBTITLE %}
-            <p>{{ SITESUBTITLE }}</p>{% endif %} {% if 'search' in DIRECT_TEMPLATES %}
+            <p>{{ SITESUBTITLE }}</p>{% endif %} {% if DIRECT_TEMPLATES %}
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>

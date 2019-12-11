@@ -71,7 +71,7 @@ PLUGIN_PATHS = [
 #     "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
 # ]
 
-DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search'))
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
 
 PLUGINS = [
     "sitemap",
