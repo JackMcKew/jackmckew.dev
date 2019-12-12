@@ -32,6 +32,7 @@ GOOGLE_ADSENSE = {
     }
 }
 
+GITHUB_CORNER_URL = 'https://github.com/JackMcKew/jackmckew.dev'
 
 ARTICLE_URL = '{slug}.html'
 # ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
