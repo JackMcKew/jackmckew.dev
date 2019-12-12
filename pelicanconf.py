@@ -45,7 +45,7 @@ ARTICLE_SAVE_AS = '{slug}.html'
 
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
-STATIC_PATHS = ["img","files","html","extra"]
+STATIC_PATHS = ["img","files","html","extra","2018","2019"]
 # STATIC_SAVE_AS = "{dirname}"
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
@@ -72,6 +72,7 @@ MENUITEMS = (
 )
 
 NOTEBOOK_DIR = ''
+CODE_DIR = ''
 
 SITEMAP = {
     "format": "xml",
@@ -101,6 +102,7 @@ PLUGINS = [
     "neighbors",
     "pelican-ert",
     "liquid_tags.notebook",
+    "liquid_tags.include_code",
     "representative_image",
     "share_post",
     'show_source',

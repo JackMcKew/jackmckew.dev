@@ -8,3 +8,5 @@ A 'dunder' (double underscores) in Python (also known as a magic method) are the
 ![example]({static img\example.png})
 
 {% notebook 2019/test-post/notebooks/NZ_City_Letter_Analysis.ipynb cells[24:25] %}
+
+{% include_code 2019/test-post/code/spotify-analysis.py :hidefilename: Test Example %}
