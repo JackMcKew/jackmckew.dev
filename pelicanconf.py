@@ -71,6 +71,8 @@ MENUITEMS = (
     # ("Search","/search.html")
 )
 
+NOTEBOOK_DIR = ''
+
 SITEMAP = {
     "format": "xml",
     "priorities": {"articles": 0.6, "indexes": 0.6, "pages": 0.5},

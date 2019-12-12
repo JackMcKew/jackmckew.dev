@@ -56,6 +56,9 @@ from io import open
 from .mdx_liquid_tags import LiquidTags
 
 import IPython
+
+from pelican.utils import posixize_path
+
 IPYTHON_VERSION = IPython.version_info[0]
 
 try:
@@ -284,7 +287,7 @@ def notebook(preprocessor, tag, markup):
     language_applied_highlighter = partial(custom_highlighter, language=language)
 
     nb_dir =  preprocessor.configs.getConfig('NOTEBOOK_DIR')
-    nb_path = os.path.join('content', nb_dir, src)
+    nb_path = os.path.join('content', src)
 
     if not os.path.exists(nb_path):
         raise ValueError("File {0} could not be found".format(nb_path))

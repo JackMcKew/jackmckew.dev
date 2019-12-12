@@ -7,4 +7,4 @@ A 'dunder' (double underscores) in Python (also known as a magic method) are the
 
 ![example]({static img\example.png})
 
-{% notebook ./notebooks/NZ_City_Letter_Analysis.ipynb cells[24:25] %}
+{% notebook 2019/test-post/notebooks/NZ_City_Letter_Analysis.ipynb cells[24:25] %}
