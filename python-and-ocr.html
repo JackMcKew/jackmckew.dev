@@ -109,12 +109,12 @@
 
 
   <div>
-    </head><body><p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form of semi-structured data. OCR just like humans also has it's limitations, for example, if you were trying to read someone with really difficult handwriting, it could be a big challenge. In this post, we will use the <a href="https://opensource.google.com/projects/tesseract">Tesseract</a> engine (an open source Google project) to undertake the OCR process for us.</p>
+    <body><p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form of semi-structured data. OCR just like humans also has it's limitations, for example, if you were trying to read someone with really difficult handwriting, it could be a big challenge. In this post, we will use the <a href="https://opensource.google.com/projects/tesseract">Tesseract</a> engine (an open source Google project) to undertake the OCR process for us.</p>
 <p>First of all, as always, we must create a new virtual environment for our project to live in or use a package manager such as Anaconda (as explained in my post <a href="https://jmckew.com/2019/01/11/episode-8-anaconda/">Episode - 8: Anaconda</a>. Once initialized, we want to install a few packages to help us on our quest for OCR. Both <a href="https://pillow.readthedocs.io/en/stable/">Pillow</a> and <a href="https://pypi.org/project/pytesseract/">PyTesseract</a>, if you are using Anaconda like I did, you will want to specifically use pip, not conda, to install these packages. Further to this, you will need to install the binary of the Tesseract-OCR engine, which installation instructions can be found: <a href="https://github.com/UB-Mannheim/tesseract/wiki">https://github.com/UB-Mannheim/tesseract/wiki</a>.</p>
 <p>Now we are finally ready to test the engine and see if we can extract text out of an image, first of all we will start with a 'well' written example, the 'logo' of this website!</p>
 <p><img alt="test_image" class="img-fluid" src="..\img\python-and-ocr\example.png"/></p>
 <p>Of course, we have still yet to write any code, so naturally, that is the next step. As always in a python project, you will need to import all the dependencies of the project, in this case, it will be Image from the PIL (pillow) package, and pytesseract (the python wrapper around the Tesseract Engine).</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">pytesseract</span></span>
 </pre></div>
@@ -125,7 +125,7 @@
 <li><a href="https://pytesseract.readthedocs.io/">PyTesseract</a>.</li>
 </ul>
 <p>Luckily for us, the developers have made this so simple it could be a one liner:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)))</span></span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)))</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Which outputs in the console from the example image above:</p>
@@ -137,7 +137,7 @@ tinkerer</p>
 </blockquote>
 <p>Great! We can confirm that the text that the tesseract engine detected, is in fact, exactly what the example we gave it was.</p>
 <p>However, let's go a bit out of the way to make this a function such that it can be called more easily with the filepath to the image as a string.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -251,7 +251,7 @@ X2ZH:709) EEH:133) (GAA729)</p>
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
+</script></body>
   </div>
   <div class="tag-cloud">
     <p>
