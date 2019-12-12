@@ -4,5 +4,5 @@
 
 # Jack McKew's Blog
 
-[jackmckew.dev]](https://jackmckew.dev) Powered by Pelican + Travis CI + Netlify
+[jackmckew.dev](https://jackmckew.dev) Powered by Pelican + Travis CI + Netlify
 
