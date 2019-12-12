@@ -32,6 +32,8 @@ GOOGLE_ADSENSE = {
     }
 }
 
+USE_TIPUE_SEARCH = True
+
 GITHUB_CORNER_URL = 'https://github.com/JackMcKew/jackmckew.dev'
 
 ARTICLE_URL = '{slug}.html'

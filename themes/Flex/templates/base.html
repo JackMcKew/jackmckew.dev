@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome.css"> {% if DIRECT_TEMPLATES %}
+    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome.css"> {% if USE_TIPUE_SEARCH %}
     <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/jquery.min.js"></script>
     <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.min.js"></script>
     <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.js"></script>
@@ -72,7 +72,7 @@
             <h1><a href="{{ SITEURL }}">{{ SITETITLE }}</a></h1>
 
             {% if SITESUBTITLE %}
-            <p>{{ SITESUBTITLE }}</p>{% endif %} {% if DIRECT_TEMPLATES %}
+            <p>{{ SITESUBTITLE }}</p>{% endif %} {% if USE_TIPUE_SEARCH %}
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -135,7 +135,7 @@
     {% if GUAGES %} {% include "partial/guages.html" %} {% endif %} {% if ADD_THIS_ID %}
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ ADD_THIS_ID }}" async="async"></script>
     {% endif %} {% if (PIWIK_URL and PIWIK_SITE_ID) or (MATOMO_URL and MATOMO_SITE_ID) %} {% include "partial/matomo.html" %} {% endif %} {% include "partial/jsonld.html" %} {% block additional_js %}{% endblock %} {% if GITHUB_CORNER_URL %} {% include 'partial/github.html'
-    %} {% endif %} {% if DIRECT_TEMPLATES %}
+    %} {% endif %} {% if USE_TIPUE_SEARCH %}
     <script>
         $(document).ready(function() {
             $('#tipue_search_input').tipuesearch();
