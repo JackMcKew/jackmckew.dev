@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2019-12-11T12:42:09-00:00</lastmod>
+<lastmod>2019-12-12T02:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2019-12-11T12:42:09-00:00</lastmod>
+<lastmod>2019-12-12T02:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2019-12-11T12:42:09-00:00</lastmod>
+<lastmod>2019-12-12T02:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2019-12-11T12:42:09-00:00</lastmod>
+<lastmod>2019-12-12T02:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -43,13 +43,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-03-13T21:18:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://jackmckew.dev/test-article.html</loc>
-<lastmod>2019-12-11T06:30:00+11:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
 </url>
 
 <url>
@@ -418,7 +411,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/python.html</loc>
-<lastmod>2019-12-11T06:30:00+10:05</lastmod>
+<lastmod>2019-11-01T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -432,7 +425,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/tag/python.html</loc>
-<lastmod>2019-12-11T06:30:00+10:05</lastmod>
+<lastmod>2019-11-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -663,7 +656,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/author/jack-mckew.html</loc>
-<lastmod>2019-12-11T06:30:00+10:05</lastmod>
+<lastmod>2019-11-08T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
