@@ -133,7 +133,7 @@
     </script>
 
   <div>
-    <body><p>This is the first post in a series of posts dedicated for demonstrating how Python can be applied in the finance industry. Personally, the first thing that comes to mind when I think of the finance industry is the stock market. For fellow Australians, our main stock exchange is the Australian Securities Exchange (ASX). For those who are reading who are not familiar with stocks, there is a plethora of information around stocks across the internet.</p>
+    </head><body><p>This is the first post in a series of posts dedicated for demonstrating how Python can be applied in the finance industry. Personally, the first thing that comes to mind when I think of the finance industry is the stock market. For fellow Australians, our main stock exchange is the Australian Securities Exchange (ASX). For those who are reading who are not familiar with stocks, there is a plethora of information around stocks across the internet.</p>
 <p>When it comes to using Python with stocks, the very first thing that you will require, is data. Thankfully, there are multitudes of services out there which provide this data through application programming interfaces (APIs). The data is provided through APIs in a few common formats:</p>
 <ul>
 <li>JSON,</li>
@@ -151,7 +151,7 @@
 </ul>
 <p>To import these libraries into our Python code the following\
 code is required:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span></span>
@@ -164,7 +164,7 @@ code is required:</p>
 process and display the data. The first step is to extract the data in a useful\
 format from the Alpha Vantage API.</p>
 <p>First declare a list with all the companies ASX names with the suffix “.AX” to denominate that it’s from the ASX. After that initialise an empty pandas dataframe to be filled with the data to analyse. Now iterate over the list, calling a request through the API to request the data that is required. There are multiple formats of data to be extracted through the API which is detailed in the <a href="https://alpha-vantage.readthedocs.io/en/latest/">Alpha_Vantage documentation</a>. For this post, I have used the get_daily function from the timeseries object in alpha_vantage to extract the daily information on a stock for the past 20 years, in particular, the closing value.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -187,7 +187,7 @@ format from the Alpha Vantage API.</p>
 </td></tr></tbody></table>
 <p><img alt="stocks_listing" class="img-fluid" src="..\img\python-for-the-finance-industry\image2.png"/></p>
 <p>Now that the dataframe is full of closing values for the companie’s stock’s closing values, it’s time to begin processing. First of all, for any missing data or erroneous 0 values, the ffill() function is used to fill any missing value by propagating the last valid observation forward. After that, the timestamp on each row is forced to become the index of the dataframe and converted to a datetime type.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span></span>
 <span class="code-line"><span class="n">stocks_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stocks_df</span><span class="p">[</span><span class="s2">"date"</span><span class="p">])</span></span>
@@ -195,7 +195,7 @@ format from the Alpha Vantage API.</p>
 </pre></div>
 </td></tr></tbody></table>
 <p>Now that the data has gone through it’s pre-processing phase, it’s time to begin plotting some figures. To begin, a basic figure, plotting a single for each company’s stock price over the past 20 years on a single line graph to enable comparison between the companies.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -210,7 +210,7 @@ format from the Alpha Vantage API.</p>
 </td></tr></tbody></table>
 <p><img alt="line_graph" class="img-fluid" src="..\img\python-for-the-finance-industry\Figure_1-1.png"/>
 Another way to plot this data is to show it as the percentage change from the day before AKA daily returns. By plotting the data in this way, instead of showing the actual prices, the graph is showing the stocks’ volatility.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -228,7 +228,7 @@ Another way to plot this data is to show it as the percentage change from the da
 </pre></div>
 </td></tr></tbody></table>
 <p><img alt="percent_change" class="img-fluid" src="..\img\python-for-the-finance-industry\Figure_2.png"/>
-Now that we have some insight to the stocks’ data, the next post in this series will demonstrate a way to calculate a balanced portfolio from historical records using Modern Portfolio Theory.</p></body>
+Now that we have some insight to the stocks’ data, the next post in this series will demonstrate a way to calculate a balanced portfolio from historical records using Modern Portfolio Theory.</p>
   </div>
   <div class="tag-cloud">
     <p>
