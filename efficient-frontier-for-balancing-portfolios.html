@@ -50,6 +50,13 @@
 
     <title>Jack McKew's Blog &ndash; Efficient Frontier for Balancing Portfolios</title>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-1052275056735196",
+            enable_page_level_ads: true
+        });
+    </script>
  </head>
 
 <body>
@@ -92,9 +99,19 @@
             </ul>
         </div>
 
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
     </aside>
     <main>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
          <nav>
             <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
  <article class="single">
@@ -108,6 +125,13 @@
     </p>
   </header>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-1052275056735196"
+         data-ad-slot="1234565"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
   <div>
     <body><p>Following last 2 weeks’ posts (<a href="https://jmckew.com/2019/04/12/python-for-the-finance-industry/">Python for the Finance Industry</a> &amp; <a href="https://jmckew.com/2019/04/19/portfolio-balancing-with-historical-stock-data/">Portfolio Balancing with Historical Stock Data</a>), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.</p>
@@ -131,7 +155,7 @@
 </li>
 <li>The result from the minimize function is returned as a <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult">OptimizeResult</a> type.</li>
 </ul>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -157,7 +181,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Similarly to the maximum sharpe ratio we do the same for determining the minimum volatility portfolio programmatically. We minimise volatility by trying different weightings on our asset allocations to find the minima.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -185,7 +209,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>As above, we can also draw a line which depicts the efficient frontier for the portfolios for a given risk rate. Below some functions are defined for computing the efficient frontier. The first function, efficient_return is calculating the most efficient portfolio for a given target return, and the second function efficient frontier is compiling the most efficient portfolio for a range of targets.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -225,7 +249,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now it's time to plot the efficient frontier on the graph with the randomly selected portfolios to check if they have been calculated correctly. It is also an opportune time to check if the maximum Sharpe ratio and minimum volatility portfolios have been calculated correctly by comparing them to the previously randomly determined portfolios.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -338,7 +362,7 @@
 <p><img alt="Code_R2bA54PriC" class="img-fluid" src="..\img\efficient-frontier-for-balancing-portfolios\Code_R2bA54PriC.png"/></p>
 <p>The surprising part is that the calculated result is very close to what we have previously simulated by picking from randomly generated portfolios. The slight differences in allocations between the simulated vs calculated are in most cases less than 1%, which shows how powerful randomly estimating calculations can be albeit sometimes not reliable in small sample spaces.</p>
 <p>Rather than plotting every randomly generated portfolio, we can plot the individual stocks on the plot with the corresponding values of each stock's return and risk. This way we can compare how diversification is lowering the risk by optimizing the allocations.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -456,6 +480,13 @@
   </div>
 
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-1052275056735196"
+         data-ad-slot="1234566"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>

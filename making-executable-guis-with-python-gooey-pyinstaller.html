@@ -48,6 +48,13 @@
 
     <title>Jack McKew's Blog &ndash; Making Executable GUIs with Python, Gooey &amp; Pyinstaller</title>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-1052275056735196",
+            enable_page_level_ads: true
+        });
+    </script>
  </head>
 
 <body>
@@ -90,9 +97,19 @@
             </ul>
         </div>
 
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
     </aside>
     <main>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
          <nav>
             <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
  <article class="single">
@@ -106,11 +123,18 @@
     </p>
   </header>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-1052275056735196"
+         data-ad-slot="1234565"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
   <div>
     <body><p>Today we will go through how to go from a python script to packaged executable with a guided user interface (GUI) for users. First off we still start by writing the scripts that we would like to share with others to be able to use, especially for users that may be uncomfortable in a programming environment and would feel at home with a GUI.</p>
 <p>My personal favourite part about <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, is that you are essentially creating a command line interface (CLI) tool, which Gooey then uses to generate a GUI. This eliminates having two separate code bases to facilitate CLI &amp; GUI users, which can be very painful at times.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -167,7 +191,7 @@
 </td></tr></tbody></table>
 <p>The 2 functions defined above are for getting information of selected files, or returning a list of files found within a folder (and subfolders).</p>
 <p>Now to use <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, we need to define a 'main' function for parsing the arguments for the GUI to generate controls. As Gooey is based on the argparse library, if you have previously built CLI tools with argparse, the migration to Gooey is quite simplistic. However as there is always edge cases, ensure to check your tools functionality once you have developed it.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -215,7 +239,7 @@
 <p>By using the Gooey decorator we are able to define many different layout options for our GUI. Since we are trying to enable users to use multiple scripts which are different and separate, I personally like to the optional columns layout, but there are many other types of layouts which can be seen here: https://github.com/chriskiehl/Gooey#layout-customization.</p>
 <p>Following this we create our argument parsing function, and in which we define parsers, subparsers and add the arguments. This post will not be covering how to write CLIs, but it is on the list for future posts.</p>
 <p>To complete the script, we need to put in the functionality at startup.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -238,7 +262,7 @@
 <p>This will then generate a build folder and a dist folder within your current directory. The build folder will contain all the files used in generating the executable, which is found within the dist folder.</p>
 <p><img alt="image-20191102174758361" class="img-fluid" src="..\img\making-executable-guis-with-python-gooey-pyinstaller\image-20191102174758361.png"/></p>
 <p>The code in it's entirety is:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -379,6 +403,13 @@
   </div>
 
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-1052275056735196"
+         data-ad-slot="1234566"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>

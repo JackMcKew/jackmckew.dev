@@ -50,6 +50,13 @@
 
     <title>Jack McKew's Blog &ndash; Episode 11 - Power Quality Explained</title>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-1052275056735196",
+            enable_page_level_ads: true
+        });
+    </script>
  </head>
 
 <body>
@@ -92,9 +99,19 @@
             </ul>
         </div>
 
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
     </aside>
     <main>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
          <nav>
             <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
  <article class="single">
@@ -108,6 +125,13 @@
     </p>
   </header>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-1052275056735196"
+         data-ad-slot="1234565"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
   <div>
     <body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up that I found difficult to explain clearly was power quality and it's issues. So I decided why not dedicate a blog post about it and write a basic example power factor capacitor calculator in Python.</p>
@@ -121,7 +145,7 @@
 </ul>
 <h2>Harmonics</h2>
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -182,16 +206,16 @@
 <h2>Capacitor Calculator - Python</h2>
 <p>Correcting power factor from a lagging (\&lt;1) power factor, can be as simple as reducing reactive power (kVAR) in the system such that the ratio of real power (kW) to apparent power (kVA) is still as close to unity (1) as possible.</p>
 <p>Since motors require inductive or lagging power for magnetizing before useful work beings, this brings makes the power factor of the system lagging (\&lt;1). Capacitors provide capacitive or leading reactive power that cancels out the lagging power when used for power-factor improvement. The improved power factor changes the current requirements of the system, but not the one required by the motor.</p>
-<p><img alt="" class="img-fluid wp-image-136" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-1-1.gif"/></p>
+<p><img alt="" class="wp-image-136 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-1-1.gif"/></p>
 <p><img alt="Apparent power calculation" class="img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-2.gif"/></p>
-<p><img alt="Reactive power calculation" class="img-fluid wp-image-138" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-3.gif"/></p>
+<p><img alt="Reactive power calculation" class="wp-image-138 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-3.gif"/></p>
 <p>Using these formulas we can calculate just how big of a capacitor we require:</p>
-<p><img alt="" class="img-fluid wp-image-139" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
-<p><img alt="" class="wp-image-140 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
-<p><img alt="" class="img-fluid wp-image-141" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
+<p><img alt="" class="wp-image-139 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
+<p><img alt="" class="img-fluid wp-image-140" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
+<p><img alt="" class="wp-image-141 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
 <p><img alt="" class="img-fluid wp-image-142" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-7.gif"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -282,6 +306,13 @@
   </div>
 
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-1052275056735196"
+         data-ad-slot="1234566"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>
