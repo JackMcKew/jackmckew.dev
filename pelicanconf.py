@@ -9,9 +9,9 @@ AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
 SITETITLE = SITENAME
 SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
-SITEURL = "https://jackmckew.dev"
+# SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
-# SITEURL = "localhost:8000"
+SITEURL = "http://localhost:8000"
 
 
 DISPLAY_PAGES_ON_MENU = True
@@ -106,9 +106,10 @@ PLUGINS = [
     "dateish",
     "post_stats",
     "render_math",
-    "autostatic"
+    "autostatic",
+    "clean_summary"
 ]
-
+CLEAN_SUMMARY_MAXIMUM = 1
 # MARKUP = ('md', 'ipynb')
 MARKUP = ('md', )
 MARKDOWN = {
