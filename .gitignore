@@ -8,3 +8,4 @@ Pipfile
 Pipfile.lock
 deprecated
 __pycache__
+20*/**/img
