@@ -11,7 +11,7 @@ SITETITLE = SITENAME
 SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
 SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
-# SITEURL = "localhost:8000"
+# SITEURL = "http://localhost:8000"
 
 
 DISPLAY_PAGES_ON_MENU = True
@@ -19,18 +19,18 @@ DISPLAY_PAGES_ON_MENU = True
 DISQUS_SITENAME = 'jackmckew-dev'
 GOOGLE_ANALYTICS = 'UA-131173168-2'
 
-GOOGLE_ADSENSE = {
-    'ca_id': 'ca-pub-1052275056735196',    # Your AdSense ID
-    'page_level_ads': True,          # Allow Page Level Ads (mobile)
-    'ads': {
-        'aside': '1234561',          # Side bar banner (all pages)
-        'main_menu': '1234562',      # Banner before main menu (all pages)
-        'index_top': '1234563',      # Banner after main menu (index only)
-        'index_bottom': '1234564',   # Banner before footer (index only)
-        'article_top': '1234565',    # Banner after article title (article only)
-        'article_bottom': '1234566', # Banner after article content (article only)
-    }
-}
+# GOOGLE_ADSENSE = {
+#     'ca_id': 'ca-pub-1052275056735196',    # Your AdSense ID
+#     'page_level_ads': True,          # Allow Page Level Ads (mobile)
+#     'ads': {
+#         'aside': '1234561',          # Side bar banner (all pages)
+#         'main_menu': '1234562',      # Banner before main menu (all pages)
+#         'index_top': '1234563',      # Banner after main menu (index only)
+#         'index_bottom': '1234564',   # Banner before footer (index only)
+#         'article_top': '1234565',    # Banner after article title (article only)
+#         'article_bottom': '1234566', # Banner after article content (article only)
+#     }
+# }
 
 USE_TIPUE_SEARCH = True
 
@@ -45,7 +45,7 @@ ARTICLE_SAVE_AS = '{slug}.html'
 
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
-STATIC_PATHS = ["img","files","html","extra"]
+STATIC_PATHS = ["img","files","html","extra","2018","2019"]
 # STATIC_SAVE_AS = "{dirname}"
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
@@ -70,6 +70,9 @@ MENUITEMS = (
     ("Sitemap", "/sitemap.xml"),
     # ("Search","/search.html")
 )
+
+NOTEBOOK_DIR = ''
+CODE_DIR = ''
 
 SITEMAP = {
     "format": "xml",
@@ -99,6 +102,7 @@ PLUGINS = [
     "neighbors",
     "pelican-ert",
     "liquid_tags.notebook",
+    "liquid_tags.include_code",
     "representative_image",
     "share_post",
     'show_source',
@@ -106,9 +110,10 @@ PLUGINS = [
     "dateish",
     "post_stats",
     "render_math",
-    "autostatic"
+    "autostatic",
+    "clean_summary"
 ]
-
+CLEAN_SUMMARY_MAXIMUM = 1
 # MARKUP = ('md', 'ipynb')
 MARKUP = ('md', )
 MARKDOWN = {
