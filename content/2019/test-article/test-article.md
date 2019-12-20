@@ -1,5 +1,5 @@
 Title: Test Article
-Date: 2019-09-12 06:30
+Date: 2019-12-12 06:30
 Author: Jack McKew
 Slug: test-article
 
@@ -7,6 +7,6 @@ A 'dunder' (double underscores) in Python (also known as a magic method) are the
 
 ![example]({static img\example.png})
 
-{% notebook 2019/test-post/notebooks/NZ_City_Letter_Analysis.ipynb cells[24:25] %}
+{% notebook 2019/test-article/notebooks/NZ_City_Letter_Analysis.ipynb cells[24:25] %}
 
-{% include_code 2019/test-post/code/spotify-analysis.py :hidefilename: Test Example %}
+{% include_code 2019/test-article/code/spotify-analysis.py :hidefilename: Test Example %}
