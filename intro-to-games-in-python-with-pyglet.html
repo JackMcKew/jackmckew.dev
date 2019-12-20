@@ -49,13 +49,6 @@
 
     <title>Jack McKew's Blog &ndash; Intro to Games in Python with Pyglet</title>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1052275056735196",
-            enable_page_level_ads: true
-        });
-    </script>
  </head>
 
 <body>
@@ -98,19 +91,9 @@
             </ul>
         </div>
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
 
     </aside>
     <main>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
          <nav>
             <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
  <article class="single">
@@ -124,16 +107,9 @@
     </p>
   </header>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234565"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
   <div>
-    </head><body><p>Recently, I've been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as:</p>
+    <body><p>Recently, I've been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as:</p>
 <ul>
 <li><a href="https://pypi.org/project/p5/">p5</a></li>
 <li><a href="https://www.pygame.org/news">pygame</a></li>
@@ -149,9 +125,9 @@
 <p>To begin, and make things a bit easier, I downloaded the pyglet-master repository from GitHub (<a href="https://github.com/pyglet/pyglet">https://github.com/pyglet/pyglet</a>) so I didn't have to create and copy the file contents one by one.</p>
 <p>After going through the different versions with the examples &gt; game folder, I decided all I required was the simple functionality of collision and any further into developing the game wasn't needed for this stage, so I copied out the version 3 folder.</p>
 <p>If we run 'asteroid.py' from within the version 3 folder, we are met with this screen</p>
-<p><img alt="full_game_screen" class="img-fluid" src="..\img\intro-to-games-in-python-with-pyglet\image.png"/></p>
+<p><img alt="full_game_screen" class="img-fluid" src="https://jackmckew.dev/img/image.png"/></p>
 <p>Now since all I am trying to do is generate multiple objects (which will be shown with the player symbol to indicate direction), I can comment out the lines which give the lives, score, title and interactive player.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -198,13 +174,13 @@
 </td></tr></tbody></table>
 <p>Now that we've done that, we need to modify the asteroids generator function to use the player sprite.</p>
 <p>In load.py, you can change simply the img argument to the player image sprite reference like so:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">new_asteroid</span> <span class="o">=</span> <span class="n">physicalobject</span><span class="o">.</span><span class="n">PhysicalObject</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">resources</span><span class="o">.</span><span class="n">player_image</span><span class="p">,</span>                                                     <span class="n">x</span><span class="o">=</span><span class="n">asteroid_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">asteroid_y</span><span class="p">,</span>                                                 <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span></span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">new_asteroid</span> <span class="o">=</span> <span class="n">physicalobject</span><span class="o">.</span><span class="n">PhysicalObject</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">resources</span><span class="o">.</span><span class="n">player_image</span><span class="p">,</span>                                                     <span class="n">x</span><span class="o">=</span><span class="n">asteroid_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">asteroid_y</span><span class="p">,</span>                                                 <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Now if we run this, the animation will look a little off, because the objects won't be traveling the direction in the direction that the sprite is pointing. This is due to the existing velocity calculation being a random number for both the X and Y component.</p>
 <p>To make the player sprites move in the direction they are rotated in, and maintain the existing codebase, we will need to convert from <a href="https://www.mathsisfun.com/polar-cartesian-coordinates.html">polar notation to cartesian</a>.</p>
 <p>To do this, we add an extra 2 functions into 'util.py' which will do this for us:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -225,7 +201,7 @@
 </td></tr></tbody></table>
 <p>Note the use of radians in pol2cart, this is due to the <a href="https://www.sparknotes.com/math/trigonometry/trigonometricfunctions/section3/">affect of quadrants and trigonometric functions</a>. I won't go into detail, but it won't behave like you expect it to.</p>
 <p>Now to get our player sprites moving in the direction they are rotated, update the code which generates the 'asteroids' to utilise our new function:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">40</span></span>
@@ -233,9 +209,9 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now when we go and run our main file again, we will met with a screen like this:</p>
-<p><img alt="boids_screen" class="img-fluid" src="..\img\intro-to-games-in-python-with-pyglet\image-1.png"/></p>
+<p><img alt="boids_screen" class="img-fluid" src="https://jackmckew.dev/img/image-1.png"/></p>
 <p>Where the player sprites will float around in the direction they are pointing, until they crash into another sprite, causing both of them to disappear.</p>
-<p>This is a quick intro to Pyglet, I am hoping to expand on this simulation and am positive I will be doing further write ups with it in the future.</p>
+<p>This is a quick intro to Pyglet, I am hoping to expand on this simulation and am positive I will be doing further write ups with it in the future.</p></body>
   </div>
   <div class="tag-cloud">
     <p>
@@ -255,13 +231,6 @@
   </div>
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234566"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>

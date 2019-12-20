@@ -1,0 +1,8 @@
+README.rst
+setup.py
+folder_renaming_script/__init__.py
+folder_renaming_script/main.py
+folder_renaming_script.egg-info/PKG-INFO
+folder_renaming_script.egg-info/SOURCES.txt
+folder_renaming_script.egg-info/dependency_links.txt
+folder_renaming_script.egg-info/top_level.txt

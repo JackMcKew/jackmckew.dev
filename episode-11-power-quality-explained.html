@@ -50,13 +50,6 @@
 
     <title>Jack McKew's Blog &ndash; Episode 11 - Power Quality Explained</title>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1052275056735196",
-            enable_page_level_ads: true
-        });
-    </script>
  </head>
 
 <body>
@@ -99,19 +92,9 @@
             </ul>
         </div>
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
 
     </aside>
     <main>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
          <nav>
             <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
  <article class="single">
@@ -125,16 +108,9 @@
     </p>
   </header>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234565"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
   <div>
-    </head><body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up that I found difficult to explain clearly was power quality and it's issues. So I decided why not dedicate a blog post about it and write a basic example power factor capacitor calculator in Python.</p>
+    <body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up that I found difficult to explain clearly was power quality and it's issues. So I decided why not dedicate a blog post about it and write a basic example power factor capacitor calculator in Python.</p>
 <p>Power quality is defined as "the concept of powering and grounding sensitive electronic equipment in a manner suitable for the equipment with precise wiring system and other connected equipment" by the IEEE (The Institute of Electrical and Electronics Engineers). In a simplistic view this is just trying to say that electrical equipment is to be installed/configured in a way that is operates as intended.</p>
 <p>Quality of power is not determined by the one who produces it, it's defined by the end user of the power. Eg, like a physical product, if you buy something from a store and it's poor quality, that's being defined by the end user. Similar to that of a physical product, quality of power can be lost in a variety of forms/ways.</p>
 <p>Issues with power quality can be categorized into three main categories:</p>
@@ -145,7 +121,7 @@
 </ul>
 <h2>Harmonics</h2>
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -183,9 +159,9 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>The example above shows us the base signal (fundamental frequency), and it's first harmonic (harmonic of 2 or twice as fast as the fundamental frequency).</p>
-<p><img alt="Harmonic1_2" class="img-fluid" src="..\img\episode-11-power-quality-explained\Harmonic1_2.png"/></p>
+<p><img alt="Harmonic1_2" class="img-fluid" src="https://jackmckew.dev/img/Harmonic1_2.png"/></p>
 <p>When these two signals are superimposed on each other, they produce a distorted waveform. Electrical equipment is designed to operate at the base signal (50Hz here in Australia), and typically does not cope with distorted wave like seen below when we superimpose a base signal with it's first harmonic.</p>
-<p><img alt="" class="img-fluid" src="..\img\episode-11-power-quality-explained\Harmonic1_2_Combined.png"/></p>
+<p><img alt="Harmonic1_2_Combined.png" class="img-fluid" src="https://jackmckew.dev/img/Harmonic1_2_Combined.png"/></p>
 <p>Luckily, these issues are now easily detected and rectified by harmonic analyzers and active/passive harmonic filters.</p>
 <h2>Power Factor</h2>
 <p>Power factor is a measure of how effectively power is being used in an electrical system, and is defined as the ratio of real (useful) to apparent (total) power.</p>
@@ -193,7 +169,7 @@
 <p>Reactive power (kVAR) is the power required by (some) equipment (eg, motors), to produce a magnetic field to enable the useful work to be produce. It's necessary to operate the equipment, however you don't see any result from the reactive power.</p>
 <p>Apparent power (kVA) is the vector sum of the real power (kW) and reactive power (kVAR) and is the total power supplied from the mains power required to produce the right amount of real power.</p>
 <p>Suppose you are running a store, you have to spend an amount of money X (cost) on buying products to sell in the future for a larger amount of money Y, meaning your profit will be P = Y - X. X is not lost money, without spending X you will not be able to make any profit P. The profit P is comparable to the active power, the earnings Y are the equivalent of apparent power and the initial cost X is the reactive power.</p>
-<p><img alt="" class="img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-1.gif"/></p>
+<p><img alt="CodeCogsEqn-1.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-1.gif"/></p>
 <p>Therefore, for a given power supply (kVA):</p>
 <ul>
 <li>The more cost you have (higher percentage of kVAR), the lower the ratio of kW (profit) to kVA (profit + cost), meaning a poorer power factor.</li>
@@ -206,16 +182,16 @@
 <h2>Capacitor Calculator - Python</h2>
 <p>Correcting power factor from a lagging (\&lt;1) power factor, can be as simple as reducing reactive power (kVAR) in the system such that the ratio of real power (kW) to apparent power (kVA) is still as close to unity (1) as possible.</p>
 <p>Since motors require inductive or lagging power for magnetizing before useful work beings, this brings makes the power factor of the system lagging (\&lt;1). Capacitors provide capacitive or leading reactive power that cancels out the lagging power when used for power-factor improvement. The improved power factor changes the current requirements of the system, but not the one required by the motor.</p>
-<p><img alt="" class="img-fluid wp-image-136" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-1-1.gif"/></p>
-<p><img alt="Apparent power calculation" class="img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-2.gif"/></p>
-<p><img alt="Reactive power calculation" class="wp-image-138 img-fluid" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-3.gif"/></p>
+<p><img alt="CodeCogsEqn-1-1.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-1-1.gif"/></p>
+<p><img alt="Apparent power calculation" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-2.gif"/></p>
+<p><img alt="Reactive power calculation" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-3.gif"/></p>
 <p>Using these formulas we can calculate just how big of a capacitor we require:</p>
-<p><img alt="" class="img-fluid wp-image-139" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-4.gif"/></p>
-<p><img alt="" class="img-fluid wp-image-140" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-5.gif"/></p>
-<p><img alt="" class="img-fluid wp-image-141" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-6.gif"/></p>
-<p><img alt="" class="img-fluid wp-image-142" src="..\img\episode-11-power-quality-explained\CodeCogsEqn-7.gif"/></p>
+<p><img alt="CodeCogsEqn-4.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-4.gif"/></p>
+<p><img alt="CodeCogsEqn-5.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-5.gif"/></p>
+<p><img alt="CodeCogsEqn-6.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-6.gif"/></p>
+<p><img alt="CodeCogsEqn-7.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-7.gif"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -285,7 +261,7 @@
 <span class="code-line"><span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span></span>
 <span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Current power factor &gt; 1"</span><span class="p">)</span></span>
 </pre></div>
-</td></tr></tbody></table>
+</td></tr></tbody></table></body>
   </div>
   <div class="tag-cloud">
     <p>
@@ -306,13 +282,6 @@
   </div>
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234566"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>

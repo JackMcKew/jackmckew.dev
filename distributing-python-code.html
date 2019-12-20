@@ -49,13 +49,6 @@
 
     <title>Jack McKew's Blog &ndash; Distributing Python Code</title>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1052275056735196",
-            enable_page_level_ads: true
-        });
-    </script>
  </head>
 
 <body>
@@ -98,19 +91,9 @@
             </ul>
         </div>
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
 
     </aside>
     <main>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
          <nav>
             <a href="https://jackmckew.dev"> Home </a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
  <article class="single">
@@ -124,19 +107,12 @@
     </p>
   </header>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234565"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
   <div>
-    </head><body><p>This post will cover a way of distributing Python code such that is can be used by someone that does not have Python installed. One of the major drawbacks with Python that the gap is slowly being closed is how easy it is to distribute Python code.</p>
+    <body><p>This post will cover a way of distributing Python code such that is can be used by someone that does not have Python installed. One of the major drawbacks with Python that the gap is slowly being closed is how easy it is to distribute Python code.</p>
 <p>At a minimum, the computer that is to run the code must have the Python compiler (or equivalent). Now while this has been progressively included in more operating systems as a default (May update of Windows being the latest), you must still develop as such that is not present on the users' PC.</p>
 <p>For this post, I will show you a basic piece of code to demonstrate how it will be packaged and distributed to your users. To show a basic dialog box on the screen with the following code:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">ctypes</span></span>
 <span class="code-line"></span>
@@ -144,7 +120,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Which shows the user with this dialog box:</p>
-<p><img alt="python_Dh0hFJKqDx" class="img-fluid" src="..\img\distributing-python-code\python_Dh0hFJKqDx.png"/></p>
+<p><img alt="python_Dh0hFJKqDx" class="img-fluid" src="https://jackmckew.dev/img/python_Dh0hFJKqDx.png"/></p>
 <p>Now to package this code into an executable (.exe), there are multiple packages out there that are possible to use, some examples of these are:</p>
 <ul>
 <li><a href="https://anthony-tuininga.github.io/cx_Freeze/">cx_freeze</a></li>
@@ -153,12 +129,12 @@
 </ul>
 <p>For this post, I will use PyInstaller as it is what I am most familiar with, please get in touch with me if you believe any other package is better suited. I have created an environment in anaconda named "pyinstall", in which I have installed PyInstaller with the command "conda install -c conda-forge pyinstaller", which includes Python 3.7.3 due to anaconda's packaging system (thereby including ctypes from the standard library).</p>
 <p>Now to use the PyInstaller package, just open Anaconda Prompt (or cmd if anaconda.exe is in your PATH). Navigate to where the python code is stored, and run the command "pyinstaller \&lt;name_of_program&gt;.py. See below for an example:</p>
-<p><img alt="" class="img-fluid" src="..\img\distributing-python-code\cmd_PXbANiLF4N.png"/></p>
+<p><img alt="cmd_PXbANiLF4N.png" class="img-fluid" src="https://jackmckew.dev/img/cmd_PXbANiLF4N.png"/></p>
 <p>This will create a build &amp; dist folder within the directory you navigated to, which contains the python application and all the required files will be put inside the dist folder which will be shipped to the user later on. There are many other settings that you can use to customize how your package gets built and more, but I won't go into that in this post.</p>
-<p><img alt="" class="img-fluid" src="..\img\distributing-python-code\explorer_409CFHxhyh.png"/></p>
+<p><img alt="explorer_409CFHxhyh.png" class="img-fluid" src="https://jackmckew.dev/img/explorer_409CFHxhyh.png"/></p>
 <p>Now if we go into the dist folder and find the .exe (which will have the same name as your python file unless you change this setting). Once you hit run, you'll be met by this screen:</p>
-<p><img alt="" class="img-fluid" src="..\img\distributing-python-code\pyinstall_example_w5KP1B327W.png"/></p>
-<p>Now you can send this executable to anyone (although most antivirus will stop you) and it will run on their PC!</p>
+<p><img alt="pyinstall_example_w5KP1B327W.png" class="img-fluid" src="https://jackmckew.dev/img/pyinstall_example_w5KP1B327W.png"/></p>
+<p>Now you can send this executable to anyone (although most antivirus will stop you) and it will run on their PC!</p></body>
   </div>
   <div class="tag-cloud">
     <p>
@@ -178,13 +154,6 @@
   </div>
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234566"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>

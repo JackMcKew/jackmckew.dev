@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2019-12-12T08:42:56-00:00</lastmod>
+<lastmod>2019-12-20T12:28:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2019-12-12T08:42:56-00:00</lastmod>
+<lastmod>2019-12-20T12:28:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2019-12-12T08:42:56-00:00</lastmod>
+<lastmod>2019-12-20T12:28:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2019-12-12T08:42:56-00:00</lastmod>
+<lastmod>2019-12-20T12:28:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -368,6 +368,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jackmckew.dev/test-article.html</loc>
+<lastmod>2017-12-12T06:30:00+11:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
 <loc>https://jackmckew.dev/category/android.html</loc>
 <lastmod>2018-12-21T01:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
@@ -398,6 +405,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/category/machine-learning.html</loc>
 <lastmod>2019-10-12T15:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/category/misc.html</loc>
+<lastmod>2017-12-12T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
