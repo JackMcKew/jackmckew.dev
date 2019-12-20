@@ -58,7 +58,7 @@ Woof!
 Animal Kingdom
 ```
 
-See my post on dunders (double underscores) to get a better understanding of how the \_\_init\_\_ function is working: <https://jmckew.com/2019/09/06/dunders-in-python/>
+See my post on dunders (double underscores) to get a better understanding of how the \_\_init\_\_ function is working: <https://jackmckew.dev/dunders-in-python.html>
 
 Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:
 

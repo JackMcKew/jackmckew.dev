@@ -25,7 +25,7 @@ On page 246, there is a summary of the life principles which are fully detailed 
   - Accurately diagnose the problems to get at their root causes
   - Design plans that will get you around them
   - Do what's necessary to push these designs through to results
-- 3 - Radical open mind - something that I have blogged about in the past, open mindedness, you can find that post here: https://jmckew.com/2018/12/07/episode-3-open-mind/
+- 3 - Radical open mind - something that I have blogged about in the past, open mindedness, you can find that post here: https://jackmckew.dev/episode-3-open-mind.html
 - 4.5 - Getting the right people in the right roles in support of your goal is the key to succeeding at whatever you choose to accomplish
 - 5.10 - Believability weight your decision making - I believe when gathering opinions and thoughts on something, you must weight the opinions based upon how 'believable' the source is
 

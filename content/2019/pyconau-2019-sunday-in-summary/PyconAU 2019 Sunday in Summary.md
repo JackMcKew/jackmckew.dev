@@ -6,7 +6,7 @@ Tags: python, pyconau
 Slug: pycon-au-2019-sunday-in-summary
 Status: published
 
-This is a follow on from my last post [PyCon AU 2019 Saturday In Summary](https://jmckew.com/2019/08/06/pycon-au-2019-saturday-in-summary/).
+This is a follow on from my last post [PyCon AU 2019 Saturday In Summary](https://jackmckew.dev/pycon-au-2019-saturday-in-summary.html).
 
 [Day 2](https://2019.pycon-au.org/schedule/sunday/)
 ---------------------------------------------------

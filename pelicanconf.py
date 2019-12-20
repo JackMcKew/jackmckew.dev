@@ -145,15 +145,6 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
-# LINKS = (
-#     ("CV/Professional", "https://jmckew.com/cv-professional/"),
-#     ("Contact", "https://jmckew.com/contact/"),
-# )
-# LINKS = (('Pelican', 'http://getpelican.com/'),
-#          ('Python.org', 'http://python.org/'),
-#          ('Jinja2', 'http://jinja.pocoo.org/'),
-#          ('You can modify those links in your config file', '#'),)
 
 # Social widget
 SOCIAL = (

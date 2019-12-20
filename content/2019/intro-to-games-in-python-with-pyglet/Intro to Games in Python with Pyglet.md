@@ -19,7 +19,7 @@ Eventually, through the motivation of another side project (looking into trainin
 
 While the aforementioned simulations won't be covered in this post, this post aims to demonstrate how I adapted the [in-depth tutorial on the Pyglet website](https://pyglet.readthedocs.io/en/stable/programming_guide/examplegame.html) (which goes through how to recreate asteroids in Pyglet) to generate vector based objects which can crash into each other.
 
-First off as always, start by setting up a virtual environment with your preferred method ([Anaconda](https://jmckew.com/2019/01/11/episode-8-anaconda/) or [follow my workflow](https://jmckew.com/2019/08/30/python-project-workflow/)), since Pyglet has no external dependencies, all you need to do is install the pyglet package.
+First off as always, start by setting up a virtual environment with your preferred method ([Anaconda](https://jackmckew.dev/episode-8-anaconda.html) or [follow my workflow](https://jackmckew.dev/python-project-workflow.html)), since Pyglet has no external dependencies, all you need to do is install the pyglet package.
 
 I won't go through all the code in the example, and how it works, I will only go through what I changed in the case to get where I wanted to go.
 

@@ -6,7 +6,7 @@ Tags: python
 Slug: intro-to-web-scraping
 Status: published
 
-Following on from last weeks post where we analysed the amount of [repeated letters within current New Zealand town names](https://jmckew.com/2019/08/16/looking-for-patterns-in-city-names-interactive-plotting/). There was still one part of that analysis that really bugged me, and if you noticed it was from the data set that was used was using the European town names not the original Maori names. This post will be dedicated to introducing web scraping where we will extract the Maori names and run a similar analysis to present an interactive graph.
+Following on from last weeks post where we analysed the amount of [repeated letters within current New Zealand town names](https://jackmckew.dev/looking-for-patterns-in-city-names-interactive-plotting.html). There was still one part of that analysis that really bugged me, and if you noticed it was from the data set that was used was using the European town names not the original Maori names. This post will be dedicated to introducing web scraping where we will extract the Maori names and run a similar analysis to present an interactive graph.
 
 As like previously, let's take a look at the interactive graph before getting into how it was created.
 

@@ -12,7 +12,7 @@ This post won't go into testing structures for complex applications, but rather 
 
 As this post is on testing, I also thought it might be quite apt for trialing out a difference package for dependency management. In the past I've used anaconda, virtualenv and just pip, but this time I wanted to try out pipenv.
 
-Similar to my post [Python Project Workflow](https://jmckew.com/2019/08/30/python-project-workflow/) where I used virtualenv, you must install pipenv in your base Python directory, and typically add the Scripts folder to your path for ease later on. Now all we need to do is navigate to the folder and run:
+Similar to my post [Python Project Workflow](https://jackmckew.dev/python-project-workflow.html) where I used virtualenv, you must install pipenv in your base Python directory, and typically add the Scripts folder to your path for ease later on. Now all we need to do is navigate to the folder and run:
 
 ``` python
 pipenv shell

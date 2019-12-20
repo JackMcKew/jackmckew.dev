@@ -16,7 +16,7 @@ When it comes to using Python with stocks, the very first thing that you will re
 
 For this post, I will be utilising the free service, Alpha Vantage, to request historical records of stock information on the ASX. For access to Alpha Vantage’s API, head to <http://www.alphavantage.co/support/#api-key> and register for a free API key. There is also documentation around testing if your API key is operational on the Alpha Vantage website.
 
-Now that we have access to an API in which we can extract historical records of stock information in the ASX, it’s time to manipulate and analyse the data. As in my previous post [Episode 8 – Anaconda](https://jmckew.com/2019/01/11/episode-8-anaconda/), I recommend setting up a virtual environment or anaconda environment to install & manage dependencies of external libraries.
+Now that we have access to an API in which we can extract historical records of stock information in the ASX, it’s time to manipulate and analyse the data. As in my previous post [Episode 8 – Anaconda](https://jackmckew.dev/episode-8-anaconda.html), I recommend setting up a virtual environment or anaconda environment to install & manage dependencies of external libraries.
 
 The packages required for this post in the series are:
 

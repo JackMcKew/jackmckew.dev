@@ -16,7 +16,7 @@ Routing can be broken into three broad categories:
 -   Algorithms – to determine paths between sender and receiver
 -   Databases – to store information that the algorithms determine
 
-The whole premise around routers in a network ([Networking Basics](https://jmckew.com/2019/03/08/episode-16-networking-basics/)) is that they will “pass it on”, either to their smarter peers or in the correct direction. For example in a star/tree network, devices pass information to their closest ‘router’ which then decides either to pass it directly to the correct address or to another router which may have a better idea on where the information is intended on going.
+The whole premise around routers in a network ([Networking Basics](https://jackmckew.dev/episode-16-networking-basics.html)) is that they will “pass it on”, either to their smarter peers or in the correct direction. For example in a star/tree network, devices pass information to their closest ‘router’ which then decides either to pass it directly to the correct address or to another router which may have a better idea on where the information is intended on going.
 
 ### Protocols
 

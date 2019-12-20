@@ -6,7 +6,7 @@ Tags: finance, python
 Slug: portfolio-balancing-with-historical-stock-data
 Status: published
 
-Following last weeks' post ([Python for the Finance Industry](https://jmckew.com/2019/04/12/python-for-the-finance-industry/)). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data.
+Following last weeks' post ([Python for the Finance Industry](https://jackmckew.dev/python-for-the-finance-industry.html)). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data.
 
 First of all while attempting to tackle this problem, I stumbled across many very informative articles in which based on what I learned throughout reading them, and trying to replicate their findings with the ASX stocks' data.
 

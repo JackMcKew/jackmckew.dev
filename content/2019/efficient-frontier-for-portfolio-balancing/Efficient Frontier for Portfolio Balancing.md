@@ -6,7 +6,7 @@ tags: python, data, analysis
 Slug: efficient-frontier-for-balancing-portfolios
 Status: published
 
-Following last 2 weeks’ posts ([Python for the Finance Industry](https://jmckew.com/2019/04/12/python-for-the-finance-industry/) & [Portfolio Balancing with Historical Stock Data](https://jmckew.com/2019/04/19/portfolio-balancing-with-historical-stock-data/)), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.
+Following last 2 weeks’ posts ([Python for the Finance Industry](https://jackmckew.dev/python-for-the-finance-industry.html) & [Portfolio Balancing with Historical Stock Data](https://jackmckew.dev/portfolio-balancing-with-historical-stock-data.html)), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.
 
 This post is to demonstrate a method in balancing portfolios that does not depend on generating random portfolios, but rather mathematically determining the extremities of boundaries for effective portfolios using the [SciPy optimize function](https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html) (similar to that of [Excel's 'solver'](https://support.office.com/en-ie/article/define-and-solve-a-problem-by-using-solver-5d1a388f-079d-43ac-a7eb-f63e45925040)).
 
