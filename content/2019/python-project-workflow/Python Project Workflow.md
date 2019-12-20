@@ -122,4 +122,4 @@ select = B,C,E,F,W,T4,B9
 
 Finally we are able to run a commit to our project!
 
-![image-5.png]({static img\image-5.png})
+![image-5.png]({static img/image-5.png})
