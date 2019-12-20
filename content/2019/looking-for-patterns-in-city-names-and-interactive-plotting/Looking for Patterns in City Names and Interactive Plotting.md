@@ -8,7 +8,7 @@ Status: published
 
 Recently, I was traveling around New Zealand, and noticed in the Maori language they use letters back to back a lot like in the original Maori name for Stratford ("whakaahurangi"). So as any normal person does, I thought, well what town has the most repeated letters, and the idea for this blog post was born. Before we get into the nitty gritty, here is the output of the analysis!
 
-{% notebook 2019/looking-for-patterns-in-city-names-interactive-plotting/notebooks/NZ_City_Letter_Analysis.ipynb cells[24:25] %}
+{% notebook 2019/looking-for-patterns-in-city-names-and-interactive-plotting/notebooks/NZ_City_Letter_Analysis.ipynb cells[24:25] %}
 
 Firstly, we have to find a dataset of all the town names, and I found a database of all world cities names hosted on Kaggle here: <https://www.kaggle.com/max-mind/world-cities-database>.
 
