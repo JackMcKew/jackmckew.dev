@@ -22,9 +22,7 @@ Now before connecting the entire circuit together, one should always test that c
 
 For a basic test, an LED would light up whenever the infrared is receiving a signal. By following the circuit diagram with the corresponding code for the NodeMCU, this test for the receiver should be reproduce-able at home, please note that for other infrared receivers you will need to check the pin outs.<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":108} -->
-
-![](../img/episode-9-web-enabled-universal-remote-part-1/Fritzing_FEKX395tbZ.png)
+![Fritzing_FEKX395tbZ.png]({static img/Fritzing_FEKX395tbZ.png})
 
 ``` c
 #define ledPin D0 //Connection at GPIO16 (D0) for the builtin LED on the NodeMCU board
@@ -55,7 +53,7 @@ Now that we have confirmed the receiver works as expected, we have to integrate 
 
 Since the NodeMCU can only pass a maximum current of 12mA through the GPIO pins, this will not be enough for the infrared diode peak spectrum which occurs at 20mA. To boost the current up from 12mA to 20mA+, it is best to use a simple transistor, for this project I had some 2N2222 transistors lying around so decided to use them. The following circuit diagram shows how the infrared diode, transistor and microcontroller integrate together.
 
-![](..\img\episode-9-web-enabled-universal-remote-part-1\Fritzing_LqJjWJppSm.png)
+![Fritzing_LqJjWJppSm.png]({static img\Fritzing_LqJjWJppSm.png})
 
 Since the human eye cannot see the infrared diode turning on/off, this creates a challenge for testing this component before implementing the project. I did not create a test specifically for the diode, and will test whether it works correctly later on in some function testing of the project.
 

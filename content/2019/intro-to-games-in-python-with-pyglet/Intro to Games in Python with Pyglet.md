@@ -29,7 +29,7 @@ After going through the different versions with the examples \> game folder, I d
 
 If we run 'asteroid.py' from within the version 3 folder, we are met with this screen
 
-![full_game_screen](..\img\intro-to-games-in-python-with-pyglet\image.png)
+![full_game_screen]({static img\image.png})
 
 Now since all I am trying to do is generate multiple objects (which will be shown with the player symbol to indicate direction), I can comment out the lines which give the lives, score, title and interactive player.
 
@@ -96,7 +96,7 @@ new_asteroid.velocity_x, new_asteroid.velocity_y = util.pol2cart(new_asteroid.ve
 
 Now when we go and run our main file again, we will met with a screen like this:
 
-![boids_screen](..\img\intro-to-games-in-python-with-pyglet\image-1.png)
+![boids_screen]({static img\image-1.png})
 
 Where the player sprites will float around in the direction they are pointing, until they crash into another sprite, causing both of them to disappear.
 

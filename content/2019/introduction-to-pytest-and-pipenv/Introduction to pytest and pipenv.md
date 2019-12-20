@@ -52,7 +52,7 @@ pytest file_name.py
 
 This will output the following:
 
-![](..\img\introduction-to-pytest-pipenv\image0.png)
+![image0.png]({static img\image0.png})
 
 Each green dot represents a single test, and we can see that our 1 test passes in 0.02 seconds.
 
@@ -82,6 +82,6 @@ def test_subtract(number_1,number_2,expected):
 
 Once run with the verbose command, we get the output:
 
-![](..\img\introduction-to-pytest-pipenv\image-10.png)
+![image-10.png]({static img\image-10.png})
 
 Hopefully this post is a gentle introduction to what unit testing can be in Python.

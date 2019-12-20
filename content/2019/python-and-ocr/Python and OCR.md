@@ -12,7 +12,7 @@ First of all, as always, we must create a new virtual environment for our projec
 
 Now we are finally ready to test the engine and see if we can extract text out of an image, first of all we will start with a 'well' written example, the 'logo' of this website!
 
-![test_image](..\img\python-and-ocr\example.png)
+![test_image]({static img\example.png})
 
 Of course, we have still yet to write any code, so naturally, that is the next step. As always in a python project, you will need to import all the dependencies of the project, in this case, it will be Image from the PIL (pillow) package, and pytesseract (the python wrapper around the Tesseract Engine).
 
@@ -58,7 +58,7 @@ print(extracted_text)
 
 Now we have a function that we can call with a file path to easily convert our images to text. Now let's give the tesseract engine a bit of challenge with a full page of handwritten text:
 
-![](..\img\python-and-ocr\example_2.jpg)
+![example_2.jpg]({static img\example_2.jpg})
 
 > Ad Bb Cc Da Fe FEF Ge Hh Ii IS RR lt Hm We\
 > 00 PP Ag Rr SsT\# Uu Vv Ww Xx 44 Le\
@@ -85,7 +85,7 @@ Using the same code, we were able to determine most of the text out of the pictu
 
 For a bit of another challenge and to demonstrate the capabilities, let's try some Australian number plates:
 
-![](..\img\python-and-ocr\example_3.jpg)
+![example_3.jpg]({static img\example_3.jpg})
 
 > (CSE) XcB-962 (66M-059\
 > X2ZH:709) EEH:133) (GAA729)

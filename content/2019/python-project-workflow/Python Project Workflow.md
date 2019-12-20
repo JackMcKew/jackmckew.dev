@@ -12,7 +12,7 @@ First of all, we need to get Python! Head over to <https://www.python.org/downlo
 
 Now once these are installed (if you put them in the default location), Python will default to be located in: C:\\Users\\Jack\\AppData\\Local\\Programs\\Python\\Python37-32. For the next few steps to ensure we are setting up virtual environments for our projects open command prompt here if you are on windows. This will look something like this:
 
-![](..\img\python-project-workflow\image-11.png)
+![image-11.png]({static img\image-11.png})
 
 The 'cd' command in windows (and other OS) stands for change directory, follow this with a path and you will be brought to that directory. Next whenever I first install Python I like to update pip to it's latest release, to do this use the command in this window:
 
@@ -24,7 +24,7 @@ With pip upgraded to it's current release, it's time to install some very helpfu
 
 If you take a peek into the Scripts folder now in your Python directory, it'll look a little like this:
 
-![](..\img\python-project-workflow\image-2.png)
+![image-2.png]({static img\image-2.png})
 Now something that I personally like to do is add this folder to your system environment variables in Windows so it's much easier to run any packages in your root Python installation on your PC. To do this:
 
 1.  type in 'system environment' into the search command
@@ -42,7 +42,7 @@ For most of my projects lately being of data science in nature, I like to use th
 cookiecutter https://github.com/drivendata/cookiecutter-data-science
 ```
 
-![](..\img\python-project-workflow\image-3.png)
+![image-3.png]({static img\image-3.png})
 
 Provide as much information as you wish into the questions and you will now have a folder created wherever you ran the command with all the relevant sections from the template.
 
@@ -86,7 +86,7 @@ Now to install these, activate your virtual environment like above, navigate to 
 
 On the default cookiecutter data science template with the settings as per above this will show on the pre-commit run (after you have staged changes in git (use git add -A for all)):
 
-![](..\img\python-project-workflow\image-4.png)
+![image-4.png]({static img\image-4.png})
 
 We can see a different opinions in code formatting appearing already from flake8's output. The black code formatter in Python's code length is 88 characters , not 79 like PEP8. So we will add a pyproject.toml to the project directory where we can specify settings within the black tool:
 
@@ -122,4 +122,4 @@ select = B,C,E,F,W,T4,B9
 
 Finally we are able to run a commit to our project!
 
-![](..\img\python-project-workflow\image-5.png)
+![image-5.png]({static img\image-5.png})

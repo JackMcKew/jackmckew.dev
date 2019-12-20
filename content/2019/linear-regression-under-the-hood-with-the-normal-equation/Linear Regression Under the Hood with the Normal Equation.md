@@ -41,7 +41,7 @@ X = 10 * np.random.rand(100,1)
 y = 6 + 2 * X + np.random.rand(100,1)
 ```
 
-![10_6_2_gen](..\img\hands-on-machine-learning-chapter-4\10_6_2_gen.png)
+![10_6_2_gen]({static img\10_6_2_gen.png})
 
 Now to compute $\hat{\theta}$ with the normal equation, we can use the inv() function from NumPy's Linear algebra module:
 
@@ -70,7 +70,7 @@ With y_predict being:
  [ 9.96411873]]
 ```
 
-![10_6_2_gen_solved](..\img\hands-on-machine-learning-chapter-4\10_6_2_gen_solved.png)
+![10_6_2_gen_solved]({static img\10_6_2_gen_solved.png})
 
 The equivalent code using Scikit-Learn would look like:
 

@@ -54,7 +54,7 @@ for company in companies:
 print(stocks_df.head())
 ```
 
-![stocks_listing](..\img\python-for-the-finance-industry\image2.png)
+![stocks_listing]({static img\image2.png})
 
 Now that the dataframe is full of closing values for the companie’s stock’s closing values, it’s time to begin processing. First of all, for any missing data or erroneous 0 values, the ffill() function is used to fill any missing value by propagating the last valid observation forward. After that, the timestamp on each row is forced to become the index of the dataframe and converted to a datetime type.
 
@@ -75,7 +75,7 @@ plt.ylabel('price in $')
 plt.show()
 ```
 
-![line_graph](..\img\python-for-the-finance-industry\Figure_1-1.png)
+![line_graph]({static img\Figure_1-1.png})
 Another way to plot this data is to show it as the percentage change from the day before AKA daily returns. By plotting the data in this way, instead of showing the actual prices, the graph is showing the stocks’ volatility.
 
 ``` python
@@ -89,5 +89,6 @@ plt.ylabel('daily returns')
 plt.show()
 ```
 
-![percent_change](..\img\python-for-the-finance-industry\Figure_2.png)
+![percent_change]({static img\Figure_2.png})
+
 Now that we have some insight to the stocks’ data, the next post in this series will demonstrate a way to calculate a balanced portfolio from historical records using Modern Portfolio Theory.

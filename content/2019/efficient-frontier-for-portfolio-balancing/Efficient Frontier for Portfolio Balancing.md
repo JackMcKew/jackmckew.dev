@@ -12,13 +12,13 @@ This post is to demonstrate a method in balancing portfolios that does not depen
 
 Returning to last weeks' post when the budget allocations to assets were determined from randomly generated portfolios, it was presented on the graph below:
 
-![image-20](..\img\efficient-frontier-for-balancing-portfolios\image-20.png)
+![image-20]({static img\image-20.png})
 
 From this plot, it can be visualized that it forms an arch line between the yellow and red crosses. This line is called the [efficient frontier](https://www.investopedia.com/terms/e/efficientfrontier.asp). The efficient frontier represents the set of optimal portfolios that offer the highest expected return for a defined level of risk or the lowest risk for a given level of expected return. Simply this means, all the dots (portfolios) to the right of the line will give you a higher risk for the same returns.
 
 First of all we must mathematically determine the portfolio with the maximum Sharpe ratio as the greater a portfolio's Sharpe ratio, the better it's risk-adjusted performance. Sharpe ratio is calculated using the formula below:
 
-![](..\img\efficient-frontier-for-balancing-portfolios\chrome_dUqVqnTloj.png)
+![chrome_dUqVqnTloj.png]({static img\chrome_dUqVqnTloj.png})
 
 To find the maximum of the Sharpe Ratio programmatically we follow these steps:
 
@@ -148,9 +148,9 @@ risk_free_rate = 0.01977
 display_efficient_frontier(average_returns,covariance_matrix,num_portfolios,risk_free_rate)
 ```
 
-![Code_lDUKAxc9JU](..\img\efficient-frontier-for-balancing-portfolios\Code_lDUKAxc9JU.png)
+![Code_lDUKAxc9JU]({static img\Code_lDUKAxc9JU.png})
 
-![Code_R2bA54PriC](..\img\efficient-frontier-for-balancing-portfolios\Code_R2bA54PriC.png)
+![Code_R2bA54PriC]({static img\Code_R2bA54PriC.png})
 
 The surprising part is that the calculated result is very close to what we have previously simulated by picking from randomly generated portfolios. The slight differences in allocations between the simulated vs calculated are in most cases less than 1%, which shows how powerful randomly estimating calculations can be albeit sometimes not reliable in small sample spaces.
 
@@ -206,7 +206,7 @@ def display_efficient_frontier_selected(average_returns,covariance_matrix,risk_f
 display_efficient_frontier_selected(average_returns,covariance_matrix,risk_free_rate)
 ```
 
-![Code_3sKudlcKG6](..\img\efficient-frontier-for-balancing-portfolios\Code_3sKudlcKG6.png)
+![Code_3sKudlcKG6]({static img\Code_3sKudlcKG6.png})
 
 From the plot above, the stock with the highest risk is BHP, which accompanies the highest returns. This shows that if the investor is willing to take the risk than they will be rewarded with the higher return.
 
