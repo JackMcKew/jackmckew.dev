@@ -3,6 +3,8 @@
 *.gitcredentials
 *.zip
 *.csv
+*.xlsx
+*.xls
 *.json
 Pipfile
 Pipfile.lock
