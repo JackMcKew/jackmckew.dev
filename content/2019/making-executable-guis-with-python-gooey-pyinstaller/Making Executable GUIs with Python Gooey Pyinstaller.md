@@ -90,19 +90,19 @@ By embedding the command names within the arguments we are able to use a variety
 
  Once this file is run will generate the following:
 
-![image-20191102174048814]({static img\image-20191102174048814.png})
+![image-20191102174048814]({static img/image-20191102174048814.png})
 
-![image-20191102174059066]({static img\image-20191102174059066.png})
+![image-20191102174059066]({static img/image-20191102174059066.png})
 
 Which are fully embedded within the windows file explorer system for selecting files, folders, etc.
 
 Now to package this GUI as an executable, we use [PyInstaller](https://www.pyinstaller.org/). By following Chris Kiehl's (Developer of Gooey) instructions on using Pyinstaller and Gooey: https://chriskiehl.com/article/packaging-gooey-with-pyinstaller. All we need to is create a build.spec file within our directory and run pyinstaller build.spec. 
 
-![image-20191102174521992]({static img\image-20191102174521992.png})
+![image-20191102174521992]({static img/image-20191102174521992.png})
 
 This will then generate a build folder and a dist folder within your current directory. The build folder will contain all the files used in generating the executable, which is found within the dist folder.
 
-![image-20191102174758361]({static img\image-20191102174758361.png})
+![image-20191102174758361]({static img/image-20191102174758361.png})
 
 The code in it's entirety is:
 

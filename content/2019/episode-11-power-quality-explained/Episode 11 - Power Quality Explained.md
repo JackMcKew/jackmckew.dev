@@ -46,11 +46,11 @@ plt.show()
 
 The example above shows us the base signal (fundamental frequency), and it's first harmonic (harmonic of 2 or twice as fast as the fundamental frequency).
 
-![Harmonic1_2]({static img\Harmonic1_2.png})
+![Harmonic1_2]({static img/Harmonic1_2.png})
 
 When these two signals are superimposed on each other, they produce a distorted waveform. Electrical equipment is designed to operate at the base signal (50Hz here in Australia), and typically does not cope with distorted wave like seen below when we superimpose a base signal with it's first harmonic.
 
-![Harmonic1_2_Combined.png]({static img\Harmonic1_2_Combined.png})
+![Harmonic1_2_Combined.png]({static img/Harmonic1_2_Combined.png})
 
 Luckily, these issues are now easily detected and rectified by harmonic analyzers and active/passive harmonic filters.
 
@@ -68,7 +68,7 @@ Apparent power (kVA) is the vector sum of the real power (kW) and reactive power
 Suppose you are running a store, you have to spend an amount of money X (cost) on buying products to sell in the future for a larger amount of money Y, meaning your profit will be P = Y - X. X is not lost money, without spending X you will not be able to make any profit P. The profit P is comparable to the active power, the earnings Y are the equivalent of apparent power and the initial cost X is the reactive power.
 
 
-![CodeCogsEqn-1.gif]({static img\CodeCogsEqn-1.gif})
+![CodeCogsEqn-1.gif]({static img/CodeCogsEqn-1.gif})
 
 Therefore, for a given power supply (kVA):
 
@@ -91,21 +91,21 @@ Correcting power factor from a lagging (\<1) power factor, can be as simple as r
 
 Since motors require inductive or lagging power for magnetizing before useful work beings, this brings makes the power factor of the system lagging (\<1). Capacitors provide capacitive or leading reactive power that cancels out the lagging power when used for power-factor improvement. The improved power factor changes the current requirements of the system, but not the one required by the motor.
 
-![CodeCogsEqn-1-1.gif]({static img\CodeCogsEqn-1-1.gif})
+![CodeCogsEqn-1-1.gif]({static img/CodeCogsEqn-1-1.gif})
 
-![Apparent power calculation]({static img\CodeCogsEqn-2.gif})
+![Apparent power calculation]({static img/CodeCogsEqn-2.gif})
 
-![Reactive power calculation]({static img\CodeCogsEqn-3.gif})
+![Reactive power calculation]({static img/CodeCogsEqn-3.gif})
 
 Using these formulas we can calculate just how big of a capacitor we require:
 
-![CodeCogsEqn-4.gif]({static img\CodeCogsEqn-4.gif})
+![CodeCogsEqn-4.gif]({static img/CodeCogsEqn-4.gif})
 
-![CodeCogsEqn-5.gif]({static img\CodeCogsEqn-5.gif})
+![CodeCogsEqn-5.gif]({static img/CodeCogsEqn-5.gif})
 
-![CodeCogsEqn-6.gif]({static img\CodeCogsEqn-6.gif})
+![CodeCogsEqn-6.gif]({static img/CodeCogsEqn-6.gif})
 
-![CodeCogsEqn-7.gif]({static img\CodeCogsEqn-7.gif})
+![CodeCogsEqn-7.gif]({static img/CodeCogsEqn-7.gif})
 
 Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.
 

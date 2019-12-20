@@ -12,4 +12,4 @@ By further making the data analysis system interactive, this adds an extreme amo
 
 With the help of python, it was simple to create an interactive map from a data set containing geographic co-ordinates allowing users to visually determine where they would like to select their data set from. This can then be embedding into any web browser or mobile device allowing for extreme flexibility and interactivity.
 
-![ezgif.com-video-to-gif-1-1]({static img\ezgif.com-video-to-gif-1-1.gif})
+![ezgif.com-video-to-gif-1-1]({static img/ezgif.com-video-to-gif-1-1.gif})

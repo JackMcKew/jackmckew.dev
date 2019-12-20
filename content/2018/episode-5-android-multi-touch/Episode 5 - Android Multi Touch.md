@@ -8,7 +8,7 @@ Status: published
 
 This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can be seen below it contains 3 values: x\_pos, y\_pos and id. It is also useful to create a constructor so that other classes can easily construct the Finger class.
 
-![ezgif.com-video-to-gif-2]({static img\ezgif.com-video-to-gif-2.gif})
+![ezgif.com-video-to-gif-2]({static img/ezgif.com-video-to-gif-2.gif})
 
 ``` java
 public class Finger

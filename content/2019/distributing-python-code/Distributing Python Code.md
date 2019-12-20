@@ -20,7 +20,7 @@ ctypes.windll.user32.MessageBoxW(0, "Hello Windows!", "PyInstaller Example", 1)
 
 Which shows the user with this dialog box:
 
-![python_Dh0hFJKqDx]({static img\python_Dh0hFJKqDx.png})
+![python_Dh0hFJKqDx]({static img/python_Dh0hFJKqDx.png})
 
 Now to package this code into an executable (.exe), there are multiple packages out there that are possible to use, some examples of these are:
 
@@ -32,15 +32,15 @@ For this post, I will use PyInstaller as it is what I am most familiar with, ple
 
 Now to use the PyInstaller package, just open Anaconda Prompt (or cmd if anaconda.exe is in your PATH). Navigate to where the python code is stored, and run the command "pyinstaller \<name\_of\_program\>.py. See below for an example:
 
-![cmd_PXbANiLF4N.png]({static img\cmd_PXbANiLF4N.png})
+![cmd_PXbANiLF4N.png]({static img/cmd_PXbANiLF4N.png})
 
 This will create a build & dist folder within the directory you navigated to, which contains the python application and all the required files will be put inside the dist folder which will be shipped to the user later on. There are many other settings that you can use to customize how your package gets built and more, but I won't go into that in this post.
 
-![explorer_409CFHxhyh.png]({static img\explorer_409CFHxhyh.png})
+![explorer_409CFHxhyh.png]({static img/explorer_409CFHxhyh.png})
 
 Now if we go into the dist folder and find the .exe (which will have the same name as your python file unless you change this setting). Once you hit run, you'll be met by this screen:
 
-![pyinstall_example_w5KP1B327W.png]({static img\pyinstall_example_w5KP1B327W.png})
+![pyinstall_example_w5KP1B327W.png]({static img/pyinstall_example_w5KP1B327W.png})
 
 Now you can send this executable to anyone (although most antivirus will stop you) and it will run on their PC!
 

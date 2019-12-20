@@ -41,7 +41,7 @@ Now classes are admittedly one of my weak points, so what better to do then go s
 
 By feeding strings of text (which are instructions), you can generate graphics with SVG, mix this with loops and you get generative art! Art being generally a very visual process, watch the video to get a better understanding, personally I liked this one:
 
-![amanda_hogan]({static img\image1.png})
+![amanda_hogan]({static img/image1.png})
 
 #### [Python Applications in Infrastructure Planning and Civil Engineering](https://2019.pycon-au.org/talks/python-applications-in-infrastructure-planning-and-civil-engineering) [Ben Chu](https://au.linkedin.com/in/ben-chu-2643aa131)
 

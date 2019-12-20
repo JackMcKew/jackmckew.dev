@@ -117,9 +117,9 @@ risk_free_rate = 0.01977
 display_random_efficient_frontier(mean_returns,cov_matrix,num_portfolios,risk_free_rate)
 ```
 
-![sharpe_ratios]({static img\image-12.png})
+![sharpe_ratios]({static img/image-12.png})
 
-![efficient_frontier]({static img\image-20.png})
+![efficient_frontier]({static img/image-20.png})
 
 With the two portfolios determined, the one gives us the best risk-adjusted (as long as the trader is prepared to take the risk) is the one with the maximum Sharpe ratio, allocating a 67% portion to WOW and 32% to BHP, as these stocks were quite volatile from the daily percentage change calculations.
 

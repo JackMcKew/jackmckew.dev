@@ -8,7 +8,7 @@ Status: published
 
 A network is defined as “A network is a collection of computers, servers, mainframes, network devices, peripherals, or other devices connected to one another to allow the sharing of data”. There are various configurations of networks for specific design scenarios as represented in:
 
-![network_topologies]({static img\nettopo.gif})
+![network_topologies]({static img/nettopo.gif})
 
 Typical residential home networks are configured in a tree topology that is connected to the internet. This typically consists of a single router/modem that serves all the end-user devices on the network with internet connection. The router also acts as a gateway for the devices connected on the network to communicate with one another.
 
