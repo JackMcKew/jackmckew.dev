@@ -18,3 +18,86 @@ I started noticing more and more people online had moved to [Github Pages](https
    3. VuePress
    4. Pelican
    5. [So on](https://www.staticgen.com/)
+3. [Blogging with Jupyter notebooks](https://dev.to/shivbhosale/jupyter-notebooks-as-blogs-26l1)
+4. [Concept of CI/CD](https://stackify.com/what-is-cicd-whats-important-and-how-to-get-it-right/)
+5. [Travis CI](https://travis-ci.com/)
+6. [Netlify](https://www.netlify.com/)
+
+What I settled on was a bit of a concoction of services, such that I can both get my feet wet with these new tools and still stay in the land of snakes (Python).
+
+## Pelican + Travis CI + Netlify + Github
+
+Before we get into all 4 services in conjunction, let's separate and step through the process for each of them.
+
+### Pelican
+
+Right off the bat, the first milestone I wanted to hit was to be able to generate a locally hosted static site from a single post converted to markdown. Luckily, there is an exact guide for going through this process in the documentation for Pelican and using the tool pelican-quickstart.
+
+http://docs.getpelican.com/en/3.6.3/quickstart.html
+
+#### Themes
+
+The next step was to decide on a theme for the website, while the intentions were to develop a theme from scratch, I shall leave this for a later date. An easy way of previewing themes was the website:
+
+http://www.pelicanthemes.com/
+
+Which lets you scroll through the various themes, and even links to the repository on github for the theme if you wish to use it. The theme I decided on was [Flex by Alexandre Vicenzi](https://github.com/alexandrevicenzi/Flex).
+
+Apply the the theme was as simple as cloning the repo (or using [git submodules](https://www.atlassian.com/git/tutorials/git-submodule)), and adding one line of code in pelicanconf.py (generated automatically by pelican-quickstart).
+
+```python
+THEME = "./themes/Flex"
+```
+
+#### Plugins
+
+Admittedly, I just tried out all the plugins in the [Pelican Plugins Repository](https://github.com/getpelican/pelican-plugins) until I found the combination that works for me, this ended up being:
+
+```python
+PLUGINS = [
+    "sitemap",
+    "better_codeblock_line_numbering",
+    "better_code_samples",
+    "bootstrapify",
+    "deadlinks",
+    "more_categories",
+    "neighbors",
+    "pelican-ert",
+    "liquid_tags.notebook",
+    "liquid_tags.include_code",
+    "representative_image",
+    "share_post",
+    'show_source',
+    'tipue_search',
+    "dateish",
+    "post_stats",
+    "render_math",
+    "autostatic",
+    "clean_summary"
+]
+```
+
+For tipue_search in particular, as this wasn't supported by the theme yet, I created a pull request on the original repository, with the functionality integrated https://github.com/alexandrevicenzi/Flex/pull/193.
+
+#### Wordpress Import
+
+Now that I had the skeleton of the website set up, I needed to bring in all the existing posts from wordpress. By following another guide within the Pelican documentation, this was a relatively simple task http://docs.getpelican.com/en/3.6.3/importer.html. However, I did spend the time to go through and edit each markdown to remove redundant 'wordpress' formatting tags manually.
+
+#### Linking to Content
+
+As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in http://docs.getpelican.com/en/3.6.3/content.html. 
+
+```bash
+content
+├── articles
+│   └── article.md
+├── images
+│   └── han.jpg
+├── pdfs
+│   └── menu.pdf
+└── pages
+    └── test.md
+```
+
+I ended up with a structure like above, which annoyed me a bit as now the content was in one place, but still divided into 3 folders with little-to-no link between them, my goal was to have the structure like:
+
