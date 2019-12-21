@@ -33,13 +33,13 @@ Before we get into all 4 services in conjunction, let's separate and step throug
 
 Right off the bat, the first milestone I wanted to hit was to be able to generate a locally hosted static site from a single post converted to markdown. Luckily, there is an exact guide for going through this process in the documentation for Pelican and using the tool pelican-quickstart.
 
-http://docs.getpelican.com/en/3.6.3/quickstart.html
+[http://docs.getpelican.com/en/3.6.3/quickstart.html](http://docs.getpelican.com/en/3.6.3/quickstart.html)
 
 #### Themes
 
 The next step was to decide on a theme for the website, while the intentions were to develop a theme from scratch, I shall leave this for a later date. An easy way of previewing themes was the website:
 
-http://www.pelicanthemes.com/
+[http://www.pelicanthemes.com/](http://www.pelicanthemes.com/)
 
 Which lets you scroll through the various themes, and even links to the repository on github for the theme if you wish to use it. The theme I decided on was [Flex by Alexandre Vicenzi](https://github.com/alexandrevicenzi/Flex).
 
@@ -77,15 +77,15 @@ PLUGINS = [
 ]
 ```
 
-For tipue_search in particular, as this wasn't supported by the theme yet, I created a pull request on the original repository, with the functionality integrated https://github.com/alexandrevicenzi/Flex/pull/193.
+For tipue_search in particular, as this wasn't supported by the theme yet, I created a pull request on the original repository, with the functionality integrated [https://github.com/alexandrevicenzi/Flex/pull/193](https://github.com/alexandrevicenzi/Flex/pull/193).
 
 #### Wordpress Import
 
-Now that I had the skeleton of the website set up, I needed to bring in all the existing posts from wordpress. By following another guide within the Pelican documentation, this was a relatively simple task http://docs.getpelican.com/en/3.6.3/importer.html. However, I did spend the time to go through and edit each markdown to remove redundant 'wordpress' formatting tags manually.
+Now that I had the skeleton of the website set up, I needed to bring in all the existing posts from wordpress. By following another guide within the Pelican documentation, this was a relatively simple task [http://docs.getpelican.com/en/3.6.3/importer.html](http://docs.getpelican.com/en/3.6.3/importer.html). However, I did spend the time to go through and edit each markdown to remove redundant 'wordpress' formatting tags manually.
 
 #### Linking to Content
 
-As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in http://docs.getpelican.com/en/3.6.3/content.html. 
+As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in [http://docs.getpelican.com/en/3.6.3/content.html](http://docs.getpelican.com/en/3.6.3/content.html). 
 
 ```bash
 content
