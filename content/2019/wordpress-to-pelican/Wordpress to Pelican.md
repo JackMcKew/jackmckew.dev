@@ -101,3 +101,64 @@ content
 
 I ended up with a structure like above, which annoyed me a bit as now the content was in one place, but still divided into 3 folders with little-to-no link between them, my goal was to have the structure like:
 
+```bash
+content
+├── articles
+│   ├── test-article
+│   |   ├── img
+│   │   |	└── icon.png
+│   │   |	└── photo.jpg
+│   |   ├── notebooks
+│   │   |	└── test-notebook.ipynb
+│   │   └── article.md
+└── files
+    └── archive.zip
+```
+
+By using the plugins [autostatic](https://github.com/AlexJF/pelican-autostatic) & [liquid_tags](https://github.com/getpelican/pelican-plugins/tree/master/liquid_tags), I was able to achieve this structure.
+
+### Travis CI
+
+To be honest, I was actually surprised at how easy it was to turn Travis CI and that I could spin up a virtual machine, install all the dependencies and re-build the website. However, I had a lot of trouble trying to get Travis CI to push back to the repository such that Netlify could build from it.
+
+This was later remedied by setting a repository secret variable on Travis CI as I couldn't get the secret token encrypted by Travis CI CLI (Ruby application).
+
+In essence, all that was needed was a .travis.yml file in the root directory which ended up like this:
+
+```bash
+language: python
+branches:
+  only:
+  - master
+install:
+- pip install --upgrade pip
+- pip install -r requirements.txt
+script:
+- pelican content
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: output
+  on:
+    branch: master
+```
+
+### Netlify
+
+Admittedly, I feel as if I'm not using Netlify for all it can do.
+
+Essentially, all for this project, it just detects a change in the gh-pages branch (for Github Pages), and redeploys the website out to a custom domain.
+
+### Github
+
+Github is the repository location for all the code, and I use Git for version control and interaction with the repository.
+
+All I need to do now to create a new post is:
+
+1. Push a new markdown file (and any other linked content) to the master branch of the repository,
+2. This will fire up Travis CI to build the site with Pelican for me, 
+3. Travis CI will then push the created site to the gh-pages branch of the repository,
+4. Netlify will detect the change and process the new site,
+5. The new site is deployed with updated posts!
