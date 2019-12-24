@@ -1,7 +1,7 @@
 Title: Episode 7 – Planning
 Date: 2019-01-04 07:30
 Category: Principles
-Author: admin
+Author: Jack McKew
 Slug: episode-7-planning
 Status: published
 

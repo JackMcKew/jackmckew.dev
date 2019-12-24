@@ -1,7 +1,7 @@
 Title: Efficient Frontier for Balancing Portfolios
 Date: 2019-04-26 06:30
 Category: Python, Data Science
-Author: admin
+Author: Jack McKew
 tags: python, data, analysis
 Slug: efficient-frontier-for-balancing-portfolios
 Status: published

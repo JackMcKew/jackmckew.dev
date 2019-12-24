@@ -1,7 +1,7 @@
 Title: Episode 3 - Open Mind
 Date: 2018-12-07 03:10
 Category: Python, Principles
-Author: admin
+Author: Jack McKew
 Tags: database, selfimprovement
 Slug: episode-3-open-mind
 Status: published

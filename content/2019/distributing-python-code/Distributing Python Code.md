@@ -1,7 +1,7 @@
 Title: Distributing Python Code
 Date: 2019-05-31 06:30
 Category: Python
-Author: admin
+Author: Jack McKew
 Tags: pyinstaller, python
 Slug: distributing-python-code
 Status: published

@@ -1,7 +1,7 @@
 Title: Episode 5 - Android Multi-Touch
 Date: 2018-12-21 01:30
 Category: Android
-Author: admin
+Author: Jack McKew
 Tags: android
 Slug: episode-5-android-multi-touch
 Status: published

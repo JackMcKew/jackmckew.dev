@@ -1,7 +1,7 @@
 Title: Episode 1 - Optimization
 Date: 2018-11-23 02:49
 Category: Python
-Author: admin
+Author: Jack McKew
 Tags: data, analysis
 Slug: episode-1-optimization
 
