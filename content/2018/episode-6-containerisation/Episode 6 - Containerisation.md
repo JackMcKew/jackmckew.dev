@@ -1,7 +1,7 @@
 Title: Episode 6 - Containerization
 Date: 2018-12-28 08:30
 Category: Software Development
-Author: admin
+Author: Jack McKew
 Slug: episode-6-containerization
 Status: published
 

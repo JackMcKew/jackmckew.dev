@@ -1,7 +1,7 @@
 Title: Episode 9 - Web Enabled Universal Remote - Part 1
 Date: 2019-01-18 07:30
 Category: Engineering
-Author: admin
+Author: Jack McKew
 Tags: electronics
 Slug: episode-9-web-enabled-universal-remote-part-1
 Status: published

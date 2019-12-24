@@ -64,6 +64,7 @@ MAIN_MENU = True
 HOME_HIDE_TAGS = False
 
 MENUITEMS = (
+    ("Authors","/authors.html"),
     ("Archives", "/archives.html"),
     ("Categories", "/categories.html"),
     ("Tags", "/tags.html"),
@@ -90,7 +91,7 @@ PLUGIN_PATHS = [
 #     "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
 # ]
 
-DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives','search'))
+DIRECT_TEMPLATES = (('index','authors', 'tags', 'categories', 'archives','search'))
 
 PLUGINS = [
     "sitemap",

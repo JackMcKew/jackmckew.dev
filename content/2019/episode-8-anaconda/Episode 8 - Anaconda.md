@@ -1,7 +1,7 @@
 Title: Episode 8 - Anaconda
 Date: 2019-01-11 07:00
 Category: Python
-Author: admin
+Author: Jack McKew
 Tags: python
 Slug: episode-8-anaconda
 Status: published
