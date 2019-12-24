@@ -17,9 +17,11 @@
   <header>
     <h2><a href="{{ SITEURL }}/{{ article.url }}{% if not DISABLE_URL_HASH %}#{{ article.slug }}{% endif %}">{{ article.title }}</a></h2>
     <p>
-      {{ _('Posted on %(when)s in %(category)s',
-           when=article.locale_date,
-           category='<a href="%s/%s">%s</a>'|format(SITEURL, article.category.url, article.category)|safe) }}
+      {{ _('Posted by %(author)s on %(when)s in %(category)s',
+           author = '<a href="%s/%s">%s</a>'|format(SITEURL, article.author.url,article.author)|safe,
+           when = article.locale_date,
+           category='<a href="%s/%s">%s</a>'|format(SITEURL, article.category.url, article.category)|safe)
+            }}
 
       {% if article.tags and not HOME_HIDE_TAGS %}
           &#8226; {{ _('Tagged with') }}
