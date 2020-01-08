@@ -1,24 +1,16 @@
 #%%
-import geopandas as gpd, pandas as pd
-from shapely.geometry import Point
+import geopandas
+from shapely.geometry import Polygon
 
-p1 = Point((1,2))
+p1 = Polygon([(0, 0), (1, 0), (1, 1), (0, 1)])
+p2 = Polygon([(0, 0), (1, 0), (1, 1)])
+p3 = Polygon([(2, 0), (3, 0), (3, 1), (2, 1)])
 
-p2 = Point((5,6))
-df = pd.DataFrame({'a': [11,22],'b':[33,44]})
-gdf = gpd.GeoDataFrame(df, geometry = [p1,p2])
-buffer = gdf.buffer(2)
-buffer.plot()
-envelope = buffer.envelope  
-envelope.plot()
-# gdf.plot()
+gdf = geopandas.GeoDataFrame(columns=['geometry'],data=[p1,p2,p3])
 
-# %%
-c1 = Point(1, 0).buffer(1)
-c2 = Point(.5, 0).buffer(1)
+gdf['Data'] = {0: 0, 1: 1,2:2}
 
-gdf = gpd.GeoDataFrame(dict(A=[1, 2], B=[3, 4]), geometry=[c1, c2])
+display
 
-gdf.plot()
-
+gdf.plot(cmap='viridis',edgecolor='black',alpha=0.8)
 # %%
