@@ -9,11 +9,11 @@ AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
 SITETITLE = SITENAME
 SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
-SITEURL = "https://jackmckew.dev"
+# SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
-# SITEURL = "http://localhost:8000"
+SITEURL = "http://localhost:8000"
 
-
+IGNORE_FILES = ['*.html']
 DISPLAY_PAGES_ON_MENU = True
 
 DISQUS_SITENAME = 'jackmckew-dev'
@@ -45,7 +45,7 @@ ARTICLE_SAVE_AS = '{slug}.html'
 
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
-STATIC_PATHS = ["img","files","html","extra","2018","2019"]
+STATIC_PATHS = ["img","files","html","extra","2018","2019","2020"]
 # STATIC_SAVE_AS = "{dirname}"
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
