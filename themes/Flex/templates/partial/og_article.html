@@ -16,7 +16,8 @@
 {% for tag in article.tags %}
 <meta property="article:tag" content="{{ tag.name|escape }}"/>
 {% endfor %}
-{% if 'cover' in article.metadata %}
+<!-- {% if 'cover' in article.metadata %} -->
+{% if  article.featured_image %}
 <meta property="og:image" content="{{ article.featured_image }}">
 {% else %}
 <meta property="og:image" content="{{ SITELOGO }}">
