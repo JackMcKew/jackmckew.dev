@@ -17,7 +17,7 @@
 <meta property="article:tag" content="{{ tag.name|escape }}"/>
 {% endfor %}
 {% if 'cover' in article.metadata %}
-<meta property="og:image" content="{{ SITEURL }}/{{ article.metadata['cover'] }}">
+<meta property="og:image" content="{{ article.featured_image }}">
 {% else %}
 <meta property="og:image" content="{{ SITELOGO }}">
 {% endif %}
