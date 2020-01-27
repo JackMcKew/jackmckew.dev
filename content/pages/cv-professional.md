@@ -13,6 +13,6 @@ Within AECOM, I have also developed several in-house automated data workflows (p
 
 If you have any opportunities you think I would be a good fit for, please don’t hesitate to contact me by emailing me directly at <jackmckew2@gmail.com>.
 
-[Curriculum Vitae]({attach}/files/JackMcKewResumeTranscript.pdf)
+[Curriculum Vitae]({attach}/files/Jack_McKew_CV.pdf)
 
 [Honour's Thesis: "In Home Appliance Scheduler Using Home Area Network"]({attach}/files/Final_Year_Project_Part_B.pdf)
