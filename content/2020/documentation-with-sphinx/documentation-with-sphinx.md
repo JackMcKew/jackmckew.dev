@@ -104,19 +104,47 @@ To add documentation within our source code, we use docstrings. There are many a
 
 The resulting documented code will look like:
 
-
 ```
 __init__.py
 ```
-{% include_code 2020/documentation-with-sphinx/sphinxdemo-with-docs/__init__.py :hidefilename: Package Init File %}
+{% include_code 2020/documentation_with_sphinx/sphinxdemo-with-docs/__init__.py :hidefilename: Package Init File %}
 
 ```
 __main__.py
 ```
-{% include_code 2020/documentation-with-sphinx/sphinxdemo-with-docs/__main__.py :hidefilename: Package Main File %}
+{% include_code 2020/documentation_with_sphinx/sphinxdemo-with-docs/__main__.py :hidefilename: Package Main File %}
 
 ```
 file_functions.py
 ```
-{% include_code 2020/documentation-with-sphinx/sphinxdemo-with-docs/file_functions.py :hidefilename: Package Functions File %}
+{% include_code 2020/documentation_with_sphinx/sphinxdemo-with-docs/file_functions.py :hidefilename: Package Functions File %}
 
+Now at a minimum our source code is documented, now to present these docstrings in a format that we can share with others (html).
+
+First we need to set the sphinx configuration, the file which contains this (we generated with sphinx-quickstart) is located in `docs/source/conf.py`.
+
+We are going to utilise the following sphinx extensions (they are all in-built into sphinx):
+- [`sphinx.ext.autodoc`](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
+- [`sphinx.ext.napoleon`](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html)
+- [`sphinx.ext.viewcode`](https://www.sphinx-doc.org/en/master/usage/extensions/viewcode.html)
+- [`sphinx.ext.autosummary`](https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html)
+
+Our `conf.py` file for sphinx's configuration results in:
+
+{% include_code 2020/documentation_with_sphinx/docs/source/conf.py Sphinx Configuration File %}
+
+We must also set our index.rst (restructured text) with what we want to see in our documentation.
+
+{% include_code 2020/documentation_with_sphinx/docs/source/index.rst Documentation Index File %}
+
+> To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: [ADD GITHUB LINK]
+
+Next we navigate our `docs` directory, and finally run:
+
+```
+make html
+```
+
+This will generate all the stubs for our documentation and compile them into HTML format.
+
+![Generated Docs]({static img/generated_docs.png})
