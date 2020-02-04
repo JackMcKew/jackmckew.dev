@@ -88,3 +88,13 @@ __main__.py
 file_functions.py
 ```
 {% include_code 2020/documentation-with-sphinx/sphinxdemo/file_functions.py :hidefilename: Package Functions File %}
+
+> If you are using VS Code to use packages with debugging, change your launch.json with the following:
+>  "configurations": [
+        {
+            "name": "Python: Module - sphinxdemo",
+            "type": "python",
+            "request": "launch",
+            "module": "sphinxdemo.`__main__`"
+        }
+
