@@ -137,7 +137,7 @@ We must also set our index.rst (restructured text) with what we want to see in o
 
 {% include_code 2020/documentation-with-sphinx/docs/source/index.rst Documentation Index File %}
 
-> To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: [ADD GITHUB LINK]
+> To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: [autosummary templates](https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/documentation-with-sphinx/docs/source/_templates)
 
 Next we navigate our `docs` directory, and finally run:
 
