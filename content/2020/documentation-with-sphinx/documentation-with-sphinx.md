@@ -98,3 +98,25 @@ file_functions.py
             "module": "sphinxdemo.`__main__`"
         }
 
+To add documentation within our source code, we use docstrings. There are many available styles of docstrings out there, my personal preference is [Google Docstring Style](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html). 
+
+> We need to enable the napoleon sphinx extensions in docs/conf.py for this style to work.
+
+The resulting documented code will look like:
+
+
+```
+__init__.py
+```
+{% include_code 2020/documentation-with-sphinx/sphinxdemo-with-docs/__init__.py :hidefilename: Package Init File %}
+
+```
+__main__.py
+```
+{% include_code 2020/documentation-with-sphinx/sphinxdemo-with-docs/__main__.py :hidefilename: Package Main File %}
+
+```
+file_functions.py
+```
+{% include_code 2020/documentation-with-sphinx/sphinxdemo-with-docs/file_functions.py :hidefilename: Package Functions File %}
+
