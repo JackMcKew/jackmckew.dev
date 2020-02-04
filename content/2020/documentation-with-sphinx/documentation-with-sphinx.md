@@ -1,4 +1,4 @@
-'Title: Automatically Generate Documentation with Sphinx
+Title: Automatically Generate Documentation with Sphinx
 Date: 2020-02-03
 Author: Jack McKew
 Category: Python, Software Development
@@ -107,17 +107,17 @@ The resulting documented code will look like:
 ```
 __init__.py
 ```
-{% include_code 2020/documentation_with_sphinx/sphinxdemo-with-docs/__init__.py :hidefilename: Package Init File %}
+{% include_code 2020/documentation-with-sphinx/sphinxdemo_with_docs/__init__.py :hidefilename: Package Init File %}
 
 ```
 __main__.py
 ```
-{% include_code 2020/documentation_with_sphinx/sphinxdemo-with-docs/__main__.py :hidefilename: Package Main File %}
+{% include_code 2020/documentation-with-sphinx/sphinxdemo_with_docs/__main__.py :hidefilename: Package Main File %}
 
 ```
 file_functions.py
 ```
-{% include_code 2020/documentation_with_sphinx/sphinxdemo-with-docs/file_functions.py :hidefilename: Package Functions File %}
+{% include_code 2020/documentation-with-sphinx/sphinxdemo_with_docs/file_functions.py :hidefilename: Package Functions File %}
 
 Now at a minimum our source code is documented, now to present these docstrings in a format that we can share with others (html).
 
@@ -131,11 +131,11 @@ We are going to utilise the following sphinx extensions (they are all in-built i
 
 Our `conf.py` file for sphinx's configuration results in:
 
-{% include_code 2020/documentation_with_sphinx/docs/source/conf.py Sphinx Configuration File %}
+{% include_code 2020/documentation-with-sphinx/docs/source/conf.py Sphinx Configuration File %}
 
 We must also set our index.rst (restructured text) with what we want to see in our documentation.
 
-{% include_code 2020/documentation_with_sphinx/docs/source/index.rst Documentation Index File %}
+{% include_code 2020/documentation-with-sphinx/docs/source/index.rst Documentation Index File %}
 
 > To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: [ADD GITHUB LINK]
 
