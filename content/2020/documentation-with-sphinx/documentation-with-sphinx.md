@@ -1,4 +1,4 @@
-Title: Automatically Generate Documentation with Sphinx
+'Title: Automatically Generate Documentation with Sphinx
 Date: 2020-02-03
 Author: Jack McKew
 Category: Python, Software Development
@@ -8,3 +8,83 @@ Slug: automatically-generate-documentation-with-sphinx
 **Document code automatically through docstrings with Sphinx**
 
 This post goes into how to generate documentation for your python projects automatically with Sphinx!
+
+First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following
+
+```
+pip install sphinx
+conda install sphinx
+pipenv install sphinx
+```
+
+Once you have installed sphinx, inside the project (let's use the directory of this blog post), we can create a docs folder in which all our documentation will live.
+
+```
+mkdir docs
+cd docs
+```
+
+Ensuring to have our virtual environment with sphinx installed active, we run `sphinx-quickstart`, this tool allows us to populate some information for our documentation in a nice Q&A style.
+
+```
+Welcome to the Sphinx 2.3.1 quickstart utility.
+
+Please enter values for the following settings (just press Enter to
+accept a default value, if one is given in brackets).
+
+Selected root path: .
+
+You have two options for placing the build directory for Sphinx output.
+Either, you use a directory "_build" within the root path, or you separate
+"source" and "build" directories within the root path.
+> Separate source and build directories (y/n) [n]: y
+
+The project name will occur in several places in the built documentation.
+> Project name: SphinxDemo
+> Author name(s): Jack McKew
+> Project release []: 
+
+If the documents are to be written in a language other than English,
+you can select a language here by its language code. Sphinx will then
+translate text that it generates into that language.
+
+For a list of supported codes, see
+https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language.
+> Project language [en]: 
+
+Creating file .\source\conf.py.
+Creating file .\source\index.rst.
+Creating file .\Makefile.
+Creating file .\make.bat.
+
+Finished: An initial directory structure has been created.
+
+You should now populate your master file .\source\index.rst and create other documentation
+source files. Use the Makefile to build the docs, like so:
+   make builder
+where "builder" is one of the supported builders, e.g. html, latex or linkcheck.
+```
+
+Now let's create an example package that we can write some documentation in.
+
+```
+mkdir sphinxdemo
+cd sphinxdemo
+```
+
+Then we create 3 files inside our example package:
+
+```
+__init__.py
+```
+{% include_code 2020/documentation-with-sphinx/sphinxdemo/__init__.py :hidefilename: Package Init File %}
+
+```
+__main__.py
+```
+{% include_code 2020/documentation-with-sphinx/sphinxdemo/__main__.py :hidefilename: Package Main File %}
+
+```
+file_functions.py
+```
+{% include_code 2020/documentation-with-sphinx/sphinxdemo/file_functions.py :hidefilename: Package Functions File %}
