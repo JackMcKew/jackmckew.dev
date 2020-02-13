@@ -3,7 +3,7 @@ Date: 2020-02-13
 Author: Jack McKew
 Category: Book Reviews
 Tags: bookreview, principles, habits
-Slug: book-review-power-of-habits
+<!-- Slug: book-review-power-of-habits -->
 
 Power of Habits by Charles Duhigg was one of the most useful books I have read. While it doesn't explicitly step the reader through how to change habits, it thoroughly goes through many examples of where habits have changed other people's lives, case studies if you will. By then being able to recognise the habitual changes these people had to make, this allows the reader to (maybe) identify and be able to change some of their own habits to better their own life.
 
