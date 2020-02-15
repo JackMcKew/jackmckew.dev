@@ -3,7 +3,8 @@
 
 import os
 
-def get_files_in_folder(path,extension):
+
+def get_files_in_folder(path, extension):
     """
     Prints all files in folder, if an extension is given, will only print the files with the given extension
 

@@ -1,6 +1,7 @@
 import os
 
-def get_files_in_folder(path,extension):
+
+def get_files_in_folder(path, extension):
     f = []
     for (dirpath, dirnames, filenames) in os.walk(path):
         if extension:
