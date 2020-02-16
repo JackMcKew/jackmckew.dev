@@ -1,4 +1,5 @@
 #code adapted from http://tillbergmann.com/blog/python-gradient-descent.html
+# source: https://gist.github.com/felipessalvatore/c2e1c09dfcb8710b847e2457620f8204
 
 # %matplotlib inline
 import numpy as np
