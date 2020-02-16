@@ -82,7 +82,7 @@ fig = plt.figure(figsize=(20, 10))
 ax = fig.add_subplot(111, projection='3d')
 
 ax.plot_surface(M, B, Z, rstride=1, cstride=1, color='b', alpha=0.2)
-#ax.contour(M, B, Z, 20, color='b', alpha=0.5, offset=0, stride=30)
+# ax.contour(M, B, Z, 20, color='b', alpha=0.5, offset=0, stride=30)
 
 
 ax.set_xlabel('x1', labelpad=30, fontsize=24, fontweight='bold')
@@ -97,4 +97,4 @@ ax.plot([t[0] for t in history], [t[1] for t in history], cost , markerfacecolor
 ax.plot([t[0] for t in history], [t[1] for t in history], 0 , markerfacecolor='r', markeredgecolor='r', marker='.', markersize=2)
 
 fig.suptitle("Minimizando f(x1,x2)", fontsize=24, fontweight='bold')
-plt.savefig("Minimization_image.png")
+plt.savefig("./img/Minimization_image.png")
