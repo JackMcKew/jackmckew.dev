@@ -111,7 +111,7 @@
     <body><p><strong>Document code automatically through docstrings with Sphinx</strong></p>
 <p>This post goes into how to generate documentation for your python projects automatically with Sphinx!</p>
 <p>First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span></span>
 <span class="code-line"><span class="n">conda</span> <span class="n">install</span> <span class="n">sphinx</span></span>
@@ -119,13 +119,13 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Once you have installed sphinx, inside the project (let's use the directory of this blog post), we can create a docs folder in which all our documentation will live.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">mkdir</span> <span class="n">docs</span></span>
 <span class="code-line"><span class="n">cd</span> <span class="n">docs</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Ensuring to have our virtual environment with sphinx installed active, we run <code>sphinx-quickstart</code>, this tool allows us to populate some information for our documentation in a nice Q&amp;A style.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -199,27 +199,27 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>Now let's create an example package that we can write some documentation in.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">mkdir</span> <span class="n">sphinxdemo</span></span>
 <span class="code-line"><span class="n">cd</span> <span class="n">sphinxdemo</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Then we create 3 files inside our example package:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__init__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__init__</span><span class="p">.</span><span class="n">py</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/__init__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">version</span> <span class="o">=</span> <span class="ss">"0.1.1"</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">version</span> <span class="o">=</span> <span class="ss">"0.1.1"</span></span>
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__main__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__main__</span><span class="p">.</span><span class="n">py</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/__main__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -227,18 +227,18 @@
 <span class="code-line">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">.file_functions</span> <span class="kn">import</span> <span class="n">get_files_in_folder</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">py_files</span> <span class="o">=</span> <span class="n">get_files_in_folder</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="n">extension</span><span class="o">=</span><span class="s2">".py"</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">py_files</span> <span class="o">=</span> <span class="n">get_files_in_folder</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s2">".py"</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="n">py_files</span><span class="p">)</span></span>
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">file_functions</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">file_functions</span><span class="p">.</span><span class="n">py</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/file_functions.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -249,9 +249,11 @@
 <span class="code-line"> 9</span>
 <span class="code-line">10</span>
 <span class="code-line">11</span>
-<span class="code-line">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">os</span></span>
+<span class="code-line">12</span>
+<span class="code-line">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">os</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">get_files_in_folder</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">extension</span><span class="p">):</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">get_files_in_folder</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span></span>
 <span class="code-line">    <span class="n">f</span> <span class="o">=</span> <span class="p">[]</span></span>
 <span class="code-line">    <span class="k">for</span> <span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">)</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span></span>
 <span class="code-line">        <span class="k">if</span> <span class="n">extension</span><span class="p">:</span></span>
@@ -279,12 +281,12 @@
 <p>We need to enable the napoleon sphinx extensions in docs/conf.py for this style to work.</p>
 </blockquote>
 <p>The resulting documented code will look like:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__init__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__init__</span><span class="p">.</span><span class="n">py</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__init__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -298,12 +300,12 @@
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__main__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__main__</span><span class="p">.</span><span class="n">py</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__main__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -323,18 +325,18 @@
 <span class="code-line"><span class="kn">from</span> <span class="nn">.file_functions</span> <span class="kn">import</span> <span class="n">get_files_in_folder</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">py_files</span> <span class="o">=</span> <span class="n">get_files_in_folder</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="n">extension</span><span class="o">=</span><span class="s2">".py"</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">py_files</span> <span class="o">=</span> <span class="n">get_files_in_folder</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s2">".py"</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="n">py_files</span><span class="p">)</span></span>
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">file_functions</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">file_functions</span><span class="p">.</span><span class="n">py</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/file_functions.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -358,12 +360,14 @@
 <span class="code-line">22</span>
 <span class="code-line">23</span>
 <span class="code-line">24</span>
-<span class="code-line">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="sd">""" Functions for parsing folders for files.</span></span>
+<span class="code-line">25</span>
+<span class="code-line">26</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="sd">""" Functions for parsing folders for files.</span></span>
 <span class="code-line"><span class="sd">"""</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">os</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">get_files_in_folder</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">extension</span><span class="p">):</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">get_files_in_folder</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span></span>
 <span class="code-line">    <span class="sd">"""</span></span>
 <span class="code-line"><span class="sd">    Prints all files in folder, if an extension is given, will only print the files with the given extension</span></span>
 <span class="code-line"></span>
@@ -396,7 +400,7 @@
 <p>Our <code>conf.py</code> file for sphinx's configuration results in:</p>
 <figure class="code">
 <figcaption><span>Sphinx Configuration File conf.py</span> <a href="/2020/documentation-with-sphinx/docs/source/conf.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -453,7 +457,8 @@
 <span class="code-line">55</span>
 <span class="code-line">56</span>
 <span class="code-line">57</span>
-<span class="code-line">58</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="c1"># Configuration file for the Sphinx documentation builder.</span></span>
+<span class="code-line">58</span>
+<span class="code-line">59</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="c1"># Configuration file for the Sphinx documentation builder.</span></span>
 <span class="code-line"><span class="c1">#</span></span>
 <span class="code-line"><span class="c1"># This file only contains a selection of the most common options. For a full</span></span>
 <span class="code-line"><span class="c1"># list see the documentation:</span></span>
@@ -467,14 +472,15 @@
 <span class="code-line"><span class="c1">#</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">os</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">sys</span></span>
-<span class="code-line"><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'../..'</span><span class="p">))</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../.."</span><span class="p">))</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># -- Project information -----------------------------------------------------</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">project</span> <span class="o">=</span> <span class="s1">'SphinxDemo'</span></span>
-<span class="code-line"><span class="n">copyright</span> <span class="o">=</span> <span class="s1">'2020, Jack McKew'</span></span>
-<span class="code-line"><span class="n">author</span> <span class="o">=</span> <span class="s1">'Jack McKew'</span></span>
+<span class="code-line"><span class="n">project</span> <span class="o">=</span> <span class="s2">"SphinxDemo"</span></span>
+<span class="code-line"><span class="n">copyright</span> <span class="o">=</span> <span class="s2">"2020, Jack McKew"</span></span>
+<span class="code-line"><span class="n">author</span> <span class="o">=</span> <span class="s2">"Jack McKew"</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># -- General configuration ---------------------------------------------------</span></span>
@@ -483,14 +489,14 @@
 <span class="code-line"><span class="c1"># extensions coming with Sphinx (named 'sphinx.ext.*') or your custom</span></span>
 <span class="code-line"><span class="c1"># ones.</span></span>
 <span class="code-line"><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span></span>
-<span class="code-line">    <span class="s1">'sphinx.ext.autodoc'</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s1">'sphinx.ext.napoleon'</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s1">'sphinx.ext.viewcode'</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s1">'sphinx.ext.autosummary'</span><span class="p">,</span></span>
+<span class="code-line">    <span class="s2">"sphinx.ext.autodoc"</span><span class="p">,</span></span>
+<span class="code-line">    <span class="s2">"sphinx.ext.napoleon"</span><span class="p">,</span></span>
+<span class="code-line">    <span class="s2">"sphinx.ext.viewcode"</span><span class="p">,</span></span>
+<span class="code-line">    <span class="s2">"sphinx.ext.autosummary"</span><span class="p">,</span></span>
 <span class="code-line"><span class="p">]</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># Add any paths that contain templates here, relative to this directory.</span></span>
-<span class="code-line"><span class="n">templates_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'_templates'</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">templates_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"_templates"</span><span class="p">]</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">autosummary_generate</span> <span class="o">=</span> <span class="bp">True</span></span>
 <span class="code-line"></span>
@@ -505,19 +511,19 @@
 <span class="code-line"><span class="c1"># The theme to use for HTML and HTML Help pages.  See the documentation for</span></span>
 <span class="code-line"><span class="c1"># a list of builtin themes.</span></span>
 <span class="code-line"><span class="c1">#</span></span>
-<span class="code-line"><span class="n">html_theme</span> <span class="o">=</span> <span class="s1">'alabaster'</span></span>
+<span class="code-line"><span class="n">html_theme</span> <span class="o">=</span> <span class="s2">"alabaster"</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># Add any paths that contain custom static files (such as style sheets) here,</span></span>
 <span class="code-line"><span class="c1"># relative to this directory. They are copied after the builtin static files,</span></span>
 <span class="code-line"><span class="c1"># so a file named "default.css" will overwrite the builtin "default.css".</span></span>
-<span class="code-line"><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'_static'</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"_static"</span><span class="p">]</span></span>
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
 <p>We must also set our index.rst (restructured text) with what we want to see in our documentation.</p>
 <figure class="code">
 <figcaption><span>Documentation Index File index.rst</span> <a href="/2020/documentation-with-sphinx/docs/source/index.rst">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -579,7 +585,7 @@
 <p>To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: <a href="https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/documentation-with-sphinx/docs/source/_templates">autosummary templates</a></p>
 </blockquote>
 <p>Next we navigate our <code>docs</code> directory, and finally run:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">make</span> <span class="n">html</span></span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">make</span> <span class="n">html</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>This will generate all the stubs for our documentation and compile them into HTML format.</p>
