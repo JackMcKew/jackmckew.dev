@@ -37,3 +37,54 @@ One of the most useful skills in my opinion in all walks of life is the ability 
 |Iteration|Repetition of a process, you iterate over a loop numerous times.|
 
 ## Editor
+
+There is so many editors out there it is difficult to find the right one for you. 
+
+### Mu [https://codewith.mu/](https://codewith.mu/)
+
+Mu is a simple Python editor, designed for beginners.
+
+![Mu Editor]({static img/mu.gif})
+
+### VS Code [https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+While not specifically for Python, it has an amazing Python extension and is my go-to editor.
+
+![VS Code]({static img/vs_code.png})
+
+### Sublime Text [https://www.sublimetext.com/](https://www.sublimetext.com/)
+
+A self proclaimed "A sophisticated text editor for
+code, markup and prose".
+
+![Sublime]({static img/sublime.png})
+
+### PyCharm [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/)
+
+A more fleshed out full suite for professional developers. All the bells and whistles included.
+
+![PyCharm]({static img/pycharm.jpg})
+
+## Resources
+
+There is an abundance of resources on the internet for getting started with Python (includng this one!), these are my personal recommendations.
+
+### Automate The Boring Stuff
+
+[http://automatetheboringstuff.com/](http://automatetheboringstuff.com/)
+
+Computers are made to do the boring things for us, so make the most of it! This book goes through many practical examples of how you can use Python to automate the boring stuff out of your life.
+
+### Code Academy
+
+[https://www.codecademy.com/catalog/language/python](https://www.codecademy.com/catalog/language/python)
+
+While the Python 3 course on Code Academy isn't free, the Python 2.7 version is and you can always learn the differences later on.
+
+## Packages
+
+The best part about Python is the community and abundance of free, open source packages that you can utilise to not re-invent the wheel when solving problems.
+
+I did a blog post on useful packages in 2019, check it out at: [https://jackmckew.dev/episode-10-python-package-cheat-sheet.html](https://jackmckew.dev/episode-10-python-package-cheat-sheet.html)
+
+If there is anything I have missed, please feel free to drop a comment below and I will update this post!
