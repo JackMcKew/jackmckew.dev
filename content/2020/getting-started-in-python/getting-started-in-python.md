@@ -81,6 +81,12 @@ Computers are made to do the boring things for us, so make the most of it! This 
 
 While the Python 3 course on Code Academy isn't free, the Python 2.7 version is and you can always learn the differences later on.
 
+### Python Bytes Podcast
+
+[https://pythonbytes.fm/](https://pythonbytes.fm/)
+
+Weekly half an hour podcast on exciting packages & tools in the Python space. Great to listen to on your commute!
+
 ## Packages
 
 The best part about Python is the community and abundance of free, open source packages that you can utilise to not re-invent the wheel when solving problems.
