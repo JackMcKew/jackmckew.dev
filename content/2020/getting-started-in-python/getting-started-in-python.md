@@ -35,6 +35,7 @@ One of the most useful skills in my opinion in all walks of life is the ability 
 |Exception|If a situation comes up that the program cannot handle, it'll throw an exception.|
 |Loop|A loop allows code to be executed repeated, either with a for (finite amount of times) or while (indefinite).|
 |Iteration|Repetition of a process, you iterate over a loop numerous times.|
+|[https://github.com/](https://github.com/)|A website/service where lots of open source packages live and great resouce for finding examples of real-use code.|
 
 ## Editor
 
@@ -86,6 +87,12 @@ While the Python 3 course on Code Academy isn't free, the Python 2.7 version is 
 [https://pythonbytes.fm/](https://pythonbytes.fm/)
 
 Weekly half an hour podcast on exciting packages & tools in the Python space. Great to listen to on your commute!
+
+### Github
+
+[https://github.com/](https://github.com/)
+
+Github is a website/service where lots of open source projects & packages live. Lots of information can be found here on the projects themselves and in the issues raised/answered previously.
 
 ## Packages
 
