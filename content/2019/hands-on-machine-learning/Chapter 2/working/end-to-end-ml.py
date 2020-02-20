@@ -1,6 +1,6 @@
 #%%
 import pandas as pd
-%matplotlib inline
+# %matplotlib inline
 import matplotlib.pyplot as plt
 csv_path = "C:\\Users\\jackm\\Documents\\Hands On ML\\handson-ml-master\\datasets\\housing\\housing.csv"
 import numpy as np

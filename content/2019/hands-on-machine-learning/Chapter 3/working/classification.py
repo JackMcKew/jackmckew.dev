@@ -11,7 +11,7 @@ y = y.reshape(c,)
 print(X.shape)
 print(y.shape)
 #%%
-%matplotlib inline
+# %matplotlib inline
 import matplotlib
 import matplotlib.pyplot as plt
 
