@@ -1,7 +1,8 @@
+#%%
 #code adapted from http://tillbergmann.com/blog/python-gradient-descent.html
 # source: https://gist.github.com/felipessalvatore/c2e1c09dfcb8710b847e2457620f8204
 
-# %matplotlib inline
+%matplotlib inline
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -10,6 +11,7 @@ from scipy import stats
 
 from sklearn.datasets.samples_generator import make_regression 
 
+#%%
 
 
 x, y = make_regression(n_samples = 100, 
@@ -23,6 +25,8 @@ best_fit = np.vectorize(lambda x: x * slope + intercept)
 plt.plot(x,y, 'o', alpha=0.5)
 grid = np.arange(-3,3,0.1)
 plt.plot(grid,best_fit(grid), '.')
+
+#%%
 
 def gradient_descent(x, y, theta_init, step=0.001, maxsteps=0, precision=0.001, ):
     costs = []
@@ -57,6 +61,7 @@ def gradient_descent(x, y, theta_init, step=0.001, maxsteps=0, precision=0.001, 
                 break
         
     return history, costs, preds, counter
+
 xaug = np.c_[np.ones(x.shape[0]), x]
 theta_i = [-15, 40] + np.random.rand(2)
 history, cost, preds, iters = gradient_descent(xaug, y, theta_i, step=0.1)
