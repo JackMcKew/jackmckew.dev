@@ -89,7 +89,7 @@ ax = fig.add_subplot(111, projection='3d')
 
 ax.plot_surface(M, B, Z, rstride=1, cstride=1, color='b', alpha=0.2)
 # ax.contour(M, B, Z, 20, color='b', alpha=0.5, offset=0, stride=30)
-
+te
 
 ax.set_xlabel('x1', labelpad=30, fontsize=24, fontweight='bold')
 ax.set_ylabel('x2', labelpad=30, fontsize=24, fontweight='bold')
