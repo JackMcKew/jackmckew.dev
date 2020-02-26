@@ -180,7 +180,7 @@
 </div>
 <figure class="code">
 <figcaption><a href="/2019/test-article/code/spotify-analysis.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -208,21 +208,21 @@
 <span class="code-line"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># %%</span></span>
-<span class="code-line"><span class="n">streaming_data_0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">"MyData/StreamingHistory0.json"</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">streaming_data_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">"MyData/StreamingHistory1.json"</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">streaming_data_0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">'MyData/StreamingHistory0.json'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">streaming_data_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">'MyData/StreamingHistory1.json'</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">merged_streaming_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">streaming_data_0</span><span class="p">,</span> <span class="n">streaming_data_1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">merged_streaming_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">streaming_data_0</span><span class="p">,</span><span class="n">streaming_data_1</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># %%</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">summed_df</span> <span class="o">=</span> <span class="n">merged_streaming_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"artistName"</span><span class="p">)[</span><span class="s2">"msPlayed"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">summed_df</span> <span class="o">=</span> <span class="n">merged_streaming_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'artistName'</span><span class="p">)[</span><span class="s1">'msPlayed'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># merged_streaming_data</span></span>
-<span class="code-line"><span class="n">summed_df</span><span class="p">[</span><span class="s2">"Horrorshow"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span></span>
+<span class="code-line"><span class="n">summed_df</span><span class="p">[</span><span class="s1">'Horrorshow'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span></span>
 <span class="code-line"><span class="c1">#%%</span></span>
 <span class="code-line"><span class="n">summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">summary_df</span><span class="p">[</span><span class="s2">"Count"</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_streaming_data</span><span class="o">.</span><span class="n">artistName</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_streaming_data</span><span class="o">.</span><span class="n">artistName</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span></span>
 <span class="code-line"><span class="c1"># summary_df['Count'] = merged_streaming_data.loc[merged_streaming_data.idxmax()].max()# %%</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
