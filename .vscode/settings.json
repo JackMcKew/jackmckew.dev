@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "C:\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Scripts\\python.exe",
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "restructuredtext.confPath": ""
 }
