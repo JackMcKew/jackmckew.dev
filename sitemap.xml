@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2020-02-28T10:06:13-00:00</lastmod>
+<lastmod>2020-02-28T10:09:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2020-02-28T10:06:13-00:00</lastmod>
+<lastmod>2020-02-28T10:09:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2020-02-28T10:06:13-00:00</lastmod>
+<lastmod>2020-02-28T10:09:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2020-02-28T10:06:13-00:00</lastmod>
+<lastmod>2020-02-28T10:09:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -62,6 +62,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/book-review-the-power-of-habits.html</loc>
 <lastmod>2020-02-13T00:00:00+11:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html</loc>
+<lastmod>2020-02-03T00:00:00+11:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
