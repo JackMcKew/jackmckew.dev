@@ -29,25 +29,26 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
-<meta name="description" content="Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product. I completed their very first …" />
-<meta name="keywords" content="database, mongodb">
+<meta name="description" content="Power of Habits by Charles Duhigg was one of the most useful books I have read. While it doesn&#39;t explicitly step the reader through how to change habits, it thoroughly goes through many examples of where habits have changed other people&#39;s lives, case studies if you will. By then being …" />
+<meta name="keywords" content="bookreview, principles, habits">
 
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="What is MongoDB?"/>
-<meta property="og:description" content="Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product. I completed their very first …"/>
+<meta property="og:title" content="Book Review: The Power Of Habits"/>
+<meta property="og:description" content="Power of Habits by Charles Duhigg was one of the most useful books I have read. While it doesn&#39;t explicitly step the reader through how to change habits, it thoroughly goes through many examples of where habits have changed other people&#39;s lives, case studies if you will. By then being …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/what-is-mongodb.html"/>
+<meta property="og:url" content="https://jackmckew.dev/book-review-the-power-of-habits.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-05-03 06:30:00+10:00"/>
+<meta property="article:published_time" content="2020-02-13 00:00:00+11:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
-<meta property="article:section" content="Software Development"/>
-<meta property="article:tag" content="database"/>
-<meta property="article:tag" content="mongodb"/>
+<meta property="article:section" content="Book Reviews"/>
+<meta property="article:tag" content="bookreview"/>
+<meta property="article:tag" content="principles"/>
+<meta property="article:tag" content="habits"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-    <title>Jack McKew's Blog &ndash; What is MongoDB?</title>
+    <title>Jack McKew's Blog &ndash; Book Review: The Power Of Habits</title>
 
  </head>
 
@@ -99,9 +100,9 @@
  <article class="single">
   <header>
       
-    <h1 id="what-is-mongodb">What is MongoDB?</h1>
+    <h1 id="book-review-the-power-of-habits">Book Review: The Power Of Habits</h1>
     <p>
-       Posted on Fri 03 May 2019 in <a href="https://jackmckew.dev/category/software-development.html">Software Development</a> 
+       Posted on Thu 13 February 2020 in <a href="https://jackmckew.dev/category/book-reviews.html">Book Reviews</a> 
 
         &#8226; 3 min read
     </p>
@@ -109,43 +110,49 @@
 
 
   <div>
-    <body><p>Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.</p>
-<p>I completed their very first introductory course M001: MongoDB Basics last week, I found it very gentle in the introduction to database management and exploring data sets. This post is dedicated my take on the course and the key takeaways from my point of view.</p>
-<p>The course is broken into multiple chapters in which a chapter is released each week for the duration of the course. For example, the basics course was broken up into:</p>
+    <!-- Slug: book-review-power-of-habits --><html><head></head><body><p>Power of Habits by Charles Duhigg was one of the most useful books I have read. While it doesn't explicitly step the reader through how to change habits, it thoroughly goes through many examples of where habits have changed other people's lives, case studies if you will. By then being able to recognise the habitual changes these people had to make, this allows the reader to (maybe) identify and be able to change some of their own habits to better their own life.</p>
+<h2>Cue, Routine, Reward</h2>
+<p>A concept that is repeatedly drawn parallel to habitual behaviours in the case study examples is that of Cue, Routine, Reward.</p>
 <ul>
-<li>Intro to MongoDB, Mongo Compass and Basic Queries,</li>
-<li>Create, Read, Update and Delete (CRUD) operations and more,</li>
-<li>MongoDB queries.</li>
+<li>Cue: Something that 'triggers' a habitual behaviour, this could be hunger, boredom or even just a bright colour.</li>
+<li>Routine: The process that follows the cue.</li>
+<li>Reward: The end goal of this habit to satisfy a need/desire for something</li>
 </ul>
-<p>Following all the chapters, you are faced with a final exam which tests if you were participating/listening in the earlier chapters. If you are concerned that you may struggle, this final exam is made up of a few multiple choice questions based on querying the data sets used in the chapters.</p>
-<p>MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilises JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.</p>
-<p>Personally, I really enjoy the functionality within Compass with plotting geographical data, presenting data type variances across the fields in a document and many other features. I found Compass one of the most appealing features as someone that constantly seeks to gain insight from data.</p>
-<p>Queries within MongoDB are structured like a dictionary in Python, where the field in the document is passed the key and the criteria is the value. For example, a basic query to return all documents within a MongoDB database with score equal to 7 would be:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="p">{</span><span class="n">score</span><span class="p">:</span><span class="mi">7</span><span class="p">}</span></span>
-</pre></div>
-</td></tr></tbody></table>
-<p>As a mainly Python developer, I found this to be very appealing as I find myself using dictionaries constantly when writing Python code, and by MongoDB using this format makes for an easy connection between the two.</p>
-<p>CRUD operations, are the fundamentals on actually using a database usefully. Through the Mongo shell you are able to add documents to the MongoDB database through JSON, XML, etc data formats.</p>
-<p>Projections within MongoDB are used to specify or restrict the fields to return with the filtered documents if you are specifically looking at a few fields within a densely populated document.</p>
-<p>In addition to the way queries are structured for filtering documents, it is also possible to use one of the many query or projection operators to further filter the documents. For example a query to return all documents with a score <strong>greater than</strong> 7 would be:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="p">{</span><span class="n">score</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="mi">7</span><span class="p">}}</span></span>
-</pre></div>
-</td></tr></tbody></table>
-<p>This sums up all of the takeaways from the M001 course for MongoDB that I found. I look forward to taking more of the courses on MongoDB university to gain a greater understanding and be able to utilise MongoDB across some of my projects.</p></body>
+<p>An example of this in my own life is that when I'm at work sitting at my desk tapping away at my jobs for the day, I'll finish one of my tasks for the day (I love bullet journalling to maintain these), I won't want to start the next task straight away so I'll typically go to the kitchen and fill up my drink bottle.</p>
+<p>Here the process is as follows:
+- Cue: Finish a task at work
+- Routine: Walk to the kitchen and fill up water bottle
+- Reward: A moment to stretch my legs and get a drink</p>
+<p>While this is a good habit that I have tried to instill myself, can also be replaced by any bad habit (eg, walk to the kitchen and eat a bag of chips)</p>
+<h2>Case Study - Alcoa</h2>
+<p>A fantastic case study that was presented in the book that resonated with me was the changing of the CEO at Alcoa. Alcoa is one of the biggest manufacturers of aluminium in the United States. </p>
+<p>When the CEO had changed, Alcoa was a dangerous place to work with a high staff injury rate, turns out working with molten metal all day can be a dangerous activity, who would've knew.</p>
+<p>The new CEO made it his goal that the number 1 priority of Alcoa going forward would be safety. Profits, revenue, etc were not going to be the focus of Alcoa anymore (upsetting lots of investors at the time).</p>
+<p>By implementing changes such as employees would be required to implement a new safety procedure to get a promotion and that no task was worth doing in an unsafe manner, the CEO had instilled a habit of safety into the culture of the company.</p>
+<p>The ripple on effect of this was that by putting a focus on one aspect of the entire operation, this amended many of the things that were halting progress within the company.</p>
+<p>For example, instead of machinery breaking down catastrophically and needing long repair times, equipment was being regularly maintained as to keep it in safe working order and producing more material. Workers that were needing to take lots of time off were now able to keep working now that they were not falling ill to injury's or sickness from the workplace.</p>
+<p>This lead to Alcoa producing some of its best results in history and is a great example how focusing on one element of a business can have such a ripple effect.</p>
+<h2>Michael Phelps</h2>
+<p>Early on in Michael Phelps life, a coach realized Michael's potential as an athlete in swimming. This coach through instilling habits into Michael's routine, would go on to produce one of the most athletic swimmers of all time.</p>
+<p>By getting Michael to follow the exact same process (routine) every time before a race, this made it naturally for Michael to compete so strongly. Michael watched a video of the perfect race, every single time before a race, listened to the same pump up music through his headphones, stood up and waved to the crowd the exact same way every time such that it had became a habit to swim. Something that he didn't actively have to think about to do.</p>
+<h2>Conclusion</h2>
+<p>I personally absolutely loved this book and it's appreciation for that not every person works the same way. By presenting the reader with a multitude of case studies and allowing the reader to determine what might be effective in their life for themselves, this doesn't instruct the reader to learn how their habits work but rather allows them to see the world through a different lens.</p>
+<p>You can find this book at: <a href="https://www.amazon.com.au/Power-Habit-What-Life-Business/dp/081298160X">https://www.amazon.com.au/Power-Habit-What-Life-Business/dp/081298160X</a></p></body></html>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/database.html">database</a>
-      <a href="https://jackmckew.dev/tag/mongodb.html">mongodb</a>
+      <a href="https://jackmckew.dev/tag/bookreview.html">bookreview</a>
+      <a href="https://jackmckew.dev/tag/principles.html">principles</a>
+      <a href="https://jackmckew.dev/tag/habits.html">habits</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/efficient-frontier-for-balancing-portfolios.html" title="Efficient Frontier for Balancing Portfolios">
+    <a class="btn float-left" href="https://jackmckew.dev/3d-terrain-in-python.html" title="3D Terrain in Python">
       <i class="fa fa-angle-left"></i>  Previous Post 
     </a>
-    <a class="btn float-right" href="https://jackmckew.dev/explained-voltage-drop.html" title="Explained: Voltage Drop">
+    <a class="btn float-right" href="https://jackmckew.dev/getting-started-in-python.html" title="Getting Started in Python">
        Next Post  <i class="fa fa-angle-right"></i>
     </a>
   </div>
@@ -153,7 +160,7 @@
   <div class="related-posts">
     <h4> You might enjoy </h4>
     <ul class="related-posts">
-      <li><a href="https://jackmckew.dev/episode-3-open-mind.html">Episode 3 - Open Mind</a></li>
+      <li><a href="https://jackmckew.dev/book-review-principles.html">Book Review: Principles by Ray Dalio</a></li>
     </ul>
   </div>
 

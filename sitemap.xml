@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2020-02-28T09:55:26-00:00</lastmod>
+<lastmod>2020-02-28T10:06:13-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2020-02-28T09:55:26-00:00</lastmod>
+<lastmod>2020-02-28T10:06:13-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2020-02-28T09:55:26-00:00</lastmod>
+<lastmod>2020-02-28T10:06:13-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2020-02-28T09:55:26-00:00</lastmod>
+<lastmod>2020-02-28T10:06:13-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -55,6 +55,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/getting-started-in-python.html</loc>
 <lastmod>2020-02-20T00:00:00+11:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/book-review-the-power-of-habits.html</loc>
+<lastmod>2020-02-13T00:00:00+11:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -418,7 +425,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/book-reviews.html</loc>
-<lastmod>2019-10-11T06:30:00+10:05</lastmod>
+<lastmod>2020-02-13T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -494,6 +501,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jackmckew.dev/tag/bookreview.html</loc>
+<lastmod>2020-02-13T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/principles.html</loc>
+<lastmod>2020-02-13T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/habits.html</loc>
+<lastmod>2020-02-13T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
 <loc>https://jackmckew.dev/tag/machinelearning.html</loc>
 <lastmod>2019-10-12T15:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
@@ -503,27 +531,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/tag/ai.html</loc>
 <lastmod>2019-10-12T15:00:00+10:05</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://jackmckew.dev/tag/bookreview.html</loc>
-<lastmod>2019-10-11T06:30:00+10:05</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://jackmckew.dev/tag/principles.html</loc>
-<lastmod>2019-10-11T06:30:00+10:05</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://jackmckew.dev/tag/habits.html</loc>
-<lastmod>2019-10-11T06:30:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
