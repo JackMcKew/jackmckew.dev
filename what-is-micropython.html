@@ -115,7 +115,7 @@
 <h2><strong>Differences between MicroPython &amp; Python</strong></h2>
 <p>There obviously had to be some changes between Python and MicroPython to make it work efficiently on processors a fraction of the power, but what are they? If you are a beginner-intermediate Python programmer, you’ll only run into trouble in very specific scenarios, which can be easily worked around. For example you cannot delete from a list with a step greater than 1.</p>
 <p><strong>Sample Python Code</strong></p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></span>
 <span class="code-line"><span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span></span>
@@ -123,7 +123,7 @@
 </pre></div>
 </td></tr></tbody></table>
 <p>You’d expect for the output here in Python normally to be:</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th><strong>Python Output</strong></th>
@@ -139,7 +139,7 @@
 </table>
 <p>However this can be easily worked around with an explicit loop for example:</p>
 <p><strong>Sample MicroPython/Python Code</strong></p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></span>
