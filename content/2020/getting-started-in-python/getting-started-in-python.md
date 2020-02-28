@@ -100,6 +100,12 @@ If you're anything like me, you'd appreciate a nicely laid out cheat sheet. [htt
 
 ![Cheat Sheet]({static img/cheat-sheet.png})
 
+### Real Python
+
+[https://realpython.com/](https://realpython.com/)
+
+Real Python is an ammazing website, with lots of beginner friendly tutorials on more topics than I can imagine.
+
 ## Packages
 
 The best part about Python is the community and abundance of free, open source packages that you can utilise to not re-invent the wheel when solving problems.
