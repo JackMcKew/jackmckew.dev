@@ -111,6 +111,7 @@ PLUGINS = [
     "dateish",
     "post_stats",
     "render_math",
+    "related_posts",
     "autostatic",
     "clean_summary"
 ]
