@@ -28,7 +28,7 @@ http://www.tipue.com/search
           'showRelated'            : true,
           'showTime'               : true,
           'showTitleCount'         : true,
-          'showURL'                : true,
+          'showURL'                : false,
           'wholeWords'             : true
           }, options);
           
@@ -373,7 +373,7 @@ http://www.tipue.com/search
                                    {
                                         out += '<div class="tipue_search_result">';
                                                                            
-                                        out += '<div class="tipue_search_content_title"><a href="' + found[i].url + '"' + tipue_search_w + '>' +  found[i].title + '</a></div>';
+                                        out += '<h2><a href="' + found[i].url + '"' + tipue_search_w + '>' +  found[i].title + '</a></h2>';
  
                                         if (set.debug)
                                         {                                             
@@ -464,7 +464,7 @@ http://www.tipue.com/search
                                              t_d = t_d.replace(/h0011/g, 'span class=\"tipue_search_content_bold\"');
                                              t_d = t_d.replace(/h0012/g, '/span');
                                              
-                                             out += '<div class="tipue_search_content_text">' + t_d + '</div>';
+                                             out += '<p>' + t_d + '</p>';
                                         }
                                         
                                         if (found[i].note)
