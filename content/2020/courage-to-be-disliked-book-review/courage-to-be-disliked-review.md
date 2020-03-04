@@ -1,4 +1,4 @@
-Title: Book Rdview: Courage To Be Disliked
+Title: Book Review: Courage To Be Disliked
 Date: 2020-03-04
 Author: Jack McKew
 Category: Book Reviews
@@ -81,3 +81,5 @@ By rather living as if everyone is equal, and lives to the benefit of others, th
 When you take in all the points & concepts raised above, this are only enhanced further when you take in the concept that the past & the future should not matter whatsoever on the actions you can change now.
 
 Therefore by living for the moment, not letting the past be the cause and effect of who you are, living for the benefit of others and treating everybody equal, I find these great steps to leading a more fulfilling, happy life.
+
+![Courage To Be Disliked Cover]({static img/the-courage-to-be-disliked-cover.jpg})
