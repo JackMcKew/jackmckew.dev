@@ -13,8 +13,9 @@ SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
 # SITEURL = "http://localhost:8000"
 
-IGNORE_FILES = ['*.html']
+IGNORE_FILES = ['*.html','*.rst']
 DISPLAY_PAGES_ON_MENU = True
+RELATED_POSTS_SKIP_SAME_CATEGORY = True
 
 DISQUS_SITENAME = 'jackmckew-dev'
 GOOGLE_ANALYTICS = 'UA-131173168-2'
@@ -111,6 +112,7 @@ PLUGINS = [
     "dateish",
     "post_stats",
     "render_math",
+    "related_posts",
     "autostatic",
     "clean_summary"
 ]

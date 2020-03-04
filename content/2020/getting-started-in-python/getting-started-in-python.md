@@ -94,6 +94,18 @@ Weekly half an hour podcast on exciting packages & tools in the Python space. Gr
 
 Github is a website/service where lots of open source projects & packages live. Lots of information can be found here on the projects themselves and in the issues raised/answered previously.
 
+### Cheat Sheet
+
+If you're anything like me, you'd appreciate a nicely laid out cheat sheet. [https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf](https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf)
+
+![Cheat Sheet]({static img/cheat-sheet.png})
+
+### Real Python
+
+[https://realpython.com/](https://realpython.com/)
+
+Real Python is an ammazing website, with lots of beginner friendly tutorials on more topics than I can imagine.
+
 ## Packages
 
 The best part about Python is the community and abundance of free, open source packages that you can utilise to not re-invent the wheel when solving problems.
