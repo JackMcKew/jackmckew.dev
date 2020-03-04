@@ -57,6 +57,49 @@ a:hover {
     color: #ff5a09
 }
 
+h2:hover > a.anchor-link {
+    display: inline;
+}
+h3:hover > a.anchor-link {
+    display: inline;
+}
+h4:hover > a.anchor-link {
+    display: inline;
+}
+h5:hover > a.anchor-link {
+    display: inline;
+}
+h6:hover > a.anchor-link {
+    display: inline;
+}
+
+a.anchor-link{
+    display: none;
+
+}
+
+a.anchor-link:after{
+    content: "Permalink to this headline";
+    padding: 2px;
+    display:none;
+    position: relative;
+    top: -5px;
+    right: -15px;
+    text-align: center;
+    background-color: #fef4c5;
+    color: black;
+    border: 1px solid #d4b943;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 0.5em;
+}
+a.anchor-link:hover:after{
+    display: inline;
+}
+
+
 hr {
     color: #eee;
     background-color: #eee;
