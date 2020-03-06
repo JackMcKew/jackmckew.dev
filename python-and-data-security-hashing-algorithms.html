@@ -192,11 +192,11 @@
 </ol>
 <p>From this, we will use the argon2 hashing algorithm. As normal, it is best practice to set up a virtual environment (or conda environment) and install the dependencies, in this case passlib.</p>
 <p>First of all, import the hashing algorithm you wish to use from the passlib package:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">argon2</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">argon2</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Following importing the hashing algorithm, to hash the password in our case is very simple and we can have a peak at what the output hash looks like:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="nb">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">)</span></span>
 <span class="code-line"></span>
@@ -215,7 +215,7 @@
 <li>\$mvLTquN71JPjuC+S9QNXYA - the base64-encoded hashed password (derived key), using standard base64 encoding and no padding.</li>
 </ul>
 <p>If we run this again, we can check that the outputs are completely different due to the randomly generated salt.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="nb">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">)</span></span>
 <span class="code-line"></span>
@@ -227,14 +227,14 @@
 </blockquote>
 <p>Now that we've generated our new passwords, stored them away in a secure database somewhere, using a secure method of communication somehow, our user wants to login with the password they signed up with ("super_secret_password") and we have to check if this is the correct password.</p>
 <p>To do this with passlib, it is as simply as calling the .verify function with the plaintext and the equivalent hash which will return a boolean value determining whether of not the password is correct or not.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <blockquote>
 <p>True</p>
 </blockquote>
 <p>Hooray! Our password verification system works, now we would like to check that if the user inputs a incorrect password that our algorithm returns correctly (false).</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"user_name"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"user_name"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span></span>
 </pre></div>
 </td></tr></tbody></table>
 <blockquote>
