@@ -1,8 +1,16 @@
 import justpy as jp
 
-def hello_world():
+@jp.SetRoute('/hello')
+def hello_function():
     wp = jp.WebPage()
-    jp.Hello(a=wp)
+    wp.add(jp.P(text='Hello there!', classes='text-5xl m-2'))
     return wp
 
-jp.justpy(hello_world)
+@jp.SetRoute('/bye')
+def bye_function():
+    wp = jp.WebPage()
+    wp.add(jp.P(text='Goodbye!', classes='text-5xl m-2'))
+    return wp
+
+
+jp.justpy()
