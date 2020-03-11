@@ -10,6 +10,78 @@ This post is intended to list out the packages I'd noted down & their applicatio
 
 # Noteworthy Packages
 
+## Sandman 2
+
+## Keras-Gym
+
+## Spinning up
+
+## Mongo Audit
+
+## Wagtail
+
+## Sand Dance
+
+## NB2XLS
+
+## Google Site Kit
+
+## Bootcamp Django
+
+## PyTorch
+
+## Gensim
+
+## GeoDjango
+
+## Python Fire
+
+## Attrs
+
+## Python Jax
+
+## Yellow Brick
+
+## Pylustrator
+
+## Gooey
+
+## Wooey
+
+## Great Expectations
+
+## PyOxidiser
+
+## Osmedeus
+
+## CartoFrames
+
+## Anvil
+
+## Panel Holoviz
+
+## PDF Plumber
+
+## Doc Assemble
+
+## Python Date Utils
+
+# Others
+
+## GeoAlchemy
+
+## Vue.py
+
+##
+
+## Eel GUI
+
+## Pyjanitor
+
+## Panda3D
+
+## Chartify
+
 ## Clize
 
 ## Quick GUI
@@ -27,3 +99,6 @@ This post is intended to list out the packages I'd noted down & their applicatio
 > 63 GUIs in Tkinter
 
 > --prompt for virtualenv
+
+> Python Graph Gallery
+> Type hints for busy programmers
