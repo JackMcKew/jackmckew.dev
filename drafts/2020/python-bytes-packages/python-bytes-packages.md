@@ -30,9 +30,15 @@ Python Fire is a library for automatically generating command line interfaces (C
 *[https://pythonbytes.fm/episodes/show/11/django-2.0-is-dropping-python-2-entirely-pipenv-for-profile-functionality-and-pythonic-home-automation](https://pythonbytes.fm/episodes/show/11/django-2.0-is-dropping-python-2-entirely-pipenv-for-profile-functionality-and-pythonic-home-automation)*
 Python Classes Without Boilerplate
 
-## Yellow Brick
+## [Yellow Brick](http://www.scikit-yb.org/en/latest/)
+**Machine Learning, Data Science**
+*[https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively](https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively)*
+Yellowbrick extends the Scikit-Learn API to make model selection and hyperparameter tuning easier. Under the hood, it’s using Matplotlib.
+![Yellow Brick Preview](http://www.scikit-yb.org/en/latest/_images/banner.png)
 
 ## Pylustrator
+
+*[https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs](https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs)*
 
 ## Gooey
 
