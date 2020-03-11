@@ -13,7 +13,7 @@ This post is intended to list out the packages I'd noted down & their applicatio
 ## [Wagtail](https://wagtail.io/)
 **Web Development**
 *[https://pythonbytes.fm/episodes/show/70/have-you-seen-my-log-it-s-cute](https://pythonbytes.fm/episodes/show/70/have-you-seen-my-log-it-s-cute)*
-Wagtail is a content management system (CMS) (like Wordpress), written in Python, based off Django.
+`Wagtail` is a content management system (CMS) (like Wordpress), written in Python, based off `Django`.
 
 ## [PyTorch](https://github.com/pytorch/pytorch)
 **Machine Learning**
@@ -23,7 +23,7 @@ Tensors and Dynamic neural networks in Python with strong GPU acceleration
 ## [Python Fire](https://github.com/google/python-fire)
 **Command Line Interfaces**
 *[https://pythonbytes.fm/episodes/show/17/google-s-python-is-on-fire-and-simon-says-you-have-cpu-load-pythonically](https://pythonbytes.fm/episodes/show/17/google-s-python-is-on-fire-and-simon-says-you-have-cpu-load-pythonically)*
-Python Fire is a library for automatically generating command line interfaces (CLIs) from absolutely any Python object. 
+`Python Fire` is a library for automatically generating command line interfaces (CLIs) from absolutely any Python object. 
 
 ## [Attrs](https://github.com/python-attrs/attrs)
 **Development Tool**
@@ -33,20 +33,45 @@ Python Classes Without Boilerplate
 ## [Yellow Brick](http://www.scikit-yb.org/en/latest/)
 **Machine Learning, Data Science**
 *[https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively](https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively)*
-Yellowbrick extends the Scikit-Learn API to make model selection and hyperparameter tuning easier. Under the hood, it’s using Matplotlib.
+`Yellowbrick` extends the `Scikit-Learn` API to make model selection and hyperparameter tuning easier. Under the hood, it’s using `Matplotlib`.
 ![Yellow Brick Preview](http://www.scikit-yb.org/en/latest/_images/banner.png)
 
-## Pylustrator
-
+## [Pylustrator](https://pylustrator.readthedocs.io/en/latest/)
+**Data Science**
 *[https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs](https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs)*
 
-## Gooey
+`Pylustrator` offers an interactive interface to find the best way to present your data in a figure for publication. Added formatting an styling can be saved by automatically generated code. To compose multiple figures to panels, pylustrator can compose different subfigures to a single figure.
 
-## Wooey
+[![pylustrator demonstration](http://img.youtube.com/vi/xXPI4LLrNuM/0.jpg)](http://www.youtube.com/watch?v=xXPI4LLrNuM "pylustrator demonstration")
 
-## Great Expectations
+## [Gooey](https://github.com/chriskiehl/Gooey)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis](https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis)*
 
-## PyOxidiser
+I personally love `Gooey` and have it installed in almost every project lately. `Gooey` turns (almost) any Python command line program into a full GUI application with one line.
+
+I have also done a tutorial blog post on Gooey as well at: [https://jackmckew.dev/making-executable-guis-with-python-gooey-pyinstaller.html](https://jackmckew.dev/making-executable-guis-with-python-gooey-pyinstaller.html#making-executable-guis-with-python-gooey-pyinstaller)
+
+![Gooey Example](https://raw.githubusercontent.com/chriskiehl/GooeyImages/images/readme-images/1-0-3-title-card.png)
+
+## [Wooey](https://github.com/wooey/Wooey)
+**Web Development**
+*[https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis](https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis)*
+A `Django` app that creates automatic web UIs for Python scripts. 
+
+Live example at: [https://wooey.herokuapp.com/](https://wooey.herokuapp.com/)
+
+![Wooey Example]({static img/wooey-example.png})
+
+## [Great Expectations](https://great-expectations.readthedocs.io/en/latest/)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/115/dataclass-csv-reader-and-nina-drops-by](https://pythonbytes.fm/episodes/show/115/dataclass-csv-reader-and-nina-drops-by)*
+`Great Expectations` is a leading tool for validating, documenting, and profiling, your data to maintain quality and improve communication between teams. 
+
+## [PyOxidiser](https://github.com/indygreg/PyOxidizer)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library](https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library)*
+`PyOxidizer` is a utility for producing binaries that embed Python. The over-arching goal of `PyOxidizer` is to make complex packaging and distribution problems simple so application maintainers can focus on building applications instead of toiling with build systems and packaging tools.
 
 ## Osmedeus
 
@@ -107,7 +132,7 @@ Automatically generate a RESTful API service for your legacy database. No code r
 ## [Keras Gym](https://github.com/KristianHolsheimer/keras-gym)
 **Machine Learning**
 *[https://github.com/KristianHolsheimer/keras-gym](https://github.com/KristianHolsheimer/keras-gym)*
-Plug-n-play reinforcement learning with OpenAI Gym and Keras
+Plug-n-play reinforcement learning with OpenAI Gym and `Keras`
 ![Keras Gym GIF](https://raw.githubusercontent.com/KristianHolsheimer/keras-gym/master/doc/_static/img/cartpole.gif)
 
 ## [Spinning up](https://spinningup.openai.com/en/latest/)
@@ -118,7 +143,7 @@ Deep reinforcement learning educational resource
 ## [Mongo Audit](https://mongoaud.it/)
 **Databases, Security**
 *[https://mongoaud.it/](https://mongoaud.it/)*
-mongoaudit is an automated pentesting tool that lets you know if your MongoDB instances are properly secured 
+`mongoaudit` is an automated pentesting tool that lets you know if your `MongoDB` instances are properly secured 
 
 ## [Sand Dance](https://github.com/microsoft/SandDance)
 **Data Science**
@@ -129,7 +154,7 @@ Visually explore, understand, and present your data.
 ## [NB2XLS](https://github.com/ideonate/nb2xls)
 **Data Science**
 *[https://github.com/ideonate/nb2xls](https://github.com/ideonate/nb2xls)*
-Convert Jupyter notebooks to Excel Spreadsheets (xlsx), through a new 'Download As' option or via nbconvert on the command line.
+Convert `Jupyter` notebooks to Excel Spreadsheets (xlsx), through a new 'Download As' option or via `nbconvert` on the command line.
 ![NB2XLS Preview](https://raw.githubusercontent.com/ideonate/nb2xls/master/screenshots/Jupyter2Excel.png)
 
 ## [Django Bootcamp](https://github.com/vitorfs/bootcamp)
@@ -141,7 +166,7 @@ Bootcamp is an open source enterprise social network of open purpose, on which y
 ## [Gensim](https://radimrehurek.com/gensim/)
 **Machine Learning, Language Processing**
 *[https://radimrehurek.com/gensim/](https://radimrehurek.com/gensim/)*
-Gensim is an open-source library for unsupervised topic modeling and natural language processing, using modern statistical machine learning.
+`Gensim` is an open-source library for unsupervised topic modeling and natural language processing, using modern statistical machine learning.
 
 ## [GeoDjango](https://docs.djangoproject.com/en/3.0/ref/contrib/gis/)
 **Web Development**
@@ -151,5 +176,5 @@ GeoDjango intends to be a world-class geographic Web framework. Its goal is to m
 ## [Jax](https://github.com/google/jax)
 **Machine Learning**
 *[https://github.com/google/jax](https://github.com/google/jax)*
-JAX is Autograd and XLA, brought together for high-performance machine learning research.
+`JAX` is Autograd and XLA, brought together for high-performance machine learning research.
 > Autograd & XLA are both optimisers, this package makes the applications run quicker
