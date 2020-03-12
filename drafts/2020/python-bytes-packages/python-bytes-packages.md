@@ -73,13 +73,11 @@ Live example at: [https://wooey.herokuapp.com/](https://wooey.herokuapp.com/)
 *[https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library](https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library)*
 `PyOxidizer` is a utility for producing binaries that embed Python. The over-arching goal of `PyOxidizer` is to make complex packaging and distribution problems simple so application maintainers can focus on building applications instead of toiling with build systems and packaging tools.
 
-## Osmedeus
+## [Anvil](https://anvil.works/)
+**Web Development**
+*[https://pythonbytes.fm/episodes/show/106/fluent-query-apis-on-python-collections](https://pythonbytes.fm/episodes/show/106/fluent-query-apis-on-python-collections)*
 
-## CartoFrames
-
-## Anvil
-
-## Panel Holoviz
+Full stack web apps with nothing but Python.
 
 ## PDF Plumber
 
@@ -178,3 +176,25 @@ GeoDjango intends to be a world-class geographic Web framework. Its goal is to m
 *[https://github.com/google/jax](https://github.com/google/jax)*
 `JAX` is Autograd and XLA, brought together for high-performance machine learning research.
 > Autograd & XLA are both optimisers, this package makes the applications run quicker
+
+## [Osmedeus](https://github.com/j3ssie/Osmedeus)
+**Security**
+Fully automated offensive security framework for reconnaissance and vulnerability scanning
+![Osmedeus](https://raw.githubusercontent.com/j3ssie/Osmedeus/master/imgs/osmedeus-architecture.png)
+
+## [Cartoframes](https://github.com/CartoDB/cartoframes)
+**Data Science**
+A Python package for integrating CARTO maps, analysis, and data services into data science workflows.
+
+Python data analysis workflows often rely on the de facto standards `pandas` and `Jupyter` notebooks. Integrating CARTO into this workflow saves data scientists time and energy by not having to export datasets as files or retain multiple copies of the data. Instead, CARTOframes give the ability to communicate reproducible analysis while providing the ability to gain from CARTO's services like hosted, dynamic or static maps and Data Observatory augmentation.
+
+![Carto Example](https://carto.com/img/layout/homepage/use-cases/image1.621dbf2e.png)
+
+
+## [Panel Holoviz](https://github.com/holoviz/panel)
+**Data Science**
+`Panel` provides tools for easily composing widgets, plots, tables, and other viewable objects and controls into control panels, apps, and dashboards. Panel works with visualizations from `Bokeh`, `Matplotlib`, `HoloViews`, and other Python plotting libraries, making them instantly viewable either individually or when combined with interactive widgets that control them. Panel works equally well in `Jupyter` Notebooks, for creating quick data-exploration tools, or as standalone deployed apps and dashboards, and allows you to easily switch between those contexts as needed.
+
+Examples at: [https://panel.holoviz.org/](https://panel.holoviz.org/)
+
+![Panel Example]({static img/panel-example.png})
