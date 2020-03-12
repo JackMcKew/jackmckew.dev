@@ -1,62 +1,37 @@
-Title: `Python` Bytes Awesome Package List
+Title: Python Bytes Awesome Package List
 Date: 2020-03-11
 Author: Jack McKew
-Category: `Python`
+Category: Python
 Tags: python
 
-[`Python` Bytes](https://pythonbytes.fm/) is a weekly, short & sweet podcast by [Michael Kennedy](https://twitter.com/mkennedy) & [Brian Okken](https://twitter.com/brianokken). After having the podcast recommended numerous times by friends & colleagues, I decided to download every episode thus far on the 14th of September 2019. Over the next 174 days, whenever I was commuting, I'd listen to 171 episodes of `Python` bytes, learn a stack of new things and found new amazing python packages.
+[Python Bytes](https://pythonbytes.fm/) is a weekly, short & sweet podcast by [Michael Kennedy](https://twitter.com/mkennedy) & [Brian Okken](https://twitter.com/brianokken). After having the podcast recommended numerous times by friends & colleagues, I decided to download every episode thus far on the 14th of September 2019. Over the next 174 days, whenever I was commuting, I'd listen to 171 episodes of Python bytes, learnt a stack of new things and found new amazing python packages.
 
-This post is intended to list out the packages I'd noted down & their application. Total disclaimer, I haven't tried out all of these packages personally.
+This post is intended to list out the packages I'd noted down & their application. Total disclaimer, I haven't tried out all of these packages personally and I'm certain there is a plethora of other packages mentioned that I have not captured here, please reach out if theres anything to add!
 
-# Noteworthy Packages
+I've attempted to sort these into a directory of sorts pending on what you're interested in looking at, and whether I found out about them through [Python Bytes](https://pythonbytes.fm/) or elsewhere.
 
-## [Wagtail](https://wagtail.io/)
+- [Web Development](#web-development)
+
+- [Data Science](#data-science)
+  - [Machine Learning](#machine-learning)
+  - [Data Visualisation](#data-visualisation)
+  - [Databases](#databases)
+
+- [Development Tools](#development-tools)
+  - [Command Line Interfaces](#command-line-interfaces-clis)
+  - [Guided User Interfaces](#guided-user-interfaces-guis)
+  - [Python Development](#python-development)
+
+# Web Development
+
+### [Wagtail](https://wagtail.io/)
 **Web Development**
 *[https://pythonbytes.fm/episodes/show/70/have-you-seen-my-log-it-s-cute](https://pythonbytes.fm/episodes/show/70/have-you-seen-my-log-it-s-cute)*
 `Wagtail` is a content management system (CMS) (like Wordpress), written in `Python`, based off `Django`.
 
 [Gallery of sites made with `wagtail`](https://madewithwagtail.org/)
 
-## [PyTorch](https://github.com/pytorch/pytorch)
-**Machine Learning**
-*[https://pythonbytes.fm/episodes/show/80/dan-bader-drops-by-and-we-found-30-new-python-projects](https://pythonbytes.fm/episodes/show/80/dan-bader-drops-by-and-we-found-30-new-python-projects)*
-Tensors and Dynamic neural networks in `Python` with strong GPU acceleration 
-
-## [`Python` Fire](https://github.com/google/python-fire)
-**Command Line Interfaces**
-*[https://pythonbytes.fm/episodes/show/17/google-s-python-is-on-fire-and-simon-says-you-have-cpu-load-pythonically](https://pythonbytes.fm/episodes/show/17/google-s-python-is-on-fire-and-simon-says-you-have-cpu-load-pythonically)*
-``Python` Fire` is a library for automatically generating command line interfaces (CLIs) from absolutely any `Python` object. 
-
-## [Attrs](https://github.com/python-attrs/attrs)
-**Development Tool**
-*[https://pythonbytes.fm/episodes/show/11/django-2.0-is-dropping-python-2-entirely-pipenv-for-profile-functionality-and-pythonic-home-automation](https://pythonbytes.fm/episodes/show/11/django-2.0-is-dropping-python-2-entirely-pipenv-for-profile-functionality-and-pythonic-home-automation)*
-`Python` Classes Without Boilerplate
-
-## [Yellow Brick](http://www.scikit-yb.org/en/latest/)
-**Machine Learning, Data Science**
-*[https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively](https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively)*
-`Yellowbrick` extends the `Scikit-Learn` API to make model selection and hyperparameter tuning easier. Under the hood, it’s using `Matplotlib`.
-![Yellow Brick Preview](http://www.scikit-yb.org/en/latest/_images/banner.png)
-
-## [Pylustrator](https://pylustrator.readthedocs.io/en/latest/)
-**Data Science**
-*[https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs](https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs)*
-
-`Pylustrator` offers an interactive interface to find the best way to present your data in a figure for publication. Added formatting an styling can be saved by automatically generated code. To compose multiple figures to panels, pylustrator can compose different subfigures to a single figure.
-
-[![pylustrator demonstration](http://img.youtube.com/vi/xXPI4LLrNuM/0.jpg)](http://www.youtube.com/watch?v=xXPI4LLrNuM "pylustrator demonstration")
-
-## [Gooey](https://github.com/chriskiehl/Gooey)
-**Development Tool**
-*[https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis](https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis)*
-
-I personally love `Gooey` and have it installed in almost every project lately. `Gooey` turns (almost) any `Python` command line program into a full GUI application with one line.
-
-I have also done a tutorial blog post on Gooey as well at: [https://jackmckew.dev/making-executable-guis-with-python-gooey-pyinstaller.html](https://jackmckew.dev/making-executable-guis-with-python-gooey-pyinstaller.html#making-executable-guis-with-python-gooey-pyinstaller)
-
-![Gooey Example](https://raw.githubusercontent.com/chriskiehl/GooeyImages/images/readme-images/1-0-3-title-card.png)
-
-## [Wooey](https://github.com/wooey/Wooey)
+### [Wooey](https://github.com/wooey/Wooey)
 **Web Development**
 *[https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis](https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis)*
 A `Django` app that creates automatic web UIs for `Python` scripts. 
@@ -65,46 +40,13 @@ Live example at: [https://wooey.herokuapp.com/](https://wooey.herokuapp.com/)
 
 ![Wooey Example]({static img/wooey-example.png})
 
-## [Great Expectations](https://great-expectations.readthedocs.io/en/latest/)
-**Data Science**
-*[https://pythonbytes.fm/episodes/show/115/dataclass-csv-reader-and-nina-drops-by](https://pythonbytes.fm/episodes/show/115/dataclass-csv-reader-and-nina-drops-by)*
-`Great Expectations` is a leading tool for validating, documenting, and profiling, your data to maintain quality and improve communication between teams. 
-
-## [PyOxidiser](https://github.com/indygreg/PyOxidizer)
-**Development Tool**
-*[https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library](https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library)*
-`PyOxidizer` is a utility for producing binaries that embed `Python`. The over-arching goal of `PyOxidizer` is to make complex packaging and distribution problems simple so application maintainers can focus on building applications instead of toiling with build systems and packaging tools.
-
-## [Anvil](https://anvil.works/)
+### [Anvil](https://anvil.works/)
 **Web Development**
 *[https://pythonbytes.fm/episodes/show/106/fluent-query-apis-on-python-collections](https://pythonbytes.fm/episodes/show/106/fluent-query-apis-on-python-collections)*
 
 Full stack web apps with nothing but `Python`.
 
-## [PDF Plumber](https://github.com/jsvine/pdfplumber)
-**Data Science**
-*[https://pythonbytes.fm/episodes/show/26/how-have-you-automated-your-life-or-cli-with-python](https://pythonbytes.fm/episodes/show/26/how-have-you-automated-your-life-or-cli-with-python)*
-
-Plumb a PDF for detailed information about each char, rectangle, line, et cetera — and easily extract text and tables.
-
-![PDF Plumb Example](https://raw.githubusercontent.com/jsvine/pdfplumber/master/examples/screenshots/visual-debugging-in-jupyter.png)
-
-## [`Python` Date Utils](https://dateutil.readthedocs.io/en/stable/)
-**Development Tool**
-*[https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries](https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries)*
-
-The `dateutil` module provides powerful extensions to the standard datetime module, available in `Python`.
-
-## [GeoAlchemy](https://geoalchemy-2.readthedocs.io/en/latest/)
-**Databases**
-*[https://pythonbytes.fm/episodes/show/77/you-don-t-have-to-be-a-workaholic-to-win](https://pythonbytes.fm/episodes/show/77/you-don-t-have-to-be-a-workaholic-to-win)*
-Using `SQLAlchemy` with Spatial Databases.
-
-`GeoAlchemy 2` provides extensions to `SQLAlchemy` for working with spatial databases.
-
-`GeoAlchemy 2` focuses on `PostGIS`. `PostGIS 1.5` and `PostGIS 2` are supported.
-
-## Vue.py
+### Vue.py
 **Web Development**
 *[https://pythonbytes.fm/episodes/show/140/becoming-a-10x-developer-sorta](https://pythonbytes.fm/episodes/show/140/becoming-a-10x-developer-sorta)*
 use `Vue.js` with pure `Python`
@@ -115,18 +57,123 @@ Live example at: [https://stefanhoelzl.github.io/vue.py/examples/todo_mvc/](http
 
 ![Vue.py Example](https://raw.githubusercontent.com/stefanhoelzl/vue.py/gh-pages/examples/todo_mvc/screenshot.png)
 
-## [Eel GUI](https://github.com/samuelhwilliams/Eel)
+
+
+
+
+
+# Data Science
+
+### [Pylustrator](https://pylustrator.readthedocs.io/en/latest/)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs](https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs)*
+
+`Pylustrator` offers an interactive interface to find the best way to present your data in a figure for publication. Added formatting an styling can be saved by automatically generated code. To compose multiple figures to panels, pylustrator can compose different subfigures to a single figure.
+
+[![pylustrator demonstration](http://img.youtube.com/vi/xXPI4LLrNuM/0.jpg)](http://www.youtube.com/watch?v=xXPI4LLrNuM "pylustrator demonstration")
+
+### [Great Expectations](https://great-expectations.readthedocs.io/en/latest/)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/115/dataclass-csv-reader-and-nina-drops-by](https://pythonbytes.fm/episodes/show/115/dataclass-csv-reader-and-nina-drops-by)*
+`Great Expectations` is a leading tool for validating, documenting, and profiling, your data to maintain quality and improve communication between teams. 
+
+### [PDF Plumber](https://github.com/jsvine/pdfplumber)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/26/how-have-you-automated-your-life-or-cli-with-python](https://pythonbytes.fm/episodes/show/26/how-have-you-automated-your-life-or-cli-with-python)*
+
+Plumb a PDF for detailed information about each char, rectangle, line, et cetera — and easily extract text and tables.
+
+![PDF Plumb Example](https://raw.githubusercontent.com/jsvine/pdfplumber/master/examples/screenshots/visual-debugging-in-jupyter.png)
+
+### [PyJanitor](https://pyjanitor.readthedocs.io/)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/108/spilled-data-call-the-pyjanitor](https://pythonbytes.fm/episodes/show/108/spilled-data-call-the-pyjanitor)*
+
+`pyjanitor` is a project that extends Pandas with a verb-based API, providing convenient data cleaning routines for repetitive tasks.
+
+## Data Visualisation
+
+## [Chartify](https://github.com/spotify/chartify)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer](https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer)*
+
+`Chartify` is a `Python` library that makes it easy for data scientists to create charts.
+
+![Chartify Example](https://raw.githubusercontent.com/spotify/chartify/master/docs/_static/chartify1.png)
+
+
+## Machine Learning
+
+### [PyTorch](https://github.com/pytorch/pytorch)
+**Machine Learning**
+*[https://pythonbytes.fm/episodes/show/80/dan-bader-drops-by-and-we-found-30-new-python-projects](https://pythonbytes.fm/episodes/show/80/dan-bader-drops-by-and-we-found-30-new-python-projects)*
+Tensors and Dynamic neural networks in `Python` with strong GPU acceleration 
+
+### [Yellow Brick](http://www.scikit-yb.org/en/latest/)
+**Machine Learning**
+*[https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively](https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively)*
+`Yellowbrick` extends the `Scikit-Learn` API to make model selection and hyperparameter tuning easier. Under the hood, it’s using `Matplotlib`.
+![Yellow Brick Preview](http://www.scikit-yb.org/en/latest/_images/banner.png)
+
+## Databases
+
+### [GeoAlchemy](https://geoalchemy-2.readthedocs.io/en/latest/)
+**Databases**
+*[https://pythonbytes.fm/episodes/show/77/you-don-t-have-to-be-a-workaholic-to-win](https://pythonbytes.fm/episodes/show/77/you-don-t-have-to-be-a-workaholic-to-win)*
+Using `SQLAlchemy` with Spatial Databases.
+
+`GeoAlchemy 2` provides extensions to `SQLAlchemy` for working with spatial databases.
+
+`GeoAlchemy 2` focuses on `PostGIS`. `PostGIS 1.5` and `PostGIS 2` are supported.
+
+
+# Development Tools
+
+
+## Command Line Interfaces (CLIs)
+
+### [Python Fire](https://github.com/google/python-fire)
+**Command Line Interfaces**
+*[https://pythonbytes.fm/episodes/show/17/google-s-python-is-on-fire-and-simon-says-you-have-cpu-load-pythonically](https://pythonbytes.fm/episodes/show/17/google-s-python-is-on-fire-and-simon-says-you-have-cpu-load-pythonically)*
+``Python` Fire` is a library for automatically generating command line interfaces (CLIs) from absolutely any `Python` object. 
+## Guided User Interfaces (GUIs)
+
+### [Gooey](https://github.com/chriskiehl/Gooey)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis](https://pythonbytes.fm/episodes/show/62/wooey-and-gooey-are-simple-python-guis)*
+
+I personally love `Gooey` and have it installed in almost every project lately. `Gooey` turns (almost) any `Python` command line program into a full GUI application with one line.
+
+I have also done a tutorial blog post on Gooey as well at: [https://jackmckew.dev/making-executable-guis-with-python-gooey-pyinstaller.html](https://jackmckew.dev/making-executable-guis-with-python-gooey-pyinstaller.html#making-executable-guis-with-python-gooey-pyinstaller)
+
+![Gooey Example](https://raw.githubusercontent.com/chriskiehl/GooeyImages/images/readme-images/1-0-3-title-card.png)
+
+### [Eel GUI](https://github.com/samuelhwilliams/Eel)
 **Development Tool**
 *[https://pythonbytes.fm/episodes/show/61/on-being-a-senior-engineer](https://pythonbytes.fm/episodes/show/61/on-being-a-senior-engineer)*
 `Eel` is a little `Python` library for making simple Electron-like offline HTML/JS GUI apps, with full access to `Python` capabilities and libraries.
 
 ![Eel Demo](https://raw.githubusercontent.com/samuelhwilliams/Eel/master/examples/04%20-%20file_access/Screenshot.png)
 
-## [PyJanitor](https://pyjanitor.readthedocs.io/)
-**Data Science**
-*[https://pythonbytes.fm/episodes/show/108/spilled-data-call-the-pyjanitor](https://pythonbytes.fm/episodes/show/108/spilled-data-call-the-pyjanitor)*
+## Python Development
 
-`pyjanitor` is a project that extends Pandas with a verb-based API, providing convenient data cleaning routines for repetitive tasks.
+### [Attrs](https://github.com/python-attrs/attrs)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/11/django-2.0-is-dropping-python-2-entirely-pipenv-for-profile-functionality-and-pythonic-home-automation](https://pythonbytes.fm/episodes/show/11/django-2.0-is-dropping-python-2-entirely-pipenv-for-profile-functionality-and-pythonic-home-automation)*
+`Python` Classes Without Boilerplate
+
+### [PyOxidiser](https://github.com/indygreg/PyOxidizer)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library](https://pythonbytes.fm/episodes/show/114/what-should-be-in-the-python-standard-library)*
+`PyOxidizer` is a utility for producing binaries that embed `Python`. The over-arching goal of `PyOxidizer` is to make complex packaging and distribution problems simple so application maintainers can focus on building applications instead of toiling with build systems and packaging tools.
+
+### [`Python` Date Utils](https://dateutil.readthedocs.io/en/stable/)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries](https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries)*
+
+The `dateutil` module provides powerful extensions to the standard datetime module, available in `Python`.
+
+# Game Development
 
 ## [Panda3D](https://www.panda3d.org/)
 **Game Development**
@@ -136,13 +183,6 @@ Live example at: [https://stefanhoelzl.github.io/vue.py/examples/todo_mvc/](http
 
 [![Panda3D Example](http://img.youtube.com/vi/MYlBW0f4HhA/0.jpg)](http://www.youtube.com/watch?v=MYlBW0f4HhA "Panda3D Example")
 
-## [Chartify](https://github.com/spotify/chartify)
-**Data Science**
-*[https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer](https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer)*
-
-`Chartify` is a `Python` library that makes it easy for data scientists to create charts.
-
-![Chartify Example](https://raw.githubusercontent.com/spotify/chartify/master/docs/_static/chartify1.png)
 
 ## [Clize](https://clize.readthedocs.io/en/stable/)
 **Development Tool**
