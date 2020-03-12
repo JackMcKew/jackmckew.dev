@@ -91,21 +91,56 @@ Plumb a PDF for detailed information about each char, rectangle, line, et cetera
 **Development Tool**
 *[https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries](https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries)*
 
-The dateutil module provides powerful extensions to the standard datetime module, available in Python.
+The `dateutil` module provides powerful extensions to the standard datetime module, available in Python.
 
-# Others
+## [GeoAlchemy](https://geoalchemy-2.readthedocs.io/en/latest/)
+**Databases**
+*[https://pythonbytes.fm/episodes/show/77/you-don-t-have-to-be-a-workaholic-to-win](https://pythonbytes.fm/episodes/show/77/you-don-t-have-to-be-a-workaholic-to-win)*
+Using `SQLAlchemy` with Spatial Databases.
 
-## GeoAlchemy
+`GeoAlchemy 2` provides extensions to `SQLAlchemy` for working with spatial databases.
+
+`GeoAlchemy 2` focuses on `PostGIS`. `PostGIS 1.5` and `PostGIS 2` are supported.
 
 ## Vue.py
+**Web Development**
+*[https://pythonbytes.fm/episodes/show/140/becoming-a-10x-developer-sorta](https://pythonbytes.fm/episodes/show/140/becoming-a-10x-developer-sorta)*
+use `Vue.js` with pure Python
 
-## Eel GUI
+`vue.py` provides Python bindings for `Vue.js`. It uses `brython` to run Python in the browser.
 
-## Pyjanitor
+Live example at: [https://stefanhoelzl.github.io/vue.py/examples/todo_mvc/](https://stefanhoelzl.github.io/vue.py/examples/todo_mvc/)
 
-## Panda3D
+![Vue.py Example](https://raw.githubusercontent.com/stefanhoelzl/vue.py/gh-pages/examples/todo_mvc/screenshot.png)
 
-## Chartify
+## [Eel GUI](https://github.com/samuelhwilliams/Eel)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/61/on-being-a-senior-engineer](https://pythonbytes.fm/episodes/show/61/on-being-a-senior-engineer)*
+`Eel` is a little Python library for making simple Electron-like offline HTML/JS GUI apps, with full access to Python capabilities and libraries.
+
+![Eel Demo](https://raw.githubusercontent.com/samuelhwilliams/Eel/master/examples/04%20-%20file_access/Screenshot.png)
+
+## [PyJanitor](https://pyjanitor.readthedocs.io/)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/108/spilled-data-call-the-pyjanitor](https://pythonbytes.fm/episodes/show/108/spilled-data-call-the-pyjanitor)*
+
+`pyjanitor` is a project that extends Pandas with a verb-based API, providing convenient data cleaning routines for repetitive tasks.
+
+## [Panda3D](https://www.panda3d.org/)
+**Game Development**
+*[https://pythonbytes.fm/episodes/show/116/so-you-want-python-in-a-3d-graphics-engine](https://pythonbytes.fm/episodes/show/116/so-you-want-python-in-a-3d-graphics-engine)*
+
+`Panda3D` is an open-source, completely free-to-use engine for realtime 3D games, visualizations, simulations, experiments
+
+[![Panda3D Example](http://img.youtube.com/vi/MYlBW0f4HhA/0.jpg)](http://www.youtube.com/watch?v=MYlBW0f4HhA "Panda3D Example")
+
+## [Chartify](https://github.com/spotify/chartify)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer](https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer)*
+
+`Chartify` is a Python library that makes it easy for data scientists to create charts.
+
+![Chartify Example](https://raw.githubusercontent.com/spotify/chartify/master/docs/_static/chartify1.png)
 
 ## Clize
 
