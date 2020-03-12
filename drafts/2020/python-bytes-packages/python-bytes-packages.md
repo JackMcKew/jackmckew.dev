@@ -79,11 +79,19 @@ Live example at: [https://wooey.herokuapp.com/](https://wooey.herokuapp.com/)
 
 Full stack web apps with nothing but Python.
 
-## PDF Plumber
+## [PDF Plumber](https://github.com/jsvine/pdfplumber)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/26/how-have-you-automated-your-life-or-cli-with-python](https://pythonbytes.fm/episodes/show/26/how-have-you-automated-your-life-or-cli-with-python)*
 
-## Doc Assemble
+Plumb a PDF for detailed information about each char, rectangle, line, et cetera — and easily extract text and tables.
 
-## Python Date Utils
+![PDF Plumb Example](https://raw.githubusercontent.com/jsvine/pdfplumber/master/examples/screenshots/visual-debugging-in-jupyter.png)
+
+## [Python Date Utils](https://dateutil.readthedocs.io/en/stable/)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries](https://pythonbytes.fm/episodes/show/136/a-python-kernel-rather-than-cleaning-the-batteries)*
+
+The dateutil module provides powerful extensions to the standard datetime module, available in Python.
 
 # Others
 
@@ -198,3 +206,7 @@ Python data analysis workflows often rely on the de facto standards `pandas` and
 Examples at: [https://panel.holoviz.org/](https://panel.holoviz.org/)
 
 ![Panel Example]({static img/panel-example.png})
+
+## [Doc Assemble](https://docassemble.org/)
+**Development Tool**
+`docassemble` is a free, open-source expert system for guided interviews and document assembly. It provides a web site that conducts interviews with users. Based on the information gathered, the interviews can present users with documents in PDF, RTF, or DOCX format, which users can download or e-mail.
