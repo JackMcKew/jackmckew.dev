@@ -160,7 +160,7 @@ Convert `Jupyter` notebooks to Excel Spreadsheets (xlsx), through a new 'Downloa
 
 `Pylustrator` offers an interactive interface to find the best way to present your data in a figure for publication. Added formatting an styling can be saved by automatically generated code. To compose multiple figures to panels, pylustrator can compose different subfigures to a single figure.
 
-[![pylustrator demonstration](http://img.youtube.com/vi/xXPI4LLrNuM/0.jpg)](http://www.youtube.com/watch?v=xXPI4LLrNuM "pylustrator demonstration")
+[![pylustrator demonstration](https://img.youtube.com/vi/xXPI4LLrNuM/0.jpg)](https://www.youtube.com/watch?v=xXPI4LLrNuM "pylustrator demonstration")
 
 
 ## [Chartify](https://github.com/spotify/chartify)
@@ -197,10 +197,10 @@ Visually explore, understand, and present your data.
 *[https://pythonbytes.fm/episodes/show/80/dan-bader-drops-by-and-we-found-30-new-python-projects](https://pythonbytes.fm/episodes/show/80/dan-bader-drops-by-and-we-found-30-new-python-projects)*
 Tensors and Dynamic neural networks in `Python` with strong GPU acceleration 
 
-## [Yellow Brick](http://www.scikit-yb.org/en/latest/)
+## [Yellow Brick](https://www.scikit-yb.org/en/latest/)
 *[https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively](https://pythonbytes.fm/episodes/show/74/contributing-to-open-source-effectively)*
 `Yellowbrick` extends the `Scikit-Learn` API to make model selection and hyperparameter tuning easier. Under the hood, it’s using `Matplotlib`.
-![Yellow Brick Preview](http://www.scikit-yb.org/en/latest/_images/banner.png)
+![Yellow Brick Preview](https://www.scikit-yb.org/en/latest/_images/banner.png)
 
 ## [Thinc](https://thinc.ai/)
 *[https://pythonbytes.fm/episodes/show/167/cheating-at-kaggle-and-uwsgi-in-prod](https://pythonbytes.fm/episodes/show/167/cheating-at-kaggle-and-uwsgi-in-prod)*
@@ -311,7 +311,7 @@ A library for compiling excel spreadsheets to `Python` code & visualizing them a
 
 `Panda3D` is an open-source, completely free-to-use engine for realtime 3D games, visualizations, simulations, experiments
 
-[![Panda3D Example](http://img.youtube.com/vi/MYlBW0f4HhA/0.jpg)](http://www.youtube.com/watch?v=MYlBW0f4HhA "Panda3D Example")
+[![Panda3D Example](https://img.youtube.com/vi/MYlBW0f4HhA/0.jpg)](https://www.youtube.com/watch?v=MYlBW0f4HhA "Panda3D Example")
 
 
 ## [PursuedPyBear](https://ppb.readthedocs.io/)
