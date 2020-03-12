@@ -124,7 +124,6 @@ Plumb a PDF for detailed information about each char, rectangle, line, et cetera
 Convert `Jupyter` notebooks to Excel Spreadsheets (xlsx), through a new 'Download As' option or via `nbconvert` on the command line.
 ![NB2XLS Preview](https://raw.githubusercontent.com/ideonate/nb2xls/master/screenshots/Jupyter2Excel.png)
 
-
 ## Data Visualisation
 
 ## [Chartify](https://github.com/spotify/chartify)
