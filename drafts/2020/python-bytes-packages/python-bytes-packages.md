@@ -142,9 +142,18 @@ Live example at: [https://stefanhoelzl.github.io/vue.py/examples/todo_mvc/](http
 
 ![Chartify Example](https://raw.githubusercontent.com/spotify/chartify/master/docs/_static/chartify1.png)
 
-## Clize
+## [Clize](https://clize.readthedocs.io/en/stable/)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/167/cheating-at-kaggle-and-uwsgi-in-prod](https://pythonbytes.fm/episodes/show/167/cheating-at-kaggle-and-uwsgi-in-prod)*
 
-## Quick GUI
+`Clize` is an argument parser for Python. You can use `Clize` as an alternative to `argparse` if you want an even easier way to create command-line interfaces.
+
+## [QUICK](https://github.com/szsdk/quick)
+**Development Tool**
+*[https://pythonbytes.fm/episodes/show/166/misunderstanding-software-clocks-and-time](https://pythonbytes.fm/episodes/show/166/misunderstanding-software-clocks-and-time)*
+A real quick GUI generator for `click`. Inspired by `Gooey`, the GUI generator for classical Python `argparse`-based command line programs.
+
+![QUICK Example](https://user-images.githubusercontent.com/6657200/38025934-bf93013c-32bc-11e8-8d12-91411b28946e.png)
 
 ## Think
 
