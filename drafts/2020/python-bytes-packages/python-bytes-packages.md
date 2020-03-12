@@ -13,6 +13,56 @@ This post is intended to list out the packages I'd noted down & their applicatio
 I've attempted to sort these into a directory of sorts pending on what you're interested in looking at, and whether I found out about them through [Python Bytes](https://pythonbytes.fm/) or elsewhere (they will have a link to the episode if directly from [Python Bytes](https://pythonbytes.fm/)).
 
 - [Web Development](#web-development)
+    - [Wagtail](#wagtail)
+    - [Wooey](#wooey)
+    - [Anvil](#anvil)
+    - [Vue.py](#vuepy)
+    - [GeoDjango](#geodjango)
+    - [Django Bootcamp](#django-bootcamp)
+  - [Security](#security)
+  - [Osmedeus](#osmedeus)
+    - [Mongo Audit](#mongo-audit)
+- [Data Science](#data-science)
+    - [Great Expectations](#great-expectations)
+    - [PDF Plumber](#pdf-plumber)
+    - [PyJanitor](#pyjanitor)
+    - [Pandas Vet](#pandas-vet)
+    - [NB2XLS](#nb2xls)
+  - [Data Visualisation](#data-visualisation)
+    - [Pylustrator](#pylustrator)
+    - [Chartify](#chartify)
+    - [Panel Holoviz](#panel-holoviz)
+    - [Cartoframes](#cartoframes)
+    - [Sand Dance](#sand-dance)
+  - [Machine Learning](#machine-learning)
+    - [PyTorch](#pytorch)
+    - [Yellow Brick](#yellow-brick)
+    - [Thinc](#thinc)
+    - [Keras Gym](#keras-gym)
+    - [Spinning up](#spinning-up)
+    - [Jax](#jax)
+    - [Gensim](#gensim)
+  - [Databases](#databases)
+    - [GeoAlchemy](#geoalchemy)
+    - [Sandman 2](#sandman-2)
+- [Development Tools](#development-tools)
+  - [Command Line Interfaces (CLIs)](#command-line-interfaces-clis)
+    - [Python Fire](#python-fire)
+    - [Clize](#clize)
+    - [Typer](#typer)
+  - [Guided User Interfaces (GUIs)](#guided-user-interfaces-guis)
+    - [Gooey](#gooey)
+    - [Eel GUI](#eel-gui)
+    - [QUICK](#quick)
+  - [Python Development](#python-development)
+    - [Attrs](#attrs)
+    - [PyOxidiser](#pyoxidiser)
+    - [Python Date Utils](#python-date-utils)
+    - [Pycel](#pycel)
+    - [Doc Assemble](#doc-assemble)
+- [Game Development](#game-development)
+    - [Panda3D](#panda3d)
+- [Interesting Tidbits](#interesting-tidbits)
 
 - [Data Science](#data-science)
   - [Machine Learning](#machine-learning)
@@ -59,13 +109,13 @@ Live example at: [https://stefanhoelzl.github.io/vue.py/examples/todo_mvc/](http
 
 ![Vue.py Example](https://raw.githubusercontent.com/stefanhoelzl/vue.py/gh-pages/examples/todo_mvc/screenshot.png)
 
-## [GeoDjango](https://docs.djangoproject.com/en/3.0/ref/contrib/gis/)
+### [GeoDjango](https://docs.djangoproject.com/en/3.0/ref/contrib/gis/)
 **Web Development**
 *[https://docs.djangoproject.com/en/3.0/ref/contrib/gis/](https://docs.djangoproject.com/en/3.0/ref/contrib/gis/)*
 GeoDjango intends to be a world-class geographic Web framework. Its goal is to make it as easy as possible to build GIS Web applications and harness the power of spatially enabled data.
 
 
-## [Django Bootcamp](https://github.com/vitorfs/bootcamp)
+### [Django Bootcamp](https://github.com/vitorfs/bootcamp)
 **Web Development**
 *[https://github.com/vitorfs/bootcamp](https://github.com/vitorfs/bootcamp)*
 Bootcamp is an open source enterprise social network of open purpose, on which you can build for your own ends.
@@ -79,19 +129,13 @@ Bootcamp is an open source enterprise social network of open purpose, on which y
 Fully automated offensive security framework for reconnaissance and vulnerability scanning
 ![Osmedeus](https://raw.githubusercontent.com/j3ssie/Osmedeus/master/imgs/osmedeus-architecture.png)
 
-
-
+### [Mongo Audit](https://mongoaud.it/)
+**Databases, Security**
+*[https://mongoaud.it/](https://mongoaud.it/)*
+`mongoaudit` is an automated pentesting tool that lets you know if your `MongoDB` instances are properly secured 
 
 
 # Data Science
-
-### [Pylustrator](https://pylustrator.readthedocs.io/en/latest/)
-**Data Science**
-*[https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs](https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs)*
-
-`Pylustrator` offers an interactive interface to find the best way to present your data in a figure for publication. Added formatting an styling can be saved by automatically generated code. To compose multiple figures to panels, pylustrator can compose different subfigures to a single figure.
-
-[![pylustrator demonstration](http://img.youtube.com/vi/xXPI4LLrNuM/0.jpg)](http://www.youtube.com/watch?v=xXPI4LLrNuM "pylustrator demonstration")
 
 ### [Great Expectations](https://great-expectations.readthedocs.io/en/latest/)
 **Data Science**
@@ -118,7 +162,7 @@ Plumb a PDF for detailed information about each char, rectangle, line, et cetera
 
 `pandas-vet` is a plugin for `flake8` that provides opinionated linting for pandas code.
 
-## [NB2XLS](https://github.com/ideonate/nb2xls)
+### [NB2XLS](https://github.com/ideonate/nb2xls)
 **Data Science**
 *[https://github.com/ideonate/nb2xls](https://github.com/ideonate/nb2xls)*
 Convert `Jupyter` notebooks to Excel Spreadsheets (xlsx), through a new 'Download As' option or via `nbconvert` on the command line.
@@ -126,7 +170,16 @@ Convert `Jupyter` notebooks to Excel Spreadsheets (xlsx), through a new 'Downloa
 
 ## Data Visualisation
 
-## [Chartify](https://github.com/spotify/chartify)
+### [Pylustrator](https://pylustrator.readthedocs.io/en/latest/)
+**Data Science**
+*[https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs](https://pythonbytes.fm/episodes/show/137/advanced-python-testing-and-big-time-diffs)*
+
+`Pylustrator` offers an interactive interface to find the best way to present your data in a figure for publication. Added formatting an styling can be saved by automatically generated code. To compose multiple figures to panels, pylustrator can compose different subfigures to a single figure.
+
+[![pylustrator demonstration](http://img.youtube.com/vi/xXPI4LLrNuM/0.jpg)](http://www.youtube.com/watch?v=xXPI4LLrNuM "pylustrator demonstration")
+
+
+### [Chartify](https://github.com/spotify/chartify)
 **Data Science**
 *[https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer](https://pythonbytes.fm/episodes/show/109/cpython-byte-code-explorer)*
 
@@ -134,7 +187,7 @@ Convert `Jupyter` notebooks to Excel Spreadsheets (xlsx), through a new 'Downloa
 
 ![Chartify Example](https://raw.githubusercontent.com/spotify/chartify/master/docs/_static/chartify1.png)
 
-## [Panel Holoviz](https://github.com/holoviz/panel)
+### [Panel Holoviz](https://github.com/holoviz/panel)
 **Data Science**
 `Panel` provides tools for easily composing widgets, plots, tables, and other viewable objects and controls into control panels, apps, and dashboards. Panel works with visualizations from `Bokeh`, `Matplotlib`, `HoloViews`, and other `Python` plotting libraries, making them instantly viewable either individually or when combined with interactive widgets that control them. Panel works equally well in `Jupyter` Notebooks, for creating quick data-exploration tools, or as standalone deployed apps and dashboards, and allows you to easily switch between those contexts as needed.
 
@@ -142,7 +195,7 @@ Examples at: [https://panel.holoviz.org/](https://panel.holoviz.org/)
 
 ![Panel Example]({static img/panel-example.png})
 
-## [Cartoframes](https://github.com/CartoDB/cartoframes)
+### [Cartoframes](https://github.com/CartoDB/cartoframes)
 **Data Science**
 A `Python` package for integrating CARTO maps, analysis, and data services into data science workflows.
 
@@ -151,7 +204,7 @@ A `Python` package for integrating CARTO maps, analysis, and data services into 
 ![Carto Example](https://carto.com/img/layout/homepage/use-cases/image1.621dbf2e.png)
 
 
-## [Sand Dance](https://github.com/microsoft/SandDance)
+### [Sand Dance](https://github.com/microsoft/SandDance)
 **Data Science**
 *[https://github.com/microsoft/SandDance](https://github.com/microsoft/SandDance)*
 Visually explore, understand, and present your data.
@@ -171,32 +224,32 @@ Tensors and Dynamic neural networks in `Python` with strong GPU acceleration
 `Yellowbrick` extends the `Scikit-Learn` API to make model selection and hyperparameter tuning easier. Under the hood, it’s using `Matplotlib`.
 ![Yellow Brick Preview](http://www.scikit-yb.org/en/latest/_images/banner.png)
 
-## [Thinc](https://thinc.ai/)
+### [Thinc](https://thinc.ai/)
 **Machine Learning**
 *[https://pythonbytes.fm/episodes/show/167/cheating-at-kaggle-and-uwsgi-in-prod](https://pythonbytes.fm/episodes/show/167/cheating-at-kaggle-and-uwsgi-in-prod)*
 A refreshing functional take on deep learning, compatible with your favorite libraries. 
 From the makers of `spaCy`, `Prodigy` & `FastAPI`
 
-## [Keras Gym](https://github.com/KristianHolsheimer/keras-gym)
+### [Keras Gym](https://github.com/KristianHolsheimer/keras-gym)
 **Machine Learning**
 *[https://github.com/KristianHolsheimer/keras-gym](https://github.com/KristianHolsheimer/keras-gym)*
 Plug-n-play reinforcement learning with OpenAI Gym and `Keras`
 ![Keras Gym GIF](https://raw.githubusercontent.com/KristianHolsheimer/keras-gym/master/doc/_static/img/cartpole.gif)
 
-## [Spinning up](https://spinningup.openai.com/en/latest/)
+### [Spinning up](https://spinningup.openai.com/en/latest/)
 **Machine Learning**
 *[https://spinningup.openai.com/en/latest/](https://spinningup.openai.com/en/latest/)*
 Deep reinforcement learning educational resource
 
 
-## [Jax](https://github.com/google/jax)
+### [Jax](https://github.com/google/jax)
 **Machine Learning**
 *[https://github.com/google/jax](https://github.com/google/jax)*
 `JAX` is Autograd and XLA, brought together for high-performance machine learning research.
 > Autograd & XLA are both optimisers, this package makes the applications run quicker
 
 
-## [Gensim](https://radimrehurek.com/gensim/)
+### [Gensim](https://radimrehurek.com/gensim/)
 **Machine Learning, Language Processing**
 *[https://radimrehurek.com/gensim/](https://radimrehurek.com/gensim/)*
 `Gensim` is an open-source library for unsupervised topic modeling and natural language processing, using modern statistical machine learning.
@@ -212,15 +265,11 @@ Using `SQLAlchemy` with Spatial Databases.
 
 `GeoAlchemy 2` focuses on `PostGIS`. `PostGIS 1.5` and `PostGIS 2` are supported.
 
-## [Sandman 2](https://github.com/jeffknupp/sandman2)
+### [Sandman 2](https://github.com/jeffknupp/sandman2)
 **Databases, API**
 *[https://github.com/jeffknupp/sandman2](https://github.com/jeffknupp/sandman2)*
 Automatically generate a RESTful API service for your legacy database. No code required! 
 
-## [Mongo Audit](https://mongoaud.it/)
-**Databases, Security**
-*[https://mongoaud.it/](https://mongoaud.it/)*
-`mongoaudit` is an automated pentesting tool that lets you know if your `MongoDB` instances are properly secured 
 
 
 # Development Tools
@@ -296,13 +345,13 @@ The `dateutil` module provides powerful extensions to the standard datetime modu
 
 A library for compiling excel spreadsheets to `Python` code & visualizing them as a graph 
 
-## [Doc Assemble](https://docassemble.org/)
+### [Doc Assemble](https://docassemble.org/)
 **Development Tool**
 `docassemble` is a free, open-source expert system for guided interviews and document assembly. It provides a web site that conducts interviews with users. Based on the information gathered, the interviews can present users with documents in PDF, RTF, or DOCX format, which users can download or e-mail.
 
 # Game Development
 
-## [Panda3D](https://www.panda3d.org/)
+### [Panda3D](https://www.panda3d.org/)
 **Game Development**
 *[https://pythonbytes.fm/episodes/show/116/so-you-want-python-in-a-3d-graphics-engine](https://pythonbytes.fm/episodes/show/116/so-you-want-python-in-a-3d-graphics-engine)*
 
