@@ -1,7 +1,7 @@
-Title: Word Count within Directory
+Title: Counting Words with Python
 Date: 2020-03-19
 Author: Jack McKew
-Category: Python, Data Science
+Category: Python
 Tags: python
 <!-- Slug: 3d-terrain-in-python -->
 
