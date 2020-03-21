@@ -75,7 +75,7 @@ for singleFile in topFolder.glob('**/*'):
     if singleFile.suffix == '.md':
         # Append path        
         allMarkdown.append(singleFile)
-    if singleFile.suffix == '.ipynb' and not 'checkpoint' in singleFile.name:
+    if singleFile.suffix == '.ipynb' and 'checkpoint' not in singleFile.name:
         allJupyter.append(singleFile)
 
 totalList: List = allJupyter + allMarkdown
