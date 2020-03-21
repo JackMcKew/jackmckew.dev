@@ -3,7 +3,7 @@ Date: 2019-03-13 22:01
 Author: Jack McKew
 Slug: contact
 
-Electrical Engineer with multi-faceted background encompassing software engineering, control systems development & buildings design/construction. Developed specialties in interactive data science & visualisation, desktop & web full stack development and technical writing. Proven ability to work apart of multi-discplinary teams to design, develop, and integrate software solutions to increase efficiency & quality and reduce human-error.
+Electrical Engineer with multi-faceted background encompassing software engineering, control systems development & buildings design/construction. Developed specialties in interactive data science & visualisation, desktop & web full stack development and technical writing. Proven ability to work apart of multi-disciplinary teams to design, develop, and integrate software solutions to increase efficiency & quality and reduce human-error.
 
 [Curriculum Vitae]({attach}/files/Jack_McKew_CV.pdf)
 
