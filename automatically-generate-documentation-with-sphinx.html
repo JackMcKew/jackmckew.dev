@@ -108,24 +108,24 @@
 
 
   <div>
-    <body><p><strong>Document code automatically through docstrings with Sphinx</strong></p>
+    <body><h2><strong>Document code automatically through docstrings with Sphinx</strong></h2>
 <p>This post goes into how to generate documentation for your python projects automatically with Sphinx!</p>
 <p>First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span></span>
-<span class="code-line"><span class="n">conda</span> <span class="n">install</span> <span class="n">sphinx</span></span>
-<span class="code-line"><span class="n">pipenv</span> <span class="n">install</span> <span class="n">sphinx</span></span>
+<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>pip install sphinx</span>
+<span class="code-line">conda install sphinx</span>
+<span class="code-line">pipenv install sphinx</span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Once you have installed sphinx, inside the project (let's use the directory of this blog post), we can create a docs folder in which all our documentation will live.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">mkdir</span> <span class="n">docs</span></span>
-<span class="code-line"><span class="n">cd</span> <span class="n">docs</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>mkdir docs</span>
+<span class="code-line"><span class="nb">cd</span> docs</span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Ensuring to have our virtual environment with sphinx installed active, we run <code>sphinx-quickstart</code>, this tool allows us to populate some information for our documentation in a nice Q&amp;A style.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -160,66 +160,66 @@
 <span class="code-line">33</span>
 <span class="code-line">34</span>
 <span class="code-line">35</span>
-<span class="code-line">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="nv">Welcome</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">Sphinx</span> <span class="mi">2</span>.<span class="mi">3</span>.<span class="mi">1</span> <span class="nv">quickstart</span> <span class="nv">utility</span>.</span>
+<span class="code-line">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>Welcome to the Sphinx <span class="m">2</span>.3.1 quickstart utility.</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="nv">Please</span> <span class="nv">enter</span> <span class="nv">values</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">following</span> <span class="nv">settings</span> <span class="ss">(</span><span class="nv">just</span> <span class="nv">press</span> <span class="nv">Enter</span> <span class="nv">to</span></span>
-<span class="code-line"><span class="nv">accept</span> <span class="nv">a</span> <span class="nv">default</span> <span class="nv">value</span>, <span class="k">if</span> <span class="nv">one</span> <span class="nv">is</span> <span class="nv">given</span> <span class="nv">in</span> <span class="nv">brackets</span><span class="ss">)</span>.</span>
+<span class="code-line">Please enter values <span class="k">for</span> the following settings <span class="o">(</span>just press Enter to</span>
+<span class="code-line">accept a default value, <span class="k">if</span> one is given in brackets<span class="o">)</span>.</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="nv">Selected</span> <span class="nv">root</span> <span class="nv">path</span>: .</span>
+<span class="code-line">Selected root path: .</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="nv">You</span> <span class="nv">have</span> <span class="nv">two</span> <span class="nv">options</span> <span class="k">for</span> <span class="nv">placing</span> <span class="nv">the</span> <span class="nv">build</span> <span class="nv">directory</span> <span class="k">for</span> <span class="nv">Sphinx</span> <span class="nv">output</span>.</span>
-<span class="code-line"><span class="nv">Either</span>, <span class="nv">you</span> <span class="nv">use</span> <span class="nv">a</span> <span class="nv">directory</span> <span class="s2">"</span><span class="s">_build</span><span class="s2">"</span> <span class="nv">within</span> <span class="nv">the</span> <span class="nv">root</span> <span class="nv">path</span>, <span class="nv">or</span> <span class="nv">you</span> <span class="nv">separate</span></span>
-<span class="code-line"><span class="s2">"</span><span class="s">source</span><span class="s2">"</span> <span class="nv">and</span> <span class="s2">"</span><span class="s">build</span><span class="s2">"</span> <span class="nv">directories</span> <span class="nv">within</span> <span class="nv">the</span> <span class="nv">root</span> <span class="nv">path</span>.</span>
-<span class="code-line"><span class="o">&gt;</span> <span class="nv">Separate</span> <span class="nv">source</span> <span class="nv">and</span> <span class="nv">build</span> <span class="nv">directories</span> <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">n</span><span class="ss">)</span> [<span class="nv">n</span>]: <span class="nv">y</span></span>
+<span class="code-line">You have two options <span class="k">for</span> placing the build directory <span class="k">for</span> Sphinx output.</span>
+<span class="code-line">Either, you use a directory <span class="s2">"_build"</span> within the root path, or you separate</span>
+<span class="code-line"><span class="s2">"source"</span> and <span class="s2">"build"</span> directories within the root path.</span>
+<span class="code-line">&gt; Separate <span class="nb">source</span> and build directories <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: y</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="nv">The</span> <span class="nv">project</span> <span class="nv">name</span> <span class="nv">will</span> <span class="nv">occur</span> <span class="nv">in</span> <span class="nv">several</span> <span class="nv">places</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">built</span> <span class="nv">documentation</span>.</span>
-<span class="code-line"><span class="o">&gt;</span> <span class="nv">Project</span> <span class="nv">name</span>: <span class="nv">SphinxDemo</span></span>
-<span class="code-line"><span class="o">&gt;</span> <span class="nv">Author</span> <span class="nv">name</span><span class="ss">(</span><span class="nv">s</span><span class="ss">)</span>: <span class="nv">Jack</span> <span class="nv">McKew</span></span>
-<span class="code-line"><span class="o">&gt;</span> <span class="nv">Project</span> <span class="nv">release</span> []: </span>
+<span class="code-line">The project name will occur in several places in the built documentation.</span>
+<span class="code-line">&gt; Project name: SphinxDemo</span>
+<span class="code-line">&gt; Author name<span class="o">(</span>s<span class="o">)</span>: Jack McKew</span>
+<span class="code-line">&gt; Project release <span class="o">[]</span>:</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">If</span> <span class="nv">the</span> <span class="nv">documents</span> <span class="nv">are</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">written</span> <span class="nv">in</span> <span class="nv">a</span> <span class="nv">language</span> <span class="nv">other</span> <span class="nv">than</span> <span class="nv">English</span>,</span>
-<span class="code-line"><span class="nv">you</span> <span class="nv">can</span> <span class="nv">select</span> <span class="nv">a</span> <span class="nv">language</span> <span class="nv">here</span> <span class="nv">by</span> <span class="nv">its</span> <span class="nv">language</span> <span class="nv">code</span>. <span class="nv">Sphinx</span> <span class="nv">will</span> <span class="k">then</span></span>
-<span class="code-line"><span class="nv">translate</span> <span class="nv">text</span> <span class="nv">that</span> <span class="nv">it</span> <span class="nv">generates</span> <span class="nv">into</span> <span class="nv">that</span> <span class="nv">language</span>.</span>
+<span class="code-line">If the documents are to be written in a language other than English,</span>
+<span class="code-line">you can <span class="k">select</span> a language here by its language code. Sphinx will <span class="k">then</span></span>
+<span class="code-line">translate text that it generates into that language.</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">For</span> <span class="nv">a</span> <span class="nv">list</span> <span class="nv">of</span> <span class="nv">supported</span> <span class="nv">codes</span>, <span class="nv">see</span></span>
-<span class="code-line"><span class="nv">https</span>:<span class="o">//</span><span class="nv">www</span>.<span class="nv">sphinx</span><span class="o">-</span><span class="nv">doc</span>.<span class="nv">org</span><span class="o">/</span><span class="nv">en</span><span class="o">/</span><span class="nv">master</span><span class="o">/</span><span class="nv">usage</span><span class="o">/</span><span class="nv">configuration</span>.<span class="nv">html</span>#<span class="nv">confval</span><span class="o">-</span><span class="nv">language</span>.</span>
-<span class="code-line"><span class="o">&gt;</span> <span class="nv">Project</span> <span class="nv">language</span> [<span class="nv">en</span>]: </span>
+<span class="code-line">For a list of supported codes, see</span>
+<span class="code-line">https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language.</span>
+<span class="code-line">&gt; Project language <span class="o">[</span>en<span class="o">]</span>:</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="nv">Creating</span> <span class="nv">file</span> .\<span class="nv">source</span>\<span class="nv">conf</span>.<span class="nv">py</span>.</span>
-<span class="code-line"><span class="nv">Creating</span> <span class="nv">file</span> .\<span class="nv">source</span>\<span class="nv">index</span>.<span class="nv">rst</span>.</span>
-<span class="code-line"><span class="nv">Creating</span> <span class="nv">file</span> .\<span class="nv">Makefile</span>.</span>
-<span class="code-line"><span class="nv">Creating</span> <span class="nv">file</span> .\<span class="nv">make</span>.<span class="nv">bat</span>.</span>
+<span class="code-line">Creating file .<span class="se">\s</span>ource<span class="se">\c</span>onf.py.</span>
+<span class="code-line">Creating file .<span class="se">\s</span>ource<span class="se">\i</span>ndex.rst.</span>
+<span class="code-line">Creating file .<span class="se">\M</span>akefile.</span>
+<span class="code-line">Creating file .<span class="se">\m</span>ake.bat.</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="nv">Finished</span>: <span class="nv">An</span> <span class="nv">initial</span> <span class="nv">directory</span> <span class="nv">structure</span> <span class="nv">has</span> <span class="nv">been</span> <span class="nv">created</span>.</span>
+<span class="code-line">Finished: An initial directory structure has been created.</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="nv">You</span> <span class="nv">should</span> <span class="nv">now</span> <span class="nv">populate</span> <span class="nv">your</span> <span class="nv">master</span> <span class="nv">file</span> .\<span class="nv">source</span>\<span class="nv">index</span>.<span class="nv">rst</span> <span class="nv">and</span> <span class="nv">create</span> <span class="nv">other</span> <span class="nv">documentation</span></span>
-<span class="code-line"><span class="nv">source</span> <span class="nv">files</span>. <span class="nv">Use</span> <span class="nv">the</span> <span class="nv">Makefile</span> <span class="nv">to</span> <span class="nv">build</span> <span class="nv">the</span> <span class="nv">docs</span>, <span class="nv">like</span> <span class="nv">so</span>:</span>
-<span class="code-line">   <span class="nv">make</span> <span class="nv">builder</span></span>
-<span class="code-line"><span class="nv">where</span> <span class="s2">"</span><span class="s">builder</span><span class="s2">"</span> <span class="nv">is</span> <span class="nv">one</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">supported</span> <span class="nv">builders</span>, <span class="nv">e</span>.<span class="nv">g</span>. <span class="nv">html</span>, <span class="nv">latex</span> <span class="nv">or</span> <span class="nv">linkcheck</span>.</span>
+<span class="code-line">You should now populate your master file .<span class="se">\s</span>ource<span class="se">\i</span>ndex.rst and create other documentation</span>
+<span class="code-line"><span class="nb">source</span> files. Use the Makefile to build the docs, like so:</span>
+<span class="code-line">   make builder</span>
+<span class="code-line">where <span class="s2">"builder"</span> is one of the supported builders, e.g. html, latex or linkcheck.</span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Now let's create an example package that we can write some documentation in.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">mkdir</span> <span class="n">sphinxdemo</span></span>
-<span class="code-line"><span class="n">cd</span> <span class="n">sphinxdemo</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>mkdir sphinxdemo</span>
+<span class="code-line"><span class="nb">cd</span> sphinxdemo</span>
 </pre></div>
 </td></tr></tbody></table>
 <p>Then we create 3 files inside our example package:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__init__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>__init__.py</span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/__init__.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">version</span> <span class="o">=</span> <span class="ss">"0.1.1"</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">version</span> <span class="o">=</span> <span class="ss">"0.1.1"</span></span>
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__main__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>__main__.py</span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/__main__.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -233,12 +233,12 @@
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">file_functions</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>file_functions.py</span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/file_functions.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -268,7 +268,7 @@
 </figcaption></figure>
 <blockquote>
 <p>If you are using VS Code to use packages with debugging, change your launch.json with the following:
- "configurations": [
+"configurations": [
         {
             "name": "Python: Module - sphinxdemo",
             "type": "python",
@@ -276,17 +276,17 @@
             "module": "sphinxdemo.<code>__main__</code>"
         }</p>
 </blockquote>
-<p>To add documentation within our source code, we use docstrings. There are many available styles of docstrings out there, my personal preference is <a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google Docstring Style</a>. </p>
+<p>To add documentation within our source code, we use docstrings. There are many available styles of docstrings out there, my personal preference is <a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google Docstring Style</a>.</p>
 <blockquote>
 <p>We need to enable the napoleon sphinx extensions in docs/conf.py for this style to work.</p>
 </blockquote>
 <p>The resulting documented code will look like:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__init__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>__init__.py</span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__init__.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -300,12 +300,12 @@
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">__main__</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>__main__.py</span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__main__.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -331,12 +331,12 @@
 </pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">file_functions</span><span class="p">.</span><span class="n">py</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>file_functions.py</span>
 </pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/file_functions.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -392,15 +392,17 @@
 </figcaption></figure>
 <p>Now at a minimum our source code is documented, now to present these docstrings in a format that we can share with others (html).</p>
 <p>First we need to set the sphinx configuration, the file which contains this (we generated with sphinx-quickstart) is located in <code>docs/source/conf.py</code>.</p>
-<p>We are going to utilise the following sphinx extensions (they are all in-built into sphinx):
-- <a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html"><code>sphinx.ext.autodoc</code></a>
-- <a href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html"><code>sphinx.ext.napoleon</code></a>
-- <a href="https://www.sphinx-doc.org/en/master/usage/extensions/viewcode.html"><code>sphinx.ext.viewcode</code></a>
-- <a href="https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html"><code>sphinx.ext.autosummary</code></a></p>
+<p>We are going to utilise the following sphinx extensions (they are all in-built into sphinx):</p>
+<ul>
+<li><a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html"><code>sphinx.ext.autodoc</code></a></li>
+<li><a href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html"><code>sphinx.ext.napoleon</code></a></li>
+<li><a href="https://www.sphinx-doc.org/en/master/usage/extensions/viewcode.html"><code>sphinx.ext.viewcode</code></a></li>
+<li><a href="https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html"><code>sphinx.ext.autosummary</code></a></li>
+</ul>
 <p>Our <code>conf.py</code> file for sphinx's configuration results in:</p>
 <figure class="code">
 <figcaption><span>Sphinx Configuration File conf.py</span> <a href="/2020/documentation-with-sphinx/docs/source/conf.py">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -523,7 +525,7 @@
 <p>We must also set our index.rst (restructured text) with what we want to see in our documentation.</p>
 <figure class="code">
 <figcaption><span>Documentation Index File index.rst</span> <a href="/2020/documentation-with-sphinx/docs/source/index.rst">download</a>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -585,7 +587,7 @@
 <p>To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: <a href="https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/documentation-with-sphinx/docs/source/_templates">autosummary templates</a></p>
 </blockquote>
 <p>Next we navigate our <code>docs</code> directory, and finally run:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">make</span> <span class="n">html</span></span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span>make html</span>
 </pre></div>
 </td></tr></tbody></table>
 <p>This will generate all the stubs for our documentation and compile them into HTML format.</p>

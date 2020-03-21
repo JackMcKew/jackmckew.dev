@@ -3,8 +3,7 @@ import pytesseract
 
 
 def ocr_convert_to_text(filename):
-    text = pytesseract.image_to_string(Image.open(filename))
-    return text
+    return pytesseract.image_to_string(Image.open(filename))
 
 
 extracted_text = ocr_convert_to_text("images/example_3.jpg")

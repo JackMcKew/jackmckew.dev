@@ -21,9 +21,8 @@ def main():
     full_path_new = [path + "\\" + x for x in new_folder_names]
     full_path_new = [re.sub(r"(-)\1+", r"\1", x) for x in full_path_new]
     for old, new in zip(full_path_original, full_path_new):
-        if os.path.exists(old):
-            if "folder-renaming" not in old:
-                os.rename(old, new)
+        if os.path.exists(old) and "folder-renaming" not in old:
+            os.rename(old, new)
 
 
 if __name__ == "__main__":
