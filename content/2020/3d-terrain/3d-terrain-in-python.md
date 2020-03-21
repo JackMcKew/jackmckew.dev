@@ -5,5 +5,4 @@ Category: Python, Data Science
 Tags: python, visualisation, generative
 <!-- Slug: 3d-terrain-in-python -->
 
-
 {% notebook 2020/3d-terrain/notebooks/3d-terrain.ipynb %}

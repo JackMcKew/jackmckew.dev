@@ -24,9 +24,9 @@ Which shows the user with this dialog box:
 
 Now to package this code into an executable (.exe), there are multiple packages out there that are possible to use, some examples of these are:
 
--   [cx\_freeze](https://anthony-tuininga.github.io/cx_Freeze/)
--   [py2exe](http://www.py2exe.org/)
--   [PyInstaller](https://www.pyinstaller.org/)
+- [cx\_freeze](https://anthony-tuininga.github.io/cx_Freeze/)
+- [py2exe](http://www.py2exe.org/)
+- [PyInstaller](https://www.pyinstaller.org/)
 
 For this post, I will use PyInstaller as it is what I am most familiar with, please get in touch with me if you believe any other package is better suited. I have created an environment in anaconda named "pyinstall", in which I have installed PyInstaller with the command "conda install -c conda-forge pyinstaller", which includes Python 3.7.3 due to anaconda's packaging system (thereby including ctypes from the standard library).
 
@@ -43,4 +43,3 @@ Now if we go into the dist folder and find the .exe (which will have the same na
 ![pyinstall_example_w5KP1B327W.png]({static img/pyinstall_example_w5KP1B327W.png})
 
 Now you can send this executable to anyone (although most antivirus will stop you) and it will run on their PC!
-

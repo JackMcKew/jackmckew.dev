@@ -10,9 +10,9 @@ This is the first post in a series of posts dedicated for demonstrating how Pyth
 
 When it comes to using Python with stocks, the very first thing that you will require, is data. Thankfully, there are multitudes of services out there which provide this data through application programming interfaces (APIs). The data is provided through APIs in a few common formats:
 
--   JSON,
--   XML,
--   CSV.
+- JSON,
+- XML,
+- CSV.
 
 For this post, I will be utilising the free service, Alpha Vantage, to request historical records of stock information on the ASX. For access to Alpha Vantage’s API, head to <http://www.alphavantage.co/support/#api-key> and register for a free API key. There is also documentation around testing if your API key is operational on the Alpha Vantage website.
 
@@ -20,10 +20,10 @@ Now that we have access to an API in which we can extract historical records of 
 
 The packages required for this post in the series are:
 
--   [Pandas](https://pandas.pydata.org/) (For manipulating the data),
--   [Alpha\_vantage](https://github.com/RomelTorres/alpha_vantage) (To access the historical records through an API),
--   [NumPy](https://www.numpy.org/) (For processing across the data),
--   [Matplotlib](https://matplotlib.org/) (For visualising and generate plots of the data).
+- [Pandas](https://pandas.pydata.org/) (For manipulating the data),
+- [Alpha\_vantage](https://github.com/RomelTorres/alpha_vantage) (To access the historical records through an API),
+- [NumPy](https://www.numpy.org/) (For processing across the data),
+- [Matplotlib](https://matplotlib.org/) (For visualising and generate plots of the data).
 
 To import these libraries into our Python code the following\
 code is required:

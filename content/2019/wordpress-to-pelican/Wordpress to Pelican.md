@@ -5,7 +5,7 @@ Author: Jack McKew
 Tags: python
 Slug: migrating-from-wordpress-to-pelican
 
-For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a Jupyter notebook, sometimes even writing the post in markdown within the notebook, then copying all of this out of the notebook into a Wordpress post and fiddling around with formatting for much too long. 
+For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a Jupyter notebook, sometimes even writing the post in markdown within the notebook, then copying all of this out of the notebook into a Wordpress post and fiddling around with formatting for much too long.
 
 What tipped me over the edge was when I was looking back on previous posts (as this blog is mainly for storing previous projects, concepts and ideas), I was finding that I would go through the post and then have no idea whatsoever on where the project actually lived, this had to be fixed.
 
@@ -85,7 +85,7 @@ Now that I had the skeleton of the website set up, I needed to bring in all the 
 
 #### Linking to Content
 
-As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in [http://docs.getpelican.com/en/3.6.3/content.html](http://docs.getpelican.com/en/3.6.3/content.html). 
+As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in [http://docs.getpelican.com/en/3.6.3/content.html](http://docs.getpelican.com/en/3.6.3/content.html).
 
 ```bash
 content
@@ -106,10 +106,10 @@ content
 ├── articles
 │   ├── test-article
 │   |   ├── img
-│   │   |	└── icon.png
-│   │   |	└── photo.jpg
+│   │   | └── icon.png
+│   │   | └── photo.jpg
 │   |   ├── notebooks
-│   │   |	└── test-notebook.ipynb
+│   │   | └── test-notebook.ipynb
 │   │   └── article.md
 └── files
     └── archive.zip
@@ -158,7 +158,7 @@ Github is the repository location for all the code, and I use Git for version co
 All I need to do now to create a new post is:
 
 1. Push a new markdown file (and any other linked content) to the master branch of the repository,
-2. This will fire up Travis CI to build the site with Pelican for me, 
+2. This will fire up Travis CI to build the site with Pelican for me,
 3. Travis CI will then push the created site to the gh-pages branch of the repository,
 4. Netlify will detect the change and process the new site,
 5. The new site is deployed with updated posts!

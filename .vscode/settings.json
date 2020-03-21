@@ -3,5 +3,16 @@
     "python.formatting.provider": "black",
     "restructuredtext.confPath": "",
     "markdown.extension.toc.githubCompatibility": true,
-    "markdown.extension.list.indentationSize":"inherit"
+    "markdown.extension.list.indentationSize": "inherit",
+    "cSpell.words": [
+        "Visualisation",
+        "aluminium",
+        "behaviour",
+        "behaviours",
+        "bookreview",
+        "duhigg",
+        "ipynb",
+        "journalling",
+        "recognise"
+    ]
 }

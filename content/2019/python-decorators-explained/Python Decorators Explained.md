@@ -48,7 +48,7 @@ def hello(name='Jack'):
 hello()
 # outputs: "You're now inside the hello() function"
 #          "Now you are in the greeting() function"
-#          "Now you are in the welcome() function" 
+#          "Now you are in the welcome() function"
 #          "You are now back in the hello() function"
 
 welcome()

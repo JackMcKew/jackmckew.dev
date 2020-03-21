@@ -20,12 +20,12 @@ On page 246, there is a summary of the life principles which are fully detailed 
 - 1.3 - Radical transparency - while this can be a tough habit to develop, it pays itself off time and time again for both yourself and the people around you
 - 1.4 - Look to nature to learn how reality works - if you haven't noticed in my blog posts, I am extremely curious about the natural way of evolution and look to bring it's methods into my everyday life and projects. I believe that Dalio also appreciates the power of evolution and is integrating it into his work (as he later describes)
 - 2 - 5 Step process to get what you want out of life
-  - Have clear goals
-  - Identify and don't tolerate the problems that stand in the way of our achieving those goals
-  - Accurately diagnose the problems to get at their root causes
-  - Design plans that will get you around them
-  - Do what's necessary to push these designs through to results
-- 3 - Radical open mind - something that I have blogged about in the past, open mindedness, you can find that post here: https://jackmckew.dev/episode-3-open-mind.html
+    - Have clear goals
+    - Identify and don't tolerate the problems that stand in the way of our achieving those goals
+    - Accurately diagnose the problems to get at their root causes
+    - Design plans that will get you around them
+    - Do what's necessary to push these designs through to results
+- 3 - Radical open mind - something that I have blogged about in the past, open mindedness, you can find that post here: <https://jackmckew.dev/episode-3-open-mind.html>
 - 4.5 - Getting the right people in the right roles in support of your goal is the key to succeeding at whatever you choose to accomplish
 - 5.10 - Believability weight your decision making - I believe when gathering opinions and thoughts on something, you must weight the opinions based upon how 'believable' the source is
 

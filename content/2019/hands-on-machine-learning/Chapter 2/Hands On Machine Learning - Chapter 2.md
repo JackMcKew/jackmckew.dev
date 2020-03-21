@@ -10,15 +10,15 @@ Chapter 2 is an end to end machine learning project, in which you pretend to be 
 
 Firstly my personal opinion on how a machine learning (or data science) project is structured is a series of steps:
 
-1.  Get an understanding of the expected goal or outcome (eg frame the problem),
-2.  Get an understanding of the current process (if there is one),
-3.  Get the data behind the problem (or what you expect will be useful for solving the problem),
-4.  Explore and visualize the data to gain insights,
-5.  Prepare/massage the data ready for input into algorithms or models,
-6.  Select a model/algorithm and train it,
-7.  Tune your model/algorithm to the best you can,
-8.  Present the solution to the original stakeholder (take the stakeholder on a journey),
-9.  Launch, monitor and maintain your system.
+1. Get an understanding of the expected goal or outcome (eg frame the problem),
+2. Get an understanding of the current process (if there is one),
+3. Get the data behind the problem (or what you expect will be useful for solving the problem),
+4. Explore and visualize the data to gain insights,
+5. Prepare/massage the data ready for input into algorithms or models,
+6. Select a model/algorithm and train it,
+7. Tune your model/algorithm to the best you can,
+8. Present the solution to the original stakeholder (take the stakeholder on a journey),
+9. Launch, monitor and maintain your system.
 
 I believe, that if you follow these steps at a minimum, you will find success with your data science/machine learning projects. This methodology also applies for any type of project and can be enhanced with tweaks where you see fit.
 
@@ -30,9 +30,9 @@ As per Chapter 1, it is again reinforced to split your data set up into a traini
 
 Personally, in Chapter 2, the most difficult part to understand is around the pipeline for preparing data ready for use in algorithms/models. Pipelines are essentially a sequence of steps that need to be completed in order before the data is ready. Stemming from the [Scikit-learn](https://arxiv.org/pdf/1309.0238v1.pdf) design principles, I found this the best way to understand the possible steps in a data preparation pipeline:
 
--   Estimators
-    -   Any object that estimates parameters based on a data set is known as an Estimator. For example, if you had a data set with lots of missing values, you could estimate what to fill these gaps with an imputer, then you could choose to use the median of the dataset if appropriate.
--   Transformers
-    -   Any object that transformers a data set is known as a Transformer. For example, if you wanted to now fill those gaps in the data set previously mentioned with the mean, you would use a transformer to 'insert' the median wherever empty values were found.
--   Predictors
-    -   Any object that is capable of making predictions given a dataset is known as a Predictor. For example, a linear regression model is a predictor, using one feature to extrapolate another feature.
+- Estimators
+    - Any object that estimates parameters based on a data set is known as an Estimator. For example, if you had a data set with lots of missing values, you could estimate what to fill these gaps with an imputer, then you could choose to use the median of the dataset if appropriate.
+- Transformers
+    - Any object that transformers a data set is known as a Transformer. For example, if you wanted to now fill those gaps in the data set previously mentioned with the mean, you would use a transformer to 'insert' the median wherever empty values were found.
+- Predictors
+    - Any object that is capable of making predictions given a dataset is known as a Predictor. For example, a linear regression model is a predictor, using one feature to extrapolate another feature.

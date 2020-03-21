@@ -18,6 +18,7 @@ A concept that is repeatedly drawn parallel to habitual behaviours in the case s
 An example of this in my own life is that when I'm at work sitting at my desk tapping away at my jobs for the day, I'll finish one of my tasks for the day (I love bullet journalling to maintain these), I won't want to start the next task straight away so I'll typically go to the kitchen and fill up my drink bottle.
 
 Here the process is as follows:
+
 - Cue: Finish a task at work
 - Routine: Walk to the kitchen and fill up water bottle
 - Reward: A moment to stretch my legs and get a drink
@@ -26,7 +27,7 @@ While this is a good habit that I have tried to instill myself, can also be repl
 
 ## Case Study - Alcoa
 
-A fantastic case study that was presented in the book that resonated with me was the changing of the CEO at Alcoa. Alcoa is one of the biggest manufacturers of aluminium in the United States. 
+A fantastic case study that was presented in the book that resonated with me was the changing of the CEO at Alcoa. Alcoa is one of the biggest manufacturers of aluminium in the United States.
 
 When the CEO had changed, Alcoa was a dangerous place to work with a high staff injury rate, turns out working with molten metal all day can be a dangerous activity, who would've knew.
 

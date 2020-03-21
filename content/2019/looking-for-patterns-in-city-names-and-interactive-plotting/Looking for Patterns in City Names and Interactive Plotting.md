@@ -37,11 +37,11 @@ lcount = dict(OrderedDict([(l, 0) for l in letters]))
 
 Now it's time for the data crunch. To count how many times a letter repeats in a town name we follow these steps:
 
--   we create a for loop, to loop through all the city names in the table,
--   initialise an ordered dictionary similar to above for each city in the value field of that town's dictionary entry
--   loop through each letter in the town name
--   check if the letter appears in our letter dictionary (mainly to not count spaces),
--   Then if the letter does appear, increment the value for that letter by 1.
+- we create a for loop, to loop through all the city names in the table,
+- initialise an ordered dictionary similar to above for each city in the value field of that town's dictionary entry
+- loop through each letter in the town name
+- check if the letter appears in our letter dictionary (mainly to not count spaces),
+- Then if the letter does appear, increment the value for that letter by 1.
 
 This results in a dictionary for each town name, with the count of repeated letters.
 
@@ -79,10 +79,10 @@ summary_df['Longitude'] = summary_df['City_Name'].map(cities_df.set_index(['Acce
 
 Now we have a dataframe that contains:
 
--   an index of the letters,
--   the town name with the most repeated letters,
--   the count of the letters within the name,
--   the longitude and latitude of the town
+- an index of the letters,
+- the town name with the most repeated letters,
+- the count of the letters within the name,
+- the longitude and latitude of the town
 
 For plotting with [Bokeh](https://bokeh.pydata.org/en/latest/) on a basemap, we need to convert from longitude & latitude to easting and northing. To do this we use the pyproj package to make this very simple.
 
@@ -106,7 +106,7 @@ Finally, it's time to plot our findings on a map. Before we initialise the map i
 
 ``` python
 source = ColumnDataSource(data=dict(
-                        longitude=list(summary_df['E']), 
+                        longitude=list(summary_df['E']),
                         latitude=list(summary_df['N']),
                         sizes=list(summary_df['Count']*3),
                         lettercount = list(summary_df['Count']),
@@ -117,7 +117,7 @@ hover = HoverTool(tooltips=[
     ("Repeated Letter" , "@letters"),
     ("City Name", "@city_name"),
     ("Count","@lettercount")
-    
+
 ])
 ```
 
@@ -127,10 +127,10 @@ Finally time for the plot! Now admittedly, I haven't found an easy way to find t
 p = figure(x_range=(20000000,17900000), y_range=(-6000000,-4000000),x_axis_type="mercator", y_axis_type="mercator",tools=[hover, 'wheel_zoom','save'])
 p.add_tile(CARTODBPOSITRON)
 p.circle(x='longitude',
-         y='latitude', 
+         y='latitude',
          size='sizes',
          source=source,
-         line_color="#FF0000", 
+         line_color="#FF0000",
          fill_color="#FF0000",
          fill_alpha=0.05)
 ```

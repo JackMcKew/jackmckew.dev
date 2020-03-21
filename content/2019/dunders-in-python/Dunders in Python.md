@@ -25,7 +25,7 @@ Vector.say_hello()
 
 This will print:
 
-``` 
+``` bash
 Hello! I'm a method
 ```
 
@@ -92,7 +92,7 @@ class Vector():
     def __init__(self, *args):
         if len(args) == 0:
             self.values = (0,0)
-        else: 
+        else:
             self.values = args
     def __repr__(self):
         return str(self.values)
@@ -107,7 +107,7 @@ class Vector():
     def __init__(self, *args):
         if len(args) == 0:
             self.values = (0,0)
-        else: 
+        else:
             self.values = args
     def __repr__(self):
         return str(self.values)
@@ -129,4 +129,4 @@ Which will print:
 
 Hopefully this post has given you insight into how dunders/magic methods could be used to super power your classes and make life much easier!
 
-You can find more information and examples about dunders in Python at: <https://docs.python.org/3/reference/datamodel.html#special-method-names
+You can find more information and examples about dunders in Python at: <<https://docs.python.org/3/reference/datamodel.html#special-method-names>

@@ -23,8 +23,8 @@ import pytesseract
 
 Now that we have our dependencies loaded, it's time to check out the documentation behind Pillow and pytesseract to know how to operate the tools, consider these an instruction manual. The documentation for these tools can be found:
 
--   [Pillow](https://pillow.readthedocs.io/en/stable/),
--   [PyTesseract](https://pytesseract.readthedocs.io/).
+- [Pillow](https://pillow.readthedocs.io/en/stable/),
+- [PyTesseract](https://pytesseract.readthedocs.io/).
 
 Luckily for us, the developers have made this so simple it could be a one liner:
 

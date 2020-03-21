@@ -12,55 +12,55 @@ Once we have created the executable file for our GUI (which will be located in t
 
 ![explorer_QxD96RKedI]({static img/explorer_QxD96RKedI.png})
 
-Now we are going to use a program called Inno Setup, which can be downloaded from: http://www.jrsoftware.org/isinfo.php.
+Now we are going to use a program called Inno Setup, which can be downloaded from: <http://www.jrsoftware.org/isinfo.php.>
 
 After you've installed Inno Setup, run these commands:
 
-1) Select create a new script file using the Script Wizard
+1. Select create a new script file using the Script Wizard
 
 ![image-20191106201014701]({static img/Compil32_TgilJK2vqP.png})
 
-2) Fill in the application information
+2. Fill in the application information
 
 ![image-20191106201132191]({static img/Compil32_KsdsIOEesc.png})
 
-3) Leave defaults
+3. Leave defaults
 
 ![image-20191106201214496]({static img/Compil32_8fAHgN6kKH.png})
 
-4) Select the *.exe file found in the dist folder
+4. Select the *.exe file found in the dist folder
 
 ![image-20191106201302960]({static img/Compil32_udpcR1NePw.png})
 
-5) Select shortcut choices
+5. Select shortcut choices
 
 ![image-20191106201331420]({static img/Compil32_vDorhKhm29.png})
 
-6) Add any license or information files
+6. Add any license or information files
 
 ![image-20191106201402191]({static img/Compil32_IkMbLdkdaw.png})
 
-7) Select install mode
+7. Select install mode
 
 ![image-20191106201440980]({static img/Compil32_dSZd7YfJh8.png})
 
-8) Select the languages
+8. Select the languages
 
 ![image-20191106201500118]({static img/Compil32_JYDCWS5x0g.png})
 
-9) Provide compiler settings and icon for installable
+9. Provide compiler settings and icon for installable
 
 ![image-20191106201550569]({static img/Compil32_tdbxJXiWgd.png})
 
-10) Leave default
+10. Leave default
 
 ![image-20191106201611129]({static img/Compil32_DUt3rPuZar.png})
 
-11) Compile new script
+11. Compile new script
 
 ![image-20191106201634021]({static img/Compil32_8RBmOJvXus.png})
 
-12) Share around the executable installer!
+12. Share around the executable installer!
 
 ![image-20191106201801891]({static img/explorer_d4QCQTi5sE.png})
 

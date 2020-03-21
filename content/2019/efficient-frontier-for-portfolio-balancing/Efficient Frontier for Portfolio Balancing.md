@@ -22,15 +22,15 @@ First of all we must mathematically determine the portfolio with the maximum Sha
 
 To find the maximum of the Sharpe Ratio programmatically we follow these steps:
 
--   Firstly, define the formula as the function neg\_sharpe\_ratio (take note that to find the [maximum of function in SciPy](https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html#constrained-minimization-of-multivariate-scalar-functions-minimize), we use the minimize function with an inverse sign),
--   In the max\_sharpe\_ratio function, define arguments to be passed into the SciPy minimize function:
-    -   neg\_sharpe\_ratio: function to be minimized,
-    -   num\*\[1/num\_assets\]: initial guess which is evenly distributed array of values,
-    -   Arguments that are to be passed into the objective function (neg\_sharpe\_ratio),
-    -   Method of Sequential Lease Squares Programming, there are [many others which can be seen here,](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
-    -   Bounds: between 0% and 100% of our budget allocation,
-    -   Constraints: given as a dictionary, 'eq' type for equality and 'fun' for the anonymous function which limits the total summed asset allocation to 100% of the budget.
--   The result from the minimize function is returned as a [OptimizeResult](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult) type.
+- Firstly, define the formula as the function neg\_sharpe\_ratio (take note that to find the [maximum of function in SciPy](https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html#constrained-minimization-of-multivariate-scalar-functions-minimize), we use the minimize function with an inverse sign),
+- In the max\_sharpe\_ratio function, define arguments to be passed into the SciPy minimize function:
+    - neg\_sharpe\_ratio: function to be minimized,
+    - num\*\[1/num\_assets\]: initial guess which is evenly distributed array of values,
+    - Arguments that are to be passed into the objective function (neg\_sharpe\_ratio),
+    - Method of Sequential Lease Squares Programming, there are [many others which can be seen here,](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
+    - Bounds: between 0% and 100% of our budget allocation,
+    - Constraints: given as a dictionary, 'eq' type for equality and 'fun' for the anonymous function which limits the total summed asset allocation to 100% of the budget.
+- The result from the minimize function is returned as a [OptimizeResult](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult) type.
 
 ``` python
 def neg_sharpe_ratio(weights, average_returns, covariance_matrix, risk_free_rate):
@@ -127,7 +127,7 @@ def display_efficient_frontier(average_returns,covariance_matrix,num_portfolios,
 
     target = np.linspace(min_vol_return, max(an_rt), 50)
     efficient_portfolios = efficient_frontier(average_returns, covariance_matrix, target)
-    
+
     plt.plot([p['fun'] for p in efficient_portfolios], target, linestyle='-.', color='white', label='efficient frontier')
 
     plt.title('Calculated Portfolio Optimization based on Efficient Frontier')
@@ -195,7 +195,7 @@ def display_efficient_frontier_selected(average_returns,covariance_matrix,risk_f
 
     target = np.linspace(min_vol_return, max(an_rt), 50)
     efficient_portfolios = efficient_frontier(average_returns, covariance_matrix, target)
-    
+
     plt.plot([p['fun'] for p in efficient_portfolios], target, linestyle='-.', color='white', label='efficient frontier')
 
     plt.title('Calculated Portfolio Optimization based on Efficient Frontier')

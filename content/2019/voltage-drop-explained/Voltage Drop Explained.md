@@ -12,7 +12,7 @@ The most well known analogy for explaining voltage, current and voltage drop is 
 
 When designing electrical systems within Australia and New Zealand, we are required to design to Australian standards. For voltage drop, the relevant standards as AS/NZS3000 (Wiring Rules) and AS/NZS3008 (Cable Selection). Where AS/NZS3000 nominates the limits to conform to (5% maximum from point of supply) and AS3008 dictates multiple ways that voltage drop can be calculated.
 
-For this post, I will demonstrate a simplified method that is outlined in AS3000 Table C7 where it specifies 'Am per %Vd' (Amp meters per % voltage drop) for each cable size: 
+For this post, I will demonstrate a simplified method that is outlined in AS3000 Table C7 where it specifies 'Am per %Vd' (Amp meters per % voltage drop) for each cable size:
 
 | Cable Conductor Size | Single Phase (230V) Am per %Vd | Three Phase (400V) Am per %Vd |
 | -------------------- | ------------------------------ | ----------------------------- |

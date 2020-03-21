@@ -96,7 +96,7 @@ By embedding the command names within the arguments we are able to use a variety
 
 Which are fully embedded within the windows file explorer system for selecting files, folders, etc.
 
-Now to package this GUI as an executable, we use [PyInstaller](https://www.pyinstaller.org/). By following Chris Kiehl's (Developer of Gooey) instructions on using Pyinstaller and Gooey: [https://chriskiehl.com/article/packaging-gooey-with-pyinstaller](https://chriskiehl.com/article/packaging-gooey-with-pyinstaller). All we need to is create a build.spec file within our directory and run pyinstaller build.spec. 
+Now to package this GUI as an executable, we use [PyInstaller](https://www.pyinstaller.org/). By following Chris Kiehl's (Developer of Gooey) instructions on using Pyinstaller and Gooey: [https://chriskiehl.com/article/packaging-gooey-with-pyinstaller](https://chriskiehl.com/article/packaging-gooey-with-pyinstaller). All we need to is create a build.spec file within our directory and run pyinstaller build.spec.
 
 ![image-20191102174521992]({static img/image-20191102174521992.png})
 
@@ -171,5 +171,5 @@ if __name__ == '__main__':
 ```
 
 > If you run into an error on Windows with the alert "Failed to execute script pyi_rth_pkgres", install the dev version of pyinstaller
-> pip install https://github.com/pyinstaller/pyinstaller/archive/develop.zip
+> pip install <https://github.com/pyinstaller/pyinstaller/archive/develop.zip>
 > This was noted in this issue on github: [https://github.com/pyinstaller/pyinstaller/issues/2137](https://github.com/pyinstaller/pyinstaller/issues/2137)

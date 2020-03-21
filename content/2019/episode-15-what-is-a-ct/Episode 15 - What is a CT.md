@@ -14,5 +14,4 @@ Possibly the frequent implementation of C.Ts in everyday life is within power me
 
 It must be noted when using C.Ts on alternating current systems that the C.T must only have a single conductor pass through it (the active); if both the active and the neutral are passed through the C.T then (in an ideal world) the C.T will have an output of 0. If you also pass through the earth wire to the equipment, it is possible to measure earth leakage or earth fault current (provided the measurement can handle it).
 
-
-![https://www.electronics-tutorials.ws/transformer/current-transformer.html]({static img/trans53.gif})
+![<https://www.electronics-tutorials.ws/transformer/current-transformer.html]({static> img/trans53.gif})

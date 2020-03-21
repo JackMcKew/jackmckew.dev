@@ -32,4 +32,3 @@ I will be updating this table in the future as well as I personally find more an
 | [Pyinstaller](https://www.pyinstaller.org/)                  | PyInstaller freezes (packages) Python applications into stand-alone executables, under Windows, GNU/Linux, Mac OS X, FreeBSD,  Solaris and AIX. | Distribution                     |
 | [cx_freeze](https://anthony-tuininga.github.io/cx_Freeze/)   | **cx_Freeze** is a set of scripts and modules for freezing Python scripts into executables | Distribution                     |
 | [PyQt5](https://www.riverbankcomputing.com/software/pyqt/download5) | Qt is set of cross-platform C++ libraries that implement high-level APIs for accessing many aspects of modern desktop and mobile systems. | GUI Development                  |
-

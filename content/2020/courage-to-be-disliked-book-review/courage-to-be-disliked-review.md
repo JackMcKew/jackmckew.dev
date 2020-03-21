@@ -34,20 +34,21 @@ The philosopher argues that the recluse youth may desire attention and affection
 
 **All problems are interpersonal relationship problems**
 
-This chapter I personally strongly agreed with. The viewpoint in which all problems derive from one human interaction with another and how this is closely tied with the 'feeling of inferiority' causing dilemmas in the world. 
+This chapter I personally strongly agreed with. The viewpoint in which all problems derive from one human interaction with another and how this is closely tied with the 'feeling of inferiority' causing dilemmas in the world.
 
 I resonate with the explanation of the feeling of inferiority being when one compares themself to another, and feels as though they are not equal and the other is superior in one form or another. All of these feeling of inferiority, while they are common, are subjective.
 
-By recognising these feelings as subjective, this puts the power to control how we perceive them in the hands of the individual. Although they can easily turn from inferiority to superiority, which can be as detrimental. 
+By recognising these feelings as subjective, this puts the power to control how we perceive them in the hands of the individual. Although they can easily turn from inferiority to superiority, which can be as detrimental.
 
 ## Third Night
+
 **Don't take on other people's tasks, and don't let other people take your tasks**
 
-This chapter delved into a way of life in which one does not live to satisfy the expectations of others and a viewpoint which denies the desire for recognition for others. 
+This chapter delved into a way of life in which one does not live to satisfy the expectations of others and a viewpoint which denies the desire for recognition for others.
 
 These concepts are portrayed through the situation in which a child tries to live up to the parents expectations, specifically the scenario where the child tries to live their life along the lines set by the parents. A common scenario of this is what to do for a living, where to go to school and many more factors.
 
-The psychological concept to combat this is by denying to live by the expectations of others and not doing things for the sake of receiving recognition from others later on. By seeking the recognition of others, it is as if trying to satisfy the expectations of everyone which can only lead to disappointment. 
+The psychological concept to combat this is by denying to live by the expectations of others and not doing things for the sake of receiving recognition from others later on. By seeking the recognition of others, it is as if trying to satisfy the expectations of everyone which can only lead to disappointment.
 
 But if you lead such a selfish life, will that not only cause more interpersonal relationship problems? The psychologist standpoint is this in to 'not behave without regards for others' and this is achieved through the separation of tasks.
 
@@ -58,6 +59,7 @@ This concept is portrayed through a child-parent relationship and the topic of s
 The solution that is presented is if the parent leaves the task in the child's responsibility, but only seeks to provide assistance, if and when the child seeks it. Which hopefully leads to the child seeing benefit in their own actions and enjoying a beneficial action.
 
 ## Fourth Night
+
 **Self value, horizontal relationships and individualism**
 
 ### Self Value
@@ -74,8 +76,8 @@ As soon as one puts themself in a 'vertical' relationship, wherein one is believ
 
 By rather living as if everyone is equal, and lives to the benefit of others, this concentrates a fulfilling lifestyle and is beneficial for everyone involved.
 
-
 ## Fifth Night
+
 **Live for the now, not the past or the future**
 
 When you take in all the points & concepts raised above, this are only enhanced further when you take in the concept that the past & the future should not matter whatsoever on the actions you can change now.

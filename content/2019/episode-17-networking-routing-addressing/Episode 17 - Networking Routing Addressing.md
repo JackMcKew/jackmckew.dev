@@ -12,9 +12,9 @@ While the goal for routing may be simple (“go from sender to receiver in the m
 
 Routing can be broken into three broad categories:
 
--   Protocols – the medium that allows information to move through a network
--   Algorithms – to determine paths between sender and receiver
--   Databases – to store information that the algorithms determine
+- Protocols – the medium that allows information to move through a network
+- Algorithms – to determine paths between sender and receiver
+- Databases – to store information that the algorithms determine
 
 The whole premise around routers in a network ([Networking Basics](https://jackmckew.dev/episode-16-networking-basics.html)) is that they will “pass it on”, either to their smarter peers or in the correct direction. For example in a star/tree network, devices pass information to their closest ‘router’ which then decides either to pass it directly to the correct address or to another router which may have a better idea on where the information is intended on going.
 

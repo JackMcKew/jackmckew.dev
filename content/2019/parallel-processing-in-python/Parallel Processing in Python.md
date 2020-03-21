@@ -25,10 +25,10 @@ Within multiprocessing there are 2 main classes that you will use for parallel p
 
 The pool class has four methods that are particular useful:
 
--   Pool.apply
--   Pool.map
--   Pool.apply\_async
--   Pool.map\_async
+- Pool.apply
+- Pool.map
+- Pool.apply\_async
+- Pool.map\_async
 
 Before we tackle the asynchronous variants of the pool methods (async suffix). Here is a simple example using Pool.apply and Pool.map. We initialize the number of processes to however many is available or the maximum of the system.
 

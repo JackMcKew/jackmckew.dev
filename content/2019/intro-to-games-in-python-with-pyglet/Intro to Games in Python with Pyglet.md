@@ -8,12 +8,12 @@ Status: published
 
 Recently, I've been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as:
 
--   [p5](https://pypi.org/project/p5/)
--   [pygame](https://www.pygame.org/news)
--   [plotly](https://plot.ly/)
--   [panda3d](https://www.panda3d.org/)
--   [bokeh](https://bokeh.pydata.org/en/latest/)
--   many others
+- [p5](https://pypi.org/project/p5/)
+- [pygame](https://www.pygame.org/news)
+- [plotly](https://plot.ly/)
+- [panda3d](https://www.panda3d.org/)
+- [bokeh](https://bokeh.pydata.org/en/latest/)
+- many others
 
 Eventually, through the motivation of another side project (looking into training neural networks to learn how to play games) and inspired by this video from Code Bullet <https://www.youtube.com/watch?v=r428O_CMcpI>; I decided on attempting to use [Pyglet](https://pyglet.readthedocs.io/en/stable/) to do these simulations.
 
@@ -45,7 +45,7 @@ Now since all I am trying to do is generate multiple objects (which will be show
 # Make three sprites to represent remaining lives
 # player_lives = load.player_lives(2, main_batch)
 
-# Make three asteroids so we have something to shoot at 
+# Make three asteroids so we have something to shoot at
 # asteroids = load.asteroids(3, player_ship.position, main_batch)
 
 asteroids = load.asteroids(100,(window_width//2,window_height//2),main_batch)

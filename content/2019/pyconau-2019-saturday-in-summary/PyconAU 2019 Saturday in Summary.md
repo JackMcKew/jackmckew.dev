@@ -12,10 +12,10 @@ Please note that all the talks written about here were only the ones I was able 
 
 To make this post more digestible for the reader (you!), I have broken into parts which are linked here:
 
--   Day 1 - How to communicate with businesses, metaclasses in python, making generative art, python applications in engineering, refactoring a large scale OSS project and the antipodean approach;
--   Day 1 - Lightning talks;
--   All the great ideas people gave me;
--   My further to-do list following day 1.
+- Day 1 - How to communicate with businesses, metaclasses in python, making generative art, python applications in engineering, refactoring a large scale OSS project and the antipodean approach;
+- Day 1 - Lightning talks;
+- All the great ideas people gave me;
+- My further to-do list following day 1.
 
 ### Day 1
 
@@ -23,19 +23,19 @@ To make this post more digestible for the reader (you!), I have broken into part
 
 Day 1 kicked off with a keynote talk from [aurynn](https://github.com/aurynn), who spoke about the lessons learned from talking to your boss. My personal key takeaways were:
 
--   One word slides directs your focus to the talk rather than distracting,
--   Communicating with people outside your discipline, interest area, etc is made much easier if you put whatever the topic is from their perspective, particularly in the workplace, putting things in terms of risk as this is what matters to businesses.
+- One word slides directs your focus to the talk rather than distracting,
+- Communicating with people outside your discipline, interest area, etc is made much easier if you put whatever the topic is from their perspective, particularly in the workplace, putting things in terms of risk as this is what matters to businesses.
 
 #### [It's Pythons All The Way Down: Python Types & Metaclasses Made Simple](https://2019.pycon-au.org/talks/its-pythons-all-the-way-down-python-types-metaclasses-made-simple) [\@judy2k](https://twitter.com/judy2k)
 
 Now classes are admittedly one of my weak points, so what better to do then go straight to metaclasses! My personal key takeaways were:
 
--   If you run dir() on a type, it'll tell you all the capabilities of that type (eg, dir(int) returns \[...,'\_\_add\_\_',...\]);
--   Complex numbers and functions have their own type in python;
--   Descriptors override attribute access;
--   There are two types of descriptors (data and non-data) where data descriptors are mutators;
--   Metaclasses can be used as blueprints for generating classes;
--   You can ensure classes are made appropriately with metaclasses.
+- If you run dir() on a type, it'll tell you all the capabilities of that type (eg, dir(int) returns \[...,'\_\_add\_\_',...\]);
+- Complex numbers and functions have their own type in python;
+- Descriptors override attribute access;
+- There are two types of descriptors (data and non-data) where data descriptors are mutators;
+- Metaclasses can be used as blueprints for generating classes;
+- You can ensure classes are made appropriately with metaclasses.
 
 #### [Pretty vector graphics - Playing with SVG in Python](https://2019.pycon-au.org/talks/pretty-vector-graphics--playing-with-svg-in-python) Amanda J Hogan
 
@@ -69,7 +69,7 @@ Personally, I thought the most interesting lightning talk was about procedurally
 
 What I think was the crowd favourite, was the [History and Politics of Australian supermarkets and their mergers](https://youtu.be/AJqcxEzRdSY?t=1097). Definitely worth the watch.
 
-### All the great ideas people gave me!
+### All the great ideas people gave me
 
 Shoutout to [\@davidjb\_](https://twitter.com/davidjb_) who made me aware of modern static html sites with using [Pelican](https://docs.getpelican.com/en/stable/) and [Netlify](https://www.netlify.com/). By using a repository to store all the content, you can use these tools in combination to make an automated workflow for a CMS (Content management system) for deploying a website. Will definitely be looking into this for this very website!
 
@@ -79,17 +79,15 @@ Further to this, I was also made aware of the [Gitflow Workflow](https://www.atl
 
 ### My to-do list after Pycon Day 1
 
--   Write this blog post!
--   Look into [tilemill](https://tilemill-project.github.io/tilemill/),
--   Understand [mutable and immutable](https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747) better,
--   Learn what [super does in Python](https://realpython.com/python-super/),
--   Try make some generative art,
--   Looking into [papermill](https://papermill.readthedocs.io/en/latest/) + [jupyterlab](https://jupyterlab.readthedocs.io/en/stable/),
--   Have a go at using [XGBoost](https://xgboost.readthedocs.io/en/latest/) and text,
--   Get (much) better at testing with [pytest](https://docs.pytest.org/en/latest/),
--   Look into structuring python projects better,
--   Move this website to static html with [netlify](https://www.netlify.com/) and more,
--   Look into [singularity](https://singularity.lbl.gov/),
--   Look into [GitFlow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
-
-
+- Write this blog post!
+- Look into [tilemill](https://tilemill-project.github.io/tilemill/),
+- Understand [mutable and immutable](https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747) better,
+- Learn what [super does in Python](https://realpython.com/python-super/),
+- Try make some generative art,
+- Looking into [papermill](https://papermill.readthedocs.io/en/latest/) + [jupyterlab](https://jupyterlab.readthedocs.io/en/stable/),
+- Have a go at using [XGBoost](https://xgboost.readthedocs.io/en/latest/) and text,
+- Get (much) better at testing with [pytest](https://docs.pytest.org/en/latest/),
+- Look into structuring python projects better,
+- Move this website to static html with [netlify](https://www.netlify.com/) and more,
+- Look into [singularity](https://singularity.lbl.gov/),
+- Look into [GitFlow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).

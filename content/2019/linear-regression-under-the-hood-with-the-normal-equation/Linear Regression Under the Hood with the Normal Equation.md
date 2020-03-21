@@ -30,7 +30,7 @@ To find the value of $\theta$ that minimises the cost function, there is a mathe
 $$
 \hat{\theta} = (X^T \cdot X)^{-1}\cdot X^T \cdot y
 $$
-Where $\hat{\theta}$ is the value of $\theta$ that minimises the cost function and $y$ (once vectorised) is the vector of target values containing $y^{(1)}$ to $y^{(m)}$. 
+Where $\hat{\theta}$ is the value of $\theta$ that minimises the cost function and $y$ (once vectorised) is the vector of target values containing $y^{(1)}$ to $y^{(m)}$.
 
 For example if this equation was run on data generated from this formula:
 

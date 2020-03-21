@@ -5,5 +5,4 @@ Category: Python
 Tags: python
 <!-- Slug: 3d-terrain-in-python -->
 
-
 {% notebook 2020/markdown-word-counter/notebooks/markdown-counter.ipynb %}

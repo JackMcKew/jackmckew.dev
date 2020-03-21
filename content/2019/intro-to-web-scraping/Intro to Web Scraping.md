@@ -16,7 +16,7 @@ Similarly with most of my posts of this nature, we always begin by getting the d
 
 Unlike last time however with our world city names from [Kaggle](https://www.kaggle.com/), this data isn't nicely supplied to us in an Excel format. While it may be possible to directly copy-paste from the website into a spreadsheet, I think this is a great way to ease into web scraping.
 
-What is Web Scraping?
+What is Web Scraping
 ---------------------
 
 Web scraping, web harvesting or web data extraction is the process of extracting data from websites. To do this in Python, while there is multiple ways to achieve this (requests + beautiful soup, selenium, etc), my personal favourite package to use is [Scrapy](https://scrapy.org/). While it may be daunting to begin with from a non object-oriented basis, you will soon appreciate it more once you've begun using it.
@@ -49,7 +49,7 @@ class NameSpider(scrapy.Spider):
     def parse(self,response):
         def extract_from_table(table_row,table_col):
             return response.xpath(f"//tr[{table_row}]//td[{table_col}]//text()").get()
-        
+
         for i in range(2,1000):
             yield {
                 'Place Name' : extract_from_table(i,1),

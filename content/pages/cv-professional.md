@@ -6,7 +6,6 @@ Status: published
 
 Electrical Engineer with multi-faceted background encompassing software engineering, control systems development & buildings design/construction. Developed specialties in interactive data science & visualisation, desktop & web full stack development and technical writing. Proven ability to work apart of multi-disciplinary teams to design, develop, and integrate software solutions to increase efficiency & quality and reduce human-error.
 
-
 [Curriculum Vitae]({attach}/files/Jack_McKew_CV.pdf)
 
 [Honour's Thesis: "In Home Appliance Scheduler Using Home Area Network"]({attach}/files/Final_Year_Project_Part_B.pdf)
@@ -36,13 +35,13 @@ My CV and honours thesis are linked below (PDF download). My professional experi
     - **Tools:** Python, SCADAPack Workbench, ViewX, Unity Pro
 - **2014 - 2018** Timber Expert & Forklift Operator at [Bunnings Warehouse](https://www.bunnings.com.au/)
     - Used safety procedures to reduce risk within an unrestricted workzone.
-    - Detailed advice to customers on building materials & techniques. 
+    - Detailed advice to customers on building materials & techniques.
     - Customer service, cashier, in store loss prevention.
-
 
 ## Previous Projects
 
 ### Air Quality Toolkit
+
 **[AECOM Internal](https://www.aecom.com/)**
 
 - Developed, packaged and distributed software to automate tasks reducing a week long task to seconds.
@@ -51,6 +50,7 @@ My CV and honours thesis are linked below (PDF download). My professional experi
 - **Responsibilities**: Full stack development, packaging, distribution
 
 ### Vulnerability Mapping Tool
+
 **[Hunter Joint Organisation](https://strategicservicesaustralia.com.au/)**
 By utilising statistical data and region-specific data, Jack was able to develop software that determines the vulnerability of communities. By visualising this data in an online, interactive form, this was then distributed to the relevant councils to assist in disaster relief planning.
 
@@ -58,15 +58,16 @@ By utilising statistical data and region-specific data, Jack was able to develop
 - Compiled various sources of statistical and functional information to model vulnerability.
 - Developed interactive visualisation to assist data driven decision making.
 - **Responsibilities**: Statistical analysis, automated GIS, data visualisation
-    	
 
 ## Mental Health Asset Condition Assessments
+
 **[Victoria Health](http://www.health.vic.gov.au/)**
 
 - Worked a part of a multidisciplinary team to audit active mental health wards across Victoria to allow the government to make data driven decisions on maintenance and upgrades.
 - **Responsibilities**: Building services (electrical \& fire) audits, data automation
 
 ## Honeysuckle Campus Development
+
 **[University of Newcastle](https://www.newcastle.edu.au/)**
 [Honeysuckle Campus](https://www.newcastle.edu.au/about-uon/our-environments/honeysuckle-city-campus-development)
 
@@ -77,6 +78,8 @@ Jack is part of a multidisciplinary team undertaking the design of the new UoN 1
 - Responsibilities: Lighting design, electrical design \& electrical drafting in Revit
 
 ## In Home Appliance Scheduler Using Home Area Network
+
 **[Engineering Thesis]({attach}/files/Final_Year_Project_Part_B.pdf)**
+
 - Designed, developed and constructed a home area network capable of monitoring and controlling appliances in accordance with an optimized schedule.
 - **Responsibilities**: Embedded development, networking, databases, algorithm design, technical writing, data analysis, Android app development

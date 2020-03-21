@@ -14,9 +14,9 @@ Quality of power is not determined by the one who produces it, it's defined by t
 
 Issues with power quality can be categorized into three main categories:
 
--   Harmonic voltages and currents
--   Poor power factor
--   Voltage instability
+- Harmonic voltages and currents
+- Poor power factor
+- Voltage instability
 
 Harmonics
 ---------
@@ -29,12 +29,12 @@ import matplotlib.pyplot as plt
 
 def Harmonic(i):
     x=np.linspace(0,2*np.pi,2000)
-    y = [0 for _ in x] 
+    y = [0 for _ in x]
     for n in range(0,i):
         y += np.sin((2*n+1)*(2*np.pi)*(x))/(2*n+1)
     plt.plot(x,y)
     plt.grid()
-    
+
 
 Harmonic(1)
 Harmonic(2)
@@ -67,13 +67,12 @@ Apparent power (kVA) is the vector sum of the real power (kW) and reactive power
 
 Suppose you are running a store, you have to spend an amount of money X (cost) on buying products to sell in the future for a larger amount of money Y, meaning your profit will be P = Y - X. X is not lost money, without spending X you will not be able to make any profit P. The profit P is comparable to the active power, the earnings Y are the equivalent of apparent power and the initial cost X is the reactive power.
 
-
 ![CodeCogsEqn-1.gif]({static img/CodeCogsEqn-1.gif})
 
 Therefore, for a given power supply (kVA):
 
--   The more cost you have (higher percentage of kVAR), the lower the ratio of kW (profit) to kVA (profit + cost), meaning a poorer power factor.
--   The less cost you have (lower percentage of kVAR), the higher your ratio of kW (profit) to kVA (profit + cost) becomes, and the better you power factor. As your cost (kVAR) approaches zero, your power factor approaches 1 (unity).
+- The more cost you have (higher percentage of kVAR), the lower the ratio of kW (profit) to kVA (profit + cost), meaning a poorer power factor.
+- The less cost you have (lower percentage of kVAR), the higher your ratio of kW (profit) to kVA (profit + cost) becomes, and the better you power factor. As your cost (kVAR) approaches zero, your power factor approaches 1 (unity).
 
 Voltage Instability
 -------------------

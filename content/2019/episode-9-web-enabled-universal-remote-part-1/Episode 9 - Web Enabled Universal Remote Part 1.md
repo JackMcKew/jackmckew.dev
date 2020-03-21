@@ -12,11 +12,11 @@ Since most existing remotes use infrared to send the signal from the remote to t
 
 After researching a few other DIY remote control guides on the internet, I came up with a plan to use a wifi-enabled microcontroller together with an infrared receiver and an infrared diode. After rummaging through my spare hardware box, I happened to find a spare NodeMCU (ESP8266) that I could use for this project, this brings my part list to:
 
--   Wifi-Enabled Microcontroller (NodeMCU)
--   A resistor to dampen the diode signal (100 ohm)
--   A transistor to boost the current from the NodeMCU so the diode signal gets to the device (2N222)
--   Infrared receiver (TSOP4136)
--   Infrared diode (L-7113F3BT)
+- Wifi-Enabled Microcontroller (NodeMCU)
+- A resistor to dampen the diode signal (100 ohm)
+- A transistor to boost the current from the NodeMCU so the diode signal gets to the device (2N222)
+- Infrared receiver (TSOP4136)
+- Infrared diode (L-7113F3BT)
 
 Now before connecting the entire circuit together, one should always test that components work in an expected way. To achieve this for the infrared receiver, a basic program to interface between the receiver and the microcontroller is needed.
 
@@ -27,22 +27,22 @@ For a basic test, an LED would light up whenever the infrared is receiving a sig
 ``` c
 #define ledPin D0 //Connection at GPIO16 (D0) for the builtin LED on the NodeMCU board
 #define inputPin D5 //Connection at GPIO14 (D5) for the infrared receiver
-int val = 0; // variable for reading the pin status 
-void setup() 
-{ 
-   pinMode(ledPin, OUTPUT); // declare LED as output 
+int val = 0; // variable for reading the pin status
+void setup()
+{
+   pinMode(ledPin, OUTPUT); // declare LED as output
    pinMode(inputPin, INPUT); // declare Infrared sensor as input
-} 
+}
 void loop()
-{ 
-   val = digitalRead(inputPin); // read input value 
+{
+   val = digitalRead(inputPin); // read input value
    if (val == HIGH)
    { // check if the input is HIGH
-      digitalWrite(ledPin, LOW); // turn LED OFF   
-   } 
-   else 
-   { 
-      digitalWrite(ledPin, HIGH); // turn LED ON 
+      digitalWrite(ledPin, LOW); // turn LED OFF
+   }
+   else
+   {
+      digitalWrite(ledPin, HIGH); // turn LED ON
    }
 }
 ```

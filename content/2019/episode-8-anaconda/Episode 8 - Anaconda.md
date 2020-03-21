@@ -8,10 +8,10 @@ Status: published
 
 Python is one of my favourite languages to develop in (if you haven't noticed yet). My favourite feature of Python is how easy it is to share your work with others and integrate other's code into your own projects. However as a project grows and gets older as time goes on it can be cumbersome to keep track of hundreds of dependencies that your project relies on to work. Even more so when all of these package dependencies are also being updated and changing functionality.
 
-One elegant solution that I always use when first starting a new project is to use Anaconda (https://www.anaconda.com/). Anaconda is a free, easy-to-install package and environment manager for Python. It is very simple to use in that when you are starting a new project, you just need to create a new environment (within the Anaconda navigator) with the python version you wish to use and then activate it. Simple as that.
+One elegant solution that I always use when first starting a new project is to use Anaconda (<https://www.anaconda.com/).> Anaconda is a free, easy-to-install package and environment manager for Python. It is very simple to use in that when you are starting a new project, you just need to create a new environment (within the Anaconda navigator) with the python version you wish to use and then activate it. Simple as that.
 
 ``` bash
-conda create --name new_environment_name python=3.5 
+conda create --name new_environment_name python=3.5
 ```
 
 In one single line, we have just created a new environment named "new\_environment\_name" and specified that this environment will use Python version 3.5. Now to activate the environment it is as simple as typing "activate new\_environment\_name".

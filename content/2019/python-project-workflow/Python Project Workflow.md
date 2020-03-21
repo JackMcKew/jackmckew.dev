@@ -27,10 +27,10 @@ If you take a peek into the Scripts folder now in your Python directory, it'll l
 ![image-2.png]({static img/image-2.png})
 Now something that I personally like to do is add this folder to your system environment variables in Windows so it's much easier to run any packages in your root Python installation on your PC. To do this:
 
-1.  type in 'system environment' into the search command
-2.  select environment variables from the bottom right corner
-3.  edit system (or user) path variable
-4.  browse and select the Scripts directory in your Python installation
+1. type in 'system environment' into the search command
+2. select environment variables from the bottom right corner
+3. edit system (or user) path variable
+4. browse and select the Scripts directory in your Python installation
 
 If you chose to do this step, you will now be able to create virtual environments and cookiecutter templates without having to specify the directory to the executables.
 

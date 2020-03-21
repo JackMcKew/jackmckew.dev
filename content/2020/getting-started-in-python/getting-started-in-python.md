@@ -5,9 +5,10 @@ Category: Python, Software Development
 Tags: python
 Slug: getting-started-in-python
 
-**Resources & tips for getting started in Python**
+## **Resources & tips for getting started in Python**
 
-## Glossary
+### Glossary
+
 One of the most useful skills in my opinion in all walks of life is the ability to find information & answers. A very useful tool for doing this is the internet & search engines like Google. In my opinion being able to search the internet for answers to your programming questions is a skill in itself, knowing the right words or phrases to use is a massive part of that, so I will begin with a glossary of terminology for things that may make it easier to answer your questions.
 
 |Term|Meaning|
@@ -35,78 +36,78 @@ One of the most useful skills in my opinion in all walks of life is the ability 
 |Exception|If a situation comes up that the program cannot handle, it'll throw an exception.|
 |Loop|A loop allows code to be executed repeated, either with a for (finite amount of times) or while (indefinite).|
 |Iteration|Repetition of a process, you iterate over a loop numerous times.|
-|[https://github.com/](https://github.com/)|A website/service where lots of open source packages live and great resouce for finding examples of real-use code.|
+|[https://github.com/](https://github.com/)|A website/service where lots of open source packages live and great resource for finding examples of real-use code.|
 
-## Editor
+### Editor
 
-There is so many editors out there it is difficult to find the right one for you. 
+There is so many editors out there it is difficult to find the right one for you.
 
-### Mu [https://codewith.mu/](https://codewith.mu/)
+#### Mu [https://codewith.mu/](https://codewith.mu/)
 
 Mu is a simple Python editor, designed for beginners.
 
 ![Mu Editor]({static img/mu.gif})
 
-### VS Code [https://code.visualstudio.com/](https://code.visualstudio.com/)
+#### VS Code [https://code.visualstudio.com/](https://code.visualstudio.com/)
 
 While not specifically for Python, it has an amazing Python extension and is my go-to editor.
 
 ![VS Code]({static img/vs_code.png})
 
-### Sublime Text [https://www.sublimetext.com/](https://www.sublimetext.com/)
+#### Sublime Text [https://www.sublimetext.com/](https://www.sublimetext.com/)
 
 A self proclaimed "A sophisticated text editor for
 code, markup and prose".
 
 ![Sublime]({static img/sublime.png})
 
-### PyCharm [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/)
+#### PyCharm [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/)
 
 A more fleshed out full suite for professional developers. All the bells and whistles included.
 
 ![PyCharm]({static img/pycharm.jpg})
 
-## Resources
+### Resources
 
-There is an abundance of resources on the internet for getting started with Python (includng this one!), these are my personal recommendations.
+There is an abundance of resources on the internet for getting started with Python (including this one!), these are my personal recommendations.
 
-### Automate The Boring Stuff
+#### Automate The Boring Stuff
 
 [http://automatetheboringstuff.com/](http://automatetheboringstuff.com/)
 
 Computers are made to do the boring things for us, so make the most of it! This book goes through many practical examples of how you can use Python to automate the boring stuff out of your life.
 
-### Code Academy
+#### Code Academy
 
 [https://www.codecademy.com/catalog/language/python](https://www.codecademy.com/catalog/language/python)
 
 While the Python 3 course on Code Academy isn't free, the Python 2.7 version is and you can always learn the differences later on.
 
-### Python Bytes Podcast
+#### Python Bytes Podcast
 
 [https://pythonbytes.fm/](https://pythonbytes.fm/)
 
 Weekly half an hour podcast on exciting packages & tools in the Python space. Great to listen to on your commute!
 
-### Github
+#### Github
 
 [https://github.com/](https://github.com/)
 
 Github is a website/service where lots of open source projects & packages live. Lots of information can be found here on the projects themselves and in the issues raised/answered previously.
 
-### Cheat Sheet
+#### Cheat Sheet
 
 If you're anything like me, you'd appreciate a nicely laid out cheat sheet. [https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf](https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf)
 
 ![Cheat Sheet]({static img/cheat-sheet.png})
 
-### Real Python
+#### Real Python
 
 [https://realpython.com/](https://realpython.com/)
 
-Real Python is an ammazing website, with lots of beginner friendly tutorials on more topics than I can imagine.
+Real Python is an amazing website, with lots of beginner friendly tutorials on more topics than I can imagine.
 
-## Packages
+### Packages
 
 The best part about Python is the community and abundance of free, open source packages that you can utilise to not re-invent the wheel when solving problems.
 

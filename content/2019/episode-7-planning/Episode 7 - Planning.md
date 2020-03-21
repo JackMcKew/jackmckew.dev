@@ -13,9 +13,9 @@ Being an effective planner can help you in all walks of life. Not only can one j
 
 With an entire new year ahead of us all, I’d like to plan on what I’d like to learn in 2019 and in turn share what I learn with you all through this blog.
 
--   Containerization – integrating containerization as mentioned in Episode 6 into projects
--   Javascript – javascript is still an enigma to me at this point, I plan to work on beginner projects and hopefully integrate some of them to enhance this website
--   Developing, deploying and maintaining an Android Application – I am currently midway through developing an Android application, in future episodes I will write tutorials on how to develop certain elements with an Android application to make it more interactive
--   Big Data tools – Apache arrow and Hadoop are also new to me at this point, hoping to integrate these elements into projects that I’m currently working on
+- Containerization – integrating containerization as mentioned in Episode 6 into projects
+- Javascript – javascript is still an enigma to me at this point, I plan to work on beginner projects and hopefully integrate some of them to enhance this website
+- Developing, deploying and maintaining an Android Application – I am currently midway through developing an Android application, in future episodes I will write tutorials on how to develop certain elements with an Android application to make it more interactive
+- Big Data tools – Apache arrow and Hadoop are also new to me at this point, hoping to integrate these elements into projects that I’m currently working on
 
 This is only just a small taste of what I am planning to cover at the very least on my weekly updates in this blog so stay tuned throughout the whole year!

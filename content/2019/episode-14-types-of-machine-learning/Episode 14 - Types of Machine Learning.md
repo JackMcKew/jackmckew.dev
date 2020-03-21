@@ -10,9 +10,9 @@ With AI and Machine Learning becoming the buzzwords in technology for 2018 and t
 
 In general, there are 3 different broad categories that current machine learning algorithms fit into:
 
--   Supervised learning
--   Unsupervised learning
--   Reinforcement learning
+- Supervised learning
+- Unsupervised learning
+- Reinforcement learning
 
 ### Supervised Learning
 

@@ -12,12 +12,11 @@ Where MicroPython comes in is that the standard library for Python might take up
 
 MicroPython also comes with an interactive REPL (Read-Evaluate-Print Loop), which is an often overlooked amazing feature of MicroPython. The REPL allows you to connect to a microcontroller, execute code quickly without the need to compile or upload code. Which gives immediate feedback on whether your program is working as intended.
 
-**Differences between MicroPython & Python**
---------------------------------------------
+## **Differences between MicroPython & Python**
 
 There obviously had to be some changes between Python and MicroPython to make it work efficiently on processors a fraction of the power, but what are they? If you are a beginner-intermediate Python programmer, you’ll only run into trouble in very specific scenarios, which can be easily worked around. For example you cannot delete from a list with a step greater than 1.
 
-**Sample Python Code**
+### **Sample Python Code**
 
 ``` python
 L = [1,2,3,4]
@@ -33,7 +32,7 @@ You’d expect for the output here in Python normally to be:
 
 However this can be easily worked around with an explicit loop for example:
 
-**Sample MicroPython/Python Code**
+### **Sample MicroPython/Python Code**
 
 ``` python
 L = [1,2,3,4]

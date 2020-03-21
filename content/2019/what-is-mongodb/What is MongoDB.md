@@ -12,13 +12,13 @@ I completed their very first introductory course M001: MongoDB Basics last week,
 
 The course is broken into multiple chapters in which a chapter is released each week for the duration of the course. For example, the basics course was broken up into:
 
--   Intro to MongoDB, Mongo Compass and Basic Queries,
--   Create, Read, Update and Delete (CRUD) operations and more,
--   MongoDB queries.
+- Intro to MongoDB, Mongo Compass and Basic Queries,
+- Create, Read, Update and Delete (CRUD) operations and more,
+- MongoDB queries.
 
 Following all the chapters, you are faced with a final exam which tests if you were participating/listening in the earlier chapters. If you are concerned that you may struggle, this final exam is made up of a few multiple choice questions based on querying the data sets used in the chapters.
 
-MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilises JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.
+MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilizes JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.
 
 Personally, I really enjoy the functionality within Compass with plotting geographical data, presenting data type variances across the fields in a document and many other features. I found Compass one of the most appealing features as someone that constantly seeks to gain insight from data.
 

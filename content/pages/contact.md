@@ -11,10 +11,9 @@ Always looking to meet new people & help let computers do the hard work for you.
 
 This site is just meant to function as half blog, half showcase of a few things I like to do. Please look around, and if you’d like to contact me about anything at all, please do!
 
-
 <form name="contact" method="POST" data-netlify="true">
   <p>
-    <label>Your Name: <input type="text" name="name" /></label>   
+    <label>Your Name: <input type="text" name="name" /></label>
   </p>
   <p>
     <label>Your Email: <input type="email" name="email" /></label>

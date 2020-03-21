@@ -10,11 +10,11 @@ As Python is a high level, general purpose programming language, which supports 
 
 Object-oriented programming is built up of a lot of concepts, to name a few:
 
--   Inheritance
--   Abstraction
--   Class
--   Encapsulation
--   so on
+- Inheritance
+- Abstraction
+- Class
+- Encapsulation
+- so on
 
 This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.
 
@@ -24,7 +24,7 @@ First off, we are going to start by defining our 'base' class (also known as abs
 class Animal():
     def __init__(self, name='Animal'):
         self.name = name
-    
+
     def family(self):
         print("Animal Kingdom")
 
@@ -44,7 +44,7 @@ class Dog(Animal):
 
     def speak(self):
         print("Woof!")
-        
+
 
 dog = Dog("Jay")
 dog.speak()

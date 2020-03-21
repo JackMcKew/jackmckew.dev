@@ -10,8 +10,8 @@ Following last weeks' post ([Python for the Finance Industry](https://jackmckew.
 
 First of all while attempting to tackle this problem, I stumbled across many very informative articles in which based on what I learned throughout reading them, and trying to replicate their findings with the ASX stocks' data.
 
--   Ricky Kim ([Efficient Frontier Portfolio Optimisation in Python)](https://towardsdatascience.com/efficient-frontier-portfolio-optimisation-in-python-e7844051e7f)
--   Bernard Brenyah ([Markowitz’s Efficient Frontier in Python)](https://medium.com/python-data/effient-frontier-in-python-34b0c3043314)
+- Ricky Kim ([Efficient Frontier Portfolio Optimisation in Python)](https://towardsdatascience.com/efficient-frontier-portfolio-optimisation-in-python-e7844051e7f)
+- Bernard Brenyah ([Markowitz’s Efficient Frontier in Python)](https://medium.com/python-data/effient-frontier-in-python-34b0c3043314)
 
 Now I will not be going into how Markowit'z Efficient Frontier Portfolio Optimization & Sharpe Ratios works as these techniques are extremely well documented across this internet and very easily found. This post will be for implementing these techniques in Python to apply them to an ASX based portfolio.
 
@@ -19,9 +19,9 @@ Picking up from the end of the previous post, we had just plotted the percentage
 
 Now there are multiple steps before we get to the desired outcome of a balanced portfolio.
 
-1.  Generate X number of 'random' portfolios,
-2.  Rate their performance against one another,
-3.  Pick the desired solution.
+1. Generate X number of 'random' portfolios,
+2. Rate their performance against one another,
+3. Pick the desired solution.
 
 To generate random portfolios, we define a function such that we can pass it differing variables as to tweak our outcomes in the future.
 
@@ -42,12 +42,12 @@ def generate_portfolios(num_portfolios,average_returns,covariance_matrix,risk_fr
 
 To step through this function:
 
-1.  Define empty location for our portfolio performance results to be stored along with recording weights so we can extract them once selected,
-2.  For each portfolio to be generated, give a random 'weighting' for each of the company that we have historical data on (eg, 23% NAB.AX),
-3.  Even out the distribution of the weights such that the sum of the weightings is 100% (eg, total budget),
-4.  Record the weightings generated in our memory location,
-5.  Determine the performance of our randomly generated portfolio (more on that soon),
-6.  Fill in the portfolio performance results for this generated portfolio and repeat for X number of portfolios.
+1. Define empty location for our portfolio performance results to be stored along with recording weights so we can extract them once selected,
+2. For each portfolio to be generated, give a random 'weighting' for each of the company that we have historical data on (eg, 23% NAB.AX),
+3. Even out the distribution of the weights such that the sum of the weightings is 100% (eg, total budget),
+4. Record the weightings generated in our memory location,
+5. Determine the performance of our randomly generated portfolio (more on that soon),
+6. Fill in the portfolio performance results for this generated portfolio and repeat for X number of portfolios.
 
 In step 5 above, we have to determine how to rank the generated portfolios against each other to work out how to filter our results. To do this, we calculate volatility of the portfolio using the following formula:
 
