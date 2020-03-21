@@ -11,3 +11,4 @@
 - never split the difference - https://www.amazon.com/Never-Split-Difference-Negotiating-Depended/dp/0062407805
 - Apache Airflow - https://airflow.apache.org/
 - Harry Stevens - https://www.washingtonpost.com/graphics/2020/world/corona-simulator/
+- sourcery - https://sourcery.ai/
