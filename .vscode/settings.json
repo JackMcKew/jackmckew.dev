@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": ".env\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Scripts\\python.exe",
     "python.formatting.provider": "black",
     "restructuredtext.confPath": "",
     "markdown.extension.toc.githubCompatibility": true,
