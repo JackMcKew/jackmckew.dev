@@ -16,7 +16,7 @@ requests = "*"
 black = "*"
 piexif = "*"
 pillow = "*"
-pelican-ipynb = "*"
+wordsum = "*"
 
 [requires]
 python_version = "3.7"

@@ -161,3 +161,7 @@ DEFAULT_PAGINATION = 20
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
 
+import wordsum
+
+# POST_TICKER = wordsum.count_files('./content',['.md','.ipynb'])
+WORD_TICKER = wordsum.count_words('./content',['.md','.ipynb'])
