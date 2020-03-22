@@ -1,4 +1,4 @@
-  
+
 <!DOCTYPE html>
 <html lang="english">
 
@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -17,8 +17,8 @@
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -28,7 +28,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
 <meta name="description" content="Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more &#39;Pythonic&#39;. This post is going to go through some basic examples where decorators can shorten your code. Firstly you have …" />
 <meta name="keywords" content="python">
 
@@ -48,7 +48,7 @@
 
     <title>Jack McKew's Blog &ndash; Python Decorators Explained</title>
 
- </head>
+</head>
 
 <body>
     <aside>
@@ -58,14 +58,16 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>             <form class="navbar-search" action="/search.html" role="search">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
+            <p>Number of Words: 36503</p>
+            <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
             <nav>
                 <ul class="list">
-                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
                     <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-                  </ul>
+                </ul>
             </nav>
 
             <ul class="social">
@@ -93,14 +95,14 @@
 
     </aside>
     <main>
-         <nav>
-            <a href="https://jackmckew.dev"> Home </a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
- <article class="single">
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
   <header>
       
     <h1 id="python-decorators-explained">Python Decorators Explained</h1>
     <p>
-       Posted on Fri 24 May 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a> 
+       Posted on Fri 24 May 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
 
         &#8226; 3 min read
     </p>
@@ -108,9 +110,9 @@
 
 
   <div>
-    <body><p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
+    </head><body><p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
 <p>Firstly you have to understand functions within python:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -127,29 +129,29 @@
 <span class="code-line">15</span>
 <span class="code-line">16</span>
 <span class="code-line">17</span>
-<span class="code-line">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jack'</span><span class="p">):</span></span>
+<span class="code-line">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jack'</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="k">return</span> <span class="s2">"Hello "</span> <span class="o">+</span> <span class="n">name</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">hello</span><span class="p">())</span></span>
+<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">hello</span><span class="p">())</span></span>
 <span class="code-line"><span class="c1"># output: 'Hello Jack'</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">greeting</span> <span class="o">=</span> <span class="n">hello</span></span>
 <span class="code-line"><span class="c1"># assign a function to a variable, with no parentheses as we are not calling it</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">())</span></span>
+<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">())</span></span>
 <span class="code-line"><span class="c1"># output: 'Hello Jack'</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="k">del</span> <span class="n">hello</span></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">hello</span><span class="p">())</span></span>
+<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">hello</span><span class="p">())</span></span>
 <span class="code-line"><span class="c1"># output: NameError</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">())</span></span>
+<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">())</span></span>
 <span class="code-line"><span class="c1"># output: 'Hello Jack'</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>As we can see above we can give functions default arguments (the string 'Jack' for the name variable in hello). Assign functions to variables (ensuring the parentheses are not included otherwise we would be assigning to the returning value from the function. Remove previous functions now that we have 'copied' the function over.</p>
 <p>Now to take the next step into functions within Python, by defining functions within functions:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -165,15 +167,15 @@
 <span class="code-line">14</span>
 <span class="code-line">15</span>
 <span class="code-line">16</span>
-<span class="code-line">17</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jack'</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"You're now inside the hello() function"</span><span class="p">)</span></span>
+<span class="code-line">17</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jack'</span><span class="p">):</span></code></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"You're now inside the hello() function"</span><span class="p">)</span></span>
 <span class="code-line">    <span class="k">def</span> <span class="nf">greeting</span><span class="p">():</span></span>
 <span class="code-line">        <span class="k">return</span> <span class="s2">"Now you are in the greeting() function"</span></span>
 <span class="code-line">    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span></span>
 <span class="code-line">        <span class="k">return</span> <span class="s2">"Now you are in the welcome() function"</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">())</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"You are now back in the hello() function"</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">())</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"You are now back in the hello() function"</span></span>
 <span class="code-line"><span class="n">hello</span><span class="p">()</span></span>
 <span class="code-line"><span class="c1"># outputs: "You're now inside the hello() function"</span></span>
 <span class="code-line"><span class="c1">#          "Now you are in the greeting() function"</span></span>
@@ -182,10 +184,10 @@
 <span class="code-line"></span>
 <span class="code-line"><span class="n">welcome</span><span class="p">()</span></span>
 <span class="code-line"><span class="c1"># output: NameError: name 'welcome' is not defined</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Now we can make nested functions (functions within functions), the next step is, functions returning functions.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -202,7 +204,7 @@
 <span class="code-line">15</span>
 <span class="code-line">16</span>
 <span class="code-line">17</span>
-<span class="code-line">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jack'</span><span class="p">):</span></span>
+<span class="code-line">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jack'</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="k">def</span> <span class="nf">greeting</span><span class="p">():</span></span>
 <span class="code-line">        <span class="k">return</span> <span class="s2">"Now you are in the greeting() function"</span></span>
 <span class="code-line">    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span></span>
@@ -213,17 +215,17 @@
 <span class="code-line">        <span class="k">return</span> <span class="n">welcome</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">returned_function</span> <span class="o">=</span> <span class="n">hello</span><span class="p">()</span></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">returned_function</span><span class="p">)</span></span>
+<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">returned_function</span><span class="p">)</span></span>
 <span class="code-line"><span class="c1"># output: &lt;function greeting at 0x7f2143c01500&gt;</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># This clearly shows that the returned function is the greeting() function within the hello() function</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">returned_function</span><span class="p">()):</span></span>
+<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">returned_function</span><span class="p">()):</span></span>
 <span class="code-line"><span class="c1"># output: "Now you are in the greeting() function"</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>From earlier, we know that if we don't include the parentheses then the function does not executed. Another extension of the way this is formatted is that we can now call hello()() which outputs "Now you are in the greeting() function".</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -232,20 +234,20 @@
 <span class="code-line"> 7</span>
 <span class="code-line"> 8</span>
 <span class="code-line"> 9</span>
-<span class="code-line">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Jack"</span><span class="p">):</span></span>
+<span class="code-line">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Jack"</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="k">return</span> <span class="s2">"Hello "</span> <span class="o">+</span> <span class="n">name</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="k">def</span> <span class="nf">preFunction</span><span class="p">(</span><span class="n">function</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"This is the prefunction function"</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="n">hello</span><span class="p">())</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"This is the prefunction function"</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">hello</span><span class="p">())</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">preFunction</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span></span>
 <span class="code-line"><span class="c1"># output: "This is the prefunction function"</span></span>
 <span class="code-line"><span class="c1">#         "Hello Jack"</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Now you have all the knowledge to learn what decorators really are, they let you execute code before and after a function. The code above is actually a decorator, but let's make it more usable.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -264,15 +266,15 @@
 <span class="code-line">17</span>
 <span class="code-line">18</span>
 <span class="code-line">19</span>
-<span class="code-line">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">function</span><span class="p">):</span></span>
+<span class="code-line">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">function</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="k">def</span> <span class="nf">functionWrapped</span><span class="p">():</span></span>
-<span class="code-line">        <span class="k">print</span><span class="p">(</span><span class="s2">"This is the pre function"</span><span class="p">)</span></span>
+<span class="code-line">        <span class="nb">print</span><span class="p">(</span><span class="s2">"This is the pre function"</span><span class="p">)</span></span>
 <span class="code-line">        <span class="n">function</span><span class="p">()</span></span>
-<span class="code-line">        <span class="k">print</span><span class="p">(</span><span class="s2">"This is the post function"</span><span class="p">)</span></span>
+<span class="code-line">        <span class="nb">print</span><span class="p">(</span><span class="s2">"This is the post function"</span><span class="p">)</span></span>
 <span class="code-line">    <span class="k">return</span> <span class="n">functionWrapped</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="k">def</span> <span class="nf">function_requiring_decoration</span><span class="p">():</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"I need some decorations!"</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"I need some decorations!"</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">function_requiring_decoration</span><span class="p">()</span></span>
 <span class="code-line"><span class="c1"># output: "I need some decorations"</span></span>
@@ -284,10 +286,10 @@
 <span class="code-line"><span class="c1"># output: "This is the pre function"</span></span>
 <span class="code-line"><span class="c1">#         "I need some decoration"</span></span>
 <span class="code-line"><span class="c1">#         "This is the post function"</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Now you've made a decorator! We've just used what we learned previously to modify it's behaviour in one way or another. Now to make it even more concise we can just the @ symbol. Here is how we could have used the previous code with @ symbol.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -297,9 +299,9 @@
 <span class="code-line"> 8</span>
 <span class="code-line"> 9</span>
 <span class="code-line">10</span>
-<span class="code-line">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="nd">@new_decorator</span></span>
+<span class="code-line">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="nd">@new_decorator</span></code></span>
 <span class="code-line"><span class="k">def</span> <span class="nf">function_requiring_decoration</span><span class="p">():</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"I need some decorations!"</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"I need some decorations!"</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">function_requiring_decoration</span><span class="p">()</span></span>
 <span class="code-line"><span class="c1"># output: "This is the pre function"</span></span>
@@ -308,9 +310,9 @@
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># The @ operator is a short way of saying:</span></span>
 <span class="code-line"><span class="n">function_requiring_decoration</span> <span class="o">=</span> <span class="n">new_decorator</span><span class="p">(</span><span class="n">function_requiring_decoration</span><span class="p">)</span></span>
-</pre></div>
-</td></tr></tbody></table>
-<p>Hopefully now you are ready to go and explore the world of -decorators within Python, they can be used quite powerfully and allow for you to reuse code and extend capabilities. Some of the best examples for decorators are for authentication or logging, however I will not cover them as they are extensively documented over the internet.</p></body>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
+<p>Hopefully now you are ready to go and explore the world of -decorators within Python, they can be used quite powerfully and allow for you to reuse code and extend capabilities. Some of the best examples for decorators are for authentication or logging, however I will not cover them as they are extensively documented over the internet.</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -321,15 +323,15 @@
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/explained-voltage-drop.html" title="Explained: Voltage Drop">
-      <i class="fa fa-angle-left"></i>  Previous Post 
+      <i class="fa fa-angle-left"></i>  Previous Post
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/distributing-python-code.html" title="Distributing Python Code">
-       Next Post  <i class="fa fa-angle-right"></i>
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
-    <h4> You might enjoy </h4>
+    <h4> You might enjoy</h4>
     <ul class="related-posts">
       <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
       <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
@@ -351,17 +353,17 @@
     })();
 </script>
 <noscript>
-     Please enable JavaScript to view comments. 
+     Please enable JavaScript to view comments.
 </noscript>
 <!-- End Disqus -->
 </article>
 
         <footer>
- <p>&copy;  </p>
-<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
     </main>
 
-   <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -370,7 +372,7 @@
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>   <a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
     <svg width="80"
          height="80"
          viewBox="0 0 250 250"
@@ -388,7 +390,7 @@
         </path>
     </svg>
 </a>
-<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>      <script>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
         $(document).ready(function() {
             $('#tipue_search_input').tipuesearch();
         });

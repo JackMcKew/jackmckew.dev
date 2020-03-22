@@ -1,4 +1,4 @@
-  
+
 <!DOCTYPE html>
 <html lang="english">
 
@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -17,8 +17,8 @@
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -28,7 +28,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
 <meta name="description" content="Pandas for geospatial data Personally whenever I am faced with a problem that involves analysing geospatial data, GeoPandas is the first tool/package I reach for. Extending on the Pandas dataframe data structure, GeoPandas brings functionality for working with points, polygons and more out of the box. This post is …" />
 <meta name="keywords" content="python, visualisation">
 
@@ -49,7 +49,7 @@
 
     <title>Jack McKew's Blog &ndash; Intro To GeoPandas</title>
 
- </head>
+</head>
 
 <body>
     <aside>
@@ -59,14 +59,16 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>             <form class="navbar-search" action="/search.html" role="search">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
+            <p>Number of Words: 36503</p>
+            <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
             <nav>
                 <ul class="list">
-                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
                     <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-                  </ul>
+                </ul>
             </nav>
 
             <ul class="social">
@@ -94,14 +96,14 @@
 
     </aside>
     <main>
-         <nav>
-            <a href="https://jackmckew.dev"> Home </a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
- <article class="single">
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
   <header>
       
     <h1 id="intro-to-geopandas">Intro To GeoPandas</h1>
     <p>
-       Posted on Wed 15 January 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a> 
+       Posted on Wed 15 January 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a>
 
         &#8226; 6 min read
     </p>
@@ -109,7 +111,7 @@
 
 
   <div>
-    <body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </head><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Pandas for geospatial data</strong></p>
@@ -175,7 +177,7 @@
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -230,8 +232,10 @@
 <div class="prompt"></div>
 <div class="output_svg output_subarea">
 <!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
 <!-- Created with matplotlib (https://matplotlib.org/) -->
-<svg height="142.678125pt" version="1.1" viewbox="0 0 378.465625 142.678125" width="378.465625pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg height="142.678125pt" version="1.1" viewBox="0 0 378.465625 142.678125" width="378.465625pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -637,9 +641,9 @@ L 371.265625 7.2
 </g>
 </g>
 <defs>
-<clippath id="p7a7f0f11b8">
+<clipPath id="p7a7f0f11b8">
 <rect height="111.6" width="334.8" x="36.465625" y="7.2"></rect>
-</clippath>
+</clipPath>
 </defs>
 </svg>
 </div>
@@ -685,7 +689,7 @@ L 371.265625 7.2
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -771,8 +775,10 @@ L 371.265625 7.2
 <div class="prompt"></div>
 <div class="output_svg output_subarea">
 <!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
 <!-- Created with matplotlib (https://matplotlib.org/) -->
-<svg height="248.518125pt" version="1.1" viewbox="0 0 309.103125 248.518125" width="309.103125pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg height="248.518125pt" version="1.1" viewBox="0 0 309.103125 248.518125" width="309.103125pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -1352,9 +1358,9 @@ L 301.903125 7.2
 </g>
 </g>
 <defs>
-<clippath id="p58c620c40f">
+<clipPath id="p58c620c40f">
 <rect height="217.44" width="271.8" x="30.103125" y="7.2"></rect>
-</clippath>
+</clipPath>
 </defs>
 </svg>
 </div>
@@ -1404,7 +1410,7 @@ L 301.903125 7.2
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -1433,8 +1439,10 @@ L 301.903125 7.2
 <div class="prompt"></div>
 <div class="output_svg output_subarea">
 <!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
 <!-- Created with matplotlib (https://matplotlib.org/) -->
-<svg height="248.518125pt" version="1.1" viewbox="0 0 205.942992 248.518125" width="205.942992pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg height="248.518125pt" version="1.1" viewBox="0 0 205.942992 248.518125" width="205.942992pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -1899,9 +1907,9 @@ L 198.742992 7.2
 </g>
 </g>
 <defs>
-<clippath id="p54d99f2879">
+<clipPath id="p54d99f2879">
 <rect height="217.44" width="168.639867" x="30.103125" y="7.2"></rect>
-</clippath>
+</clipPath>
 </defs>
 </svg>
 </div>
@@ -1947,7 +1955,7 @@ L 198.742992 7.2
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -2017,8 +2025,10 @@ L 198.742992 7.2
 <div class="prompt"></div>
 <div class="output_svg output_subarea">
 <!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
 <!-- Created with matplotlib (https://matplotlib.org/) -->
-<svg height="248.518125pt" version="1.1" viewbox="0 0 296.548521 248.518125" width="296.548521pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg height="248.518125pt" version="1.1" viewBox="0 0 296.548521 248.518125" width="296.548521pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -2492,9 +2502,9 @@ L 289.348521 7.2
 </g>
 </g>
 <defs>
-<clippath id="p9d516da122">
+<clipPath id="p9d516da122">
 <rect height="217.44" width="260.406334" x="28.942188" y="7.2"></rect>
-</clippath>
+</clipPath>
 </defs>
 </svg>
 </div>
@@ -2623,8 +2633,10 @@ Notice that this returns a GeoSeries, so we have to select the first element (Ze
 <div class="prompt"></div>
 <div class="output_svg output_subarea">
 <!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
 <!-- Created with matplotlib (https://matplotlib.org/) -->
-<svg height="248.518125pt" version="1.1" viewbox="0 0 208.594601 248.518125" width="208.594601pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg height="248.518125pt" version="1.1" viewBox="0 0 208.594601 248.518125" width="208.594601pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -3162,9 +3174,9 @@ L 201.394601 7.2
 </g>
 </g>
 <defs>
-<clippath id="pb1f5a8cb01">
+<clipPath id="pb1f5a8cb01">
 <rect height="217.44" width="172.452414" x="28.942188" y="7.2"></rect>
-</clippath>
+</clipPath>
 </defs>
 </svg>
 </div>
@@ -3210,7 +3222,7 @@ L 201.394601 7.2
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -3277,7 +3289,7 @@ L 201.394601 7.2
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -3375,7 +3387,7 @@ L 201.394601 7.2
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -3438,7 +3450,7 @@ L 201.394601 7.2
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -3470,7 +3482,7 @@ L 201.394601 7.2
 </div>
 </div>
 </div>
-</div></body>
+</div>
   </div>
   <div class="tag-cloud">
     <p>
@@ -3482,15 +3494,15 @@ L 201.394601 7.2
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html" title="Migrating from Wordpress to Pelican">
-      <i class="fa fa-angle-left"></i>  Previous Post 
+      <i class="fa fa-angle-left"></i>  Previous Post
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/3d-terrain-in-python.html" title="3D Terrain in Python">
-       Next Post  <i class="fa fa-angle-right"></i>
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
-    <h4> You might enjoy </h4>
+    <h4> You might enjoy</h4>
     <ul class="related-posts">
       <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
       <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
@@ -3512,17 +3524,17 @@ L 201.394601 7.2
     })();
 </script>
 <noscript>
-     Please enable JavaScript to view comments. 
+     Please enable JavaScript to view comments.
 </noscript>
 <!-- End Disqus -->
 </article>
 
         <footer>
- <p>&copy;  </p>
-<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
     </main>
 
-   <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -3531,7 +3543,7 @@ L 201.394601 7.2
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>   <a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
     <svg width="80"
          height="80"
          viewBox="0 0 250 250"
@@ -3549,7 +3561,7 @@ L 201.394601 7.2
         </path>
     </svg>
 </a>
-<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>      <script>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
         $(document).ready(function() {
             $('#tipue_search_input').tipuesearch();
         });

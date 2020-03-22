@@ -244,7 +244,7 @@ cat_pipeline = Pipeline(
     ]
 )
 full_pipeline = FeatureUnion(
-    transformer_list=[("num_pipeline", num_pipeline), ("cat_pipeline", cat_pipeline)]
+    transformer_list=[("num_pipeline", num_pipeline), ("cat_pipeline", cat_pipeline),]
 )
 
 

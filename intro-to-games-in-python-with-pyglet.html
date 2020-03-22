@@ -1,4 +1,4 @@
-  
+
 <!DOCTYPE html>
 <html lang="english">
 
@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -17,8 +17,8 @@
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -28,7 +28,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
 <meta name="description" content="Recently, I&#39;ve been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as: p5 pygame plotly panda3d bokeh many others Eventually, through the motivation of …" />
 <meta name="keywords" content="python, pyglet">
 
@@ -49,7 +49,7 @@
 
     <title>Jack McKew's Blog &ndash; Intro to Games in Python with Pyglet</title>
 
- </head>
+</head>
 
 <body>
     <aside>
@@ -59,14 +59,16 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>             <form class="navbar-search" action="/search.html" role="search">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
+            <p>Number of Words: 36503</p>
+            <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
             <nav>
                 <ul class="list">
-                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
                     <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-                  </ul>
+                </ul>
             </nav>
 
             <ul class="social">
@@ -94,14 +96,14 @@
 
     </aside>
     <main>
-         <nav>
-            <a href="https://jackmckew.dev"> Home </a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
- <article class="single">
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
   <header>
       
     <h1 id="intro-to-games-in-python-with-pyglet">Intro to Games in Python with Pyglet</h1>
     <p>
-       Posted on Fri 04 October 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a> 
+       Posted on Fri 04 October 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
 
         &#8226; 3 min read
     </p>
@@ -109,7 +111,7 @@
 
 
   <div>
-    <body><p>Recently, I've been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as:</p>
+    </head><body><p>Recently, I've been researching ways that I could run a 2D simulation (and hopefully 3D) with many moving pieces and there was a desire to make it interactive as well. I stumbled through many visualisation frameworks such as:</p>
 <ul>
 <li><a href="https://pypi.org/project/p5/">p5</a></li>
 <li><a href="https://www.pygame.org/news">pygame</a></li>
@@ -127,7 +129,7 @@
 <p>If we run 'asteroid.py' from within the version 3 folder, we are met with this screen</p>
 <p><img alt="full_game_screen" class="img-fluid" src="https://jackmckew.dev/img/image.png"/></p>
 <p>Now since all I am trying to do is generate multiple objects (which will be shown with the player symbol to indicate direction), I can comment out the lines which give the lives, score, title and interactive player.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -148,7 +150,7 @@
 <span class="code-line">19</span>
 <span class="code-line">20</span>
 <span class="code-line">21</span>
-<span class="code-line">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="c1"># Set up the two top labels</span></span>
+<span class="code-line">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="c1"># Set up the two top labels</span></code></span>
 <span class="code-line"><span class="c1"># score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)</span></span>
 <span class="code-line"><span class="c1"># level_label = pyglet.text.Label(text="Version 3: Basic Collision",</span></span>
 <span class="code-line"><span class="c1">#                                 x=400, y=575, anchor_x='center', batch=main_batch)</span></span>
@@ -170,17 +172,17 @@
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># Tell the main window that the player object responds to events</span></span>
 <span class="code-line"><span class="c1"># game_window.push_handlers(player_ship.key_handler)</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Now that we've done that, we need to modify the asteroids generator function to use the player sprite.</p>
 <p>In load.py, you can change simply the img argument to the player image sprite reference like so:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">new_asteroid</span> <span class="o">=</span> <span class="n">physicalobject</span><span class="o">.</span><span class="n">PhysicalObject</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">resources</span><span class="o">.</span><span class="n">player_image</span><span class="p">,</span>                                                     <span class="n">x</span><span class="o">=</span><span class="n">asteroid_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">asteroid_y</span><span class="p">,</span>                                                 <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">new_asteroid</span> <span class="o">=</span> <span class="n">physicalobject</span><span class="o">.</span><span class="n">PhysicalObject</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">resources</span><span class="o">.</span><span class="n">player_image</span><span class="p">,</span>                                                     <span class="n">x</span><span class="o">=</span><span class="n">asteroid_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">asteroid_y</span><span class="p">,</span>                                                 <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span></code></span>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Now if we run this, the animation will look a little off, because the objects won't be traveling the direction in the direction that the sprite is pointing. This is due to the existing velocity calculation being a random number for both the X and Y component.</p>
 <p>To make the player sprites move in the direction they are rotated in, and maintain the existing codebase, we will need to convert from <a href="https://www.mathsisfun.com/polar-cartesian-coordinates.html">polar notation to cartesian</a>.</p>
 <p>To do this, we add an extra 2 functions into 'util.py' which will do this for us:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
@@ -188,7 +190,7 @@
 <span class="code-line">6</span>
 <span class="code-line">7</span>
 <span class="code-line">8</span>
-<span class="code-line">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">cart2pol</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span></span>
+<span class="code-line">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">cart2pol</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="n">rho</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></span>
 <span class="code-line">    <span class="n">phi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></span>
 <span class="code-line">    <span class="k">return</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span></span>
@@ -197,21 +199,21 @@
 <span class="code-line">    <span class="n">x</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span></span>
 <span class="code-line">    <span class="n">y</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span></span>
 <span class="code-line">    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Note the use of radians in pol2cart, this is due to the <a href="https://www.sparknotes.com/math/trigonometry/trigonometricfunctions/section3/">affect of quadrants and trigonometric functions</a>. I won't go into detail, but it won't behave like you expect it to.</p>
 <p>Now to get our player sprites moving in the direction they are rotated, update the code which generates the 'asteroids' to utilise our new function:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span></span>
+<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span></code></span>
 <span class="code-line"><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">40</span></span>
 <span class="code-line"><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_x</span><span class="p">,</span> <span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_y</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">pol2cart</span><span class="p">(</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span><span class="p">,</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span><span class="p">)</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Now when we go and run our main file again, we will met with a screen like this:</p>
 <p><img alt="boids_screen" class="img-fluid" src="https://jackmckew.dev/img/image-1.png"/></p>
 <p>Where the player sprites will float around in the direction they are pointing, until they crash into another sprite, causing both of them to disappear.</p>
-<p>This is a quick intro to Pyglet, I am hoping to expand on this simulation and am positive I will be doing further write ups with it in the future.</p></body>
+<p>This is a quick intro to Pyglet, I am hoping to expand on this simulation and am positive I will be doing further write ups with it in the future.</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -223,15 +225,15 @@
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/introduction-to-pytest-pipenv.html" title="Introduction to Pytest & Pipenv">
-      <i class="fa fa-angle-left"></i>  Previous Post 
+      <i class="fa fa-angle-left"></i>  Previous Post
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/book-review-principles.html" title="Book Review: Principles by Ray Dalio">
-       Next Post  <i class="fa fa-angle-right"></i>
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
-    <h4> You might enjoy </h4>
+    <h4> You might enjoy</h4>
     <ul class="related-posts">
       <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
       <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
@@ -253,17 +255,17 @@
     })();
 </script>
 <noscript>
-     Please enable JavaScript to view comments. 
+     Please enable JavaScript to view comments.
 </noscript>
 <!-- End Disqus -->
 </article>
 
         <footer>
- <p>&copy;  </p>
-<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
     </main>
 
-   <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -272,7 +274,7 @@
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>   <a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
     <svg width="80"
          height="80"
          viewBox="0 0 250 250"
@@ -290,7 +292,7 @@
         </path>
     </svg>
 </a>
-<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>      <script>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
         $(document).ready(function() {
             $('#tipue_search_input').tipuesearch();
         });

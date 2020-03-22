@@ -1,4 +1,4 @@
-  
+
 <!DOCTYPE html>
 <html lang="english">
 
@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />      <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">      <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -17,8 +17,8 @@
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">   <!-- Google Analytics -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -28,7 +28,7 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->   <meta name="author" content="Jack McKew" />
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
 <meta name="description" content="Following last weeks&#39; post (Python for the Finance Industry). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data. First of all while attempting to tackle this problem, I stumbled across many very informative articles in which based on what I learned …" />
 <meta name="keywords" content="finance, python">
 
@@ -49,7 +49,7 @@
 
     <title>Jack McKew's Blog &ndash; Portfolio Balancing with Historical Stock Data</title>
 
- </head>
+</head>
 
 <body>
     <aside>
@@ -59,14 +59,16 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>             <form class="navbar-search" action="/search.html" role="search">
+            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
+            <p>Number of Words: 36503</p>
+            <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
             <nav>
                 <ul class="list">
-                        <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
                     <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
-                  </ul>
+                </ul>
             </nav>
 
             <ul class="social">
@@ -94,14 +96,14 @@
 
     </aside>
     <main>
-         <nav>
-            <a href="https://jackmckew.dev"> Home </a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>           </nav>
- <article class="single">
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
   <header>
       
     <h1 id="portfolio-balancing-with-historical-stock-data">Portfolio Balancing with Historical Stock Data</h1>
     <p>
-       Posted on Fri 19 April 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a> 
+       Posted on Fri 19 April 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
 
         &#8226; 4 min read
     </p>
@@ -109,7 +111,7 @@
 
 
   <div>
-    <body><p>Following last weeks' post (<a href="https://jackmckew.dev/python-for-the-finance-industry.html">Python for the Finance Industry</a>). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data.</p>
+    </head><body><p>Following last weeks' post (<a href="https://jackmckew.dev/python-for-the-finance-industry.html">Python for the Finance Industry</a>). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data.</p>
 <p>First of all while attempting to tackle this problem, I stumbled across many very informative articles in which based on what I learned throughout reading them, and trying to replicate their findings with the ASX stocks' data.</p>
 <ul>
 <li>Ricky Kim (<a href="https://towardsdatascience.com/efficient-frontier-portfolio-optimisation-in-python-e7844051e7f">Efficient Frontier Portfolio Optimisation in Python)</a></li>
@@ -124,7 +126,7 @@
 <li>Pick the desired solution.</li>
 </ol>
 <p>To generate random portfolios, we define a function such that we can pass it differing variables as to tweak our outcomes in the future.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -135,7 +137,7 @@
 <span class="code-line"> 9</span>
 <span class="code-line">10</span>
 <span class="code-line">11</span>
-<span class="code-line">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">generate_portfolios</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span></span>
+<span class="code-line">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">generate_portfolios</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">))</span></span>
 <span class="code-line">    <span class="n">weights_record</span> <span class="o">=</span> <span class="p">[]</span></span>
 <span class="code-line">    <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">):</span></span>
@@ -147,8 +149,8 @@
 <span class="code-line">        <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="n">returns</span></span>
 <span class="code-line">        <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">returns</span> <span class="o">-</span> <span class="n">risk_free_rate</span><span class="p">)</span> <span class="o">/</span> <span class="n">volatility</span></span>
 <span class="code-line">    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">weights_record</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>To step through this function:</p>
 <ol>
 <li>Define empty location for our portfolio performance results to be stored along with recording weights so we can extract them once selected,</li>
@@ -162,19 +164,19 @@
 <p><img alt="\
 Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https://cdn-images-1.medium.com/max/1600/1*IabrYvsgHE07z2CJwoE9Zw.jpeg"/></p>
 <p><a href="https://medium.com/@bbrenyah">Bernard Brenyah</a>, whom I mentioned at the beginning of the post, has provided a clear explanation of how the above formula can be expressed in matrix calculation in one of <a href="https://medium.com/python-data/assessing-risks-and-return-with-probabilities-of-events-with-python-c564d9be4db4">his blog post</a>s. In which we just take the matrix calculation and multiply by 253 for number of trading days in Australia.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
-<span class="code-line">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">portfolio_performance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">):</span></span>
+<span class="code-line">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">portfolio_performance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="n">returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="o">*</span><span class="n">average_returns</span><span class="p">)</span> <span class="o">*</span> <span class="mi">253</span></span>
 <span class="code-line">    <span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">weights</span><span class="p">))</span></span>
 <span class="code-line">    <span class="n">volatility</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">253</span><span class="p">)</span></span>
 <span class="code-line">    <span class="k">return</span> <span class="n">returns</span><span class="p">,</span> <span class="n">volatility</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Now that we have X number of randomly generated portfolios, all ranked against one another, it's time to plot so that our results can be visualized.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
 <span class="code-line"> 2</span>
 <span class="code-line"> 3</span>
 <span class="code-line"> 4</span>
@@ -209,7 +211,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 <span class="code-line">33</span>
 <span class="code-line">34</span>
 <span class="code-line">35</span>
-<span class="code-line">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">display_random_efficient_frontier</span><span class="p">(</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span></span>
+<span class="code-line">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">display_random_efficient_frontier</span><span class="p">(</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span></code></span>
 <span class="code-line">    <span class="n">results</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">generate_portfolios</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line">    <span class="n">max_sharpe_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></span>
@@ -217,20 +219,20 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 <span class="code-line">    <span class="n">max_return</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">max_sharpe_index</span><span class="p">]</span></span>
 <span class="code-line">    <span class="n">max_sharpe_allocations</span> <span class="o">=</span> <span class="n">allocations</span><span class="p">(</span><span class="n">max_sharpe_index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></span>
 <span class="code-line"></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Return: {0:.2f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_return</span><span class="p">))</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Volatility: {0:.2f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_volatility</span><span class="p">))</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="n">max_sharpe_allocations</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Return: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_return</span><span class="p">))</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Volatility: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_volatility</span><span class="p">))</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">max_sharpe_allocations</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line">    <span class="n">min_vol_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></span>
 <span class="code-line">    <span class="n">min_volatility</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">min_vol_index</span><span class="p">]</span></span>
 <span class="code-line">    <span class="n">min_return</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">min_vol_index</span><span class="p">]</span></span>
 <span class="code-line">    <span class="n">min_vol_allocations</span> <span class="o">=</span> <span class="n">allocations</span><span class="p">(</span><span class="n">min_vol_index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></span>
 <span class="code-line"></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Return: {0:.2f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_return</span><span class="p">))</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="s2">"Volatility: {0:.2f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_volatility</span><span class="p">))</span></span>
-<span class="code-line">    <span class="k">print</span><span class="p">(</span><span class="n">min_vol_allocations</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Return: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_return</span><span class="p">))</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Volatility: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_volatility</span><span class="p">))</span></span>
+<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">min_vol_allocations</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span></span>
 <span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span><span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,:],</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'YlGnBu'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span></span>
@@ -245,28 +247,28 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 <span class="code-line"><span class="k">def</span> <span class="nf">allocations</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">):</span></span>
 <span class="code-line">    <span class="n">allocation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">index</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'allocation'</span><span class="p">])</span></span>
 <span class="code-line">    <span class="k">return</span> <span class="n">allocation</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p>Using the above function 'display_random_efficient_frontier', this will determine our max sharpe ratio portfolio generated and the minimum volatility portfolio with their respective returns. Now it is entirely up to the trader on how much risk they are willing to take on board with their portfolio. With the settings below in conjunction with the previously defined functions and stock data to generate the portfolios (risk free rate determined from <a href="http://www.worldgovernmentbonds.com/country/australia/">this website</a>).</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
 <span class="code-line">2</span>
 <span class="code-line">3</span>
 <span class="code-line">4</span>
 <span class="code-line">5</span>
 <span class="code-line">6</span>
-<span class="code-line">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span></span>
+<span class="code-line">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span></code></span>
 <span class="code-line"><span class="n">mean_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 <span class="code-line"><span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span></span>
 <span class="code-line"><span class="n">num_portfolios</span> <span class="o">=</span> <span class="mi">25000</span></span>
 <span class="code-line"><span class="n">risk_free_rate</span> <span class="o">=</span> <span class="mf">0.01977</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">display_random_efficient_frontier</span><span class="p">(</span><span class="n">mean_returns</span><span class="p">,</span><span class="n">cov_matrix</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">)</span></span>
-</pre></div>
-</td></tr></tbody></table>
+<span class="code-line"></span></pre></div></td></tr></tbody></table>
+
 <p><img alt="sharpe_ratios" class="img-fluid" src="https://jackmckew.dev/img/image-12.png"/></p>
 <p><img alt="efficient_frontier" class="img-fluid" src="https://jackmckew.dev/img/image-20.png"/></p>
 <p>With the two portfolios determined, the one gives us the best risk-adjusted (as long as the trader is prepared to take the risk) is the one with the maximum Sharpe ratio, allocating a 67% portion to WOW and 32% to BHP, as these stocks were quite volatile from the daily percentage change calculations.</p>
-<p>On the other hand, the minimum volatility portfolio is reflecting the more stable of the stocks from the daily percentage change calculations distributing portions over NAB and TLS due to their stability from the percentage change calculations and reducing the portion to WOW.</p></body>
+<p>On the other hand, the minimum volatility portfolio is reflecting the more stable of the stocks from the daily percentage change calculations distributing portions over NAB and TLS due to their stability from the percentage change calculations and reducing the portion to WOW.</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -278,15 +280,15 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/python-for-the-finance-industry.html" title="Python for the Finance Industry">
-      <i class="fa fa-angle-left"></i>  Previous Post 
+      <i class="fa fa-angle-left"></i>  Previous Post
     </a>
     <a class="btn float-right" href="https://jackmckew.dev/efficient-frontier-for-balancing-portfolios.html" title="Efficient Frontier for Balancing Portfolios">
-       Next Post  <i class="fa fa-angle-right"></i>
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
-    <h4> You might enjoy </h4>
+    <h4> You might enjoy</h4>
     <ul class="related-posts">
       <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
       <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
@@ -308,17 +310,17 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
     })();
 </script>
 <noscript>
-     Please enable JavaScript to view comments. 
+     Please enable JavaScript to view comments.
 </noscript>
 <!-- End Disqus -->
 </article>
 
         <footer>
- <p>&copy;  </p>
-<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme </p>         </footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
     </main>
 
-   <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
@@ -327,7 +329,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
   "image": "/jm-photo.jpg",
   "description": ""
 }
-</script>   <a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
     <svg width="80"
          height="80"
          viewBox="0 0 250 250"
@@ -345,7 +347,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
         </path>
     </svg>
 </a>
-<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>      <script>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
         $(document).ready(function() {
             $('#tipue_search_input').tipuesearch();
         });

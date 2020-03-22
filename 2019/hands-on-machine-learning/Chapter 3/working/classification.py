@@ -8,7 +8,7 @@ X, y = mnist["data"], mnist["label"]
 X = X.T
 y = y.T
 c, r = y.shape
-y = y.reshape(c)
+y = y.reshape(c,)
 print(X.shape)
 print(y.shape)
 #%%
