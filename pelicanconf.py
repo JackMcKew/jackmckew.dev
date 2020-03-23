@@ -165,3 +165,4 @@ import wordsum
 
 # POST_TICKER = wordsum.count_files('./content',['.md','.ipynb'])
 WORD_TICKER = wordsum.count_words('./content',['.md','.ipynb'])
+WORD_TICKER = f"{WORD_TICKER:,}"
