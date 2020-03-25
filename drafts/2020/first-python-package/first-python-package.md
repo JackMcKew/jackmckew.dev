@@ -64,3 +64,8 @@ or
 
 `from test_package import function`
 
+## Wordsum - My First Package
+
+If you have read my blog previously, I did a post on answering the question "How many words have I written in this blog?" which you can reach at: [https://jackmckew.dev/counting-words-with-python.html](https://jackmckew.dev/counting-words-with-python.html).
+
+This was great, I had wrote 2 functions which count how many words were inside markdown files & Jupyter notebooks. Following this, I had a great idea, why not make a 'ticker' on this website which increments each time a new post goes up.
