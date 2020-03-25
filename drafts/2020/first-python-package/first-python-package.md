@@ -12,4 +12,35 @@ This post is for how to structure a package in Python with [Poetry](https://pyth
 
 ## What is Poetry?
 
-##
+A quote from the creator of [Poetry](https://python-poetry.org/):
+
+> I built Poetry because I wanted a single tool to manage my Python projects from start to finish. I wanted something reliable and intuitive that the community could use and enjoy. - Sébastien Eustace
+
+In it's essence, [Poetry](https://python-poetry.org/) manages the Python project workflow so you don't have to.
+
+Same as venv, virtualenv, conda create virtual environments for a project, [Poetry](https://python-poetry.org/) will also create a virtual environment to go with your project.
+
+> If you are working in VS Code, the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) doesn't automatically detect the virtual environment location that Poetry defaults to. To tell VS Code where the virtual environments live for Poetry head to `Settings > python.venvFolders` and add `C:\\Users\\USERNAME\\AppData\\Local\\pypoetry\\Cache\\virtualenvs` for Windows.
+
+## Package Structure
+
+Python packages require a standard structure (albeit lenient), which [Poetry](https://python-poetry.org/) sets up for you when a project is initialized.  If we run `poetry new test_package` we will end up with the structure:
+
+``` tree
+test-package
++-- pyproject.toml
++-- README.rst
++-- test_package
+|   +-- __init__.py
++-- tests
+|   +-- __init__.py
+|   +-- test_test_package.py
+```
+
+Inside the top directory of our package we have 2 folders and 2 files.
+|File|Use|
+|--|--|
+|pyproject.toml|Contains all the information about your package, dependancies, versions, etc.|
+|README.rst|Readme file as to what the project does, any instructions of use, etc (see [Pandas-Bokeh](https://github.com/PatrikHlobil/Pandas-Bokeh) for a great example).|
+|test_package|This is where all our Python code will live for the project.|
+|tests|Following test driven development, this is where any automated tests live to make sure the code runs as expected.|
