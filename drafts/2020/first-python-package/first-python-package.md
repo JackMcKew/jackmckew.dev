@@ -44,3 +44,23 @@ Inside the top directory of our package we have 2 folders and 2 files.
 |README.rst|Readme file as to what the project does, any instructions of use, etc (see [Pandas-Bokeh](https://github.com/PatrikHlobil/Pandas-Bokeh) for a great example).|
 |test_package|This is where all our Python code will live for the project.|
 |tests|Following test driven development, this is where any automated tests live to make sure the code runs as expected.|
+
+### `__init__.py` Files
+
+What are all these `__init__.py` files and what are they there for? To be able to import code from another folder, Python requires to see an `__init__.py` inside a folder to mark it as a package.
+
+If we create a function inside our test_package folder:
+
+``` tree
++-- test_package
+|   +-- __init__.py
+|   +-- function.py
+```
+
+Now users can use:
+`import test_package.function`
+
+or
+
+`from test_package import function`
+
