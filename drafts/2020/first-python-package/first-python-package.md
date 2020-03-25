@@ -8,6 +8,18 @@ Tags: python
 
 Building upon a previous post on ["How many words have I written in this blog?"](https://jackmckew.dev/counting-words-with-python.html), let's dive into how to share this code with other on [PyPI](https://pypi.org/) and integrate into this website with a 'word ticker' which updates whenever a new post is uploaded.
 
+- [What is Poetry](#what-is-poetry)
+- [Package Structure](#package-structure)
+    - [`__init__.py` Files](#initpy-files)
+- [Wordsum - My First Package](#wordsum---my-first-package)
+    - [Wordsum Package Structure](#wordsum-package-structure)
+    - [User Interaction](#user-interaction)
+    - [Publishing to PyPI](#publishing-to-pypi)
+- [Integrating Wordsum Into This Website](#integrating-wordsum-into-this-website)
+    - [Update `requirements.txt`](#update-requirementstxt)
+    - [Update `pelicanconf.py`](#update-pelicanconfpy)
+    - [Update `base.html`](#update-basehtml)
+
 If you are using Python, you've most likely used pip, conda or similar to install packages from other developers such that you aren't reinventing the wheel. This functionality is by far one of my favourite features of the language. If you aren't already aware, (most) of these packages you install with pip live on [PyPI](https://pypi.org/), the Python Package Index.
 
 This post is for how to structure a package in Python with [Poetry](https://python-poetry.org/) and publish it on [PyPI](https://pypi.org/) (I was amazed how easy this was).
