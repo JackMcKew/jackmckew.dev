@@ -8,7 +8,7 @@ PATH = "content"
 AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
 SITETITLE = SITENAME
-SITESUBTITLE = "Python enthusiast, electrical engineer and tinkerer"
+SITESUBTITLE = "Engineer | Software Developer | Data Scientist | Blogger"
 SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
 # SITEURL = "http://localhost:8000"
@@ -96,7 +96,7 @@ DIRECT_TEMPLATES = (('index','authors', 'tags', 'categories', 'archives','search
 
 PLUGINS = [
     "sitemap",
-    "better_codeblock_line_numbering",
+    # "better_codeblock_line_numbering",
     "better_code_samples",
     "bootstrapify",
     "deadlinks",

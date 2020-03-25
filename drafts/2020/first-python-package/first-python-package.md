@@ -40,7 +40,7 @@ Same as venv, virtualenv, conda create virtual environments for a project, [Poet
 
 Python packages require a standard structure (albeit lenient), which [Poetry](https://python-poetry.org/) sets up for you when a project is initialized.  If we run `poetry new test_package` we will end up with the structure:
 
-``` tree
+``` bash
 test-package
 +-- pyproject.toml
 +-- README.rst
@@ -65,7 +65,7 @@ What are all these `__init__.py` files and what are they there for? To be able t
 
 If we create a function inside our test_package folder:
 
-``` tree
+``` bash
 +-- test_package
 |   +-- __init__.py
 |   +-- function.py
@@ -96,7 +96,7 @@ To make the two functions more extensible, the two functions were further broken
 
 The basic structure we ended up with was:
 
-``` tree
+``` bash
 wordsum
 +-- word_sum.py
 +-- __init__.py
