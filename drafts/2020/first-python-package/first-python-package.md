@@ -6,11 +6,13 @@ Tags: python
 
 **Packaging Python code to easily share code with others!**
 
+Building upon a previous post on ["How many words have I written in this blog?"](https://jackmckew.dev/counting-words-with-python.html), let's dive into how to share this code with other on [PyPI](https://pypi.org/) and integrate into this website with a 'word ticker' which updates whenever a new post is uploaded.
+
 If you are using Python, you've most likely used pip, conda or similar to install packages from other developers such that you aren't reinventing the wheel. This functionality is by far one of my favourite features of the language. If you aren't already aware, (most) of these packages you install with pip live on [PyPI](https://pypi.org/), the Python Package Index.
 
 This post is for how to structure a package in Python with [Poetry](https://python-poetry.org/) and publish it on [PyPI](https://pypi.org/) (I was amazed how easy this was).
 
-## What is Poetry?
+## What is Poetry
 
 A quote from the creator of [Poetry](https://python-poetry.org/):
 
@@ -180,7 +182,8 @@ So there was only 3 files that I needed to edit: `pelicanconf.py`, `requirements
 
 ### Update `requirements.txt`
 
-First off we add `wordsum` to the virtual environment for the project and freeze it within `requirements.txt` with 
+First off we add `wordsum` to the virtual environment for the project and freeze it within `requirements.txt` with
+
 ``` bash
 pip install wordsum
 pip freeze requirements.txt
@@ -203,3 +206,19 @@ WORD_TICKER = f"{WORD_TICKER:,}"
 This creates a variable `WORD_TICKER` that can be used later on to show the number of words counted across all markdown files & Jupyter notebooks.
 
 > The line `WORD_TICKER = f"{WORD_TICKER:,}"` adds thousand separators to numbers in Python with f-strings. For example this converts 123456 to 123,456.
+
+### Update `base.html`
+
+Now we just need to show our word ticker on the website. In the Flex theme, all pages inherit from a `base.html` file. To squeeze our new metrics onto the page we add the lines:
+
+``` html
+{% if WORD_TICKER %}
+<p>Number of Posts: {{ articles|count }}</p>
+<p>Number of Words: {{ WORD_TICKER}}</p>
+{% endif %}
+```
+
+First we check if the variable `WORD_TICKER` is used to ensure we only include the metrics if the variable has been set. Followed by two paragraph markers which will show:
+
+1. How many posts are on the website
+2. How many words are used in all of those posts
