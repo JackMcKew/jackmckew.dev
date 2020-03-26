@@ -58,8 +58,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -137,142 +137,142 @@
 <p><a href="http://www.pelicanthemes.com/">http://www.pelicanthemes.com/</a></p>
 <p>Which lets you scroll through the various themes, and even links to the repository on github for the theme if you wish to use it. The theme I decided on was <a href="https://github.com/alexandrevicenzi/Flex">Flex by Alexandre Vicenzi</a>.</p>
 <p>Apply the the theme was as simple as cloning the repo (or using <a href="https://www.atlassian.com/git/tutorials/git-submodule">git submodules</a>), and adding one line of code in pelicanconf.py (generated automatically by pelican-quickstart).</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s2">"./themes/Flex"</span></code></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s2">"./themes/Flex"</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <h4>Plugins</h4>
 <p>Admittedly, I just tried out all the plugins in the <a href="https://github.com/getpelican/pelican-plugins">Pelican Plugins Repository</a> until I found the combination that works for me, this ended up being:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span>
-<span class="code-line">15</span>
-<span class="code-line">16</span>
-<span class="code-line">17</span>
-<span class="code-line">18</span>
-<span class="code-line">19</span>
-<span class="code-line">20</span>
-<span class="code-line">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span></code></span>
-<span class="code-line">    <span class="s2">"sitemap"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"better_codeblock_line_numbering"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"better_code_samples"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"bootstrapify"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"deadlinks"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"more_categories"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"neighbors"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"pelican-ert"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"liquid_tags.notebook"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"liquid_tags.include_code"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"representative_image"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"share_post"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s1">'show_source'</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s1">'tipue_search'</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"dateish"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"post_stats"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"render_math"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"autostatic"</span><span class="p">,</span></span>
-<span class="code-line">    <span class="s2">"clean_summary"</span></span>
-<span class="code-line"><span class="p">]</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"sitemap"</span><span class="p">,</span>
+    <span class="s2">"better_codeblock_line_numbering"</span><span class="p">,</span>
+    <span class="s2">"better_code_samples"</span><span class="p">,</span>
+    <span class="s2">"bootstrapify"</span><span class="p">,</span>
+    <span class="s2">"deadlinks"</span><span class="p">,</span>
+    <span class="s2">"more_categories"</span><span class="p">,</span>
+    <span class="s2">"neighbors"</span><span class="p">,</span>
+    <span class="s2">"pelican-ert"</span><span class="p">,</span>
+    <span class="s2">"liquid_tags.notebook"</span><span class="p">,</span>
+    <span class="s2">"liquid_tags.include_code"</span><span class="p">,</span>
+    <span class="s2">"representative_image"</span><span class="p">,</span>
+    <span class="s2">"share_post"</span><span class="p">,</span>
+    <span class="s1">'show_source'</span><span class="p">,</span>
+    <span class="s1">'tipue_search'</span><span class="p">,</span>
+    <span class="s2">"dateish"</span><span class="p">,</span>
+    <span class="s2">"post_stats"</span><span class="p">,</span>
+    <span class="s2">"render_math"</span><span class="p">,</span>
+    <span class="s2">"autostatic"</span><span class="p">,</span>
+    <span class="s2">"clean_summary"</span>
+<span class="p">]</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>For tipue_search in particular, as this wasn't supported by the theme yet, I created a pull request on the original repository, with the functionality integrated <a href="https://github.com/alexandrevicenzi/Flex/pull/193">https://github.com/alexandrevicenzi/Flex/pull/193</a>.</p>
 <h4>Wordpress Import</h4>
 <p>Now that I had the skeleton of the website set up, I needed to bring in all the existing posts from wordpress. By following another guide within the Pelican documentation, this was a relatively simple task <a href="http://docs.getpelican.com/en/3.6.3/importer.html">http://docs.getpelican.com/en/3.6.3/importer.html</a>. However, I did spend the time to go through and edit each markdown to remove redundant 'wordpress' formatting tags manually.</p>
 <h4>Linking to Content</h4>
 <p>As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in <a href="http://docs.getpelican.com/en/3.6.3/content.html">http://docs.getpelican.com/en/3.6.3/content.html</a>.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span>
-<span class="code-line">8</span>
-<span class="code-line">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code>content</code></span>
-<span class="code-line">├── articles</span>
-<span class="code-line">│   └── article.md</span>
-<span class="code-line">├── images</span>
-<span class="code-line">│   └── han.jpg</span>
-<span class="code-line">├── pdfs</span>
-<span class="code-line">│   └── menu.pdf</span>
-<span class="code-line">└── pages</span>
-<span class="code-line">    └── test.md</span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>content
+├── articles
+│   └── article.md
+├── images
+│   └── han.jpg
+├── pdfs
+│   └── menu.pdf
+└── pages
+    └── test.md
+</code></pre></div>
+</td></tr></tbody></table>
 <p>I ended up with a structure like above, which annoyed me a bit as now the content was in one place, but still divided into 3 folders with little-to-no link between them, my goal was to have the structure like:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code>content</code></span>
-<span class="code-line">├── articles</span>
-<span class="code-line">│   ├── test-article</span>
-<span class="code-line">│   <span class="p">|</span>   ├── img</span>
-<span class="code-line">│   │   <span class="p">|</span> └── icon.png</span>
-<span class="code-line">│   │   <span class="p">|</span> └── photo.jpg</span>
-<span class="code-line">│   <span class="p">|</span>   ├── notebooks</span>
-<span class="code-line">│   │   <span class="p">|</span> └── test-notebook.ipynb</span>
-<span class="code-line">│   │   └── article.md</span>
-<span class="code-line">└── files</span>
-<span class="code-line">    └── archive.zip</span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>content
+├── articles
+│   ├── test-article
+│   <span class="p">|</span>   ├── img
+│   │   <span class="p">|</span> └── icon.png
+│   │   <span class="p">|</span> └── photo.jpg
+│   <span class="p">|</span>   ├── notebooks
+│   │   <span class="p">|</span> └── test-notebook.ipynb
+│   │   └── article.md
+└── files
+    └── archive.zip
+</code></pre></div>
+</td></tr></tbody></table>
 <p>By using the plugins <a href="https://github.com/AlexJF/pelican-autostatic">autostatic</a> &amp; <a href="https://github.com/getpelican/pelican-plugins/tree/master/liquid_tags">liquid_tags</a>, I was able to achieve this structure.</p>
 <h3>Travis CI</h3>
 <p>To be honest, I was actually surprised at how easy it was to turn Travis CI and that I could spin up a virtual machine, install all the dependencies and re-build the website. However, I had a lot of trouble trying to get Travis CI to push back to the repository such that Netlify could build from it.</p>
 <p>This was later remedied by setting a repository secret variable on Travis CI as I couldn't get the secret token encrypted by Travis CI CLI (Ruby application).</p>
 <p>In essence, all that was needed was a .travis.yml file in the root directory which ended up like this:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span>
-<span class="code-line">15</span>
-<span class="code-line">16</span>
-<span class="code-line">17</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code>language: python</code></span>
-<span class="code-line">branches:</span>
-<span class="code-line">  only:</span>
-<span class="code-line">  - master</span>
-<span class="code-line">install:</span>
-<span class="code-line">- pip install --upgrade pip</span>
-<span class="code-line">- pip install -r requirements.txt</span>
-<span class="code-line">script:</span>
-<span class="code-line">- pelican content</span>
-<span class="code-line">deploy:</span>
-<span class="code-line">  provider: pages</span>
-<span class="code-line">  skip_cleanup: <span class="nb">true</span></span>
-<span class="code-line">  github_token: <span class="nv">$GITHUB_TOKEN</span></span>
-<span class="code-line">  keep_history: <span class="nb">true</span></span>
-<span class="code-line">  local_dir: output</span>
-<span class="code-line">  on:</span>
-<span class="code-line">    branch: master</span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>language: python
+branches:
+  only:
+  - master
+install:
+- pip install --upgrade pip
+- pip install -r requirements.txt
+script:
+- pelican content
+deploy:
+  provider: pages
+  skip_cleanup: <span class="nb">true</span>
+  github_token: <span class="nv">$GITHUB_TOKEN</span>
+  keep_history: <span class="nb">true</span>
+  local_dir: output
+  on:
+    branch: master
+</code></pre></div>
+</td></tr></tbody></table>
 <h3>Netlify</h3>
 <p>Admittedly, I feel as if I'm not using Netlify for all it can do.</p>
 <p>Essentially, all for this project, it just detects a change in the gh-pages branch (for Github Pages), and redeploys the website out to a custom domain.</p>
@@ -306,11 +306,11 @@
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/packaging-python-packages-with-poetry.html">Packaging Python Packages with Poetry</a></li>
       <li><a href="https://jackmckew.dev/counting-words-with-python.html">Counting Words with Python</a></li>
       <li><a href="https://jackmckew.dev/python-bytes-awesome-package-list.html">Python Bytes Awesome Package List</a></li>
       <li><a href="https://jackmckew.dev/3d-gradient-descent-in-python.html">3D Gradient Descent in Python</a></li>
       <li><a href="https://jackmckew.dev/getting-started-in-python.html">Getting Started in Python</a></li>
-      <li><a href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html">Automatically Generate Documentation with Sphinx</a></li>
     </ul>
   </div>
 

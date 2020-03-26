@@ -60,8 +60,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -123,43 +123,43 @@
 </ul>
 <h2>Harmonics</h2>
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span>
-<span class="code-line">15</span>
-<span class="code-line">16</span>
-<span class="code-line">17</span>
-<span class="code-line">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></code></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">Harmonic</span><span class="p">(</span><span class="n">i</span><span class="p">):</span></span>
-<span class="code-line">    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">):</span></span>
-<span class="code-line">        <span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">Harmonic</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">Harmonic</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></span>
-<span class="code-line"><span class="c1"># Harmonic(3)</span></span>
-<span class="code-line"><span class="c1"># Harmonic(4)</span></span>
-<span class="code-line"><span class="c1"># Harmonic(5)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+<span class="k">def</span> <span class="nf">Harmonic</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+
+<span class="n">Harmonic</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Harmonic</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Harmonic(3)</span>
+<span class="c1"># Harmonic(4)</span>
+<span class="c1"># Harmonic(5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>The example above shows us the base signal (fundamental frequency), and it's first harmonic (harmonic of 2 or twice as fast as the fundamental frequency).</p>
 <p><img alt="Harmonic1_2" class="img-fluid" src="https://jackmckew.dev/img/Harmonic1_2.png"/></p>
 <p>When these two signals are superimposed on each other, they produce a distorted waveform. Electrical equipment is designed to operate at the base signal (50Hz here in Australia), and typically does not cope with distorted wave like seen below when we superimpose a base signal with it's first harmonic.</p>
@@ -193,77 +193,77 @@
 <p><img alt="CodeCogsEqn-6.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-6.gif"/></p>
 <p><img alt="CodeCogsEqn-7.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-7.gif"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span>
-<span class="code-line">15</span>
-<span class="code-line">16</span>
-<span class="code-line">17</span>
-<span class="code-line">18</span>
-<span class="code-line">19</span>
-<span class="code-line">20</span>
-<span class="code-line">21</span>
-<span class="code-line">22</span>
-<span class="code-line">23</span>
-<span class="code-line">24</span>
-<span class="code-line">25</span>
-<span class="code-line">26</span>
-<span class="code-line">27</span>
-<span class="code-line">28</span>
-<span class="code-line">29</span>
-<span class="code-line">30</span>
-<span class="code-line">31</span>
-<span class="code-line">32</span>
-<span class="code-line">33</span>
-<span class="code-line">34</span>
-<span class="code-line">35</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span><span class="n">pi</span></code></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">real_power</span> <span class="o">=</span> <span class="mf">2.2</span>     <span class="c1">#Real power in kW</span></span>
-<span class="code-line"><span class="n">current</span> <span class="o">=</span> <span class="mi">10</span>         <span class="c1">#Current in amps</span></span>
-<span class="code-line"><span class="n">voltage</span> <span class="o">=</span> <span class="mi">240</span>        <span class="c1">#Voltage in volts</span></span>
-<span class="code-line"><span class="n">frequency</span> <span class="o">=</span> <span class="mi">50</span>       <span class="c1">#Frequency in hertz</span></span>
-<span class="code-line"><span class="n">corrected_pf</span> <span class="o">=</span> <span class="mf">0.95</span>  <span class="c1">#Target power factor</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1">#Calculate current power factor and apparent power</span></span>
-<span class="code-line"><span class="n">current_pf</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">real_power</span> <span class="o">/</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">S_current</span> <span class="o">=</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1">#Power factors greater than 1 will give imaginary Q_current, alert user</span></span>
-<span class="code-line"><span class="k">try</span><span class="p">:</span></span>
-<span class="code-line">    <span class="c1">#Calculate current reactive power</span></span>
-<span class="code-line">    <span class="n">Q_current</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">S_current</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="c1">#Calculate target apparent power</span></span>
-<span class="code-line">    <span class="n">S_corrected</span> <span class="o">=</span> <span class="n">real_power</span> <span class="o">/</span> <span class="n">corrected_pf</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="c1">#Calculate required reactive power compensation</span></span>
-<span class="code-line">    <span class="n">Q_corrected</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">S_corrected</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="c1">#Calculate size of capacitor required for reactive power</span></span>
-<span class="code-line">    <span class="n">Q_c</span> <span class="o">=</span> <span class="n">Q_current</span> <span class="o">-</span> <span class="n">Q_corrected</span></span>
-<span class="code-line">    <span class="n">C_f</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">Q_c</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">frequency</span><span class="o">*</span><span class="n">voltage</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="c1">#Print results to user</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current power factor </span><span class="si">{0:.3f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_pf</span><span class="p">))</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current apparent power </span><span class="si">{0:.3f}</span><span class="s2"> kVA"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_current</span><span class="p">))</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current reactive power </span><span class="si">{0:.3f}</span><span class="s2"> kVAR"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Q_current</span><span class="p">))</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Capacitor required </span><span class="si">{0:.3f}</span><span class="s2"> Farads"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">C_f</span><span class="p">))</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current power factor &gt; 1"</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span><span class="n">pi</span>
 
+<span class="n">real_power</span> <span class="o">=</span> <span class="mf">2.2</span>     <span class="c1">#Real power in kW</span>
+<span class="n">current</span> <span class="o">=</span> <span class="mi">10</span>         <span class="c1">#Current in amps</span>
+<span class="n">voltage</span> <span class="o">=</span> <span class="mi">240</span>        <span class="c1">#Voltage in volts</span>
+<span class="n">frequency</span> <span class="o">=</span> <span class="mi">50</span>       <span class="c1">#Frequency in hertz</span>
+<span class="n">corrected_pf</span> <span class="o">=</span> <span class="mf">0.95</span>  <span class="c1">#Target power factor</span>
+
+<span class="c1">#Calculate current power factor and apparent power</span>
+<span class="n">current_pf</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">real_power</span> <span class="o">/</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span>
+<span class="n">S_current</span> <span class="o">=</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
+
+<span class="c1">#Power factors greater than 1 will give imaginary Q_current, alert user</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1">#Calculate current reactive power</span>
+    <span class="n">Q_current</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">S_current</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1">#Calculate target apparent power</span>
+    <span class="n">S_corrected</span> <span class="o">=</span> <span class="n">real_power</span> <span class="o">/</span> <span class="n">corrected_pf</span>
+
+    <span class="c1">#Calculate required reactive power compensation</span>
+    <span class="n">Q_corrected</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">S_corrected</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">real_power</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1">#Calculate size of capacitor required for reactive power</span>
+    <span class="n">Q_c</span> <span class="o">=</span> <span class="n">Q_current</span> <span class="o">-</span> <span class="n">Q_corrected</span>
+    <span class="n">C_f</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">Q_c</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">frequency</span><span class="o">*</span><span class="n">voltage</span><span class="p">)</span>
+
+    <span class="c1">#Print results to user</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current power factor </span><span class="si">{0:.3f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_pf</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current apparent power </span><span class="si">{0:.3f}</span><span class="s2"> kVA"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S_current</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current reactive power </span><span class="si">{0:.3f}</span><span class="s2"> kVAR"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Q_current</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Capacitor required </span><span class="si">{0:.3f}</span><span class="s2"> Farads"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">C_f</span><span class="p">))</span>
+
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Current power factor &gt; 1"</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
   </div>
   <div class="tag-cloud">
     <p>
@@ -286,11 +286,11 @@
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/packaging-python-packages-with-poetry.html">Packaging Python Packages with Poetry</a></li>
       <li><a href="https://jackmckew.dev/counting-words-with-python.html">Counting Words with Python</a></li>
       <li><a href="https://jackmckew.dev/python-bytes-awesome-package-list.html">Python Bytes Awesome Package List</a></li>
       <li><a href="https://jackmckew.dev/3d-gradient-descent-in-python.html">3D Gradient Descent in Python</a></li>
       <li><a href="https://jackmckew.dev/getting-started-in-python.html">Getting Started in Python</a></li>
-      <li><a href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html">Automatically Generate Documentation with Sphinx</a></li>
     </ul>
   </div>
 

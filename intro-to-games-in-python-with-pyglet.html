@@ -59,8 +59,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -129,87 +129,87 @@
 <p>If we run 'asteroid.py' from within the version 3 folder, we are met with this screen</p>
 <p><img alt="full_game_screen" class="img-fluid" src="https://jackmckew.dev/img/image.png"/></p>
 <p>Now since all I am trying to do is generate multiple objects (which will be shown with the player symbol to indicate direction), I can comment out the lines which give the lives, score, title and interactive player.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span>
-<span class="code-line">15</span>
-<span class="code-line">16</span>
-<span class="code-line">17</span>
-<span class="code-line">18</span>
-<span class="code-line">19</span>
-<span class="code-line">20</span>
-<span class="code-line">21</span>
-<span class="code-line">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="c1"># Set up the two top labels</span></code></span>
-<span class="code-line"><span class="c1"># score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)</span></span>
-<span class="code-line"><span class="c1"># level_label = pyglet.text.Label(text="Version 3: Basic Collision",</span></span>
-<span class="code-line"><span class="c1">#                                 x=400, y=575, anchor_x='center', batch=main_batch)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Initialize the player sprite</span></span>
-<span class="code-line"><span class="c1"># player_ship = player.Player(x=400, y=300, batch=main_batch)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Make three sprites to represent remaining lives</span></span>
-<span class="code-line"><span class="c1"># player_lives = load.player_lives(2, main_batch)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Make three asteroids so we have something to shoot at</span></span>
-<span class="code-line"><span class="c1"># asteroids = load.asteroids(3, player_ship.position, main_batch)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">asteroids</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">asteroids</span><span class="p">(</span><span class="mi">100</span><span class="p">,(</span><span class="n">window_width</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="n">window_height</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span><span class="n">main_batch</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Store all objects that update each frame in a list</span></span>
-<span class="code-line"><span class="c1"># game_objects = [player_ship] + asteroids</span></span>
-<span class="code-line"><span class="n">game_objects</span> <span class="o">=</span> <span class="n">asteroids</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Tell the main window that the player object responds to events</span></span>
-<span class="code-line"><span class="c1"># game_window.push_handlers(player_ship.key_handler)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Set up the two top labels</span>
+<span class="c1"># score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)</span>
+<span class="c1"># level_label = pyglet.text.Label(text="Version 3: Basic Collision",</span>
+<span class="c1">#                                 x=400, y=575, anchor_x='center', batch=main_batch)</span>
 
+<span class="c1"># Initialize the player sprite</span>
+<span class="c1"># player_ship = player.Player(x=400, y=300, batch=main_batch)</span>
+
+<span class="c1"># Make three sprites to represent remaining lives</span>
+<span class="c1"># player_lives = load.player_lives(2, main_batch)</span>
+
+<span class="c1"># Make three asteroids so we have something to shoot at</span>
+<span class="c1"># asteroids = load.asteroids(3, player_ship.position, main_batch)</span>
+
+<span class="n">asteroids</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">asteroids</span><span class="p">(</span><span class="mi">100</span><span class="p">,(</span><span class="n">window_width</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span><span class="n">window_height</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span><span class="n">main_batch</span><span class="p">)</span>
+
+<span class="c1"># Store all objects that update each frame in a list</span>
+<span class="c1"># game_objects = [player_ship] + asteroids</span>
+<span class="n">game_objects</span> <span class="o">=</span> <span class="n">asteroids</span>
+
+<span class="c1"># Tell the main window that the player object responds to events</span>
+<span class="c1"># game_window.push_handlers(player_ship.key_handler)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now that we've done that, we need to modify the asteroids generator function to use the player sprite.</p>
 <p>In load.py, you can change simply the img argument to the player image sprite reference like so:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">new_asteroid</span> <span class="o">=</span> <span class="n">physicalobject</span><span class="o">.</span><span class="n">PhysicalObject</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">resources</span><span class="o">.</span><span class="n">player_image</span><span class="p">,</span>                                                     <span class="n">x</span><span class="o">=</span><span class="n">asteroid_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">asteroid_y</span><span class="p">,</span>                                                 <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span></code></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">new_asteroid</span> <span class="o">=</span> <span class="n">physicalobject</span><span class="o">.</span><span class="n">PhysicalObject</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">resources</span><span class="o">.</span><span class="n">player_image</span><span class="p">,</span>                                                     <span class="n">x</span><span class="o">=</span><span class="n">asteroid_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">asteroid_y</span><span class="p">,</span>                                                 <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now if we run this, the animation will look a little off, because the objects won't be traveling the direction in the direction that the sprite is pointing. This is due to the existing velocity calculation being a random number for both the X and Y component.</p>
 <p>To make the player sprites move in the direction they are rotated in, and maintain the existing codebase, we will need to convert from <a href="https://www.mathsisfun.com/polar-cartesian-coordinates.html">polar notation to cartesian</a>.</p>
 <p>To do this, we add an extra 2 functions into 'util.py' which will do this for us:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span>
-<span class="code-line">8</span>
-<span class="code-line">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">cart2pol</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="n">rho</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">phi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">return</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">pol2cart</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span></span>
-<span class="code-line">    <span class="n">x</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">y</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span></span>
-<span class="code-line">    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cart2pol</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
 
+<span class="k">def</span> <span class="nf">pol2cart</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Note the use of radians in pol2cart, this is due to the <a href="https://www.sparknotes.com/math/trigonometry/trigonometricfunctions/section3/">affect of quadrants and trigonometric functions</a>. I won't go into detail, but it won't behave like you expect it to.</p>
 <p>Now to get our player sprites moving in the direction they are rotated, update the code which generates the 'asteroids' to utilise our new function:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span></code></span>
-<span class="code-line"><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">40</span></span>
-<span class="code-line"><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_x</span><span class="p">,</span> <span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_y</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">pol2cart</span><span class="p">(</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span><span class="p">,</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+<span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">40</span>
+<span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_x</span><span class="p">,</span> <span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_y</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">pol2cart</span><span class="p">(</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">velocity_speed</span><span class="p">,</span><span class="n">new_asteroid</span><span class="o">.</span><span class="n">rotation</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now when we go and run our main file again, we will met with a screen like this:</p>
 <p><img alt="boids_screen" class="img-fluid" src="https://jackmckew.dev/img/image-1.png"/></p>
 <p>Where the player sprites will float around in the direction they are pointing, until they crash into another sprite, causing both of them to disappear.</p>

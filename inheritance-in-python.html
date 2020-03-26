@@ -58,8 +58,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -121,138 +121,138 @@
 </ul>
 <p>This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.</p>
 <p>First off, we are going to start by defining our 'base' class (also known as abstract class) of our Animal with common properties:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span></code></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span></span>
-<span class="code-line">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Animal Kingdom"</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Not implemented yet (define speak)"</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Not implemented yet (define eat)"</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
+    <span class="k">def</span> <span class="nf">family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Animal Kingdom"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Not implemented yet (define speak)"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Not implemented yet (define eat)"</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now that we have our base class, we can define a subclass 'Dog' that will be able to speak if we define the function inside, but we can also see that it derives from it's parent class 'Animal' by printing out it's family.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Woof!"</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Jay"</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">dog</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">dog</span><span class="o">.</span><span class="n">family</span><span class="p">()</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Woof!"</span><span class="p">)</span>
+
+
+<span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Jay"</span><span class="p">)</span>
+<span class="n">dog</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+<span class="n">dog</span><span class="o">.</span><span class="n">family</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Which will print out:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">Woof</span><span class="err">!</span></code></span>
-<span class="code-line"><span class="n">Animal</span> <span class="n">Kingdom</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
+<span class="n">Animal</span> <span class="n">Kingdom</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>See my post on dunders (double underscores) to get a better understanding of how the __init__ function is working: <a href="https://jackmckew.dev/dunders-in-python.html">https://jackmckew.dev/dunders-in-python.html</a></p>
 <p>Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">class</span> <span class="nc">JackRussell</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">dog_2</span> <span class="o">=</span> <span class="n">JackRussell</span><span class="p">(</span><span class="s1">'Jeff'</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">dog_2</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">dog_2</span><span class="o">.</span><span class="n">family</span><span class="p">()</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">JackRussell</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
+<span class="n">dog_2</span> <span class="o">=</span> <span class="n">JackRussell</span><span class="p">(</span><span class="s1">'Jeff'</span><span class="p">)</span>
+<span class="n">dog_2</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+<span class="n">dog_2</span><span class="o">.</span><span class="n">family</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Which will also print:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">Woof</span><span class="err">!</span></code></span>
-<span class="code-line"><span class="n">Animal</span> <span class="n">Kingdom</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
+<span class="n">Animal</span> <span class="n">Kingdom</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now what if we wanted to specify the family that all of our dog classes are, we can do this by overriding their parent class (similar to how we are overriding the speak function):</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span>
-<span class="code-line">8</span>
-<span class="code-line">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Mammal"</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">print</span><span class="p">(</span><span class="s2">"Woof!"</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Mammal"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Woof!"</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Which then when we run both the below code:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Jay"</span><span class="p">)</span></code></span>
-<span class="code-line"><span class="n">dog</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">dog</span><span class="o">.</span><span class="n">family</span><span class="p">()</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">class</span> <span class="nc">JackRussell</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span></span>
-<span class="code-line">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">dog_2</span> <span class="o">=</span> <span class="n">JackRussell</span><span class="p">(</span><span class="s1">'Jeff'</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">dog_2</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">dog_2</span><span class="o">.</span><span class="n">family</span><span class="p">()</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Jay"</span><span class="p">)</span>
+<span class="n">dog</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+<span class="n">dog</span><span class="o">.</span><span class="n">family</span><span class="p">()</span>
 
+<span class="k">class</span> <span class="nc">JackRussell</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Animal'</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">dog_2</span> <span class="o">=</span> <span class="n">JackRussell</span><span class="p">(</span><span class="s1">'Jeff'</span><span class="p">)</span>
+<span class="n">dog_2</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+<span class="n">dog_2</span><span class="o">.</span><span class="n">family</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>We will now get:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">Woof</span><span class="err">!</span></code></span>
-<span class="code-line"><span class="n">Mammal</span></span>
-<span class="code-line"><span class="n">Woof</span><span class="err">!</span></span>
-<span class="code-line"><span class="n">Mammal</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
+<span class="n">Mammal</span>
+<span class="n">Woof</span><span class="err">!</span>
+<span class="n">Mammal</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>You should now be comfortable in understanding how inheritance works. Normally, it's best practice to inherit only from a single parent class when creating subclasses. As multiple inheritance makes your programs less complicated and easier to manage. However, for large programs, it is very difficult to avoid multiple inheritance.</p>
   </div>
   <div class="tag-cloud">

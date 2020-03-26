@@ -60,8 +60,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -133,14 +133,14 @@
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">plotly</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">noise</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib</span></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span></span>
-<span class="code-line"><span class="o">%</span><span class="k">matplotlib</span> inline</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">import</span> <span class="nn">plotly</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">noise</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -151,18 +151,18 @@
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">world</span></span>
-<span class="code-line"><span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">'lower'</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Find maximum value index in numpy array</span></span>
-<span class="code-line"><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">())</span></span>
-<span class="code-line"><span class="n">max_z_x_location</span><span class="p">,</span> <span class="n">max_z_y_location</span> <span class="o">=</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">max_z_x_location</span><span class="p">,</span><span class="n">max_z_y_location</span><span class="p">,</span><span class="s1">'ro'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Find minimum value index in numpy array</span></span>
-<span class="code-line"><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">())</span></span>
-<span class="code-line"><span class="n">min_z_x_location</span><span class="p">,</span> <span class="n">min_z_y_location</span> <span class="o">=</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">min_z_x_location</span><span class="p">,</span><span class="n">min_z_y_location</span><span class="p">,</span><span class="s1">'yo'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">world</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">'lower'</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span>
+
+<span class="c1"># Find maximum value index in numpy array</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">max_z_x_location</span><span class="p">,</span> <span class="n">max_z_y_location</span> <span class="o">=</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">max_z_x_location</span><span class="p">,</span><span class="n">max_z_y_location</span><span class="p">,</span><span class="s1">'ro'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Find minimum value index in numpy array</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">min_z_x_location</span><span class="p">,</span> <span class="n">min_z_y_location</span> <span class="o">=</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">min_z_x_location</span><span class="p">,</span><span class="n">min_z_y_location</span><span class="p">,</span><span class="s1">'yo'</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -172,7 +172,7 @@
 <div class="output_area">
 <div class="prompt output_prompt">Out[12]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="code-line">[&lt;matplotlib.lines.Line2D at 0x1d927058b88&gt;]</span></pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x1d927058b88&gt;]</pre>
 </div>
 </div>
 <div class="output_area">
@@ -197,43 +197,43 @@
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># Source: https://stackoverflow.com/questions/10996769/pixel-neighbors-in-2d-array-image-using-python</span></span>
-<span class="code-line"><span class="c1"># This code by pv (https://stackoverflow.com/users/108184/pv), is to find all the adjacent values around a specific index</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">numpy.lib.stride_tricks</span> <span class="kn">import</span> <span class="n">as_strided</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">window_size</span><span class="p">):</span></span>
-<span class="code-line">    <span class="sd">""" Construct a sliding window view of the array"""</span></span>
-<span class="code-line">    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">window_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span></span>
-<span class="code-line">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need 2-D input"</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">window_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need a positive window size"</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">window_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span></span>
-<span class="code-line">             <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">window_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span></span>
-<span class="code-line">             <span class="n">window_size</span><span class="p">,</span> <span class="n">window_size</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">if</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span></span>
-<span class="code-line">        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span></span>
-<span class="code-line">    <span class="k">if</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span></span>
-<span class="code-line">        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></span>
-<span class="code-line">    <span class="n">strides</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">,</span></span>
-<span class="code-line">               <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">as_strided</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="n">strides</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">cell_neighbours</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span></span>
-<span class="code-line">    <span class="sd">"""Return d-th neighbors of cell (i, j)"""</span></span>
-<span class="code-line">    <span class="n">w</span> <span class="o">=</span> <span class="n">sliding_window</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">jx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">i0</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">d</span> <span class="o">-</span> <span class="n">ix</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">j0</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">d</span> <span class="o">-</span> <span class="n">jx</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">i1</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="n">ix</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">j1</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="n">jx</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">w</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="n">jx</span><span class="p">][</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">,</span><span class="n">j0</span><span class="p">:</span><span class="n">j1</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Source: https://stackoverflow.com/questions/10996769/pixel-neighbors-in-2d-array-image-using-python</span>
+<span class="c1"># This code by pv (https://stackoverflow.com/users/108184/pv), is to find all the adjacent values around a specific index</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.lib.stride_tricks</span> <span class="kn">import</span> <span class="n">as_strided</span>
+
+<span class="k">def</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">window_size</span><span class="p">):</span>
+    <span class="sd">""" Construct a sliding window view of the array"""</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">window_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need 2-D input"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">window_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"need a positive window size"</span><span class="p">)</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">window_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">window_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="n">window_size</span><span class="p">,</span> <span class="n">window_size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">strides</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">,</span>
+               <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">as_strided</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="n">strides</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">cell_neighbours</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="sd">"""Return d-th neighbors of cell (i, j)"""</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">sliding_window</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">jx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">i0</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">d</span> <span class="o">-</span> <span class="n">ix</span><span class="p">)</span>
+    <span class="n">j0</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">d</span> <span class="o">-</span> <span class="n">jx</span><span class="p">)</span>
+    <span class="n">i1</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="n">ix</span><span class="p">)</span>
+    <span class="n">j1</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="n">jx</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">w</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="n">jx</span><span class="p">][</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">,</span><span class="n">j0</span><span class="p">:</span><span class="n">j1</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -259,58 +259,58 @@
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nd">@dataclass</span></span>
-<span class="code-line"><span class="k">class</span> <span class="nc">descent_step</span><span class="p">:</span></span>
-<span class="code-line">    <span class="sd">"""Class for storing each step taken in gradient descent"""</span></span>
-<span class="code-line">    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span></span>
-<span class="code-line">    <span class="n">x_index</span><span class="p">:</span> <span class="nb">float</span></span>
-<span class="code-line">    <span class="n">y_index</span><span class="p">:</span> <span class="nb">float</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">gradient_descent_3d</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">x_start</span><span class="p">,</span><span class="n">y_start</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span></span>
-<span class="code-line">    <span class="c1"># Initial point to start gradient descent at</span></span>
-<span class="code-line">    <span class="n">step</span> <span class="o">=</span> <span class="n">descent_step</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">y_start</span><span class="p">][</span><span class="n">x_start</span><span class="p">],</span><span class="n">x_start</span><span class="p">,</span><span class="n">y_start</span><span class="p">)</span></span>
-<span class="code-line">    </span>
-<span class="code-line">    <span class="c1"># Store each step taken in gradient descent in a list</span></span>
-<span class="code-line">    <span class="n">step_history</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    <span class="n">step_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span></span>
-<span class="code-line">    </span>
-<span class="code-line">    <span class="c1"># Plot 2D representation of array with startng point as a red marker</span></span>
-<span class="code-line">    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span></span>
-<span class="code-line">        <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">'lower'</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span></span>
-<span class="code-line">        <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span><span class="n">y_start</span><span class="p">,</span><span class="s1">'ro'</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">current_x</span> <span class="o">=</span> <span class="n">x_start</span></span>
-<span class="code-line">    <span class="n">current_y</span> <span class="o">=</span> <span class="n">y_start</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="c1"># Loop through specified number of steps of gradient descent to take</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span></span>
-<span class="code-line">        <span class="n">prev_x</span> <span class="o">=</span> <span class="n">current_x</span></span>
-<span class="code-line">        <span class="n">prev_y</span> <span class="o">=</span> <span class="n">current_y</span></span>
-<span class="code-line">        </span>
-<span class="code-line">        <span class="c1"># Extract array of neighbouring cells around current step location with size nominated</span></span>
-<span class="code-line">        <span class="n">neighbours</span><span class="o">=</span><span class="n">cell_neighbours</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">current_y</span><span class="p">,</span><span class="n">current_x</span><span class="p">,</span><span class="n">step_size</span><span class="p">)</span></span>
-<span class="code-line">        </span>
-<span class="code-line">        <span class="c1"># Locate minimum in array (steepest slope from current point)</span></span>
-<span class="code-line">        <span class="n">next_step</span> <span class="o">=</span> <span class="n">neighbours</span><span class="o">.</span><span class="n">min</span><span class="p">()</span></span>
-<span class="code-line">        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">array</span> <span class="o">==</span> <span class="n">next_step</span><span class="p">)</span></span>
-<span class="code-line">        </span>
-<span class="code-line">        <span class="c1"># Update current point to now be the next point after stepping</span></span>
-<span class="code-line">        <span class="n">current_x</span><span class="p">,</span> <span class="n">current_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></span>
-<span class="code-line">        <span class="n">step</span> <span class="o">=</span> <span class="n">descent_step</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">current_y</span><span class="p">][</span><span class="n">current_x</span><span class="p">],</span><span class="n">current_x</span><span class="p">,</span><span class="n">current_y</span><span class="p">)</span></span>
-<span class="code-line">        </span>
-<span class="code-line">        <span class="n">step_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span></span>
-<span class="code-line">        </span>
-<span class="code-line">        <span class="c1"># Plot each step taken as a black line to the current point nominated by a red marker</span></span>
-<span class="code-line">        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span></span>
-<span class="code-line">            <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">prev_x</span><span class="p">,</span><span class="n">current_x</span><span class="p">],[</span><span class="n">prev_y</span><span class="p">,</span><span class="n">current_y</span><span class="p">],</span><span class="s1">'k-'</span><span class="p">)</span></span>
-<span class="code-line">            <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">current_x</span><span class="p">,</span><span class="n">current_y</span><span class="p">,</span><span class="s1">'ro'</span><span class="p">)</span></span>
-<span class="code-line">            </span>
-<span class="code-line">        <span class="c1"># If step is to the same location as previously, this infers convergence and end loop</span></span>
-<span class="code-line">        <span class="k">if</span> <span class="n">prev_y</span> <span class="o">==</span> <span class="n">current_y</span> <span class="ow">and</span> <span class="n">prev_x</span> <span class="o">==</span> <span class="n">current_x</span><span class="p">:</span></span>
-<span class="code-line">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Converged in </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> steps"</span><span class="p">)</span></span>
-<span class="code-line">            <span class="k">break</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">next_step</span><span class="p">,</span><span class="n">step_history</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">descent_step</span><span class="p">:</span>
+    <span class="sd">"""Class for storing each step taken in gradient descent"""</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">x_index</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">y_index</span><span class="p">:</span> <span class="nb">float</span>
+
+<span class="k">def</span> <span class="nf">gradient_descent_3d</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">x_start</span><span class="p">,</span><span class="n">y_start</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="c1"># Initial point to start gradient descent at</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">descent_step</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">y_start</span><span class="p">][</span><span class="n">x_start</span><span class="p">],</span><span class="n">x_start</span><span class="p">,</span><span class="n">y_start</span><span class="p">)</span>
+    
+    <span class="c1"># Store each step taken in gradient descent in a list</span>
+    <span class="n">step_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">step_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    
+    <span class="c1"># Plot 2D representation of array with startng point as a red marker</span>
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">'lower'</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span>
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span><span class="n">y_start</span><span class="p">,</span><span class="s1">'ro'</span><span class="p">)</span>
+    <span class="n">current_x</span> <span class="o">=</span> <span class="n">x_start</span>
+    <span class="n">current_y</span> <span class="o">=</span> <span class="n">y_start</span>
+
+    <span class="c1"># Loop through specified number of steps of gradient descent to take</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+        <span class="n">prev_x</span> <span class="o">=</span> <span class="n">current_x</span>
+        <span class="n">prev_y</span> <span class="o">=</span> <span class="n">current_y</span>
+        
+        <span class="c1"># Extract array of neighbouring cells around current step location with size nominated</span>
+        <span class="n">neighbours</span><span class="o">=</span><span class="n">cell_neighbours</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">current_y</span><span class="p">,</span><span class="n">current_x</span><span class="p">,</span><span class="n">step_size</span><span class="p">)</span>
+        
+        <span class="c1"># Locate minimum in array (steepest slope from current point)</span>
+        <span class="n">next_step</span> <span class="o">=</span> <span class="n">neighbours</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">array</span> <span class="o">==</span> <span class="n">next_step</span><span class="p">)</span>
+        
+        <span class="c1"># Update current point to now be the next point after stepping</span>
+        <span class="n">current_x</span><span class="p">,</span> <span class="n">current_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">descent_step</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">current_y</span><span class="p">][</span><span class="n">current_x</span><span class="p">],</span><span class="n">current_x</span><span class="p">,</span><span class="n">current_y</span><span class="p">)</span>
+        
+        <span class="n">step_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        
+        <span class="c1"># Plot each step taken as a black line to the current point nominated by a red marker</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">prev_x</span><span class="p">,</span><span class="n">current_x</span><span class="p">],[</span><span class="n">prev_y</span><span class="p">,</span><span class="n">current_y</span><span class="p">],</span><span class="s1">'k-'</span><span class="p">)</span>
+            <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">current_x</span><span class="p">,</span><span class="n">current_y</span><span class="p">,</span><span class="s1">'ro'</span><span class="p">)</span>
+            
+        <span class="c1"># If step is to the same location as previously, this infers convergence and end loop</span>
+        <span class="k">if</span> <span class="n">prev_y</span> <span class="o">==</span> <span class="n">current_y</span> <span class="ow">and</span> <span class="n">prev_x</span> <span class="o">==</span> <span class="n">current_x</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Converged in </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> steps"</span><span class="p">)</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">next_step</span><span class="p">,</span><span class="n">step_history</span>
 </pre></div>
 </div>
 </div>
@@ -331,26 +331,26 @@
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">global_minimum</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="n">global_minimum</span><span class="p">)</span></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Target: </span><span class="si">{</span><span class="n">global_minimum</span><span class="si">}</span><span class="s2"> @ </span><span class="si">{</span><span class="n">indices</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">step_size</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line"><span class="n">found_minimum</span> <span class="o">=</span> <span class="mi">99999</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Random starting point</span></span>
-<span class="code-line"><span class="n">start_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">start_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Increase step size until convergence on global minimum</span></span>
-<span class="code-line"><span class="k">while</span> <span class="n">found_minimum</span> <span class="o">!=</span> <span class="n">global_minimum</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">step_size</span> <span class="o">+=</span> <span class="mi">1</span></span>
-<span class="code-line">    <span class="n">found_minimum</span><span class="p">,</span><span class="n">steps</span> <span class="o">=</span> <span class="n">gradient_descent_3d</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">start_x</span><span class="p">,</span><span class="n">start_y</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Optimal step size </span><span class="si">{</span><span class="n">step_size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">found_minimum</span><span class="p">,</span><span class="n">steps</span> <span class="o">=</span> <span class="n">gradient_descent_3d</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">start_x</span><span class="p">,</span><span class="n">start_y</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Steps: </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">global_minimum</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="n">global_minimum</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Target: </span><span class="si">{</span><span class="n">global_minimum</span><span class="si">}</span><span class="s2"> @ </span><span class="si">{</span><span class="n">indices</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">step_size</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">found_minimum</span> <span class="o">=</span> <span class="mi">99999</span>
+
+<span class="c1"># Random starting point</span>
+<span class="n">start_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">start_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Increase step size until convergence on global minimum</span>
+<span class="k">while</span> <span class="n">found_minimum</span> <span class="o">!=</span> <span class="n">global_minimum</span><span class="p">:</span>
+    <span class="n">step_size</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">found_minimum</span><span class="p">,</span><span class="n">steps</span> <span class="o">=</span> <span class="n">gradient_descent_3d</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">start_x</span><span class="p">,</span><span class="n">start_y</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Optimal step size </span><span class="si">{</span><span class="n">step_size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">found_minimum</span><span class="p">,</span><span class="n">steps</span> <span class="o">=</span> <span class="n">gradient_descent_3d</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">start_x</span><span class="p">,</span><span class="n">start_y</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Steps: </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -360,20 +360,20 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">Target: -0.0994970053434372 @ (array([16], dtype=int64), array([0], dtype=int64))</span>
-<span class="code-line">Converged in 9 steps</span>
-<span class="code-line">Converged in 5 steps</span>
-<span class="code-line">Converged in 7 steps</span>
-<span class="code-line">Converged in 6 steps</span>
-<span class="code-line">Converged in 4 steps</span>
-<span class="code-line">Converged in 4 steps</span>
-<span class="code-line">Converged in 3 steps</span>
-<span class="code-line">Converged in 3 steps</span>
-<span class="code-line">Converged in 3 steps</span>
-<span class="code-line">Converged in 5 steps</span>
-<span class="code-line">Optimal step size 10</span>
-<span class="code-line">Converged in 5 steps</span>
-<span class="code-line">Steps: [descent_step(value=0.10347005724906921, x_index=38, y_index=28), descent_step(value=0.007558110170066357, x_index=28, y_index=38), descent_step(value=-0.03461135923862457, x_index=18, y_index=39), descent_step(value=-0.03682023286819458, x_index=8, y_index=35), descent_step(value=-0.07587684690952301, x_index=0, y_index=26), descent_step(value=-0.0994970053434372, x_index=0, y_index=16), descent_step(value=-0.0994970053434372, x_index=0, y_index=16)]</span>
+<pre>Target: -0.0994970053434372 @ (array([16], dtype=int64), array([0], dtype=int64))
+Converged in 9 steps
+Converged in 5 steps
+Converged in 7 steps
+Converged in 6 steps
+Converged in 4 steps
+Converged in 4 steps
+Converged in 3 steps
+Converged in 3 steps
+Converged in 3 steps
+Converged in 5 steps
+Optimal step size 10
+Converged in 5 steps
+Steps: [descent_step(value=0.10347005724906921, x_index=38, y_index=28), descent_step(value=0.007558110170066357, x_index=28, y_index=38), descent_step(value=-0.03461135923862457, x_index=18, y_index=39), descent_step(value=-0.03682023286819458, x_index=8, y_index=35), descent_step(value=-0.07587684690952301, x_index=0, y_index=26), descent_step(value=-0.0994970053434372, x_index=0, y_index=16), descent_step(value=-0.0994970053434372, x_index=0, y_index=16)]
 </pre>
 </div>
 </div>
@@ -399,32 +399,32 @@
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># Source https://stackoverflow.com/questions/51272288/how-to-calculate-the-vector-from-two-points-in-3d-with-python</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">multiDimenDist</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">):</span></span>
-<span class="code-line">   <span class="c1">#find the difference between the two points, its really the same as below</span></span>
-<span class="code-line">   <span class="n">deltaVals</span> <span class="o">=</span> <span class="p">[</span><span class="n">point2</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span><span class="o">-</span><span class="n">point1</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span> <span class="k">for</span> <span class="n">dimension</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">point1</span><span class="p">))]</span></span>
-<span class="code-line">   <span class="n">runningSquared</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line">   <span class="c1">#because the pythagarom theorm works for any dimension we can just use that</span></span>
-<span class="code-line">   <span class="k">for</span> <span class="n">coOrd</span> <span class="ow">in</span> <span class="n">deltaVals</span><span class="p">:</span></span>
-<span class="code-line">       <span class="n">runningSquared</span> <span class="o">+=</span> <span class="n">coOrd</span><span class="o">**</span><span class="mi">2</span></span>
-<span class="code-line">   <span class="k">return</span> <span class="n">runningSquared</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">findVec</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">,</span><span class="n">unitSphere</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span></span>
-<span class="code-line">  <span class="c1">#setting unitSphere to True will make the vector scaled down to a sphere with a radius one, instead of it's orginal length</span></span>
-<span class="code-line">  <span class="n">finalVector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">coOrd</span> <span class="ow">in</span> <span class="n">point1</span><span class="p">]</span></span>
-<span class="code-line">  <span class="k">for</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">coOrd</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">point1</span><span class="p">):</span></span>
-<span class="code-line">      <span class="c1">#finding total differnce for that co-ordinate(x,y,z...)</span></span>
-<span class="code-line">      <span class="n">deltaCoOrd</span> <span class="o">=</span> <span class="n">point2</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span><span class="o">-</span><span class="n">coOrd</span></span>
-<span class="code-line">      <span class="c1">#adding total difference</span></span>
-<span class="code-line">      <span class="n">finalVector</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span> <span class="o">=</span> <span class="n">deltaCoOrd</span></span>
-<span class="code-line">  <span class="k">if</span> <span class="n">unitSphere</span><span class="p">:</span></span>
-<span class="code-line">      <span class="n">totalDist</span> <span class="o">=</span> <span class="n">multiDimenDist</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">)</span></span>
-<span class="code-line">      <span class="n">unitVector</span> <span class="o">=</span><span class="p">[]</span></span>
-<span class="code-line">      <span class="k">for</span> <span class="n">dimen</span> <span class="ow">in</span> <span class="n">finalVector</span><span class="p">:</span></span>
-<span class="code-line">          <span class="n">unitVector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">dimen</span><span class="o">/</span><span class="n">totalDist</span><span class="p">)</span></span>
-<span class="code-line">      <span class="k">return</span> <span class="n">unitVector</span></span>
-<span class="code-line">  <span class="k">else</span><span class="p">:</span></span>
-<span class="code-line">      <span class="k">return</span> <span class="n">finalVector</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Source https://stackoverflow.com/questions/51272288/how-to-calculate-the-vector-from-two-points-in-3d-with-python</span>
+
+<span class="k">def</span> <span class="nf">multiDimenDist</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">):</span>
+   <span class="c1">#find the difference between the two points, its really the same as below</span>
+   <span class="n">deltaVals</span> <span class="o">=</span> <span class="p">[</span><span class="n">point2</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span><span class="o">-</span><span class="n">point1</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span> <span class="k">for</span> <span class="n">dimension</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">point1</span><span class="p">))]</span>
+   <span class="n">runningSquared</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="c1">#because the pythagarom theorm works for any dimension we can just use that</span>
+   <span class="k">for</span> <span class="n">coOrd</span> <span class="ow">in</span> <span class="n">deltaVals</span><span class="p">:</span>
+       <span class="n">runningSquared</span> <span class="o">+=</span> <span class="n">coOrd</span><span class="o">**</span><span class="mi">2</span>
+   <span class="k">return</span> <span class="n">runningSquared</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">findVec</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">,</span><span class="n">unitSphere</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+  <span class="c1">#setting unitSphere to True will make the vector scaled down to a sphere with a radius one, instead of it's orginal length</span>
+  <span class="n">finalVector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">coOrd</span> <span class="ow">in</span> <span class="n">point1</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">coOrd</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">point1</span><span class="p">):</span>
+      <span class="c1">#finding total differnce for that co-ordinate(x,y,z...)</span>
+      <span class="n">deltaCoOrd</span> <span class="o">=</span> <span class="n">point2</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span><span class="o">-</span><span class="n">coOrd</span>
+      <span class="c1">#adding total difference</span>
+      <span class="n">finalVector</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span> <span class="o">=</span> <span class="n">deltaCoOrd</span>
+  <span class="k">if</span> <span class="n">unitSphere</span><span class="p">:</span>
+      <span class="n">totalDist</span> <span class="o">=</span> <span class="n">multiDimenDist</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span><span class="n">point2</span><span class="p">)</span>
+      <span class="n">unitVector</span> <span class="o">=</span><span class="p">[]</span>
+      <span class="k">for</span> <span class="n">dimen</span> <span class="ow">in</span> <span class="n">finalVector</span><span class="p">:</span>
+          <span class="n">unitVector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">dimen</span><span class="o">/</span><span class="n">totalDist</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">unitVector</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">finalVector</span>
 </pre></div>
 </div>
 </div>
@@ -442,69 +442,69 @@
 <div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">generate_3d_plot</span><span class="p">(</span><span class="n">step_history</span><span class="p">):</span></span>
-<span class="code-line">    <span class="c1"># Initialise empty lists for markers</span></span>
-<span class="code-line">    <span class="n">step_markers_x</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    <span class="n">step_markers_y</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    <span class="n">step_markers_z</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    <span class="n">step_markers_u</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    <span class="n">step_markers_v</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    <span class="n">step_markers_w</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    </span>
-<span class="code-line">    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">step_history</span><span class="p">):</span></span>
-<span class="code-line">        <span class="n">step_markers_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">x_index</span><span class="p">)</span></span>
-<span class="code-line">        <span class="n">step_markers_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">y_index</span><span class="p">)</span></span>
-<span class="code-line">        <span class="n">step_markers_z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></span>
-<span class="code-line">        </span>
-<span class="code-line">        <span class="c1"># If we haven't reached the final step, calculate the vector between the current step and the next step</span></span>
-<span class="code-line">        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span></span>
-<span class="code-line">            <span class="n">vec1</span> <span class="o">=</span> <span class="p">[</span><span class="n">step</span><span class="o">.</span><span class="n">x_index</span><span class="p">,</span><span class="n">step</span><span class="o">.</span><span class="n">y_index</span><span class="p">,</span><span class="n">step</span><span class="o">.</span><span class="n">value</span><span class="p">]</span></span>
-<span class="code-line">            <span class="n">vec2</span> <span class="o">=</span> <span class="p">[</span><span class="n">steps</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">x_index</span><span class="p">,</span><span class="n">steps</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">y_index</span><span class="p">,</span><span class="n">steps</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">]</span></span>
-<span class="code-line"></span>
-<span class="code-line">            <span class="n">result_vector</span> <span class="o">=</span> <span class="n">findVec</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span><span class="n">vec2</span><span class="p">)</span></span>
-<span class="code-line">            <span class="n">step_markers_u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_vector</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></span>
-<span class="code-line">            <span class="n">step_markers_v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_vector</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></span>
-<span class="code-line">            <span class="n">step_markers_w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_vector</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></span>
-<span class="code-line">        <span class="k">else</span><span class="p">:</span></span>
-<span class="code-line">            <span class="n">step_markers_u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span></span>
-<span class="code-line">            <span class="n">step_markers_v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span></span>
-<span class="code-line">            <span class="n">step_markers_w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span></span>
-<span class="code-line">    </span>
-<span class="code-line">    <span class="c1"># Include cones at each marker to show direction of step, scatter3d is to show the red line between points and surface for the terrain</span></span>
-<span class="code-line">    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span></span>
-<span class="code-line">        <span class="n">go</span><span class="o">.</span><span class="n">Cone</span><span class="p">(</span></span>
-<span class="code-line">        <span class="n">x</span><span class="o">=</span><span class="n">step_markers_x</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">y</span><span class="o">=</span><span class="n">step_markers_y</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">z</span><span class="o">=</span><span class="n">step_markers_z</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">u</span><span class="o">=</span><span class="n">step_markers_u</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">v</span><span class="o">=</span><span class="n">step_markers_v</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">w</span><span class="o">=</span><span class="n">step_markers_w</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">sizemode</span><span class="o">=</span><span class="s2">"absolute"</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">sizeref</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">anchor</span><span class="o">=</span><span class="s1">'tail'</span><span class="p">),</span></span>
-<span class="code-line"></span>
-<span class="code-line">        <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span></span>
-<span class="code-line">        <span class="n">x</span><span class="o">=</span><span class="n">step_markers_x</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">y</span><span class="o">=</span><span class="n">step_markers_y</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">z</span><span class="o">=</span><span class="n">step_markers_z</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">mode</span><span class="o">=</span><span class="s1">'lines'</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span></span>
-<span class="code-line">            <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span></span>
-<span class="code-line">            <span class="n">width</span><span class="o">=</span><span class="mi">2</span></span>
-<span class="code-line">        <span class="p">)),</span></span>
-<span class="code-line"></span>
-<span class="code-line">        <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">colorscale</span><span class="o">=</span><span class="n">terrain</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="n">world</span><span class="p">,</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)])</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="c1"># Z axis is limited to the extent of the terrain array</span></span>
-<span class="code-line">    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span></span>
-<span class="code-line">        <span class="n">title</span><span class="o">=</span><span class="s1">'Gradient Descent Steps'</span><span class="p">,</span></span>
-<span class="code-line">        <span class="n">scene</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">zaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">world</span><span class="o">.</span><span class="n">max</span><span class="p">()],),),)</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">fig</span></span>
-<span class="code-line">    </span>
-<span class="code-line"><span class="c1"># Generate 3D plot from previous random starting location</span></span>
-<span class="code-line"><span class="n">fig</span> <span class="o">=</span> <span class="n">generate_3d_plot</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">HTML</span><span class="p">(</span><span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'random_starting_point_3d_gradient_descent.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">))</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generate_3d_plot</span><span class="p">(</span><span class="n">step_history</span><span class="p">):</span>
+    <span class="c1"># Initialise empty lists for markers</span>
+    <span class="n">step_markers_x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">step_markers_y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">step_markers_z</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">step_markers_u</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">step_markers_v</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">step_markers_w</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">step_history</span><span class="p">):</span>
+        <span class="n">step_markers_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">x_index</span><span class="p">)</span>
+        <span class="n">step_markers_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">y_index</span><span class="p">)</span>
+        <span class="n">step_markers_z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        
+        <span class="c1"># If we haven't reached the final step, calculate the vector between the current step and the next step</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">vec1</span> <span class="o">=</span> <span class="p">[</span><span class="n">step</span><span class="o">.</span><span class="n">x_index</span><span class="p">,</span><span class="n">step</span><span class="o">.</span><span class="n">y_index</span><span class="p">,</span><span class="n">step</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
+            <span class="n">vec2</span> <span class="o">=</span> <span class="p">[</span><span class="n">steps</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">x_index</span><span class="p">,</span><span class="n">steps</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">y_index</span><span class="p">,</span><span class="n">steps</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
+
+            <span class="n">result_vector</span> <span class="o">=</span> <span class="n">findVec</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span><span class="n">vec2</span><span class="p">)</span>
+            <span class="n">step_markers_u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_vector</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">step_markers_v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_vector</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">step_markers_w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_vector</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">step_markers_u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">step_markers_v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">step_markers_w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    
+    <span class="c1"># Include cones at each marker to show direction of step, scatter3d is to show the red line between points and surface for the terrain</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">go</span><span class="o">.</span><span class="n">Cone</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">step_markers_x</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">step_markers_y</span><span class="p">,</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">step_markers_z</span><span class="p">,</span>
+        <span class="n">u</span><span class="o">=</span><span class="n">step_markers_u</span><span class="p">,</span>
+        <span class="n">v</span><span class="o">=</span><span class="n">step_markers_v</span><span class="p">,</span>
+        <span class="n">w</span><span class="o">=</span><span class="n">step_markers_w</span><span class="p">,</span>
+        <span class="n">sizemode</span><span class="o">=</span><span class="s2">"absolute"</span><span class="p">,</span>
+        <span class="n">sizeref</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">anchor</span><span class="o">=</span><span class="s1">'tail'</span><span class="p">),</span>
+
+        <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">step_markers_x</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">step_markers_y</span><span class="p">,</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">step_markers_z</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s1">'lines'</span><span class="p">,</span>
+        <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">2</span>
+        <span class="p">)),</span>
+
+        <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">colorscale</span><span class="o">=</span><span class="n">terrain</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="n">world</span><span class="p">,</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)])</span>
+
+
+    <span class="c1"># Z axis is limited to the extent of the terrain array</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">'Gradient Descent Steps'</span><span class="p">,</span>
+        <span class="n">scene</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">zaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">world</span><span class="o">.</span><span class="n">max</span><span class="p">()],),),)</span>
+    <span class="k">return</span> <span class="n">fig</span>
+    
+<span class="c1"># Generate 3D plot from previous random starting location</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">generate_3d_plot</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'random_starting_point_3d_gradient_descent.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -555,9 +555,9 @@
 <div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">found_minimum</span><span class="p">,</span><span class="n">steps</span> <span class="o">=</span> <span class="n">gradient_descent_3d</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">max_z_x_location</span><span class="p">,</span><span class="n">max_z_y_location</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">fig</span> <span class="o">=</span> <span class="n">generate_3d_plot</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">HTML</span><span class="p">(</span><span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'maximum_starting_point_step_size_5_3d_gradient_descent.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">))</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">found_minimum</span><span class="p">,</span><span class="n">steps</span> <span class="o">=</span> <span class="n">gradient_descent_3d</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">max_z_x_location</span><span class="p">,</span><span class="n">max_z_y_location</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">generate_3d_plot</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'maximum_starting_point_step_size_5_3d_gradient_descent.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -567,7 +567,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">Converged in 3 steps</span>
+<pre>Converged in 3 steps
 </pre>
 </div>
 </div>
@@ -615,7 +615,7 @@
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span> </span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>

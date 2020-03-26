@@ -59,8 +59,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -126,31 +126,31 @@
 <li>Pick the desired solution.</li>
 </ol>
 <p>To generate random portfolios, we define a function such that we can pass it differing variables as to tweak our outcomes in the future.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">generate_portfolios</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">weights_record</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">):</span></span>
-<span class="code-line">        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">companies</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line">        <span class="n">weights</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span></span>
-<span class="code-line">        <span class="n">weights_record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span></span>
-<span class="code-line">        <span class="n">returns</span><span class="p">,</span> <span class="n">volatility</span> <span class="o">=</span> <span class="n">portfolio_performance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">)</span></span>
-<span class="code-line">        <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="n">volatility</span></span>
-<span class="code-line">        <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="n">returns</span></span>
-<span class="code-line">        <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">returns</span> <span class="o">-</span> <span class="n">risk_free_rate</span><span class="p">)</span> <span class="o">/</span> <span class="n">volatility</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">weights_record</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">generate_portfolios</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">))</span>
+    <span class="n">weights_record</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">portfolio</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">companies</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">weights</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="n">weights_record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="n">returns</span><span class="p">,</span> <span class="n">volatility</span> <span class="o">=</span> <span class="n">portfolio_performance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="n">volatility</span>
+        <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="n">returns</span>
+        <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="n">portfolio</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">returns</span> <span class="o">-</span> <span class="n">risk_free_rate</span><span class="p">)</span> <span class="o">/</span> <span class="n">volatility</span>
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">weights_record</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>To step through this function:</p>
 <ol>
 <li>Define empty location for our portfolio performance results to be stored along with recording weights so we can extract them once selected,</li>
@@ -164,107 +164,107 @@
 <p><img alt="\
 Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https://cdn-images-1.medium.com/max/1600/1*IabrYvsgHE07z2CJwoE9Zw.jpeg"/></p>
 <p><a href="https://medium.com/@bbrenyah">Bernard Brenyah</a>, whom I mentioned at the beginning of the post, has provided a clear explanation of how the above formula can be expressed in matrix calculation in one of <a href="https://medium.com/python-data/assessing-risks-and-return-with-probabilities-of-events-with-python-c564d9be4db4">his blog post</a>s. In which we just take the matrix calculation and multiply by 253 for number of trading days in Australia.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">portfolio_performance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="n">returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="o">*</span><span class="n">average_returns</span><span class="p">)</span> <span class="o">*</span> <span class="mi">253</span></span>
-<span class="code-line">    <span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">weights</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">volatility</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">253</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">returns</span><span class="p">,</span> <span class="n">volatility</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">portfolio_performance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">):</span>
+    <span class="n">returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="o">*</span><span class="n">average_returns</span><span class="p">)</span> <span class="o">*</span> <span class="mi">253</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">weights</span><span class="p">))</span>
+    <span class="n">volatility</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">253</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">returns</span><span class="p">,</span> <span class="n">volatility</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now that we have X number of randomly generated portfolios, all ranked against one another, it's time to plot so that our results can be visualized.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span>
-<span class="code-line">15</span>
-<span class="code-line">16</span>
-<span class="code-line">17</span>
-<span class="code-line">18</span>
-<span class="code-line">19</span>
-<span class="code-line">20</span>
-<span class="code-line">21</span>
-<span class="code-line">22</span>
-<span class="code-line">23</span>
-<span class="code-line">24</span>
-<span class="code-line">25</span>
-<span class="code-line">26</span>
-<span class="code-line">27</span>
-<span class="code-line">28</span>
-<span class="code-line">29</span>
-<span class="code-line">30</span>
-<span class="code-line">31</span>
-<span class="code-line">32</span>
-<span class="code-line">33</span>
-<span class="code-line">34</span>
-<span class="code-line">35</span>
-<span class="code-line">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">display_random_efficient_frontier</span><span class="p">(</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="n">results</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">generate_portfolios</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">max_sharpe_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></span>
-<span class="code-line">    <span class="n">max_volatility</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">max_sharpe_index</span><span class="p">]</span></span>
-<span class="code-line">    <span class="n">max_return</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">max_sharpe_index</span><span class="p">]</span></span>
-<span class="code-line">    <span class="n">max_sharpe_allocations</span> <span class="o">=</span> <span class="n">allocations</span><span class="p">(</span><span class="n">max_sharpe_index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Return: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_return</span><span class="p">))</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Volatility: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_volatility</span><span class="p">))</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">max_sharpe_allocations</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">min_vol_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></span>
-<span class="code-line">    <span class="n">min_volatility</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">min_vol_index</span><span class="p">]</span></span>
-<span class="code-line">    <span class="n">min_return</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">min_vol_index</span><span class="p">]</span></span>
-<span class="code-line">    <span class="n">min_vol_allocations</span> <span class="o">=</span> <span class="n">allocations</span><span class="p">(</span><span class="n">min_vol_index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Return: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_return</span><span class="p">))</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s2">"Volatility: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_volatility</span><span class="p">))</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">min_vol_allocations</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span><span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,:],</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'YlGnBu'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">max_volatility</span><span class="p">,</span><span class="n">max_return</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">'X'</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">'r'</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Maximum Sharpe ratio'</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">min_volatility</span><span class="p">,</span><span class="n">min_return</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">'X'</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Minimum volatility'</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Simulated Portfolio Optimization based on Efficient Frontier'</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Volatility'</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Returns'</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">allocations</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">):</span></span>
-<span class="code-line">    <span class="n">allocation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">index</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'allocation'</span><span class="p">])</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">allocation</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">display_random_efficient_frontier</span><span class="p">(</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">):</span>
+    <span class="n">results</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">generate_portfolios</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">average_returns</span><span class="p">,</span><span class="n">covariance_matrix</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">)</span>
 
+    <span class="n">max_sharpe_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">max_volatility</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">max_sharpe_index</span><span class="p">]</span>
+    <span class="n">max_return</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">max_sharpe_index</span><span class="p">]</span>
+    <span class="n">max_sharpe_allocations</span> <span class="o">=</span> <span class="n">allocations</span><span class="p">(</span><span class="n">max_sharpe_index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"MAX SHARPE RATIO</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Return: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_return</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Volatility: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_volatility</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">max_sharpe_allocations</span><span class="p">)</span>
+
+    <span class="n">min_vol_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">min_volatility</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">min_vol_index</span><span class="p">]</span>
+    <span class="n">min_return</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">min_vol_index</span><span class="p">]</span>
+    <span class="n">min_vol_allocations</span> <span class="o">=</span> <span class="n">allocations</span><span class="p">(</span><span class="n">min_vol_index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">MINIMUM VOLATILITY</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Return: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_return</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Volatility: </span><span class="si">{0:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_volatility</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">min_vol_allocations</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span><span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,:],</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'YlGnBu'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">max_volatility</span><span class="p">,</span><span class="n">max_return</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">'X'</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">'r'</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Maximum Sharpe ratio'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">min_volatility</span><span class="p">,</span><span class="n">min_return</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">'X'</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Minimum volatility'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Simulated Portfolio Optimization based on Efficient Frontier'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Volatility'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Returns'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">allocations</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">):</span>
+    <span class="n">allocation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">index</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'allocation'</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">allocation</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Using the above function 'display_random_efficient_frontier', this will determine our max sharpe ratio portfolio generated and the minimum volatility portfolio with their respective returns. Now it is entirely up to the trader on how much risk they are willing to take on board with their portfolio. With the settings below in conjunction with the previously defined functions and stock data to generate the portfolios (risk free rate determined from <a href="http://www.worldgovernmentbonds.com/country/australia/">this website</a>).</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span></code></span>
-<span class="code-line"><span class="n">mean_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">num_portfolios</span> <span class="o">=</span> <span class="mi">25000</span></span>
-<span class="code-line"><span class="n">risk_free_rate</span> <span class="o">=</span> <span class="mf">0.01977</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">display_random_efficient_frontier</span><span class="p">(</span><span class="n">mean_returns</span><span class="p">,</span><span class="n">cov_matrix</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="n">mean_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+<span class="n">num_portfolios</span> <span class="o">=</span> <span class="mi">25000</span>
+<span class="n">risk_free_rate</span> <span class="o">=</span> <span class="mf">0.01977</span>
 
+<span class="n">display_random_efficient_frontier</span><span class="p">(</span><span class="n">mean_returns</span><span class="p">,</span><span class="n">cov_matrix</span><span class="p">,</span><span class="n">num_portfolios</span><span class="p">,</span><span class="n">risk_free_rate</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p><img alt="sharpe_ratios" class="img-fluid" src="https://jackmckew.dev/img/image-12.png"/></p>
 <p><img alt="efficient_frontier" class="img-fluid" src="https://jackmckew.dev/img/image-20.png"/></p>
 <p>With the two portfolios determined, the one gives us the best risk-adjusted (as long as the trader is prepared to take the risk) is the one with the maximum Sharpe ratio, allocating a 67% portion to WOW and 32% to BHP, as these stocks were quite volatile from the daily percentage change calculations.</p>

@@ -59,8 +59,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -117,11 +117,11 @@
 <div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="c1"># output_file("NZ_City_Letter_Analysis.html")</span></span>
-<span class="code-line"><span class="c1"># save(p)</span></span>
-<span class="code-line"><span class="n">html</span> <span class="o">=</span> <span class="n">file_html</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">CDN</span><span class="p">,</span> <span class="s2">"NZ_City_Letter_Analysis"</span><span class="p">)</span></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span></span>
-<span class="code-line"><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span></span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># output_file("NZ_City_Letter_Analysis.html")</span>
+<span class="c1"># save(p)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">file_html</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">CDN</span><span class="p">,</span> <span class="s2">"NZ_City_Letter_Analysis"</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -191,25 +191,25 @@
 </div>
 <p>Firstly, we have to find a dataset of all the town names, and I found a database of all world cities names hosted on Kaggle here: <a href="https://www.kaggle.com/max-mind/world-cities-database">https://www.kaggle.com/max-mind/world-cities-database</a>.</p>
 <h2 id="Get-the-data!">Get the data!</h2>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="c1"># data source https://www.kaggle.com/max-mind/world-cities-database</span></code></span>
-<span class="code-line"><span class="n">cities_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./data/worldcitiespop.csv'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">'"'</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">cities_df</span> <span class="o">=</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">cities_df</span><span class="p">[</span><span class="s1">'Country'</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"nz"</span><span class="p">]</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># data source https://www.kaggle.com/max-mind/world-cities-database</span>
+<span class="n">cities_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./data/worldcitiespop.csv'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">'"'</span><span class="p">)</span>
+<span class="n">cities_df</span> <span class="o">=</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">cities_df</span><span class="p">[</span><span class="s1">'Country'</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"nz"</span><span class="p">]</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>After inspecting the data of this data set, we're able to filter out to look at just New Zealand with the prefix of "nz" in the Country column. It must be noted that this data set represents the names of the towns currently, and not the original Maori names (more on this will be covered in a later post). Now we want to extract the town names out of the dataframe with the ones we want to analyze. For ease later on, we will extract this as a dictionary, such that we can assign the value of each to the count of each letter.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">nz_cities</span> <span class="o">=</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">cities_df</span><span class="p">[</span><span class="s1">'Country'</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"nz"</span><span class="p">][</span><span class="s1">'AccentCity'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></code></span>
-<span class="code-line"><span class="n">nz_dict</span> <span class="o">=</span> <span class="p">{</span> <span class="n">i</span> <span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nz_cities</span> <span class="p">}</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">nz_cities</span> <span class="o">=</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">cities_df</span><span class="p">[</span><span class="s1">'Country'</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"nz"</span><span class="p">][</span><span class="s1">'AccentCity'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">nz_dict</span> <span class="o">=</span> <span class="p">{</span> <span class="n">i</span> <span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nz_cities</span> <span class="p">}</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now we will create an ordered dictionary with the help from the collections package which will store the values of the count for each letter in the town name.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">letters</span> <span class="o">=</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></code></span>
-<span class="code-line"><span class="n">lcount</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">]))</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">letters</span> <span class="o">=</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span>
+<span class="n">lcount</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">]))</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now it's time for the data crunch. To count how many times a letter repeats in a town name we follow these steps:</p>
 <ul>
 <li>we create a for loop, to loop through all the city names in the table,</li>
@@ -219,41 +219,41 @@
 <li>Then if the letter does appear, increment the value for that letter by 1.</li>
 </ul>
 <p>This results in a dictionary for each town name, with the count of repeated letters.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">nz_cities</span><span class="p">:</span></code></span>
-<span class="code-line">    <span class="n">nz_dict</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">]))</span></span>
-<span class="code-line">    <span class="n">city_dict</span> <span class="o">=</span> <span class="n">nz_dict</span><span class="p">[</span><span class="n">city</span><span class="p">]</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">city</span><span class="p">:</span></span>
-<span class="code-line">        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span></span>
-<span class="code-line">            <span class="n">city_dict</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span> <span class="o">+=</span> <span class="mi">1</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">nz_cities</span><span class="p">:</span>
+    <span class="n">nz_dict</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">]))</span>
+    <span class="n">city_dict</span> <span class="o">=</span> <span class="n">nz_dict</span><span class="p">[</span><span class="n">city</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">city</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span>
+            <span class="n">city_dict</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Hooray! Now we have all the data we need broken down and ready for analysis. To help ease the analysis and make it more readable for a human, we convert from our nested dictionaries to a pandas dataframe and transpose it such that we have the town name as the index, the letters as the column and the count of that letter as the values.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">total_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">nz_dict</span><span class="p">)</span></code></span>
-<span class="code-line"><span class="n">total_df</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">T</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">total_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">nz_dict</span><span class="p">)</span>
+<span class="n">total_df</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">T</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now we want to find which of these names have the maximum count for any particular letter and store it in a summary dataframe. It is to be noted that we could use the pivot function with aggregate types, however, I have not figured a nice way to do this yet. If you do know a nicer way to determine this, please let me know.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span></code></span>
-<span class="code-line"><span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span></span>
-<span class="code-line"><span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">total_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now by using the equivalent of an index-match in excel which you can read more about here (<a href="https://towardsdatascience.com/name-your-favorite-excel-function-and-ill-teach-you-its-pandas-equivalent-7ee4400ada9f">https://towardsdatascience.com/name-your-favorite-excel-function-and-ill-teach-you-its-pandas-equivalent-7ee4400ada9f</a>). Admittedly, we could've made the join earlier, but since I use index-match so often in Excel, I wanted to learn how to do the same in pandas. This is achieved by using the map function (which is the equivalent of the index), but by using the index of another dataframe as the argument (the match function), we can rejoin the data set by matching the city name from our original data set.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">cities_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'AccentCity'</span><span class="p">])[</span><span class="s1">'Latitude'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span> <span class="o">*</span> <span class="n">scale</span></code></span>
-<span class="code-line"><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">cities_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'AccentCity'</span><span class="p">])[</span><span class="s1">'Longitude'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span> <span class="o">*</span> <span class="n">scale</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">cities_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'AccentCity'</span><span class="p">])[</span><span class="s1">'Latitude'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span> <span class="o">*</span> <span class="n">scale</span>
+<span class="n">summary_df</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">cities_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'AccentCity'</span><span class="p">])[</span><span class="s1">'Longitude'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span> <span class="o">*</span> <span class="n">scale</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now we have a dataframe that contains:</p>
 <ul>
 <li>an index of the letters,</li>
@@ -262,75 +262,75 @@
 <li>the longitude and latitude of the town</li>
 </ul>
 <p>For plotting with <a href="https://bokeh.pydata.org/en/latest/">Bokeh</a> on a basemap, we need to convert from longitude &amp; latitude to easting and northing. To do this we use the pyproj package to make this very simple.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">LongLat_to_EN</span><span class="p">(</span><span class="n">long</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span></code></span>
-<span class="code-line">    <span class="k">try</span><span class="p">:</span></span>
-<span class="code-line">      <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span></span>
-<span class="code-line">        <span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">'epsg:4326'</span><span class="p">),</span> <span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">'epsg:3857'</span><span class="p">),</span> <span class="n">long</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span></span>
-<span class="code-line">      <span class="k">return</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span></span>
-<span class="code-line">    <span class="k">except</span><span class="p">:</span></span>
-<span class="code-line">      <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">LongLat_to_EN</span><span class="p">(</span><span class="n">long</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span>
+        <span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">'epsg:4326'</span><span class="p">),</span> <span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">'epsg:3857'</span><span class="p">),</span> <span class="n">long</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">easting</span><span class="p">,</span> <span class="n">northing</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>This function can be used to generate the easting and northing for every town from it's longitude &amp; latitude and add it to the dataframe.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">summary_df</span><span class="p">[</span><span class="s1">'E'</span><span class="p">],</span> <span class="n">summary_df</span><span class="p">[</span><span class="s1">'N'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">summary_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">LongLat_to_EN</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></code></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">summary_df</span><span class="p">[</span><span class="s1">'E'</span><span class="p">],</span> <span class="n">summary_df</span><span class="p">[</span><span class="s1">'N'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">summary_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">LongLat_to_EN</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Finally, it's time to plot our findings on a map. Before we initialise the map in <a href="https://bokeh.pydata.org/en/latest/">Bokeh</a>, for most plots, data tables and more in <a href="https://bokeh.pydata.org/en/latest/">Bokeh</a>, we need to put it in the <a href="https://bokeh.pydata.org/en/latest/docs/reference/models/sources.html">ColumnDataSource</a> form. We also initialise the interactivity when the user hovers over the data points on the plot.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span>
-<span class="code-line">11</span>
-<span class="code-line">12</span>
-<span class="code-line">13</span>
-<span class="code-line">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span></code></span>
-<span class="code-line">                        <span class="n">longitude</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'E'</span><span class="p">]),</span></span>
-<span class="code-line">                        <span class="n">latitude</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'N'</span><span class="p">]),</span></span>
-<span class="code-line">                        <span class="n">sizes</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">),</span></span>
-<span class="code-line">                        <span class="n">lettercount</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]),</span></span>
-<span class="code-line">                        <span class="n">city_name</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]),</span></span>
-<span class="code-line">                        <span class="n">letters</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">hover</span> <span class="o">=</span> <span class="n">HoverTool</span><span class="p">(</span><span class="n">tooltips</span><span class="o">=</span><span class="p">[</span></span>
-<span class="code-line">    <span class="p">(</span><span class="s2">"Repeated Letter"</span> <span class="p">,</span> <span class="s2">"@letters"</span><span class="p">),</span></span>
-<span class="code-line">    <span class="p">(</span><span class="s2">"City Name"</span><span class="p">,</span> <span class="s2">"@city_name"</span><span class="p">),</span></span>
-<span class="code-line">    <span class="p">(</span><span class="s2">"Count"</span><span class="p">,</span><span class="s2">"@lettercount"</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="p">])</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">longitude</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'E'</span><span class="p">]),</span>
+                        <span class="n">latitude</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'N'</span><span class="p">]),</span>
+                        <span class="n">sizes</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">),</span>
+                        <span class="n">lettercount</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'Count'</span><span class="p">]),</span>
+                        <span class="n">city_name</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">'City_Name'</span><span class="p">]),</span>
+                        <span class="n">letters</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">summary_df</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
 
+<span class="n">hover</span> <span class="o">=</span> <span class="n">HoverTool</span><span class="p">(</span><span class="n">tooltips</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s2">"Repeated Letter"</span> <span class="p">,</span> <span class="s2">"@letters"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"City Name"</span><span class="p">,</span> <span class="s2">"@city_name"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Count"</span><span class="p">,</span><span class="s2">"@lettercount"</span><span class="p">)</span>
+
+<span class="p">])</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Finally time for the plot! Now admittedly, I haven't found an easy way to find the limits of the graph, so this was made with a lot of trial and error (If you know a better way, please let me know!).</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span>
-<span class="code-line">8</span>
-<span class="code-line">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="mi">20000000</span><span class="p">,</span><span class="mi">17900000</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">6000000</span><span class="p">,</span><span class="o">-</span><span class="mi">4000000</span><span class="p">),</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">"mercator"</span><span class="p">,</span> <span class="n">y_axis_type</span><span class="o">=</span><span class="s2">"mercator"</span><span class="p">,</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">hover</span><span class="p">,</span> <span class="s1">'wheel_zoom'</span><span class="p">,</span><span class="s1">'save'</span><span class="p">])</span></code></span>
-<span class="code-line"><span class="n">p</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">CARTODBPOSITRON</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'longitude'</span><span class="p">,</span></span>
-<span class="code-line">         <span class="n">y</span><span class="o">=</span><span class="s1">'latitude'</span><span class="p">,</span></span>
-<span class="code-line">         <span class="n">size</span><span class="o">=</span><span class="s1">'sizes'</span><span class="p">,</span></span>
-<span class="code-line">         <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span></span>
-<span class="code-line">         <span class="n">line_color</span><span class="o">=</span><span class="s2">"#FF0000"</span><span class="p">,</span></span>
-<span class="code-line">         <span class="n">fill_color</span><span class="o">=</span><span class="s2">"#FF0000"</span><span class="p">,</span></span>
-<span class="code-line">         <span class="n">fill_alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-</body></html>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="mi">20000000</span><span class="p">,</span><span class="mi">17900000</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">6000000</span><span class="p">,</span><span class="o">-</span><span class="mi">4000000</span><span class="p">),</span><span class="n">x_axis_type</span><span class="o">=</span><span class="s2">"mercator"</span><span class="p">,</span> <span class="n">y_axis_type</span><span class="o">=</span><span class="s2">"mercator"</span><span class="p">,</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">hover</span><span class="p">,</span> <span class="s1">'wheel_zoom'</span><span class="p">,</span><span class="s1">'save'</span><span class="p">])</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">CARTODBPOSITRON</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'longitude'</span><span class="p">,</span>
+         <span class="n">y</span><span class="o">=</span><span class="s1">'latitude'</span><span class="p">,</span>
+         <span class="n">size</span><span class="o">=</span><span class="s1">'sizes'</span><span class="p">,</span>
+         <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+         <span class="n">line_color</span><span class="o">=</span><span class="s2">"#FF0000"</span><span class="p">,</span>
+         <span class="n">fill_color</span><span class="o">=</span><span class="s2">"#FF0000"</span><span class="p">,</span>
+         <span class="n">fill_alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table></body></html>
   </div>
   <div class="tag-cloud">
     <p>

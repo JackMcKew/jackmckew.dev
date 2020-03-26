@@ -59,8 +59,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -129,82 +129,82 @@
 </ul>
 <p>To import these libraries into our Python code the following\
 code is required:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></code></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">alpha_vantage.timeseries</span> <span class="kn">import</span> <span class="n">TimeSeries</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">alpha_vantage.timeseries</span> <span class="kn">import</span> <span class="n">TimeSeries</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now that we have imported the packages required to extract,\
 process and display the data. The first step is to extract the data in a useful\
 format from the Alpha Vantage API.</p>
 <p>First declare a list with all the companies ASX names with the suffix “.AX” to denominate that it’s from the ASX. After that initialise an empty pandas dataframe to be filled with the data to analyse. Now iterate over the list, calling a request through the API to request the data that is required. There are multiple formats of data to be extracted through the API which is detailed in the <a href="https://alpha-vantage.readthedocs.io/en/latest/">Alpha_Vantage documentation</a>. For this post, I have used the get_daily function from the timeseries object in alpha_vantage to extract the daily information on a stock for the past 20 years, in particular, the closing value.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line"> 1</span>
-<span class="code-line"> 2</span>
-<span class="code-line"> 3</span>
-<span class="code-line"> 4</span>
-<span class="code-line"> 5</span>
-<span class="code-line"> 6</span>
-<span class="code-line"> 7</span>
-<span class="code-line"> 8</span>
-<span class="code-line"> 9</span>
-<span class="code-line">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">companies</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'NAB.AX'</span><span class="p">,</span><span class="s1">'WOW.AX'</span><span class="p">,</span><span class="s1">'TLS.AX'</span><span class="p">,</span><span class="s1">'BHP.AX'</span><span class="p">]</span></code></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="n">companies</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">data</span><span class="p">,</span> <span class="n">meta_data</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">get_daily</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="n">company</span><span class="p">,</span><span class="n">outputsize</span><span class="o">=</span><span class="s1">'full'</span><span class="p">)</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span></span>
-<span class="code-line">    <span class="n">stocks_df</span><span class="p">[</span><span class="n">company</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'4. close'</span><span class="p">])</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">companies</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'NAB.AX'</span><span class="p">,</span><span class="s1">'WOW.AX'</span><span class="p">,</span><span class="s1">'TLS.AX'</span><span class="p">,</span><span class="s1">'BHP.AX'</span><span class="p">]</span>
 
+<span class="n">stocks_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="n">companies</span><span class="p">:</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">meta_data</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">get_daily</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="n">company</span><span class="p">,</span><span class="n">outputsize</span><span class="o">=</span><span class="s1">'full'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+    <span class="n">stocks_df</span><span class="p">[</span><span class="n">company</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'4. close'</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p><img alt="stocks_listing" class="img-fluid" src="https://jackmckew.dev/img/image2.png"/></p>
 <p>Now that the dataframe is full of closing values for the companie’s stock’s closing values, it’s time to begin processing. First of all, for any missing data or erroneous 0 values, the ffill() function is used to fill any missing value by propagating the last valid observation forward. After that, the timestamp on each row is forced to become the index of the dataframe and converted to a datetime type.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span></code></span>
-<span class="code-line"><span class="n">stocks_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stocks_df</span><span class="p">[</span><span class="s2">"date"</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"date"</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<span class="n">stocks_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stocks_df</span><span class="p">[</span><span class="s2">"date"</span><span class="p">])</span>
+<span class="n">stocks_df</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"date"</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Now that the data has gone through it’s pre-processing phase, it’s time to begin plotting some figures. To begin, a basic figure, plotting a single for each company’s stock price over the past 20 years on a single line graph to enable comparison between the companies.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span></code></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">:</span></span>
-<span class="code-line">        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'price in $'</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
-
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stocks_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">stocks_df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'price in $'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p><img alt="line_graph" class="img-fluid" src="https://jackmckew.dev/img/Figure_1-1.png"/>
 Another way to plot this data is to show it as the percentage change from the day before AKA daily returns. By plotting the data in this way, instead of showing the actual prices, the graph is showing the stocks’ volatility.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span>
-<span class="code-line">4</span>
-<span class="code-line">5</span>
-<span class="code-line">6</span>
-<span class="code-line">7</span>
-<span class="code-line">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span></code></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span></span>
-<span class="code-line"><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">returns</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">returns</span><span class="p">[</span><span class="n">column</span><span class="p">],</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'daily returns'</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks_df</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">returns</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">returns</span><span class="p">[</span><span class="n">column</span><span class="p">],</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'daily returns'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p><img alt="percent_change" class="img-fluid" src="https://jackmckew.dev/img/Figure_2.png"/></p>
 <p>Now that we have some insight to the stocks’ data, the next post in this series will demonstrate a way to calculate a balanced portfolio from historical records using Modern Portfolio Theory.</p>
   </div>

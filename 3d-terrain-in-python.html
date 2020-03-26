@@ -60,8 +60,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -137,11 +137,11 @@
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">noise</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib</span></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">noise</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
 </pre></div>
 </div>
 </div>
@@ -159,8 +159,8 @@
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">help</span><span class="p">(</span><span class="n">noise</span><span class="o">.</span><span class="n">pnoise2</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">help</span><span class="p">(</span><span class="n">noise</span><span class="o">.</span><span class="n">pnoise3</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">noise</span><span class="o">.</span><span class="n">pnoise2</span><span class="p">)</span>
+<span class="n">help</span><span class="p">(</span><span class="n">noise</span><span class="o">.</span><span class="n">pnoise3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -170,37 +170,37 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">Help on built-in function noise2 in module noise._perlin:</span>
-<span class="code-line"></span>
-<span class="code-line">noise2(...)</span>
-<span class="code-line">    noise2(x, y, octaves=1, persistence=0.5, lacunarity=2.0, repeatx=1024, repeaty=1024, base=0.0)</span>
-<span class="code-line">    </span>
-<span class="code-line">    2 dimensional perlin improved noise function (see noise3 for more info)</span>
-<span class="code-line"></span>
-<span class="code-line">Help on built-in function noise3 in module noise._perlin:</span>
-<span class="code-line"></span>
-<span class="code-line">noise3(...)</span>
-<span class="code-line">    noise3(x, y, z, octaves=1, persistence=0.5, lacunarity=2.0repeatx=1024, repeaty=1024, repeatz=1024, base=0.0)</span>
-<span class="code-line">    </span>
-<span class="code-line">    return perlin "improved" noise value for specified coordinate</span>
-<span class="code-line">    </span>
-<span class="code-line">    octaves -- specifies the number of passes for generating fBm noise,</span>
-<span class="code-line">    defaults to 1 (simple noise).</span>
-<span class="code-line">    </span>
-<span class="code-line">    persistence -- specifies the amplitude of each successive octave relative</span>
-<span class="code-line">    to the one below it. Defaults to 0.5 (each higher octave's amplitude</span>
-<span class="code-line">    is halved). Note the amplitude of the first pass is always 1.0.</span>
-<span class="code-line">    </span>
-<span class="code-line">    lacunarity -- specifies the frequency of each successive octave relative</span>
-<span class="code-line">    to the one below it, similar to persistence. Defaults to 2.0.</span>
-<span class="code-line">    </span>
-<span class="code-line">    repeatx, repeaty, repeatz -- specifies the interval along each axis when </span>
-<span class="code-line">    the noise values repeat. This can be used as the tile size for creating </span>
-<span class="code-line">    tileable textures</span>
-<span class="code-line">    </span>
-<span class="code-line">    base -- specifies a fixed offset for the input coordinates. Useful for</span>
-<span class="code-line">    generating different noise textures with the same repeat interval</span>
-<span class="code-line"></span>
+<pre>Help on built-in function noise2 in module noise._perlin:
+
+noise2(...)
+    noise2(x, y, octaves=1, persistence=0.5, lacunarity=2.0, repeatx=1024, repeaty=1024, base=0.0)
+    
+    2 dimensional perlin improved noise function (see noise3 for more info)
+
+Help on built-in function noise3 in module noise._perlin:
+
+noise3(...)
+    noise3(x, y, z, octaves=1, persistence=0.5, lacunarity=2.0repeatx=1024, repeaty=1024, repeatz=1024, base=0.0)
+    
+    return perlin "improved" noise value for specified coordinate
+    
+    octaves -- specifies the number of passes for generating fBm noise,
+    defaults to 1 (simple noise).
+    
+    persistence -- specifies the amplitude of each successive octave relative
+    to the one below it. Defaults to 0.5 (each higher octave's amplitude
+    is halved). Note the amplitude of the first pass is always 1.0.
+    
+    lacunarity -- specifies the frequency of each successive octave relative
+    to the one below it, similar to persistence. Defaults to 2.0.
+    
+    repeatx, repeaty, repeatz -- specifies the interval along each axis when 
+    the noise values repeat. This can be used as the tile size for creating 
+    tileable textures
+    
+    base -- specifies a fixed offset for the input coordinates. Useful for
+    generating different noise textures with the same repeat interval
+
 </pre>
 </div>
 </div>
@@ -212,11 +212,11 @@
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">scale</span> <span class="o">=</span> <span class="mf">100.0</span></span>
-<span class="code-line"><span class="n">octaves</span> <span class="o">=</span> <span class="mi">6</span></span>
-<span class="code-line"><span class="n">persistence</span> <span class="o">=</span> <span class="mf">0.5</span></span>
-<span class="code-line"><span class="n">lacunarity</span> <span class="o">=</span> <span class="mf">2.0</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="mf">100.0</span>
+<span class="n">octaves</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">persistence</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">lacunarity</span> <span class="o">=</span> <span class="mf">2.0</span>
 </pre></div>
 </div>
 </div>
@@ -234,17 +234,17 @@
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span></span>
-<span class="code-line">        <span class="n">world</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">pnoise2</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">scale</span><span class="p">,</span> </span>
-<span class="code-line">                                    <span class="n">j</span><span class="o">/</span><span class="n">scale</span><span class="p">,</span> </span>
-<span class="code-line">                                    <span class="n">octaves</span><span class="o">=</span><span class="n">octaves</span><span class="p">,</span> </span>
-<span class="code-line">                                    <span class="n">persistence</span><span class="o">=</span><span class="n">persistence</span><span class="p">,</span> </span>
-<span class="code-line">                                    <span class="n">lacunarity</span><span class="o">=</span><span class="n">lacunarity</span><span class="p">,</span> </span>
-<span class="code-line">                                    <span class="n">repeatx</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> </span>
-<span class="code-line">                                    <span class="n">repeaty</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> </span>
-<span class="code-line">                                    <span class="n">base</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">world</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">pnoise2</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">scale</span><span class="p">,</span> 
+                                    <span class="n">j</span><span class="o">/</span><span class="n">scale</span><span class="p">,</span> 
+                                    <span class="n">octaves</span><span class="o">=</span><span class="n">octaves</span><span class="p">,</span> 
+                                    <span class="n">persistence</span><span class="o">=</span><span class="n">persistence</span><span class="p">,</span> 
+                                    <span class="n">lacunarity</span><span class="o">=</span><span class="n">lacunarity</span><span class="p">,</span> 
+                                    <span class="n">repeatx</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> 
+                                    <span class="n">repeaty</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> 
+                                    <span class="n">base</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -262,7 +262,7 @@
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">world</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">world</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -272,7 +272,7 @@
 <div class="output_area">
 <div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="code-line">&lt;matplotlib.image.AxesImage at 0x24bd59119c8&gt;</span></pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x24bd59119c8&gt;</pre>
 </div>
 </div>
 <div class="output_area">
@@ -625,9 +625,9 @@ L 244.365 8.824819
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">lin_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">lin_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lin_x</span><span class="p">,</span><span class="n">lin_y</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">lin_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lin_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lin_x</span><span class="p">,</span><span class="n">lin_y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -645,9 +645,9 @@ L 244.365 8.824819
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span></span>
-<span class="code-line"><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">"3d"</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">world</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">"3d"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">world</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -657,7 +657,7 @@ L 244.365 8.824819
 <div class="output_area">
 <div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="code-line">&lt;mpl_toolkits.mplot3d.art3d.Poly3DCollection at 0x24be0b2af08&gt;</span></pre>
+<pre>&lt;mpl_toolkits.mplot3d.art3d.Poly3DCollection at 0x24be0b2af08&gt;</pre>
 </div>
 </div>
 <div class="output_area">
@@ -15781,18 +15781,18 @@ z
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">terrain_cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">'terrain'</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">matplotlib_to_plotly</span><span class="p">(</span><span class="n">cmap</span><span class="p">,</span> <span class="n">pl_entries</span><span class="p">):</span></span>
-<span class="code-line">    <span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">pl_entries</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">pl_colorscale</span> <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pl_entries</span><span class="p">):</span></span>
-<span class="code-line">        <span class="n">C</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cmap</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">h</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="mi">255</span><span class="p">))</span></span>
-<span class="code-line">        <span class="n">pl_colorscale</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">k</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="s1">'rgb'</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="mi">2</span><span class="p">]))])</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">pl_colorscale</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">terrain</span> <span class="o">=</span> <span class="n">matplotlib_to_plotly</span><span class="p">(</span><span class="n">terrain_cmap</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">terrain_cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">'terrain'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">matplotlib_to_plotly</span><span class="p">(</span><span class="n">cmap</span><span class="p">,</span> <span class="n">pl_entries</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">pl_entries</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pl_colorscale</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pl_entries</span><span class="p">):</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cmap</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">h</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span><span class="o">*</span><span class="mi">255</span><span class="p">))</span>
+        <span class="n">pl_colorscale</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">k</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="s1">'rgb'</span><span class="o">+</span><span class="nb">str</span><span class="p">((</span><span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="mi">2</span><span class="p">]))])</span>
+
+    <span class="k">return</span> <span class="n">pl_colorscale</span>
+
+<span class="n">terrain</span> <span class="o">=</span> <span class="n">matplotlib_to_plotly</span><span class="p">(</span><span class="n">terrain_cmap</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -15810,16 +15810,16 @@ z
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">plotly</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span></span>
-<span class="code-line"><span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">colorscale</span><span class="o">=</span><span class="n">terrain</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="n">world</span><span class="p">)])</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Random 3D Terrain'</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Note that include_plotlyjs is used as cdn so that the static site generator can read it and present it on the browser. This is not typically required.</span></span>
-<span class="code-line"><span class="n">html</span> <span class="o">=</span> <span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'3d-terrain-plotly.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">plotly</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">colorscale</span><span class="o">=</span><span class="n">terrain</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="n">world</span><span class="p">)])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Random 3D Terrain'</span><span class="p">)</span>
+
+<span class="c1"># Note that include_plotlyjs is used as cdn so that the static site generator can read it and present it on the browser. This is not typically required.</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'3d-terrain-plotly.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -15854,9 +15854,9 @@ z
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="c1"># This is for showing within a jupyter notebook on the browser.</span></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span></span>
-<span class="code-line"><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># This is for showing within a jupyter notebook on the browser.</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -58,8 +58,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -124,11 +124,11 @@
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">os</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">re</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">pathlib</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">io</span></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 </pre></div>
 </div>
 </div>
@@ -154,8 +154,8 @@
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">testSentence</span> <span class="o">=</span> <span class="s1">'How many words have I written in this blog?'</span></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">testSentence</span><span class="o">.</span><span class="n">split</span><span class="p">())</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">testSentence</span> <span class="o">=</span> <span class="s1">'How many words have I written in this blog?'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">testSentence</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -165,7 +165,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">['How', 'many', 'words', 'have', 'I', 'written', 'in', 'this', 'blog?']</span>
+<pre>['How', 'many', 'words', 'have', 'I', 'written', 'in', 'this', 'blog?']
 </pre>
 </div>
 </div>
@@ -177,37 +177,37 @@
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="c1"># Source: https://github.com/gandreadis/markdown-word-count</span></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">count_words_in_markdown</span><span class="p">(</span><span class="n">filePath</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span></span>
-<span class="code-line">        <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="c1"># Comments</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'&lt;!--(.*?)--&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Tabs to spaces</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'    '</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># More than 1 space to 4 spaces</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[ ]{2,}'</span><span class="p">,</span> <span class="s1">'    '</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Footnotes</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^\[[^]]*\][^(].*'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Indented blocks of code</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^( {4,}[^-*]).*'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Replace newlines with spaces for uniform handling</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Custom header IDs</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'{#.*}'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Remove images</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'!\[[^\]]*\]\([^)]*\)'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Remove HTML tags</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'&lt;/?[^&gt;]*&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Remove special characters</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[#*`~\-–^=&lt;&gt;+|/:]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Remove footnote references</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\[[0-9]*\]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c1"># Remove enumerations</span></span>
-<span class="code-line">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[0-9#]*\.'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Source: https://github.com/gandreadis/markdown-word-count</span>
+<span class="k">def</span> <span class="nf">count_words_in_markdown</span><span class="p">(</span><span class="n">filePath</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># Comments</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'&lt;!--(.*?)--&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="c1"># Tabs to spaces</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'    '</span><span class="p">)</span>
+    <span class="c1"># More than 1 space to 4 spaces</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[ ]{2,}'</span><span class="p">,</span> <span class="s1">'    '</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Footnotes</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^\[[^]]*\][^(].*'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="c1"># Indented blocks of code</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^( {4,}[^-*]).*'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="c1"># Replace newlines with spaces for uniform handling</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">)</span>
+    <span class="c1"># Custom header IDs</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'{#.*}'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove images</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'!\[[^\]]*\]\([^)]*\)'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove HTML tags</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'&lt;/?[^&gt;]*&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove special characters</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[#*`~\-–^=&lt;&gt;+|/:]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove footnote references</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\[[0-9]*\]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove enumerations</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[0-9#]*\.'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -233,21 +233,21 @@
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="c1"># Top directory to search through</span></span>
-<span class="code-line"><span class="n">topFolder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">'C:/Users/jackm/Documents/GitHub/jackmckew.dev/content'</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">allMarkdown</span><span class="p">:</span> <span class="n">List</span>  <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Iterate through all files using pathlib</span></span>
-<span class="code-line"><span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">topFolder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'**/20??/**/*.md'</span><span class="p">):</span></span>
-<span class="code-line">    <span class="n">allMarkdown</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># If you don't want to use glob patterns, can easily use the 'suffix' within the path variable.</span></span>
-<span class="code-line"><span class="c1"># for singleFile in topFolder.glob('**/*'):</span></span>
-<span class="code-line"><span class="c1">#     if singleFile.suffix == '.md':</span></span>
-<span class="code-line"><span class="c1">#         allMarkdown.append(singleFile)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">allMarkdown</span><span class="p">))</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Top directory to search through</span>
+<span class="n">topFolder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">'C:/Users/jackm/Documents/GitHub/jackmckew.dev/content'</span><span class="p">)</span>
+
+<span class="n">allMarkdown</span><span class="p">:</span> <span class="n">List</span>  <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate through all files using pathlib</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">topFolder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'**/20??/**/*.md'</span><span class="p">):</span>
+    <span class="n">allMarkdown</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span>
+
+<span class="c1"># If you don't want to use glob patterns, can easily use the 'suffix' within the path variable.</span>
+<span class="c1"># for singleFile in topFolder.glob('**/*'):</span>
+<span class="c1">#     if singleFile.suffix == '.md':</span>
+<span class="c1">#         allMarkdown.append(singleFile)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">allMarkdown</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -257,7 +257,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">55</span>
+<pre>55
 </pre>
 </div>
 </div>
@@ -277,11 +277,11 @@
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">totalWordCountMarkdown</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line"><span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allMarkdown</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">totalWordCountMarkdown</span> <span class="o">+=</span> <span class="n">count_words_in_markdown</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountMarkdown</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">totalWordCountMarkdown</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allMarkdown</span><span class="p">:</span>
+    <span class="n">totalWordCountMarkdown</span> <span class="o">+=</span> <span class="n">count_words_in_markdown</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountMarkdown</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -291,7 +291,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">31380</span>
+<pre>31380
 </pre>
 </div>
 </div>
@@ -326,31 +326,31 @@
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">nbformat</span> <span class="kn">import</span> <span class="n">current</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">count_words_in_jupyter</span><span class="p">(</span><span class="n">filePath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">returnType</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s1">'markdown'</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span></span>
-<span class="code-line">        <span class="n">nb</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">'json'</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">word_count_markdown</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line">    <span class="n">word_count_heading</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line">    <span class="n">word_count_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">nb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span></span>
-<span class="code-line">        <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"markdown"</span><span class="p">:</span></span>
-<span class="code-line">            <span class="n">word_count_markdown</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'source'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span></span>
-<span class="code-line">        <span class="k">elif</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"heading"</span><span class="p">:</span></span>
-<span class="code-line">            <span class="n">word_count_heading</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'source'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span></span>
-<span class="code-line">        <span class="k">elif</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"code"</span><span class="p">:</span></span>
-<span class="code-line">            <span class="n">word_count_code</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'input'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="k">if</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'markdown'</span><span class="p">:</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="n">word_count_markdown</span></span>
-<span class="code-line">    <span class="k">elif</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'heading'</span><span class="p">:</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="n">word_count_heading</span></span>
-<span class="code-line">    <span class="k">elif</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'code'</span><span class="p">:</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="n">word_count_code</span></span>
-<span class="code-line">    <span class="k">else</span><span class="p">:</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="ne">Exception</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">nbformat</span> <span class="kn">import</span> <span class="n">current</span>
+
+<span class="k">def</span> <span class="nf">count_words_in_jupyter</span><span class="p">(</span><span class="n">filePath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">returnType</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s1">'markdown'</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">'json'</span><span class="p">)</span>
+
+    <span class="n">word_count_markdown</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">word_count_heading</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">word_count_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">nb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"markdown"</span><span class="p">:</span>
+            <span class="n">word_count_markdown</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'source'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"heading"</span><span class="p">:</span>
+            <span class="n">word_count_heading</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'source'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"code"</span><span class="p">:</span>
+            <span class="n">word_count_code</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'input'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'markdown'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">word_count_markdown</span>
+    <span class="k">elif</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'heading'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">word_count_heading</span>
+    <span class="k">elif</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'code'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">word_count_code</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ne">Exception</span>
 </pre></div>
 </div>
 </div>
@@ -370,17 +370,17 @@
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="c1"># Top directory to search through</span></span>
-<span class="code-line"><span class="n">topFolder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">'C:/Users/jackm/Documents/GitHub/jackmckew.dev/content'</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">allJupyter</span><span class="p">:</span> <span class="n">List</span>  <span class="o">=</span> <span class="p">[]</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="c1"># Iterate through all files using pathlib</span></span>
-<span class="code-line"><span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">topFolder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'**/20??/**/*.ipynb'</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">if</span> <span class="s1">'checkpoint'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">singleFile</span><span class="o">.</span><span class="n">name</span><span class="p">:</span></span>
-<span class="code-line">        <span class="n">allJupyter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">allJupyter</span><span class="p">))</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Top directory to search through</span>
+<span class="n">topFolder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">'C:/Users/jackm/Documents/GitHub/jackmckew.dev/content'</span><span class="p">)</span>
+
+<span class="n">allJupyter</span><span class="p">:</span> <span class="n">List</span>  <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate through all files using pathlib</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">topFolder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'**/20??/**/*.ipynb'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">'checkpoint'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">singleFile</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+        <span class="n">allJupyter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">allJupyter</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -390,7 +390,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">5</span>
+<pre>5
 </pre>
 </div>
 </div>
@@ -409,11 +409,11 @@
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">totalWordCountJupyter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line"><span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allJupyter</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">totalWordCountJupyter</span> <span class="o">+=</span> <span class="n">count_words_in_jupyter</span><span class="p">(</span><span class="n">singleFile</span><span class="p">,</span><span class="s1">'markdown'</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">totalWordCountJupyter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allJupyter</span><span class="p">:</span>
+    <span class="n">totalWordCountJupyter</span> <span class="o">+=</span> <span class="n">count_words_in_jupyter</span><span class="p">(</span><span class="n">singleFile</span><span class="p">,</span><span class="s1">'markdown'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -423,7 +423,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">3466</span>
+<pre>3466
 </pre>
 </div>
 </div>
@@ -443,7 +443,7 @@
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span> <span class="o">+</span> <span class="n">totalWordCountMarkdown</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span> <span class="o">+</span> <span class="n">totalWordCountMarkdown</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -453,7 +453,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">34846</span>
+<pre>34846
 </pre>
 </div>
 </div>
@@ -472,11 +472,11 @@
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-python"><pre><span class="code-line"><span></span><span class="n">totalWordCountJupyter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></span>
-<span class="code-line"><span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allJupyter</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">totalWordCountJupyter</span> <span class="o">+=</span> <span class="n">count_words_in_jupyter</span><span class="p">(</span><span class="n">singleFile</span><span class="p">,</span><span class="s1">'code'</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span><span class="p">)</span></span>
+<div class="highlight hl-python"><pre><span></span><span class="n">totalWordCountJupyter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allJupyter</span><span class="p">:</span>
+    <span class="n">totalWordCountJupyter</span> <span class="o">+=</span> <span class="n">count_words_in_jupyter</span><span class="p">(</span><span class="n">singleFile</span><span class="p">,</span><span class="s1">'code'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -486,7 +486,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="code-line">3292</span>
+<pre>3292
 </pre>
 </div>
 </div>
@@ -504,6 +504,9 @@
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/python-bytes-awesome-package-list.html" title="Python Bytes Awesome Package List">
       <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/packaging-python-packages-with-poetry.html" title="Packaging Python Packages with Poetry">
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 

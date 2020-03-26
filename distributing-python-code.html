@@ -59,8 +59,8 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Python enthusiast, electrical engineer and tinkerer</p>            <p>Number of Posts: 56</p>
-            <p>Number of Words: 36,503</p>
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 57</p>
+            <p>Number of Words: 37,775</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -114,13 +114,13 @@
     </head><body><p>This post will cover a way of distributing Python code such that is can be used by someone that does not have Python installed. One of the major drawbacks with Python that the gap is slowly being closed is how easy it is to distribute Python code.</p>
 <p>At a minimum, the computer that is to run the code must have the Python compiler (or equivalent). Now while this has been progressively included in more operating systems as a default (May update of Windows being the latest), you must still develop as such that is not present on the users' PC.</p>
 <p>For this post, I will show you a basic piece of code to demonstrate how it will be packaged and distributed to your users. To show a basic dialog box on the screen with the following code:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="code-line">1</span>
-<span class="code-line">2</span>
-<span class="code-line">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">import</span> <span class="nn">ctypes</span></code></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxW</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"Hello Windows!"</span><span class="p">,</span> <span class="s2">"PyInstaller Example"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line"></span></pre></div></td></tr></tbody></table>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">ctypes</span>
 
+<span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxW</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"Hello Windows!"</span><span class="p">,</span> <span class="s2">"PyInstaller Example"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></tbody></table>
 <p>Which shows the user with this dialog box:</p>
 <p><img alt="python_Dh0hFJKqDx" class="img-fluid" src="https://jackmckew.dev/img/python_Dh0hFJKqDx.png"/></p>
 <p>Now to package this code into an executable (.exe), there are multiple packages out there that are possible to use, some examples of these are:</p>
