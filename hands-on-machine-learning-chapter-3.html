@@ -133,7 +133,7 @@ Or you can combine both precision and recall into a single metric, namely the <e
 <div class="math">$$
 \frac{TP}{TP+\frac{FN+FP}{2}}
 $$</div>
-<h2>Precision/Recall Tradeoff</h2>
+<h2 id="precisionrecall-tradeoff">Precision/Recall Tradeoff</h2>
 <p>As above, when comparing precision and recall, you cannot have 100% of either, instead it is a trade off. With a precision of 100%, means all the samples classified as positive are true positives, however there may be a lot more that are now false positives. With a recall of 100%, all samples classified will include all of the true positives, however now all the false positives are included.</p>
 <p>Deciding the trade off comes down to the application. For example, if you wanted to create a classifier that detects websites that are safe for kids, you would prefer a classifier that rejects many good websites (low recall), but keeps only safe ones (high precision). On the other hand, if you wanted to create a classifier that detects threats in messages, it is probably fine to have a 25% precision, as long as it has 99% recall; meaning the authorities will get a few false alerts, but almost all threats will be identified.</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {

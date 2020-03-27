@@ -133,7 +133,7 @@
 </ul>
 <p>If you are using Python, you've most likely used pip, conda or similar to install packages from other developers such that you aren't reinventing the wheel. This functionality is by far one of my favourite features of the language. If you aren't already aware, (most) of these packages you install with pip live on <a href="https://pypi.org/">PyPI</a>, the Python Package Index.</p>
 <p>This post is for how to structure a package in Python with <a href="https://python-poetry.org/">Poetry</a> and publish it on <a href="https://pypi.org/">PyPI</a> (I was amazed how easy this was).</p>
-<h2>What is Poetry</h2>
+<h2 id="what-is-poetry">What is Poetry</h2>
 <p>A quote from the creator of <a href="https://python-poetry.org/">Poetry</a>:</p>
 <blockquote>
 <p>I built Poetry because I wanted a single tool to manage my Python projects from start to finish. I wanted something reliable and intuitive that the community could use and enjoy. - Sébastien Eustace</p>
@@ -143,9 +143,9 @@
 <blockquote>
 <p>If you are working in VS Code, the <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</a> doesn't automatically detect the virtual environment location that Poetry defaults to. To tell VS Code where the virtual environments live for Poetry head to <code>Settings &gt; python.venvFolders</code> and add <code>C:\\Users\\USERNAME\\AppData\\Local\\pypoetry\\Cache\\virtualenvs</code> for Windows.</p>
 </blockquote>
-<h2>Package Structure</h2>
+<h2 id="package-structure">Package Structure</h2>
 <p>Python packages require a standard structure (albeit lenient), which <a href="https://python-poetry.org/">Poetry</a> sets up for you when a project is initialized.  If we run <code>poetry new test_package</code> we will end up with the structure:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -169,10 +169,10 @@
 |README.rst|Readme file as to what the project does, any instructions of use, etc (see <a href="https://github.com/PatrikHlobil/Pandas-Bokeh">Pandas-Bokeh</a> for a great example).|
 |test_package|This is where all our Python code will live for the project.|
 |tests|Following test driven development, this is where any automated tests live to make sure the code runs as expected.|</p>
-<h3><code>__init__.py</code> Files</h3>
+<h3 id="__init__py-files"><code>__init__.py</code> Files</h3>
 <p>What are all these <code>__init__.py</code> files and what are they there for? To be able to import code from another folder, Python requires to see an <code>__init__.py</code> inside a folder to mark it as a package.</p>
 <p>If we create a function inside our test_package folder:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>+-- test_package
 <span class="p">|</span>   +-- __init__.py
@@ -183,17 +183,17 @@
 <code>import test_package.function</code></p>
 <p>or</p>
 <p><code>from test_package import function</code></p>
-<h2>Wordsum - My First Package</h2>
+<h2 id="wordsum-my-first-package">Wordsum - My First Package</h2>
 <p>If you have read this blog previously, I did a post on answering the question "How many words have I written in this blog?" which you can reach at: <a href="https://jackmckew.dev/counting-words-with-python.html">https://jackmckew.dev/counting-words-with-python.html</a>.</p>
 <p>This was great, I had wrote 2 functions which count how many words were inside markdown files &amp; Jupyter notebooks. Following this, I had a great idea, why not make a 'ticker' of how many words have been written in this blog and display this on the website. Making sure that whenever a new post is added the 'word ticker' increments by how many words were in that post.</p>
 <p>This in the inspiration behind <a href="https://github.com/JackMcKew/wordsum">Wordsum</a> which is also available on <a href="https://pypi.org/project/wordsum/">PyPI</a>. Meaning you can install it with:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install wordsum
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install wordsum
 </code></pre></div>
 </td></tr></tbody></table>
-<h3>Wordsum Package Structure</h3>
+<h3 id="wordsum-package-structure">Wordsum Package Structure</h3>
 <p>To make the two functions more extensible, the two functions were further broken into smaller functions and contained in their own 'internal' package (folder).</p>
 <p>The basic structure we ended up with was:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -222,9 +222,9 @@
 </td></tr></tbody></table>
 <p>Now the <code>_</code> prefix to the folders is to nominate that functions contained in these folders are internal to the package. Meaning the user shouldn't be able to access these functions.</p>
 <p>The main functions of the package are kept within <code>word_sum.py</code> (which uses the functions in the <code>_xxx</code> folders).</p>
-<h3>User Interaction</h3>
+<h3 id="user-interaction">User Interaction</h3>
 <p>To make the main functions within <code>word_sum.py</code> accessible to users of the package we can import them in the 'top' <code>__init__.py</code> of the wordsum package.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -236,7 +236,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This will allow users to interact with the package like:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -247,9 +247,9 @@
     <span class="n">wordsum</span><span class="o">.</span><span class="n">list_supported_formats</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></tbody></table>
-<h3>Publishing to PyPI</h3>
+<h3 id="publishing-to-pypi">Publishing to PyPI</h3>
 <p>Since we've used Poetry with the development of this package, our <code>pyproject.toml</code> should be a bit more fleshed out. Wordsum's <code>pyproject.toml</code> ended up as:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -301,21 +301,21 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>All that is left to do is to sign up for an account on PyPI and run:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>poetry publish
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>poetry publish
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This will ask for your PyPI credentials, build the package (a step done by <code>setuptools</code> previously) and upload the package for you.</p>
 <p>Now users can install your package with:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install wordsum
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install wordsum
 </code></pre></div>
 </td></tr></tbody></table>
-<h2>Integrating Wordsum Into This Website</h2>
+<h2 id="integrating-wordsum-into-this-website">Integrating Wordsum Into This Website</h2>
 <p>Previously I've written a blog post on how I moved from Wordpress to Pelican (<a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">https://jackmckew.dev/migrating-from-wordpress-to-pelican.html</a>). This goes into detail about how this site utilizes a continuous integration (CI) service (TravisCI), that rebuilds the site each time a new file is pushed to the GitHub repository. Following this, Netlify fires up and pushes the freshly built website out to the internet.</p>
 <p>This site uses the theme <a href="https://github.com/alexandrevicenzi/Flex">Flex</a> as a basis, except a local 'fork' of Flex is retained in the repository such that I can make edit without disrupting other users of Flex.</p>
 <p>So there was only 3 files that I needed to edit: <code>pelicanconf.py</code>, <code>requirements.txt</code> and a html file for the theme. <code>pelicanconf.py</code> contains all the instructions to provide to pelican when building the site, <code>requirements.txt</code> contains the list of packages required for TravisCI to use and the template html file is how it is to represented on the web.</p>
-<h3>Update <code>requirements.txt</code></h3>
+<h3 id="update-requirementstxt">Update <code>requirements.txt</code></h3>
 <p>First off we add <code>wordsum</code> to the virtual environment for the project and freeze it within <code>requirements.txt</code> with</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install wordsum
 pip freeze requirements.txt
 </code></pre></div>
@@ -323,9 +323,9 @@ pip freeze requirements.txt
 <blockquote>
 <p>Since most CI services use Ubuntu as a base, pywin32 is installed be default as a dependancy on wordsum, this can be removed with <code>pip uninstall pywin32</code></p>
 </blockquote>
-<h3>Update <code>pelicanconf.py</code></h3>
+<h3 id="update-pelicanconfpy">Update <code>pelicanconf.py</code></h3>
 <p>This file contains the code that will run when <code>pelican content</code> is called upon the folder to build this website. To interface with <code>wordsum</code> we add the code:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">wordsum</span>
@@ -338,9 +338,9 @@ pip freeze requirements.txt
 <blockquote>
 <p>The line <code>WORD_TICKER = f"{WORD_TICKER:,}"</code> adds thousand separators to numbers in Python with f-strings. For example this converts 123456 to 123,456.</p>
 </blockquote>
-<h3>Update <code>base.html</code></h3>
+<h3 id="update-basehtml">Update <code>base.html</code></h3>
 <p>Now we just need to show our word ticker on the website. In the Flex theme, all pages inherit from a <code>base.html</code> file. To squeeze our new metrics onto the page we add the lines:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>{% if WORD_TICKER %}
