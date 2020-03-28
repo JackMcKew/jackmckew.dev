@@ -2,9 +2,13 @@
   <head>
     <meta charset="utf-8"/>
     <style>
+      body {
+        margin: 0;
+        background: white;
+      }
       circle {
-      fill: orange;
-      stroke: white;
+        fill: steelblue;
+        stroke: white;
       }
     </style>
     <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
@@ -13,12 +17,13 @@
     <script src="https://d3js.org/d3-timer.v1.min.js"></script>
   </head>
   <body>
-    <div id="d3-balls"></div>
+    <!-- <div id="bo"></div> -->
     <script>
     var width = window.innerWidth, height = window.innerHeight;
     var data = [];
     var ball_count = 20;
-    var svg = d3.select(".d3-balls").append("svg");
+    var svg = d3.select("body").append("svg");
+
     for (var i=0; i < ball_count; i++)
     {
       var ball = {
@@ -48,6 +53,10 @@
     }
 
     d3.timer(_ => { redraw(data); });
+
+    function update(data){
+      
+    }
     </script>
   </body>
 </html>

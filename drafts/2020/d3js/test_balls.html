@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+    }
+    circle {
+      fill: steelblue;
+      stroke: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello</h1>
+  <div id="chart"></div>
+  <script src="https://d3js.org/d3-selection.v1.min.js"></script>
+  <script src="https://d3js.org/d3-random.v1.min.js"></script>
+  <script src="https://d3js.org/d3-timer.v1.min.js"></script>
+  <script src="https://unpkg.com/geometric@1.0.6/build/geometric.min.js"></script>
+  <script>
+    var width = window.innerWidth/2, height = window.innerHeight/2;
+
+    var data = [];
+    var point_count = 20;
+    var svg = d3.select("#chart").append("svg");
+    for (var i = 0; i < point_count; i++){
+      var obj = {
+        radius: d3.randomUniform(2, 20)(),
+        angle: d3.randomUniform(0, 3600)() / 10,
+        speed: d3.randomUniform(1, 5)(),
+      }
+      if(i%2 == 0)
+      {
+          obj.colour = "red";
+      }
+      else{
+          obj.colour = "blue";
+      }
+      obj.pos = [
+        d3.randomUniform(obj.radius, width - obj.radius)(),
+        d3.randomUniform(obj.radius, height - obj.radius)()
+      ];
+      data.push(obj);
+    }
+
+    var circle = svg.selectAll("circle")
+        .data(data)
+      .enter().append("circle")
+        .attr("r", d => d.radius)
+        .style("fill",d => d.colour);
+
+    d3.timer(_ => { redraw(update(data)); });
+
+    function redraw(data){
+      width = window.innerWidth/2;
+      height = window.innerHeight/2;
+      svg.attr("width", width).attr("height", height);
+      
+      circle.attr("transform", d => "translate(" + d.pos + ")");
+      circle.style("fill",d => d.colour);
+    //   circle.style("fill","#fff8ee")
+    }
+
+    function update(data){
+      data.forEach((d, i) => {  
+        // Detect collisions      
+        for (var i0 = 0, l = data.length; i0 < l; i0++){
+          var target = data[i0];
+          if (i !== i0 && geometric.lineLength([d.pos, target.pos]) < d.radius + target.radius){
+            
+            var dCurr = JSON.parse(JSON.stringify(d));
+            // var dCurr = d;
+            
+            d.colour = target.colour;
+            d.angle = target.angle;
+            d.speed = target.speed;
+            target.colour = dCurr.colour;
+            target.speed = dCurr.speed;
+            target.angle = dCurr.angle;
+
+          }
+        }
+
+        // Detect horizontal walls
+        if (d.pos[0] <= d.radius || d.pos[0] >= width - d.radius){
+          d.angle = geometric.angleReflect(d.angle, 90);
+        }
+
+        // Detect vertical walls
+        if (d.pos[1] <= d.radius || d.pos[1] >= height - d.radius){
+          d.angle = geometric.angleReflect(d.angle, 0);
+        }
+
+        // Translate the point
+        d.pos = geometric.pointTranslate(d.pos, d.angle, d.speed);
+      });
+      return data;
+    }
+  </script>
+</body>
+</html>
