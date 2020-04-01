@@ -1,83 +1,43 @@
-var width = window.innerWidth, height = window.innerHeight;
-
-var variables = {
-    radius: 15,
-    distance: 10
-}
-
-var extents = {
-    radius: [3, 50],
-    distance: [0, 40]
-}
-
-var min = 2, max = 100;
-
-$("#sliders input").each(function(slider_index, slider){
-    var this_var = $(this).attr("data-variable");
-    var extent = extents[this_var];
-    $(this).attr("value", variables[this_var]).attr("min", extent[0]).attr("max", extent[1]);
-}).on("change input", function(){
-    variables[$(this).attr("data-variable")] = $(this).val();
-});
-
+var canvas = document.getElementById("mycanvas");
+var ctx = canvas.getContext("2d");
 var data = [];
-
-var point_count = 20;
-
-var svg = d3.select("#canvas").append("svg").attr("width", width).attr("height", height);
-
-for (var i = 0; i < point_count; i++){
-    data.push({
-        id: jz.str.randomString(),
-        x: jz.num.randBetween(0, width),
-        y: jz.num.randBetween(0, height),
-        slope: jz.num.randBetween(1, 20) / 10,
-        x_dir: [-1, 1][jz.num.randBetween(0, 1)],
-        y_dir: [-1, 1][jz.num.randBetween(0, 1)]
-    });
+var point_count = 100;
+for (var i = 0; i < point_count; i++) {
+  var obj = {
+    radius: 5,
+    angle: Math.random() * 360
+  };
+  obj.speed = 2;
+  if (i == 0) {
+    obj.colour = "red";
+  } else {
+    obj.colour = "blue";
+  }
+  obj.pos = [
+    Math.random() * canvas.width - obj.radius,
+    Math.random() * canvas.height - obj.radius
+  ];
+  data.push(obj);
 }
 
-redraw(data);
+function DrawMe() {
+  ctx.clearRect(0, 0, 400, 300);
 
-d3.interval(function(){ redraw(update(data)); }, 30)
+  for (var i = 0; i < data.length; i++) {
+    var ball = data[i];
+    if (ball.pos[0] > canvas.width - ball.radius || ball.pos[0] < ball.radius)
+      ball.angle += 180;
+    if (ball.pos[1] > canvas.height - ball.radius || ball.pos[1] < ball.radius)
+      ball.angle += 180;
 
-function redraw(data){
-    var circle = svg.selectAll("circle")
-            .data(data, function(d){ return d.id; })
-        
-    circle
-            .attr("r", variables.radius)
-            .attr("cx", function(d){ return d.x; })
-            .attr("cy", function(d){ return d.y; });
+    ball.pos[0] += Math.cos(ball.angle) * ball.speed;
+    ball.pos[1] += Math.sin(ball.angle) * ball.speed;
 
-    circle.enter().append("circle")
-            .attr("r", variables.radius)
-            .attr("cx", function(d){ return d.x; })
-            .attr("cy", function(d){ return d.y; });			
+    ctx.beginPath();
+    ctx.fillStyle = ball.colour;
+    ctx.arc(ball.pos[0], ball.pos[1], ball.radius, 0, Math.PI * 2, false);
+    ctx.fill();
+    ctx.closePath();
+  }
 }
-
-function update(data){
-    data.forEach(function(d){
-        return calcPointB(d, variables.distance, d.slope);
-    });
-    return data;
-}
-
-// given a point, p, and a distance, d, and a slope, m, return x and y
-// formula from http://www.geeksforgeeks.org/find-points-at-a-given-distance-on-a-line-of-given-slope/
-function calcPointB(p, d, m){
-
-    p.x_dir = getDir(p.x, p.x_dir, width);
-
-    p.y_dir = getDir(p.y, p.y_dir, height);
-
-    function getDir(coord, dir, dimension){
-        return  Math.floor(coord) <= variables.radius ? 1 :
-                        Math.ceil(coord) >= dimension - variables.radius ? -1 :
-                        dir;
-    }
-    
-    p.x = p.x + (d * Math.sqrt(1 / (1 + Math.pow(m, 2))) * p.x_dir);
-    p.y = p.y + (m * d * Math.sqrt(1 / (1 + Math.pow(m, 2))) * p.y_dir);
-
-    return p;
+setInterval(DrawMe, 10);

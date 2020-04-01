@@ -84,6 +84,7 @@ SITEMAP = {
 
 PLUGIN_PATHS = [
     './plugins/',
+    # './plugins/pelican_javascript'
     # './plugins/pelican_youtube'
 ]
 

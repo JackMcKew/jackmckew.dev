@@ -4,10 +4,30 @@
     <style>
       body {
         margin: 0;
-        background: black;
+        background: white;
+      }
+      h1 {
+        color: black;
+      }
+      p {
+        color: black;
       }
       circle {
         fill: steelblue;
+      }
+      .svg-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%;
+        vertical-align: top;
+        overflow: hidden;
+      }
+      .svg-content {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
     </style>
   </head>
@@ -16,8 +36,10 @@
     <p id="timer"></p>
     <p id="infected_count"></p>
     <p id="healthy_count"></p>
-    <div id="area-chart"></div>
-    <div id="ball-chart"></div>
+    <!-- <div id="area-chart"></div> -->
+    <!-- <canvas height="400" width="400" id="ball-chart"></canvas> -->
+    <div id="container" class="svg-container"></div>
+    <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
     <script src="https://d3js.org/d3-selection.v1.min.js"></script>
     <script src="https://d3js.org/d3-random.v1.min.js"></script>
     <script src="https://d3js.org/d3-timer.v1.min.js"></script>
@@ -25,25 +47,30 @@
     <script>
       var width = window.innerWidth,
         height = window.innerHeight;
-
       var data = [];
       var point_count = 100;
-      var svg = d3.select("#ball-chart").append("svg");
+      var svg = d3
+        .select("")
+        .append("svg")
+        // .attr("preserveAspectRatio", "xMinYMin meet")
+        // .attr("viewBox", "0 0 300 300")
+        .classed("svg-content", true);
+
       for (var i = 0; i < point_count; i++) {
         var obj = {
-          radius: 10,
+          radius: 5,
           angle: d3.randomUniform(0, 3600)() / 10
           // speed: d3.randomUniform(1, 5)()
         };
-        // obj.speed = 2;
-        if (i < 90) {
-          obj.speed = 0.0001;
-        } else {
-          obj.speed = 2;
-        }
+        obj.speed = 2;
+        // if (i < 90) {
+        //   obj.speed = 0.0001;
+        // } else {
+        //   obj.speed = 2;
+        // }
 
         // obj.speed = 2;
-        if (i < 10) {
+        if (i == 0) {
           obj.colour = "red";
         } else {
           obj.colour = "blue";
@@ -117,20 +144,15 @@
         return result;
       }
 
-      function transmit_infection(ball1,ball2)
-      {
-        if(ball1.colour == ball2.colour)
-        {
+      function transmit_infection(ball1, ball2) {
+        if (ball1.colour == ball2.colour) {
           return;
         }
-        if(d3.randomUniform(1,101)() > 50)
-        {
-          if(ball1.colour == "red")
-          {
+        if (d3.randomUniform(1, 101)() > 0) {
+          if (ball1.colour == "red") {
             ball2.colour = ball1.colour;
           }
-          if(ball2.colour == "red")
-          {
+          if (ball2.colour == "red") {
             ball1.colour = ball2.colour;
           }
         }
@@ -148,7 +170,7 @@
                 d.radius + target.radius &&
               target.speed < 1
             ) {
-              transmit_infection(d,target);
+              transmit_infection(d, target);
               d.angle += 180;
               break;
             }
@@ -162,7 +184,7 @@
 
               d.angle = target.angle;
               d.speed = target.speed;
-              transmit_infection(d,target);
+              transmit_infection(d, target);
               // if (d.colour == "red"){
               // // d3.randomUniform(1, 101)() > 0) {
               //   target.colour = dCurr.colour;
