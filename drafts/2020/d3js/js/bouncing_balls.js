@@ -40,4 +40,5 @@ function DrawMe() {
     ctx.closePath();
   }
 }
+
 setInterval(DrawMe, 10);
