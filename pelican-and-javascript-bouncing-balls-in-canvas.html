@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="Today let&#39;s look into building a visualisation of some bouncing balls with Javascript. The inspiration for building this comes from Harry Stevens over at the Washington Post for his amazing piece of data journalism around the coronavirus. Here is a gif of the current version of my bouncing balls using …" />
+<meta name="keywords" content="javascript, data-viz">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Pelican and Javascript - Bouncing Balls in Canvas"/>
+<meta property="og:description" content="Today let&#39;s look into building a visualisation of some bouncing balls with Javascript. The inspiration for building this comes from Harry Stevens over at the Washington Post for his amazing piece of data journalism around the coronavirus. Here is a gif of the current version of my bouncing balls using …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/pelican-and-javascript-bouncing-balls-in-canvas.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-04-02 00:00:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Javascript"/>
+<meta property="article:tag" content="javascript"/>
+<meta property="article:tag" content="data-viz"/>
+<meta property="og:image" content="https://jackmckew.dev/img/bouncing_balls.gif">
+
+    <title>Jack McKew's Blog &ndash; Pelican and Javascript - Bouncing Balls in Canvas</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 58</p>
+            <p>Number of Words: 38,352</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="pelican-and-javascript-bouncing-balls-in-canvas">Pelican and Javascript - Bouncing Balls in Canvas</h1>
+    <p>
+       Posted on Thu 02 April 2020 in <a href="https://jackmckew.dev/category/javascript.html">Javascript</a>
+
+        &#8226; 3 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>Today let's look into building a visualisation of some bouncing balls with Javascript. The inspiration for building this comes from <a href="https://www.washingtonpost.com/people/harry-stevens/">Harry Stevens</a> over at the Washington Post for his amazing piece of data journalism around the <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">coronavirus</a>.</p>
+<p>Here is a gif of the current version of my bouncing balls using the Canvas API:</p>
+<p><img alt="Bouncing Balls GIF" class="img-fluid" src="https://jackmckew.dev/img/bouncing_balls.gif"/></p>
+<p>As soon as I read that article personally, I thought of a few ways to extend the analysis, and such this post was born. A few of the ideas that I've had are:</p>
+<ul>
+<li>Adding a 'chance' to transmit the infection (eg, 50% of all collisions transmit). This could be a symbolic way of seeing how much of an impact wearing PPE makes on virus outbreaks.</li>
+<li>Having hot spots in which the circles will be attracted towards.</li>
+</ul>
+<p>If you've got any ideas of some new parameters that might be interesting to see, leave a comment!</p>
+<p>Before I could build a similar visualisation, I had to figure out how I could integrate Javascript into this blog. Luckily, the amazing community behind Pelican has built a plethora of plugins to choose from.</p>
+<p><a href="https://github.com/mortada/pelican_javascript">Pelican Javascript</a> ended up being the plugin of choice. By using this in combination with <a href="https://github.com/AlexJF/pelican-autostatic">Pelican Autostatic</a>, this allowed for the article-centric resources and also ensures that a list of source javascript files was included at the end of each post.</p>
+<p>Without further ado, here is my current implementation of bouncing balls. There is a few bugs in that sometimes they fly out of the box and some get stuck together forever, if anyone has any ideas on how I could fix it, please let me know in the comments!</p>
+<canvas height="400" id="mycanvas" style="border:1px solid grey;" width="400"></canvas>
+<p>This visualisation is completed using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">Canvas API</a>. To interface with the canvas element in HTML, we use the <a href="https://www.w3schools.com/whatis/whatis_htmldom.asp">DOM</a>. Another option of doing this is using <a href="https://d3js.org/">d3js</a>, for which my understanding is that since Canvas is inbuilt, it is much more powerful at painting more objects.</p>
+<p>We then instantiate an amount of objects (which will be the balls) within Javascript with the following parameters:</p>
+<ul>
+<li>radius</li>
+<li>angle</li>
+<li>speed</li>
+<li>colour</li>
+<li>position</li>
+</ul>
+<p>These are then all pushed into an array for which we will loop through checking collision with horizontal walls, vertical walls and the other balls.</p>
+<p>To have a visualisation which moves along with time, we can use the <a href="https://www.w3schools.com/whatis/whatis_htmldom.asp">setInterval</a> method (which is apart of the Window object aka the browser). We will be painting the canvas at each interval that we have set with this method.</p>
+<p>Now we need to paint our canvas with the balls. To do this, we start by clearing the canvas each time, so the last 'timestamp' doesn't stay on our canvas (unless you want to?). The balls are then painted onto the canvas using the <a href="https://www.w3schools.com/tags/canvas_arc.asp">canvas arc() Method</a>.</p>
+<p>At each time step, we need to do a series of steps:</p>
+<ol>
+<li>Clear the canvas (using <a href="https://www.w3schools.com/tags/canvas_clearrect.asp">canvas clearRect() Method</a>).</li>
+<li>The following steps are applied to each individual ball.</li>
+<li>Check if the ball is colliding with the walls or another ball.<ol>
+<li>If they are, reflect them accordingly. (Since our balls are all the same 'weight', we use a <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/colsta.html">mass elastic collision</a>, which means both balls angle will be rotated by 90 degrees.</li>
+</ol>
+</li>
+<li>Move our ball according to the angle it is facing, by it's speed.</li>
+<li>Paint the ball on canvas.</li>
+<li>Repeat for all balls.</li>
+</ol>
+<p>Javascript Source(s):
+<a href="https://jackmckew.dev/js/bouncing_balls.js">Bouncing_Balls.js</a></p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/javascript.html">javascript</a>
+      <a href="https://jackmckew.dev/tag/data-viz.html">data-viz</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/packaging-python-packages-with-poetry.html" title="Packaging Python Packages with Poetry">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+            <script src="https://jackmckew.dev/js/bouncing_balls.js"></script>
+</html>
