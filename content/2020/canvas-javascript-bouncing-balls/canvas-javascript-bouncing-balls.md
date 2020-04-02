@@ -1,5 +1,5 @@
 Title: Pelican and Javascript - Bouncing Balls in Canvas
-Date: 2020-03-26
+Date: 2020-04-02
 Author: Jack McKew
 Category: Javascript, Data Visualisation
 Tags: javascript, data-viz
