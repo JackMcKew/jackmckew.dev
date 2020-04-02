@@ -15,6 +15,9 @@ http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
 <body>
 
 <script>
+
+
+
     // Ball object - multiple balls can be created by instantiating new objects
     function Ball(svg, x, y, id, color, aoa, weight) {
         this.posX = x; // cx
@@ -157,7 +160,7 @@ http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
 
             // show collision effect for 500 miliseconds
             var intersectBall = svg.select('#' + ball1.id + '_intersect');
-            intersectBall.attr({ 'cx': interx, 'cy': intery, 'r': 5 ,'fill': 'black' })
+            intersectBall.attr({ 'cx': interx, 'cy': intery, 'r': 5 ,'fill': 'red' })
                         .transition()
                         .duration(500)
                         .attr('r', 0);

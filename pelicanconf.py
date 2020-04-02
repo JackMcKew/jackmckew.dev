@@ -84,6 +84,7 @@ SITEMAP = {
 
 PLUGIN_PATHS = [
     './plugins/',
+    # './plugins/pelican_javascript'
     # './plugins/pelican_youtube'
 ]
 
@@ -111,6 +112,7 @@ PLUGINS = [
     'tipue_search',
     "dateish",
     "post_stats",
+    "pelican_javascript",
     "render_math",
     "related_posts",
     "autostatic",

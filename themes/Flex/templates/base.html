@@ -56,6 +56,13 @@
         });
     </script>
     {% endif %} {% if GOOGLE_TAG_MANAGER %} {% include "partial/gtm.html" %} {% endif %}
+    {% if article %}
+        {% if article.stylesheets %}
+            {% for stylesheet in article.stylesheets %}
+                {{ stylesheet }}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
 </head>
 
 <body>
@@ -147,5 +154,11 @@
     </script>
     {% endif %}
 </body>
-
+{% if article %}
+    {% if article.javascripts %}
+        {% for javascript in article.javascripts %}
+            {{ javascript }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
 </html>
