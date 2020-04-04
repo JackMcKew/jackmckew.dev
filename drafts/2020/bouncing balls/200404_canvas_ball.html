@@ -18,22 +18,13 @@
     ></canvas>
 
     <script>
-      var canvas = document.getElementById("area_chart");
-      if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
-
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
-        // ctx.clearRect(45, 45, 60, 60);
-        // ctx.strokeRect(50, 50, 50, 50);
-      }
-    </script>
-    <script>
       // Inspiration from http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
       var canvas = document.getElementById("mycanvas");
       var ctx = canvas.getContext("2d");
       var ball_array = [];
       var ball_count = 200;
       var recovery_time = 4000;
+      var time_counter = 0;
 
       function summary_count(data, query) {
         var result = 0;
@@ -213,7 +204,16 @@
         recovered_count = summary_count(ball_array, "purple");
         document.getElementById("recovered_count").innerHTML =
           "Recovered: " + recovered_count;
+        time_counter += 1;
+        document.getElementById("recovered_count").innerHTML =
+          "Timer: " + time_counter;
+        var area_canvas = document.getElementById('area_chart');
+        if(area_canvas.getContext())
+        {
+          var area_ctx = area_canvas.getContext('2d');
+          area_ctx.clearRect(0,0,area_canvas.width,area_canvas.height);
           
+        }
       }
 
       setInterval(paint_canvas, 20);
