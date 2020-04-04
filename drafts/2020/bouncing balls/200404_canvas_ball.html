@@ -21,8 +21,8 @@
       // Inspiration from http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
       var canvas = document.getElementById("mycanvas");
       var ctx = canvas.getContext("2d");
-      var area_canvas = document.getElementById('area_chart');
-      var area_ctx = area_canvas.getContext('2d');
+      var area_canvas = document.getElementById("area_chart");
+      var area_ctx = area_canvas.getContext("2d");
       // area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
       var ball_array = [];
       var ball_count = 200;
@@ -45,7 +45,8 @@
         var ball = {
           radius: 5,
           angle: Math.random() * 360,
-          mass: 1
+          mass: 1,
+          moving: true
         };
         // ball.mass = ball.radius;
         ball.speed = 1;
@@ -181,10 +182,10 @@
               transmit_infection(current_ball, ball_array[j]);
             }
           }
-
-          current_ball.x_position += current_ball.x_velocity;
-          current_ball.y_position += current_ball.y_velocity;
-
+          if (current_ball.moving) {
+            current_ball.x_position += current_ball.x_velocity;
+            current_ball.y_position += current_ball.y_velocity;
+          }
           ctx.beginPath();
           ctx.fillStyle = current_ball.colour;
           ctx.arc(
@@ -210,20 +211,29 @@
         time_counter += 1;
         document.getElementById("recovered_count").innerHTML =
           "Timer: " + time_counter;
-        
 
-          area_ctx.fillStyle = "blue";
-          area_ctx.fillRect(time_counter/2,0,1,healthy_count);
-          area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
-          area_ctx.fillStyle = "purple"
-          area_ctx.fillRect(time_counter/2,0,1,(recovered_count+infected_count));
-          area_ctx.fillStyle = "red"
-          area_ctx.fillRect(time_counter/2,0,1,infected_count);
-          area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
-          
+        area_ctx.fillStyle = "blue";
+        area_ctx.fillRect(time_counter / 2, 0, 1, healthy_count);
+        area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
+        area_ctx.fillStyle = "purple";
+        area_ctx.fillRect(
+          time_counter / 2,
+          0,
+          1,
+          recovered_count + infected_count
+        );
+        area_ctx.fillStyle = "red";
+        area_ctx.fillRect(time_counter / 2, 0, 1, infected_count);
+        area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
+        if(time_counter >= 800)
+        {
+          clearInterval(global_timer);
+        }
       }
-      setInterval(paint_canvas,20);
-      // setTimeout(setInterval,1000,paint_canvas,20);
+      // if (time_counter < 1000) {
+      var global_timer = setInterval(paint_canvas, 20);
+      // }
+      // setTimeout(setInterval,1,paint_canvas,20);
     </script>
   </body>
 </html>
