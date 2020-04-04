@@ -7,6 +7,9 @@
     <div class="slidecontainer">
       <label>Number of People allowed to move</label>
       <input type="range" min="1" max="200" value="1" class="slider" id="allowed_to_move_count">
+      <br>
+      <label>Virus Reoccurs at (0 = start, 4 = reoccurs at 4 seconds)</label>
+      <input type="range" min="0" max="8" value="1" class="slider" id="reoccurance_rate">
     </div>
     <canvas
       id="area_chart"
@@ -32,7 +35,8 @@
       var ball_count = 200;
       var recovery_time = 4000;
       var time_counter = 0;
-      var slider = document.getElementById("allowed_to_move_count");
+      var allowed_to_move_slider = document.getElementById("allowed_to_move_count");
+      var reoccurance_rate_slider = document.getElementById("reoccurance_rate");
       function summary_count(data, query) {
         var result = 0;
         for (i = 0; i < data.length; i++) {
@@ -174,8 +178,13 @@
       }
 
       function paint_canvas() {
+        if((time_counter / 100) % reoccurance_rate_slider.value == 0)
+        {
+          var unlucky_index = Math.round(Math.random() * ball_array.length);
+          ball_array[unlucky_index].colour = "red";
+        }
         for (var i = 0; i < ball_array.length; ++i) {
-          if(i < slider.value)
+          if(i < allowed_to_move_slider.value)
           {
             ball_array[i].allowed_to_move = false;
           }
