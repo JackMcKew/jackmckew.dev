@@ -21,6 +21,9 @@
       // Inspiration from http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
       var canvas = document.getElementById("mycanvas");
       var ctx = canvas.getContext("2d");
+      var area_canvas = document.getElementById('area_chart');
+      var area_ctx = area_canvas.getContext('2d');
+      // area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
       var ball_array = [];
       var ball_count = 200;
       var recovery_time = 4000;
@@ -207,24 +210,20 @@
         time_counter += 1;
         document.getElementById("recovered_count").innerHTML =
           "Timer: " + time_counter;
-        var area_canvas = document.getElementById('area_chart');
-        if(area_canvas.getContext)
-        {
-          var area_ctx = area_canvas.getContext('2d');
-          
+        
+
           area_ctx.fillStyle = "blue";
-          
-          area_ctx.fillRect(time_counter/2,0,1,(healthy_count - recovered_count));
-          area_ctx.fillStyle = "purple"
-          area_ctx.fillRect(time_counter/2,0,1,recovered_count);
+          area_ctx.fillRect(time_counter/2,0,1,healthy_count);
           area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
+          area_ctx.fillStyle = "purple"
+          area_ctx.fillRect(time_counter/2,0,1,(recovered_count+infected_count));
           area_ctx.fillStyle = "red"
           area_ctx.fillRect(time_counter/2,0,1,infected_count);
           area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
-        }
+          
       }
-
-      setInterval(paint_canvas, 20);
+      setInterval(paint_canvas,20);
+      // setTimeout(setInterval,1000,paint_canvas,20);
     </script>
   </body>
 </html>
