@@ -1,0 +1,191 @@
+<html>
+  <body>
+    <p id="timer"></p>
+    <p id="infected_count"></p>
+    <p id="healthy_count"></p>
+    <canvas
+      id="mycanvas"
+      width="400"
+      height="400"
+      style="border:2px solid grey;"
+    ></canvas>
+    <script>
+      // Inspiration from http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
+      var canvas = document.getElementById("mycanvas");
+      var ctx = canvas.getContext("2d");
+      var ball_array = [];
+      var ball_count = 200;
+
+      function summary_count(data, query) {
+        var result = 0;
+        for (i = 0; i < data.length; i++) {
+          var obj = data[i];
+          if (obj.colour == query) {
+            result++;
+          }
+        }
+        return result;
+      }
+
+      for (var i = 0; i < ball_count; i++) {
+        // Initialise all balls and append to array
+        var ball = {
+          radius: 5,
+          angle: Math.random() * 360,
+          mass: 1
+        };
+        // ball.mass = ball.radius;
+        ball.speed = 1;
+        if (i == 0) {
+          ball.colour = "red";
+        } else {
+          ball.colour = "blue";
+        }
+        ball.x_position = Math.random() * (canvas.width - ball.radius);
+        ball.y_position = Math.random() * (canvas.height - ball.radius);
+        ball.x_velocity = Math.cos(ball.angle) * ball.speed;
+        ball.y_velocity = Math.sin(ball.angle) * ball.speed;
+        ball_array.push(ball);
+      }
+
+      function check_boundaries(canvas, ball) {
+        // Checks if ball has collided with walls and adjust angles accordingly
+        if(ball.x_position >= canvas.width - ball.radius)
+        {
+          ball.x_position = canvas.width - ball.radius - 1;
+          ball.angle = Math.PI - ball.angle;
+          ball.x_velocity = -1 * Math.cos(ball.angle) * ball.speed;
+        }
+
+        if(ball.x_position <= ball.radius)
+        {
+          ball.x_position = ball.radius + 1
+          ball.angle = Math.PI - ball.angle;
+          ball.x_velocity = -1 * Math.cos(ball.angle) * ball.speed;
+        }
+
+        if(ball.y_position >= canvas.height - ball.radius)
+        {
+          ball.y_position = canvas.height - ball.radius - 1;
+          ball.angle = 2 * Math.PI - ball.angle;
+          ball.y_velocity = -1 * Math.sin(ball.angle) * ball.speed;
+        }
+
+        if(ball.y_position <= ball.radius)
+        {
+          ball.y_position = ball.radius + 1
+          ball.angle = 2 * Math.PI - ball.angle;
+          ball.y_velocity = -1 * Math.sin(ball.angle) * ball.speed;
+        }
+
+        return ball;
+      }
+
+      function check_collision(ball1, ball2) {
+        var absx = Math.abs(
+          parseFloat(ball2.x_position) - parseFloat(ball1.x_position)
+        );
+        var absy = Math.abs(
+          parseFloat(ball2.y_position) - parseFloat(ball1.y_position)
+        );
+
+        // find distance between two balls.
+        var distance = absx * absx + absy * absy;
+        distance = Math.sqrt(distance);
+        // check if distance is less than sum of two radius - if yes, collision
+        if (distance < (parseFloat(ball1.radius) + parseFloat(ball2.radius))) {
+          return true;
+        }
+        return false;
+      }
+
+      function process_collision(ball1, ball2) {
+        // Sticky balls check from: https://gist.github.com/christopher4lis/f9ccb589ee8ecf751481f05a8e59b1dc
+        if((ball1.x_velocity - ball2.x_velocity) * (ball2.x_position - ball1.x_position) + 
+        (ball1.y_velocity - ball2.y_velocity) * (ball2.y_position - ball1.y_position) >= 0)
+        {
+          var vx1 =
+            (ball1.x_velocity * (ball1.mass - ball2.mass) +
+              2 * ball2.mass * ball2.x_velocity) /
+            (ball1.mass + ball2.mass);
+          var vy1 =
+            (ball1.y_velocity * (ball1.mass - ball2.mass) +
+              2 * ball2.mass * ball2.y_velocity) /
+            (ball1.mass + ball2.mass);
+
+          var vx2 =
+            (ball2.x_velocity * (ball2.mass - ball1.mass) +
+              2 * ball1.mass * ball1.x_velocity) /
+            (ball1.mass + ball2.mass);
+          var vy2 =
+            (ball2.y_velocity * (ball2.mass - ball1.mass) +
+              2 * ball1.mass * ball1.y_velocity) /
+            (ball1.mass + ball2.mass);
+
+          //set velocities for both balls
+          ball1.x_velocity = vx1;
+          ball1.y_velocity = vy1;
+          ball2.x_velocity = vx2;
+          ball2.y_velocity = vy2;
+        }
+        // while (check_collision(ball1, ball2)) {
+        //   process_collision(ball1,ball2)
+        // //    // ball1.x_position += ball1.x_velocity;
+        // //   // ball1.y_position += ball1.y_velocity;
+        // //   // ball2.x_position += ball2.x_velocity;
+        // //   // ball2.y_position += ball2.y_velocity;
+        // }
+      }
+
+      function transmit_infection(ball1,ball2)
+      {
+        if( ball1.colour == "red" || ball2.colour == "red")
+        {
+          ball1.colour = "red";
+          ball2.colour = "red";
+        }
+      }
+
+      function paint_canvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < ball_array.length; ++i) {
+          var current_ball = ball_array[i];
+
+          
+          current_ball = check_boundaries(canvas, current_ball);
+
+          for (var j = i + 1; j < ball_array.length; ++j) {
+            if (check_collision(current_ball, ball_array[j])) {
+              process_collision(current_ball, ball_array[j]);
+              transmit_infection(current_ball,ball_array[j]);
+            }
+          }
+
+          current_ball.x_position += current_ball.x_velocity;
+          current_ball.y_position += current_ball.y_velocity;
+
+          ctx.beginPath();
+          ctx.fillStyle = current_ball.colour;
+          ctx.arc(
+            current_ball.x_position,
+            current_ball.y_position,
+            current_ball.radius,
+            0,
+            Math.PI * 2,
+            false
+          );
+          ctx.fill();
+          ctx.closePath();
+        }
+        infected_count = summary_count(ball_array, "red");
+        document.getElementById("infected_count").innerHTML =
+          "Infected: " + infected_count;
+        healthy_count = summary_count(ball_array, "blue");
+        document.getElementById("healthy_count").innerHTML =
+          "Healthy: " + healthy_count;
+      }
+
+      setInterval(paint_canvas, 20);
+    </script>
+  </body>
+</html>
