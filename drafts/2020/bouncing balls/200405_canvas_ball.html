@@ -4,8 +4,10 @@
     <p id="infected_count"></p>
     <p id="healthy_count"></p>
     <p id="recovered_count"></p>
-    <div class="slidecontainer">
+    <form>
+      <input type="checkbox" id="enable_allowed_to_move">
       <label>Number of People allowed to move</label>
+      
       <input type="range" min="1" max="200" value="1" class="slider" id="allowed_to_move_count">
       <br>
       <label>Virus Reoccurs at (0 = start, 4 = reoccurs at 4 seconds)</label>
@@ -13,7 +15,7 @@
       <br>
       <label>Chance to transmit (eg, 50% chance)</label>
       <input type="range" min="0" max="100" value="50" class="slider" id="transmit_chance">
-    </div>
+    </form>
     <canvas
       id="area_chart"
       width="400"
