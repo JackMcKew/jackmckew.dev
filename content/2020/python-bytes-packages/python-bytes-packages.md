@@ -6,6 +6,9 @@ Tags: python
 
 [Python Bytes](https://pythonbytes.fm/) is a weekly, short & sweet podcast by [Michael Kennedy](https://twitter.com/mkennedy) & [Brian Okken](https://twitter.com/brianokken). After having the podcast recommended numerous times by friends & colleagues, I decided to download every episode thus far on the 14th of September 2019. Over the next 174 days, whenever I was commuting, I'd listen to 171 episodes of Python bytes, learnt a stack of new things and found new amazing python packages.
 
+> **IMPORTANT NOTE**: This list has been moved to it's own repository on Github so other listeners can add other awesome packages to this list! Pull requests are 100% open and I'm looking forward to seeing your contributions! 
+> [https://github.com/JackMcKew/awesome-python-bytes](https://github.com/JackMcKew/awesome-python-bytes)
+
 ![Python Bytes Image](https://pythonbytes.fm/static/img/banner_750.png)
 
 This post is intended to list out the packages I'd noted down & their application. Total disclaimer, I haven't tried out all of these packages personally and I'm certain there is a plethora of other packages mentioned that I have not captured here, please reach out if theres anything to add!
