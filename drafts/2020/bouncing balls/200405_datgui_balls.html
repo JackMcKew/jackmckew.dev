@@ -9,7 +9,6 @@
       </style> -->
     <style>
       #simulation-block {
-        fill: red;
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
@@ -18,7 +17,7 @@
         margin-top: 10px;
         margin-bottom: 40px;
         width:  100%;
-        height: 50%;
+        /* height: 50%; */
       }
       #controls-container{
         float: right;
@@ -57,29 +56,36 @@
       </div>
       <canvas
       id="mycanvas"
-      width="400"
+      width="800"
       height="400"
-      style="border:2px solid grey;""
+      style="border:2px solid grey;"
     ></canvas>
     </div>
 
     <script>
-      var SimControls = function () {
-        this.message = "Control the SIM!!!!!!!";
-        this.speed = 0.8;
-        this.displayOutline = false;
+      var controls = new function () {
+        // this.message = "Control the SIM!!!!!!!";
+        this.speed = 1;
+        this.not_allowed_to_move = 0;
+        this.reoccurance_rate = 0;
+        this.chance_to_transmit  = 100;
+        this.time_to_recover = 4;
+        // this.displayOutline = false;
       };
       window.onload = function () {
-        var text = new SimControls();
+        // var  = new gui_variables();
         var gui = new dat.GUI({autoPlace : false});
-        gui.add(text, "message");
-        gui.add(text, "speed", -5, 5);
-        gui.add(text, "displayOutline");
-        gui.add(text, "displayOutline");
-        gui.add(text, "displayOutline");
-        gui.add(text, "displayOutline");
+      
+        gui.add(controls, "speed", 1, 10);
+        gui.add(controls,"not_allowed_to_move",0,200);
+        gui.add(controls,"reoccurance_rate",0,8);
+        gui.add(controls,"chance_to_transmit",0,100);
+        gui.add(controls,"time_to_recover",0,20);
+    
+      
         var customContainer = document.getElementById("controls-container");
         customContainer.append(gui.domElement);
+        console.log(controls.speed)
       };
       // Inspiration from http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
       var canvas = document.getElementById("mycanvas");
@@ -87,19 +93,19 @@
       ctx.canvas.width = document.getElementById("simulation-block").clientWidth;
       var area_canvas = document.getElementById("area_chart");
       var area_ctx = area_canvas.getContext("2d");
-      area_ctx.canvas.height = document.getElementById("summary-block").clientHeight
-      // console.log(document.getElementById("summary-block").clientHeight)
-      area_ctx.canvas.width = document.getElementById("summary-block").clientWidth - 250;
+      // area_ctx.canvas.height = document.getElementById("summary-block").clientHeight
+      var area_width = document.getElementById("summary-block").clientWidth - 300;
+      area_ctx.canvas.width = area_width
       // area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
       var ball_array = [];
       var ball_count = 200;
-      var recovery_time = 4000;
+      // var recovery_time = 4000;
       var time_counter = 0;
-      var allowed_to_move_slider = document.getElementById(
-        "allowed_to_move_count"
-      );
-      var reoccurance_rate_slider = document.getElementById("reoccurance_rate");
-      var transmit_chance_slider = document.getElementById("transmit_chance");
+      // var allowed_to_move_slider = document.getElementById(
+      //   "allowed_to_move_count"
+      // );
+      // var reoccurance_rate_slider = document.getElementById("reoccurance_rate");
+      // var transmit_chance_slider = document.getElementById("transmit_chance");
       function summary_count(data, query) {
         var result = 0;
         for (i = 0; i < data.length; i++) {
@@ -114,16 +120,16 @@
       for (var i = 0; i < ball_count; i++) {
         // Initialise all balls and append to array
         var ball = {
-          radius: 5,
+          radius: 10,
           angle: Math.random() * 360,
           mass: 1,
           allowed_to_move: true,
         };
         // ball.mass = ball.radius;
-        ball.speed = 1;
+        ball.speed = 1.5;
         if (i == 0) {
           ball.colour = "red";
-          setTimeout(recover, recovery_time, ball);
+          setTimeout(recover, controls.time_to_recover * 1000, ball);
         } else {
           ball.colour = "blue";
         }
@@ -230,11 +236,11 @@
       function transmit_infection(ball1, ball2) {
         if (ball1.colour !== "purple" && ball2.colour !== "purple") {
           if (ball1.colour == "red" || ball2.colour == "red") {
-            if (Math.random() * 100 < transmit_chance_slider.value) {
+            if (Math.random() * 100 < controls.chance_to_transmit) {
               ball1.colour = "red";
               ball2.colour = "red";
-              setTimeout(recover, recovery_time, ball1);
-              setTimeout(recover, recovery_time, ball2);
+              setTimeout(recover, controls.time_to_recover * 1000, ball1);
+              setTimeout(recover, controls.time_to_recover * 1000, ball2);
               // setTimeout(recover(ball1),recovery_time);
               // setTimeout(recover(ball2),recovery_time);
             }
@@ -243,12 +249,13 @@
       }
 
       function paint_canvas() {
-        if ((time_counter / 100) % reoccurance_rate_slider.value == 0) {
+        console.log(controls.not_allowed_to_move)
+        if ((time_counter / 100) % controls.reoccurance_rate == 0) {
           var unlucky_index = Math.round(Math.random() * ball_array.length);
           ball_array[unlucky_index].colour = "red";
         }
         for (var i = 0; i < ball_array.length; ++i) {
-          if (i < allowed_to_move_slider.value) {
+          if (i < controls.not_allowed_to_move) {
             ball_array[i].allowed_to_move = false;
           } else {
             ball_array[i].allowed_to_move = true;
@@ -309,7 +316,7 @@
         area_ctx.fillStyle = "red";
         area_ctx.fillRect(time_counter / 2, 0, 1, infected_count);
         area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
-        if (time_counter >= 800) {
+        if (time_counter >= area_width * 2) {
           clearInterval(global_timer);
         }
       }
