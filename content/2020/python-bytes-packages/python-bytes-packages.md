@@ -6,6 +6,9 @@ Tags: python
 
 [Python Bytes](https://pythonbytes.fm/) is a weekly, short & sweet podcast by [Michael Kennedy](https://twitter.com/mkennedy) & [Brian Okken](https://twitter.com/brianokken). After having the podcast recommended numerous times by friends & colleagues, I decided to download every episode thus far on the 14th of September 2019. Over the next 174 days, whenever I was commuting, I'd listen to 171 episodes of Python bytes, learnt a stack of new things and found new amazing python packages.
 
+> **IMPORTANT NOTE**: This list has been moved to it's own repository on Github so other listeners can add other awesome packages to this list! Pull requests are 100% open and I'm looking forward to seeing your contributions! 
+> [https://github.com/JackMcKew/awesome-python-bytes](https://github.com/JackMcKew/awesome-python-bytes)
+
 ![Python Bytes Image](https://pythonbytes.fm/static/img/banner_750.png)
 
 This post is intended to list out the packages I'd noted down & their application. Total disclaimer, I haven't tried out all of these packages personally and I'm certain there is a plethora of other packages mentioned that I have not captured here, please reach out if theres anything to add!
@@ -56,6 +59,7 @@ I've attempted to sort these into a directory of sorts pending on what you're in
     - [Gooey](#gooey)
     - [Eel GUI](#eel-gui)
     - [QUICK](#quick)
+    - [Great Examples of Tkinter](#great-examples-of-tkinter)
 - [Python Development](#python-development)
     - [Attrs](#attrs)
     - [PyOxidiser](#pyoxidiser)
@@ -300,6 +304,18 @@ A real quick GUI generator for `click`. Inspired by `Gooey`, the GUI generator f
 
 ![QUICK Example](https://user-images.githubusercontent.com/6657200/38025934-bf93013c-32bc-11e8-8d12-91411b28946e.png)
 
+## Great Examples of Tkinter
+
+*[https://pythonbytes.fm/episodes/show/63/we-re-still-on-a-desktop-gui-kick](https://pythonbytes.fm/episodes/show/63/we-re-still-on-a-desktop-gui-kick)*
+A few great examples of what is possible with Tkinter.
+- https://github.com/victordomingos/PT-Tracking/
+    - ![PT Tracking](https://cloud.githubusercontent.com/assets/18650184/24768034/13b5f4f4-1af9-11e7-8b8c-5ac8411e5469.png)
+- https://github.com/victordomingos/RepService/
+    - ![RepService](https://user-images.githubusercontent.com/18650184/27431379-4a942e82-5744-11e7-87cb-226f798a5bba.jpg)
+- https://github.com/victordomingos/ContarDinheiro.py
+    - ![Money Counter](https://raw.githubusercontent.com/victordomingos/count-money/master/screenshots/screenshot_en.png)
+
+
 # Python Development
 
 ## [Attrs](https://github.com/python-attrs/attrs)
@@ -344,7 +360,7 @@ PursuedPyBear, also known as ppb, exists to be an educational resource. Most obv
 
 # Interesting Tidbits
 
-> There was one episode that referenced some amazing examples of GUIs built in Tkinter, unfortunately I have been unable to find it again. My note that I had down was `63 GUIs in Tkinter`.
+> There was one episode that referenced some amazing examples of GUIs built in Tkinter, unfortunately I have been unable to find it again. My note that I had down was `63 GUIs in Tkinter`. EDIT: Thank you [Anton Alekseev](https://github.com/antonalekseev) for helping me find this! [Tkinter Examples](#great-examples-of-tkinter)
 > Using --prompt to name your virtualenv for easy identification later on is something I use widely now. [https://pythonbytes.fm/episodes/show/168/race-your-donkey-car-with-python](https://pythonbytes.fm/episodes/show/168/race-your-donkey-car-with-python)
 > [Python Graph Gallery](https://python-graph-gallery.com/) is an amazing resource for examples of already made data visualisations.
 > [Type hints for busy programmers](https://inventwithpython.com/blog/2019/11/24/type-hints-for-busy-python-programmers/) is a great resource for understanding what type hints are and why you should use them.
