@@ -1,11 +1,38 @@
 <html>
+  <head>
+    <script type="text/javascript" src="dat.gui.js"></script>
+    <!-- <style>
+      #controls_container {
+          /* margin-bottom: 2.5%; */
+          /* margin-left: 25%; */
+      }
+      </style> -->
+    <style>
+      #simulation-block {
+        fill: red;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #summary-block {
+        margin-top: 10px;
+        margin-bottom: 40px;
+        width:  100%;
+        height: 50%;
+      }
+      #controls-container{
+        float: right;
+      }
+      
+    </style>
+  </head>
   <body>
     <p id="timer"></p>
     <p id="infected_count"></p>
     <p id="healthy_count"></p>
     <p id="recovered_count"></p>
-    <form>
-      <input type="checkbox" id="enable_allowed_to_move">
+    <!-- <form>
+
       <label>Number of People allowed to move</label>
       
       <input type="range" min="1" max="200" value="1" class="slider" id="allowed_to_move_count">
@@ -15,33 +42,62 @@
       <br>
       <label>Chance to transmit (eg, 50% chance)</label>
       <input type="range" min="0" max="100" value="50" class="slider" id="transmit_chance">
-    </form>
-    
-    <canvas
-      id="area_chart"
-      width="400"
-      height="200"
-      style="border: 2px solid grey;"
-    ></canvas>
-    <canvas
+    </form> -->
+
+    <div id="simulation-block">
+      <div id="summary-block">
+        <div id="controls-container">
+        </div>
+        <canvas
+          id="area_chart"
+          width="400"
+          height="200"
+          style="border: 2px solid grey;"
+        ></canvas>
+      </div>
+      <canvas
       id="mycanvas"
       width="400"
       height="400"
       style="border:2px solid grey;""
     ></canvas>
+    </div>
 
     <script>
+      var SimControls = function () {
+        this.message = "Control the SIM!!!!!!!";
+        this.speed = 0.8;
+        this.displayOutline = false;
+      };
+      window.onload = function () {
+        var text = new SimControls();
+        var gui = new dat.GUI({autoPlace : false});
+        gui.add(text, "message");
+        gui.add(text, "speed", -5, 5);
+        gui.add(text, "displayOutline");
+        gui.add(text, "displayOutline");
+        gui.add(text, "displayOutline");
+        gui.add(text, "displayOutline");
+        var customContainer = document.getElementById("controls-container");
+        customContainer.append(gui.domElement);
+      };
       // Inspiration from http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
       var canvas = document.getElementById("mycanvas");
       var ctx = canvas.getContext("2d");
+      ctx.canvas.width = document.getElementById("simulation-block").clientWidth;
       var area_canvas = document.getElementById("area_chart");
       var area_ctx = area_canvas.getContext("2d");
+      area_ctx.canvas.height = document.getElementById("summary-block").clientHeight
+      // console.log(document.getElementById("summary-block").clientHeight)
+      area_ctx.canvas.width = document.getElementById("summary-block").clientWidth - 250;
       // area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
       var ball_array = [];
       var ball_count = 200;
       var recovery_time = 4000;
       var time_counter = 0;
-      var allowed_to_move_slider = document.getElementById("allowed_to_move_count");
+      var allowed_to_move_slider = document.getElementById(
+        "allowed_to_move_count"
+      );
       var reoccurance_rate_slider = document.getElementById("reoccurance_rate");
       var transmit_chance_slider = document.getElementById("transmit_chance");
       function summary_count(data, query) {
@@ -61,7 +117,7 @@
           radius: 5,
           angle: Math.random() * 360,
           mass: 1,
-          allowed_to_move: true
+          allowed_to_move: true,
         };
         // ball.mass = ball.radius;
         ball.speed = 1;
@@ -174,31 +230,27 @@
       function transmit_infection(ball1, ball2) {
         if (ball1.colour !== "purple" && ball2.colour !== "purple") {
           if (ball1.colour == "red" || ball2.colour == "red") {
-            if(Math.random() * 100 < transmit_chance_slider.value)
-            {
-            ball1.colour = "red";
-            ball2.colour = "red";
-            setTimeout(recover, recovery_time, ball1);
-            setTimeout(recover, recovery_time, ball2);
-            // setTimeout(recover(ball1),recovery_time);
-            // setTimeout(recover(ball2),recovery_time);
+            if (Math.random() * 100 < transmit_chance_slider.value) {
+              ball1.colour = "red";
+              ball2.colour = "red";
+              setTimeout(recover, recovery_time, ball1);
+              setTimeout(recover, recovery_time, ball2);
+              // setTimeout(recover(ball1),recovery_time);
+              // setTimeout(recover(ball2),recovery_time);
             }
           }
         }
       }
 
       function paint_canvas() {
-        if((time_counter / 100) % reoccurance_rate_slider.value == 0)
-        {
+        if ((time_counter / 100) % reoccurance_rate_slider.value == 0) {
           var unlucky_index = Math.round(Math.random() * ball_array.length);
           ball_array[unlucky_index].colour = "red";
         }
         for (var i = 0; i < ball_array.length; ++i) {
-          if(i < allowed_to_move_slider.value)
-          {
+          if (i < allowed_to_move_slider.value) {
             ball_array[i].allowed_to_move = false;
-          }
-          else{
+          } else {
             ball_array[i].allowed_to_move = true;
           }
         }
