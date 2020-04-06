@@ -16,13 +16,12 @@
       #summary-block {
         margin-top: 10px;
         margin-bottom: 40px;
-        width:  100%;
+        width: 100%;
         /* height: 50%; */
       }
-      #controls-container{
+      #controls-container {
         float: right;
       }
-      
     </style>
   </head>
   <body>
@@ -45,8 +44,7 @@
 
     <div id="simulation-block">
       <div id="summary-block">
-        <div id="controls-container">
-        </div>
+        <div id="controls-container"></div>
         <canvas
           id="area_chart"
           width="400"
@@ -55,47 +53,48 @@
         ></canvas>
       </div>
       <canvas
-      id="mycanvas"
-      width="800"
-      height="400"
-      style="border:2px solid grey;"
-    ></canvas>
+        id="mycanvas"
+        width="800"
+        height="400"
+        style="border: 2px solid grey;"
+      ></canvas>
     </div>
 
     <script>
-      var controls = new function () {
+      var controls = new (function () {
         // this.message = "Control the SIM!!!!!!!";
         this.speed = 1;
         this.not_allowed_to_move = 0;
         this.reoccurance_rate = 0;
-        this.chance_to_transmit  = 100;
+        this.chance_to_transmit = 100;
         this.time_to_recover = 4;
         // this.displayOutline = false;
-      };
+      })();
       window.onload = function () {
-        // var  = new gui_variables();
-        var gui = new dat.GUI({autoPlace : false});
-      
+        var gui = new dat.GUI({ autoPlace: false });
+
         gui.add(controls, "speed", 1, 10);
-        gui.add(controls,"not_allowed_to_move",0,200);
-        gui.add(controls,"reoccurance_rate",0,8);
-        gui.add(controls,"chance_to_transmit",0,100);
-        gui.add(controls,"time_to_recover",0,20);
-    
-      
+        gui.add(controls, "not_allowed_to_move", 0, 200);
+        gui.add(controls, "reoccurance_rate", 0, 8);
+        gui.add(controls, "chance_to_transmit", 0, 100);
+        gui.add(controls, "time_to_recover", 0, 20);
+
         var customContainer = document.getElementById("controls-container");
         customContainer.append(gui.domElement);
-        console.log(controls.speed)
+        console.log(controls.speed);
       };
       // Inspiration from http://bl.ocks.org/atul-github/0019158da5d2f8499f7f
       var canvas = document.getElementById("mycanvas");
       var ctx = canvas.getContext("2d");
-      ctx.canvas.width = document.getElementById("simulation-block").clientWidth;
+      ctx.canvas.width = document.getElementById(
+        "simulation-block"
+      ).clientWidth;
       var area_canvas = document.getElementById("area_chart");
       var area_ctx = area_canvas.getContext("2d");
       // area_ctx.canvas.height = document.getElementById("summary-block").clientHeight
-      var area_width = document.getElementById("summary-block").clientWidth - 300;
-      area_ctx.canvas.width = area_width
+      var area_width =
+        document.getElementById("summary-block").clientWidth - 300;
+      area_ctx.canvas.width = area_width;
       // area_ctx.transform(1, 0, 0, -1, 0, area_canvas.height);
       var ball_array = [];
       var ball_count = 200;
@@ -249,7 +248,7 @@
       }
 
       function paint_canvas() {
-        console.log(controls.not_allowed_to_move)
+        console.log(controls.not_allowed_to_move);
         if ((time_counter / 100) % controls.reoccurance_rate == 0) {
           var unlucky_index = Math.round(Math.random() * ball_array.length);
           ball_array[unlucky_index].colour = "red";
