@@ -18,39 +18,61 @@
   </head>
   <body>
     <div id="moveGUI"></div>
-      <!-- <canvas
+    <!-- <canvas
         height="400"
         width="400"
         style="border: 2px solid grey;"
         id="gui-container"
       ></canvas> -->
-    
-    <script type="text/javascript">
-       var controls = new (function () {
-        // this.message = "Control the SIM!!!!!!!";
-        this.speed = 1;
-        this.not_allowed_to_move = 0;
-        this.reoccurance_rate = 0;
-        this.ChanceToTransmit = 100;
-        this.TimeToRecover = 4;
 
-        this.StartButton = function(){
-          console.log('start')
-        }
-        this.Pause
-        // this.displayOutline = false;
+    <script type="text/javascript">
+      var controls = new (function () {
+        this.speed = 1;
+        this.radius = 5;
+        this.allowed_to_move = 0;
+        // this.reoccurance_rate = 0;
+        this.chance_to_transmit = 100;
+        this.time_to_recover = 4;
+
+        this.start_button = function () {
+          console.log("start");
+        };
+        this.pause_button = function () {
+          console.log("pause");
+        };
+        this.restart_button = function () {
+          console.log("restart");
+        };
+        this.infect_random = function () {
+          console.log("infect");
+        };
       })();
 
       window.onload = function () {
-        var gui = new dat.GUI({width: 400, autoPlace: false });
+        var gui = new dat.GUI({ 
+  "closed": false,
+  "remembered": {
+    "undefined": {
+      "0": {}
+    }
+  },
+  "folders": {}, load: JSON, width: 400, autoPlace: false });
 
-        gui.add(controls, "speed", 1, 10);
-        gui.add(controls, "NotAllowedToMove", 0, 200);
-        gui.add(controls, "ReoccuranceRate", 0, 8);
-        gui.add(controls, "ChanceToTransmit", 0, 100);
-        gui.add(controls, "TimeToRecover", 0, 20);
-        gui.add(controls,"StartButton").name("Press To Start")
-        
+        gui.add(controls, "speed", 1, 10).name("Speed To Move");
+        gui.add(controls, "radius", 1, 10).name("Ball Radius (Size)");
+        gui
+          .add(controls, "allowed_to_move", 0, 200)
+          .name("Number Allowed To Move");
+        // gui.add(controls, "reoccurance_rate", 0, 8).name("Reoccurance Rate");
+        gui
+          .add(controls, "chance_to_transmit", 0, 100)
+          .name("Chance to Transmit");
+        gui.add(controls, "time_to_recover", 0, 20).name("Time To Recover");
+        gui.add(controls, "start_button").name("Click To Start");
+        gui.add(controls, "pause_button").name("Click To Pause");
+        gui.add(controls, "restart_button").name("Click To Restart");
+        gui.add(controls, "infect_random").name("Infect Random");
+        gui.remember("Default");
 
         var customContainer = document.getElementById("moveGUI");
         customContainer.prepend(gui.domElement);
