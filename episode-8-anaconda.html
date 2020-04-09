@@ -58,8 +58,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 58</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 58</p>
             <p>Number of Words: 38,390</p>
+            <p>Number of Lines of Code 2,640</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -112,24 +113,24 @@
   <div>
     <body><p>Python is one of my favourite languages to develop in (if you haven't noticed yet). My favourite feature of Python is how easy it is to share your work with others and integrate other's code into your own projects. However as a project grows and gets older as time goes on it can be cumbersome to keep track of hundreds of dependencies that your project relies on to work. Even more so when all of these package dependencies are also being updated and changing functionality.</p>
 <p>One elegant solution that I always use when first starting a new project is to use Anaconda (<a href="https://www.anaconda.com/).">https://www.anaconda.com/).</a> Anaconda is a free, easy-to-install package and environment manager for Python. It is very simple to use in that when you are starting a new project, you just need to create a new environment (within the Anaconda navigator) with the python version you wish to use and then activate it. Simple as that.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda create --name new_environment_name <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.5
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda create --name new_environment_name <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.5
 </code></pre></div>
 </td></tr></tbody></table>
 <p>In one single line, we have just created a new environment named "new_environment_name" and specified that this environment will use Python version 3.5. Now to activate the environment it is as simple as typing "activate new_environment_name".</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>activate new_environment_name
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>activate new_environment_name
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now to see what packages are contained within our newly created environment, or to ever see what packages and their versions are listed the command is:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda list
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda list
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that we have created, activated and peeked inside our newly created environment we need to add some packages that we might use! This is as simple as the command "conda install PACKAGENAME", for example we might want to install matplotlib, a widely used data visualization package. Installing matplotlib into our environment is done by the command:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda install matplotlib
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda install matplotlib
 </code></pre></div>
 </td></tr></tbody></table>
 <p>You will note that when this runs, it also asks to install all the dependencies that matplotlib relies on and will also notify you later when you have more packages that some might clash and need to be upgraded/downgraded so that all packages have a common version to work with.</p>
 <p>With regards to working with certain version numbers of packages within an Anaconda environment, to install a specific version of a package, or even if you know what the minimum requirement is, can by following the table below:</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Constraint</th>
@@ -167,11 +168,11 @@
 </table>
 <p>By following these simple constraint rules, it is very easy to manage package version to maintain dependencies within your project without tearing your hair out when packages update and break your project.</p>
 <p>Another major benefit of using Anaconda to manage your project's package dependencies is that when you're developing simultaneously with other projects and you may discover some bugs and wish to share them with your colleagues. To share all the dependencies (and their respective versions) with your colleague is as easy as generating an "environment file" and sharing the file with them so they have exactly the same environment as you. This is done by the following command:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda env <span class="nb">export</span> &gt; environment.yml
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda env <span class="nb">export</span> &gt; environment.yml
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Similarly, if you colleague sends you their "environment file", the command to reproduce their environment is (Please note that the name of the environment is encoded within the first line of the .yml file):</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda env create -f environment.yml
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda env create -f environment.yml
 </code></pre></div>
 </td></tr></tbody></table>
 <p>In summary, Anaconda can be used to easily manage packages and dependencies across a project and fast track test/bug reproduction across multiple machines seamlessly. Personally, I would always advise to use a package manager across projects no matter the size.</p></body>

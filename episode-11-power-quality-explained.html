@@ -46,7 +46,7 @@
 <meta property="article:tag" content="power"/>
 <meta property="article:tag" content="electrical"/>
 <meta property="article:tag" content="python"/>
-<meta property="og:image" content="https://jackmckew.dev/img/Harmonic1_2.png">
+<meta property="og:image" content="{static img/Harmonic1_2.png}">
 
     <title>Jack McKew's Blog &ndash; Episode 11 - Power Quality Explained</title>
 
@@ -60,8 +60,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist | Blogger</p>            <p>Number of Posts: 58</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 58</p>
             <p>Number of Words: 38,390</p>
+            <p>Number of Lines of Code 2,640</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -123,7 +124,7 @@
 </ul>
 <h2 id="harmonics">Harmonics</h2>
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -161,9 +162,9 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>The example above shows us the base signal (fundamental frequency), and it's first harmonic (harmonic of 2 or twice as fast as the fundamental frequency).</p>
-<p><img alt="Harmonic1_2" class="img-fluid" src="https://jackmckew.dev/img/Harmonic1_2.png"/></p>
+<p><img alt="Harmonic1_2" class="img-fluid" src="{static img/Harmonic1_2.png}"/></p>
 <p>When these two signals are superimposed on each other, they produce a distorted waveform. Electrical equipment is designed to operate at the base signal (50Hz here in Australia), and typically does not cope with distorted wave like seen below when we superimpose a base signal with it's first harmonic.</p>
-<p><img alt="Harmonic1_2_Combined.png" class="img-fluid" src="https://jackmckew.dev/img/Harmonic1_2_Combined.png"/></p>
+<p><img alt="Harmonic1_2_Combined.png" class="img-fluid" src="{static img/Harmonic1_2_Combined.png}"/></p>
 <p>Luckily, these issues are now easily detected and rectified by harmonic analyzers and active/passive harmonic filters.</p>
 <h2 id="power-factor">Power Factor</h2>
 <p>Power factor is a measure of how effectively power is being used in an electrical system, and is defined as the ratio of real (useful) to apparent (total) power.</p>
@@ -171,7 +172,7 @@
 <p>Reactive power (kVAR) is the power required by (some) equipment (eg, motors), to produce a magnetic field to enable the useful work to be produce. It's necessary to operate the equipment, however you don't see any result from the reactive power.</p>
 <p>Apparent power (kVA) is the vector sum of the real power (kW) and reactive power (kVAR) and is the total power supplied from the mains power required to produce the right amount of real power.</p>
 <p>Suppose you are running a store, you have to spend an amount of money X (cost) on buying products to sell in the future for a larger amount of money Y, meaning your profit will be P = Y - X. X is not lost money, without spending X you will not be able to make any profit P. The profit P is comparable to the active power, the earnings Y are the equivalent of apparent power and the initial cost X is the reactive power.</p>
-<p><img alt="CodeCogsEqn-1.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-1.gif"/></p>
+<p><img alt="CodeCogsEqn-1.gif" class="img-fluid" src="{static img/CodeCogsEqn-1.gif}"/></p>
 <p>Therefore, for a given power supply (kVA):</p>
 <ul>
 <li>The more cost you have (higher percentage of kVAR), the lower the ratio of kW (profit) to kVA (profit + cost), meaning a poorer power factor.</li>
@@ -184,16 +185,16 @@
 <h2 id="capacitor-calculator-python">Capacitor Calculator - Python</h2>
 <p>Correcting power factor from a lagging (\&lt;1) power factor, can be as simple as reducing reactive power (kVAR) in the system such that the ratio of real power (kW) to apparent power (kVA) is still as close to unity (1) as possible.</p>
 <p>Since motors require inductive or lagging power for magnetizing before useful work beings, this brings makes the power factor of the system lagging (\&lt;1). Capacitors provide capacitive or leading reactive power that cancels out the lagging power when used for power-factor improvement. The improved power factor changes the current requirements of the system, but not the one required by the motor.</p>
-<p><img alt="CodeCogsEqn-1-1.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-1-1.gif"/></p>
-<p><img alt="Apparent power calculation" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-2.gif"/></p>
-<p><img alt="Reactive power calculation" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-3.gif"/></p>
+<p><img alt="CodeCogsEqn-1-1.gif" class="img-fluid" src="{static img/CodeCogsEqn-1-1.gif}"/></p>
+<p><img alt="Apparent power calculation" class="img-fluid" src="{static img/CodeCogsEqn-2.gif}"/></p>
+<p><img alt="Reactive power calculation" class="img-fluid" src="{static img/CodeCogsEqn-3.gif}"/></p>
 <p>Using these formulas we can calculate just how big of a capacitor we require:</p>
-<p><img alt="CodeCogsEqn-4.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-4.gif"/></p>
-<p><img alt="CodeCogsEqn-5.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-5.gif"/></p>
-<p><img alt="CodeCogsEqn-6.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-6.gif"/></p>
-<p><img alt="CodeCogsEqn-7.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-7.gif"/></p>
+<p><img alt="CodeCogsEqn-4.gif" class="img-fluid" src="{static img/CodeCogsEqn-4.gif}"/></p>
+<p><img alt="CodeCogsEqn-5.gif" class="img-fluid" src="{static img/CodeCogsEqn-5.gif}"/></p>
+<p><img alt="CodeCogsEqn-6.gif" class="img-fluid" src="{static img/CodeCogsEqn-6.gif}"/></p>
+<p><img alt="CodeCogsEqn-7.gif" class="img-fluid" src="{static img/CodeCogsEqn-7.gif}"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
