@@ -44,7 +44,7 @@
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
 <meta property="article:section" content="Engineering"/>
 <meta property="article:tag" content="electronics"/>
-<meta property="og:image" content="{static img/Fritzing_FEKX395tbZ.png}">
+<meta property="og:image" content="https://jackmckew.dev/img/Fritzing_FEKX395tbZ.png">
 
     <title>Jack McKew's Blog &ndash; Episode 9 - Web Enabled Universal Remote - Part 1</title>
 
@@ -123,8 +123,8 @@
 </ul>
 <p>Now before connecting the entire circuit together, one should always test that components work in an expected way. To achieve this for the infrared receiver, a basic program to interface between the receiver and the microcontroller is needed.</p>
 <p>For a basic test, an LED would light up whenever the infrared is receiving a signal. By following the circuit diagram with the corresponding code for the NodeMCU, this test for the receiver should be reproduce-able at home, please note that for other infrared receivers you will need to check the pin outs.<!-- /wp:paragraph --></p>
-<p><img alt="Fritzing_FEKX395tbZ.png" class="img-fluid" src="{static img/Fritzing_FEKX395tbZ.png}"/></p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p><img alt="Fritzing_FEKX395tbZ.png" class="img-fluid" src="https://jackmckew.dev/img/Fritzing_FEKX395tbZ.png"/></p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -168,7 +168,7 @@
 <p>In the code above, this defines the pins that the sensor and LED are connected to, checks if the sensor is receiving a signal and then switches the builtin LED accordingly. Since the microcontroller loops without delay and an infrared remote control sends signals very quickly with delay in between, the LED only flickers when a remote is aimed at it, however proving the component works as expected.</p>
 <p>Now that we have confirmed the receiver works as expected, we have to integrate and interface the infrared diode with the microcontroller such that we are able to send the decoded signals back at the device.</p>
 <p>Since the NodeMCU can only pass a maximum current of 12mA through the GPIO pins, this will not be enough for the infrared diode peak spectrum which occurs at 20mA. To boost the current up from 12mA to 20mA+, it is best to use a simple transistor, for this project I had some 2N2222 transistors lying around so decided to use them. The following circuit diagram shows how the infrared diode, transistor and microcontroller integrate together.</p>
-<p><img alt="Fritzing_LqJjWJppSm.png" class="img-fluid" src="{static img/Fritzing_LqJjWJppSm.png}"/></p>
+<p><img alt="Fritzing_LqJjWJppSm.png" class="img-fluid" src="https://jackmckew.dev/img/Fritzing_LqJjWJppSm.png"/></p>
 <p>Since the human eye cannot see the infrared diode turning on/off, this creates a challenge for testing this component before implementing the project. I did not create a test specifically for the diode, and will test whether it works correctly later on in some function testing of the project.</p>
 <p>This completes the hardware component of this project, the next part of this project will be the software. I am planning to utilise both docker and django on my home Raspberry Pi to act as a webserver that will issue commands to the microcontroller over a network to mimic the device's remote control.</p></body>
   </div>
