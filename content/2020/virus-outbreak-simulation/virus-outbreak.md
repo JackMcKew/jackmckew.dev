@@ -34,7 +34,7 @@ The controllable elements of the simulation below are:
 - Time to recover
     - Simulate if a virus took a different amount of time before recovering
 
-Try the simulation out below and please feel free to comment if you have any more interesting parameters to simulate!
+Try the simulation out below and please comment any setting combinations you found interesting or if you have any more interesting parameters to simulate!
 
 <div id="simulation-block">
     <div id="tickers">
