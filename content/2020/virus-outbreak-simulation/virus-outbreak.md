@@ -36,6 +36,8 @@ The controllable elements of the simulation below are:
 
 Try the simulation out below and please comment any setting combinations you found interesting or if you have any more interesting parameters to simulate!
 
+> The simulation depends on the size of the screen that you are looking at on this post, change some variables to see the impact!
+
 <div id="simulation-block">
     <div id="tickers">
         <p id="timer"></p>
