@@ -1,0 +1,36 @@
+#simulation-block {
+    /* max-width: 1200px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    /* order: 1; */
+}
+
+#tickers {}
+
+#ball-container {}
+
+#summary-block {
+    margin-top: 10px;
+    display: flex;
+    margin-bottom: 40px;
+    /* width: 100%; */
+    flex-wrap: wrap;
+    /* order: 1; */
+    flex-grow: 3;
+}
+
+@media only screen and (max-width: 400px) {
+    #summary-block {
+        width: 100%;
+    }
+}
+
+#controls-container {
+    /* float: right; */
+    /* order: 2; */
+    flex-grow: 1;
+    margin-bottom: 40px;
+}
