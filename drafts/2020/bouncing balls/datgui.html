@@ -43,9 +43,9 @@
         this.restart_button = function () {
           console.log("restart");
         };
-        this.infect_random = function () {
-          console.log("infect");
-        };
+        // this.infect_random = function () {
+        //   console.log("infect");
+        // };
       })();
 
       window.onload = function () {
@@ -71,7 +71,7 @@
         gui.add(controls, "start_button").name("Click To Start");
         gui.add(controls, "pause_button").name("Click To Pause");
         gui.add(controls, "restart_button").name("Click To Restart");
-        gui.add(controls, "infect_random").name("Infect Random");
+        // gui.add(controls, "infect_random").name("Infect Random");
         gui.remember("Default");
 
         var customContainer = document.getElementById("moveGUI");
