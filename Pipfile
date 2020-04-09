@@ -18,6 +18,8 @@ piexif = "*"
 pillow = "*"
 wordsum = "*"
 pygount = "*"
+pelican-autostatic = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.7"
