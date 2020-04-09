@@ -20,6 +20,7 @@ wordsum = "*"
 pygount = "*"
 pelican-autostatic = "*"
 ipython = "*"
+nbconvert = "*"
 
 [requires]
 python_version = "3.7"
