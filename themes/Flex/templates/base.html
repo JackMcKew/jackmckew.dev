@@ -84,6 +84,9 @@
             <p>Number of Posts: {{ articles|count }}</p>
             <p>Number of Words: {{ WORD_TICKER}}</p>
             {% endif %}
+            {% if LOC_TICKER %}
+            <p>Number of Lines of Code {{ LOC_TICKER }}</p>
+            {% endif %}
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>

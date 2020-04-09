@@ -17,6 +17,7 @@ black = "*"
 piexif = "*"
 pillow = "*"
 wordsum = "*"
+pygount = "*"
 
 [requires]
 python_version = "3.7"
