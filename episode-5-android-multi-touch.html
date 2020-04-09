@@ -6,17 +6,17 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
-    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome.css">     <script src="http://localhost:8000/theme/tipuesearch/jquery.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="http://localhost:8000/theme/tipuesearch/tipuesearch.css" />
+    <script src="http://localhost:8000/tipuesearch_content.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
@@ -37,14 +37,14 @@
 <meta property="og:title" content="Episode 5 - Android Multi-Touch"/>
 <meta property="og:description" content="This week&#39;s episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/episode-5-android-multi-touch.html"/>
+<meta property="og:url" content="http://localhost:8000/episode-5-android-multi-touch.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-12-21 01:30:00+11:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:author" content="http://localhost:8000/author/jack-mckew.html">
 <meta property="article:section" content="Android"/>
 <meta property="article:tag" content="android"/>
-<meta property="og:image" content="https://jackmckew.dev/img/ezgif.com-video-to-gif-2.gif">
+<meta property="og:image" content="http://localhost:8000/img/ezgif.com-video-to-gif-2.gif">
 
     <title>Jack McKew's Blog &ndash; Episode 5 - Android Multi-Touch</title>
 
@@ -53,12 +53,12 @@
 <body>
     <aside>
         <div>
-            <a href="https://jackmckew.dev">
+            <a href="http://localhost:8000">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="http://localhost:8000">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 58</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 52</p>
             <p>Number of Words: 38,390</p>
             <p>Number of Lines of Code 2,640</p>
             <form class="navbar-search" action="/search.html" role="search">
@@ -66,8 +66,8 @@
             </form>
             <nav>
                 <ul class="list">
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
                 </ul>
             </nav>
 
@@ -97,13 +97,13 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="http://localhost:8000"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
 <article class="single">
   <header>
       
     <h1 id="episode-5-android-multi-touch">Episode 5 - Android Multi-Touch</h1>
     <p>
-       Posted on Fri 21 December 2018 in <a href="https://jackmckew.dev/category/android.html">Android</a>
+       Posted on Fri 21 December 2018 in <a href="http://localhost:8000/category/android.html">Android</a>
 
         &#8226; 4 min read
     </p>
@@ -112,8 +112,8 @@
 
   <div>
     </head><body><p>This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can be seen below it contains 3 values: x_pos, y_pos and id. It is also useful to create a constructor so that other classes can easily construct the Finger class.</p>
-<p><img alt="ezgif.com-video-to-gif-2" class="img-fluid" src="https://jackmckew.dev/img/ezgif.com-video-to-gif-2.gif"/></p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p><img alt="ezgif.com-video-to-gif-2" class="img-fluid" src="http://localhost:8000/img/ezgif.com-video-to-gif-2.gif"/></p>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -143,7 +143,7 @@
 <p>Now that we have a class to store our details on how each finger is touching the screen, we now need to interact with some base level Java. Firstly we need to extend a view within the Android application so that the application knows what boundaries to deal, in my test application, I've just used the entire screen as a view.</p>
 <p>After that an array is needed to store the data of multiple inputs touching the screen. I've used a TreeMap in this example as this allows for ease later on so that they are in order on how they were input, however this comes with a downside to this example as lifting a input in the middle of the order touched crashes the array, this will be fixed in a later episode.</p>
 <p>A paint is initialized for both the stroke paint for drawing lines between the touches and a paint for the text that is to come. Generic constructors for the view are also listed below.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -209,7 +209,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that everything is initialized and ready to draw some graphics on the screen so that the application is interactive, now we have to interface with touch events. This is done by creating a new function within our View class, that takes in a MotionEvent on the View so that we can detect different types of touch events. Documentation on this can be found (<a href="https://developer.android.com/training/graphics/opengl/touch#java">https://developer.android.com/training/graphics/opengl/touch#java</a>).</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -320,7 +320,7 @@
 </td></tr></tbody></table>
 <p>Now that we've created a new Finger class inside our TreeMap by the order that the screen is touched in and we're removing that class when the screen input has been released, we are now ready to draw on the screen from our inputs.</p>
 <p>By iterating through the TreeMap, in each loop we know what the previous and what the next value in the array we can draw a circle for where the input is and a line between. This also allows us to determine whereabouts is the point in between these two points so we can write text. For this example, I've chosen to write the length of the distance between the two inputs to demonstrate that this can also be dynamic in nature.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -383,16 +383,16 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/android.html">android</a>
+      <a href="http://localhost:8000/tag/android.html">android</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/episode-4-visualization.html" title="Episode 4 - Visualization">
+    <a class="btn float-left" href="http://localhost:8000/episode-4-visualization.html" title="Episode 4 - Visualization">
       <i class="fa fa-angle-left"></i>  Previous Post
     </a>
-    <a class="btn float-right" href="https://jackmckew.dev/episode-6-containerization.html" title="Episode 6 - Containerization">
+    <a class="btn float-right" href="http://localhost:8000/episode-6-containerization.html" title="Episode 6 - Containerization">
        Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
@@ -425,7 +425,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Jack McKew's Blog ",
-  "url" : "https://jackmckew.dev",
+  "url" : "http://localhost:8000",
   "image": "/jm-photo.jpg",
   "description": ""
 }

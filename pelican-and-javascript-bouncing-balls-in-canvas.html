@@ -6,17 +6,17 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
-    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome.css">     <script src="http://localhost:8000/theme/tipuesearch/jquery.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="http://localhost:8000/theme/tipuesearch/tipuesearch.css" />
+    <script src="http://localhost:8000/tipuesearch_content.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
@@ -37,15 +37,15 @@
 <meta property="og:title" content="Pelican and Javascript - Bouncing Balls in Canvas"/>
 <meta property="og:description" content="Today let&#39;s look into building a visualisation of some bouncing balls with Javascript. The inspiration for building this comes from Harry Stevens over at the Washington Post for his amazing piece of data journalism around the coronavirus. Here is a gif of the current version of my bouncing balls using …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/pelican-and-javascript-bouncing-balls-in-canvas.html"/>
+<meta property="og:url" content="http://localhost:8000/pelican-and-javascript-bouncing-balls-in-canvas.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2020-04-02 00:00:00+11:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:author" content="http://localhost:8000/author/jack-mckew.html">
 <meta property="article:section" content="Javascript"/>
 <meta property="article:tag" content="javascript"/>
 <meta property="article:tag" content="data-viz"/>
-<meta property="og:image" content="https://jackmckew.dev/img/bouncing_balls.gif">
+<meta property="og:image" content="http://localhost:8000/img/bouncing_balls.gif">
 
     <title>Jack McKew's Blog &ndash; Pelican and Javascript - Bouncing Balls in Canvas</title>
 
@@ -54,12 +54,12 @@
 <body>
     <aside>
         <div>
-            <a href="https://jackmckew.dev">
+            <a href="http://localhost:8000">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="http://localhost:8000">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 58</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 52</p>
             <p>Number of Words: 38,390</p>
             <p>Number of Lines of Code 2,640</p>
             <form class="navbar-search" action="/search.html" role="search">
@@ -67,8 +67,8 @@
             </form>
             <nav>
                 <ul class="list">
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
                 </ul>
             </nav>
 
@@ -98,13 +98,13 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="http://localhost:8000"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
 <article class="single">
   <header>
       
     <h1 id="pelican-and-javascript-bouncing-balls-in-canvas">Pelican and Javascript - Bouncing Balls in Canvas</h1>
     <p>
-       Posted on Thu 02 April 2020 in <a href="https://jackmckew.dev/category/javascript.html">Javascript</a>
+       Posted on Thu 02 April 2020 in <a href="http://localhost:8000/category/javascript.html">Javascript</a>
 
         &#8226; 3 min read
     </p>
@@ -114,7 +114,7 @@
   <div>
     </head><body><p>Today let's look into building a visualisation of some bouncing balls with Javascript. The inspiration for building this comes from <a href="https://www.washingtonpost.com/people/harry-stevens/">Harry Stevens</a> over at the Washington Post for his amazing piece of data journalism around the <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">coronavirus</a>.</p>
 <p>Here is a gif of the current version of my bouncing balls using the Canvas API:</p>
-<p><img alt="Bouncing Balls GIF" class="img-fluid" src="https://jackmckew.dev/img/bouncing_balls.gif"/></p>
+<p><img alt="Bouncing Balls GIF" class="img-fluid" src="http://localhost:8000/img/bouncing_balls.gif"/></p>
 <p>As soon as I read that article personally, I thought of a few ways to extend the analysis, and such this post was born. A few of the ideas that I've had are:</p>
 <ul>
 <li>Adding a 'chance' to transmit the infection (eg, 50% of all collisions transmit). This could be a symbolic way of seeing how much of an impact wearing PPE makes on virus outbreaks.</li>
@@ -150,18 +150,18 @@
 <li>Repeat for all balls.</li>
 </ol>
 <p>Javascript Source(s):
-<a href="https://jackmckew.dev/js/bouncing_balls.js">Bouncing_Balls.js</a></p>
+<a href="http://localhost:8000/js/bouncing_balls.js">Bouncing_Balls.js</a></p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/javascript.html">javascript</a>
-      <a href="https://jackmckew.dev/tag/data-viz.html">data-viz</a>
+      <a href="http://localhost:8000/tag/javascript.html">javascript</a>
+      <a href="http://localhost:8000/tag/data-viz.html">data-viz</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/packaging-python-packages-with-poetry.html" title="Packaging Python Packages with Poetry">
+    <a class="btn float-left" href="http://localhost:8000/packaging-python-packages-with-poetry.html" title="Packaging Python Packages with Poetry">
       <i class="fa fa-angle-left"></i>  Previous Post
     </a>
   </div>
@@ -194,7 +194,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Jack McKew's Blog ",
-  "url" : "https://jackmckew.dev",
+  "url" : "http://localhost:8000",
   "image": "/jm-photo.jpg",
   "description": ""
 }
@@ -222,5 +222,5 @@
         });
     </script>
 </body>
-            <script src="https://jackmckew.dev/js/bouncing_balls.js"></script>
+            <script src="http://localhost:8000/js/bouncing_balls.js"></script>
 </html>

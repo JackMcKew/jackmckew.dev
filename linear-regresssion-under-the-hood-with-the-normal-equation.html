@@ -6,17 +6,17 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
-    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome.css">     <script src="http://localhost:8000/theme/tipuesearch/jquery.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="http://localhost:8000/theme/tipuesearch/tipuesearch.css" />
+    <script src="http://localhost:8000/tipuesearch_content.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
@@ -37,14 +37,14 @@
 <meta property="og:title" content="Linear Regression: Under the Hood with the Normal Equation"/>
 <meta property="og:description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where \(\hat{y}\) is the predicted value, \(n\) is the number of features, \(x_i\) is the \(i^{th}\) feature value and \(\theta_n\) is the \(n^{th}\) model parameter. This …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html"/>
+<meta property="og:url" content="http://localhost:8000/linear-regresssion-under-the-hood-with-the-normal-equation.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-08-25 06:30:00+10:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:author" content="http://localhost:8000/author/jack-mckew.html">
 <meta property="article:section" content="Data Science"/>
 <meta property="article:tag" content="python"/>
-<meta property="og:image" content="https://jackmckew.dev/img/10_6_2_gen.png">
+<meta property="og:image" content="http://localhost:8000/img/10_6_2_gen.png">
 
     <title>Jack McKew's Blog &ndash; Linear Regression: Under the Hood with the Normal Equation</title>
 
@@ -53,12 +53,12 @@
 <body>
     <aside>
         <div>
-            <a href="https://jackmckew.dev">
+            <a href="http://localhost:8000">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="http://localhost:8000">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 58</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 52</p>
             <p>Number of Words: 38,390</p>
             <p>Number of Lines of Code 2,640</p>
             <form class="navbar-search" action="/search.html" role="search">
@@ -66,8 +66,8 @@
             </form>
             <nav>
                 <ul class="list">
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
                 </ul>
             </nav>
 
@@ -97,13 +97,13 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="http://localhost:8000"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
 <article class="single">
   <header>
       
     <h1 id="linear-regresssion-under-the-hood-with-the-normal-equation">Linear Regression: Under the Hood with the Normal Equation</h1>
     <p>
-       Posted on Sun 25 August 2019 in <a href="https://jackmckew.dev/category/data-science.html">Data Science</a>
+       Posted on Sun 25 August 2019 in <a href="http://localhost:8000/category/data-science.html">Data Science</a>
 
         &#8226; 2 min read
     </p>
@@ -137,7 +137,7 @@ $$</div>
 <p>
 Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="math">\(\theta\)</span> that minimises the cost function and <span class="math">\(y\)</span> (once vectorised) is the vector of target values containing <span class="math">\(y^{(1)}\)</span> to <span class="math">\(y^{(m)}\)</span>.</p>
 <p>For example if this equation was run on data generated from this formula:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -146,32 +146,32 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
 <span class="n">y</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
-<p><img alt="10_6_2_gen" class="img-fluid" src="https://jackmckew.dev/img/10_6_2_gen.png"/></p>
+<p><img alt="10_6_2_gen" class="img-fluid" src="http://localhost:8000/img/10_6_2_gen.png"/></p>
 <p>Now to compute <span class="math">\(\hat{\theta}\)</span> with the normal equation, we can use the inv() function from NumPy's Linear algebra module:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">X</span><span class="p">]</span>
 <span class="n">theta_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>With the actual function being <span class="math">\(y = 6 + 2x_0 + noise\)</span>, and the equation found:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">array</span><span class="p">([[</span> <span class="mf">5.96356419</span><span class="p">],</span>
        <span class="p">[</span> <span class="mf">2.00027727</span><span class="p">]])</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Since the noise makes it impossible to recover the exact parameters of the original function now we can use <span class="math">\(\hat{\theta}\)</span> to make predictions:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span>
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>With y_predict being:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>
  <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span>
 </code></pre></div>
 </td></tr></tbody></table>
-<p><img alt="10_6_2_gen_solved" class="img-fluid" src="https://jackmckew.dev/img/10_6_2_gen_solved.png"/></p>
+<p><img alt="10_6_2_gen_solved" class="img-fluid" src="http://localhost:8000/img/10_6_2_gen_solved.png"/></p>
 <p>The equivalent code using Scikit-Learn would look like:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -183,7 +183,7 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
 </code></pre></div>
 </td></tr></tbody></table>
 <p>And it finds:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[</span> <span class="mf">5.96356419</span><span class="p">]</span> <span class="p">[[</span> <span class="mf">2.00027727</span><span class="p">]]</span>
 <span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>
@@ -257,16 +257,16 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/python.html">python</a>
+      <a href="http://localhost:8000/tag/python.html">python</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/intro-to-web-scraping.html" title="Intro to Web Scraping">
+    <a class="btn float-left" href="http://localhost:8000/pycon-au-2019-sunday-in-summary.html" title="PyCon AU 2019 Sunday In Summary">
       <i class="fa fa-angle-left"></i>  Previous Post
     </a>
-    <a class="btn float-right" href="https://jackmckew.dev/python-project-workflow.html" title="Python Project Workflow">
+    <a class="btn float-right" href="http://localhost:8000/python-project-workflow.html" title="Python Project Workflow">
        Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
@@ -274,11 +274,11 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
-      <li><a href="https://jackmckew.dev/packaging-python-packages-with-poetry.html">Packaging Python Packages with Poetry</a></li>
-      <li><a href="https://jackmckew.dev/counting-words-with-python.html">Counting Words with Python</a></li>
-      <li><a href="https://jackmckew.dev/python-bytes-awesome-package-list.html">Python Bytes Awesome Package List</a></li>
-      <li><a href="https://jackmckew.dev/3d-gradient-descent-in-python.html">3D Gradient Descent in Python</a></li>
-      <li><a href="https://jackmckew.dev/getting-started-in-python.html">Getting Started in Python</a></li>
+      <li><a href="http://localhost:8000/packaging-python-packages-with-poetry.html">Packaging Python Packages with Poetry</a></li>
+      <li><a href="http://localhost:8000/python-bytes-awesome-package-list.html">Python Bytes Awesome Package List</a></li>
+      <li><a href="http://localhost:8000/getting-started-in-python.html">Getting Started in Python</a></li>
+      <li><a href="http://localhost:8000/automatically-generate-documentation-with-sphinx.html">Automatically Generate Documentation with Sphinx</a></li>
+      <li><a href="http://localhost:8000/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
     </ul>
   </div>
 
@@ -309,7 +309,7 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Jack McKew's Blog ",
-  "url" : "https://jackmckew.dev",
+  "url" : "http://localhost:8000",
   "image": "/jm-photo.jpg",
   "description": ""
 }
