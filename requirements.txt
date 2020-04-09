@@ -56,12 +56,14 @@ prometheus-client==0.7.1
 prompt-toolkit==2.0.10
 pycparser==2.19
 Pygments==2.6.1
+pygount==1.2.1
 PyPDF2==1.26.0
 pyperclip==1.7.0
 pyrsistent==0.15.7
 python-dateutil==2.8.1
 python-dotenv==0.10.3
 pytz==2019.3
+pywin32==227
 pywinpty==0.5.7
 PyYAML==5.2
 pyzmq==18.1.1
