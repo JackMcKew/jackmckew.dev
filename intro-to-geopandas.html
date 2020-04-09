@@ -1,0 +1,3571 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="Pandas for geospatial data Personally whenever I am faced with a problem that involves analysing geospatial data, GeoPandas is the first tool/package I reach for. Extending on the Pandas dataframe data structure, GeoPandas brings functionality for working with points, polygons and more out of the box. This post is …" />
+<meta name="keywords" content="python, visualisation">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Intro To GeoPandas"/>
+<meta property="og:description" content="Pandas for geospatial data Personally whenever I am faced with a problem that involves analysing geospatial data, GeoPandas is the first tool/package I reach for. Extending on the Pandas dataframe data structure, GeoPandas brings functionality for working with points, polygons and more out of the box. This post is …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/intro-to-geopandas.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-01-15 00:00:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="visualisation"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+    <title>Jack McKew's Blog &ndash; Intro To GeoPandas</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 58</p>
+            <p>Number of Words: 38,390</p>
+            <p>Number of Lines of Code 2,640</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="intro-to-geopandas">Intro To GeoPandas</h1>
+    <p>
+       Posted on Wed 15 January 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+
+        &#8226; 6 min read
+    </p>
+  </header>
+
+
+  <div>
+    </head><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Pandas for geospatial data</strong></p>
+<p>Personally whenever I am faced with a problem that involves analysing geospatial data, <a href="http://geopandas.org/">GeoPandas</a> is the first tool/package I reach for. Extending on the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">Pandas dataframe</a> data structure, GeoPandas brings functionality for working with points, polygons and more out of the box. This post is to go through some basic geometry functions which I find myself countless times in GIS work.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="First-Steps">First Steps<a class="anchor-link" href="#First-Steps">¶</a></h2><p>A <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">Pandas dataframe</a>, is essentially a tabular representation of a dataset; a GeoPandas dataframe is an extension on this tabular format that includes a 'geometry' column and a crs. The 'geometry' column is exactly as it sounds, it contains the geometry of the point, line or polygon that is assosciated with the rest of the columns (this is defined by the shapely module). The crs (Coordinate Reference System) attribute to a GeoPandas dataframe contains the projection of the data into the real world (eg, WGS84)</p>
+<p>Let's begin by creating some example geometries with Shapely to include in our GeoDataFrame.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span><span class="p">,</span> <span class="n">Point</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'geometry'</span><span class="p">],</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">])</span>
+
+<span class="n">gdf</span><span class="p">[</span><span class="s1">'Data'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>geometry</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>POLYGON ((0.00000 0.00000, 1.00000 0.00000, 1....</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>POLYGON ((0.00000 0.00000, 1.00000 0.00000, 1....</td>
+<td>1</td>
+</tr>
+<tr>
+<th>2</th>
+<td>POLYGON ((2.00000 0.00000, 3.00000 0.00000, 3....</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see, our new polygons and their assosciated data is given in a tabular format and can be worked with like a Pandas DataFrame. For me personally, I find GIS work to be a very visual process and struggle to imagine the shapes without them in front of me, so let's plot them. Luckily for us this is a very simple process as there is already a plot function within GeoPandas.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">plt</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_svg output_subarea">
+<!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="142.678125pt" version="1.1" viewBox="0 0 378.465625 142.678125" width="378.465625pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">
+*{stroke-linecap:butt;stroke-linejoin:round;}
+  </style>
+</defs>
+<g id="figure_1">
+<g id="patch_1">
+<path d="M 0 142.678125 
+L 378.465625 142.678125 
+L 378.465625 0 
+L 0 0 
+z
+" style="fill:none;"></path>
+</g>
+<g id="axes_1">
+<g id="patch_2">
+<path d="M 36.465625 118.8 
+L 371.265625 118.8 
+L 371.265625 7.2 
+L 36.465625 7.2 
+z
+" style="fill:#ffffff;"></path>
+</g>
+<g id="PatchCollection_1">
+<path clip-path="url(#p7a7f0f11b8)" d="M 51.683807 113.727273 
+L 153.138352 113.727273 
+L 153.138352 12.272727 
+L 51.683807 12.272727 
+L 51.683807 113.727273 
+" style="fill:#440154;fill-opacity:0.8;stroke:#000000;stroke-opacity:0.8;"></path>
+<path clip-path="url(#p7a7f0f11b8)" d="M 51.683807 113.727273 
+L 153.138352 113.727273 
+L 153.138352 12.272727 
+L 51.683807 113.727273 
+" style="fill:#21918c;fill-opacity:0.8;stroke:#000000;stroke-opacity:0.8;"></path>
+<path clip-path="url(#p7a7f0f11b8)" d="M 254.592898 113.727273 
+L 356.047443 113.727273 
+L 356.047443 12.272727 
+L 254.592898 12.272727 
+L 254.592898 113.727273 
+" style="fill:#fde725;fill-opacity:0.8;stroke:#000000;stroke-opacity:0.8;"></path>
+</g>
+<g id="matplotlib.axis_1">
+<g id="xtick_1">
+<g id="line2d_1">
+<defs>
+<path d="M 0 0 
+L 0 3.5 
+" id="m55855e36dc" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="51.683807" xlink:href="#m55855e36dc" y="118.8"></use>
+</g>
+</g>
+<g id="text_1">
+<!-- 0.0 -->
+<defs>
+<path d="M 31.78125 66.40625 
+Q 24.171875 66.40625 20.328125 58.90625 
+Q 16.5 51.421875 16.5 36.375 
+Q 16.5 21.390625 20.328125 13.890625 
+Q 24.171875 6.390625 31.78125 6.390625 
+Q 39.453125 6.390625 43.28125 13.890625 
+Q 47.125 21.390625 47.125 36.375 
+Q 47.125 51.421875 43.28125 58.90625 
+Q 39.453125 66.40625 31.78125 66.40625 
+z
+M 31.78125 74.21875 
+Q 44.046875 74.21875 50.515625 64.515625 
+Q 56.984375 54.828125 56.984375 36.375 
+Q 56.984375 17.96875 50.515625 8.265625 
+Q 44.046875 -1.421875 31.78125 -1.421875 
+Q 19.53125 -1.421875 13.0625 8.265625 
+Q 6.59375 17.96875 6.59375 36.375 
+Q 6.59375 54.828125 13.0625 64.515625 
+Q 19.53125 74.21875 31.78125 74.21875 
+z
+" id="DejaVuSans-48"></path>
+<path d="M 10.6875 12.40625 
+L 21 12.40625 
+L 21 0 
+L 10.6875 0 
+z
+" id="DejaVuSans-46"></path>
+</defs>
+<g transform="translate(43.732244 133.398438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_2">
+<g id="line2d_2">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="102.41108" xlink:href="#m55855e36dc" y="118.8"></use>
+</g>
+</g>
+<g id="text_2">
+<!-- 0.5 -->
+<defs>
+<path d="M 10.796875 72.90625 
+L 49.515625 72.90625 
+L 49.515625 64.59375 
+L 19.828125 64.59375 
+L 19.828125 46.734375 
+Q 21.96875 47.46875 24.109375 47.828125 
+Q 26.265625 48.1875 28.421875 48.1875 
+Q 40.625 48.1875 47.75 41.5 
+Q 54.890625 34.8125 54.890625 23.390625 
+Q 54.890625 11.625 47.5625 5.09375 
+Q 40.234375 -1.421875 26.90625 -1.421875 
+Q 22.3125 -1.421875 17.546875 -0.640625 
+Q 12.796875 0.140625 7.71875 1.703125 
+L 7.71875 11.625 
+Q 12.109375 9.234375 16.796875 8.0625 
+Q 21.484375 6.890625 26.703125 6.890625 
+Q 35.15625 6.890625 40.078125 11.328125 
+Q 45.015625 15.765625 45.015625 23.390625 
+Q 45.015625 31 40.078125 35.4375 
+Q 35.15625 39.890625 26.703125 39.890625 
+Q 22.75 39.890625 18.8125 39.015625 
+Q 14.890625 38.140625 10.796875 36.28125 
+z
+" id="DejaVuSans-53"></path>
+</defs>
+<g transform="translate(94.459517 133.398438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="xtick_3">
+<g id="line2d_3">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="153.138352" xlink:href="#m55855e36dc" y="118.8"></use>
+</g>
+</g>
+<g id="text_3">
+<!-- 1.0 -->
+<defs>
+<path d="M 12.40625 8.296875 
+L 28.515625 8.296875 
+L 28.515625 63.921875 
+L 10.984375 60.40625 
+L 10.984375 69.390625 
+L 28.421875 72.90625 
+L 38.28125 72.90625 
+L 38.28125 8.296875 
+L 54.390625 8.296875 
+L 54.390625 0 
+L 12.40625 0 
+z
+" id="DejaVuSans-49"></path>
+</defs>
+<g transform="translate(145.18679 133.398438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_4">
+<g id="line2d_4">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="203.865625" xlink:href="#m55855e36dc" y="118.8"></use>
+</g>
+</g>
+<g id="text_4">
+<!-- 1.5 -->
+<g transform="translate(195.914063 133.398438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="xtick_5">
+<g id="line2d_5">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="254.592898" xlink:href="#m55855e36dc" y="118.8"></use>
+</g>
+</g>
+<g id="text_5">
+<!-- 2.0 -->
+<defs>
+<path d="M 19.1875 8.296875 
+L 53.609375 8.296875 
+L 53.609375 0 
+L 7.328125 0 
+L 7.328125 8.296875 
+Q 12.9375 14.109375 22.625 23.890625 
+Q 32.328125 33.6875 34.8125 36.53125 
+Q 39.546875 41.84375 41.421875 45.53125 
+Q 43.3125 49.21875 43.3125 52.78125 
+Q 43.3125 58.59375 39.234375 62.25 
+Q 35.15625 65.921875 28.609375 65.921875 
+Q 23.96875 65.921875 18.8125 64.3125 
+Q 13.671875 62.703125 7.8125 59.421875 
+L 7.8125 69.390625 
+Q 13.765625 71.78125 18.9375 73 
+Q 24.125 74.21875 28.421875 74.21875 
+Q 39.75 74.21875 46.484375 68.546875 
+Q 53.21875 62.890625 53.21875 53.421875 
+Q 53.21875 48.921875 51.53125 44.890625 
+Q 49.859375 40.875 45.40625 35.40625 
+Q 44.1875 33.984375 37.640625 27.21875 
+Q 31.109375 20.453125 19.1875 8.296875 
+z
+" id="DejaVuSans-50"></path>
+</defs>
+<g transform="translate(246.641335 133.398438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_6">
+<g id="line2d_6">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="305.32017" xlink:href="#m55855e36dc" y="118.8"></use>
+</g>
+</g>
+<g id="text_6">
+<!-- 2.5 -->
+<g transform="translate(297.368608 133.398438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="xtick_7">
+<g id="line2d_7">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="356.047443" xlink:href="#m55855e36dc" y="118.8"></use>
+</g>
+</g>
+<g id="text_7">
+<!-- 3.0 -->
+<defs>
+<path d="M 40.578125 39.3125 
+Q 47.65625 37.796875 51.625 33 
+Q 55.609375 28.21875 55.609375 21.1875 
+Q 55.609375 10.40625 48.1875 4.484375 
+Q 40.765625 -1.421875 27.09375 -1.421875 
+Q 22.515625 -1.421875 17.65625 -0.515625 
+Q 12.796875 0.390625 7.625 2.203125 
+L 7.625 11.71875 
+Q 11.71875 9.328125 16.59375 8.109375 
+Q 21.484375 6.890625 26.8125 6.890625 
+Q 36.078125 6.890625 40.9375 10.546875 
+Q 45.796875 14.203125 45.796875 21.1875 
+Q 45.796875 27.640625 41.28125 31.265625 
+Q 36.765625 34.90625 28.71875 34.90625 
+L 20.21875 34.90625 
+L 20.21875 43.015625 
+L 29.109375 43.015625 
+Q 36.375 43.015625 40.234375 45.921875 
+Q 44.09375 48.828125 44.09375 54.296875 
+Q 44.09375 59.90625 40.109375 62.90625 
+Q 36.140625 65.921875 28.71875 65.921875 
+Q 24.65625 65.921875 20.015625 65.03125 
+Q 15.375 64.15625 9.8125 62.3125 
+L 9.8125 71.09375 
+Q 15.4375 72.65625 20.34375 73.4375 
+Q 25.25 74.21875 29.59375 74.21875 
+Q 40.828125 74.21875 47.359375 69.109375 
+Q 53.90625 64.015625 53.90625 55.328125 
+Q 53.90625 49.265625 50.4375 45.09375 
+Q 46.96875 40.921875 40.578125 39.3125 
+z
+" id="DejaVuSans-51"></path>
+</defs>
+<g transform="translate(348.095881 133.398438)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="matplotlib.axis_2">
+<g id="ytick_1">
+<g id="line2d_8">
+<defs>
+<path d="M 0 0 
+L -3.5 0 
+" id="mb41e9d8920" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="36.465625" xlink:href="#mb41e9d8920" y="113.727273"></use>
+</g>
+</g>
+<g id="text_8">
+<!-- 0.00 -->
+<g transform="translate(7.2 117.526491)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+<use x="159.033203" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_2">
+<g id="line2d_9">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="36.465625" xlink:href="#mb41e9d8920" y="88.363636"></use>
+</g>
+</g>
+<g id="text_9">
+<!-- 0.25 -->
+<g transform="translate(7.2 92.162855)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-50"></use>
+<use x="159.033203" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_3">
+<g id="line2d_10">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="36.465625" xlink:href="#mb41e9d8920" y="63"></use>
+</g>
+</g>
+<g id="text_10">
+<!-- 0.50 -->
+<g transform="translate(7.2 66.799219)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+<use x="159.033203" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_4">
+<g id="line2d_11">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="36.465625" xlink:href="#mb41e9d8920" y="37.636364"></use>
+</g>
+</g>
+<g id="text_11">
+<!-- 0.75 -->
+<defs>
+<path d="M 8.203125 72.90625 
+L 55.078125 72.90625 
+L 55.078125 68.703125 
+L 28.609375 0 
+L 18.3125 0 
+L 43.21875 64.59375 
+L 8.203125 64.59375 
+z
+" id="DejaVuSans-55"></path>
+</defs>
+<g transform="translate(7.2 41.435582)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-55"></use>
+<use x="159.033203" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_5">
+<g id="line2d_12">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="36.465625" xlink:href="#mb41e9d8920" y="12.272727"></use>
+</g>
+</g>
+<g id="text_12">
+<!-- 1.00 -->
+<g transform="translate(7.2 16.071946)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+<use x="159.033203" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="patch_3">
+<path d="M 36.465625 118.8 
+L 36.465625 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_4">
+<path d="M 371.265625 118.8 
+L 371.265625 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_5">
+<path d="M 36.465625 118.8 
+L 371.265625 118.8 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_6">
+<path d="M 36.465625 7.2 
+L 371.265625 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="p7a7f0f11b8">
+<rect height="111.6" width="334.8" x="36.465625" y="7.2"></rect>
+</clipPath>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you didn't notice from the polygon definition, we've created 2 squares (purple &amp; yellow) and one triangle. Now what if we wanted to know the area of all of the shapes in our GeoDataFrame. Since we've initialised our data in a GeoDataFrame this can be done quite easily. I have noted two ways to do this, as per <a href="https://twitter.com/martinfleis">Martin Fleischmann</a>'s help on <a href="https://twitter.com/martinfleis/status/1218931969158938625">Twitter</a>, thank you Martin!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s1">'Shape Area'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">area</span>
+<span class="c1"># gdf['Shape Area'] = gdf.geometry.apply(lambda x: x.area)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>geometry</th>
+<th>Data</th>
+<th>Shape Area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>POLYGON ((0.00000 0.00000, 1.00000 0.00000, 1....</td>
+<td>0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>POLYGON ((0.00000 0.00000, 1.00000 0.00000, 1....</td>
+<td>1</td>
+<td>0.5</td>
+</tr>
+<tr>
+<th>2</th>
+<td>POLYGON ((2.00000 0.00000, 3.00000 0.00000, 3....</td>
+<td>2</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>EDIT: The apply method still technically works, but there is an already implemented area property of a GeoDataFrame that we can utilise, make it much nicer to read!</p>
+<p>To break down what's happening above, we are 'creating' a new column in our GeoDataFrame named 'Shape Area'. Following this, we are selecting the 'geometry' column (this can also be achieved with gdf<code>['geometry']</code>) and using the apply function. The apply function works by iterating over each row invidually (in this case it's simply each value in the geometry column). After this we are creating an 'anonymous' function, meaning, it's a function that doesn't require a definition. For each value in our geometry column, since they are Shapely objects, we can access the area function within them. Finally you can see the areas are calculated and added as a new column.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overlapping-Area">Overlapping Area<a class="anchor-link" href="#Overlapping-Area">¶</a></h2><p>Now let's use what we have just learned to find the area that is overlapping of two shapes. To create the shapes this time though, we are going to start with a point and use the buffer function to make this a polygon. Following this, we will give the DataFrame some data, initialise the GeoDataFrames, calculate the area and plot them on a single graph.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">df_1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">]})</span>
+<span class="n">df_2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'b'</span> <span class="p">:</span> <span class="p">[</span><span class="mi">22</span><span class="p">]})</span>
+
+<span class="n">gdf_1</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df_1</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">p1</span><span class="p">])</span>
+<span class="n">gdf_2</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df_2</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">p2</span><span class="p">])</span>
+
+<span class="n">gdf_1</span><span class="p">[</span><span class="s1">'area'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf_1</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+<span class="n">gdf_2</span><span class="p">[</span><span class="s1">'area'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf_2</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">gdf_1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'purple'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
+<span class="n">gdf_2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">'yellow'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1dd37e4a308&gt;</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_svg output_subarea">
+<!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="248.518125pt" version="1.1" viewBox="0 0 309.103125 248.518125" width="309.103125pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">
+*{stroke-linecap:butt;stroke-linejoin:round;}
+  </style>
+</defs>
+<g id="figure_1">
+<g id="patch_1">
+<path d="M 0 248.518125 
+L 309.103125 248.518125 
+L 309.103125 0 
+L 0 0 
+z
+" style="fill:none;"></path>
+</g>
+<g id="axes_1">
+<g id="patch_2">
+<path d="M 30.103125 224.64 
+L 301.903125 224.64 
+L 301.903125 7.2 
+L 30.103125 7.2 
+z
+" style="fill:#ffffff;"></path>
+</g>
+<g id="PatchCollection_1">
+<defs>
+<path d="M 240.130398 -132.598125 
+L 239.654474 -122.910467 
+L 238.231285 -113.316107 
+L 235.874537 -103.907443 
+L 232.606928 -94.775086 
+L 228.459925 -86.006986 
+L 223.473467 -77.687583 
+L 217.695576 -69.897 
+L 211.181897 -62.710262 
+L 203.995159 -56.196583 
+L 196.204576 -50.418692 
+L 187.885173 -45.432234 
+L 179.117073 -41.285232 
+L 169.984716 -38.017622 
+L 160.576052 -35.660874 
+L 150.981692 -34.237685 
+L 141.294034 -33.761761 
+L 131.606376 -34.237685 
+L 122.012016 -35.660874 
+L 112.603352 -38.017622 
+L 103.470995 -41.285232 
+L 94.702895 -45.432234 
+L 86.383493 -50.418692 
+L 78.592909 -56.196583 
+L 71.406171 -62.710262 
+L 64.892492 -69.897 
+L 59.114601 -77.687583 
+L 54.128143 -86.006986 
+L 49.981141 -94.775086 
+L 46.713531 -103.907443 
+L 44.356783 -113.316107 
+L 42.933595 -122.910467 
+L 42.45767 -132.598125 
+L 42.933595 -142.285783 
+L 44.356783 -151.880143 
+L 46.713531 -161.288807 
+L 49.981141 -170.421164 
+L 54.128143 -179.189264 
+L 59.114601 -187.508667 
+L 64.892492 -195.29925 
+L 71.406171 -202.485988 
+L 78.592909 -208.999667 
+L 86.383493 -214.777558 
+L 94.702895 -219.764016 
+L 103.470995 -223.911018 
+L 112.603352 -227.178628 
+L 122.012016 -229.535376 
+L 131.606376 -230.958565 
+L 141.294034 -231.434489 
+L 150.981692 -230.958565 
+L 160.576052 -229.535376 
+L 169.984716 -227.178628 
+L 179.117073 -223.911018 
+L 187.885173 -219.764016 
+L 196.204576 -214.777558 
+L 203.995159 -208.999667 
+L 211.181897 -202.485988 
+L 217.695576 -195.29925 
+L 223.473467 -187.508667 
+L 228.459925 -179.189264 
+L 232.606928 -170.421164 
+L 235.874537 -161.288807 
+L 238.231285 -151.880143 
+L 239.654474 -142.285783 
+L 240.130398 -132.598125 
+L 240.130398 -132.598125 
+" id="m73db94b288" style="stroke:#000000;"></path>
+</defs>
+<g clip-path="url(#p58c620c40f)">
+<use style="fill:#800080;stroke:#000000;" x="0" xlink:href="#m73db94b288" y="248.518125"></use>
+</g>
+</g>
+<g id="PatchCollection_2">
+<defs>
+<path d="M 289.54858 -132.598125 
+L 289.072655 -122.910467 
+L 287.649467 -113.316107 
+L 285.292719 -103.907443 
+L 282.025109 -94.775086 
+L 277.878107 -86.006986 
+L 272.891649 -77.687583 
+L 267.113758 -69.897 
+L 260.600079 -62.710262 
+L 253.413341 -56.196583 
+L 245.622757 -50.418692 
+L 237.303355 -45.432234 
+L 228.535255 -41.285232 
+L 219.402898 -38.017622 
+L 209.994234 -35.660874 
+L 200.399874 -34.237685 
+L 190.712216 -33.761761 
+L 181.024558 -34.237685 
+L 171.430198 -35.660874 
+L 162.021534 -38.017622 
+L 152.889177 -41.285232 
+L 144.121077 -45.432234 
+L 135.801674 -50.418692 
+L 128.011091 -56.196583 
+L 120.824353 -62.710262 
+L 114.310674 -69.897 
+L 108.532783 -77.687583 
+L 103.546325 -86.006986 
+L 99.399322 -94.775086 
+L 96.131713 -103.907443 
+L 93.774965 -113.316107 
+L 92.351776 -122.910467 
+L 91.875852 -132.598125 
+L 92.351776 -142.285783 
+L 93.774965 -151.880143 
+L 96.131713 -161.288807 
+L 99.399322 -170.421164 
+L 103.546325 -179.189264 
+L 108.532783 -187.508667 
+L 114.310674 -195.29925 
+L 120.824353 -202.485988 
+L 128.011091 -208.999667 
+L 135.801674 -214.777558 
+L 144.121077 -219.764016 
+L 152.889177 -223.911018 
+L 162.021534 -227.178628 
+L 171.430198 -229.535376 
+L 181.024558 -230.958565 
+L 190.712216 -231.434489 
+L 200.399874 -230.958565 
+L 209.994234 -229.535376 
+L 219.402898 -227.178628 
+L 228.535255 -223.911018 
+L 237.303355 -219.764016 
+L 245.622757 -214.777558 
+L 253.413341 -208.999667 
+L 260.600079 -202.485988 
+L 267.113758 -195.29925 
+L 272.891649 -187.508667 
+L 277.878107 -179.189264 
+L 282.025109 -170.421164 
+L 285.292719 -161.288807 
+L 287.649467 -151.880143 
+L 289.072655 -142.285783 
+L 289.54858 -132.598125 
+L 289.54858 -132.598125 
+" id="m297eab778f" style="stroke:#000000;stroke-opacity:0.5;"></path>
+</defs>
+<g clip-path="url(#p58c620c40f)">
+<use style="fill:#ffff00;fill-opacity:0.5;stroke:#000000;stroke-opacity:0.5;" x="0" xlink:href="#m297eab778f" y="248.518125"></use>
+</g>
+</g>
+<g id="matplotlib.axis_1">
+<g id="xtick_1">
+<g id="line2d_1">
+<defs>
+<path d="M 0 0 
+L 0 3.5 
+" id="m301efb24f6" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="42.45767" xlink:href="#m301efb24f6" y="224.64"></use>
+</g>
+</g>
+<g id="text_1">
+<!-- −1 -->
+<defs>
+<path d="M 10.59375 35.5 
+L 73.1875 35.5 
+L 73.1875 27.203125 
+L 10.59375 27.203125 
+z
+" id="DejaVuSans-8722"></path>
+<path d="M 12.40625 8.296875 
+L 28.515625 8.296875 
+L 28.515625 63.921875 
+L 10.984375 60.40625 
+L 10.984375 69.390625 
+L 28.421875 72.90625 
+L 38.28125 72.90625 
+L 38.28125 8.296875 
+L 54.390625 8.296875 
+L 54.390625 0 
+L 12.40625 0 
+z
+" id="DejaVuSans-49"></path>
+</defs>
+<g transform="translate(35.086577 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-8722"></use>
+<use x="83.789062" xlink:href="#DejaVuSans-49"></use>
+</g>
+</g>
+</g>
+<g id="xtick_2">
+<g id="line2d_2">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="91.875852" xlink:href="#m301efb24f6" y="224.64"></use>
+</g>
+</g>
+<g id="text_2">
+<!-- 0 -->
+<defs>
+<path d="M 31.78125 66.40625 
+Q 24.171875 66.40625 20.328125 58.90625 
+Q 16.5 51.421875 16.5 36.375 
+Q 16.5 21.390625 20.328125 13.890625 
+Q 24.171875 6.390625 31.78125 6.390625 
+Q 39.453125 6.390625 43.28125 13.890625 
+Q 47.125 21.390625 47.125 36.375 
+Q 47.125 51.421875 43.28125 58.90625 
+Q 39.453125 66.40625 31.78125 66.40625 
+z
+M 31.78125 74.21875 
+Q 44.046875 74.21875 50.515625 64.515625 
+Q 56.984375 54.828125 56.984375 36.375 
+Q 56.984375 17.96875 50.515625 8.265625 
+Q 44.046875 -1.421875 31.78125 -1.421875 
+Q 19.53125 -1.421875 13.0625 8.265625 
+Q 6.59375 17.96875 6.59375 36.375 
+Q 6.59375 54.828125 13.0625 64.515625 
+Q 19.53125 74.21875 31.78125 74.21875 
+z
+" id="DejaVuSans-48"></path>
+</defs>
+<g transform="translate(88.694602 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_3">
+<g id="line2d_3">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="141.294034" xlink:href="#m301efb24f6" y="224.64"></use>
+</g>
+</g>
+<g id="text_3">
+<!-- 1 -->
+<g transform="translate(138.112784 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+</g>
+</g>
+</g>
+<g id="xtick_4">
+<g id="line2d_4">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="190.712216" xlink:href="#m301efb24f6" y="224.64"></use>
+</g>
+</g>
+<g id="text_4">
+<!-- 2 -->
+<defs>
+<path d="M 19.1875 8.296875 
+L 53.609375 8.296875 
+L 53.609375 0 
+L 7.328125 0 
+L 7.328125 8.296875 
+Q 12.9375 14.109375 22.625 23.890625 
+Q 32.328125 33.6875 34.8125 36.53125 
+Q 39.546875 41.84375 41.421875 45.53125 
+Q 43.3125 49.21875 43.3125 52.78125 
+Q 43.3125 58.59375 39.234375 62.25 
+Q 35.15625 65.921875 28.609375 65.921875 
+Q 23.96875 65.921875 18.8125 64.3125 
+Q 13.671875 62.703125 7.8125 59.421875 
+L 7.8125 69.390625 
+Q 13.765625 71.78125 18.9375 73 
+Q 24.125 74.21875 28.421875 74.21875 
+Q 39.75 74.21875 46.484375 68.546875 
+Q 53.21875 62.890625 53.21875 53.421875 
+Q 53.21875 48.921875 51.53125 44.890625 
+Q 49.859375 40.875 45.40625 35.40625 
+Q 44.1875 33.984375 37.640625 27.21875 
+Q 31.109375 20.453125 19.1875 8.296875 
+z
+" id="DejaVuSans-50"></path>
+</defs>
+<g transform="translate(187.530966 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+</g>
+</g>
+</g>
+<g id="xtick_5">
+<g id="line2d_5">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="240.130398" xlink:href="#m301efb24f6" y="224.64"></use>
+</g>
+</g>
+<g id="text_5">
+<!-- 3 -->
+<defs>
+<path d="M 40.578125 39.3125 
+Q 47.65625 37.796875 51.625 33 
+Q 55.609375 28.21875 55.609375 21.1875 
+Q 55.609375 10.40625 48.1875 4.484375 
+Q 40.765625 -1.421875 27.09375 -1.421875 
+Q 22.515625 -1.421875 17.65625 -0.515625 
+Q 12.796875 0.390625 7.625 2.203125 
+L 7.625 11.71875 
+Q 11.71875 9.328125 16.59375 8.109375 
+Q 21.484375 6.890625 26.8125 6.890625 
+Q 36.078125 6.890625 40.9375 10.546875 
+Q 45.796875 14.203125 45.796875 21.1875 
+Q 45.796875 27.640625 41.28125 31.265625 
+Q 36.765625 34.90625 28.71875 34.90625 
+L 20.21875 34.90625 
+L 20.21875 43.015625 
+L 29.109375 43.015625 
+Q 36.375 43.015625 40.234375 45.921875 
+Q 44.09375 48.828125 44.09375 54.296875 
+Q 44.09375 59.90625 40.109375 62.90625 
+Q 36.140625 65.921875 28.71875 65.921875 
+Q 24.65625 65.921875 20.015625 65.03125 
+Q 15.375 64.15625 9.8125 62.3125 
+L 9.8125 71.09375 
+Q 15.4375 72.65625 20.34375 73.4375 
+Q 25.25 74.21875 29.59375 74.21875 
+Q 40.828125 74.21875 47.359375 69.109375 
+Q 53.90625 64.015625 53.90625 55.328125 
+Q 53.90625 49.265625 50.4375 45.09375 
+Q 46.96875 40.921875 40.578125 39.3125 
+z
+" id="DejaVuSans-51"></path>
+</defs>
+<g transform="translate(236.949148 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+</g>
+</g>
+</g>
+<g id="xtick_6">
+<g id="line2d_6">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="289.54858" xlink:href="#m301efb24f6" y="224.64"></use>
+</g>
+</g>
+<g id="text_6">
+<!-- 4 -->
+<defs>
+<path d="M 37.796875 64.3125 
+L 12.890625 25.390625 
+L 37.796875 25.390625 
+z
+M 35.203125 72.90625 
+L 47.609375 72.90625 
+L 47.609375 25.390625 
+L 58.015625 25.390625 
+L 58.015625 17.1875 
+L 47.609375 17.1875 
+L 47.609375 0 
+L 37.796875 0 
+L 37.796875 17.1875 
+L 4.890625 17.1875 
+L 4.890625 26.703125 
+z
+" id="DejaVuSans-52"></path>
+</defs>
+<g transform="translate(286.36733 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="matplotlib.axis_2">
+<g id="ytick_1">
+<g id="line2d_7">
+<defs>
+<path d="M 0 0 
+L -3.5 0 
+" id="mcfbf7ff404" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="214.756364"></use>
+</g>
+</g>
+<g id="text_7">
+<!-- 0.0 -->
+<defs>
+<path d="M 10.6875 12.40625 
+L 21 12.40625 
+L 21 0 
+L 10.6875 0 
+z
+" id="DejaVuSans-46"></path>
+</defs>
+<g transform="translate(7.2 218.555582)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_2">
+<g id="line2d_8">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="190.047273"></use>
+</g>
+</g>
+<g id="text_8">
+<!-- 0.5 -->
+<defs>
+<path d="M 10.796875 72.90625 
+L 49.515625 72.90625 
+L 49.515625 64.59375 
+L 19.828125 64.59375 
+L 19.828125 46.734375 
+Q 21.96875 47.46875 24.109375 47.828125 
+Q 26.265625 48.1875 28.421875 48.1875 
+Q 40.625 48.1875 47.75 41.5 
+Q 54.890625 34.8125 54.890625 23.390625 
+Q 54.890625 11.625 47.5625 5.09375 
+Q 40.234375 -1.421875 26.90625 -1.421875 
+Q 22.3125 -1.421875 17.546875 -0.640625 
+Q 12.796875 0.140625 7.71875 1.703125 
+L 7.71875 11.625 
+Q 12.109375 9.234375 16.796875 8.0625 
+Q 21.484375 6.890625 26.703125 6.890625 
+Q 35.15625 6.890625 40.078125 11.328125 
+Q 45.015625 15.765625 45.015625 23.390625 
+Q 45.015625 31 40.078125 35.4375 
+Q 35.15625 39.890625 26.703125 39.890625 
+Q 22.75 39.890625 18.8125 39.015625 
+Q 14.890625 38.140625 10.796875 36.28125 
+z
+" id="DejaVuSans-53"></path>
+</defs>
+<g transform="translate(7.2 193.846491)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_3">
+<g id="line2d_9">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="165.338182"></use>
+</g>
+</g>
+<g id="text_9">
+<!-- 1.0 -->
+<g transform="translate(7.2 169.137401)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_4">
+<g id="line2d_10">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="140.629091"></use>
+</g>
+</g>
+<g id="text_10">
+<!-- 1.5 -->
+<g transform="translate(7.2 144.42831)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_5">
+<g id="line2d_11">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="115.92"></use>
+</g>
+</g>
+<g id="text_11">
+<!-- 2.0 -->
+<g transform="translate(7.2 119.719219)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_6">
+<g id="line2d_12">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="91.210909"></use>
+</g>
+</g>
+<g id="text_12">
+<!-- 2.5 -->
+<g transform="translate(7.2 95.010128)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_7">
+<g id="line2d_13">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="66.501818"></use>
+</g>
+</g>
+<g id="text_13">
+<!-- 3.0 -->
+<g transform="translate(7.2 70.301037)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_8">
+<g id="line2d_14">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="41.792727"></use>
+</g>
+</g>
+<g id="text_14">
+<!-- 3.5 -->
+<g transform="translate(7.2 45.591946)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_9">
+<g id="line2d_15">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#mcfbf7ff404" y="17.083636"></use>
+</g>
+</g>
+<g id="text_15">
+<!-- 4.0 -->
+<g transform="translate(7.2 20.882855)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="patch_3">
+<path d="M 30.103125 224.64 
+L 30.103125 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_4">
+<path d="M 301.903125 224.64 
+L 301.903125 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_5">
+<path d="M 30.103125 224.64 
+L 301.903125 224.64 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_6">
+<path d="M 30.103125 7.2 
+L 301.903125 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="p58c620c40f">
+<rect height="217.44" width="271.8" x="30.103125" y="7.2"></rect>
+</clipPath>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now it's time to make use of the overlay function within GeoPandas. There are many implemented methods within the overlay function which are outlined here: <a href="http://geopandas.org/set_operations.html">Set Operations with Overlay</a>. We will be using the intersection method, which will only return the area of each geometry which overlaps.</p>
+<p>Notice below when we display the GeoPandas GeoDataFrame and plot the result that we have only returned the overlapping area, with data brought from both underlying geometries (a and b) column.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">overlay</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">gdf_1</span><span class="p">,</span><span class="n">gdf_2</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">'intersection'</span><span class="p">)</span>
+
+<span class="n">overlay</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">overlay</span><span class="p">)</span>
+<span class="c1"># total_gdf = geopandas.GeoDataFrame(pandas.concat([gdf_1,gdf_2,overlay],ignore_index=True,sort=False))</span>
+<span class="c1"># display(total_gdf)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>a</th>
+<th>area_1</th>
+<th>b</th>
+<th>area_2</th>
+<th>geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>11</td>
+<td>12.546194</td>
+<td>22</td>
+<td>12.546194</td>
+<td>POLYGON ((3.00000 2.00000, 2.99037 1.80397, 2....</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_svg output_subarea">
+<!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="248.518125pt" version="1.1" viewBox="0 0 205.942992 248.518125" width="205.942992pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">
+*{stroke-linecap:butt;stroke-linejoin:round;}
+  </style>
+</defs>
+<g id="figure_1">
+<g id="patch_1">
+<path d="M 0 248.518125 
+L 205.942992 248.518125 
+L 205.942992 0 
+L 0 0 
+z
+" style="fill:none;"></path>
+</g>
+<g id="axes_1">
+<g id="patch_2">
+<path d="M 30.103125 224.64 
+L 198.742992 224.64 
+L 198.742992 7.2 
+L 30.103125 7.2 
+z
+" style="fill:#ffffff;"></path>
+</g>
+<g id="PatchCollection_1">
+<defs>
+<path d="M 191.077544 -132.598125 
+L 190.585394 -122.580187 
+L 189.113684 -112.658727 
+L 186.676588 -102.929295 
+L 183.297577 -93.48559 
+L 179.009191 -84.418559 
+L 173.85273 -75.815525 
+L 167.877855 -67.759338 
+L 161.142105 -60.327583 
+L 153.710351 -53.591834 
+L 145.654164 -47.616958 
+L 137.051129 -42.460498 
+L 127.984099 -38.172112 
+L 118.540394 -34.7931 
+L 114.423059 -33.761761 
+L 110.305724 -34.7931 
+L 100.862018 -38.172112 
+L 91.794988 -42.460498 
+L 83.191953 -47.616958 
+L 75.135766 -53.591834 
+L 67.704012 -60.327583 
+L 60.968263 -67.759338 
+L 54.993387 -75.815525 
+L 49.836926 -84.418559 
+L 45.54854 -93.48559 
+L 42.169529 -102.929295 
+L 39.732433 -112.658727 
+L 38.260723 -122.580187 
+L 37.768574 -132.598125 
+L 38.260723 -142.616063 
+L 39.732433 -152.537523 
+L 42.169529 -162.266955 
+L 45.54854 -171.71066 
+L 49.836926 -180.777691 
+L 54.993387 -189.380725 
+L 60.968263 -197.436912 
+L 67.704012 -204.868667 
+L 75.135766 -211.604416 
+L 83.191953 -217.579292 
+L 91.794988 -222.735752 
+L 100.862018 -227.024138 
+L 110.305724 -230.40315 
+L 114.423059 -231.434489 
+L 118.540394 -230.40315 
+L 127.984099 -227.024138 
+L 137.051129 -222.735752 
+L 145.654164 -217.579292 
+L 153.710351 -211.604416 
+L 161.142105 -204.868667 
+L 167.877855 -197.436912 
+L 173.85273 -189.380725 
+L 179.009191 -180.777691 
+L 183.297577 -171.71066 
+L 186.676588 -162.266955 
+L 189.113684 -152.537523 
+L 190.585394 -142.616063 
+L 191.077544 -132.598125 
+L 191.077544 -132.598125 
+" id="m2ccdf1d001" style="stroke:#000000;"></path>
+</defs>
+<g clip-path="url(#p54d99f2879)">
+<use style="fill:#440154;stroke:#000000;" x="0" xlink:href="#m2ccdf1d001" y="248.518125"></use>
+</g>
+</g>
+<g id="matplotlib.axis_1">
+<g id="xtick_1">
+<g id="line2d_1">
+<defs>
+<path d="M 0 0 
+L 0 3.5 
+" id="m0f5cb9a546" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="37.768574" xlink:href="#m0f5cb9a546" y="224.64"></use>
+</g>
+</g>
+<g id="text_1">
+<!-- 0 -->
+<defs>
+<path d="M 31.78125 66.40625 
+Q 24.171875 66.40625 20.328125 58.90625 
+Q 16.5 51.421875 16.5 36.375 
+Q 16.5 21.390625 20.328125 13.890625 
+Q 24.171875 6.390625 31.78125 6.390625 
+Q 39.453125 6.390625 43.28125 13.890625 
+Q 47.125 21.390625 47.125 36.375 
+Q 47.125 51.421875 43.28125 58.90625 
+Q 39.453125 66.40625 31.78125 66.40625 
+z
+M 31.78125 74.21875 
+Q 44.046875 74.21875 50.515625 64.515625 
+Q 56.984375 54.828125 56.984375 36.375 
+Q 56.984375 17.96875 50.515625 8.265625 
+Q 44.046875 -1.421875 31.78125 -1.421875 
+Q 19.53125 -1.421875 13.0625 8.265625 
+Q 6.59375 17.96875 6.59375 36.375 
+Q 6.59375 54.828125 13.0625 64.515625 
+Q 19.53125 74.21875 31.78125 74.21875 
+z
+" id="DejaVuSans-48"></path>
+</defs>
+<g transform="translate(34.587324 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_2">
+<g id="line2d_2">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="88.871564" xlink:href="#m0f5cb9a546" y="224.64"></use>
+</g>
+</g>
+<g id="text_2">
+<!-- 1 -->
+<defs>
+<path d="M 12.40625 8.296875 
+L 28.515625 8.296875 
+L 28.515625 63.921875 
+L 10.984375 60.40625 
+L 10.984375 69.390625 
+L 28.421875 72.90625 
+L 38.28125 72.90625 
+L 38.28125 8.296875 
+L 54.390625 8.296875 
+L 54.390625 0 
+L 12.40625 0 
+z
+" id="DejaVuSans-49"></path>
+</defs>
+<g transform="translate(85.690314 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+</g>
+</g>
+</g>
+<g id="xtick_3">
+<g id="line2d_3">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="139.974554" xlink:href="#m0f5cb9a546" y="224.64"></use>
+</g>
+</g>
+<g id="text_3">
+<!-- 2 -->
+<defs>
+<path d="M 19.1875 8.296875 
+L 53.609375 8.296875 
+L 53.609375 0 
+L 7.328125 0 
+L 7.328125 8.296875 
+Q 12.9375 14.109375 22.625 23.890625 
+Q 32.328125 33.6875 34.8125 36.53125 
+Q 39.546875 41.84375 41.421875 45.53125 
+Q 43.3125 49.21875 43.3125 52.78125 
+Q 43.3125 58.59375 39.234375 62.25 
+Q 35.15625 65.921875 28.609375 65.921875 
+Q 23.96875 65.921875 18.8125 64.3125 
+Q 13.671875 62.703125 7.8125 59.421875 
+L 7.8125 69.390625 
+Q 13.765625 71.78125 18.9375 73 
+Q 24.125 74.21875 28.421875 74.21875 
+Q 39.75 74.21875 46.484375 68.546875 
+Q 53.21875 62.890625 53.21875 53.421875 
+Q 53.21875 48.921875 51.53125 44.890625 
+Q 49.859375 40.875 45.40625 35.40625 
+Q 44.1875 33.984375 37.640625 27.21875 
+Q 31.109375 20.453125 19.1875 8.296875 
+z
+" id="DejaVuSans-50"></path>
+</defs>
+<g transform="translate(136.793304 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+</g>
+</g>
+</g>
+<g id="xtick_4">
+<g id="line2d_4">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="191.077544" xlink:href="#m0f5cb9a546" y="224.64"></use>
+</g>
+</g>
+<g id="text_4">
+<!-- 3 -->
+<defs>
+<path d="M 40.578125 39.3125 
+Q 47.65625 37.796875 51.625 33 
+Q 55.609375 28.21875 55.609375 21.1875 
+Q 55.609375 10.40625 48.1875 4.484375 
+Q 40.765625 -1.421875 27.09375 -1.421875 
+Q 22.515625 -1.421875 17.65625 -0.515625 
+Q 12.796875 0.390625 7.625 2.203125 
+L 7.625 11.71875 
+Q 11.71875 9.328125 16.59375 8.109375 
+Q 21.484375 6.890625 26.8125 6.890625 
+Q 36.078125 6.890625 40.9375 10.546875 
+Q 45.796875 14.203125 45.796875 21.1875 
+Q 45.796875 27.640625 41.28125 31.265625 
+Q 36.765625 34.90625 28.71875 34.90625 
+L 20.21875 34.90625 
+L 20.21875 43.015625 
+L 29.109375 43.015625 
+Q 36.375 43.015625 40.234375 45.921875 
+Q 44.09375 48.828125 44.09375 54.296875 
+Q 44.09375 59.90625 40.109375 62.90625 
+Q 36.140625 65.921875 28.71875 65.921875 
+Q 24.65625 65.921875 20.015625 65.03125 
+Q 15.375 64.15625 9.8125 62.3125 
+L 9.8125 71.09375 
+Q 15.4375 72.65625 20.34375 73.4375 
+Q 25.25 74.21875 29.59375 74.21875 
+Q 40.828125 74.21875 47.359375 69.109375 
+Q 53.90625 64.015625 53.90625 55.328125 
+Q 53.90625 49.265625 50.4375 45.09375 
+Q 46.96875 40.921875 40.578125 39.3125 
+z
+" id="DejaVuSans-51"></path>
+</defs>
+<g transform="translate(187.896294 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="matplotlib.axis_2">
+<g id="ytick_1">
+<g id="line2d_5">
+<defs>
+<path d="M 0 0 
+L -3.5 0 
+" id="m42309f41ba" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="218.12598"></use>
+</g>
+</g>
+<g id="text_5">
+<!-- 0.0 -->
+<defs>
+<path d="M 10.6875 12.40625 
+L 21 12.40625 
+L 21 0 
+L 10.6875 0 
+z
+" id="DejaVuSans-46"></path>
+</defs>
+<g transform="translate(7.2 221.925199)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_2">
+<g id="line2d_6">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="192.574485"></use>
+</g>
+</g>
+<g id="text_6">
+<!-- 0.5 -->
+<defs>
+<path d="M 10.796875 72.90625 
+L 49.515625 72.90625 
+L 49.515625 64.59375 
+L 19.828125 64.59375 
+L 19.828125 46.734375 
+Q 21.96875 47.46875 24.109375 47.828125 
+Q 26.265625 48.1875 28.421875 48.1875 
+Q 40.625 48.1875 47.75 41.5 
+Q 54.890625 34.8125 54.890625 23.390625 
+Q 54.890625 11.625 47.5625 5.09375 
+Q 40.234375 -1.421875 26.90625 -1.421875 
+Q 22.3125 -1.421875 17.546875 -0.640625 
+Q 12.796875 0.140625 7.71875 1.703125 
+L 7.71875 11.625 
+Q 12.109375 9.234375 16.796875 8.0625 
+Q 21.484375 6.890625 26.703125 6.890625 
+Q 35.15625 6.890625 40.078125 11.328125 
+Q 45.015625 15.765625 45.015625 23.390625 
+Q 45.015625 31 40.078125 35.4375 
+Q 35.15625 39.890625 26.703125 39.890625 
+Q 22.75 39.890625 18.8125 39.015625 
+Q 14.890625 38.140625 10.796875 36.28125 
+z
+" id="DejaVuSans-53"></path>
+</defs>
+<g transform="translate(7.2 196.373704)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_3">
+<g id="line2d_7">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="167.02299"></use>
+</g>
+</g>
+<g id="text_7">
+<!-- 1.0 -->
+<g transform="translate(7.2 170.822209)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_4">
+<g id="line2d_8">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="141.471495"></use>
+</g>
+</g>
+<g id="text_8">
+<!-- 1.5 -->
+<g transform="translate(7.2 145.270714)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_5">
+<g id="line2d_9">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="115.92"></use>
+</g>
+</g>
+<g id="text_9">
+<!-- 2.0 -->
+<g transform="translate(7.2 119.719219)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_6">
+<g id="line2d_10">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="90.368505"></use>
+</g>
+</g>
+<g id="text_10">
+<!-- 2.5 -->
+<g transform="translate(7.2 94.167724)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_7">
+<g id="line2d_11">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="64.81701"></use>
+</g>
+</g>
+<g id="text_11">
+<!-- 3.0 -->
+<g transform="translate(7.2 68.616229)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_8">
+<g id="line2d_12">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="39.265515"></use>
+</g>
+</g>
+<g id="text_12">
+<!-- 3.5 -->
+<g transform="translate(7.2 43.064734)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+<g id="ytick_9">
+<g id="line2d_13">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="30.103125" xlink:href="#m42309f41ba" y="13.71402"></use>
+</g>
+</g>
+<g id="text_13">
+<!-- 4.0 -->
+<defs>
+<path d="M 37.796875 64.3125 
+L 12.890625 25.390625 
+L 37.796875 25.390625 
+z
+M 35.203125 72.90625 
+L 47.609375 72.90625 
+L 47.609375 25.390625 
+L 58.015625 25.390625 
+L 58.015625 17.1875 
+L 47.609375 17.1875 
+L 47.609375 0 
+L 37.796875 0 
+L 37.796875 17.1875 
+L 4.890625 17.1875 
+L 4.890625 26.703125 
+z
+" id="DejaVuSans-52"></path>
+</defs>
+<g transform="translate(7.2 17.513239)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-46"></use>
+<use x="95.410156" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="patch_3">
+<path d="M 30.103125 224.64 
+L 30.103125 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_4">
+<path d="M 198.742992 224.64 
+L 198.742992 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_5">
+<path d="M 30.103125 224.64 
+L 198.742992 224.64 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_6">
+<path d="M 30.103125 7.2 
+L 198.742992 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="p54d99f2879">
+<rect height="217.44" width="168.639867" x="30.103125" y="7.2"></rect>
+</clipPath>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can reuse our methodology from before to recalculate the area that is overlapping.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">overlay</span><span class="p">[</span><span class="s1">'Overlapping Area'</span><span class="p">]</span> <span class="o">=</span> <span class="n">overlay</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">area</span>
+<span class="c1"># overlay['Overlapping Area'] = overlay.geometry.apply(lambda x: x.area)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">overlay</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>a</th>
+<th>area_1</th>
+<th>b</th>
+<th>area_2</th>
+<th>geometry</th>
+<th>Overlapping Area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>11</td>
+<td>12.546194</td>
+<td>22</td>
+<td>12.546194</td>
+<td>POLYGON ((3.00000 2.00000, 2.99037 1.80397, 2....</td>
+<td>8.591554</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Distance-to-Nearest-Point-from-Polygon">Distance to Nearest Point from Polygon<a class="anchor-link" href="#Distance-to-Nearest-Point-from-Polygon">¶</a></h2><p>Another common type of analysis that we would like to make, is how far a particular polygon may be from a point.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">df_1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">]})</span>
+<span class="n">df_2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'b'</span> <span class="p">:</span> <span class="p">[</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">]})</span>
+
+<span class="n">gdf_1</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df_1</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">p1</span><span class="p">])</span>
+<span class="n">gdf_2</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df_2</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">])</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">gdf_1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'purple'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
+<span class="n">gdf_2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">'yellow'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1dd37f437c8&gt;</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_svg output_subarea">
+<!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="248.518125pt" version="1.1" viewBox="0 0 296.548521 248.518125" width="296.548521pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">
+*{stroke-linecap:butt;stroke-linejoin:round;}
+  </style>
+</defs>
+<g id="figure_1">
+<g id="patch_1">
+<path d="M 0 248.518125 
+L 296.548521 248.518125 
+L 296.548521 0 
+L 0 0 
+z
+" style="fill:none;"></path>
+</g>
+<g id="axes_1">
+<g id="patch_2">
+<path d="M 28.942188 224.64 
+L 289.348521 224.64 
+L 289.348521 7.2 
+L 28.942188 7.2 
+z
+" style="fill:#ffffff;"></path>
+</g>
+<g id="PatchCollection_1">
+<defs>
+<path d="M 197.020052 -153.313882 
+L 196.64388 -145.656723 
+L 195.518987 -138.073308 
+L 193.656205 -130.636667 
+L 191.073475 -123.41842 
+L 187.79567 -116.488083 
+L 183.854356 -109.912398 
+L 179.287491 -103.754694 
+L 174.139057 -98.074271 
+L 168.458634 -92.925836 
+L 162.300929 -88.358971 
+L 155.725245 -84.417658 
+L 148.794908 -81.139852 
+L 141.576661 -78.557122 
+L 134.14002 -76.694341 
+L 126.556604 -75.569447 
+L 118.899446 -75.193275 
+L 111.242287 -75.569447 
+L 103.658871 -76.694341 
+L 96.222231 -78.557122 
+L 89.003984 -81.139852 
+L 82.073647 -84.417658 
+L 75.497962 -88.358971 
+L 69.340257 -92.925836 
+L 63.659835 -98.074271 
+L 58.5114 -103.754694 
+L 53.944535 -109.912398 
+L 50.003222 -116.488083 
+L 46.725416 -123.41842 
+L 44.142686 -130.636667 
+L 42.279905 -138.073308 
+L 41.155011 -145.656723 
+L 40.778839 -153.313882 
+L 41.155011 -160.97104 
+L 42.279905 -168.554456 
+L 44.142686 -175.991097 
+L 46.725416 -183.209344 
+L 50.003222 -190.139681 
+L 53.944535 -196.715366 
+L 58.5114 -202.87307 
+L 63.659835 -208.553493 
+L 69.340257 -213.701928 
+L 75.497962 -218.268792 
+L 82.073647 -222.210106 
+L 89.003984 -225.487912 
+L 96.222231 -228.070642 
+L 103.658871 -229.933423 
+L 111.242287 -231.058317 
+L 118.899446 -231.434489 
+L 126.556604 -231.058317 
+L 134.14002 -229.933423 
+L 141.576661 -228.070642 
+L 148.794908 -225.487912 
+L 155.725245 -222.210106 
+L 162.300929 -218.268792 
+L 168.458634 -213.701928 
+L 174.139057 -208.553493 
+L 179.287491 -202.87307 
+L 183.854356 -196.715366 
+L 187.79567 -190.139681 
+L 191.073475 -183.209344 
+L 193.656205 -175.991097 
+L 195.518987 -168.554456 
+L 196.64388 -160.97104 
+L 197.020052 -153.313882 
+L 197.020052 -153.313882 
+" id="m3e29a3e6a1" style="stroke:#000000;"></path>
+</defs>
+<g clip-path="url(#p9d516da122)">
+<use style="fill:#800080;stroke:#000000;" x="0" xlink:href="#m3e29a3e6a1" y="248.518125"></use>
+</g>
+</g>
+<g id="PathCollection_1">
+<defs>
+<path d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" id="m376aba172a" style="stroke:#000000;stroke-opacity:0.5;"></path>
+</defs>
+<g clip-path="url(#p9d516da122)">
+<use style="fill:#ffff00;fill-opacity:0.5;stroke:#000000;stroke-opacity:0.5;" x="236.080356" xlink:href="#m376aba172a" y="56.14394"></use>
+<use style="fill:#ffff00;fill-opacity:0.5;stroke:#000000;stroke-opacity:0.5;" x="275.140659" xlink:href="#m376aba172a" y="212.385153"></use>
+</g>
+</g>
+<g id="matplotlib.axis_1">
+<g id="xtick_1">
+<g id="line2d_1">
+<defs>
+<path d="M 0 0 
+L 0 3.5 
+" id="mfe243c807f" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="40.778839" xlink:href="#mfe243c807f" y="224.64"></use>
+</g>
+</g>
+<g id="text_1">
+<!-- −1 -->
+<defs>
+<path d="M 10.59375 35.5 
+L 73.1875 35.5 
+L 73.1875 27.203125 
+L 10.59375 27.203125 
+z
+" id="DejaVuSans-8722"></path>
+<path d="M 12.40625 8.296875 
+L 28.515625 8.296875 
+L 28.515625 63.921875 
+L 10.984375 60.40625 
+L 10.984375 69.390625 
+L 28.421875 72.90625 
+L 38.28125 72.90625 
+L 38.28125 8.296875 
+L 54.390625 8.296875 
+L 54.390625 0 
+L 12.40625 0 
+z
+" id="DejaVuSans-49"></path>
+</defs>
+<g transform="translate(33.407745 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-8722"></use>
+<use x="83.789062" xlink:href="#DejaVuSans-49"></use>
+</g>
+</g>
+</g>
+<g id="xtick_2">
+<g id="line2d_2">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="79.839142" xlink:href="#mfe243c807f" y="224.64"></use>
+</g>
+</g>
+<g id="text_2">
+<!-- 0 -->
+<defs>
+<path d="M 31.78125 66.40625 
+Q 24.171875 66.40625 20.328125 58.90625 
+Q 16.5 51.421875 16.5 36.375 
+Q 16.5 21.390625 20.328125 13.890625 
+Q 24.171875 6.390625 31.78125 6.390625 
+Q 39.453125 6.390625 43.28125 13.890625 
+Q 47.125 21.390625 47.125 36.375 
+Q 47.125 51.421875 43.28125 58.90625 
+Q 39.453125 66.40625 31.78125 66.40625 
+z
+M 31.78125 74.21875 
+Q 44.046875 74.21875 50.515625 64.515625 
+Q 56.984375 54.828125 56.984375 36.375 
+Q 56.984375 17.96875 50.515625 8.265625 
+Q 44.046875 -1.421875 31.78125 -1.421875 
+Q 19.53125 -1.421875 13.0625 8.265625 
+Q 6.59375 17.96875 6.59375 36.375 
+Q 6.59375 54.828125 13.0625 64.515625 
+Q 19.53125 74.21875 31.78125 74.21875 
+z
+" id="DejaVuSans-48"></path>
+</defs>
+<g transform="translate(76.657892 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_3">
+<g id="line2d_3">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="118.899446" xlink:href="#mfe243c807f" y="224.64"></use>
+</g>
+</g>
+<g id="text_3">
+<!-- 1 -->
+<g transform="translate(115.718196 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+</g>
+</g>
+</g>
+<g id="xtick_4">
+<g id="line2d_4">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="157.959749" xlink:href="#mfe243c807f" y="224.64"></use>
+</g>
+</g>
+<g id="text_4">
+<!-- 2 -->
+<defs>
+<path d="M 19.1875 8.296875 
+L 53.609375 8.296875 
+L 53.609375 0 
+L 7.328125 0 
+L 7.328125 8.296875 
+Q 12.9375 14.109375 22.625 23.890625 
+Q 32.328125 33.6875 34.8125 36.53125 
+Q 39.546875 41.84375 41.421875 45.53125 
+Q 43.3125 49.21875 43.3125 52.78125 
+Q 43.3125 58.59375 39.234375 62.25 
+Q 35.15625 65.921875 28.609375 65.921875 
+Q 23.96875 65.921875 18.8125 64.3125 
+Q 13.671875 62.703125 7.8125 59.421875 
+L 7.8125 69.390625 
+Q 13.765625 71.78125 18.9375 73 
+Q 24.125 74.21875 28.421875 74.21875 
+Q 39.75 74.21875 46.484375 68.546875 
+Q 53.21875 62.890625 53.21875 53.421875 
+Q 53.21875 48.921875 51.53125 44.890625 
+Q 49.859375 40.875 45.40625 35.40625 
+Q 44.1875 33.984375 37.640625 27.21875 
+Q 31.109375 20.453125 19.1875 8.296875 
+z
+" id="DejaVuSans-50"></path>
+</defs>
+<g transform="translate(154.778499 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+</g>
+</g>
+</g>
+<g id="xtick_5">
+<g id="line2d_5">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="197.020052" xlink:href="#mfe243c807f" y="224.64"></use>
+</g>
+</g>
+<g id="text_5">
+<!-- 3 -->
+<defs>
+<path d="M 40.578125 39.3125 
+Q 47.65625 37.796875 51.625 33 
+Q 55.609375 28.21875 55.609375 21.1875 
+Q 55.609375 10.40625 48.1875 4.484375 
+Q 40.765625 -1.421875 27.09375 -1.421875 
+Q 22.515625 -1.421875 17.65625 -0.515625 
+Q 12.796875 0.390625 7.625 2.203125 
+L 7.625 11.71875 
+Q 11.71875 9.328125 16.59375 8.109375 
+Q 21.484375 6.890625 26.8125 6.890625 
+Q 36.078125 6.890625 40.9375 10.546875 
+Q 45.796875 14.203125 45.796875 21.1875 
+Q 45.796875 27.640625 41.28125 31.265625 
+Q 36.765625 34.90625 28.71875 34.90625 
+L 20.21875 34.90625 
+L 20.21875 43.015625 
+L 29.109375 43.015625 
+Q 36.375 43.015625 40.234375 45.921875 
+Q 44.09375 48.828125 44.09375 54.296875 
+Q 44.09375 59.90625 40.109375 62.90625 
+Q 36.140625 65.921875 28.71875 65.921875 
+Q 24.65625 65.921875 20.015625 65.03125 
+Q 15.375 64.15625 9.8125 62.3125 
+L 9.8125 71.09375 
+Q 15.4375 72.65625 20.34375 73.4375 
+Q 25.25 74.21875 29.59375 74.21875 
+Q 40.828125 74.21875 47.359375 69.109375 
+Q 53.90625 64.015625 53.90625 55.328125 
+Q 53.90625 49.265625 50.4375 45.09375 
+Q 46.96875 40.921875 40.578125 39.3125 
+z
+" id="DejaVuSans-51"></path>
+</defs>
+<g transform="translate(193.838802 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+</g>
+</g>
+</g>
+<g id="xtick_6">
+<g id="line2d_6">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="236.080356" xlink:href="#mfe243c807f" y="224.64"></use>
+</g>
+</g>
+<g id="text_6">
+<!-- 4 -->
+<defs>
+<path d="M 37.796875 64.3125 
+L 12.890625 25.390625 
+L 37.796875 25.390625 
+z
+M 35.203125 72.90625 
+L 47.609375 72.90625 
+L 47.609375 25.390625 
+L 58.015625 25.390625 
+L 58.015625 17.1875 
+L 47.609375 17.1875 
+L 47.609375 0 
+L 37.796875 0 
+L 37.796875 17.1875 
+L 4.890625 17.1875 
+L 4.890625 26.703125 
+z
+" id="DejaVuSans-52"></path>
+</defs>
+<g transform="translate(232.899106 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+</g>
+</g>
+</g>
+<g id="xtick_7">
+<g id="line2d_7">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="275.140659" xlink:href="#mfe243c807f" y="224.64"></use>
+</g>
+</g>
+<g id="text_7">
+<!-- 5 -->
+<defs>
+<path d="M 10.796875 72.90625 
+L 49.515625 72.90625 
+L 49.515625 64.59375 
+L 19.828125 64.59375 
+L 19.828125 46.734375 
+Q 21.96875 47.46875 24.109375 47.828125 
+Q 26.265625 48.1875 28.421875 48.1875 
+Q 40.625 48.1875 47.75 41.5 
+Q 54.890625 34.8125 54.890625 23.390625 
+Q 54.890625 11.625 47.5625 5.09375 
+Q 40.234375 -1.421875 26.90625 -1.421875 
+Q 22.3125 -1.421875 17.546875 -0.640625 
+Q 12.796875 0.140625 7.71875 1.703125 
+L 7.71875 11.625 
+Q 12.109375 9.234375 16.796875 8.0625 
+Q 21.484375 6.890625 26.703125 6.890625 
+Q 35.15625 6.890625 40.078125 11.328125 
+Q 45.015625 15.765625 45.015625 23.390625 
+Q 45.015625 31 40.078125 35.4375 
+Q 35.15625 39.890625 26.703125 39.890625 
+Q 22.75 39.890625 18.8125 39.015625 
+Q 14.890625 38.140625 10.796875 36.28125 
+z
+" id="DejaVuSans-53"></path>
+</defs>
+<g transform="translate(271.959409 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="matplotlib.axis_2">
+<g id="ytick_1">
+<g id="line2d_8">
+<defs>
+<path d="M 0 0 
+L -3.5 0 
+" id="m6fc97379ab" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m6fc97379ab" y="212.385153"></use>
+</g>
+</g>
+<g id="text_8">
+<!-- −1 -->
+<g transform="translate(7.2 216.184372)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-8722"></use>
+<use x="83.789062" xlink:href="#DejaVuSans-49"></use>
+</g>
+</g>
+</g>
+<g id="ytick_2">
+<g id="line2d_9">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m6fc97379ab" y="173.32485"></use>
+</g>
+</g>
+<g id="text_9">
+<!-- 0 -->
+<g transform="translate(15.579688 177.124069)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_3">
+<g id="line2d_10">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m6fc97379ab" y="134.264546"></use>
+</g>
+</g>
+<g id="text_10">
+<!-- 1 -->
+<g transform="translate(15.579688 138.063765)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+</g>
+</g>
+</g>
+<g id="ytick_4">
+<g id="line2d_11">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m6fc97379ab" y="95.204243"></use>
+</g>
+</g>
+<g id="text_11">
+<!-- 2 -->
+<g transform="translate(15.579688 99.003462)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+</g>
+</g>
+</g>
+<g id="ytick_5">
+<g id="line2d_12">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m6fc97379ab" y="56.14394"></use>
+</g>
+</g>
+<g id="text_12">
+<!-- 3 -->
+<g transform="translate(15.579688 59.943158)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-51"></use>
+</g>
+</g>
+</g>
+<g id="ytick_6">
+<g id="line2d_13">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m6fc97379ab" y="17.083636"></use>
+</g>
+</g>
+<g id="text_13">
+<!-- 4 -->
+<g transform="translate(15.579688 20.882855)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="patch_3">
+<path d="M 28.942188 224.64 
+L 28.942188 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_4">
+<path d="M 289.348521 224.64 
+L 289.348521 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_5">
+<path d="M 28.942188 224.64 
+L 289.348521 224.64 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_6">
+<path d="M 28.942188 7.2 
+L 289.348521 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="p9d516da122">
+<rect height="217.44" width="260.406334" x="28.942188" y="7.2"></rect>
+</clipPath>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I have noted two ways to do this, as per <a href="https://twitter.com/martinfleis">Martin Fleischmann</a>'s help on <a href="https://twitter.com/martinfleis/status/1220315609797419008">Twitter</a>, thank you Martin!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># gdf_2.geometry.apply(lambda x: gdf_1.distance(x))</span>
+<span class="n">gdf_2</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0    1.163931
+1    3.002337
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This will calculate the distance at each point to our polygon, from this we can select the minimum value.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">gdf_2</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="c1"># gdf_2.geometry.apply(lambda x: gdf_1.distance(x)).min()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>1.163931136530937</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>EDIT: This is now not required :)
+Notice that this returns a GeoSeries, so we have to select the first element (Zeroth in Python).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># gdf_2.geometry.apply(lambda x: gdf_1.distance(x)).min()[0]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Count-of-Points-in-Polygon">Count of Points in Polygon<a class="anchor-link" href="#Count-of-Points-in-Polygon">¶</a></h2><p>The final application in this point will be to count the amount of points within a polygon.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">p4</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">p5</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">df_1</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">]})</span>
+<span class="n">df_2</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'b'</span> <span class="p">:</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mi">55</span><span class="p">]})</span>
+
+<span class="n">gdf_1</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df_1</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">])</span>
+<span class="n">gdf_2</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df_2</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">,</span><span class="n">p5</span><span class="p">])</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">gdf_1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'purple'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
+<span class="n">gdf_2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">'yellow'</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1dd37fc1c48&gt;</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_svg output_subarea">
+<!--?xml version="1.0" encoding="utf-8" standalone="no"?-->
+
+
+<!-- Created with matplotlib (https://matplotlib.org/) -->
+<svg height="248.518125pt" version="1.1" viewBox="0 0 208.594601 248.518125" width="208.594601pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">
+*{stroke-linecap:butt;stroke-linejoin:round;}
+  </style>
+</defs>
+<g id="figure_1">
+<g id="patch_1">
+<path d="M 0 248.518125 
+L 208.594601 248.518125 
+L 208.594601 0 
+L 0 0 
+z
+" style="fill:none;"></path>
+</g>
+<g id="axes_1">
+<g id="patch_2">
+<path d="M 28.942188 224.64 
+L 201.394601 224.64 
+L 201.394601 7.2 
+L 28.942188 7.2 
+z
+" style="fill:#ffffff;"></path>
+</g>
+<g id="PatchCollection_1">
+<path clip-path="url(#pb1f5a8cb01)" d="M 173.106952 146.593354 
+L 172.778729 153.274497 
+L 171.797219 159.891298 
+L 170.171876 166.380031 
+L 167.918352 172.678209 
+L 165.05835 178.725174 
+L 161.619414 184.462693 
+L 157.634662 189.83551 
+L 153.142469 194.79188 
+L 148.186098 199.284073 
+L 142.813282 203.268825 
+L 137.075763 206.707762 
+L 131.028797 209.567763 
+L 124.73062 211.821287 
+L 118.241886 213.446631 
+L 111.625086 214.42814 
+L 104.943943 214.756364 
+L 98.2628 214.42814 
+L 91.646 213.446631 
+L 85.157266 211.821287 
+L 78.859089 209.567763 
+L 72.812123 206.707762 
+L 67.074604 203.268825 
+L 61.701788 199.284073 
+L 56.745417 194.79188 
+L 52.253224 189.83551 
+L 48.268472 184.462693 
+L 44.829536 178.725174 
+L 41.969534 172.678209 
+L 39.71601 166.380031 
+L 38.090667 159.891298 
+L 37.109157 153.274497 
+L 36.780934 146.593354 
+L 37.109157 139.912211 
+L 38.090667 133.295411 
+L 39.71601 126.806677 
+L 41.969534 120.5085 
+L 44.829536 114.461534 
+L 48.268472 108.724015 
+L 52.253224 103.351199 
+L 56.745417 98.394828 
+L 61.701788 93.902635 
+L 67.074604 89.917883 
+L 72.812123 86.478947 
+L 78.859089 83.618945 
+L 85.157266 81.365421 
+L 91.646 79.740078 
+L 98.2628 78.758568 
+L 104.943943 78.430345 
+L 111.625086 78.758568 
+L 118.241886 79.740078 
+L 124.73062 81.365421 
+L 131.028797 83.618945 
+L 137.075763 86.478947 
+L 142.813282 89.917883 
+L 148.186098 93.902635 
+L 153.142469 98.394828 
+L 157.634662 103.351199 
+L 161.619414 108.724015 
+L 165.05835 114.461534 
+L 167.918352 120.5085 
+L 170.171876 126.806677 
+L 171.797219 133.295411 
+L 172.778729 139.912211 
+L 173.106952 146.593354 
+L 173.106952 146.593354 
+" style="fill:#800080;stroke:#000000;"></path>
+<path clip-path="url(#pb1f5a8cb01)" d="M 193.555855 37.532539 
+L 193.457388 39.536882 
+L 193.162935 41.521922 
+L 192.675332 43.468542 
+L 191.999275 45.357996 
+L 191.141275 47.172085 
+L 190.109594 48.893341 
+L 188.914168 50.505186 
+L 187.56651 51.992097 
+L 186.079599 53.339755 
+L 184.467754 54.53518 
+L 182.746498 55.566861 
+L 180.932409 56.424862 
+L 179.042956 57.100919 
+L 177.096335 57.588522 
+L 175.111295 57.882975 
+L 173.106952 57.981442 
+L 171.102609 57.882975 
+L 169.117569 57.588522 
+L 167.170949 57.100919 
+L 165.281496 56.424862 
+L 163.467406 55.566861 
+L 161.746151 54.53518 
+L 160.134306 53.339755 
+L 158.647395 51.992097 
+L 157.299737 50.505186 
+L 156.104311 48.893341 
+L 155.07263 47.172085 
+L 154.21463 45.357996 
+L 153.538572 43.468542 
+L 153.05097 41.521922 
+L 152.756517 39.536882 
+L 152.65805 37.532539 
+L 152.756517 35.528196 
+L 153.05097 33.543156 
+L 153.538572 31.596536 
+L 154.21463 29.707083 
+L 155.07263 27.892993 
+L 156.104311 26.171737 
+L 157.299737 24.559893 
+L 158.647395 23.072981 
+L 160.134306 21.725324 
+L 161.746151 20.529898 
+L 163.467406 19.498217 
+L 165.281496 18.640216 
+L 167.170949 17.964159 
+L 169.117569 17.476556 
+L 171.102609 17.182103 
+L 173.106952 17.083636 
+L 175.111295 17.182103 
+L 177.096335 17.476556 
+L 179.042956 17.964159 
+L 180.932409 18.640216 
+L 182.746498 19.498217 
+L 184.467754 20.529898 
+L 186.079599 21.725324 
+L 187.56651 23.072981 
+L 188.914168 24.559893 
+L 190.109594 26.171737 
+L 191.141275 27.892993 
+L 191.999275 29.707083 
+L 192.675332 31.596536 
+L 193.162935 33.543156 
+L 193.457388 35.528196 
+L 193.555855 37.532539 
+L 193.555855 37.532539 
+" style="fill:#800080;stroke:#000000;"></path>
+</g>
+<g id="PathCollection_1">
+<defs>
+<path d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" id="m89b1e7c8bc" style="stroke:#000000;stroke-opacity:0.5;"></path>
+</defs>
+<g clip-path="url(#pb1f5a8cb01)">
+<use style="fill:#ffff00;fill-opacity:0.5;stroke:#000000;stroke-opacity:0.5;" x="118.576545" xlink:href="#m89b1e7c8bc" y="132.960752"></use>
+<use style="fill:#ffff00;fill-opacity:0.5;stroke:#000000;stroke-opacity:0.5;" x="145.841749" xlink:href="#m89b1e7c8bc" y="119.32815"></use>
+<use style="fill:#ffff00;fill-opacity:0.5;stroke:#000000;stroke-opacity:0.5;" x="173.106952" xlink:href="#m89b1e7c8bc" y="51.165141"></use>
+</g>
+</g>
+<g id="matplotlib.axis_1">
+<g id="xtick_1">
+<g id="line2d_1">
+<defs>
+<path d="M 0 0 
+L 0 3.5 
+" id="m2505e875eb" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="91.311341" xlink:href="#m2505e875eb" y="224.64"></use>
+</g>
+</g>
+<g id="text_1">
+<!-- 0 -->
+<defs>
+<path d="M 31.78125 66.40625 
+Q 24.171875 66.40625 20.328125 58.90625 
+Q 16.5 51.421875 16.5 36.375 
+Q 16.5 21.390625 20.328125 13.890625 
+Q 24.171875 6.390625 31.78125 6.390625 
+Q 39.453125 6.390625 43.28125 13.890625 
+Q 47.125 21.390625 47.125 36.375 
+Q 47.125 51.421875 43.28125 58.90625 
+Q 39.453125 66.40625 31.78125 66.40625 
+z
+M 31.78125 74.21875 
+Q 44.046875 74.21875 50.515625 64.515625 
+Q 56.984375 54.828125 56.984375 36.375 
+Q 56.984375 17.96875 50.515625 8.265625 
+Q 44.046875 -1.421875 31.78125 -1.421875 
+Q 19.53125 -1.421875 13.0625 8.265625 
+Q 6.59375 17.96875 6.59375 36.375 
+Q 6.59375 54.828125 13.0625 64.515625 
+Q 19.53125 74.21875 31.78125 74.21875 
+z
+" id="DejaVuSans-48"></path>
+</defs>
+<g transform="translate(88.130091 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="xtick_2">
+<g id="line2d_2">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="159.474351" xlink:href="#m2505e875eb" y="224.64"></use>
+</g>
+</g>
+<g id="text_2">
+<!-- 5 -->
+<defs>
+<path d="M 10.796875 72.90625 
+L 49.515625 72.90625 
+L 49.515625 64.59375 
+L 19.828125 64.59375 
+L 19.828125 46.734375 
+Q 21.96875 47.46875 24.109375 47.828125 
+Q 26.265625 48.1875 28.421875 48.1875 
+Q 40.625 48.1875 47.75 41.5 
+Q 54.890625 34.8125 54.890625 23.390625 
+Q 54.890625 11.625 47.5625 5.09375 
+Q 40.234375 -1.421875 26.90625 -1.421875 
+Q 22.3125 -1.421875 17.546875 -0.640625 
+Q 12.796875 0.140625 7.71875 1.703125 
+L 7.71875 11.625 
+Q 12.109375 9.234375 16.796875 8.0625 
+Q 21.484375 6.890625 26.703125 6.890625 
+Q 35.15625 6.890625 40.078125 11.328125 
+Q 45.015625 15.765625 45.015625 23.390625 
+Q 45.015625 31 40.078125 35.4375 
+Q 35.15625 39.890625 26.703125 39.890625 
+Q 22.75 39.890625 18.8125 39.015625 
+Q 14.890625 38.140625 10.796875 36.28125 
+z
+" id="DejaVuSans-53"></path>
+</defs>
+<g transform="translate(156.293101 239.238437)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-53"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="matplotlib.axis_2">
+<g id="ytick_1">
+<g id="line2d_3">
+<defs>
+<path d="M 0 0 
+L -3.5 0 
+" id="m22bf374ebd" style="stroke:#000000;stroke-width:0.8;"></path>
+</defs>
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="214.756364"></use>
+</g>
+</g>
+<g id="text_3">
+<!-- −4 -->
+<defs>
+<path d="M 10.59375 35.5 
+L 73.1875 35.5 
+L 73.1875 27.203125 
+L 10.59375 27.203125 
+z
+" id="DejaVuSans-8722"></path>
+<path d="M 37.796875 64.3125 
+L 12.890625 25.390625 
+L 37.796875 25.390625 
+z
+M 35.203125 72.90625 
+L 47.609375 72.90625 
+L 47.609375 25.390625 
+L 58.015625 25.390625 
+L 58.015625 17.1875 
+L 47.609375 17.1875 
+L 47.609375 0 
+L 37.796875 0 
+L 37.796875 17.1875 
+L 4.890625 17.1875 
+L 4.890625 26.703125 
+z
+" id="DejaVuSans-52"></path>
+</defs>
+<g transform="translate(7.2 218.555582)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-8722"></use>
+<use x="83.789062" xlink:href="#DejaVuSans-52"></use>
+</g>
+</g>
+</g>
+<g id="ytick_2">
+<g id="line2d_4">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="187.49116"></use>
+</g>
+</g>
+<g id="text_4">
+<!-- −2 -->
+<defs>
+<path d="M 19.1875 8.296875 
+L 53.609375 8.296875 
+L 53.609375 0 
+L 7.328125 0 
+L 7.328125 8.296875 
+Q 12.9375 14.109375 22.625 23.890625 
+Q 32.328125 33.6875 34.8125 36.53125 
+Q 39.546875 41.84375 41.421875 45.53125 
+Q 43.3125 49.21875 43.3125 52.78125 
+Q 43.3125 58.59375 39.234375 62.25 
+Q 35.15625 65.921875 28.609375 65.921875 
+Q 23.96875 65.921875 18.8125 64.3125 
+Q 13.671875 62.703125 7.8125 59.421875 
+L 7.8125 69.390625 
+Q 13.765625 71.78125 18.9375 73 
+Q 24.125 74.21875 28.421875 74.21875 
+Q 39.75 74.21875 46.484375 68.546875 
+Q 53.21875 62.890625 53.21875 53.421875 
+Q 53.21875 48.921875 51.53125 44.890625 
+Q 49.859375 40.875 45.40625 35.40625 
+Q 44.1875 33.984375 37.640625 27.21875 
+Q 31.109375 20.453125 19.1875 8.296875 
+z
+" id="DejaVuSans-50"></path>
+</defs>
+<g transform="translate(7.2 191.290379)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-8722"></use>
+<use x="83.789062" xlink:href="#DejaVuSans-50"></use>
+</g>
+</g>
+</g>
+<g id="ytick_3">
+<g id="line2d_5">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="160.225956"></use>
+</g>
+</g>
+<g id="text_5">
+<!-- 0 -->
+<g transform="translate(15.579688 164.025175)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+<g id="ytick_4">
+<g id="line2d_6">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="132.960752"></use>
+</g>
+</g>
+<g id="text_6">
+<!-- 2 -->
+<g transform="translate(15.579688 136.759971)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-50"></use>
+</g>
+</g>
+</g>
+<g id="ytick_5">
+<g id="line2d_7">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="105.695549"></use>
+</g>
+</g>
+<g id="text_7">
+<!-- 4 -->
+<g transform="translate(15.579688 109.494767)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-52"></use>
+</g>
+</g>
+</g>
+<g id="ytick_6">
+<g id="line2d_8">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="78.430345"></use>
+</g>
+</g>
+<g id="text_8">
+<!-- 6 -->
+<defs>
+<path d="M 33.015625 40.375 
+Q 26.375 40.375 22.484375 35.828125 
+Q 18.609375 31.296875 18.609375 23.390625 
+Q 18.609375 15.53125 22.484375 10.953125 
+Q 26.375 6.390625 33.015625 6.390625 
+Q 39.65625 6.390625 43.53125 10.953125 
+Q 47.40625 15.53125 47.40625 23.390625 
+Q 47.40625 31.296875 43.53125 35.828125 
+Q 39.65625 40.375 33.015625 40.375 
+z
+M 52.59375 71.296875 
+L 52.59375 62.3125 
+Q 48.875 64.0625 45.09375 64.984375 
+Q 41.3125 65.921875 37.59375 65.921875 
+Q 27.828125 65.921875 22.671875 59.328125 
+Q 17.53125 52.734375 16.796875 39.40625 
+Q 19.671875 43.65625 24.015625 45.921875 
+Q 28.375 48.1875 33.59375 48.1875 
+Q 44.578125 48.1875 50.953125 41.515625 
+Q 57.328125 34.859375 57.328125 23.390625 
+Q 57.328125 12.15625 50.6875 5.359375 
+Q 44.046875 -1.421875 33.015625 -1.421875 
+Q 20.359375 -1.421875 13.671875 8.265625 
+Q 6.984375 17.96875 6.984375 36.375 
+Q 6.984375 53.65625 15.1875 63.9375 
+Q 23.390625 74.21875 37.203125 74.21875 
+Q 40.921875 74.21875 44.703125 73.484375 
+Q 48.484375 72.75 52.59375 71.296875 
+z
+" id="DejaVuSans-54"></path>
+</defs>
+<g transform="translate(15.579688 82.229564)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-54"></use>
+</g>
+</g>
+</g>
+<g id="ytick_7">
+<g id="line2d_9">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="51.165141"></use>
+</g>
+</g>
+<g id="text_9">
+<!-- 8 -->
+<defs>
+<path d="M 31.78125 34.625 
+Q 24.75 34.625 20.71875 30.859375 
+Q 16.703125 27.09375 16.703125 20.515625 
+Q 16.703125 13.921875 20.71875 10.15625 
+Q 24.75 6.390625 31.78125 6.390625 
+Q 38.8125 6.390625 42.859375 10.171875 
+Q 46.921875 13.96875 46.921875 20.515625 
+Q 46.921875 27.09375 42.890625 30.859375 
+Q 38.875 34.625 31.78125 34.625 
+z
+M 21.921875 38.8125 
+Q 15.578125 40.375 12.03125 44.71875 
+Q 8.5 49.078125 8.5 55.328125 
+Q 8.5 64.0625 14.71875 69.140625 
+Q 20.953125 74.21875 31.78125 74.21875 
+Q 42.671875 74.21875 48.875 69.140625 
+Q 55.078125 64.0625 55.078125 55.328125 
+Q 55.078125 49.078125 51.53125 44.71875 
+Q 48 40.375 41.703125 38.8125 
+Q 48.828125 37.15625 52.796875 32.3125 
+Q 56.78125 27.484375 56.78125 20.515625 
+Q 56.78125 9.90625 50.3125 4.234375 
+Q 43.84375 -1.421875 31.78125 -1.421875 
+Q 19.734375 -1.421875 13.25 4.234375 
+Q 6.78125 9.90625 6.78125 20.515625 
+Q 6.78125 27.484375 10.78125 32.3125 
+Q 14.796875 37.15625 21.921875 38.8125 
+z
+M 18.3125 54.390625 
+Q 18.3125 48.734375 21.84375 45.5625 
+Q 25.390625 42.390625 31.78125 42.390625 
+Q 38.140625 42.390625 41.71875 45.5625 
+Q 45.3125 48.734375 45.3125 54.390625 
+Q 45.3125 60.0625 41.71875 63.234375 
+Q 38.140625 66.40625 31.78125 66.40625 
+Q 25.390625 66.40625 21.84375 63.234375 
+Q 18.3125 60.0625 18.3125 54.390625 
+z
+" id="DejaVuSans-56"></path>
+</defs>
+<g transform="translate(15.579688 54.96436)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-56"></use>
+</g>
+</g>
+</g>
+<g id="ytick_8">
+<g id="line2d_10">
+<g>
+<use style="stroke:#000000;stroke-width:0.8;" x="28.942188" xlink:href="#m22bf374ebd" y="23.899937"></use>
+</g>
+</g>
+<g id="text_10">
+<!-- 10 -->
+<defs>
+<path d="M 12.40625 8.296875 
+L 28.515625 8.296875 
+L 28.515625 63.921875 
+L 10.984375 60.40625 
+L 10.984375 69.390625 
+L 28.421875 72.90625 
+L 38.28125 72.90625 
+L 38.28125 8.296875 
+L 54.390625 8.296875 
+L 54.390625 0 
+L 12.40625 0 
+z
+" id="DejaVuSans-49"></path>
+</defs>
+<g transform="translate(9.217188 27.699156)scale(0.1 -0.1)">
+<use xlink:href="#DejaVuSans-49"></use>
+<use x="63.623047" xlink:href="#DejaVuSans-48"></use>
+</g>
+</g>
+</g>
+</g>
+<g id="patch_3">
+<path d="M 28.942188 224.64 
+L 28.942188 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_4">
+<path d="M 201.394601 224.64 
+L 201.394601 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_5">
+<path d="M 28.942188 224.64 
+L 201.394601 224.64 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+<g id="patch_6">
+<path d="M 28.942188 7.2 
+L 201.394601 7.2 
+" style="fill:none;stroke:#000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:0.8;"></path>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="pb1f5a8cb01">
+<rect height="217.44" width="172.452414" x="28.942188" y="7.2"></rect>
+</clipPath>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We are looking to have our answer be 2 for the larger polygon and 1 for the smaller circle. To make sure we are getting the right answers, let's provide an identifying column for each polygon. This is completed by using the apply function again, row wise (axis=1) and by concatenating the word 'Polygon' with the row number (this is called name in Pandas).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">gdf_1</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf_1</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">'Polygon '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">gdf_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>a</th>
+<th>geometry</th>
+<th>id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>11</td>
+<td>POLYGON ((6.00000 1.00000, 5.97592 0.50991, 5....</td>
+<td>Polygon 0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>22</td>
+<td>POLYGON ((7.50000 9.00000, 7.49278 8.85297, 7....</td>
+<td>Polygon 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we are going to use a spatial join function, like the overlay previously, this also has many methods within it. They are all detailed here: <a href="http://geopandas.org/mergingdata.html">Merging Data in GeoPandas</a>. For this application we will use the within operator.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">spatial_join</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">gdf_2</span><span class="p">,</span><span class="n">gdf_1</span><span class="p">,</span><span class="n">op</span><span class="o">=</span><span class="s1">'within'</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">spatial_join</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>b</th>
+<th>geometry</th>
+<th>index_right</th>
+<th>a</th>
+<th>id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>33</td>
+<td>POINT (2.00000 2.00000)</td>
+<td>0</td>
+<td>11</td>
+<td>Polygon 0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>44</td>
+<td>POINT (4.00000 3.00000)</td>
+<td>0</td>
+<td>11</td>
+<td>Polygon 0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>55</td>
+<td>POINT (6.00000 8.00000)</td>
+<td>1</td>
+<td>22</td>
+<td>Polygon 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see above, the output GeoDataFrame from this is all of our points and the id containing the Polygon they live in.</p>
+<p>Next we will group them by id, count how many of them there is (with .size()) and create a new DataFrame with the results of our analysis.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">grouped</span> <span class="o">=</span> <span class="n">spatial_join</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">grouped</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'id'</span><span class="p">,</span><span class="s1">'Count'</span><span class="p">]</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>id
+Polygon 0    2
+Polygon 1    1
+dtype: int64</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>id</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Polygon 0</td>
+<td>2</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Polygon 1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To bring this back into our original GeoDataFrame, this is acheieved with the merge function.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">gdf_1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'id'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'outer'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>a</th>
+<th>geometry</th>
+<th>id</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>11</td>
+<td>POLYGON ((6.00000 1.00000, 5.97592 0.50991, 5....</td>
+<td>Polygon 0</td>
+<td>2</td>
+</tr>
+<tr>
+<th>1</th>
+<td>22</td>
+<td>POLYGON ((7.50000 9.00000, 7.49278 8.85297, 7....</td>
+<td>Polygon 1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+      <a href="https://jackmckew.dev/tag/visualisation.html">visualisation</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html" title="Migrating from Wordpress to Pelican">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/3d-terrain-in-python.html" title="3D Terrain in Python">
+       Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
+      <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
+      <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
+      <li><a href="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html">Linear Regression: Under the Hood with the Normal Equation</a></li>
+      <li><a href="https://jackmckew.dev/episode-11-power-quality-explained.html">Episode 11 - Power Quality Explained</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+</html>

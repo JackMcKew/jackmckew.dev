@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="Recursively counting words in markdown within a folder In the last 55 posts, I&#39;ve written 34846 words in this blog. In comparison, my engineering thesis for graduating university was 9916 words across 69 pages. A question had popped into my mind this week, &#34;How many words have I written in …" />
+<meta name="keywords" content="python">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Counting Words with Python"/>
+<meta property="og:description" content="Recursively counting words in markdown within a folder In the last 55 posts, I&#39;ve written 34846 words in this blog. In comparison, my engineering thesis for graduating university was 9916 words across 69 pages. A question had popped into my mind this week, &#34;How many words have I written in …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/counting-words-with-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-03-19 00:00:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+    <title>Jack McKew's Blog &ndash; Counting Words with Python</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 58</p>
+            <p>Number of Words: 38,390</p>
+            <p>Number of Lines of Code 2,640</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="counting-words-with-python">Counting Words with Python</h1>
+    <p>
+       Posted on Thu 19 March 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+
+        &#8226; 5 min read
+    </p>
+  </header>
+
+
+  <div>
+    <!-- Slug: 3d-terrain-in-python --><html><head></head><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Recursively counting words in markdown within a folder</strong></p>
+<p>In the last 55 posts, I've written 34846 words in this blog. In comparison, my engineering thesis for graduating university was 9916 words across 69 pages.</p>
+<p>A question had popped into my mind this week, "How many words have I written in this blog?". As per normal, we'll go into how to use Python to solve this problem. This is an opportunity to get more familiar with <code>pathlib</code>, a renowned, enjoyable way to handle pathing within Python programs.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A great way to start projects, is to see if it's already been done before. <a href="https://github.com/gandreadis">@gandreadis</a> over at GitHub had already tackled this problem on the single file basis: <a href="https://github.com/gandreadis/markdown-word-count">https://github.com/gandreadis/markdown-word-count</a>.</p>
+<p>This means all we need to do is:</p>
+<ul>
+<li>Recursively loop through a folder and find all the markdown files</li>
+<li>Call <a href="https://github.com/gandreadis">@gandreadis</a>'s function to get the count of words for each file</li>
+<li>Sum total words</li>
+</ul>
+<p>First of let's bring <a href="https://github.com/gandreadis">@gandreadis</a> function into our program. It's been modified slightly to take in a file path, read the file contents in a variable, clean up contents and return the length of an array split by spaces.</p>
+<p>For example if the sentence (string) is 'How many words have I written in this blog?', when .split is called this returns an array of each word split by a space. Allowing us to calculate how many words, by counting the number of elements in the array.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">testSentence</span> <span class="o">=</span> <span class="s1">'How many words have I written in this blog?'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">testSentence</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['How', 'many', 'words', 'have', 'I', 'written', 'in', 'this', 'blog?']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Source: https://github.com/gandreadis/markdown-word-count</span>
+<span class="k">def</span> <span class="nf">count_words_in_markdown</span><span class="p">(</span><span class="n">filePath</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># Comments</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'&lt;!--(.*?)--&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="c1"># Tabs to spaces</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'    '</span><span class="p">)</span>
+    <span class="c1"># More than 1 space to 4 spaces</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[ ]{2,}'</span><span class="p">,</span> <span class="s1">'    '</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Footnotes</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^\[[^]]*\][^(].*'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="c1"># Indented blocks of code</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^( {4,}[^-*]).*'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="c1"># Replace newlines with spaces for uniform handling</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">)</span>
+    <span class="c1"># Custom header IDs</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'{#.*}'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove images</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'!\[[^\]]*\]\([^)]*\)'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove HTML tags</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'&lt;/?[^&gt;]*&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove special characters</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[#*`~\-–^=&lt;&gt;+|/:]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove footnote references</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\[[0-9]*\]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="c1"># Remove enumerations</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[0-9#]*\.'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We start by defining the 'top' directory to search within. We call this the 'top' folder as we go 'down' inside more folders inside the 'top' folder. Within pathlib, we can access elements within using <code>glob</code>. A great resource for testing glob patterns, as they are not very intuitive for me personally is <a href="https://globster.xyz/">https://globster.xyz/</a>.</p>
+<p>The glob pattern elements we will use are:</p>
+<ul>
+<li><code>**</code> - Feature known as globstar. Matches all files and zero or more directories and subdirectories. </li>
+<li><code>*</code> - Matches any string.</li>
+<li><code>?</code> - Matches single character.</li>
+<li><code>.md</code> - Matches files with a <code>.md</code> suffix.</li>
+</ul>
+<p>For this particular application, the posts are structured within folders which represent the year they are written so we use the <code>20??/</code> glob pattern as to exclude other folders.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Top directory to search through</span>
+<span class="n">topFolder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">'C:/Users/jackm/Documents/GitHub/jackmckew.dev/content'</span><span class="p">)</span>
+
+<span class="n">allMarkdown</span><span class="p">:</span> <span class="n">List</span>  <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate through all files using pathlib</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">topFolder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'**/20??/**/*.md'</span><span class="p">):</span>
+    <span class="n">allMarkdown</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span>
+
+<span class="c1"># If you don't want to use glob patterns, can easily use the 'suffix' within the path variable.</span>
+<span class="c1"># for singleFile in topFolder.glob('**/*'):</span>
+<span class="c1">#     if singleFile.suffix == '.md':</span>
+<span class="c1">#         allMarkdown.append(singleFile)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">allMarkdown</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>55
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see that there is 55 markdown files within the folder and all the paths are stored within the list.</p>
+<p>All we need to do now is loop over all of them, passing the path into a function defined previously to get the total word count.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">totalWordCountMarkdown</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allMarkdown</span><span class="p">:</span>
+    <span class="n">totalWordCountMarkdown</span> <span class="o">+=</span> <span class="n">count_words_in_markdown</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountMarkdown</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>31380
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There you have it! 31380 words across all the markdown files. In comparison, my engineering thesis for graduating university was 9916 words across 69 pages.</p>
+<h2 id="What-about-Notebooks?">What about Notebooks?<a class="anchor-link" href="#What-about-Notebooks?">¶</a></h2><p>This post has been written in a <a href="https://jupyter.org/">Jupyter notebook</a>, these files (.ipynb) are formatted at the base level as json files. This means that the tool we've just created won't capture any of the <a href="https://jupyter.org/">Jupyter notebooks</a> within the folder, this will not stand!</p>
+<p>When working with Jupyter notebooks, everything is broken into 'cells'. Cells can be either be markdown, heading, code or output cells.</p>
+<ul>
+<li>Markdown cells contain the written explanation or notes around some code</li>
+<li>Heading cells (denoted by <code>#</code>) allow for navigatable headings</li>
+<li>Code cells contain runnable code through a runtime</li>
+<li>Output cells contain the output from the code cell that precedes it</li>
+</ul>
+<p>So let's create a function which will count all the markdown cells within a Jupyter notebook's markdown cells.</p>
+<p>We follow these steps:</p>
+<ol>
+<li>Read the notebook as a json files</li>
+<li>Loop through all the cells within the notebook</li>
+<li>If the cell type matches the type we want, count the words using a similar method</li>
+<li>Sum all the counts to get the total for the notebook</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">nbformat</span> <span class="kn">import</span> <span class="n">current</span>
+
+<span class="k">def</span> <span class="nf">count_words_in_jupyter</span><span class="p">(</span><span class="n">filePath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">returnType</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s1">'markdown'</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">'json'</span><span class="p">)</span>
+
+    <span class="n">word_count_markdown</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">word_count_heading</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">word_count_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">nb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"markdown"</span><span class="p">:</span>
+            <span class="n">word_count_markdown</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'source'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"heading"</span><span class="p">:</span>
+            <span class="n">word_count_heading</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'source'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">==</span> <span class="s2">"code"</span><span class="p">:</span>
+            <span class="n">word_count_code</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s1">'input'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'#'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'markdown'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">word_count_markdown</span>
+    <span class="k">elif</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'heading'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">word_count_heading</span>
+    <span class="k">elif</span> <span class="n">returnType</span> <span class="o">==</span> <span class="s1">'code'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">word_count_code</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ne">Exception</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now similar to our markdown loop, let's reproduce this looking for &amp; counting words inside Jupyter notebooks.</p>
+<blockquote><p>Jupyter creates <code>checkpoint.ipynb</code> files contain a snapshot of the notebook each time it is manually saved, implementing an inbuilt basic version control system. We don't want to count the words in this as it'll be counting the same files over and over again.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Top directory to search through</span>
+<span class="n">topFolder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">'C:/Users/jackm/Documents/GitHub/jackmckew.dev/content'</span><span class="p">)</span>
+
+<span class="n">allJupyter</span><span class="p">:</span> <span class="n">List</span>  <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate through all files using pathlib</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">topFolder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'**/20??/**/*.ipynb'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">'checkpoint'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">singleFile</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+        <span class="n">allJupyter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">singleFile</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">allJupyter</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We found 5 notebooks! Now let's loop over them and count all the files in the markdown cells.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">totalWordCountJupyter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allJupyter</span><span class="p">:</span>
+    <span class="n">totalWordCountJupyter</span> <span class="o">+=</span> <span class="n">count_words_in_jupyter</span><span class="p">(</span><span class="n">singleFile</span><span class="p">,</span><span class="s1">'markdown'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3466
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There you have it! 3466 words across all the Jupyter notebooks.</p>
+<p>This brings our total to 34846!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span> <span class="o">+</span> <span class="n">totalWordCountMarkdown</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>34846
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Out of interest, let's see how many words live in code within the Jupyter notebooks.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python"><pre><span></span><span class="n">totalWordCountJupyter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">singleFile</span> <span class="ow">in</span> <span class="n">allJupyter</span><span class="p">:</span>
+    <span class="n">totalWordCountJupyter</span> <span class="o">+=</span> <span class="n">count_words_in_jupyter</span><span class="p">(</span><span class="n">singleFile</span><span class="p">,</span><span class="s1">'code'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">totalWordCountJupyter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3292
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div></body></html>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/python-bytes-awesome-package-list.html" title="Python Bytes Awesome Package List">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/packaging-python-packages-with-poetry.html" title="Packaging Python Packages with Poetry">
+       Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
+      <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
+      <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
+      <li><a href="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html">Linear Regression: Under the Hood with the Normal Equation</a></li>
+      <li><a href="https://jackmckew.dev/episode-11-power-quality-explained.html">Episode 11 - Power Quality Explained</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+</html>
