@@ -59,7 +59,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 59</p>
-            <p>Number of Words: 38,696</p>
+            <p>Number of Words: 38,700</p>
             <p>Number of Lines of Code 2,673</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -195,7 +195,7 @@
 <h2 id="what-is-web-scraping">What is Web Scraping</h2>
 <p>Web scraping, web harvesting or web data extraction is the process of extracting data from websites. To do this in Python, while there is multiple ways to achieve this (requests + beautiful soup, selenium, etc), my personal favourite package to use is <a href="https://scrapy.org/">Scrapy</a>. While it may be daunting to begin with from a non object-oriented basis, you will soon appreciate it more once you've begun using it.</p>
 <p>Initially the premise around the <a href="https://scrapy.org/">Scrapy</a> package is to create 'web spiders'. If we take a look of the structure of the first example on the <a href="https://scrapy.org/">Scrapy</a> website we get an understanding on how to structure our web spiders when developing:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -220,7 +220,7 @@
 </td></tr></tbody></table>
 <p>First of all we can see that the custom spider is essentially an extension of the scrapy.Spider class. It is to be noted that the name and start_urls variables (which are apart of the class) are special in the sense the scrapy package uses them as configuration settings. When it comes to web scraping, if you have had experience using HTML, CSS and/or Javascript, this experience will become extremely useful; that is not to say it is not possible without experience, it's just a learning curve.</p>
 <p>Following on we can see a function for parsing (also specially named) in which there are 2 loops, the first for loop is going to loop through all title's marked as headers (specifically h2) and return a dictionary with the text in the heading.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -251,7 +251,7 @@
 </td></tr></tbody></table>
 <p>Now that we have created our spider that looks through each row of the table on the webpage (more information on determining this can be found: <a href="https://docs.scrapy.org/en/latest/intro/tutorial.html">https://docs.scrapy.org/en/latest/intro/tutorial.html</a>). It's time to run the spider and take a look at the output. To run a spider you go into the directory from the command line and run 'scrapy crawl \&lt;spider name&gt;' and to store an output at the same time 'scrapy crawl \&lt;spider name&gt; -o filename.csv -t csv.</p>
 <p>Now similar to the previous post, we run a similar analysis and plot with Bokeh!</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
