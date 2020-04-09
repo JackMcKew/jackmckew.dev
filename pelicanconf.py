@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+from typing import Any
 
 RELATIVE_URLS = False
 _DEFAULT_LANGUAGE = 'en'
@@ -145,11 +146,11 @@ TIMEZONE = "Australia/Sydney"
 DEFAULT_LANG = "English"
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
-AUTHOR_FEED_RSS = None
+FEED_ALL_ATOM: Any = None
+CATEGORY_FEED_ATOM: Any = None
+TRANSLATION_FEED_ATOM: Any = None
+AUTHOR_FEED_ATOM: Any = None
+AUTHOR_FEED_RSS: Any = None
 
 
 # Social widget
