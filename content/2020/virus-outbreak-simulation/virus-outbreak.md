@@ -30,7 +30,7 @@ The controllable elements of the simulation below are:
 - Chance to transmit
     - Great for showing the effects of viruses if there is only a chance to transmit between population.
         - Respirators are normally named after their filter efficiency (eg, N95 is 95% efficient at collecting a specific size particle).
-        - If you set the chance to transmit as 95 then you'll simulate if everyone in a population wore a mask.
+        - If you set the chance to transmit 5 (95% chance to block) then you'll simulate if everyone in a population wore a mask.
 - Time to recover
     - Simulate if a virus took a different amount of time before recovering
 
