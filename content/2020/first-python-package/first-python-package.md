@@ -52,6 +52,7 @@ test-package
 ```
 
 Inside the top directory of our package we have 2 folders and 2 files.
+
 |File|Use|
 |--|--|
 |pyproject.toml|Contains all the information about your package, dependancies, versions, etc.|
