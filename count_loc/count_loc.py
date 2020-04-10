@@ -1,7 +1,10 @@
-from typing import List, Dict
-from count_loc._util.file_locate import locate_files
-from pygount import ProjectSummary, SourceAnalysis
 from json import load
+from typing import Dict, List
+
+from pygount import ProjectSummary, SourceAnalysis
+
+from count_loc._util.file_locate import locate_files
+
 
 def loc(nb):
     try:
