@@ -60,7 +60,7 @@
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 59</p>
             <p>Number of Words: 38,727</p>
-            <p>Number of Lines of Code 2,674</p>
+            <p>Number of Lines of Code 2,673</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -114,7 +114,7 @@
     </head><body><h2 id="document-code-automatically-through-docstrings-with-sphinx"><strong>Document code automatically through docstrings with Sphinx</strong></h2>
 <p>This post goes into how to generate documentation for your python projects automatically with Sphinx!</p>
 <p>First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install sphinx
 conda install sphinx
@@ -122,13 +122,13 @@ pipenv install sphinx
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Once you have installed sphinx, inside the project (let's use the directory of this blog post), we can create a docs folder in which all our documentation will live.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mkdir docs
 <span class="nb">cd</span> docs
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Ensuring to have our virtual environment with sphinx installed active, we run <code>sphinx-quickstart</code>, this tool allows us to populate some information for our documentation in a nice Q&amp;A style.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -202,27 +202,27 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now let's create an example package that we can write some documentation in.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mkdir sphinxdemo
 <span class="nb">cd</span> sphinxdemo
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Then we create 3 files inside our example package:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__init__.py
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__init__.py
 </code></pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/__init__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">version = "0.1.1"</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">version = "0.1.1"</span>
 </code></pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__main__.py
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__main__.py
 </code></pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/__main__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -236,12 +236,12 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 </code></pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>file_functions.py
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>file_functions.py
 </code></pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo/file_functions.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -284,12 +284,12 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 <p>We need to enable the napoleon sphinx extensions in docs/conf.py for this style to work.</p>
 </blockquote>
 <p>The resulting documented code will look like:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__init__.py
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__init__.py
 </code></pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__init__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -303,12 +303,12 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 </code></pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__main__.py
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>__main__.py
 </code></pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__main__.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -334,12 +334,12 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 </code></pre></div>
 </td></tr></tbody></table>
 </figcaption></figure>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>file_functions.py
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>file_functions.py
 </code></pre></div>
 </td></tr></tbody></table>
 <figure class="code">
 <figcaption><a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/file_functions.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -405,7 +405,7 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 <p>Our <code>conf.py</code> file for sphinx's configuration results in:</p>
 <figure class="code">
 <figcaption><span>Sphinx Configuration File conf.py</span> <a href="/2020/documentation-with-sphinx/docs/source/conf.py">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -528,7 +528,7 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 <p>We must also set our index.rst (restructured text) with what we want to see in our documentation.</p>
 <figure class="code">
 <figcaption><span>Documentation Index File index.rst</span> <a href="/2020/documentation-with-sphinx/docs/source/index.rst">download</a>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -590,7 +590,7 @@ where <span class="s2">"builder"</span> is one of the supported builders, e.g. h
 <p>To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: <a href="https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/documentation-with-sphinx/docs/source/_templates">autosummary templates</a></p>
 </blockquote>
 <p>Next we navigate our <code>docs</code> directory, and finally run:</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>make html
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>make html
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This will generate all the stubs for our documentation and compile them into HTML format.</p>
