@@ -9,11 +9,10 @@ JavaScripts: virus_part_1.js, dat.gui.js
 This post will and simulate how viruses can spread throughout a community and implement a variety of different parameters to see how these affect the simulation. This is following on from last week's post on how to do a bouncing ball simulation with the canvas API [https://jackmckew.dev/pelican-and-javascript-bouncing-balls-in-canvas.html](https://jackmckew.dev/pelican-and-javascript-bouncing-balls-in-canvas.html).
 
 > Below is a GIF for sharing on social media, see below for interactive visualisation.
-
 > I am not an epidemiologist by any means of the word, this is entirely out of interest.
 
 ![Virus Outbreak GIF]({static img/virus-outbreak.gif})
- 
+
 Firstly, the extensions that are implemented on top of the bouncing ball simulation are:
 
 - GUI controls for operating the simulation
