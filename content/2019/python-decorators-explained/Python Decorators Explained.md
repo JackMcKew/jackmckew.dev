@@ -134,4 +134,4 @@ function_requiring_decoration()
 function_requiring_decoration = new_decorator(function_requiring_decoration)
 ```
 
-Hopefully now you are ready to go and explore the world of -decorators within Python, they can be used quite powerfully and allow for you to reuse code and extend capabilities. Some of the best examples for decorators are for authentication or logging, however I will not cover them as they are extensively documented over the internet.
+Hopefully now you are ready to go and explore the world of decorators within Python, they can be used quite powerfully and allow for you to reuse code and extend capabilities. Some of the best examples for decorators are for authentication or logging, however I will not cover them as they are extensively documented over the internet.
