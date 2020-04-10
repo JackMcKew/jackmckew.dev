@@ -128,6 +128,7 @@ MARKDOWN = {
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
         'markdown.extensions.toc': {},
+        'markdown.extensions.tables':{},
     },
     'output_format': 'html5',
 }
