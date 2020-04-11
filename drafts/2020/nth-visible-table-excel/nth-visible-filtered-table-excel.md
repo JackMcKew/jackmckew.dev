@@ -25,7 +25,7 @@ The function searches in:
 
 You should see cell `I2` changing to be whatever the first Rep value visible is.
 
-![Working Function GIF]({ static img/working-function.gif})
+![Working Function GIF]({static img/working-function.gif})
 
 # Create a Source Data Table
 
@@ -45,7 +45,7 @@ A sample of this data set is:
 
 Once we've formatted the data source as a table in excel, this should result in:
 
-![Source Data Table]({ static img/source-data-table.png })
+![Source Data Table]({static img/source-data-table.png})
 
 # Enable Developer Mode / Macros
 
@@ -94,11 +94,11 @@ Fantastic, now we've got a function to locate the row, now we can make another f
 
 Once you have the Developer tab open, select `Visual Basic` button on the left hand side. This will present you with a window like:
 
-![Visual Basic Window]({ static img/visual-basic.png })
+![Visual Basic Window]({static img/visual-basic.png})
 
 Now, to create a space we're our functions will live, we need to insert a module:
 
-![Visual Basic Window]({ static img/insert-module.png })
+![Visual Basic Window]({static img/insert-module.png})
 
 This is we're our functions live, copy & paste the above and you'll have made a function!
 
