@@ -8,7 +8,68 @@
 </body>
 <script>
     var canvas = document.getElementById("random-walk-canvas")
-    var canvas_context = canvas.getContext('2d')
+    var ctx = canvas.getContext('2d')
+
+    var walker_count = 1
+    var walker_array = []
+
+    for (var i = 0; i < walker_count; i++) {
+        var walker = {
+            x_position: canvas.width / 2,
+            y_position: canvas.height / 2,
+            radius: 3,
+            colour: 'red',
+            speed: 20,
+            angle: Math.random() * 360
+        }
+        walker.x_velocity = walker.speed * Math.cos(walker.angle)
+        walker.y_velocity = walker.speed * Math.sin(walker.angle)
+        walker_array.push(walker)
+    }
+
+    function move_walker(walker) {
+        walker.x_position += walker.x_velocity
+        walker.y_position += walker.y_velocity
+        walker.angle = Math.random() * 360;
+        walker.x_velocity = walker.speed * Math.cos(walker.angle)
+        walker.y_velocity = walker.speed * Math.sin(walker.angle)
+    }
+
+    function check_boundaries(canvas, walker) {
+        // Checks if ball has collided with walls and adjust angles accordingly
+        if (walker.x_position >= canvas.width - walker.radius || walker.x_position <= walker.radius) {
+            walker.x_velocity = 0;
+            walker.y_velocity = 0;
+        }
+
+        if (walker.y_position >= canvas.height - walker.radius || walker.y_position <= walker.radius) {
+            walker.x_velocity = 0
+            walker.y_velocity = 0
+        }
+    }
+
+    function paint_canvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < walker_array.length; i++) {
+            current_walker = walker_array[i];
+            check_boundaries(canvas, walker);
+            move_walker(current_walker);
+            ctx.beginPath()
+            ctx.fillStyle = current_walker.colour;
+            ctx.arc(
+                current_walker.x_position,
+                current_walker.y_position,
+                current_walker.radius,
+                0,
+                Math.PI * 2,
+                false
+            );
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+
+    setInterval(paint_canvas, 20)
 </script>
 
 </html>
