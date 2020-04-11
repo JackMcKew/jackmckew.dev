@@ -34,7 +34,7 @@ Once we've formatted the data source as a table in excel, this should result in:
 
 This post won't go into how to enable Developer mode/tab, there is many resources on the web for this, such as: <https://support.office.com/en-us/article/show-the-developer-tab-e1192344-5e56-4d45-931b-e5fd9bea2d45>
 
-# Create Function to Find Visible Row
+# Function to Find Visible Row
 
 After researching the internet when I came across this problem, I stumbled across a similar question on Stackoverflow:
 
@@ -67,3 +67,45 @@ Fantastic, now we've got a function to locate the row, now we can make another f
 Once you have the Developer tab open, select `Visual Basic` button on the left hand side. This will present you with a window like:
 
 ![Visual Basic Window]({ static img/visual-basic.png })
+
+Now, to create a space we're our functions will live, we need to insert a module:
+
+![Visual Basic Window]({ static img/insert-module.png })
+
+This is we're our functions live, copy & paste the above and you'll have made a function!
+
+# Function for Visible Cell
+
+To interface with the above `FindNthVisibleRow` function, we need 3 new variables:
+
+- `sheetName` - The name of the sheet where the table lives. (This is only necessary if you have multiple tables spread across many sheets, as afaik VBA only selects table Objects through the worksheet object)
+- `tableName` - The name of the table to return data from
+- `iRow` - The row index we want to return
+- `iCol` - The column index we want to return
+
+Without further ado, here is the function. Note that another function `GetListObject` is used to find the table in question see [GetListObject Function](#getlistobject-function) for more information on this. Otherwise you can use `Application.
+
+``` VBA
+Function FindNthVisibleCell(sheetName As String, tableName As String, iRow As Long, iCol As Long)
+
+    Application.Volatile True
+    Dim lo As ListObject
+    Dim rng As Range
+    Dim address As String
+    Dim cellVal As Variant
+
+    Set lo = GetListObject(tableName, Sheets(sheetName))
+
+    address = FindNthVisibleRow(lo, iRow).Range.address
+
+    Set rng = Worksheets(sheetName).Range(address)
+
+    FindNthVisibleCell = rng.Cells(1, iCol).Value
+
+
+End Function
+```
+
+## GetListObject Function
+
+<https://stackoverflow.com/questions/18030637/how-do-i-reference-tables-in-excel-using-vba>
