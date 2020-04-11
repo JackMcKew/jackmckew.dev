@@ -27,6 +27,12 @@ You should see cell `I2` changing to be whatever the first Rep value visible is.
 
 ![Working Function GIF]({static img/working-function.gif})
 
+# Example Source File
+
+Here is the source file used to create the GIF above, with code already included, just make sure to enable macros.
+
+[Nth Visible Cell Excel Workbook]({static files/NthVisibleExample.xlsm})
+
 # Create a Source Data Table
 
 After googling 'Sample Excel Data', let's just use this data set to built & test our function:
