@@ -21,8 +21,9 @@
     var canvas = document.getElementById("random-walk-canvas")
     var ctx = canvas.getContext('2d')
 
-    var walker_count = 20
+    var walker_count = 10
     var walker_array = []
+    var limit_angles = 8;
 
     for (var i = 0; i < walker_count; i++) {
         var walker = {
@@ -38,10 +39,53 @@
         walker_array.push(walker)
     }
 
+    function degrees_to_radians(degrees) {
+        var pi = Math.PI;
+        return degrees * (pi / 180);
+    }
+
+    function radians_to_degrees(radians) {
+        var pi = Math.PI;
+        return radians * (180 / pi);
+    }
+
+
+    function angle_list(number_of_groups) {
+        var angle_list = []
+
+        var initial_angle = 360 / number_of_groups;
+        var steps = [...Array(number_of_groups).keys()];
+        for (var i = 0; i < number_of_groups + 1; i++) {
+            angle_list.push(initial_angle * i);
+        }
+        // console.log(angle_list)
+        return angle_list
+    }
+
+    function get_nearest_angle(goal, angle_list) {
+        var closest = angle_list.reduce(function(prev, curr) {
+            return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+        });
+        // console.log(closest);
+        return closest
+
+    }
+
+    get_nearest_angle(46, angle_list(4));
+
+
     function move_walker(walker) {
+        // var prev_angle = walker.angle
+        var new_angle = Math.random() * 360
+            // console.log(new_angle)
         walker.x_position += walker.x_velocity
         walker.y_position += walker.y_velocity
-        walker.angle = Math.random() * 360;
+            // while (walker.angle != prev_angle) {
+        if (limit_angles > 0) {
+            walker.angle = degrees_to_radians(get_nearest_angle(new_angle, angle_list(limit_angles)))
+        }
+        // // }
+        // walker.angle = Math.random() * 360;
         walker.x_velocity = walker.speed * Math.cos(walker.angle)
         walker.y_velocity = walker.speed * Math.sin(walker.angle)
     }
