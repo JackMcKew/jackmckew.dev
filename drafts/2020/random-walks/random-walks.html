@@ -18,12 +18,13 @@
         '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
         '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
     ];
+    console.log(colorArray.length)
     var canvas = document.getElementById("random-walk-canvas")
     var ctx = canvas.getContext('2d')
 
-    var walker_count = 10
+    var walker_count = 50;
     var walker_array = []
-    var limit_angles = 8;
+    var limit_angles = 360;
 
     for (var i = 0; i < walker_count; i++) {
         var walker = {
@@ -31,8 +32,9 @@
             y_position: canvas.height / 2,
             line_width: 1,
             colour: colorArray[i],
-            speed: 10,
-            angle: Math.random() * 360
+            speed: 5,
+            angle: Math.random() * 360,
+            halt: false,
         }
         walker.x_velocity = walker.speed * Math.cos(walker.angle)
         walker.y_velocity = walker.speed * Math.sin(walker.angle)
@@ -71,7 +73,7 @@
 
     }
 
-    get_nearest_angle(46, angle_list(4));
+    // get_nearest_angle(46, angle_list(limit_angles));
 
 
     function move_walker(walker) {
@@ -92,42 +94,46 @@
 
     function check_boundaries(canvas, walker) {
         // Checks if ball has collided with walls and adjust angles accordingly
-        if (walker.x_position >= canvas.width - walker.radius || walker.x_position <= walker.radius) {
+        if (walker.x_position >= canvas.width - walker.line_width || walker.x_position <= walker.line_width) {
             walker.x_velocity = 0;
             walker.y_velocity = 0;
+            walker.halt = true
         }
 
-        if (walker.y_position >= canvas.height - walker.radius || walker.y_position <= walker.radius) {
+        if (walker.y_position >= canvas.height - walker.line_width || walker.y_position <= walker.line_width) {
             walker.x_velocity = 0
             walker.y_velocity = 0
+            walker.halt = true;
         }
     }
 
     function paint_canvas() {
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (var i = 0; i < walker_array.length; i++) {
-            current_walker = walker_array[i];
-            var prev_x = current_walker.x_position
-            var prev_y = current_walker.y_position
-            ctx.beginPath()
-            ctx.moveTo(prev_x, prev_y)
-            check_boundaries(canvas, walker);
-            move_walker(current_walker);
-            ctx.strokeStyle = current_walker.colour;
-            ctx.lineWidth = current_walker.line_width;
-            ctx.lineTo(current_walker.x_position, current_walker.y_position)
-            ctx.stroke()
-                // ctx.moveTo(prev_x,)
-                // ctx.arc(
-                //     current_walker.x_position,
-                //     current_walker.y_position,
-                //     current_walker.radius,
-                //     0,
-                //     Math.PI * 2,
-                //     false
-                // );
-                // ctx.fill();
-            ctx.closePath();
+            if (!walker.halt) {
+                current_walker = walker_array[i];
+                var prev_x = current_walker.x_position
+                var prev_y = current_walker.y_position
+                ctx.beginPath()
+                ctx.moveTo(prev_x, prev_y)
+                check_boundaries(canvas, walker);
+                move_walker(current_walker);
+                ctx.strokeStyle = current_walker.colour;
+                ctx.lineWidth = current_walker.line_width;
+                ctx.lineTo(current_walker.x_position, current_walker.y_position)
+                ctx.stroke()
+                    // ctx.moveTo(prev_x,)
+                    // ctx.arc(
+                    //     current_walker.x_position,
+                    //     current_walker.y_position,
+                    //     current_walker.line_width,
+                    //     0,
+                    //     Math.PI * 2,
+                    //     false
+                    // );
+                    // ctx.fill();
+                ctx.closePath();
+            }
         }
     }
 
