@@ -1,0 +1,12 @@
+#controls-container {
+    flex-grow: 1;
+    margin-bottom: 40px;
+}
+
+#canvas-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
