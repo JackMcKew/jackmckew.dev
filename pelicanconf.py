@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from typing import Any
 
 RELATIVE_URLS = False
-_DEFAULT_LANGUAGE = 'en'
+_DEFAULT_LANGUAGE = "en"
 PATH = "content"
 AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
@@ -14,12 +14,12 @@ SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
 # SITEURL = "http://localhost:8000"
 
-IGNORE_FILES = ['*.html','*.rst']
+IGNORE_FILES = ["*.html", "*.rst"]
 DISPLAY_PAGES_ON_MENU = True
 RELATED_POSTS_SKIP_SAME_CATEGORY = True
 
-DISQUS_SITENAME = 'jackmckew-dev'
-GOOGLE_ANALYTICS = 'UA-131173168-2'
+DISQUS_SITENAME = "jackmckew-dev"
+GOOGLE_ANALYTICS = "UA-131173168-2"
 
 # GOOGLE_ADSENSE = {
 #     'ca_id': 'ca-pub-1052275056735196',    # Your AdSense ID
@@ -36,27 +36,27 @@ GOOGLE_ANALYTICS = 'UA-131173168-2'
 
 USE_TIPUE_SEARCH = True
 
-GITHUB_CORNER_URL = 'https://github.com/JackMcKew/jackmckew.dev'
+GITHUB_CORNER_URL = "https://github.com/JackMcKew/jackmckew.dev"
 
-ARTICLE_URL = '{slug}.html'
+ARTICLE_URL = "{slug}.html"
 # ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
-ARTICLE_SAVE_AS = '{slug}.html'
+ARTICLE_SAVE_AS = "{slug}.html"
 # YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
 # MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
-# DAY_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/index.html' 
+# DAY_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/index.html'
 
 THEME = "./themes/Flex"
 # STATIC_PATHS = ["content/img","static"]
-STATIC_PATHS = ["img","files","html","extra","2018","2019","2020"]
+STATIC_PATHS = ["img", "files", "html", "extra", "2018", "2019", "2020"]
 # STATIC_SAVE_AS = "{dirname}"
 EXTRA_PATH_METADATA = {
-    'extra/favicon.ico': {'path': 'favicon.ico'},
-    'extra/jm-photo.jpg' : {'path' : 'jm-photo.jpg'},
-    'extra/CNAME' : {'path' : 'CNAME'}
+    "extra/favicon.ico": {"path": "favicon.ico"},
+    "extra/jm-photo.jpg": {"path": "jm-photo.jpg"},
+    "extra/CNAME": {"path": "CNAME"},
 }
 SITELOGO = "/jm-photo.jpg"
 # EXTRA_PATH_METADATA = {
-    # 'img/favicon.ico' : {'path' : 'favicon.ico'}
+# 'img/favicon.ico' : {'path' : 'favicon.ico'}
 # }
 FAVICON = "/favicon.ico"
 # CUSTOM_CSS = THEME + "static/custom.css"
@@ -66,7 +66,7 @@ MAIN_MENU = True
 HOME_HIDE_TAGS = False
 
 MENUITEMS = (
-    ("Authors","/authors.html"),
+    ("Authors", "/authors.html"),
     ("Archives", "/archives.html"),
     ("Categories", "/categories.html"),
     ("Tags", "/tags.html"),
@@ -74,8 +74,8 @@ MENUITEMS = (
     # ("Search","/search.html")
 )
 
-NOTEBOOK_DIR = ''
-CODE_DIR = ''
+NOTEBOOK_DIR = ""
+CODE_DIR = ""
 
 SITEMAP = {
     "format": "xml",
@@ -84,7 +84,7 @@ SITEMAP = {
 }
 
 PLUGIN_PATHS = [
-    './plugins/',
+    "./plugins/",
     # './plugins/pelican_javascript'
     # './plugins/pelican_youtube'
 ]
@@ -94,7 +94,7 @@ PLUGIN_PATHS = [
 #     "C:\\\\Users\\jackm\\.virtualenvs\\blog-mLKe2F5s\\Lib\\site-packages\\pelican\\pelican-plugins\\pelican_youtube",
 # ]
 
-DIRECT_TEMPLATES = (('index','authors', 'tags', 'categories', 'archives','search'))
+DIRECT_TEMPLATES = ("index", "authors", "tags", "categories", "archives", "search")
 
 PLUGINS = [
     "sitemap",
@@ -109,32 +109,35 @@ PLUGINS = [
     "liquid_tags.include_code",
     "representative_image",
     "share_post",
-    'show_source',
-    'tipue_search',
+    "show_source",
+    "tipue_search",
     "dateish",
     "post_stats",
     "pelican_javascript",
     "render_math",
     "related_posts",
     "autostatic",
-    "clean_summary"
+    "clean_summary",
 ]
 CLEAN_SUMMARY_MAXIMUM = 1
 # MARKUP = ('md', 'ipynb')
-MARKUP = ('md', )
+MARKUP = ("md",)
 MARKDOWN = {
-    'extension_configs': {
-        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums' : 'True'},
-        'markdown.extensions.extra': {},
-        'markdown.extensions.meta': {},
-        'markdown.extensions.toc': {},
-        'markdown.extensions.tables':{},
+    "extension_configs": {
+        "markdown.extensions.codehilite": {
+            "css_class": "highlight",
+            "linenums": "True",
+        },
+        "markdown.extensions.extra": {},
+        "markdown.extensions.meta": {},
+        "markdown.extensions.toc": {},
+        "markdown.extensions.tables": {},
     },
-    'output_format': 'html5',
+    "output_format": "html5",
 }
 # IPYNB_USE_METACELL = True
 
-# IGNORE_FILES = [".ipynb_checkpoints"] 
+# IGNORE_FILES = [".ipynb_checkpoints"]
 
 DELETE_OUTPUT_DIRECTORY = True
 
@@ -169,16 +172,22 @@ DEFAULT_PAGINATION = 20
 import wordsum
 
 # POST_TICKER = wordsum.count_files('./content',['.md','.ipynb'])
-WORD_TICKER = wordsum.count_words('./content',['.md','.ipynb'])
+WORD_TICKER = wordsum.count_words("./content", [".md", ".ipynb"])
 WORD_TICKER = f"{WORD_TICKER:,}"
 
 import sys
-sys.path.append('.')
+
+sys.path.append(".")
 import count_loc
 
-custom_js_files = ['content/2020/virus-outbreak-simulation/js/virus_part_1.js','content/2020/canvas-javascript-bouncing-balls/js/bouncing_balls.js']
+custom_js_files = [
+    "content/2020/virus-outbreak-simulation/js/virus_part_1.js",
+    "content/2020/canvas-javascript-bouncing-balls/js/bouncing_balls.js",
+]
 
-language_stat = count_loc.get_total_loc('content',['.py','.md','.ipynb'],custom_js_files)
+language_stat = count_loc.get_total_loc(
+    "content", [".py", ".md", ".ipynb"], custom_js_files
+)
 
 LOC_TICKER = sum(language_stat.values())
 LOC_TICKER = f"{LOC_TICKER:,}"
