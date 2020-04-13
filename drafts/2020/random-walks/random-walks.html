@@ -1,12 +1,63 @@
 <html>
 
+<head>
+    <script src="dat.gui.js"></script>
+    <style>
+        #controls-container {
+            /* float: right; */
+            /* order: 2; */
+            flex-grow: 1;
+            margin-bottom: 40px;
+        }
+        
+        #canvas-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
 <body>
-    <div>
+    <div id="controls-container"></div>
+    <div id="canvas-container">
         <canvas id="random-walk-canvas" height="400" width="400" style="border: 2px solid grey;">
             </canvas>
     </div>
 </body>
 <script>
+    //colorArray source: https://gist.github.com/mucar/3898821
+    window.onload = function() {
+        var gui = new dat.GUI({
+            closed: false,
+            remembered: {
+                undefined: {
+                    "0": {},
+                },
+            },
+            folders: {},
+            load: JSON,
+            // width: 400,
+            autoPlace: false,
+        });
+
+        gui.add(controls, "speed", 1, 10).name("Speed To Move");
+        gui.add(controls, "line_width", 1, 10).name("Line Width");
+
+        // gui.add(controls, "reoccurance_rate", 0, 8).name("Reoccurance Rate");
+        gui
+            .add(controls, "walker_count", 1, 50)
+            .name("Number of Walkers").step(1);
+        gui.add(controls, "limit_angles", 1, 360).name("Limit Number of Directions").step(1);
+
+        gui.add(controls, "restart_button").name("Click To Restart");
+
+        var customContainer = document.getElementById("controls-container");
+        customContainer.append(gui.domElement);
+    };
+
     var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
         '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
         '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
@@ -18,28 +69,42 @@
         '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
         '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
     ];
-    console.log(colorArray.length)
-    var canvas = document.getElementById("random-walk-canvas")
-    var ctx = canvas.getContext('2d')
 
-    var walker_count = 50;
-    var walker_array = []
-    var limit_angles = 360;
+    var controls = new(function() {
+        this.speed = 5;
+        this.line_width = 1;
+        this.walker_count = 5;
 
-    for (var i = 0; i < walker_count; i++) {
-        var walker = {
-            x_position: canvas.width / 2,
-            y_position: canvas.height / 2,
-            line_width: 1,
-            colour: colorArray[i],
-            speed: 5,
-            angle: Math.random() * 360,
-            halt: false,
+        this.limit_angles = 4;
+        this.time_to_recover = 4;
+
+        this.restart_button = function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            initialise();
         }
-        walker.x_velocity = walker.speed * Math.cos(walker.angle)
-        walker.y_velocity = walker.speed * Math.sin(walker.angle)
-        walker_array.push(walker)
+    })();
+
+
+    function initialise() {
+        walker_array = []
+        for (var i = 0; i < controls.walker_count; i++) {
+            var walker = {
+                x_position: canvas.width / 2,
+                y_position: canvas.height / 2,
+                line_width: controls.line_width,
+                colour: colorArray[i],
+                speed: controls.speed,
+                angle: Math.random() * 360,
+                halt: false,
+            }
+            walker.x_velocity = walker.speed * Math.cos(walker.angle)
+            walker.y_velocity = walker.speed * Math.sin(walker.angle)
+            walker_array.push(walker)
+        }
+        setInterval(paint_canvas, 20);
     }
+
+
 
     function degrees_to_radians(degrees) {
         var pi = Math.PI;
@@ -52,7 +117,7 @@
     }
 
 
-    function angle_list(number_of_groups) {
+    function gen_angle_list(number_of_groups) {
         var angle_list = []
 
         var initial_angle = 360 / number_of_groups;
@@ -60,7 +125,6 @@
         for (var i = 0; i < number_of_groups + 1; i++) {
             angle_list.push(initial_angle * i);
         }
-        // console.log(angle_list)
         return angle_list
     }
 
@@ -68,23 +132,25 @@
         var closest = angle_list.reduce(function(prev, curr) {
             return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
         });
-        // console.log(closest);
         return closest
 
     }
 
     // get_nearest_angle(46, angle_list(limit_angles));
 
+    var possible_directions = gen_angle_list(controls.limit_angles);
+    // var prev_limit_angles = controls.limit_angles;
 
-    function move_walker(walker) {
+
+    function move_walker(walker, possible_directions) {
         // var prev_angle = walker.angle
         var new_angle = Math.random() * 360
             // console.log(new_angle)
         walker.x_position += walker.x_velocity
         walker.y_position += walker.y_velocity
             // while (walker.angle != prev_angle) {
-        if (limit_angles > 0) {
-            walker.angle = degrees_to_radians(get_nearest_angle(new_angle, angle_list(limit_angles)))
+        if (controls.limit_angles > 0) {
+            walker.angle = degrees_to_radians(get_nearest_angle(new_angle, possible_directions))
         }
         // // }
         // walker.angle = Math.random() * 360;
@@ -108,36 +174,36 @@
     }
 
     function paint_canvas() {
-        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        possible_directions = gen_angle_list(controls.limit_angles)
         for (var i = 0; i < walker_array.length; i++) {
-            if (!walker.halt) {
-                current_walker = walker_array[i];
+
+            current_walker = walker_array[i];
+            if (!current_walker.halt) {
                 var prev_x = current_walker.x_position
                 var prev_y = current_walker.y_position
                 ctx.beginPath()
                 ctx.moveTo(prev_x, prev_y)
-                check_boundaries(canvas, walker);
-                move_walker(current_walker);
+                check_boundaries(canvas, current_walker);
+                move_walker(current_walker, possible_directions);
                 ctx.strokeStyle = current_walker.colour;
                 ctx.lineWidth = current_walker.line_width;
                 ctx.lineTo(current_walker.x_position, current_walker.y_position)
                 ctx.stroke()
-                    // ctx.moveTo(prev_x,)
-                    // ctx.arc(
-                    //     current_walker.x_position,
-                    //     current_walker.y_position,
-                    //     current_walker.line_width,
-                    //     0,
-                    //     Math.PI * 2,
-                    //     false
-                    // );
-                    // ctx.fill();
+
                 ctx.closePath();
             }
         }
     }
 
-    setInterval(paint_canvas, 20)
+
+    var canvas = document.getElementById("random-walk-canvas")
+    var ctx = canvas.getContext('2d')
+
+    // var walker_count = 50;
+    var walker_array = []
+    initialise();
+
+    // var limit_angles = 360;
 </script>
 
 </html>
