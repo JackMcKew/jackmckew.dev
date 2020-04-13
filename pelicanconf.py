@@ -10,9 +10,9 @@ AUTHOR = "Jack McKew"
 SITENAME = "Jack McKew's Blog"
 SITETITLE = SITENAME
 SITESUBTITLE = "Engineer | Software Developer | Data Scientist"
-# SITEURL = "https://jackmckew.dev"
+SITEURL = "https://jackmckew.dev"
 # SITEURL = "https://jackmckew.github.io/jackmckew.dev/"
-SITEURL = "http://localhost:8000"
+# SITEURL = "http://localhost:8000"
 
 IGNORE_FILES = ['*.html','*.rst']
 DISPLAY_PAGES_ON_MENU = True

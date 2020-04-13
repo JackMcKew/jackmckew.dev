@@ -8,6 +8,9 @@ JavaScripts: random-walkers.js, dat.gui.js
 
 Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the number of random walkers, the line thickness of each, the number of directions they can move (eg, 4 as seen in the GIF) and how fast they move.
 
+
+If you get a cool pattern out of the visualisation, please share it in the comments!
+
 ![Random Walkers GIF]({static img/random-walkers.gif})
 
 > Above is GIF for sharing on social media, see the interactive version below.
@@ -42,6 +45,19 @@ To be able to limit the angles that our walkers can move at, we need some method
 4. Push onto a possible directions array (resulting array `possible_directions = [0,90,180,270,360]`)
 
 > 0 & 360 is included in each possible directions array to give the walker a better chance at 'turning around' and staying on the canvas.
+
+## Applications for Random Walk
+
+*This is all well and good for making funky pictures, but what can this actually be used for?*
+
+|Field|Use|
+|---|---|
+|Finance|Model share prices & other factors, also known as the [random walk hypothesis](https://en.wikipedia.org/wiki/Random_walk_hypothesis)|
+|Genetics|Genetic drift, the change in frequency of which genes are passed on or not|
+|Physics|Brownian motion, the movement of molecules in liquid & gases|
+|Ecology|Model individual animal movements|
+
+There are many, many more applications for this, if you'd like to add to this list, leave a comment below!
 
 Javascript Source(s):
 
