@@ -16,8 +16,9 @@ def loc(nb):
 def count_lines_jupyter(ipynb_files):
     return sum(loc(nb) for nb in ipynb_files)
 
-def get_total_loc(path: str,file_types: List):
+def get_total_loc(path: str,file_types: List,custom_paths: List):
     total_file_list: List = []
+    total_file_list.extend(custom_paths)
     jupyter_list: List = []
     total_loc: int = 0
     project_summary = ProjectSummary()
