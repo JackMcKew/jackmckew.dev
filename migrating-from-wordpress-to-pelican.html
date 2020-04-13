@@ -60,7 +60,7 @@
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 59</p>
             <p>Number of Words: 38,727</p>
-            <p>Number of Lines of Code 2,673</p>
+            <p>Number of Lines of Code 2,831</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -111,7 +111,7 @@
 
 
   <div>
-    </head><body><p>For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a Jupyter notebook, sometimes even writing the post in markdown within the notebook, then copying all of this out of the notebook into a Wordpress post and fiddling around with formatting for much too long.</p>
+    <body><p>For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a Jupyter notebook, sometimes even writing the post in markdown within the notebook, then copying all of this out of the notebook into a Wordpress post and fiddling around with formatting for much too long.</p>
 <p>What tipped me over the edge was when I was looking back on previous posts (as this blog is mainly for storing previous projects, concepts and ideas), I was finding that I would go through the post and then have no idea whatsoever on where the project actually lived, this had to be fixed.</p>
 <p>I started noticing more and more people online had moved to <a href="https://pages.github.com/">Github Pages</a>, which is primarily used with Jekyll. This rabbit hole went on as follows:</p>
 <ol>
@@ -138,12 +138,12 @@
 <p><a href="http://www.pelicanthemes.com/">http://www.pelicanthemes.com/</a></p>
 <p>Which lets you scroll through the various themes, and even links to the repository on github for the theme if you wish to use it. The theme I decided on was <a href="https://github.com/alexandrevicenzi/Flex">Flex by Alexandre Vicenzi</a>.</p>
 <p>Apply the the theme was as simple as cloning the repo (or using <a href="https://www.atlassian.com/git/tutorials/git-submodule">git submodules</a>), and adding one line of code in pelicanconf.py (generated automatically by pelican-quickstart).</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s2">"./themes/Flex"</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s2">"./themes/Flex"</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h4 id="plugins">Plugins</h4>
 <p>Admittedly, I just tried out all the plugins in the <a href="https://github.com/getpelican/pelican-plugins">Pelican Plugins Repository</a> until I found the combination that works for me, this ended up being:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -191,7 +191,7 @@
 <p>Now that I had the skeleton of the website set up, I needed to bring in all the existing posts from wordpress. By following another guide within the Pelican documentation, this was a relatively simple task <a href="http://docs.getpelican.com/en/3.6.3/importer.html">http://docs.getpelican.com/en/3.6.3/importer.html</a>. However, I did spend the time to go through and edit each markdown to remove redundant 'wordpress' formatting tags manually.</p>
 <h4 id="linking-to-content">Linking to Content</h4>
 <p>As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in <a href="http://docs.getpelican.com/en/3.6.3/content.html">http://docs.getpelican.com/en/3.6.3/content.html</a>.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -211,7 +211,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>I ended up with a structure like above, which annoyed me a bit as now the content was in one place, but still divided into 3 folders with little-to-no link between them, my goal was to have the structure like:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -239,7 +239,7 @@
 <p>To be honest, I was actually surprised at how easy it was to turn Travis CI and that I could spin up a virtual machine, install all the dependencies and re-build the website. However, I had a lot of trouble trying to get Travis CI to push back to the repository such that Netlify could build from it.</p>
 <p>This was later remedied by setting a repository secret variable on Travis CI as I couldn't get the secret token encrypted by Travis CI CLI (Ruby application).</p>
 <p>In essence, all that was needed was a .travis.yml file in the root directory which ended up like this:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -286,7 +286,7 @@ deploy:
 <li>Travis CI will then push the created site to the gh-pages branch of the repository,</li>
 <li>Netlify will detect the change and process the new site,</li>
 <li>The new site is deployed with updated posts!</li>
-</ol>
+</ol></body>
   </div>
   <div class="tag-cloud">
     <p>
