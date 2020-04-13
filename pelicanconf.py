@@ -176,8 +176,9 @@ import sys
 sys.path.append('.')
 import count_loc
 
-language_stat = count_loc.get_total_loc('content',['.py','.md','.ipynb'])
+custom_js_files = ['content/2020/virus-outbreak-simulation/js/virus_part_1.js','content/2020/canvas-javascript-bouncing-balls/js/bouncing_balls.js']
+
+language_stat = count_loc.get_total_loc('content',['.py','.md','.ipynb'],custom_js_files)
 
 LOC_TICKER = sum(language_stat.values())
 LOC_TICKER = f"{LOC_TICKER:,}"
-# LOC_TICKER = "2,619"
