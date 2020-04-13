@@ -29,6 +29,20 @@ First off let's draft up the steps/concepts we will need to do to get this visua
 6. Calculate the next position for each walker
 7. Rinse repeat
 
+The source code is provided below with comments which align with the steps above.
+
+## Limitations on Directions
+
+To be able to limit the angles that our walkers can move at, we need some methodology behind this. The concept that is implemented below that was landed on follows the steps:
+
+1. Divide the total degree of freedom (360) by desired number of directions (eg, 4) `desired_number_of_directions = 4`
+    1. This gives us a 'base' angle of 90 `base_angle = 360 / 4`
+2. Iterate over the range to the number of directions (eg, [0,1,2,3,4])
+3. Multiply our base angle by each iteration (eg, `2 * 90 = 180`)
+4. Push onto a possible directions array (resulting array `possible_directions = [0,90,180,270,360]`)
+
+> 0 & 360 is included in each possible directions array to give the walker a better chance at 'turning around' and staying on the canvas.
+
 Javascript Source(s):
 
 - [random-walkers.js]({static js/random-walkers.js})
