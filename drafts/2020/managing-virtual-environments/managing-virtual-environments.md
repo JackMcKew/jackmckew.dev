@@ -9,8 +9,8 @@ Managing virtual environments for Python on Windows was never straightforward in
 # The Tools
 
 - [Pyenv-win](https://github.com/pyenv-win/pyenv-win)
-- [Poetry](https://python-poetry.org/)
 - [Virtualenv](https://virtualenv.pypa.io/en/latest/) (interchangeable with [venv](https://docs.python.org/3/library/venv.html))
+- [Poetry](https://python-poetry.org/)
 
 Prior to using these tools, [Anaconda](https://www.anaconda.com/) was the go-to. Admittedly, the only reason to stop using was disk space. After using [Anaconda](https://www.anaconda.com/) on every project for a few months, around 30GB of space was being taken up for conda environments. As a lot of my projects involve using [Pandas](https://pandas.pydata.org/), [Gooey](https://github.com/chriskiehl/Gooey) & [PyInstaller](https://www.pyinstaller.org/), when packaging these executables up they would come out bigger than expected (250MB vs 25MB). This is a [well documented issue](https://stackoverflow.com/questions/43886822/pyinstaller-with-pandas-creates-over-500-mb-exe) across the internet.
 
@@ -32,8 +32,12 @@ Now we need to add in new variables to the `PATH` variable. The two variables we
 
 Following this, open command prompt, check that `python --version` matches the version variable selected, and then install packages required. The packages that I install are `virtualenv` & `poetry`. All project specific packages are installed in their own virtual environment (more on this below).
 
+## Virtualenv
+
+Once virtualenv is installed and accessible from anywhere, whenever a new folder is created for a project, you can run `virtualenv --prompt folder_name .env`. This command will create a new virtual environment in a folder named .env, when using with VS Code, you can select this as the current environment with the Python extension. This setting lives in it's own folder `.vscode/settings.json`.
+
+To install new packages inside the virtual environment, either run `.env/Scripts/activate.bat` or open a new terminal in VS Code once selected. That's it!
+
 ## Poetry
 
-
-
-## Virtualenv
+The use-case for Poetry is solely for packaging & distributing packages, something personally I don't do very much. To read further around packaging projects with Poetry, I've written a post at [Packaging Python Packages with Poetry](https://jackmckew.dev/packaging-python-packages-with-poetry.html#packaging-python-packages-with-poetry)
