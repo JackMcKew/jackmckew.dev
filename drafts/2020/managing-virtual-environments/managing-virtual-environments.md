@@ -16,3 +16,24 @@ Prior to using these tools, [Anaconda](https://www.anaconda.com/) was the go-to.
 
 # The Workflow
 
+## Pyenv-win
+
+[Pyenv](https://github.com/pyenv/pyenv) (specifically [pyenv-win](https://github.com/pyenv-win/pyenv-win)), is used in this workflow to manage multiple versions of Python. To make interfacing with pyenv-win & subsequent tools, let's include system environment variables. This let's us call for the enabled Python version executable & installed packages (virtualenv, poetry, etc) from anywhere on the PC. 
+
+Firstly, let's set up a variable of where the pyenv-win installation lives as `PYENV`, which I placed in `C:\Users\%USER%\.pyenv\pyenv-win`. Followed by a variable which will hold the current version of Python that pyenv will use as `PYENV_VERSION`, the value of this variable will be dependant on the installed version folder name in `User/.pyenv/pyenv-win/versions/`, which is currently `3.8.1-amd64`. These are set up to use with the `PATH` variable, which is integrate with Windows and makes all files included in the paths listed in `PATH` available to anywhere on the PC.
+
+The result is:
+
+![Pyenv Variables]({static img/pyenv-variables.png})
+
+Now we need to add in new variables to the `PATH` variable. The two variables we want to add are `%PYENV%\versions\%PYENV_VERSION%` and `%PYENV%\versions\%PYENV_VERSION%\Scripts`. This enables us to access both the python.exe & pip.exe of the selected version from anywhere, and then when we install packages with pip, we can access packages that have been installed. This ends up looking like:
+
+![Path Variables]({static img/path-variables.png})
+
+Following this, open command prompt, check that `python --version` matches the version variable selected, and then install packages required. The packages that I install are `virtualenv` & `poetry`. All project specific packages are installed in their own virtual environment (more on this below).
+
+## Poetry
+
+
+
+## Virtualenv
