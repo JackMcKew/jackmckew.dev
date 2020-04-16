@@ -1,0 +1,7 @@
+Possible to build a 3D visualisation with bars with basemap
+
+3D with basemap
+https://plotly.com/~empet/14397/plotly-plot-of-a-map-from-data-available/#/
+
+3D bar chart
+https://plotly.com/~empet/15253/#data
