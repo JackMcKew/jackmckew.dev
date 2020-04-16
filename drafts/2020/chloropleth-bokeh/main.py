@@ -15,6 +15,9 @@ lga_dataset = gpd.read_file('data/LGA/NSW_LGA_POLYGON_shp.shp')
 
 lga_dataset = lga_dataset[lga_dataset['NSW_LGA__3'] != 'UNINCORPORATED']
 
+#%%
+# https://www.matthewproctor.com/full_australian_postcodes_nsw
+postcode_dataset = gpd.pd.read_csv('data/postcode-data.csv')
 
 # %%
 import urllib.request, json 
@@ -29,22 +32,39 @@ covid_nsw_data_url = data['result']['resources'][0]['url']
 nsw_covid = gpd.pd.read_csv(covid_nsw_data_url)
 
 #%%
-# display(lga_dataset['NSW_LGA__3'].tolist())
-# display(nsw_covid.pivot_table())
-count_df = gpd.pd.pivot_table(nsw_covid,'notification_date','lhd_2010_name',aggfunc='count')
+nsw_covid = nsw_covid.dropna()
+nsw_covid['postcode'] = nsw_covid['postcode'].astype(int)
+display(nsw_covid)
+# nsw_covid['postcode'] = nsw_covid.dropna()
 
-# %%
-# display(count_df)
-count_df.index = count_df.index.map(str.upper)
-lga_dataset['NSW_LGA__3'].name = 'LGA_NAME'
-lga_dataset.index = lga_dataset['NSW_LGA__3']
-count_df.index.name = 'LGA_NAME'
+# nsw_covid['postcode'] = nsw_covid['postcode'].apply(lambda x: int(x))
 
 #%%
-joined_df = count_df.join(lga_dataset,'LGA_NAME')
+# display(lga_dataset['NSW_LGA__3'].tolist())
+# display(nsw_covid.pivot_table())
+count_df = gpd.pd.pivot_table(nsw_covid,'notification_date','postcode',aggfunc='count')
+
+
+
+count_df.rename(columns={'notification_date':'number_of_confirmed_cases'}, inplace=True)
+
+display(count_df)
+#%%
+joined_df = count_df.join(postcode_dataset,'postcode')
 display(joined_df)
 
 #%%
-joined_df.plot_bokeh()
+# joined_df.plot_bokeh()
+print(type(joined_df))
+# from geopandas import GeoDataFrame
+from shapely.geometry import Point
+
+geometry = [Point(xy) for xy in zip(joined_df.Longitude, joined_df.Latitude)]
+joined_df = joined_df.drop(['Longitude', 'Latitude'], axis=1)
+crs = {'init': 'epsg:4326'}
+joined_gdf = gpd.GeoDataFrame(joined_df, crs=crs, geometry=geometry)
+display(joined_gdf)
+# %%
+joined_gdf.plot_bokeh()
 
 # %%
