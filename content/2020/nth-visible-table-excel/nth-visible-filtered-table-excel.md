@@ -1,5 +1,5 @@
 Title: Find Nth Visible Cell with VBA - Excel
-Date: 2020-04-11
+Date: 2020-04-17
 Author: Jack McKew
 Category: Excel, VBA
 Tags: vba, excel
