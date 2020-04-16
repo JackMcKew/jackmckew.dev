@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2020-04-13T06:51:25-00:00</lastmod>
+<lastmod>2020-04-16T05:46:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2020-04-13T06:51:25-00:00</lastmod>
+<lastmod>2020-04-16T05:46:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2020-04-13T06:51:25-00:00</lastmod>
+<lastmod>2020-04-16T05:46:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2020-04-13T06:51:25-00:00</lastmod>
+<lastmod>2020-04-16T05:46:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -43,6 +43,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-03-13T21:18:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/find-nth-visible-cell-with-vba-excel.html</loc>
+<lastmod>2020-04-17T00:00:00+10:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -494,6 +501,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jackmckew.dev/category/excel.html</loc>
+<lastmod>2020-04-17T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
 <loc>https://jackmckew.dev/category/javascript.html</loc>
 <lastmod>2020-04-09T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
@@ -524,6 +538,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/category/software-development.html</loc>
 <lastmod>2020-02-20T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/category/vba.html</loc>
+<lastmod>2020-04-17T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/vba.html</loc>
+<lastmod>2020-04-17T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/excel.html</loc>
+<lastmod>2020-04-17T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -782,7 +817,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/author/jack-mckew.html</loc>
-<lastmod>2020-04-09T00:00:00+10:05</lastmod>
+<lastmod>2020-04-17T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
