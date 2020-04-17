@@ -89,6 +89,8 @@ Essentially, to take 'ownership' of the changes presented in a pull request, the
 
 For the Awesome Python Bytes, the action to cover this workflow ended up as ([source](https://github.com/JackMcKew/awesome-python-bytes/blob/master/.github/workflows/chatops.yaml)):
 
+> Ensure to use `if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'` in all subsequent jobs you want triggered if the phrase is found, otherwise the action will become recursive: check for comment, run checks, make a comment, check for comment, etc
+
 ``` yaml
 name: Trigger Checks on Fork
 on: [issue_comment]
@@ -123,9 +125,11 @@ jobs:
           USERNAME: ${{ steps.prcomm.outputs.COMMENTER_USERNAME }}
 
       - name: Check Spelling
+        if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'
         uses: UnicornGlobal/spellcheck-github-actions@master
 
       - name: Link Checker
+        if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'
         id: lc
         uses: peter-evans/link-checker@v1
         with:
@@ -134,7 +138,7 @@ jobs:
         run: exit ${{ steps.lc.outputs.exit_code }}
 
       - name: Comment on PR if checks pass
-        if: success()
+        if: success() && steps.prcomm.outputs.BOOL_TRIGGERED == 'true'
         uses: actions/github-script@0.9.0
         with:
           github-token: ${{secrets.manual_github_token}}
@@ -147,7 +151,7 @@ jobs:
             })
 
       - name: Comment on PR if checks fail
-        if: failure()
+        if: failure() && steps.prcomm.outputs.BOOL_TRIGGERED == 'true'
         uses: actions/github-script@0.9.0
         with:
           github-token: ${{secrets.manual_github_token}}
