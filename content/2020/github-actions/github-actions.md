@@ -1,5 +1,5 @@
 Title: Github Actions for CI/CD
-Date: 2020-04-15
+Date: 2020-04-23
 Author: Jack McKew
 Category: Software, CICD
 Tags: software, cicd
@@ -14,6 +14,10 @@ Initially, the things to automate were:
 - Checking all the links work
 
 Perfect, this is should be a gentle introduction to Github Actions.
+
+Here is an example of how GitHub Actions can be used to automatically rebase. Source: <https://github.com/marketplace/actions/automatic-rebase>.
+
+![GitHub Actions Example]({static img/example-action.gif})
 
 # Action Marketplace
 
