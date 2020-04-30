@@ -59,9 +59,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 61</p>
-            <p>Number of Words: 40,210</p>
-            <p>Number of Lines of Code 2,969</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 62</p>
+            <p>Number of Words: 40,738</p>
+            <p>Number of Lines of Code 2,976</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -133,7 +133,7 @@
 <h1 id="action-format-yaml">Action Format (.yaml)</h1>
 <p>A Github Action is defined with a <code>&lt;action_name&gt;.yaml</code> file which must be placed within <code>.github/workflows</code> from the base of the repository. As many actions as you want can be placed in this folder, and will subsequently run when triggered.</p>
 <p>The base structure of a <code>link_checker.yaml</code> file is:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -163,7 +163,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>To break this down:</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Field</th>
@@ -208,7 +208,7 @@
 <p>Fork repository &gt; Make changes &gt; Submit Pull Request with changes &gt; Check changes &gt; Merge into repository</p>
 </blockquote>
 <p>When the action was first set up for actions to run on pull requests, it kept throwing an error:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The process <span class="s1">'/usr/bin/git'</span> failed with <span class="nb">exit</span> code <span class="m">1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The process <span class="s1">'/usr/bin/git'</span> failed with <span class="nb">exit</span> code <span class="m">1</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This was determined to be intentional design by Github as a mitigation against the possibility that a bad actor could open PRs against your repo and do things like list out secrets or just run up a large bill (once we start charging) on your account.</p>
@@ -226,7 +226,7 @@
 <blockquote>
 <p>Ensure to use <code>if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'</code> in all subsequent jobs you want triggered if the phrase is found, otherwise the action will become recursive: check for comment, run checks, make a comment, check for comment, etc</p>
 </blockquote>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -379,6 +379,9 @@
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/find-nth-visible-cell-with-vba-excel.html" title="Find Nth Visible Cell with VBA - Excel">
       <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/managing-virtual-environments-on-windows.html" title="Managing Virtual Environments on Windows">
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
