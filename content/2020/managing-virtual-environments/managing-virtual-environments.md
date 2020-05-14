@@ -18,7 +18,9 @@ Prior to using these tools, [Anaconda](https://www.anaconda.com/) was the go-to.
 
 ## Pyenv-win
 
-[Pyenv](https://github.com/pyenv/pyenv) (specifically [pyenv-win](https://github.com/pyenv-win/pyenv-win)), is used in this workflow to manage multiple versions of Python. To make interfacing with pyenv-win & subsequent tools, let's include system environment variables. This let's us call for the enabled Python version executable & installed packages (virtualenv, poetry, etc) from anywhere on the PC. 
+[Pyenv](https://github.com/pyenv/pyenv) (specifically [pyenv-win](https://github.com/pyenv-win/pyenv-win)), is used in this workflow to manage multiple versions of Python. To make interfacing with pyenv-win & subsequent tools, let's include system environment variables. This let's us call for the enabled Python version executable & installed packages (virtualenv, poetry, etc) from anywhere on the PC.
+
+> Ensure to setup pyenv-win as per the instructions at: <https://github.com/pyenv-win/pyenv-win#installation>. I personally installed via the zip file method. Thank you to read Julian for raising this.
 
 Firstly, let's set up a variable of where the pyenv-win installation lives as `PYENV`, which I placed in `C:\Users\%USER%\.pyenv\pyenv-win`. Followed by a variable which will hold the current version of Python that pyenv will use as `PYENV_VERSION`, the value of this variable will be dependant on the installed version folder name in `User/.pyenv/pyenv-win/versions/`, which is currently `3.8.1-amd64`. These are set up to use with the `PATH` variable, which is integrate with Windows and makes all files included in the paths listed in `PATH` available to anywhere on the PC.
 
