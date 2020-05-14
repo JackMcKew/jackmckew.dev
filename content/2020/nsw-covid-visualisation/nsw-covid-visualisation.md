@@ -4,11 +4,13 @@ Author: Jack McKew
 Category: Data Science
 Tags: datascience, python, data-viz, datavisualiation
 
-# COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time (up to 09/05/2020)
+Recently, I had wanted to build a visualisation of the confirmed cases of COVID-19 in my home state NSW. This post is to cover the release of the visualisation on YouTube, and there is hopes to write future post(s) about building this visualisation & developing [Pandas_Alive](https://github.com/JackMcKew/pandas_alive). Would love to hear others thoughts!
+
+[![NSW COVID Visualisation]({static img/nsw-covid.gif})](https://www.youtube.com/watch?v=qyqiYrtpxRE)
 
 > Disclaimer: I am not an epidemiologist, this is a personal project not a official report; see NSW Health website for official figures <https://www.health.nsw.gov.au/Infectious/covid-19/Pages/stats-nsw.aspx>.
 
-Find the chart at:
+Find the full animation at:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qyqiYrtpxRE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
