@@ -58,9 +58,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 63</p>
-            <p>Number of Words: 41,100</p>
-            <p>Number of Lines of Code 2,985</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 64</p>
+            <p>Number of Words: 41,338</p>
+            <p>Number of Lines of Code 2,993</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -121,7 +121,10 @@
 <p>Prior to using these tools, <a href="https://www.anaconda.com/">Anaconda</a> was the go-to. Admittedly, the only reason to stop using was disk space. After using <a href="https://www.anaconda.com/">Anaconda</a> on every project for a few months, around 30GB of space was being taken up for conda environments. As a lot of my projects involve using <a href="https://pandas.pydata.org/">Pandas</a>, <a href="https://github.com/chriskiehl/Gooey">Gooey</a> &amp; <a href="https://www.pyinstaller.org/">PyInstaller</a>, when packaging these executables up they would come out bigger than expected (250MB vs 25MB). This is a <a href="https://stackoverflow.com/questions/43886822/pyinstaller-with-pandas-creates-over-500-mb-exe">well documented issue</a> across the internet.</p>
 <h1 id="the-workflow">The Workflow</h1>
 <h2 id="pyenv-win">Pyenv-win</h2>
-<p><a href="https://github.com/pyenv/pyenv">Pyenv</a> (specifically <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a>), is used in this workflow to manage multiple versions of Python. To make interfacing with pyenv-win &amp; subsequent tools, let's include system environment variables. This let's us call for the enabled Python version executable &amp; installed packages (virtualenv, poetry, etc) from anywhere on the PC. </p>
+<p><a href="https://github.com/pyenv/pyenv">Pyenv</a> (specifically <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a>), is used in this workflow to manage multiple versions of Python. To make interfacing with pyenv-win &amp; subsequent tools, let's include system environment variables. This let's us call for the enabled Python version executable &amp; installed packages (virtualenv, poetry, etc) from anywhere on the PC.</p>
+<blockquote>
+<p>Ensure to setup pyenv-win as per the instructions at: <a href="https://github.com/pyenv-win/pyenv-win#installation">https://github.com/pyenv-win/pyenv-win#installation</a>. I personally installed via the zip file method. Thank you to read Julian for raising this.</p>
+</blockquote>
 <p>Firstly, let's set up a variable of where the pyenv-win installation lives as <code>PYENV</code>, which I placed in <code>C:\Users\%USER%\.pyenv\pyenv-win</code>. Followed by a variable which will hold the current version of Python that pyenv will use as <code>PYENV_VERSION</code>, the value of this variable will be dependant on the installed version folder name in <code>User/.pyenv/pyenv-win/versions/</code>, which is currently <code>3.8.1-amd64</code>. These are set up to use with the <code>PATH</code> variable, which is integrate with Windows and makes all files included in the paths listed in <code>PATH</code> available to anywhere on the PC.</p>
 <p>The result is:</p>
 <p><img alt="Pyenv Variables" class="img-fluid" src="https://jackmckew.dev/img/pyenv-variables.png"/></p>
@@ -153,11 +156,11 @@
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
       <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
       <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
       <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
       <li><a href="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html">Linear Regression: Under the Hood with the Normal Equation</a></li>
-      <li><a href="https://jackmckew.dev/episode-11-power-quality-explained.html">Episode 11 - Power Quality Explained</a></li>
     </ul>
   </div>
 
