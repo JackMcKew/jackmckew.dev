@@ -47,9 +47,12 @@ display(nsw_covid)
 # display(lga_dataset['NSW_LGA__3'].tolist())
 # display(nsw_covid.pivot_table())
 count_df = gpd.pd.pivot_table(
-    nsw_covid, "postcode", "postcode", aggfunc="count"
+    nsw_covid, "postcode", "notification_date", aggfunc="count"
 )
 
+display(count_df)
+
+#%%
 count_df.rename(
     columns={"notification_date": "number_of_confirmed_cases"}, inplace=True
 )
@@ -79,8 +82,16 @@ joined_gdf.dropna().plot_bokeh(
     size="number_of_confirmed_cases",
     colormap="Viridis",
 )
-# joined_gdf.to_csv('joined_data.csv')
+joined_gdf.to_csv('joined_data.csv')
 # %%
+
+# print(joined_gdf.geometry.x)
+joined_gdf['x'] = joined_gdf.geometry.x
+joined_gdf['y'] = joined_gdf.geometry.y
+
+export_cols = ['number_of_confirmed_cases','x','y']
+
+joined_gdf[export_cols].to_csv('joined_data.csv')
 
 
 # %%
