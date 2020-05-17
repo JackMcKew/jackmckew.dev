@@ -80,6 +80,7 @@ Now let's check the [supported output types for nbconvert](https://nbconvert.rea
 When first run, it was noticed that `nbconvert` wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the `README.md` with language specifics. The workaround for this, was to use `nbconvert`'s support for custom templates. See the docs at: <https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates>.
 
 The resulting template "pythoncodeblocks.tpl" was:
+
 ``` html
     {% extends 'markdown.tpl' %}
     {% block codecell %}
@@ -97,3 +98,97 @@ jupyter nbconvert --template "pythoncodeblocks.tpl" --to markdown README.ipynb
 ```
 
 ## Integration into Documentation with Sphinx
+
+If you haven't already, check out my previous post [Automatically Generate Documentation with Sphinx](https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html). The post goes into detail on how to implement Sphinx as to generate all of the documentation for a project from docstrings automatically.
+
+Before going on, the live site of the documentation in reference can be reached at: <https://jackmckew.github.io/pandas_alive/>
+
+Now, we've:
+
+1. Stored our working code & documentation for a our project's front page in a Jupyter notebook `README.ipynb`
+2. Converted `README.ipynb` into markdown format with `nbconvert`
+3. Inserted language specific (python) into the code blocks within the markdown
+
+The next step is to make the README content also live in the documentation.
+
+Since Sphinx relies on reStructuredText format, so we'll need to convert `README.md` to `README.rst`. Enter [`m2r`](https://github.com/miyakogi/m2r), a markdown to reStructuredText converter.
+
+> `nbconvert` could be used in this step over `m2r`, in saying that this step was originally developed prior to the `README.ipynb` being created, thus only `README.md` existed. Please drop a comment if you try using `nbconvert` over `m2r` for this step and your results!
+
+Firstly, `m2r` can be installed with pip (`pip install m2r`) and we can convert `README.md` with the command `m2r README.md` which will generate `README.rst` in the same directory.
+
+Now we need to include our `README.rst` in the documentation. After much tweaking, the documentation structure set up landed upon for Pandas_Alive, with use of autosummary to automatically generate documentation from docstrings was:
+
+> Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme
+
+[index.rst](https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst)
+
+``` reStructuredText
+
+.. module:: pandas_alive
+
+Pandas_Alive |version|
+========================================
+
+Animated plotting extension for Pandas with Matplotlib
+
+:mod:`Pandas_alive` is intended to provide a plotting backend for animated matplotlib charts for Pandas DataFrames, similar to the already existing Visualization feature of Pandas.
+
+With :mod:`Pandas_alive`, creating stunning, animated visualisations is as easy as calling:
+
+``df.plot_animated()``
+
+.. image:: ../../examples/example-barh-chart.gif
+   :target: examples/example-barh-chart.gif
+   :alt: Example Bar Chart
+
+.. toctree::
+   :caption: Getting Started
+
+   Installation & Examples <README>
+
+
+.. toctree::
+   :caption: Developers
+
+   developer
+
+.. rubric:: Modules
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+```
+
+[developer.rst](https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst)
+
+``` reStructuredText
+API Reference
+=============
+
+.. autosummary::
+   :toctree: generated
+
+   pandas_alive.plotting.plot
+   pandas_alive.plotting
+   pandas_alive.base
+   pandas_alive._base_chart
+   pandas_alive.charts
+   pandas_alive.__init__
+
+```
+
+[conf.py](https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/conf.py)
+
+## Integration with GitHub Actions
+
+All the steps above mentioned are currently being used to maintain the project Pandas_Alive.
+
+Find the GitHub Action yml files at: <https://github.com/JackMcKew/pandas_alive/tree/master/.github/workflows>
+
+Find the Sphinx configuration files at: <https://github.com/JackMcKew/pandas_alive/tree/master/docs>
