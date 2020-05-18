@@ -1,7 +1,7 @@
 Title: Translating Text in Python
 Date: 2020-05-xx
 Author: Jack McKew
-Category: Data Science
-Tags: datascience, python, data-viz, datavisualisation
+Category: Data Science, Python
+Tags: datascience, python
 
-{% notebook notebooks/pandas_alive_demo.ipynb %}
+{% notebook notebooks/translating-in-python.ipynb %}
