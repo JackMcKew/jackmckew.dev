@@ -1,5 +1,5 @@
 Title: Make a README & Documentation with Jupyter Notebooks
-Date: 2020-05-xx
+Date: 2020-05-17
 Author: Jack McKew
 Category: Python
 Tags: python

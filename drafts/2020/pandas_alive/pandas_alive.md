@@ -4,4 +4,4 @@ Author: Jack McKew
 Category: Data Science
 Tags: datascience, python, data-viz, datavisualisation
 
-{% notebook notebooks/pandas_alive_demo.ipynb %}
+{% notebook 2020/pandas_alive/notebooks/pandas_alive_demo.ipynb %}
