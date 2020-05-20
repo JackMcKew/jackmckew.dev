@@ -66,7 +66,7 @@ MAIN_MENU = True
 HOME_HIDE_TAGS = False
 
 MENUITEMS = (
-    ("Authors", "/authors.html"),
+    # ("Authors", "/authors.html"),
     ("Archives", "/archives.html"),
     ("Categories", "/categories.html"),
     ("Tags", "/tags.html"),

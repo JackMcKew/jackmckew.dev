@@ -55,14 +55,7 @@
             enable_page_level_ads: true
         });
     </script>
-    {% endif %} {% if GOOGLE_TAG_MANAGER %} {% include "partial/gtm.html" %} {% endif %}
-    {% if article %}
-        {% if article.stylesheets %}
-            {% for stylesheet in article.stylesheets %}
-                {{ stylesheet }}
-            {% endfor %}
-        {% endif %}
-    {% endif %}
+    {% endif %} {% if GOOGLE_TAG_MANAGER %} {% include "partial/gtm.html" %} {% endif %} {% if article %} {% if article.stylesheets %} {% for stylesheet in article.stylesheets %} {{ stylesheet }} {% endfor %} {% endif %} {% endif %}
 </head>
 
 <body>
@@ -79,18 +72,63 @@
             <h1><a href="{{ SITEURL }}">{{ SITETITLE }}</a></h1>
 
             {% if SITESUBTITLE %}
-            <p>{{ SITESUBTITLE }}</p>{% endif %} {% if USE_TIPUE_SEARCH %}
-            {% if WORD_TICKER %}
+            <p>{{ SITESUBTITLE }}</p>{% endif %} {% if USE_TIPUE_SEARCH %} {% if WORD_TICKER %}
             <p>Number of Posts: {{ articles|count }}</p>
             <p>Number of Words: {{ WORD_TICKER}}</p>
-            {% endif %}
-            {% if LOC_TICKER %}
+            {% endif %} {% if LOC_TICKER %}
             <p>Number of Lines of Code {{ LOC_TICKER }}</p>
             {% endif %}
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            {% endif %}{% if pages or LINKS %}
+            {% endif %}
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 15px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    background-color: #FF813F !important;
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+
+
+            {% if pages or LINKS %}
             <nav>
                 <ul class="list">
                     {# Open links in new window depending on the LINKS_IN_NEW_TAB setting #} {% macro get_target(link) -%} {%- if LINKS_IN_NEW_TAB is not defined -%} _blank {%- elif LINKS_IN_NEW_TAB in ('all', none, true) -%} _blank {%- elif LINKS_IN_NEW_TAB == "external"
@@ -157,11 +195,6 @@
     </script>
     {% endif %}
 </body>
-{% if article %}
-    {% if article.javascripts %}
-        {% for javascript in article.javascripts %}
-            {{ javascript }}
-        {% endfor %}
-    {% endif %}
-{% endif %}
+{% if article %} {% if article.javascripts %} {% for javascript in article.javascripts %} {{ javascript }} {% endfor %} {% endif %} {% endif %}
+
 </html>
