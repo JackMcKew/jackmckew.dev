@@ -1,5 +1,5 @@
 Title: Creating Animated Plots with Pandas_Alive
-Date: 2020-05-14
+Date: 2020-05-21
 Author: Jack McKew
 Category: Data Science
 Tags: datascience, python, data-viz, datavisualisation
