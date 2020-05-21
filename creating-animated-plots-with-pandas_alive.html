@@ -1,0 +1,912 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="In this tutorial we&#39;ll learn how to create a series of animations using Pandas_Alive. This post is rendered in the style of a Jupyter Notebook. Find the source here: https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb. Pandas_Alive was created by me! I set …" />
+<meta name="keywords" content="datascience, python, data-viz, datavisualisation">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Creating Animated Plots with Pandas_Alive"/>
+<meta property="og:description" content="In this tutorial we&#39;ll learn how to create a series of animations using Pandas_Alive. This post is rendered in the style of a Jupyter Notebook. Find the source here: https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb. Pandas_Alive was created by me! I set …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-05-21 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Data Science"/>
+<meta property="article:tag" content="datascience"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="data-viz"/>
+<meta property="article:tag" content="datavisualisation"/>
+<meta property="og:image" content="https://jackmckew.dev/img/population-combined-charts.gif">
+
+    <title>Jack McKew's Blog &ndash; Creating Animated Plots with Pandas_Alive</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 65</p>
+            <p>Number of Words: 42,073</p>
+            <p>Number of Lines of Code 3,040</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 15px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    background-color: #FF813F !important;
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+
+
+            <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="creating-animated-plots-with-pandas_alive">Creating Animated Plots with Pandas_Alive</h1>
+    <p>
+       Posted on Thu 21 May 2020 in <a href="https://jackmckew.dev/category/data-science.html">Data Science</a>
+
+        &#8226; 5 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this tutorial we'll learn how to create a series of animations using Pandas_Alive. This post is rendered in the style of a Jupyter Notebook. Find the source here: <a href="https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb">https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb</a>.</p>
+<p><code>Pandas_Alive</code> was created by me! I set out to develop this package to build a very specific data visualisation, which is also apart of a prior blog post which you can see at: <a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html</a></p>
+<p><img alt="Pandas_Alive Example" class="img-fluid" src="https://jackmckew.dev/img/population-combined-charts.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="pandas_alive-python-package">pandas_alive python package<a class="anchor-link" href="#pandas_alive-python-package">¶</a></h3><p><a href="https://github.com/JackMcKew/pandas_alive">pandas_alive</a> is a python package that automates the process of making these animations. Head over to the <a href="https://github.com/JackMcKew/pandas_alive">github repository</a> to see even more examples!</p>
+<h4 id="Installation">Installation<a class="anchor-link" href="#Installation">¶</a></h4><p>Install with <code>pip install pandas_alive</code></p>
+<h3 id="Supported-Chart-Types">Supported Chart Types<a class="anchor-link" href="#Supported-Chart-Types">¶</a></h3><p>See the README on GitHub for current chart types at <a href="https://github.com/JackMcKew/pandas_alive#currently-supported-chart-types">https://github.com/JackMcKew/pandas_alive#currently-supported-chart-types</a></p>
+<p>At the time of writing the currently supported chart types are:</p>
+<ul>
+<li>Horizontal Bar Chart Races</li>
+<li>Vertical Bar Chart Races</li>
+<li>Line Charts</li>
+<li>Scatter Charts</li>
+<li>Pie Charts</li>
+</ul>
+<h3 id="Requirements">Requirements<a class="anchor-link" href="#Requirements">¶</a></h3><p><code>pandas_alive</code> utilises the <a href="https://matplotlib.org/3.2.1/api/animation_api.html">matplotlib.animation function</a>, thus requiring a writer library.</p>
+<p>Ensure to have one of the supported tooling software installed prior to use!</p>
+<ul>
+<li><a href="https://ffmpeg.org/">ffmpeg</a></li>
+<li><a href="https://imagemagick.org/index.php">ImageMagick</a></li>
+<li><a href="https://pillow.readthedocs.io/en/stable/">Pillow</a></li>
+<li>See more at <a href="https://matplotlib.org/3.2.1/api/animation_api.html#writer-classes">https://matplotlib.org/3.2.1/api/animation_api.html#writer-classes</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bar-Chart-Race">Bar Chart Race<a class="anchor-link" href="#Bar-Chart-Race">¶</a></h2><p>Firstly let's build a bar chart race of the population change by year in all the countries of the world.</p>
+<p>Once pandas_alive is installed with <code>pip install pandas_alive</code>, we import the package, along with <code>pandas</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas_alive</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we need to import the data!</p>
+<p>We do the following steps:</p>
+<ol>
+<li><p>Using <code>pandas</code>, we can read the data into a DataFrame using <code>pd.read_csv</code>, ensuring to use the keyword <code>parse_dates</code> on the Year column in our dataset.</p>
+</li>
+<li><p>Next we rename the columns to make life easier.</p>
+</li>
+<li><p>We're only interested in years 1800 onwards, so we can make a selection and drop the data that isn't on or after the year 1800.</p>
+</li>
+<li><p>Finally we convert the 'Year' column into datetime format, read more about datetime format here: <a href="https://docs.python.org/3/library/datetime.html">https://docs.python.org/3/library/datetime.html</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Data Source: https://ourworldindata.org/grapher/population-by-country</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'population-by-country.csv'</span><span class="p">,</span><span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">])</span>
+
+<span class="c1"># Rename columns</span>
+<span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Country'</span><span class="p">,</span><span class="s1">'Country Code'</span><span class="p">,</span><span class="s1">'Year'</span><span class="p">,</span><span class="s1">'Population'</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">column_names</span>
+
+<span class="c1"># Only years from 1800 onwards</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1800</span><span class="p">]</span>
+
+<span class="c1"># Convert Year column to datetime</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">])</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table table-striped">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Country</th>
+<th>Country Code</th>
+<th>Year</th>
+<th>Population</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>3</th>
+<td>Afghanistan</td>
+<td>AFG</td>
+<td>1800-01-01</td>
+<td>3280000.0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Afghanistan</td>
+<td>AFG</td>
+<td>1820-01-01</td>
+<td>3280000.0</td>
+</tr>
+<tr>
+<th>5</th>
+<td>Afghanistan</td>
+<td>AFG</td>
+<td>1850-01-01</td>
+<td>3750000.0</td>
+</tr>
+<tr>
+<th>6</th>
+<td>Afghanistan</td>
+<td>AFG</td>
+<td>1870-01-01</td>
+<td>4207000.0</td>
+</tr>
+<tr>
+<th>7</th>
+<td>Afghanistan</td>
+<td>AFG</td>
+<td>1900-01-01</td>
+<td>5000000.0</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>3216</th>
+<td>Zimbabwe</td>
+<td>ZWE</td>
+<td>1960-01-01</td>
+<td>3751000.0</td>
+</tr>
+<tr>
+<th>3217</th>
+<td>Zimbabwe</td>
+<td>ZWE</td>
+<td>1970-01-01</td>
+<td>5514536.0</td>
+</tr>
+<tr>
+<th>3218</th>
+<td>Zimbabwe</td>
+<td>ZWE</td>
+<td>1980-01-01</td>
+<td>7169968.0</td>
+</tr>
+<tr>
+<th>3219</th>
+<td>Zimbabwe</td>
+<td>ZWE</td>
+<td>1990-01-01</td>
+<td>10156000.0</td>
+</tr>
+<tr>
+<th>3220</th>
+<td>Zimbabwe</td>
+<td>ZWE</td>
+<td>2000-01-01</td>
+<td>11820000.0</td>
+</tr>
+</tbody>
+</table>
+<p>2923 rows × 4 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see, our data is currently in a 'long' format; where each row is one time point per subject. Meaning each row (country) will have data in multiple rows.</p>
+<p><code>pandas_alive</code> requires the data to be in a 'wide' format, where:</p>
+<ul>
+<li>Each row represents a single point/period in time</li>
+<li>Each column holds the value for a particular category (country in this case)</li>
+<li>The index contains the time component (optional, if not used ensure to use <code>interpolate_period=False</code>)</li>
+</ul>
+<p>To convert our data from 'long' to 'wide' format, we can use the <code>pandas</code> function <code>pivot</code> to achieve this!</p>
+<blockquote><p>For any missing data we fill this with 0 using <code>.fillna(0)</code></p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Pivot data to turn from `long` to `wide` format</span>
+<span class="n">pivoted_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'Year'</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="s1">'Country'</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s1">'Population'</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">pivoted_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table table-striped">
+<thead>
+<tr style="text-align: right;">
+<th>Country</th>
+<th>Afghanistan</th>
+<th>Albania</th>
+<th>Algeria</th>
+<th>Andorra</th>
+<th>Angola</th>
+<th>Antigua and Barbuda</th>
+<th>Argentina</th>
+<th>Armenia</th>
+<th>Australia</th>
+<th>Austria</th>
+<th>...</th>
+<th>United Kingdom</th>
+<th>United States</th>
+<th>Uruguay</th>
+<th>Uzbekistan</th>
+<th>Vanuatu</th>
+<th>Venezuela</th>
+<th>Vietnam</th>
+<th>Yemen</th>
+<th>Zambia</th>
+<th>Zimbabwe</th>
+</tr>
+<tr>
+<th>Year</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1800-01-01</th>
+<td>3280000.0</td>
+<td>400000.0</td>
+<td>2500000.0</td>
+<td>2654.0</td>
+<td>1567028.0</td>
+<td>37000.0</td>
+<td>534000.0</td>
+<td>413326.0</td>
+<td>200000.0</td>
+<td>3000000.0</td>
+<td>...</td>
+<td>10750000.0</td>
+<td>6000000.0</td>
+<td>55000.0</td>
+<td>1919159.0</td>
+<td>27791.0</td>
+<td>1000000.0</td>
+<td>4000000.0</td>
+<td>2593000.0</td>
+<td>747000.0</td>
+<td>1085814.0</td>
+</tr>
+<tr>
+<th>1810-01-01</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>406000.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>...</td>
+<td>11970000.0</td>
+<td>7240000.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>802000.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>1820-01-01</th>
+<td>3280000.0</td>
+<td>437000.0</td>
+<td>2689000.0</td>
+<td>2654.0</td>
+<td>1567028.0</td>
+<td>0.0</td>
+<td>534000.0</td>
+<td>413326.0</td>
+<td>334000.0</td>
+<td>3369000.0</td>
+<td>...</td>
+<td>21239000.0</td>
+<td>9980510.2</td>
+<td>55000.0</td>
+<td>1919159.0</td>
+<td>27791.0</td>
+<td>718000.0</td>
+<td>6551000.0</td>
+<td>2593000.0</td>
+<td>0.0</td>
+<td>1085814.0</td>
+</tr>
+<tr>
+<th>1830-01-01</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>634000.0</td>
+<td>0.0</td>
+<td>330000.0</td>
+<td>3538000.0</td>
+<td>...</td>
+<td>24139000.0</td>
+<td>13240313.9</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>887000.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>1840-01-01</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>768000.0</td>
+<td>0.0</td>
+<td>420000.0</td>
+<td>3716000.0</td>
+<td>...</td>
+<td>26745000.0</td>
+<td>17443768.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1219000.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 190 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that our data is prepared in 'wide' format, we're ready to create the animation!</p>
+<p>Ensuring that <code>pandas_alive</code> has been imported, we can now call <code>.plot_animated()</code> on our DataFrame. If a <code>filename</code> is passed, along with an extension (eg, .mp4, .gif), <code>pandas_alive</code> will export the animation to a file. Otherwise, <code>pandas_alive</code> creates an instance of the animation for use in <code>pandas_alive.animate_multiple_plots()</code>.</p>
+<p>We can configure settings of <code>.plot_animated</code>, such as:</p>
+<ul>
+<li><code>n_visible</code> - Change the number of visible bars on the plot</li>
+<li><code>period_fmt</code> - Change the way the date is represented on the plot (eg, '%d/%m/%Y')</li>
+<li><code>title</code> - Set a title for the plot</li>
+<li><code>fixed_max</code> - Set the x-axis to be fixed from the lowest - biggest number</li>
+<li><code>perpendicular_bar_func</code> - Set the function to show a perpendicular bar (eg 'mean', 'min','max', custom function, etc)</li>
+</ul>
+<p>There are many more settings which you can read more over at the documentation:  <a href="https://jackmckew.github.io/pandas_alive/generated/pandas_alive.plotting.plot.html#pandas_alive.plotting.plot">https://jackmckew.github.io/pandas_alive/generated/pandas_alive.plotting.plot.html#pandas_alive.plotting.plot</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Generate bar chart race</span>
+<span class="n">pivoted_df</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'population-over-time-bar-chart-race.gif'</span><span class="p">,</span><span class="n">n_visible</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">period_fmt</span><span class="o">=</span><span class="s2">"%Y"</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Top 10 Populous Countries 1800-2000'</span><span class="p">,</span><span class="n">fixed_max</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">perpendicular_bar_func</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Population Bar Chart Race" class="img-fluid" src="https://jackmckew.dev/img/population-over-time-bar-chart-race.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What if we wanted to show a custom function for each time period. This can be achieved with defining a function and returns a dictionary on where the label should be located. Let's show the total population for each time period in the bottom left.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">current_total</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Total Population : </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">total</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="o">.</span><span class="mi">85</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'s'</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="s1">'ha'</span><span class="p">:</span> <span class="s1">'right'</span><span class="p">,</span> <span class="s1">'size'</span><span class="p">:</span> <span class="mi">11</span><span class="p">}</span>
+
+<span class="c1"># Generate bar chart race</span>
+
+<span class="n">pivoted_df</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'population-over-time-bar-chart-race.gif'</span><span class="p">,</span><span class="n">n_visible</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">period_fmt</span><span class="o">=</span><span class="s2">"%Y"</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Top 10 Populous Countries 1800-2000'</span><span class="p">,</span><span class="n">fixed_max</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">perpendicular_bar_func</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">,</span><span class="n">period_summary_func</span><span class="o">=</span><span class="n">current_total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Population Bar Chart Race With Total" class="img-fluid" src="https://jackmckew.dev/img/population-over-time-bar-chart-race-with-total.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Line-Charts">Line Charts<a class="anchor-link" href="#Line-Charts">¶</a></h2><p>Let's show the total population over time.</p>
+<p>Get the total population for each year by summing the entire row <code>.sum(axis=1)</code></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">total_df</span> <span class="o">=</span> <span class="n">pivoted_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">total_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>Year
+1800-01-01    6.706962e+08
+1810-01-01    3.742780e+08
+1820-01-01    1.013967e+09
+1830-01-01    8.385709e+08
+1840-01-01    8.768713e+08
+1850-01-01    1.095515e+09
+1860-01-01    1.005687e+09
+1870-01-01    1.201439e+09
+1880-01-01    1.096303e+09
+1890-01-01    1.266791e+09
+1900-01-01    1.382444e+09
+1910-01-01    1.593107e+09
+1920-01-01    1.619245e+09
+1930-01-01    1.804095e+09
+1940-01-01    1.994912e+09
+1950-01-01    2.417460e+09
+1960-01-01    2.911371e+09
+1970-01-01    3.536889e+09
+1980-01-01    4.245110e+09
+1990-01-01    5.030435e+09
+2000-01-01    5.800368e+09
+dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let's create an animated line chart with this data using <code>pandas_alive</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">total_df</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s2">"total-population-over-time-line.gif"</span><span class="p">,</span><span class="n">period_fmt</span><span class="o">=</span><span class="s2">"%Y"</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">"Total Population Over Time"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Population Line Chart" class="img-fluid" src="https://jackmckew.dev/img/total-population-over-time-line.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Combining-Both-Charts">Combining Both Charts<a class="anchor-link" href="#Combining-Both-Charts">¶</a></h2><p>Now that we've created a bar chart race &amp; a line chart, let's combine the two charts into a single animation!</p>
+<p>Luckily, <code>pandas_alive</code> makes this simple, as we can pass a list of animations we'd like to combine into <code>pandas_alive.animate_multiple_plots</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">bar_chart_race</span> <span class="o">=</span> <span class="n">pivoted_df</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">n_visible</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">period_fmt</span><span class="o">=</span><span class="s2">"%Y"</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Top 10 Populous Countries 1800-2000'</span><span class="p">)</span>
+<span class="n">animated_line_chart</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span><span class="n">period_label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">"Total Population Over Time"</span><span class="p">)</span>
+
+<span class="n">pandas_alive</span><span class="o">.</span><span class="n">animate_multiple_plots</span><span class="p">(</span><span class="s1">'population-combined-charts.gif'</span><span class="p">,[</span><span class="n">bar_chart_race</span><span class="p">,</span><span class="n">animated_line_chart</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Combined Charts" class="img-fluid" src="https://jackmckew.dev/img/population-combined-charts.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Obligatory-XKCD-Style-Plot">Obligatory XKCD Style Plot<a class="anchor-link" href="#Obligatory-XKCD-Style-Plot">¶</a></h2><p><a href="https://xkcd.com/">XKCD</a> is an amazing comic by one of my favourite authors Randall Munro. Even better, we can style our plots in the same style of the comit with <code>plt.xkcd()</code>. See more at <a href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.xkcd.html">https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.xkcd.html</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">xkcd</span><span class="p">():</span>
+    <span class="n">animated_line_chart</span> <span class="o">=</span> <span class="n">total_df</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'xkcd-line-plot.gif'</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span><span class="n">period_label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">"Total Population Over Time"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Generating LineChart, plotting ['0']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="XKCD Line Plot" class="img-fluid" src="https://jackmckew.dev/img/xkcd-line-plot.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/datascience.html">datascience</a>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+      <a href="https://jackmckew.dev/tag/data-viz.html">data-viz</a>
+      <a href="https://jackmckew.dev/tag/datavisualisation.html">datavisualisation</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html" title="COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/looking-for-patterns-in-city-names-interactive-plotting.html">Looking for Patterns in City Names & Interactive Plotting</a></li>
+      <li><a href="https://jackmckew.dev/managing-virtual-environments-on-windows.html">Managing Virtual Environments on Windows</a></li>
+      <li><a href="https://jackmckew.dev/packaging-python-packages-with-poetry.html">Packaging Python Packages with Poetry</a></li>
+      <li><a href="https://jackmckew.dev/counting-words-with-python.html">Counting Words with Python</a></li>
+      <li><a href="https://jackmckew.dev/python-bytes-awesome-package-list.html">Python Bytes Awesome Package List</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>

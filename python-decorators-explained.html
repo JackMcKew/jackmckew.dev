@@ -58,12 +58,58 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 64</p>
-            <p>Number of Words: 41,338</p>
-            <p>Number of Lines of Code 2,993</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 65</p>
+            <p>Number of Words: 42,073</p>
+            <p>Number of Lines of Code 3,040</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 15px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    background-color: #FF813F !important;
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+
+
             <nav>
                 <ul class="list">
                     <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
@@ -97,7 +143,7 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
 <article class="single">
   <header>
       
@@ -113,7 +159,7 @@
   <div>
     <body><p>Python decorators are one of the most difficult concepts in Python to grasp, and subsequently a lot of beginners struggle. However they help to shorten code and make it more 'Pythonic'. This post is going to go through some basic examples where decorators can shorten your code.</p>
 <p>Firstly you have to understand functions within python:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -152,7 +198,7 @@
 </td></tr></tbody></table>
 <p>As we can see above we can give functions default arguments (the string 'Jack' for the name variable in hello). Assign functions to variables (ensuring the parentheses are not included otherwise we would be assigning to the returning value from the function. Remove previous functions now that we have 'copied' the function over.</p>
 <p>Now to take the next step into functions within Python, by defining functions within functions:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -188,7 +234,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now we can make nested functions (functions within functions), the next step is, functions returning functions.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -226,7 +272,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>From earlier, we know that if we don't include the parentheses then the function does not executed. Another extension of the way this is formatted is that we can now call hello()() which outputs "Now you are in the greeting() function".</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -248,7 +294,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now you have all the knowledge to learn what decorators really are, they let you execute code before and after a function. The code above is actually a decorator, but let's make it more usable.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -290,7 +336,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now you've made a decorator! We've just used what we learned previously to modify it's behaviour in one way or another. Now to make it even more concise we can just the @ symbol. Here is how we could have used the previous code with @ symbol.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -334,11 +380,11 @@
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
       <li><a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
       <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
       <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
       <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
-      <li><a href="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html">Linear Regression: Under the Hood with the Normal Equation</a></li>
     </ul>
   </div>
 
@@ -397,4 +443,5 @@
         });
     </script>
 </body>
+
 </html>

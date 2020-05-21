@@ -58,12 +58,58 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 64</p>
-            <p>Number of Words: 41,338</p>
-            <p>Number of Lines of Code 2,993</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 65</p>
+            <p>Number of Words: 42,073</p>
+            <p>Number of Lines of Code 3,040</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 15px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    background-color: #FF813F !important;
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+
+
             <nav>
                 <ul class="list">
                     <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
@@ -97,7 +143,7 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
 <article class="single">
   <header>
       
@@ -137,7 +183,7 @@ $$</div>
 <p>
 Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="math">\(\theta\)</span> that minimises the cost function and <span class="math">\(y\)</span> (once vectorised) is the vector of target values containing <span class="math">\(y^{(1)}\)</span> to <span class="math">\(y^{(m)}\)</span>.</p>
 <p>For example if this equation was run on data generated from this formula:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -148,30 +194,30 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
 </td></tr></tbody></table>
 <p><img alt="10_6_2_gen" class="img-fluid" src="https://jackmckew.dev/img/10_6_2_gen.png"/></p>
 <p>Now to compute <span class="math">\(\hat{\theta}\)</span> with the normal equation, we can use the inv() function from NumPy's Linear algebra module:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">X</span><span class="p">]</span>
 <span class="n">theta_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>With the actual function being <span class="math">\(y = 6 + 2x_0 + noise\)</span>, and the equation found:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">array</span><span class="p">([[</span> <span class="mf">5.96356419</span><span class="p">],</span>
        <span class="p">[</span> <span class="mf">2.00027727</span><span class="p">]])</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Since the noise makes it impossible to recover the exact parameters of the original function now we can use <span class="math">\(\hat{\theta}\)</span> to make predictions:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>With y_predict being:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>
  <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p><img alt="10_6_2_gen_solved" class="img-fluid" src="https://jackmckew.dev/img/10_6_2_gen_solved.png"/></p>
 <p>The equivalent code using Scikit-Learn would look like:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -183,7 +229,7 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
 </code></pre></div>
 </td></tr></tbody></table>
 <p>And it finds:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[</span> <span class="mf">5.96356419</span><span class="p">]</span> <span class="p">[[</span> <span class="mf">2.00027727</span><span class="p">]]</span>
 <span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>
@@ -337,4 +383,5 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
         });
     </script>
 </body>
+
 </html>

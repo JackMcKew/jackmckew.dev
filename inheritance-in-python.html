@@ -58,12 +58,58 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 64</p>
-            <p>Number of Words: 41,338</p>
-            <p>Number of Lines of Code 2,993</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 65</p>
+            <p>Number of Words: 42,073</p>
+            <p>Number of Lines of Code 3,040</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 15px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    background-color: #FF813F !important;
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+
+
             <nav>
                 <ul class="list">
                     <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
@@ -97,7 +143,7 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/authors.html">Authors</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
 <article class="single">
   <header>
       
@@ -122,7 +168,7 @@
 </ul>
 <p>This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.</p>
 <p>First off, we are going to start by defining our 'base' class (also known as abstract class) of our Animal with common properties:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -148,7 +194,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that we have our base class, we can define a subclass 'Dog' that will be able to speak if we define the function inside, but we can also see that it derives from it's parent class 'Animal' by printing out it's family.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -172,14 +218,14 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will print out:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
 <span class="n">Animal</span> <span class="n">Kingdom</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>See my post on dunders (double underscores) to get a better understanding of how the __init__ function is working: <a href="https://jackmckew.dev/dunders-in-python.html">https://jackmckew.dev/dunders-in-python.html</a></p>
 <p>Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -195,13 +241,13 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will also print:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
 <span class="n">Animal</span> <span class="n">Kingdom</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now what if we wanted to specify the family that all of our dog classes are, we can do this by overriding their parent class (similar to how we are overriding the speak function):</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -221,7 +267,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which then when we run both the below code:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -245,7 +291,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>We will now get:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
@@ -275,11 +321,11 @@
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
       <li><a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
       <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
       <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
       <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
-      <li><a href="https://jackmckew.dev/linear-regresssion-under-the-hood-with-the-normal-equation.html">Linear Regression: Under the Hood with the Normal Equation</a></li>
     </ul>
   </div>
 
@@ -338,4 +384,5 @@
         });
     </script>
 </body>
+
 </html>

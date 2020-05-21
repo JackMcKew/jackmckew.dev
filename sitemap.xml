@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2020-05-14T12:30:41-00:00</lastmod>
+<lastmod>2020-05-21T02:10:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2020-05-14T12:30:41-00:00</lastmod>
+<lastmod>2020-05-21T02:10:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2020-05-14T12:30:41-00:00</lastmod>
+<lastmod>2020-05-21T02:10:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2020-05-14T12:30:41-00:00</lastmod>
+<lastmod>2020-05-21T02:10:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -43,6 +43,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-03-13T21:18:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html</loc>
+<lastmod>2020-05-21T00:00:00+10:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -516,7 +523,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/data-science.html</loc>
-<lastmod>2020-05-14T00:00:00+10:05</lastmod>
+<lastmod>2020-05-21T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -593,21 +600,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/tag/datascience.html</loc>
-<lastmod>2020-05-14T00:00:00+10:05</lastmod>
+<lastmod>2020-05-21T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tag/python.html</loc>
-<lastmod>2020-05-14T00:00:00+10:05</lastmod>
+<lastmod>2020-05-21T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tag/data-viz.html</loc>
-<lastmod>2020-05-14T00:00:00+10:05</lastmod>
+<lastmod>2020-05-21T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/datavisualisation.html</loc>
+<lastmod>2020-05-21T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -873,7 +887,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/author/jack-mckew.html</loc>
-<lastmod>2020-05-14T00:00:00+10:05</lastmod>
+<lastmod>2020-05-21T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
