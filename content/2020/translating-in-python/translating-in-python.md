@@ -1,5 +1,5 @@
 Title: Translating Text in Python
-Date: 2020-05-18
+Date: 2020-05-29
 Author: Jack McKew
 Category: Data Science, Python
 Tags: datascience, python
