@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome.css">     <script src="http://localhost:8000/theme/tipuesearch/jquery.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="http://localhost:8000/theme/tipuesearch/tipuesearch.css" />
+    <script src="http://localhost:8000/tipuesearch_content.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="Working with data in a connected digital world, means you will possibly encounter data in a language outside your own. In this post we&#39;ll go into ways to translate this data in Python. First off we need some sample text, and what is better to read about then pizza! In …" />
+<meta name="keywords" content="datascience, python">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Translating Text in Python"/>
+<meta property="og:description" content="Working with data in a connected digital world, means you will possibly encounter data in a language outside your own. In this post we&#39;ll go into ways to translate this data in Python. First off we need some sample text, and what is better to read about then pizza! In …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://localhost:8000/translating-text-in-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-05-29 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://localhost:8000/author/jack-mckew.html">
+<meta property="article:section" content="Data Science"/>
+<meta property="article:tag" content="datascience"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+    <title>Jack McKew's Blog &ndash; Translating Text in Python</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="http://localhost:8000">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="http://localhost:8000">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 66</p>
+            <p>Number of Words: 42,988</p>
+            <p>Number of Lines of Code 3,120</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 15px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    background-color: #FF813F !important;
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="http://localhost:8000/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+
+
+            <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="http://localhost:8000/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="http://localhost:8000"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="translating-text-in-python">Translating Text in Python</h1>
+    <p>
+       Posted on Fri 29 May 2020 in <a href="http://localhost:8000/category/data-science.html">Data Science</a>
+
+        &#8226; 9 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Working with data in a connected digital world, means you will possibly encounter data in a language outside your own. In this post we'll go into ways to translate this data in Python.</p>
+<p>First off we need some sample text, and what is better to read about then pizza!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Source: http://saberitaliano.com.ar/reading/pizza.html</span>
+<span class="n">sample_text_it</span> <span class="o">=</span> <span class="s2">"""La pizza è un prodotto gastronomico che ha per base un impasto di acqua, farina di frumento, e lievito, lavorato fino a ottenere una forma piatta, cotto al forno e variamente condito.</span>
+
+<span class="s2">Benché si tratti ormai di un prodotto diffuso in quasi tutto il mondo, la pizza è generalmente considerata un piatto originario della cucina italiana ed in particolar modo napoletana. Nel sentire comune, infatti, ci si riferisce con questo termine alla pizza tonda condita con pomodoro e mozzarella, ossia la variante più conosciuta della cosiddetta pizza napoletana.</span>
+
+<span class="s2">La vera e propria origine della pizza è tuttavia argomento controverso: oltre a Napoli, altre città ne rivendicano la paternità. Esiste, del resto, anche un significato più ampio del termine "pizza". Infatti, trattandosi in ultima analisi di una particolare specie di pane o focaccia, la pizza si presenta in innumerevoli derivazioni e varianti, cambiando nome e caratteristiche a seconda delle diverse tradizioni locali. In particolare, in alcune aree dell'Italia centrale, viene chiamata "pizza" qualsiasi tipo di torta cotta al forno, salata o dolce e alta o bassa che sia."""</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that we use triple quotes to contain this string, because this is a multiline string. Care must be taken when using triple quotes, as these strings will also contain special characters such as newline, tabs and more.</p>
+<h2 id="Google-Translate-API---Free!">Google Translate API - Free!<a class="anchor-link" href="#Google-Translate-API---Free!">¶</a></h2><p>If you've ever needed to translate anything from a language that you didn't know, chances are you've used Google Translate. It's almost magic how well this software performs, and the features it boasts are nothing short of amazing. On top of all of this, they offer a free API that we can access directly from our code! While there is some limitations, this is still an amazing start and if the program isn't required to translate mass amounts of text, this would be a straightforward solution.</p>
+<p>To make this even simpler in Python, there is a package aptly named <code>googletrans</code>, which interfaces with the Google Translate API for us <a href="https://pypi.org/project/googletrans/">https://pypi.org/project/googletrans/</a>. Let's begin by importing the package, and seeing what languages are supported.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">googletrans</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">googletrans</span><span class="o">.</span><span class="n">LANGUAGES</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian', 'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian', 'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa', 'zh-cn': 'chinese (simplified)', 'zh-tw': 'chinese (traditional)', 'co': 'corsican', 'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto', 'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian', 'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati', 'ht': 'haitian creole', 'ha': 'hausa', 'haw': 'hawaiian', 'iw': 'hebrew', 'hi': 'hindi', 'hmn': 'hmong', 'hu': 'hungarian', 'is': 'icelandic', 'ig': 'igbo', 'id': 'indonesian', 'ga': 'irish', 'it': 'italian', 'ja': 'japanese', 'jw': 'javanese', 'kn': 'kannada', 'kk': 'kazakh', 'km': 'khmer', 'ko': 'korean', 'ku': 'kurdish (kurmanji)', 'ky': 'kyrgyz', 'lo': 'lao', 'la': 'latin', 'lv': 'latvian', 'lt': 'lithuanian', 'lb': 'luxembourgish', 'mk': 'macedonian', 'mg': 'malagasy', 'ms': 'malay', 'ml': 'malayalam', 'mt': 'maltese', 'mi': 'maori', 'mr': 'marathi', 'mn': 'mongolian', 'my': 'myanmar (burmese)', 'ne': 'nepali', 'no': 'norwegian', 'ps': 'pashto', 'fa': 'persian', 'pl': 'polish', 'pt': 'portuguese', 'pa': 'punjabi', 'ro': 'romanian', 'ru': 'russian', 'sm': 'samoan', 'gd': 'scots gaelic', 'sr': 'serbian', 'st': 'sesotho', 'sn': 'shona', 'sd': 'sindhi', 'si': 'sinhala', 'sk': 'slovak', 'sl': 'slovenian', 'so': 'somali', 'es': 'spanish', 'su': 'sundanese', 'sw': 'swahili', 'sv': 'swedish', 'tg': 'tajik', 'ta': 'tamil', 'te': 'telugu', 'th': 'thai', 'tr': 'turkish', 'uk': 'ukrainian', 'ur': 'urdu', 'uz': 'uzbek', 'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu', 'fil': 'Filipino', 'he': 'Hebrew'}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we need to create an instance of the translator class within <code>googletrans</code>. Another feature of Google Translate, is that it can automatically detect the language that the text is in, and we can use this feature in our code too! This is straightforward by passing our string to the method <code>translator.detect()</code>. This will return an instance of a class named <code>Detected</code>, in which we can see the detected language and how confident the package is in it's prediction.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">translator</span> <span class="o">=</span> <span class="n">googletrans</span><span class="o">.</span><span class="n">Translator</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">translator</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">sample_text_it</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Detected(lang=it, confidence=1.0)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now time to get translating! Once again, a straightforward method of <code>translator.translate()</code> is used by passing the string. We can also define the source &amp; destination language to translate to. This returns an instance of the <code>Translated</code> class containing attributes of:</p>
+<ul>
+<li><code>src</code> - The source language to translate from</li>
+<li><code>dest</code> - The destination language to translate to</li>
+<li><code>text</code> - The translated text</li>
+<li><code>origin</code> - The original text</li>
+<li><code>pronunciation</code> - How to pronounce the translated text (although this only returns <code>None</code> in my experience)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">translated</span> <span class="o">=</span> <span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">sample_text_it</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s1">'it'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">'en'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">translated</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Translated(src=it, dest=en, text=The pizza is a gourmet product that has as its base a mixture of water, wheat flour, and yeast, worked up to obtain a flat shape, baked and variously seasoned.
+
+Although it now is a widespread product in almost all over the world, pizza is generally considered an original dish of Italian cuisine and especially Neapolitan way. In common feeling, in fact, we are referring to with this term round pizza topped with tomato sauce and mozzarella, which is the most well-known variant of the so-called Neapolitan pizza.
+
+The real origin of pizza, however, is controversial: in addition to Naples, other cities claim its paternity. There is, moreover, also a broader meaning of the term "pizza". In fact, since in the final analysis of a particular kind of bread or focaccia, pizza presents itself in countless derivations and variations, changing name and characteristics depending on the different local traditions. In particular, in some areas of central Italy, it is called "pizza" any type of baked cake baked, salty or sweet, high or low it is., pronunciation=None, extra_data="{'translat...")
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What if we had many strings that needed translating? Let's start by breaking our sample text into sections with the method <code>str.splitlines()</code>, this will create a <code>list</code> of each string that is separate by a newline (separate paragraphs).</p>
+<blockquote><p>We use the <code>filter()</code> function to rid the list of empty strings for neatness sake</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sentence_list</span> <span class="o">=</span> <span class="n">sample_text_it</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="c1"># Remove empty strings</span>
+<span class="n">sentence_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">sentence_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['La pizza è un prodotto gastronomico che ha per base un impasto di acqua, farina di frumento, e lievito, lavorato fino a ottenere una forma piatta, cotto al forno e variamente condito.', 'Benché si tratti ormai di un prodotto diffuso in quasi tutto il mondo, la pizza è generalmente considerata un piatto originario della cucina italiana ed in particolar modo napoletana. Nel sentire comune, infatti, ci si riferisce con questo termine alla pizza tonda condita con pomodoro e mozzarella, ossia la variante più conosciuta della cosiddetta pizza napoletana.', 'La vera e propria origine della pizza è tuttavia argomento controverso: oltre a Napoli, altre città ne rivendicano la paternità. Esiste, del resto, anche un significato più ampio del termine "pizza". Infatti, trattandosi in ultima analisi di una particolare specie di pane o focaccia, la pizza si presenta in innumerevoli derivazioni e varianti, cambiando nome e caratteristiche a seconda delle diverse tradizioni locali. In particolare, in alcune aree dell\'Italia centrale, viene chiamata "pizza" qualsiasi tipo di torta cotta al forno, salata o dolce e alta o bassa che sia.']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's create a function to handle the translation step. We instantiate a new translator each time the function is called, this also helps to reinitalise the Google Translate API on each time we translate. If the <code>src_lang</code> isn't defined the function call, let's use the magical method <code>translator.detect()</code> to make a prediction for us.</p>
+<p>Now we iterate over the list, calling our new function repeatedly and finally appending the translated data into a new list <code>translated_list</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">translate_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="n">src_lang</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">dest_lang</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">"en"</span><span class="p">):</span>
+    <span class="n">translator</span> <span class="o">=</span> <span class="n">googletrans</span><span class="o">.</span><span class="n">Translator</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">src_lang</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">src_lang</span> <span class="o">=</span> <span class="n">translator</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lang</span>
+    
+    <span class="k">return</span> <span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">src</span><span class="o">=</span><span class="n">src_lang</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">dest_lang</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        
+<span class="n">translated_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentence_list</span><span class="p">:</span>
+    <span class="n">translated_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">translate_text</span><span class="p">(</span><span class="n">sentence</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">translated_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['The pizza is a gourmet product that has as its base a mixture of water, wheat flour, and yeast, worked up to obtain a flat shape, baked and variously seasoned.', 'Although it now is a widespread product in almost all over the world, pizza is generally considered an original dish of Italian cuisine and especially Neapolitan way. In common feeling, in fact, we are referring to with this term round pizza topped with tomato sauce and mozzarella, which is the most well-known variant of the so-called Neapolitan pizza.', 'The real origin of pizza, however, is controversial: in addition to Naples, other cities claim its paternity. There is, moreover, also a broader meaning of the term "pizza". In fact, since in the final analysis of a particular kind of bread or focaccia, pizza presents itself in countless derivations and variations, changing name and characteristics depending on the different local traditions. In particular, in some areas of central Italy, it is called "pizza" any type of baked cake baked, salty or sweet, high or low it is.']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="DeepL-Translator"><a href="https://www.deepl.com/translator">DeepL Translator</a><a class="anchor-link" href="#DeepL-Translator">¶</a></h2><p>Sometimes we need to translate much larger datasets. I recently faced this problem while volunteering for a COVID-19 project in which we wanted to run analysis on the tweets of Italy during the pandemic. We were supplied with millions of tweets over weeks in May 2020, all in Italian. As most of the team only spoke English, and as far as we knew sentiment analysis was developed for English extensively; we would need to translate all of this data. While Google Translate can be paid for, we were kindly donated an API key from the DeepL team for our cause. Following this, will be how the team &amp; I set up the mass translator with <code>pandas</code>, <code>requests</code> and the DeepL Translator API.</p>
+<blockquote><p>As to not share the donated API key, responses from the DeepL translator will not be shown in this post.</p>
+</blockquote>
+<p>Firstly, we will initialise our sample text (split by paragraph) from before, in a <code>pandas DataFrame</code> to represent our mass datasets.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">source_text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Source Text"</span><span class="p">])</span>
+
+<span class="n">source_text_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="table dataframe table-striped">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Source Text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>La pizza è un prodotto gastronomico che ha per...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Benché si tratti ormai di un prodotto diffuso ...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>La vera e propria origine della pizza è tuttav...</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that we have our data arranged in a <code>pandas DataFrame</code>, we create a function for interfacing with the DeepL Translator API.</p>
+<p>The documentation for the DeepL Translator API is fantastic, and can be reached at <a href="https://www.deepl.com/docs-api/introduction/">https://www.deepl.com/docs-api/introduction/</a>.</p>
+<p>Using build our request as a dictionary to be used with the <code>requests</code> package. Read more details about how payloads are formatted in the <a href="https://requests.readthedocs.io/en/master/user/quickstart/#passing-parameters-in-urls">requests documentation</a>.</p>
+<p>The response back from DeepL is then in the JSON format, which we can then convert back into a dictionary with the <code>response.json()</code> method.</p>
+<p>Finally we loop through the returned response, and reconstruct a list of the translated data to return from the function.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">translate_text_deepl</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">api_key</span><span class="p">,</span><span class="n">src_lang</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">"IT"</span><span class="p">,</span><span class="n">target_lang</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">"EN"</span><span class="p">):</span>
+        <span class="c1"># Create empty list</span>
+    <span class="n">translated_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Translate all tweets and add to list</span>
+        <span class="c1"># Request should not exceed 30KB</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+            <span class="s2">"source_lang"</span><span class="p">:</span> <span class="n">src_lang</span><span class="p">,</span>
+            <span class="s2">"target_lang"</span><span class="p">:</span> <span class="n">target_lang</span><span class="p">,</span>
+            <span class="s2">"auth_key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://api.deepl.com/v2/translate"</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+        <span class="n">deepl_response_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">deepl_response_data</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">translated_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s2">"text"</span><span class="p">])</span>
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+        <span class="c1"># Insert error for each line in data</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">translated_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Error"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error translating.. `Error` placed in output dataset"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">translated_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that we have our function that interfaces with the DeepL Translator API, we can use this to translate all of our data easily by calling the function, that's it, done!</p>
+<blockquote><p>The output shows Error due to the API Key not being valid</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">source_text_df</span><span class="p">[</span><span class="s1">'Translated Text'</span><span class="p">]</span> <span class="o">=</span> <span class="n">translate_text_deepl</span><span class="p">(</span><span class="n">source_text_df</span><span class="p">[</span><span class="s1">'Source Text'</span><span class="p">],</span><span class="s2">"APIKEY"</span><span class="p">,</span><span class="s2">"IT"</span><span class="p">,</span><span class="s2">"EN"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Error translating.. `Error` placed in output dataset
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the DataFrame is much larger in size, we may need to process this data in chunks. This can be done by using our new <code>translate_text_deepl</code> function from a different perspective.</p>
+<p>Similarly we create a new list to store all of our translated data, and add in new data iteratively in chunks in our DataFrame. Chunks can be iterated through a DataFrame using the <code>groupby</code> method, along with with <code>arange</code> function in <code>numpy</code>.</p>
+<blockquote><p>The output shows Error due to the API Key not being valid</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_translated_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">source_text_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">source_text_df</span><span class="p">))</span> <span class="o">//</span> <span class="n">chunk_size</span><span class="p">):</span>
+
+    <span class="c1"># Add new data to list</span>
+    <span class="c1"># We use extend as the function returns a list</span>
+    <span class="n">all_translated_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">translate_text_deepl</span><span class="p">(</span><span class="n">chunk</span><span class="p">[</span><span class="s1">'Source Text'</span><span class="p">],</span><span class="s2">"APIKEY"</span><span class="p">,</span><span class="s2">"IT"</span><span class="p">,</span><span class="s2">"EN"</span><span class="p">))</span>
+
+<span class="n">source_text_df</span><span class="p">[</span><span class="s1">'Translated Text'</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_translated_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Error translating.. `Error` placed in output dataset
+Error translating.. `Error` placed in output dataset
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://localhost:8000/tag/datascience.html">datascience</a>
+      <a href="http://localhost:8000/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="http://localhost:8000/creating-animated-plots-with-pandas_alive.html" title="Creating Animated Plots with Pandas_Alive">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="http://localhost:8000/looking-for-patterns-in-city-names-interactive-plotting.html">Looking for Patterns in City Names & Interactive Plotting</a></li>
+      <li><a href="http://localhost:8000/managing-virtual-environments-on-windows.html">Managing Virtual Environments on Windows</a></li>
+      <li><a href="http://localhost:8000/packaging-python-packages-with-poetry.html">Packaging Python Packages with Poetry</a></li>
+      <li><a href="http://localhost:8000/counting-words-with-python.html">Counting Words with Python</a></li>
+      <li><a href="http://localhost:8000/python-bytes-awesome-package-list.html">Python Bytes Awesome Package List</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "http://localhost:8000",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>

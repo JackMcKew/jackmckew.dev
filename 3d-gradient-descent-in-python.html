@@ -6,17 +6,17 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
-    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
-    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
-    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/font-awesome.css">     <script src="http://localhost:8000/theme/tipuesearch/jquery.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="http://localhost:8000/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="http://localhost:8000/theme/tipuesearch/tipuesearch.css" />
+    <script src="http://localhost:8000/tipuesearch_content.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
@@ -37,16 +37,16 @@
 <meta property="og:title" content="3D Gradient Descent in Python"/>
 <meta property="og:description" content="Visualising gradient descent in 3 dimensions Building upon our terrain generator from the blog post: https://jackmckew.dev/3d-terrain-in-python.html, today we will implement a demonstration of how gradient descent behaves in 3 dimensions and produce an interactive visualisation similar to the terrain visualisation. Note that my understanding of gradient …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/3d-gradient-descent-in-python.html"/>
+<meta property="og:url" content="http://localhost:8000/3d-gradient-descent-in-python.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2020-02-26 00:00:00+11:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:author" content="http://localhost:8000/author/jack-mckew.html">
 <meta property="article:section" content="Python"/>
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="visualisation"/>
 <meta property="article:tag" content="generative"/>
-<meta property="og:image" content="https://jackmckew.dev/img/3d-gradient-descent.gif">
+<meta property="og:image" content="http://localhost:8000/img/3d-gradient-descent.gif">
 
     <title>Jack McKew's Blog &ndash; 3D Gradient Descent in Python</title>
 
@@ -55,14 +55,14 @@
 <body>
     <aside>
         <div>
-            <a href="https://jackmckew.dev">
+            <a href="http://localhost:8000">
         <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
       </a>
-            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+            <h1><a href="http://localhost:8000">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 65</p>
-            <p>Number of Words: 42,073</p>
-            <p>Number of Lines of Code 3,040</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 66</p>
+            <p>Number of Words: 42,988</p>
+            <p>Number of Lines of Code 3,120</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -109,13 +109,13 @@
                 }
             </style>
             <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="http://localhost:8000/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
 
 
             <nav>
                 <ul class="list">
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
-                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="http://localhost:8000/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
                 </ul>
             </nav>
 
@@ -145,13 +145,13 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="http://localhost:8000"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
 <article class="single">
   <header>
       
     <h1 id="3d-gradient-descent-in-python">3D Gradient Descent in Python</h1>
     <p>
-       Posted on Wed 26 February 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+       Posted on Wed 26 February 2020 in <a href="http://localhost:8000/category/python.html">Python</a>
 
         &#8226; 40 min read
     </p>
@@ -164,9 +164,9 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Visualising gradient descent in 3 dimensions</strong></p>
 <p>Building upon our terrain generator from the blog post: <a href="https://jackmckew.dev/3d-terrain-in-python.html#3d-terrain-in-python">https://jackmckew.dev/3d-terrain-in-python.html</a>, today we will implement a demonstration of how gradient descent behaves in 3 dimensions and produce an interactive visualisation similar to the terrain visualisation. Note that my understanding of gradient descent this does not behave in the similar manner as the gradient descent function used heavily in optimisation problems, although this does make for a demonstration.</p>
-<p><img alt="3D Terrain in Plotly" class="img-fluid" src="https://jackmckew.dev/img/3d-gradient-descent.gif"/></p>
+<p><img alt="3D Terrain in Plotly" class="img-fluid" src="http://localhost:8000/img/3d-gradient-descent.gif"/></p>
 <h2 id="What-is-Gradient-Descent">What is Gradient Descent<a class="anchor-link" href="#What-is-Gradient-Descent">¶</a></h2><p>The premise behind gradient descent is at a point in an a 'function' or array, you can determine the minimum value or maximum value by taking the steepest slope around the point till you get to the minimum/maximum. As optimising functions is one of the main premises behind machine learning, gradient descent is used to reduce computation time &amp; resources.<a href="https://www.youtube.com/watch?v=5u0jaA3qAGk&amp;feature=youtu.be">Image Source</a></p>
-<p><img alt="2D Gradient Descent" class="img-fluid" src="https://jackmckew.dev/img/2d-gradient-descent.png"/></p>
+<p><img alt="2D Gradient Descent" class="img-fluid" src="http://localhost:8000/img/2d-gradient-descent.png"/></p>
 <h3 id="What-can-I-use-this-for?">What can I use this for?<a class="anchor-link" href="#What-can-I-use-this-for?">¶</a></h3><p>At it's core, gradient descent is a optimisation algorithm used to minimise a function. The benefit of gradient shines when searching every single possible combination isn't feasible, so taking an iterative approach to finding the minimum is favourable.</p>
 <p>In machine learning, we use gradient descent to update the parameters of our model. Parameters refer weights on training data, coefficients in Linear Regression, weights in neural networks and more.</p>
 <h3 id="How?">How?<a class="anchor-link" href="#How?">¶</a></h3><p>A way of imagining this is if you are at the top of a hill, and want to get to the bottom in the quickest way possible, if you take a step in each time in the direction of the steepest slope, you should hopefully get to the bottom a quick as possible.</p>
@@ -663,18 +663,18 @@ Steps: [descent_step(value=0.10347005724906921, x_index=38, y_index=28), descent
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/python.html">python</a>
-      <a href="https://jackmckew.dev/tag/visualisation.html">visualisation</a>
-      <a href="https://jackmckew.dev/tag/generative.html">generative</a>
+      <a href="http://localhost:8000/tag/python.html">python</a>
+      <a href="http://localhost:8000/tag/visualisation.html">visualisation</a>
+      <a href="http://localhost:8000/tag/generative.html">generative</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/getting-started-in-python.html" title="Getting Started in Python">
+    <a class="btn float-left" href="http://localhost:8000/getting-started-in-python.html" title="Getting Started in Python">
       <i class="fa fa-angle-left"></i>  Previous Post
     </a>
-    <a class="btn float-right" href="https://jackmckew.dev/book-review-courage-to-be-disliked.html" title="Book Review: Courage To Be Disliked">
+    <a class="btn float-right" href="http://localhost:8000/book-review-courage-to-be-disliked.html" title="Book Review: Courage To Be Disliked">
        Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
@@ -682,11 +682,11 @@ Steps: [descent_step(value=0.10347005724906921, x_index=38, y_index=28), descent
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
-      <li><a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
-      <li><a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
-      <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
-      <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
-      <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
+      <li><a href="http://localhost:8000/translating-text-in-python.html">Translating Text in Python</a></li>
+      <li><a href="http://localhost:8000/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
+      <li><a href="http://localhost:8000/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
+      <li><a href="http://localhost:8000/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
+      <li><a href="http://localhost:8000/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
     </ul>
   </div>
 
@@ -717,7 +717,7 @@ Steps: [descent_step(value=0.10347005724906921, x_index=38, y_index=28), descent
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Jack McKew's Blog ",
-  "url" : "https://jackmckew.dev",
+  "url" : "http://localhost:8000",
   "image": "/jm-photo.jpg",
   "description": ""
 }
