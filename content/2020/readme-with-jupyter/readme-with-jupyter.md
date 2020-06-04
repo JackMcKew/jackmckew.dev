@@ -1,5 +1,5 @@
 Title: Make a README & Documentation with Jupyter Notebooks
-Date: 2020-05-17
+Date: 2020-06-05
 Author: Jack McKew
 Category: Python
 Tags: python
@@ -73,7 +73,7 @@ Now let's check the [supported output types for nbconvert](https://nbconvert.rea
 
 `nbconvert` supports Markdown! Fantastic, we can add this step into our CI process (eg, [GitHub Action](https://github.com/JackMcKew/pandas_alive/blob/master/.github/workflows/update-readme.yml)). This will allow us to generate a new `README.md` whenever our `README.ipynb` changes.
 
-> In Pnndas_Alive, we clear the output output of the cells in `README.ipynb` with the flags: `jupyter nbconvert --ClearMetadataPreprocessor.enabled=True --ClearOutput.enabled=True  --to markdown README.ipynb`.
+> In Pandas_Alive, we clear the output output of the cells in `README.ipynb` with the flags: `jupyter nbconvert --ClearMetadataPreprocessor.enabled=True --ClearOutput.enabled=True  --to markdown README.ipynb`.
 
 #### Python Highlighting in Output
 
