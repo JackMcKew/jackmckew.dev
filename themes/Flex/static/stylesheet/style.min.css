@@ -57,31 +57,34 @@ a:hover {
     color: #ff5a09
 }
 
-h2:hover > a.anchor-link {
-    display: inline;
-}
-h3:hover > a.anchor-link {
-    display: inline;
-}
-h4:hover > a.anchor-link {
-    display: inline;
-}
-h5:hover > a.anchor-link {
-    display: inline;
-}
-h6:hover > a.anchor-link {
+h2:hover>a.anchor-link {
     display: inline;
 }
 
-a.anchor-link{
+h3:hover>a.anchor-link {
+    display: inline;
+}
+
+h4:hover>a.anchor-link {
+    display: inline;
+}
+
+h5:hover>a.anchor-link {
+    display: inline;
+}
+
+h6:hover>a.anchor-link {
+    display: inline;
+}
+
+a.anchor-link {
     display: none;
-
 }
 
-a.anchor-link:after{
+a.anchor-link:after {
     content: "Permalink to this headline";
     padding: 2px;
-    display:none;
+    display: none;
     position: relative;
     top: -5px;
     right: -15px;
@@ -95,10 +98,10 @@ a.anchor-link:after{
     border-radius: 2px;
     font-size: 0.5em;
 }
-a.anchor-link:hover:after{
+
+a.anchor-link:hover:after {
     display: inline;
 }
-
 
 hr {
     color: #eee;

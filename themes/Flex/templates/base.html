@@ -126,9 +126,10 @@
             </style>
             <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
             <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
-
-
-            {% if pages or LINKS %}
+            <br>
+            <a href="https://feedburner.google.com/fb/a/mailverify?uri=JackMckewsBlog&amp;loc=en_US" class="mbscreenphone phonelink btn btn-info btn-lg">
+                Subscribe by Email <i class="fas fa-envelope"></i>
+              </a> {% if pages or LINKS %}
             <nav>
                 <ul class="list">
                     {# Open links in new window depending on the LINKS_IN_NEW_TAB setting #} {% macro get_target(link) -%} {%- if LINKS_IN_NEW_TAB is not defined -%} _blank {%- elif LINKS_IN_NEW_TAB in ('all', none, true) -%} _blank {%- elif LINKS_IN_NEW_TAB == "external"
