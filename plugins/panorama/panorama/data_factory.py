@@ -3,8 +3,14 @@ from __future__ import unicode_literals
 from pandas import DataFrame, Series, pivot_table, to_datetime
 import numpy as np
 
-FUNCTIONS_ALLOWED = ('count_article_by_column_by_year', 'top_article', 'count_article', 'count_article_by_year',
-                     'count_article_by_column', 'count_article_by_month')
+FUNCTIONS_ALLOWED = (
+    "count_article_by_column_by_year",
+    "top_article",
+    "count_article",
+    "count_article_by_year",
+    "count_article_by_column",
+    "count_article_by_month",
+)
 
 
 class DataFactory(object):
@@ -34,28 +40,48 @@ class DataFactory(object):
         metadata = []
         # TODO not the more efficient way to do that I think.
         for article in articles:
-            if hasattr(article, 'tags'):
+            if hasattr(article, "tags"):
                 # Extracting all tags name from an article and putting them in a Series
                 tags.append(
-                    Series([tag.name for tag in article.tags], ['tag_' + str(x) for x in range(len(article.tags))]))
+                    Series(
+                        [tag.name for tag in article.tags],
+                        ["tag_" + str(x) for x in range(len(article.tags))],
+                    )
+                )
             # Selecting metadata, only the ones specified in the columns
-            metadata.append(Series(
-                dict([(i, article.metadata[i]) for i in self.metadata_columns if i in article.metadata]),
-                self.metadata_columns))
+            metadata.append(
+                Series(
+                    dict(
+                        [
+                            (i, article.metadata[i])
+                            for i in self.metadata_columns
+                            if i in article.metadata
+                        ]
+                    ),
+                    self.metadata_columns,
+                )
+            )
         # Creating the tags DataFrame
         tags_data_frame = DataFrame(tags)
         # Renaming columns, leaving the remaining ones with the generated name "tag_"
         # Mapping current column names to the new ones in order to make a replacement
         if self.tag_columns is not None:
-            replacement = dict(zip(tags_data_frame.columns.get_values()[:len(self.tag_columns)], self.tag_columns))
+            replacement = dict(
+                zip(
+                    tags_data_frame.columns.get_values()[: len(self.tag_columns)],
+                    self.tag_columns,
+                )
+            )
             # Inplace means no copy
             tags_data_frame.rename(columns=replacement, inplace=True)
         # Creating the metadata DataFrame
         metadata_data_frame = DataFrame(metadata)
         # Replacing data in column category by its string value
         # TODO maybe a better way to do that, it seems a bit ugly
-        if 'category' in metadata_data_frame:
-            metadata_data_frame['category'] = metadata_data_frame['category'].apply(lambda x: str(x))
+        if "category" in metadata_data_frame:
+            metadata_data_frame["category"] = metadata_data_frame["category"].apply(
+                lambda x: str(x)
+            )
         # Merging the two DataFrame together
         self.data = metadata_data_frame.join(tags_data_frame)
 
@@ -78,7 +104,7 @@ class DataFactory(object):
         :return: the function
         """
         if function_name not in FUNCTIONS_ALLOWED:
-            raise ValueError('Function [%s] not allowed for a renderer' % function_name)
+            raise ValueError("Function [%s] not allowed for a renderer" % function_name)
         return eval(function_name)
 
 
@@ -98,7 +124,7 @@ def count_article_by_year(data):
     :param data: the DataFrame containing articles
     :return: a Series containing the number of articles indexed by year
     """
-    return count_article(data.groupby(lambda x: data['date'][x].year))
+    return count_article(data.groupby(lambda x: data["date"][x].year))
 
 
 def count_article(data):
@@ -107,7 +133,7 @@ def count_article(data):
     :param data: the DataFrame containing articles
     :return: a Series containing the number of articles
     """
-    return data['title'].count()
+    return data["title"].count()
 
 
 def top_article(data, column, top):
@@ -131,8 +157,12 @@ def count_article_by_column_by_year(data, column):
     :return: a DataFrame
     """
     # Grouping data by the column and by year counting unique titles
-    table = pivot_table(data, values=['title'], index=[column, lambda x: data['date'][x].year],
-                        aggfunc=np.count_nonzero)
+    table = pivot_table(
+        data,
+        values=["title"],
+        index=[column, lambda x: data["date"][x].year],
+        aggfunc=np.count_nonzero,
+    )
     # Unstacking to display the chosen column values as DataFrame columns
     table = table.unstack(level=0)
     # Filling the empty values with 0
@@ -152,21 +182,27 @@ def count_article_by_month(data):
     """
 
     # Grouping data by the by year and month counting unique titles
-    table = pivot_table(data, values=['title'], index=[lambda x: data['date'][x].year, lambda x: data['date'][x].month],
-                        aggfunc=np.count_nonzero)
+    table = pivot_table(
+        data,
+        values=["title"],
+        index=[lambda x: data["date"][x].year, lambda x: data["date"][x].month],
+        aggfunc=np.count_nonzero,
+    )
     # Resetting index to break the multi index in columns
     table = table.reset_index()
     # Concatenating the year and month columns to compute a single column with the date (one by month)
-    table['concat'] = to_datetime(table.level_0 * 10000 + table.level_1 * 100 + 1, format='%Y%m%d')
+    table["concat"] = to_datetime(
+        table.level_0 * 10000 + table.level_1 * 100 + 1, format="%Y%m%d"
+    )
     # Setting this column as the index
-    table = table.set_index('concat')
+    table = table.set_index("concat")
     # Resampling data to add missing month
-    table = table.resample('M')
+    table = table.resample("M")
     # Filling missing month with 0
     table = table.fillna(0)
     # Dropping unnecessary columns
-    table = table.drop(['level_0', 'level_1'], 1)
+    table = table.drop(["level_0", "level_1"], 1)
     # Renaming the column
-    table.columns = ['posts']
+    table.columns = ["posts"]
     # Returning a Series selected from the DataFrame
-    return table['posts']
+    return table["posts"]

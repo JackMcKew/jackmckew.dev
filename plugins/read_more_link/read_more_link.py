@@ -31,15 +31,16 @@ def insert_into_last_element(html, element):
     try:
         item = fragment_fromstring(element)
     except (ParserError, TypeError) as e:
-        item = fragment_fromstring('<span></span>')
+        item = fragment_fromstring("<span></span>")
 
     try:
         doc = fragments_fromstring(html)
         doc[-1].append(item)
 
-        return ''.join(tostring(e) for e in doc)
+        return "".join(tostring(e) for e in doc)
     except (ParserError, TypeError) as e:
-        return ''
+        return ""
+
 
 def insert_read_more_link(instance):
     """
@@ -49,23 +50,27 @@ def insert_read_more_link(instance):
     """
 
     # only deals with Article type
-    if type(instance) != contents.Article: return
+    if type(instance) != contents.Article:
+        return
 
+    SUMMARY_MAX_LENGTH = instance.settings.get("SUMMARY_MAX_LENGTH")
+    READ_MORE_LINK = instance.settings.get("READ_MORE_LINK", None)
+    READ_MORE_LINK_FORMAT = instance.settings.get(
+        "READ_MORE_LINK_FORMAT", '<a class="read-more" href="/{url}">{text}</a>'
+    )
 
-    SUMMARY_MAX_LENGTH = instance.settings.get('SUMMARY_MAX_LENGTH')
-    READ_MORE_LINK = instance.settings.get('READ_MORE_LINK', None)
-    READ_MORE_LINK_FORMAT = instance.settings.get('READ_MORE_LINK_FORMAT',
-                                                  '<a class="read-more" href="/{url}">{text}</a>')
+    if not (SUMMARY_MAX_LENGTH and READ_MORE_LINK and READ_MORE_LINK_FORMAT):
+        return
 
-    if not (SUMMARY_MAX_LENGTH and READ_MORE_LINK and READ_MORE_LINK_FORMAT): return
-
-    if hasattr(instance, '_summary') and instance._summary:
+    if hasattr(instance, "_summary") and instance._summary:
         summary = instance._summary
     else:
         summary = truncate_html_words(instance.content, SUMMARY_MAX_LENGTH)
 
     if summary != instance.content:
-        read_more_link = READ_MORE_LINK_FORMAT.format(url=instance.url, text=READ_MORE_LINK)
+        read_more_link = READ_MORE_LINK_FORMAT.format(
+            url=instance.url, text=READ_MORE_LINK
+        )
         instance._summary = insert_into_last_element(summary, read_more_link)
 
 

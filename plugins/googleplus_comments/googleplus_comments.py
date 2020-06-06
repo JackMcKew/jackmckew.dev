@@ -22,8 +22,10 @@ googleplus_comments_snippet = """
     </script>
 """
 
+
 def add_googleplus_comments(generator, metadata):
     metadata["googleplus_comments"] = googleplus_comments_snippet
+
 
 def register():
     signals.article_generator_context.connect(add_googleplus_comments)

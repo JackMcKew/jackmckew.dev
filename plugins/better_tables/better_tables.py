@@ -17,7 +17,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-''' Better Tables: Restore sanity to rst->html tables
+""" Better Tables: Restore sanity to rst->html tables
 
 This pelican plugin removes the excess attributes and elements in the HTML
 tables generated from RST. Trimming this fat allows them to pass HTML5
@@ -41,31 +41,33 @@ Usage:
     ]
 
     And that's it. Life's simple like that sometimes.
-'''
+"""
 
 from pelican import signals, contents
 from bs4 import BeautifulSoup
+
 
 def better_tables(content):
     if isinstance(content, contents.Static):
         return
 
-    soup = BeautifulSoup(content._content, 'html.parser')
+    soup = BeautifulSoup(content._content, "html.parser")
 
-    for table in soup.findAll('table'):
+    for table in soup.findAll("table"):
         # table's "border" is so 1996
-        del(table['border'])
+        del table["border"]
 
         # col widths. not only /infuriating/ it's also not in HTML5
-        for tag in table.findAll('colgroup'):
+        for tag in table.findAll("colgroup"):
             tag.extract()
 
         # tbody and thead's valign
-        for tag in table.findAll(['tbody', 'thead']):
-            del(tag['valign'])
+        for tag in table.findAll(["tbody", "thead"]):
+            del tag["valign"]
 
     soup.renderContents()
     content._content = soup.decode()
+
 
 def register():
     signals.content_object_init.connect(better_tables)

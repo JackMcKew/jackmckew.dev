@@ -30,10 +30,10 @@ from .mdx_liquid_tags import LiquidTags
 
 SYNTAX = "{% vimeo id [width height] %}"
 
-VIMEO = re.compile(r'(\S+)(\s+(\d+)\s(\d+))?')
+VIMEO = re.compile(r"(\S+)(\s+(\d+)\s(\d+))?")
 
 
-@LiquidTags.register('vimeo')
+@LiquidTags.register("vimeo")
 def vimeo(preprocessor, tag, markup):
     width = 640
     height = 390
@@ -55,10 +55,13 @@ def vimeo(preprocessor, tag, markup):
                     webkitAllowFullScreen mozallowfullscreen allowFullScreen>
                 </iframe>
             </span>
-        """.format(width=width, height=height, vimeo_id=vimeo_id).strip()
+        """.format(
+            width=width, height=height, vimeo_id=vimeo_id
+        ).strip()
     else:
-        raise ValueError("Error processing input, "
-                         "expected syntax: {0}".format(SYNTAX))
+        raise ValueError(
+            "Error processing input, " "expected syntax: {0}".format(SYNTAX)
+        )
 
     return vimeo_out
 

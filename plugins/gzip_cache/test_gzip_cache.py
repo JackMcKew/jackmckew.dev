@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''Core plugins unit tests'''
+"""Core plugins unit tests"""
 
 import os
 import tempfile
@@ -12,6 +12,7 @@ from shutil import rmtree
 from hashlib import md5
 
 import gzip_cache
+
 
 @contextmanager
 def temporary_folder():
@@ -30,26 +31,25 @@ def temporary_folder():
 
 
 class TestGzipCache(unittest.TestCase):
-
     def test_should_compress(self):
         # Some filetypes should compress and others shouldn't.
-        self.assertTrue(gzip_cache.should_compress('foo.html'))
-        self.assertTrue(gzip_cache.should_compress('bar.css'))
-        self.assertTrue(gzip_cache.should_compress('baz.js'))
-        self.assertTrue(gzip_cache.should_compress('foo.txt'))
+        self.assertTrue(gzip_cache.should_compress("foo.html"))
+        self.assertTrue(gzip_cache.should_compress("bar.css"))
+        self.assertTrue(gzip_cache.should_compress("baz.js"))
+        self.assertTrue(gzip_cache.should_compress("foo.txt"))
 
-        self.assertFalse(gzip_cache.should_compress('foo.gz'))
-        self.assertFalse(gzip_cache.should_compress('bar.png'))
-        self.assertFalse(gzip_cache.should_compress('baz.mp3'))
-        self.assertFalse(gzip_cache.should_compress('foo.mov'))
+        self.assertFalse(gzip_cache.should_compress("foo.gz"))
+        self.assertFalse(gzip_cache.should_compress("bar.png"))
+        self.assertFalse(gzip_cache.should_compress("baz.mp3"))
+        self.assertFalse(gzip_cache.should_compress("foo.mov"))
 
     def test_should_overwrite(self):
         # Default to false if GZIP_CACHE_OVERWRITE is not set
-        settings = { }
+        settings = {}
         self.assertFalse(gzip_cache.should_overwrite(settings))
-        settings = { 'GZIP_CACHE_OVERWRITE': False }
+        settings = {"GZIP_CACHE_OVERWRITE": False}
         self.assertFalse(gzip_cache.should_overwrite(settings))
-        settings = { 'GZIP_CACHE_OVERWRITE': True }
+        settings = {"GZIP_CACHE_OVERWRITE": True}
         self.assertTrue(gzip_cache.should_overwrite(settings))
 
     def test_creates_gzip_file(self):
@@ -59,11 +59,13 @@ class TestGzipCache(unittest.TestCase):
         # so it is safe to assume that the file exists (otherwise walk would
         # not report it). Therefore, create a dummy file to use.
         with temporary_folder() as tempdir:
-            _, a_html_filename = tempfile.mkstemp(suffix='.html', dir=tempdir)
-            with open(a_html_filename, 'w') as f:
-                f.write('A' * 24)  # under this length, compressing is useless and create_gzip_file will not create any file
+            _, a_html_filename = tempfile.mkstemp(suffix=".html", dir=tempdir)
+            with open(a_html_filename, "w") as f:
+                f.write(
+                    "A" * 24
+                )  # under this length, compressing is useless and create_gzip_file will not create any file
             gzip_cache.create_gzip_file(a_html_filename, False)
-            self.assertTrue(os.path.exists(a_html_filename + '.gz'))
+            self.assertTrue(os.path.exists(a_html_filename + ".gz"))
 
     def test_creates_same_gzip_file(self):
         # Should create the same gzip file from the same contents.
@@ -72,10 +74,12 @@ class TestGzipCache(unittest.TestCase):
         # a timestamp in the compressed file by default. This can cause
         # problems for some caching strategies.
         with temporary_folder() as tempdir:
-            _, a_html_filename = tempfile.mkstemp(suffix='.html', dir=tempdir)
-            with open(a_html_filename, 'w') as f:
-                f.write('A' * 24)  # under this length, compressing is useless and create_gzip_file will not create any file
-            a_gz_filename = a_html_filename + '.gz'
+            _, a_html_filename = tempfile.mkstemp(suffix=".html", dir=tempdir)
+            with open(a_html_filename, "w") as f:
+                f.write(
+                    "A" * 24
+                )  # under this length, compressing is useless and create_gzip_file will not create any file
+            a_gz_filename = a_html_filename + ".gz"
             gzip_cache.create_gzip_file(a_html_filename, False)
             gzip_hash = get_md5(a_gz_filename)
             time.sleep(1)
@@ -89,11 +93,11 @@ class TestGzipCache(unittest.TestCase):
         # so it is safe to assume that the file exists (otherwise walk would
         # not report it). Therefore, create a dummy file to use.
         with temporary_folder() as tempdir:
-            _, a_html_filename = tempfile.mkstemp(suffix='.html', dir=tempdir)
+            _, a_html_filename = tempfile.mkstemp(suffix=".html", dir=tempdir)
             gzip_cache.create_gzip_file(a_html_filename, True)
-            self.assertFalse(os.path.exists(a_html_filename + '.gz'))
+            self.assertFalse(os.path.exists(a_html_filename + ".gz"))
+
 
 def get_md5(filepath):
-    with open(filepath, 'rb') as fh:
+    with open(filepath, "rb") as fh:
         return md5(fh.read()).hexdigest()
-

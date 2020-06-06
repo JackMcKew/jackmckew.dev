@@ -8,6 +8,7 @@ from pelican.contents import Page
 
 logger = logging.getLogger("autopages")
 
+
 def yield_files(root):
     root = os.path.realpath(os.path.abspath(root))
     for dirpath, dirnames, filenames in os.walk(root):
@@ -23,11 +24,13 @@ def yield_files(root):
                 continue
             yield os.path.join(dirpath, filename)
 
+
 def make_page(readers, context, filename):
     base_path, filename = os.path.split(filename)
     page = readers.read_file(base_path, filename, Page, None, context)
     slug, _ = os.path.splitext(filename)
     return slug, page
+
 
 def make_pages(readers, context, path):
     pages = {}
@@ -39,6 +42,7 @@ def make_pages(readers, context, path):
             continue
         pages[slug] = page
     return pages
+
 
 def create_autopages(article_generator):
     settings = article_generator.settings
@@ -59,6 +63,7 @@ def create_autopages(article_generator):
         category.page = category_pages.get(category.slug, "")
     for tag in article_generator.tags:
         tag.page = tag_pages.get(tag.slug, "")
+
 
 def register():
     signals.article_generator_finalized.connect(create_autopages)

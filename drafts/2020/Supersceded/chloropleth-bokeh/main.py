@@ -78,20 +78,20 @@ display(joined_gdf)
 # %%
 joined_gdf.dropna().plot_bokeh(
     category="number_of_confirmed_cases",
-    hovertool_columns=['Postcode'],
+    hovertool_columns=["Postcode"],
     size="number_of_confirmed_cases",
     colormap="Viridis",
 )
-joined_gdf.to_csv('joined_data.csv')
+joined_gdf.to_csv("joined_data.csv")
 # %%
 
 # print(joined_gdf.geometry.x)
-joined_gdf['x'] = joined_gdf.geometry.x
-joined_gdf['y'] = joined_gdf.geometry.y
+joined_gdf["x"] = joined_gdf.geometry.x
+joined_gdf["y"] = joined_gdf.geometry.y
 
-export_cols = ['number_of_confirmed_cases','x','y']
+export_cols = ["number_of_confirmed_cases", "x", "y"]
 
-joined_gdf[export_cols].to_csv('joined_data.csv')
+joined_gdf[export_cols].to_csv("joined_data.csv")
 
 
 # %%

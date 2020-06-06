@@ -19,32 +19,35 @@
 import os
 import sys
 from pelican import signals
-from . mdx_linkclass import LinkClassExtension, LC_CONFIG, LC_HELP
+from .mdx_linkclass import LinkClassExtension, LC_CONFIG, LC_HELP
 
-def addLinkClass (gen):
 
-    if not gen.settings.get ('MARKDOWN'):
+def addLinkClass(gen):
+
+    if not gen.settings.get("MARKDOWN"):
         from pelican.settings import DEFAULT_CONFIG
-        gen.settings ['MARKDOWN'] = DEFAULT_CONFIG ['MARKDOWN']
 
-    if gen.settings.get ('LINKCLASS'):
-        for param, default, helptext in gen.settings.get ('LINKCLASS'):
-            LC_CONFIG [param] = default
-            LC_HELP [param] = helptext
+        gen.settings["MARKDOWN"] = DEFAULT_CONFIG["MARKDOWN"]
 
-    if LinkClassExtension not in gen.settings ['MARKDOWN']:
-        config = dict ()
-        for key, value in LC_CONFIG.items ():
-            config [key] = value
-        for key, value in gen.settings.items ():
+    if gen.settings.get("LINKCLASS"):
+        for param, default, helptext in gen.settings.get("LINKCLASS"):
+            LC_CONFIG[param] = default
+            LC_HELP[param] = helptext
+
+    if LinkClassExtension not in gen.settings["MARKDOWN"]:
+        config = dict()
+        for key, value in LC_CONFIG.items():
+            config[key] = value
+        for key, value in gen.settings.items():
             if key in LC_CONFIG:
-                config [key] = value
-        lcobj = LinkClassExtension (config)
+                config[key] = value
+        lcobj = LinkClassExtension(config)
         try:
-            gen.settings ['MARKDOWN'] ['extensions'].append (lcobj)
+            gen.settings["MARKDOWN"]["extensions"].append(lcobj)
         except (KeyError):
-            gen.settings ['MARKDOWN'] ['extensions'] = [lcobj]
+            gen.settings["MARKDOWN"]["extensions"] = [lcobj]
 
-def register ():
+
+def register():
     """Register the Link Class plugin with Pelican"""
-    signals.initialized.connect (addLinkClass)
+    signals.initialized.connect(addLinkClass)

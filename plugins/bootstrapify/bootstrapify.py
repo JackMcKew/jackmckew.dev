@@ -1,20 +1,17 @@
-'''
+"""
 bootstrapify
 ===================================
 This pelican plugin adds css classes to nonstatic html output.
 
 This is especially useful if you want to use bootstrap and want
 to add its default classes to your tables and images.
-'''
+"""
 
 from bs4 import BeautifulSoup
 from pelican import signals, contents
 
-BOOTSTRAPIFY_DEFAULT = {
-    'table': ['table', 'table-striped'],
-    'img': ['img-fluid']
-}
-BOOTSTRAPIFY_KEY = 'BOOTSTRAPIFY'
+BOOTSTRAPIFY_DEFAULT = {"table": ["table", "table-striped"], "img": ["img-fluid"]}
+BOOTSTRAPIFY_KEY = "BOOTSTRAPIFY"
 
 
 def init_default_config(pelican):
@@ -28,14 +25,14 @@ def init_default_config(pelican):
         return settings
 
     DEFAULT_CONFIG = update_settings(DEFAULT_CONFIG)
-    if(pelican):
+    if pelican:
         pelican.settings = update_settings(pelican.settings)
 
 
 def replace_in_with(searchterm, soup, attributes):
     for item in soup.select(searchterm):
-        attribute_set = set(item.attrs.get('class', []) + attributes)
-        item.attrs['class'] = list(attribute_set)
+        attribute_set = set(item.attrs.get("class", []) + attributes)
+        item.attrs["class"] = list(attribute_set)
 
 
 def bootstrapify(content):
@@ -43,7 +40,7 @@ def bootstrapify(content):
         return
 
     replacements = content.settings[BOOTSTRAPIFY_KEY]
-    soup = BeautifulSoup(content._content, 'html.parser')
+    soup = BeautifulSoup(content._content, "html.parser")
 
     for selector, classes in replacements.items():
         replace_in_with(selector, soup, classes)

@@ -40,7 +40,10 @@ def entity_role(typ, rawtext, text, lineno, inliner, options={}, content=[]):
 
 
 def register():
-    roles.register_local_role('html_entity', entity_role)
+    roles.register_local_role("html_entity", entity_role)
 
-PelicanHTMLTranslator.visit_html_entity = lambda self, node: self.body.append(node.astext())
+
+PelicanHTMLTranslator.visit_html_entity = lambda self, node: self.body.append(
+    node.astext()
+)
 PelicanHTMLTranslator.depart_html_entity = lambda self, node: None

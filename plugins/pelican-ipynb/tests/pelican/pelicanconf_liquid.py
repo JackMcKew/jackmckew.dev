@@ -2,16 +2,16 @@ from __future__ import unicode_literals
 
 LOAD_CONTENT_CACHE = False
 
-SITEURL = ''
-SITENAME = u'ipynb-test'
+SITEURL = ""
+SITENAME = "ipynb-test"
 
-TIMEZONE = 'UTC'
-DEFAULT_LANG = 'en'
+TIMEZONE = "UTC"
+DEFAULT_LANG = "en"
 
-MARKUP = ('md', )
+MARKUP = ("md",)
 
 # PLUGINS SETTINGS
-PLUGIN_PATHS = ['../../../../plugins']
-PLUGINS = ['ipynb.markup', 'ipynb.liquid']
+PLUGIN_PATHS = ["../../../../plugins"]
+PLUGINS = ["ipynb.markup", "ipynb.liquid"]
 
-THEME = 'theme'
+THEME = "theme"

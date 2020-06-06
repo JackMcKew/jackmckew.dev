@@ -38,13 +38,17 @@ nsw_covid["postcode"] = nsw_covid["postcode"].astype(int)
 display(nsw_covid)
 
 #%%
-nsw_covid["Latitude"] = nsw_covid["postcode"].map(
-    postcode_dataset.set_index("Postcode")["Latitude"].to_dict()
-).fillna(-36.860723)
+nsw_covid["Latitude"] = (
+    nsw_covid["postcode"]
+    .map(postcode_dataset.set_index("Postcode")["Latitude"].to_dict())
+    .fillna(-36.860723)
+)
 
-nsw_covid["Longitude"] = nsw_covid["postcode"].map(
-    postcode_dataset.set_index("Postcode")["Longitude"].to_dict()
-).fillna(153.592843)
+nsw_covid["Longitude"] = (
+    nsw_covid["postcode"]
+    .map(postcode_dataset.set_index("Postcode")["Longitude"].to_dict())
+    .fillna(153.592843)
+)
 # nsw_covid = nsw_covid.fillna(9999)
 
 display(nsw_covid)
@@ -57,29 +61,37 @@ melted_nsw = nsw_covid.melt(
 
 drop_dupes = melted_nsw.drop_duplicates()
 
-lat_pivot = gpd.pd.pivot_table(
-    drop_dupes,
-    values="value",
-    index="notification_date",
-    columns="postcode",
-    aggfunc="min",
-).ffill().bfill()
+lat_pivot = (
+    gpd.pd.pivot_table(
+        drop_dupes,
+        values="value",
+        index="notification_date",
+        columns="postcode",
+        aggfunc="min",
+    )
+    .ffill()
+    .bfill()
+)
 
 
-lon_pivot = gpd.pd.pivot_table(
-    drop_dupes,
-    values="value",
-    index="notification_date",
-    columns="postcode",
-    aggfunc="max",
-).ffill().bfill()
+lon_pivot = (
+    gpd.pd.pivot_table(
+        drop_dupes,
+        values="value",
+        index="notification_date",
+        columns="postcode",
+        aggfunc="max",
+    )
+    .ffill()
+    .bfill()
+)
 
 display(lat_pivot)
 
 display(lon_pivot)
 
 #%%
-print(nsw_covid['notification_date'])
+print(nsw_covid["notification_date"])
 grouped_df = nsw_covid.groupby(["notification_date", "postcode"]).size()
 
 print(grouped_df.values.sum())
@@ -100,21 +112,21 @@ display(grouped_df)
 
 # grouped_df.plot()
 # plt.show()
-grouped_df.to_csv('grouped.csv')
+grouped_df.to_csv("grouped.csv")
 
 #%%
 
 # https://stackoverflow.com/questions/46960864/combine-multiple-pandas-dataframes-into-a-multi-index-dataframe
 
-combine_dfs = [grouped_df,lat_pivot,lon_pivot]
+combine_dfs = [grouped_df, lat_pivot, lon_pivot]
 
-keys = ['Cases','Latitude','Longitude']
+keys = ["Cases", "Latitude", "Longitude"]
 
-multi_index_df = gpd.pd.concat(combine_dfs,keys=keys,axis=1)
+multi_index_df = gpd.pd.concat(combine_dfs, keys=keys, axis=1)
 
 display(multi_index_df)
 
-multi_index_df.to_csv('multi.csv')
+multi_index_df.to_csv("multi.csv")
 
 #%%
 # https://stackoverflow.com/questions/25929319/how-to-iterate-over-pandas-multiindex-dataframe-using-index
@@ -134,7 +146,7 @@ display(multi_index_df[level_keys[1]].iloc[0].values)
 
 # grouped_df.to_csv('test.csv')
 
-    #%%
+#%%
 import pandas_alive
 
 bar_chart = grouped_df.sum(axis=1).plot_animated(

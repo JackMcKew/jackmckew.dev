@@ -12,24 +12,25 @@ from pelican.generators import ArticlesGenerator
 from bs4 import BeautifulSoup
 from six import text_type
 
+
 def init(pelican):
     global maximum_images
     global minimum_one
-    maximum_images = pelican.settings.get('CLEAN_SUMMARY_MAXIMUM', 0)
-    minimum_one = pelican.settings.get('CLEAN_SUMMARY_MINIMUM_ONE', False)
+    maximum_images = pelican.settings.get("CLEAN_SUMMARY_MAXIMUM", 0)
+    minimum_one = pelican.settings.get("CLEAN_SUMMARY_MINIMUM_ONE", False)
 
 
 def clean_summary(instance):
     if type(instance) == Article:
         summary = instance.summary
-        summary = BeautifulSoup(instance.summary, 'html.parser')
-        images = summary.findAll('img')
-        if (len(images) > maximum_images):
+        summary = BeautifulSoup(instance.summary, "html.parser")
+        images = summary.findAll("img")
+        if len(images) > maximum_images:
             for image in images[maximum_images:]:
                 image.extract()
-        if len(images) < 1 and minimum_one: #try to find one
-            content = BeautifulSoup(instance.content, 'html.parser')
-            first_image = content.find('img')
+        if len(images) < 1 and minimum_one:  # try to find one
+            content = BeautifulSoup(instance.content, "html.parser")
+            first_image = content.find("img")
             if first_image:
                 summary.insert(0, first_image)
         instance._summary = text_type(summary)

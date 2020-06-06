@@ -43,14 +43,14 @@ class Vimeo(Directive):
 
     def align(argument):
         """Conversion function for the "align" option."""
-        return directives.choice(argument, ('left', 'center', 'right'))
+        return directives.choice(argument, ("left", "center", "right"))
 
     required_arguments = 1
     optional_arguments = 2
     option_spec = {
-        'width': directives.positive_int,
-        'height': directives.positive_int,
-        'align': align
+        "width": directives.positive_int,
+        "height": directives.positive_int,
+        "align": align,
     }
 
     final_argument_whitespace = False
@@ -60,27 +60,30 @@ class Vimeo(Directive):
         videoID = self.arguments[0].strip()
         width = 420
         height = 315
-        align = 'left'
+        align = "left"
 
-        if 'width' in self.options:
-            width = self.options['width']
+        if "width" in self.options:
+            width = self.options["width"]
 
-        if 'height' in self.options:
-            height = self.options['height']
+        if "height" in self.options:
+            height = self.options["height"]
 
-        if 'align' in self.options:
-            align = self.options['align']
+        if "align" in self.options:
+            align = self.options["align"]
 
-        url = 'https://player.vimeo.com/video/{}'.format(videoID)
+        url = "https://player.vimeo.com/video/{}".format(videoID)
         div_block = '<div class="vimeo" align="{}">'.format(align)
-        embed_block = '<iframe width="{}" height="{}" src="{}" '\
-                      'frameborder="0"></iframe>'.format(width, height, url)
+        embed_block = (
+            '<iframe width="{}" height="{}" src="{}" '
+            'frameborder="0"></iframe>'.format(width, height, url)
+        )
 
         return [
-            nodes.raw('', div_block, format='html'),
-            nodes.raw('', embed_block, format='html'),
-            nodes.raw('', '</div>', format='html')]
+            nodes.raw("", div_block, format="html"),
+            nodes.raw("", embed_block, format="html"),
+            nodes.raw("", "</div>", format="html"),
+        ]
 
 
 def register():
-    directives.register_directive('vimeo', Vimeo)
+    directives.register_directive("vimeo", Vimeo)

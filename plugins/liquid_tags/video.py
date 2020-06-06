@@ -28,14 +28,18 @@ from .mdx_liquid_tags import LiquidTags
 
 SYNTAX = "{% video url/to/video [url/to/video] [url/to/video] [width height] [url/to/poster] %}"
 
-VIDEO = re.compile(r'(/\S+|https?:\S+)(\s+(/\S+|https?:\S+))?(\s+(/\S+|https?:\S+))?(\s+(\d+\%?)\s(\d+\%?))?(\s+(/\S+|https?:\S+))?')
+VIDEO = re.compile(
+    r"(/\S+|https?:\S+)(\s+(/\S+|https?:\S+))?(\s+(/\S+|https?:\S+))?(\s+(\d+\%?)\s(\d+\%?))?(\s+(/\S+|https?:\S+))?"
+)
 
-VID_TYPEDICT = {'.mp4':"type='video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\"'",
-                '.ogv':"type='video/ogg; codecs=theora, vorbis'",
-                '.webm':"type='video/webm; codecs=vp8, vorbis'"}
+VID_TYPEDICT = {
+    ".mp4": "type='video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\"'",
+    ".ogv": "type='video/ogg; codecs=theora, vorbis'",
+    ".webm": "type='video/webm; codecs=vp8, vorbis'",
+}
 
 
-@LiquidTags.register('video')
+@LiquidTags.register("video")
 def video(preprocessor, tag, markup):
     videos = []
     width = None
@@ -54,23 +58,24 @@ def video(preprocessor, tag, markup):
         video_out = """
         <span class="videobox">
             <video width="{width}" height="{height}" preload="none" controls poster="{poster}">
-        """.format(width=width, height=height, poster=poster).strip()
+        """.format(
+            width=width, height=height, poster=poster
+        ).strip()
 
         for vid in videos:
             base, ext = os.path.splitext(vid)
             if ext not in VID_TYPEDICT:
-                raise ValueError("Unrecognized video extension: "
-                                 "{0}".format(ext))
-            video_out += ("<source src='{0}' "
-                          "{1}>".format(vid, VID_TYPEDICT[ext]))
+                raise ValueError("Unrecognized video extension: " "{0}".format(ext))
+            video_out += "<source src='{0}' " "{1}>".format(vid, VID_TYPEDICT[ext])
         video_out += "</video></span>"
     else:
-        raise ValueError("Error processing input, "
-                         "expected syntax: {0}".format(SYNTAX))
+        raise ValueError(
+            "Error processing input, " "expected syntax: {0}".format(SYNTAX)
+        )
 
     return video_out
 
 
-#----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # This import allows video tag to be a Pelican plugin
 from liquid_tags import register

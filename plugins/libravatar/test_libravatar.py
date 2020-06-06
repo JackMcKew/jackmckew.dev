@@ -28,70 +28,70 @@ from pelican import Pelican
 from pelican.settings import read_settings
 
 
-AUTHOR_EMAIL = 'bart.simpson@example.com'
-MD5_HASH = hashlib.md5 (AUTHOR_EMAIL.encode()).hexdigest ()
-LIBRAVATAR_BASE_URL = 'http://cdn.libravatar.org/avatar/'
+AUTHOR_EMAIL = "bart.simpson@example.com"
+MD5_HASH = hashlib.md5(AUTHOR_EMAIL.encode()).hexdigest()
+LIBRAVATAR_BASE_URL = "http://cdn.libravatar.org/avatar/"
 
 
-class TestLibravatarURL (unittest.TestCase):
+class TestLibravatarURL(unittest.TestCase):
     """Class for testing the URL output of the Libravatar plugin"""
 
-    def setUp (self, override = None):
-        self.output_path = mkdtemp (prefix = 'pelicantests.')
-        self.content_path = mkdtemp (prefix = 'pelicantests.')
-        theme_path = os.path.join (os.path.dirname (os.path.abspath (__file__)),
-                                   'test_data', 'theme')
+    def setUp(self, override=None):
+        self.output_path = mkdtemp(prefix="pelicantests.")
+        self.content_path = mkdtemp(prefix="pelicantests.")
+        theme_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "test_data", "theme"
+        )
         settings = {
-            'PATH': self.content_path,
-            'THEME': theme_path,
-            'OUTPUT_PATH': self.output_path,
-            'PLUGINS': [libravatar],
-            'CACHE_CONTENT': False
+            "PATH": self.content_path,
+            "THEME": theme_path,
+            "OUTPUT_PATH": self.output_path,
+            "PLUGINS": [libravatar],
+            "CACHE_CONTENT": False,
         }
         if override:
-            settings.update (override)
+            settings.update(override)
 
-        with open (os.path.join (self.content_path, 'test.md'), 'w') as test_md_file:
-            test_md_file.write ('Title: Test\nDate: 2019-09-05\nEmail: ' + AUTHOR_EMAIL + '\n\n')
+        with open(os.path.join(self.content_path, "test.md"), "w") as test_md_file:
+            test_md_file.write(
+                "Title: Test\nDate: 2019-09-05\nEmail: " + AUTHOR_EMAIL + "\n\n"
+            )
 
-        self.settings = read_settings (override = settings)
-        pelican = Pelican (settings = self.settings)
-        pelican.run ()
+        self.settings = read_settings(override=settings)
+        pelican = Pelican(settings=self.settings)
+        pelican.run()
 
-    def tearDown (self):
-        rmtree (self.output_path)
-        rmtree (self.content_path)
+    def tearDown(self):
+        rmtree(self.output_path)
+        rmtree(self.content_path)
 
-    def test_url (self, options = ''):
-        with open (os.path.join (self.output_path, 'test.html'), 'r') as test_html_file:
+    def test_url(self, options=""):
+        with open(os.path.join(self.output_path, "test.html"), "r") as test_html_file:
             found = False
-            for line in test_html_file.readlines ():
-                if re.search (LIBRAVATAR_BASE_URL + MD5_HASH + options, line):
+            for line in test_html_file.readlines():
+                if re.search(LIBRAVATAR_BASE_URL + MD5_HASH + options, line):
                     found = True
                     break
             assert found
 
-class TestLibravatarMissing (TestLibravatarURL):
+
+class TestLibravatarMissing(TestLibravatarURL):
     """Class for testing the Libravatar "missing picture" option"""
 
-    def setUp (self, override = None):
-        self.library = 'wavatar'
-        TestLibravatarURL.setUp (self,
-                                  override = {'LIBRAVATAR_MISSING':
-                                              self.library})
+    def setUp(self, override=None):
+        self.library = "wavatar"
+        TestLibravatarURL.setUp(self, override={"LIBRAVATAR_MISSING": self.library})
 
-    def test_url (self):
-        TestLibravatarURL.test_url (self, r'\?d=' + self.library)
+    def test_url(self):
+        TestLibravatarURL.test_url(self, r"\?d=" + self.library)
 
 
-class TestLibravatarSize (TestLibravatarURL):
+class TestLibravatarSize(TestLibravatarURL):
     """Class for testing the Libravatar size option"""
 
-    def setUp (self, override = None):
+    def setUp(self, override=None):
         self.size = 100
-        TestLibravatarURL.setUp (self,
-                                  override = {'LIBRAVATAR_SIZE': self.size})
+        TestLibravatarURL.setUp(self, override={"LIBRAVATAR_SIZE": self.size})
 
-    def test_url (self):
-        TestLibravatarURL.test_url (self, r'\?s=' + str (self.size))
-
+    def test_url(self):
+        TestLibravatarURL.test_url(self, r"\?s=" + str(self.size))

@@ -18,18 +18,20 @@ from pelican import signals
 from pelican.readers import BaseReader
 from pelican.utils import pelican_open
 
+
 class OrgReader(BaseReader):
     """Reader for Org files"""
+
     enabled = True
-    file_extensions = ['org']
+    file_extensions = ["org"]
 
     def __init__(self, *args, **kargs):
         """Init object construct with this class"""
         super(OrgReader, self).__init__(*args, **kargs)
-        settings = self.settings['ORGMODE']
-        settings.setdefault('code_highlight', True)
-        self.code_highlight = settings['code_highlight']
-    
+        settings = self.settings["ORGMODE"]
+        settings.setdefault("code_highlight", True)
+        self.code_highlight = settings["code_highlight"]
+
     def _separate_header_and_content(self, text_lines):
         """
         From a given Org text, return the header separate from the content.
@@ -45,7 +47,7 @@ class OrgReader(BaseReader):
         ]
         """
         no_more_header = False
-        expr_metadata = re.compile(r'^#\+[a-zA-Z]+:.*')
+        expr_metadata = re.compile(r"^#\+[a-zA-Z]+:.*")
         header = []
         content = []
         for line in text_lines:
@@ -55,7 +57,7 @@ class OrgReader(BaseReader):
             else:
                 no_more_header = True
                 content.append(line)
-        return header, content 
+        return header, content
 
     def _parse_metadatas(self, text_lines):
         """
@@ -67,10 +69,13 @@ class OrgReader(BaseReader):
         """
         if not text_lines:
             return {}
-        expr_metadata = re.compile(r'^#\+([a-zA-Z]+):(.*)')
+        expr_metadata = re.compile(r"^#\+([a-zA-Z]+):(.*)")
         return {
-            expr_metadata.match(line).group(1).lower()
-            : expr_metadata.match(line).group(2).strip()
+            expr_metadata.match(line)
+            .group(1)
+            .lower(): expr_metadata.match(line)
+            .group(2)
+            .strip()
             for line in text_lines
         }
 
@@ -86,17 +91,16 @@ class OrgReader(BaseReader):
         header, content = self._separate_header_and_content(text_lines)
         metadatas = self._parse_metadatas(header)
         metadatas_processed = {
-            key
-            : self.process_metadata(key, value)
-            for key, value in metadatas.items()
+            key: self.process_metadata(key, value) for key, value in metadatas.items()
         }
-        content_html = convert_html("\n".join(content),
-                                    highlight=self.code_highlight)
+        content_html = convert_html("\n".join(content), highlight=self.code_highlight)
         return content_html, metadatas_processed
-    
+
+
 def add_reader(readers):
     for ext in OrgReader.file_extensions:
         readers.reader_classes[ext] = OrgReader
+
 
 def register():
     signals.readers_init.connect(add_reader)

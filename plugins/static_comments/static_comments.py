@@ -12,24 +12,26 @@ from pelican import signals
 
 def initialized(pelican):
     from pelican.settings import DEFAULT_CONFIG
-    DEFAULT_CONFIG.setdefault('STATIC_COMMENTS', False)
-    DEFAULT_CONFIG.setdefault('STATIC_COMMENTS_DIR' 'comments')
+
+    DEFAULT_CONFIG.setdefault("STATIC_COMMENTS", False)
+    DEFAULT_CONFIG.setdefault("STATIC_COMMENTS_DIR" "comments")
     if pelican:
-        pelican.settings.setdefault('STATIC_COMMENTS', False)
-        pelican.settings.setdefault('STATIC_COMMENTS_DIR', 'comments')
+        pelican.settings.setdefault("STATIC_COMMENTS", False)
+        pelican.settings.setdefault("STATIC_COMMENTS_DIR", "comments")
 
 
 def add_static_comments(gen, metadata):
-    if gen.settings['STATIC_COMMENTS'] != True:
+    if gen.settings["STATIC_COMMENTS"] != True:
         return
 
-    if not 'slug' in metadata:
-        logger.warning("static_comments: "
-                "cant't locate comments file without slug tag in the article")
+    if not "slug" in metadata:
+        logger.warning(
+            "static_comments: "
+            "cant't locate comments file without slug tag in the article"
+        )
         return
 
-    fname = os.path.join(gen.settings['STATIC_COMMENTS_DIR'],
-            metadata['slug'] + ".md")
+    fname = os.path.join(gen.settings["STATIC_COMMENTS_DIR"], metadata["slug"] + ".md")
 
     if not os.path.exists(fname):
         return
@@ -38,7 +40,7 @@ def add_static_comments(gen, metadata):
     text = input_file.read()
     html = markdown.markdown(text)
 
-    metadata['static_comments'] = html
+    metadata["static_comments"] = html
 
 
 def register():

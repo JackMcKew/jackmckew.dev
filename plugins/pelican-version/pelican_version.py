@@ -13,13 +13,13 @@ import os
 
 
 def generate_version(generator):
-    versionPath = generator.settings.get('VERSION_PATH', 'content')
+    versionPath = generator.settings.get("VERSION_PATH", "content")
     path = os.path.dirname(os.path.realpath(__file__))
-    outputPath = generator.settings.get('OUTPUT_VERSION_PATH', 'output')
+    outputPath = generator.settings.get("OUTPUT_VERSION_PATH", "output")
     env = Environment(loader=FileSystemLoader(path))
-    template = env.get_template('version.html')
+    template = env.get_template("version.html")
     try:
-        currentVersionFile = open(versionPath + '/currentVersion', 'r')
+        currentVersionFile = open(versionPath + "/currentVersion", "r")
         currentVersion = int(currentVersionFile.read()) + 1
     except:
         currentVersion = 0

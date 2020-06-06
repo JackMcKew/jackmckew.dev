@@ -9,10 +9,11 @@ from within your theme's templates.
 
 from pelican import signals
 
+
 def add_license(generator, metadata):
-    if 'license' not in metadata.keys()\
-        and 'LICENSE' in generator.settings.keys():
-            metadata['license'] = generator.settings['LICENSE']
+    if "license" not in metadata.keys() and "LICENSE" in generator.settings.keys():
+        metadata["license"] = generator.settings["LICENSE"]
+
 
 def register():
     signals.article_generator_context.connect(add_license)

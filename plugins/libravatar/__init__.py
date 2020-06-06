@@ -1,1 +1,1 @@
-from . libravatar import *
+from .libravatar import *

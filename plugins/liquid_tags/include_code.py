@@ -43,9 +43,12 @@ import sys
 from .mdx_liquid_tags import LiquidTags
 
 
-SYNTAX = "{% include_code /path/to/code.py [lang:python] [lines:X-Y] "\
-         "[:hidefilename:] [:hidelink:] [:hideall:] [title] %}"
-FORMAT = re.compile(r"""
+SYNTAX = (
+    "{% include_code /path/to/code.py [lang:python] [lines:X-Y] "
+    "[:hidefilename:] [:hidelink:] [:hideall:] [title] %}"
+)
+FORMAT = re.compile(
+    r"""
 ^(?:\s+)?                          # Allow whitespace at beginning
 (?P<src>\S+)                       # Find the path
 (?:\s+)?                           # Whitespace
@@ -62,10 +65,12 @@ FORMAT = re.compile(r"""
 (?:(?:codec:)(?P<codec>\S+))?      # Optional language
 (?:\s+)?                           # Whitespace
 (?P<title>.+)?$                    # Optional title
-""", re.VERBOSE)
+""",
+    re.VERBOSE,
+)
 
 
-@LiquidTags.register('include_code')
+@LiquidTags.register("include_code")
 def include_code(preprocessor, tag, markup):
 
     title = None
@@ -75,44 +80,46 @@ def include_code(preprocessor, tag, markup):
     match = FORMAT.search(markup)
     if match:
         argdict = match.groupdict()
-        title = argdict['title'] or ""
-        lang = argdict['lang']
-        codec = argdict['codec'] or "utf8"
-        lines = argdict['lines']
-        hide_filename = bool(argdict['hidefilename'])
-        hide_link = bool(argdict['hidelink'])
-        hide_all = bool(argdict['hideall'])
+        title = argdict["title"] or ""
+        lang = argdict["lang"]
+        codec = argdict["codec"] or "utf8"
+        lines = argdict["lines"]
+        hide_filename = bool(argdict["hidefilename"])
+        hide_link = bool(argdict["hidelink"])
+        hide_all = bool(argdict["hideall"])
         if lines:
             first_line, last_line = map(int, lines.split("-"))
-        src = argdict['src']
+        src = argdict["src"]
 
     if not src:
-        raise ValueError("Error processing input, "
-                         "expected syntax: {0}".format(SYNTAX))
+        raise ValueError(
+            "Error processing input, " "expected syntax: {0}".format(SYNTAX)
+        )
 
-    code_dir = preprocessor.configs.getConfig('CODE_DIR')
-    code_path = os.path.join('content', code_dir, src)
+    code_dir = preprocessor.configs.getConfig("CODE_DIR")
+    code_path = os.path.join("content", code_dir, src)
 
     if not os.path.exists(code_path):
         raise ValueError("File {0} could not be found".format(code_path))
 
     if not codec:
-        codec = 'utf-8'
+        codec = "utf-8"
 
     with open(code_path, encoding=codec) as fh:
         if lines:
-            code = fh.readlines()[first_line - 1: last_line]
+            code = fh.readlines()[first_line - 1 : last_line]
             code[-1] = code[-1].rstrip()
             code = "".join(code)
         else:
             code = fh.read()
 
     if (not title and hide_filename) and not hide_all:
-        raise ValueError("Either title must be specified or filename must "
-                         "be available")
+        raise ValueError(
+            "Either title must be specified or filename must " "be available"
+        )
 
-    open_tag = ''
-    close_tag = ''
+    open_tag = ""
+    close_tag = ""
 
     open_tag = "<figure class='code'>\n<figcaption>"
     close_tag = "</figure>"
@@ -126,8 +133,8 @@ def include_code(preprocessor, tag, markup):
             open_tag += "<span>{title}</span> ".format(title=title)
 
         if not hide_link:
-            url = '/{0}/{1}'.format(code_dir, src)
-            url = re.sub('/+', '/', url)
+            url = "/{0}/{1}".format(code_dir, src)
+            url = re.sub("/+", "/", url)
             open_tag += "<a href='{url}'>download</a>".format(url=url)
 
     # store HTML tags in the stash.  This prevents them from being
@@ -136,26 +143,34 @@ def include_code(preprocessor, tag, markup):
     close_tag = preprocessor.configs.htmlStash.store(close_tag)
 
     if lang:
-        lang_include = ':::' + lang + '\n    '
+        lang_include = ":::" + lang + "\n    "
     else:
-        lang_include = ''
+        lang_include = ""
 
     if sys.version_info[0] < 3:
-        source = (open_tag
-                  + '\n\n    '
-                  + lang_include
-                  + '\n    '.join(code.decode(codec).split('\n')) + '\n\n'
-                  + close_tag + '\n')
+        source = (
+            open_tag
+            + "\n\n    "
+            + lang_include
+            + "\n    ".join(code.decode(codec).split("\n"))
+            + "\n\n"
+            + close_tag
+            + "\n"
+        )
     else:
-        source = (open_tag
-                  + '\n\n    '
-                  + lang_include
-                  + '\n    '.join(code.split('\n')) + '\n\n'
-                  + close_tag + '\n')
+        source = (
+            open_tag
+            + "\n\n    "
+            + lang_include
+            + "\n    ".join(code.split("\n"))
+            + "\n\n"
+            + close_tag
+            + "\n"
+        )
 
     return source
 
 
-#----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # This import allows image tag to be a Pelican plugin
 from liquid_tags import register

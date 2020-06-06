@@ -12,20 +12,22 @@ A plugin to list your Github Activity
 from __future__ import unicode_literals, print_function
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 from pelican import signals
 
 
-class GitHubActivity():
+class GitHubActivity:
     """
         A class created to fetch github activity with feedparser
     """
+
     def __init__(self, generator):
         import feedparser
-        self.activities = feedparser.parse(
-            generator.settings['GITHUB_ACTIVITY_FEED'])
-        self.max_entries = generator.settings['GITHUB_ACTIVITY_MAX_ENTRIES'] 
+
+        self.activities = feedparser.parse(generator.settings["GITHUB_ACTIVITY_FEED"])
+        self.max_entries = generator.settings["GITHUB_ACTIVITY_MAX_ENTRIES"]
 
     def fetch(self):
         """
@@ -33,12 +35,15 @@ class GitHubActivity():
         """
 
         entries = []
-        for activity in self.activities['entries']:
+        for activity in self.activities["entries"]:
             entries.append(
-                    [element for element in [activity['title'],
-                        activity['content'][0]['value']]])
+                [
+                    element
+                    for element in [activity["title"], activity["content"][0]["value"]]
+                ]
+            )
 
-        return entries[0:self.max_entries]
+        return entries[0 : self.max_entries]
 
 
 def fetch_github_activity(gen, metadata):
@@ -48,8 +53,8 @@ def fetch_github_activity(gen, metadata):
         template
     """
 
-    if 'GITHUB_ACTIVITY_FEED' in gen.settings.keys():
-        gen.context['github_activity'] = gen.plugin_instance.fetch()
+    if "GITHUB_ACTIVITY_FEED" in gen.settings.keys():
+        gen.context["github_activity"] = gen.plugin_instance.fetch()
 
 
 def feed_parser_initialization(generator):
@@ -68,5 +73,7 @@ def register():
         signals.article_generator_init.connect(feed_parser_initialization)
         signals.article_generator_context.connect(fetch_github_activity)
     except ImportError:
-        logger.warning('`github_activity` failed to load dependency `feedparser`.'
-                       '`github_activity` plugin not loaded.')
+        logger.warning(
+            "`github_activity` failed to load dependency `feedparser`."
+            "`github_activity` plugin not loaded."
+        )

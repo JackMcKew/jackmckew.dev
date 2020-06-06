@@ -38,18 +38,18 @@ def group_content(generator, content_type):
     `CATEGORIES_TO_COLLATE` when using this plugin with category
     filtering enabled.
     """
-    category_filter = generator.settings.get('CATEGORIES_TO_COLLATE', None)
+    category_filter = generator.settings.get("CATEGORIES_TO_COLLATE", None)
     filtering_active = type(category_filter) in (list, tuple, set)
 
-    collations = generator.context.get('collations', defaultdict(list))
+    collations = generator.context.get("collations", defaultdict(list))
     for content in generator.context[content_type]:
-        category_list = [c.strip() for c in content.category.name.split(',')]
+        category_list = [c.strip() for c in content.category.name.split(",")]
         for category in category_list:
             if filtering_active and category not in category_filter:
                 continue
             category = substitute_category_name(category)
-            collations['%s_%s' % (category, content_type)].append(content)
-    generator.context['collations'] = collations
+            collations["%s_%s" % (category, content_type)].append(content)
+    generator.context["collations"] = collations
 
 
 def substitute_category_name(category_name):
@@ -62,10 +62,11 @@ def substitute_category_name(category_name):
     the user of the collate_content module is advised to use
     categories with Python-friendly names.
     """
-    return re.sub(r'\s', '_', category_name).replace('-', '_').lower()
+    return re.sub(r"\s", "_", category_name).replace("-", "_").lower()
 
-ARTICLE_GROUPER = functools.partial(group_content, content_type='articles')
-PAGE_GROUPER = functools.partial(group_content, content_type='pages')
+
+ARTICLE_GROUPER = functools.partial(group_content, content_type="articles")
+PAGE_GROUPER = functools.partial(group_content, content_type="pages")
 
 
 def register():

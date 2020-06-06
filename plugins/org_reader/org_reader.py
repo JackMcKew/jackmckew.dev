@@ -50,7 +50,7 @@ from pelican import readers
 from pelican import signals
 
 
-ELISP = os.path.join(os.path.dirname(__file__), 'org_reader.el')
+ELISP = os.path.join(os.path.dirname(__file__), "org_reader.el")
 LOG = logging.getLogger(__name__)
 
 
@@ -58,27 +58,28 @@ class OrgEmacsReader(readers.BaseReader):
     enabled = True
 
     EMACS_ARGS = ["-Q", "--batch"]
-    ELISP_EXEC = "(org->pelican \"{0}\" {1})"
+    ELISP_EXEC = '(org->pelican "{0}" {1})'
 
-    file_extensions = ['org']
+    file_extensions = ["org"]
 
     def read(self, filename):
-        assert 'ORG_READER_EMACS_LOCATION' in self.settings, \
-            "No ORG_READER_EMACS_LOCATION specified in settings"
+        assert (
+            "ORG_READER_EMACS_LOCATION" in self.settings
+        ), "No ORG_READER_EMACS_LOCATION specified in settings"
         LOG.info("Reading Org file {0}".format(filename))
-        cmd = [self.settings['ORG_READER_EMACS_LOCATION']]
+        cmd = [self.settings["ORG_READER_EMACS_LOCATION"]]
         cmd.extend(self.EMACS_ARGS)
 
-        if 'ORG_READER_EMACS_SETTINGS' in self.settings:
-            cmd.append('-l')
-            cmd.append(self.settings['ORG_READER_EMACS_SETTINGS'])
+        if "ORG_READER_EMACS_SETTINGS" in self.settings:
+            cmd.append("-l")
+            cmd.append(self.settings["ORG_READER_EMACS_SETTINGS"])
 
-        backend = self.settings.get('ORG_READER_BACKEND', "'html")
+        backend = self.settings.get("ORG_READER_BACKEND", "'html")
 
-        cmd.append('-l')
+        cmd.append("-l")
         cmd.append(ELISP)
 
-        cmd.append('--eval')
+        cmd.append("--eval")
         cmd.append(self.ELISP_EXEC.format(filename, backend))
 
         LOG.debug("OrgEmacsReader: running command `{0}`".format(cmd))
@@ -89,19 +90,21 @@ class OrgEmacsReader(readers.BaseReader):
         # get default slug from .org filename
         default_slug, _ = os.path.splitext(os.path.basename(filename))
 
-        metadata = {'title': json_output['title'] or '',
-                    'date': json_output['date'] or '',
-                    'author': json_output['author'] or '',
-                    'lang': json_output['language'] or '',
-                    'category': json_output['category'] or '',
-                    'slug': json_output['slug'] or default_slug,
-                    'modified': json_output['modified'] or '',
-                    'tags': json_output['tags'] or '',
-                    'save_as': json_output['save_as'] or '',
-                    'summary': json_output['summary'] or '',
-                    'status': json_output['status'] or ''}
+        metadata = {
+            "title": json_output["title"] or "",
+            "date": json_output["date"] or "",
+            "author": json_output["author"] or "",
+            "lang": json_output["language"] or "",
+            "category": json_output["category"] or "",
+            "slug": json_output["slug"] or default_slug,
+            "modified": json_output["modified"] or "",
+            "tags": json_output["tags"] or "",
+            "save_as": json_output["save_as"] or "",
+            "summary": json_output["summary"] or "",
+            "status": json_output["status"] or "",
+        }
         # remove empty strings when necessary
-        for key in ['save_as', 'modified', 'lang', 'summary']:
+        for key in ["save_as", "modified", "lang", "summary"]:
             if not metadata[key]:
                 metadata.pop(key)
 
@@ -109,13 +112,13 @@ class OrgEmacsReader(readers.BaseReader):
         for key, value in metadata.items():
             parsed[key] = self.process_metadata(key, value)
 
-        content = json_output['post']
+        content = json_output["post"]
 
         return content, parsed
 
 
 def add_reader(readers):
-    readers.reader_classes['org'] = OrgEmacsReader
+    readers.reader_classes["org"] = OrgEmacsReader
 
 
 def register():
