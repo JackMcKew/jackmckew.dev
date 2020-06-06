@@ -152,10 +152,11 @@ DEFAULT_LANG = "English"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM: Any = "feeds/all.atom.xml"
-CATEGORY_FEED_ATOM: Any = "feeds/%s.atom.xml"
+CATEGORY_FEED_ATOM: Any = 'feeds/{slug}.atom.xml'
 TRANSLATION_FEED_ATOM: Any = None
 AUTHOR_FEED_ATOM: Any = None
 AUTHOR_FEED_RSS: Any = None
+FEED_MAX_ITEMS = 5
 
 
 # Social widget
