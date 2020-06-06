@@ -42,12 +42,23 @@ class Animal():
         self.species = species
 ```
 
+So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the `__init__` and other dunder methods generated for us (see a previous post on dunder methods here).
+
+This allows us to write the same class as above like:
+
+``` python
+@attr.s
+class Animal():
+    name: str = 'Animal'
+    species: str = 'JackRussell
+```
+
+This will create the same class but initalise dunder methods for us!
+
 I've written multiple posts on these topics which you can find:
 
 - [Dunders](https://jackmckew.dev/dunders-in-python.html)
 - [Class Inheritance](https://jackmckew.dev/inheritance-in-python.html)
-
-So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the `__init__` and other dunder methods generated for us (see a previous post on dunder methods here).
 
 Now we write the methods which all charts should share such as create figure, save, etc. We also create methods which will raise errors unless overridden, this is for future developers as a reminder to make sure that any classes that inherit from base chart ensure to override these methods with custom functionality. By having these methods shared, this allows us to change one part of code and have it ripple through the project. The benefit was definitely realised later on in version 0.2.0 where we could add in memory functionality to write to gif and not have to copy paste throughout the project.
 
@@ -81,7 +92,7 @@ As a user of others projects, sifting through the documentation is where most of
 
 Once interrogate was implemented to check all classes, methods and functions were captured by docstrings, we wanted to make sure that this was routinely checked. The best way to ensure this, is to automate it! Thus another project was started to create a GitHub action that uses interrogate.
 
-For more information on GitHub actions and how to use them, check out a previous write up here: GitHub actions post
+For more information on GitHub actions and how to use them, check out a previous write up here: <https://jackmckew.dev/github-actions-for-cicd.html>
 
 GitHub actions can be created from a Docker file, which spins up an instance of a specified container (we use alpine python in this case), install our dependencies and run the package. There was a bit of a hurdle in debugging the action and making sure the shell script was functional. The beauty of GitHub actions is then shown as we can string multiple actions together to get our workflow as we want it.
 
