@@ -62,7 +62,7 @@ Consider a container as a standalone object, when you start it, it won't have an
 
 The `action.yml` file contains all the metadata around the action. The syntax is well defined here <https://help.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions>. The things you'll want to include in this file are:
 
-- The name & description of the action 
+- The name & description of the action
 - The branding of the action (eg, the 'logo' looks for the action on the marketplace)
     - There's a really good cheat sheet for branding here: <https://github.com/haya14busa/github-action-brandings>
 - Inputs & Output
