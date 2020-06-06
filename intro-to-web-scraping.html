@@ -17,7 +17,7 @@
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -143,7 +143,7 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
 <article class="single">
   <header>
       
@@ -178,12 +178,18 @@
 <div class="output_area">
 <div class="prompt output_prompt">Out[11]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
+
+
+
+
 <meta charset="utf-8"/>
 <title>NZ_City_Letter_Analysis</title>
 <script src="https://cdn.pydata.org/bokeh/release/bokeh-1.3.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
             Bokeh.set_log_level("info");
         </script>
+
+
 <div class="bk-root" data-root-id="1003" id="44d6f2ea-a84c-406e-98f4-090d20f0aa6f"></div>
 <script id="1114" type="application/json">
           {"6a79ccec-7604-45e6-8eef-74d2887334ba":{"roots":{"references":[{"attributes":{},"id":"1010","type":"CategoricalScale"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1037","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1038","type":"VBar"},"selection_glyph":null,"view":{"id":"1040","type":"CDSView"}},"id":"1039","type":"GlyphRenderer"},{"attributes":{"fill_color":{"value":"#1f77b4"},"line_color":{"value":"#1f77b4"},"top":{"field":"Count"},"width":{"value":0.9},"x":{"field":"index"}},"id":"1037","type":"VBar"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1040","type":"CDSView"},{"attributes":{},"id":"1012","type":"LinearScale"},{"attributes":{},"id":"1023","type":"PanTool"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{"formatter":{"id":"1043","type":"CategoricalTickFormatter"},"ticker":{"id":"1015","type":"CategoricalTicker"}},"id":"1014","type":"CategoricalAxis"},{"attributes":{},"id":"1024","type":"WheelZoomTool"},{"attributes":{},"id":"1015","type":"CategoricalTicker"},{"attributes":{"callback":null,"data":{"Count":[10,1,0,1,4,1,6,3,5,0,4,2,3,6,6,3,0,5,2,4,4,1,3,0,1,0],"Word_Name":["Aratiatia Lakes, Aratiatia Rapids","Kaik\u016bmera Bay","Ahuroa","Aratiatia Lakes, Aratiatia Rapids","Keteketerau","Kaipara Flats","Mangangarongaro: Mangangarongaro Stream","Whatiwhatihoe","Aratiatia Lakes, Aratiatia Rapids","Ahuroa","Pukek\u0101k\u0101riki","M\u0101k\u014dhine Valley","Mangangarongaro: Mangangarongaro Stream","Mangangarongaro: Mangangarongaro Stream","Mokoroa: Mokoroa Stream","Pukepiripiri","Ahuroa","Mangangarongaro: Mangangarongaro Stream","Aratiatia Lakes, Aratiatia Rapids","Aratiatia Lakes, Aratiatia Rapids","Motukauri: Motukauri Island","Awah\u014dhonu River","Waianiwaniwa","Ahuroa","Kaik\u016bmera Bay","Ahuroa"],"index":["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]},"selected":{"id":"1049","type":"Selection"},"selection_policy":{"id":"1048","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{"overlay":{"id":"1047","type":"BoxAnnotation"}},"id":"1025","type":"BoxZoomTool"},{"attributes":{},"id":"1048","type":"UnionRenderers"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1015","type":"CategoricalTicker"}},"id":"1017","type":"Grid"},{"attributes":{},"id":"1026","type":"SaveTool"},{"attributes":{"callback":null,"tooltips":[["Word","@Word_Name"]]},"id":"1002","type":"HoverTool"},{"attributes":{"formatter":{"id":"1045","type":"BasicTickFormatter"},"ticker":{"id":"1019","type":"BasicTicker"}},"id":"1018","type":"LinearAxis"},{"attributes":{},"id":"1043","type":"CategoricalTickFormatter"},{"attributes":{},"id":"1027","type":"ResetTool"},{"attributes":{"text":"Letter Counts"},"id":"1004","type":"Title"},{"attributes":{},"id":"1019","type":"BasicTicker"},{"attributes":{},"id":"1049","type":"Selection"},{"attributes":{},"id":"1028","type":"HelpTool"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1047","type":"BoxAnnotation"},{"attributes":{"dimension":1,"ticker":{"id":"1019","type":"BasicTicker"}},"id":"1022","type":"Grid"},{"attributes":{"callback":null,"factors":["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]},"id":"1006","type":"FactorRange"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1023","type":"PanTool"},{"id":"1024","type":"WheelZoomTool"},{"id":"1025","type":"BoxZoomTool"},{"id":"1026","type":"SaveTool"},{"id":"1027","type":"ResetTool"},{"id":"1028","type":"HelpTool"},{"id":"1002","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"Count"},"width":{"value":0.9},"x":{"field":"index"}},"id":"1038","type":"VBar"},{"attributes":{"below":[{"id":"1014","type":"CategoricalAxis"}],"center":[{"id":"1017","type":"Grid"},{"id":"1022","type":"Grid"}],"left":[{"id":"1018","type":"LinearAxis"}],"plot_height":250,"renderers":[{"id":"1039","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":null,"x_range":{"id":"1006","type":"FactorRange"},"x_scale":{"id":"1010","type":"CategoricalScale"},"y_range":{"id":"1008","type":"DataRange1d"},"y_scale":{"id":"1012","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"callback":null,"start":0},"id":"1008","type":"DataRange1d"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.1"}}
@@ -223,6 +229,8 @@
             else document.addEventListener("DOMContentLoaded", fn);
           })();
         </script>
+
+
 </div>
 </div>
 </div>

@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software Development</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software-development.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-02-20T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Getting Started in Python</title><link href="https://jackmckew.dev/getting-started-in-python.html" rel="alternate"></link><published>2020-02-20T00:00:00+11:00</published><updated>2020-02-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-02-20:/getting-started-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="resources-tips-for-getting-started-in-python"&gt;&lt;strong&gt;Resources &amp;amp; tips for getting started in Python&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id="glossary"&gt;Glossary&lt;/h3&gt;
+&lt;p&gt;One of the most useful skills in my opinion in all walks of life is the ability to find information &amp;amp; answers. A very useful tool for doing this is the internet &amp;amp; search engines like Google. In my opinion being able to search …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="resources-tips-for-getting-started-in-python"&gt;&lt;strong&gt;Resources &amp;amp; tips for getting started in Python&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id="glossary"&gt;Glossary&lt;/h3&gt;
+&lt;p&gt;One of the most useful skills in my opinion in all walks of life is the ability to find information &amp;amp; answers. A very useful tool for doing this is the internet &amp;amp; search engines like Google. In my opinion being able to search the internet for answers to your programming questions is a skill in itself, knowing the right words or phrases to use is a massive part of that, so I will begin with a glossary of terminology for things that may make it easier to answer your questions.&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Term&lt;/th&gt;
+&lt;th&gt;Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Directory&lt;/td&gt;
+&lt;td&gt;In Windows, a directory is commonly referred to as a folder.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Module&lt;/td&gt;
+&lt;td&gt;A module in software is a piece of software responsible for one specific functionality. In Python, they are separate files with a .py extension containing functions, classes and/or variables.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Package&lt;/td&gt;
+&lt;td&gt;A package in Python is a directory of packages and/or modules. It is more or less a directory with one special &lt;code&gt;__init__.py&lt;/code&gt; file inside it.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Runtime / Environment&lt;/td&gt;
+&lt;td&gt;The runtime or environment in Python is the context in which the code runs.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Variable&lt;/td&gt;
+&lt;td&gt;A variable is a location that stores data temporarily within a program which can be modified, stored and/or displayed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;An object is a combination of data, whether in variables or structures.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Class&lt;/td&gt;
+&lt;td&gt;A class refers to a set of related objects with common properties.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Function&lt;/td&gt;
+&lt;td&gt;A named section of a program that has a specific purpose.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Algorithms&lt;/td&gt;
+&lt;td&gt;A set of guidelines which describe how to perform a task.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;API&lt;/td&gt;
+&lt;td&gt;Application Programming Interface, is a structure in which you can interact with another piece of software.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Bug&lt;/td&gt;
+&lt;td&gt;A bug is an unexpected error which causes a malfunction.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Frontend&lt;/td&gt;
+&lt;td&gt;The front-end is how the user interacts with the software, like Windows.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;The back-end is all the tasks that happen in the background with the user's interaction&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Argument&lt;/td&gt;
+&lt;td&gt;An argument is a value or variable passed into a function.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;Boolean is an expression used with True or False statements, operators include AND, OR, NOT.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command Line Interface&lt;/td&gt;
+&lt;td&gt;The user interface based on text, typically used on Windows through cmd.exe (Command Prompt)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Shell&lt;/td&gt;
+&lt;td&gt;A shell is a program that takes in commands (like Command Prompt) to interact with the operating system.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Compilation&lt;/td&gt;
+&lt;td&gt;Compilation is converting programming (code) into instructions the computer can understand.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;An ordered sequence of elements, denoted with square brackets [ ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dictionary&lt;/td&gt;
+&lt;td&gt;An ordered (in 3.6+) collection of data, with a key and a value, denoted with curly brackets &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Exception&lt;/td&gt;
+&lt;td&gt;If a situation comes up that the program cannot handle, it'll throw an exception.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Loop&lt;/td&gt;
+&lt;td&gt;A loop allows code to be executed repeated, either with a for (finite amount of times) or while (indefinite).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Iteration&lt;/td&gt;
+&lt;td&gt;Repetition of a process, you iterate over a loop numerous times.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;A website/service where lots of open source packages live and great resource for finding examples of real-use code.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="editor"&gt;Editor&lt;/h3&gt;
+&lt;p&gt;There is so many editors out there it is difficult to find the right one for you.&lt;/p&gt;
+&lt;h4 id="mu-httpscodewithmu"&gt;Mu &lt;a href="https://codewith.mu/"&gt;https://codewith.mu/&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Mu is a simple Python editor, designed for beginners.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Mu Editor" class="img-fluid" src="https://jackmckew.dev/img/mu.gif"/&gt;&lt;/p&gt;
+&lt;h4 id="vs-code-httpscodevisualstudiocom"&gt;VS Code &lt;a href="https://code.visualstudio.com/"&gt;https://code.visualstudio.com/&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;While not specifically for Python, it has an amazing Python extension and is my go-to editor.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="VS Code" class="img-fluid" src="https://jackmckew.dev/img/vs_code.png"/&gt;&lt;/p&gt;
+&lt;h4 id="sublime-text-httpswwwsublimetextcom"&gt;Sublime Text &lt;a href="https://www.sublimetext.com/"&gt;https://www.sublimetext.com/&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;A self proclaimed "A sophisticated text editor for
+code, markup and prose".&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Sublime" class="img-fluid" src="https://jackmckew.dev/img/sublime.png"/&gt;&lt;/p&gt;
+&lt;h4 id="pycharm-httpswwwjetbrainscompycharm"&gt;PyCharm &lt;a href="https://www.jetbrains.com/pycharm/"&gt;https://www.jetbrains.com/pycharm/&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;A more fleshed out full suite for professional developers. All the bells and whistles included.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="PyCharm" class="img-fluid" src="https://jackmckew.dev/img/pycharm.jpg"/&gt;&lt;/p&gt;
+&lt;h3 id="resources"&gt;Resources&lt;/h3&gt;
+&lt;p&gt;There is an abundance of resources on the internet for getting started with Python (including this one!), these are my personal recommendations.&lt;/p&gt;
+&lt;h4 id="automate-the-boring-stuff"&gt;Automate The Boring Stuff&lt;/h4&gt;
+&lt;p&gt;&lt;a href="http://automatetheboringstuff.com/"&gt;http://automatetheboringstuff.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Computers are made to do the boring things for us, so make the most of it! This book goes through many practical examples of how you can use Python to automate the boring stuff out of your life.&lt;/p&gt;
+&lt;h4 id="code-academy"&gt;Code Academy&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://www.codecademy.com/catalog/language/python"&gt;https://www.codecademy.com/catalog/language/python&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;While the Python 3 course on Code Academy isn't free, the Python 2.7 version is and you can always learn the differences later on.&lt;/p&gt;
+&lt;h4 id="python-bytes-podcast"&gt;Python Bytes Podcast&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://pythonbytes.fm/"&gt;https://pythonbytes.fm/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Weekly half an hour podcast on exciting packages &amp;amp; tools in the Python space. Great to listen to on your commute!&lt;/p&gt;
+&lt;h4 id="github"&gt;Github&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://github.com/"&gt;https://github.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Github is a website/service where lots of open source projects &amp;amp; packages live. Lots of information can be found here on the projects themselves and in the issues raised/answered previously.&lt;/p&gt;
+&lt;h4 id="cheat-sheet"&gt;Cheat Sheet&lt;/h4&gt;
+&lt;p&gt;If you're anything like me, you'd appreciate a nicely laid out cheat sheet. &lt;a href="https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf"&gt;https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Cheat Sheet" class="img-fluid" src="https://jackmckew.dev/img/cheat-sheet.png"/&gt;&lt;/p&gt;
+&lt;h4 id="real-python"&gt;Real Python&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://realpython.com/"&gt;https://realpython.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Real Python is an amazing website, with lots of beginner friendly tutorials on more topics than I can imagine.&lt;/p&gt;
+&lt;h3 id="packages"&gt;Packages&lt;/h3&gt;
+&lt;p&gt;The best part about Python is the community and abundance of free, open source packages that you can utilise to not re-invent the wheel when solving problems.&lt;/p&gt;
+&lt;p&gt;I did a blog post on useful packages in 2019, check it out at: &lt;a href="https://jackmckew.dev/episode-10-python-package-cheat-sheet.html"&gt;https://jackmckew.dev/episode-10-python-package-cheat-sheet.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If there is anything I have missed, please feel free to drop a comment below and I will update this post!&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>Automatically Generate Documentation with Sphinx</title><link href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html" rel="alternate"></link><published>2020-02-03T00:00:00+11:00</published><updated>2020-02-03T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-02-03:/automatically-generate-documentation-with-sphinx.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="document-code-automatically-through-docstrings-with-sphinx"&gt;&lt;strong&gt;Document code automatically through docstrings with Sphinx&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;This post goes into how to generate documentation for your python projects automatically with Sphinx!&lt;/p&gt;
+&lt;p&gt;First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install sphinx …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="document-code-automatically-through-docstrings-with-sphinx"&gt;&lt;strong&gt;Document code automatically through docstrings with Sphinx&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;This post goes into how to generate documentation for your python projects automatically with Sphinx!&lt;/p&gt;
+&lt;p&gt;First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install sphinx
+conda install sphinx
+pipenv install sphinx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Once you have installed sphinx, inside the project (let's use the directory of this blog post), we can create a docs folder in which all our documentation will live.&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;mkdir docs
+&lt;span class="nb"&gt;cd&lt;/span&gt; docs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Ensuring to have our virtual environment with sphinx installed active, we run &lt;code&gt;sphinx-quickstart&lt;/code&gt;, this tool allows us to populate some information for our documentation in a nice Q&amp;amp;A style.&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Welcome to the Sphinx &lt;span class="m"&gt;2&lt;/span&gt;.3.1 quickstart utility.
+
+Please enter values &lt;span class="k"&gt;for&lt;/span&gt; the following settings &lt;span class="o"&gt;(&lt;/span&gt;just press Enter to
+accept a default value, &lt;span class="k"&gt;if&lt;/span&gt; one is given in brackets&lt;span class="o"&gt;)&lt;/span&gt;.
+
+Selected root path: .
+
+You have two options &lt;span class="k"&gt;for&lt;/span&gt; placing the build directory &lt;span class="k"&gt;for&lt;/span&gt; Sphinx output.
+Either, you use a directory &lt;span class="s2"&gt;"_build"&lt;/span&gt; within the root path, or you separate
+&lt;span class="s2"&gt;"source"&lt;/span&gt; and &lt;span class="s2"&gt;"build"&lt;/span&gt; directories within the root path.
+&amp;gt; Separate &lt;span class="nb"&gt;source&lt;/span&gt; and build directories &lt;span class="o"&gt;(&lt;/span&gt;y/n&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;n&lt;span class="o"&gt;]&lt;/span&gt;: y
+
+The project name will occur in several places in the built documentation.
+&amp;gt; Project name: SphinxDemo
+&amp;gt; Author name&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;: Jack McKew
+&amp;gt; Project release &lt;span class="o"&gt;[]&lt;/span&gt;:
+
+If the documents are to be written in a language other than English,
+you can &lt;span class="k"&gt;select&lt;/span&gt; a language here by its language code. Sphinx will &lt;span class="k"&gt;then&lt;/span&gt;
+translate text that it generates into that language.
+
+For a list of supported codes, see
+https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language.
+&amp;gt; Project language &lt;span class="o"&gt;[&lt;/span&gt;en&lt;span class="o"&gt;]&lt;/span&gt;:
+
+Creating file .&lt;span class="se"&gt;\s&lt;/span&gt;ource&lt;span class="se"&gt;\c&lt;/span&gt;onf.py.
+Creating file .&lt;span class="se"&gt;\s&lt;/span&gt;ource&lt;span class="se"&gt;\i&lt;/span&gt;ndex.rst.
+Creating file .&lt;span class="se"&gt;\M&lt;/span&gt;akefile.
+Creating file .&lt;span class="se"&gt;\m&lt;/span&gt;ake.bat.
+
+Finished: An initial directory structure has been created.
+
+You should now populate your master file .&lt;span class="se"&gt;\s&lt;/span&gt;ource&lt;span class="se"&gt;\i&lt;/span&gt;ndex.rst and create other documentation
+&lt;span class="nb"&gt;source&lt;/span&gt; files. Use the Makefile to build the docs, like so:
+   make builder
+where &lt;span class="s2"&gt;"builder"&lt;/span&gt; is one of the supported builders, e.g. html, latex or linkcheck.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Now let's create an example package that we can write some documentation in.&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;mkdir sphinxdemo
+&lt;span class="nb"&gt;cd&lt;/span&gt; sphinxdemo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Then we create 3 files inside our example package:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;__init__.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;a href="/2020/documentation-with-sphinx/sphinxdemo/__init__.py"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;version = "0.1.1"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;__main__.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;a href="/2020/documentation-with-sphinx/sphinxdemo/__main__.py"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.file_functions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_files_in_folder&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;py_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_files_in_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;".py"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;py_files&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;file_functions.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;a href="/2020/documentation-with-sphinx/sphinxdemo/file_functions.py"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_files_in_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dirpath&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirnames&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filenames&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;filenames&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filenames&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you are using VS Code to use packages with debugging, change your launch.json with the following:
+"configurations": [
+        {
+            "name": "Python: Module - sphinxdemo",
+            "type": "python",
+            "request": "launch",
+            "module": "sphinxdemo.&lt;code&gt;__main__&lt;/code&gt;"
+        }&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To add documentation within our source code, we use docstrings. There are many available styles of docstrings out there, my personal preference is &lt;a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html"&gt;Google Docstring Style&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We need to enable the napoleon sphinx extensions in docs/conf.py for this style to work.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The resulting documented code will look like:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;__init__.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__init__.py"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ss"&gt;""" Initialisation file for package sphinxdemo-with-docs&lt;/span&gt;
+
+&lt;span class="ss"&gt;Declare any package wide variables here&lt;/span&gt;
+&lt;span class="ss"&gt;"""&lt;/span&gt;
+
+&lt;span class="k"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;"0.1.1"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;__main__.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/__main__.py"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sd"&gt;""" Main runtime for sphinxdemo-with-docs package&lt;/span&gt;
+
+&lt;span class="sd"&gt;__main__.py file used within package to work with `python -m` functionality.&lt;/span&gt;
+
+&lt;span class="sd"&gt;Prints out list of all *.py files within current directory when run&lt;/span&gt;
+&lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.file_functions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_files_in_folder&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;py_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_files_in_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;".py"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;py_files&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;file_functions.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;a href="/2020/documentation-with-sphinx/sphinxdemo_with_docs/file_functions.py"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sd"&gt;""" Functions for parsing folders for files.&lt;/span&gt;
+&lt;span class="sd"&gt;"""&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_files_in_folder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Prints all files in folder, if an extension is given, will only print the files with the given extension&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Args:&lt;/span&gt;
+&lt;span class="sd"&gt;        path (string): folder to recursively search through for specific extensions&lt;/span&gt;
+&lt;span class="sd"&gt;        extension (string): extension of file type to filter by&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Returns:&lt;/span&gt;
+&lt;span class="sd"&gt;        list: list of all filenames within path with matching extension&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dirpath&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirnames&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filenames&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;filenames&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extension&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filenames&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;Now at a minimum our source code is documented, now to present these docstrings in a format that we can share with others (html).&lt;/p&gt;
+&lt;p&gt;First we need to set the sphinx configuration, the file which contains this (we generated with sphinx-quickstart) is located in &lt;code&gt;docs/source/conf.py&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We are going to utilise the following sphinx extensions (they are all in-built into sphinx):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html"&gt;&lt;code&gt;sphinx.ext.autodoc&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html"&gt;&lt;code&gt;sphinx.ext.napoleon&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.sphinx-doc.org/en/master/usage/extensions/viewcode.html"&gt;&lt;code&gt;sphinx.ext.viewcode&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html"&gt;&lt;code&gt;sphinx.ext.autosummary&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Our &lt;code&gt;conf.py&lt;/code&gt; file for sphinx's configuration results in:&lt;/p&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;span&gt;Sphinx Configuration File conf.py&lt;/span&gt; &lt;a href="/2020/documentation-with-sphinx/docs/source/conf.py"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Configuration file for the Sphinx documentation builder.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# This file only contains a selection of the most common options. For a full&lt;/span&gt;
+&lt;span class="c1"&gt;# list see the documentation:&lt;/span&gt;
+&lt;span class="c1"&gt;# https://www.sphinx-doc.org/en/master/usage/configuration.html&lt;/span&gt;
+
+&lt;span class="c1"&gt;# -- Path setup --------------------------------------------------------------&lt;/span&gt;
+
+&lt;span class="c1"&gt;# If extensions (or modules to document with autodoc) are in another directory,&lt;/span&gt;
+&lt;span class="c1"&gt;# add these directories to sys.path here. If the directory is relative to the&lt;/span&gt;
+&lt;span class="c1"&gt;# documentation root, use os.path.abspath to make it absolute, like shown here.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;abspath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"../.."&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# -- Project information -----------------------------------------------------&lt;/span&gt;
+
+&lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"SphinxDemo"&lt;/span&gt;
+&lt;span class="n"&gt;copyright&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"2020, Jack McKew"&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Jack McKew"&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# -- General configuration ---------------------------------------------------&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Add any Sphinx extension module names here, as strings. They can be&lt;/span&gt;
+&lt;span class="c1"&gt;# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom&lt;/span&gt;
+&lt;span class="c1"&gt;# ones.&lt;/span&gt;
+&lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;"sphinx.ext.autodoc"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"sphinx.ext.napoleon"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"sphinx.ext.viewcode"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"sphinx.ext.autosummary"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Add any paths that contain templates here, relative to this directory.&lt;/span&gt;
+&lt;span class="n"&gt;templates_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"_templates"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;autosummary_generate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+
+&lt;span class="c1"&gt;# List of patterns, relative to source directory, that match files and&lt;/span&gt;
+&lt;span class="c1"&gt;# directories to ignore when looking for source files.&lt;/span&gt;
+&lt;span class="c1"&gt;# This pattern also affects html_static_path and html_extra_path.&lt;/span&gt;
+&lt;span class="n"&gt;exclude_patterns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# -- Options for HTML output -------------------------------------------------&lt;/span&gt;
+
+&lt;span class="c1"&gt;# The theme to use for HTML and HTML Help pages.  See the documentation for&lt;/span&gt;
+&lt;span class="c1"&gt;# a list of builtin themes.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="n"&gt;html_theme&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"alabaster"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Add any paths that contain custom static files (such as style sheets) here,&lt;/span&gt;
+&lt;span class="c1"&gt;# relative to this directory. They are copied after the builtin static files,&lt;/span&gt;
+&lt;span class="c1"&gt;# so a file named "default.css" will overwrite the builtin "default.css".&lt;/span&gt;
+&lt;span class="n"&gt;html_static_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"_static"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;We must also set our index.rst (restructured text) with what we want to see in our documentation.&lt;/p&gt;
+&lt;figure class="code"&gt;
+&lt;figcaption&gt;&lt;span&gt;Documentation Index File index.rst&lt;/span&gt; &lt;a href="/2020/documentation-with-sphinx/docs/source/index.rst"&gt;download&lt;/a&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;SphinxDemo&lt;/span&gt; &lt;span class="n"&gt;documentation&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;created&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt;
+   &lt;span class="n"&gt;sphinx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;Tue&lt;/span&gt; &lt;span class="n"&gt;Feb&lt;/span&gt;  &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;05&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt; &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+   &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;adapt&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;completely&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;liking&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;but&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;least&lt;/span&gt;
+   &lt;span class="n"&gt;contain&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="ss"&gt;`toctree`&lt;/span&gt; &lt;span class="n"&gt;directive&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;Welcome&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;SphinxDemo&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;documentation&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+&lt;span class="o"&gt;======================================&lt;/span&gt;
+
+&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;toctree&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
+   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;maxdepth&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;
+   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;caption&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Contents&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;rubric&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt; &lt;span class="n"&gt;Modules&lt;/span&gt;
+
+&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;autosummary&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
+   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;toctree&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;generated&lt;/span&gt;
+
+   &lt;span class="n"&gt;sphinxdemo_with_docs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__init__&lt;/span&gt;
+   &lt;span class="n"&gt;sphinxdemo_with_docs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__main__&lt;/span&gt;
+   &lt;span class="n"&gt;sphinxdemo_with_docs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;file_functions&lt;/span&gt;
+   
+
+&lt;span class="n"&gt;Indices&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="kp"&gt;tables&lt;/span&gt;
+&lt;span class="o"&gt;==================&lt;/span&gt;
+
+&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;ref&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="ss"&gt;`genindex`&lt;/span&gt;
+&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;ref&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="ss"&gt;`modindex`&lt;/span&gt;
+&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;ref&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="ss"&gt;`search`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To generate individual pages for our modules, classes and functions, we define separate templates, these are detailed here: &lt;a href="https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/documentation-with-sphinx/docs/source/_templates"&gt;autosummary templates&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Next we navigate our &lt;code&gt;docs&lt;/code&gt; directory, and finally run:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;This will generate all the stubs for our documentation and compile them into HTML format.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Generated Docs" class="img-fluid" src="https://jackmckew.dev/img/generated_docs.png"/&gt;&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>Migrating from Wordpress to Pelican</title><link href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html" rel="alternate"></link><published>2019-12-20T06:30:00+11:00</published><updated>2019-12-20T06:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-12-20:/migrating-from-wordpress-to-pelican.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a Jupyter notebook, sometimes even writing the post in markdown within the notebook, then copying all of this out of the notebook into a Wordpress post and fiddling around with formatting for much too long.&lt;/p&gt;
+&lt;p&gt;What tipped me over the edge was when I was looking back on previous posts (as this blog is mainly for storing previous projects, concepts and ideas), I was finding that I would go through the post and then have no idea whatsoever on where the project actually lived, this had to be fixed.&lt;/p&gt;
+&lt;p&gt;I started noticing more and more people online had moved to &lt;a href="https://pages.github.com/"&gt;Github Pages&lt;/a&gt;, which is primarily used with Jekyll. This rabbit hole went on as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Static served websites (generate HTML pages and serve them)&lt;/li&gt;
+&lt;li&gt;Numerous static site generators:&lt;/li&gt;
+&lt;li&gt;Jekyll,&lt;/li&gt;
+&lt;li&gt;Hugo,&lt;/li&gt;
+&lt;li&gt;VuePress&lt;/li&gt;
+&lt;li&gt;Pelican&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.staticgen.com/"&gt;So on&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dev.to/shivbhosale/jupyter-notebooks-as-blogs-26l1"&gt;Blogging with Jupyter notebooks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://stackify.com/what-is-cicd-whats-important-and-how-to-get-it-right/"&gt;Concept of CI/CD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://travis-ci.com/"&gt;Travis CI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.netlify.com/"&gt;Netlify&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;What I settled on was a bit of a concoction of services, such that I can both get my feet wet with these new tools and still stay in the land of snakes (Python).&lt;/p&gt;
+&lt;h2 id="pelican-travis-ci-netlify-github"&gt;Pelican + Travis CI + Netlify + Github&lt;/h2&gt;
+&lt;p&gt;Before we get into all 4 services in conjunction, let's separate and step through the process for each of them.&lt;/p&gt;
+&lt;h3 id="pelican"&gt;Pelican&lt;/h3&gt;
+&lt;p&gt;Right off the bat, the first milestone I wanted to hit was to be able to generate a locally hosted static site from a single post converted to markdown. Luckily, there is an exact guide for going through this process in the documentation for Pelican and using the tool pelican-quickstart.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.getpelican.com/en/3.6.3/quickstart.html"&gt;http://docs.getpelican.com/en/3.6.3/quickstart.html&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id="themes"&gt;Themes&lt;/h4&gt;
+&lt;p&gt;The next step was to decide on a theme for the website, while the intentions were to develop a theme from scratch, I shall leave this for a later date. An easy way of previewing themes was the website:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.pelicanthemes.com/"&gt;http://www.pelicanthemes.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Which lets you scroll through the various themes, and even links to the repository on github for the theme if you wish to use it. The theme I decided on was &lt;a href="https://github.com/alexandrevicenzi/Flex"&gt;Flex by Alexandre Vicenzi&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Apply the the theme was as simple as cloning the repo (or using &lt;a href="https://www.atlassian.com/git/tutorials/git-submodule"&gt;git submodules&lt;/a&gt;), and adding one line of code in pelicanconf.py (generated automatically by pelican-quickstart).&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"./themes/Flex"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id="plugins"&gt;Plugins&lt;/h4&gt;
+&lt;p&gt;Admittedly, I just tried out all the plugins in the &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;Pelican Plugins Repository&lt;/a&gt; until I found the combination that works for me, this ended up being:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;"sitemap"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"better_codeblock_line_numbering"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"better_code_samples"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"bootstrapify"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"deadlinks"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"more_categories"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"neighbors"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"pelican-ert"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"liquid_tags.notebook"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"liquid_tags.include_code"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"representative_image"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"share_post"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;'show_source'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;'tipue_search'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"dateish"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"post_stats"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"render_math"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"autostatic"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"clean_summary"&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;For tipue_search in particular, as this wasn't supported by the theme yet, I created a pull request on the original repository, with the functionality integrated &lt;a href="https://github.com/alexandrevicenzi/Flex/pull/193"&gt;https://github.com/alexandrevicenzi/Flex/pull/193&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id="wordpress-import"&gt;Wordpress Import&lt;/h4&gt;
+&lt;p&gt;Now that I had the skeleton of the website set up, I needed to bring in all the existing posts from wordpress. By following another guide within the Pelican documentation, this was a relatively simple task &lt;a href="http://docs.getpelican.com/en/3.6.3/importer.html"&gt;http://docs.getpelican.com/en/3.6.3/importer.html&lt;/a&gt;. However, I did spend the time to go through and edit each markdown to remove redundant 'wordpress' formatting tags manually.&lt;/p&gt;
+&lt;h4 id="linking-to-content"&gt;Linking to Content&lt;/h4&gt;
+&lt;p&gt;As one of the main tasks of this project was to consolidate articles with the content/code/analysis in one spot, initially in development following the guide in &lt;a href="http://docs.getpelican.com/en/3.6.3/content.html"&gt;http://docs.getpelican.com/en/3.6.3/content.html&lt;/a&gt;.&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7
+8
+9&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;content
+├── articles
+│   └── article.md
+├── images
+│   └── han.jpg
+├── pdfs
+│   └── menu.pdf
+└── pages
+    └── test.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;I ended up with a structure like above, which annoyed me a bit as now the content was in one place, but still divided into 3 folders with little-to-no link between them, my goal was to have the structure like:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;content
+├── articles
+│   ├── test-article
+│   &lt;span class="p"&gt;|&lt;/span&gt;   ├── img
+│   │   &lt;span class="p"&gt;|&lt;/span&gt; └── icon.png
+│   │   &lt;span class="p"&gt;|&lt;/span&gt; └── photo.jpg
+│   &lt;span class="p"&gt;|&lt;/span&gt;   ├── notebooks
+│   │   &lt;span class="p"&gt;|&lt;/span&gt; └── test-notebook.ipynb
+│   │   └── article.md
+└── files
+    └── archive.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;By using the plugins &lt;a href="https://github.com/AlexJF/pelican-autostatic"&gt;autostatic&lt;/a&gt; &amp;amp; &lt;a href="https://github.com/getpelican/pelican-plugins/tree/master/liquid_tags"&gt;liquid_tags&lt;/a&gt;, I was able to achieve this structure.&lt;/p&gt;
+&lt;h3 id="travis-ci"&gt;Travis CI&lt;/h3&gt;
+&lt;p&gt;To be honest, I was actually surprised at how easy it was to turn Travis CI and that I could spin up a virtual machine, install all the dependencies and re-build the website. However, I had a lot of trouble trying to get Travis CI to push back to the repository such that Netlify could build from it.&lt;/p&gt;
+&lt;p&gt;This was later remedied by setting a repository secret variable on Travis CI as I couldn't get the secret token encrypted by Travis CI CLI (Ruby application).&lt;/p&gt;
+&lt;p&gt;In essence, all that was needed was a .travis.yml file in the root directory which ended up like this:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;language: python
+branches:
+  only:
+  - master
+install:
+- pip install --upgrade pip
+- pip install -r requirements.txt
+script:
+- pelican content
+deploy:
+  provider: pages
+  skip_cleanup: &lt;span class="nb"&gt;true&lt;/span&gt;
+  github_token: &lt;span class="nv"&gt;$GITHUB_TOKEN&lt;/span&gt;
+  keep_history: &lt;span class="nb"&gt;true&lt;/span&gt;
+  local_dir: output
+  on:
+    branch: master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id="netlify"&gt;Netlify&lt;/h3&gt;
+&lt;p&gt;Admittedly, I feel as if I'm not using Netlify for all it can do.&lt;/p&gt;
+&lt;p&gt;Essentially, all for this project, it just detects a change in the gh-pages branch (for Github Pages), and redeploys the website out to a custom domain.&lt;/p&gt;
+&lt;h3 id="github"&gt;Github&lt;/h3&gt;
+&lt;p&gt;Github is the repository location for all the code, and I use Git for version control and interaction with the repository.&lt;/p&gt;
+&lt;p&gt;All I need to do now to create a new post is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Push a new markdown file (and any other linked content) to the master branch of the repository,&lt;/li&gt;
+&lt;li&gt;This will fire up Travis CI to build the site with Pelican for me,&lt;/li&gt;
+&lt;li&gt;Travis CI will then push the created site to the gh-pages branch of the repository,&lt;/li&gt;
+&lt;li&gt;Netlify will detect the change and process the new site,&lt;/li&gt;
+&lt;li&gt;The new site is deployed with updated posts!&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Software Development"></category><category term="python"></category></entry><entry><title>Making Executables Installable with Inno Setup</title><link href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html" rel="alternate"></link><published>2019-11-08T06:30:00+11:00</published><updated>2019-11-08T06:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-11-08:/making-executables-installable-with-inno-setup.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.&lt;/p&gt;
+&lt;p&gt;Once we have created the executable file for our GUI (which will be located in …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.&lt;/p&gt;
+&lt;p&gt;Once we have created the executable file for our GUI (which will be located in the dist folder:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="explorer_QxD96RKedI" class="img-fluid" src="https://jackmckew.dev/img/explorer_QxD96RKedI.png"/&gt;&lt;/p&gt;
+&lt;p&gt;Now we are going to use a program called Inno Setup, which can be downloaded from: &lt;a href="http://www.jrsoftware.org/isinfo.php."&gt;http://www.jrsoftware.org/isinfo.php.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After you've installed Inno Setup, run these commands:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select create a new script file using the Script Wizard&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201014701" class="img-fluid" src="https://jackmckew.dev/img/Compil32_TgilJK2vqP.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Fill in the application information&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201132191" class="img-fluid" src="https://jackmckew.dev/img/Compil32_KsdsIOEesc.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Leave defaults&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201214496" class="img-fluid" src="https://jackmckew.dev/img/Compil32_8fAHgN6kKH.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select the *.exe file found in the dist folder&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201302960" class="img-fluid" src="https://jackmckew.dev/img/Compil32_udpcR1NePw.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select shortcut choices&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201331420" class="img-fluid" src="https://jackmckew.dev/img/Compil32_vDorhKhm29.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Add any license or information files&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201402191" class="img-fluid" src="https://jackmckew.dev/img/Compil32_IkMbLdkdaw.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select install mode&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201440980" class="img-fluid" src="https://jackmckew.dev/img/Compil32_dSZd7YfJh8.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select the languages&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201500118" class="img-fluid" src="https://jackmckew.dev/img/Compil32_JYDCWS5x0g.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Provide compiler settings and icon for installable&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201550569" class="img-fluid" src="https://jackmckew.dev/img/Compil32_tdbxJXiWgd.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Leave default&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201611129" class="img-fluid" src="https://jackmckew.dev/img/Compil32_DUt3rPuZar.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Compile new script&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201634021" class="img-fluid" src="https://jackmckew.dev/img/Compil32_8RBmOJvXus.png"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Share around the executable installer!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="image-20191106201801891" class="img-fluid" src="https://jackmckew.dev/img/explorer_d4QCQTi5sE.png"/&gt;&lt;/p&gt;
+&lt;p&gt;Once installed, it will now act and behave like any other software installed on your computer!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image-20191106201903238" class="img-fluid" src="https://jackmckew.dev/img/main_W1DbyAXofL.png"/&gt;&lt;/p&gt;</content><category term="Software Development"></category><category term="python"></category></entry><entry><title>What is MongoDB?</title><link href="https://jackmckew.dev/what-is-mongodb.html" rel="alternate"></link><published>2019-05-03T06:30:00+10:00</published><updated>2019-05-03T06:30:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-05-03:/what-is-mongodb.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.&lt;/p&gt;
+&lt;p&gt;I completed their very first …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.&lt;/p&gt;
+&lt;p&gt;I completed their very first introductory course M001: MongoDB Basics last week, I found it very gentle in the introduction to database management and exploring data sets. This post is dedicated my take on the course and the key takeaways from my point of view.&lt;/p&gt;
+&lt;p&gt;The course is broken into multiple chapters in which a chapter is released each week for the duration of the course. For example, the basics course was broken up into:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Intro to MongoDB, Mongo Compass and Basic Queries,&lt;/li&gt;
+&lt;li&gt;Create, Read, Update and Delete (CRUD) operations and more,&lt;/li&gt;
+&lt;li&gt;MongoDB queries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Following all the chapters, you are faced with a final exam which tests if you were participating/listening in the earlier chapters. If you are concerned that you may struggle, this final exam is made up of a few multiple choice questions based on querying the data sets used in the chapters.&lt;/p&gt;
+&lt;p&gt;MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilizes JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.&lt;/p&gt;
+&lt;p&gt;Personally, I really enjoy the functionality within Compass with plotting geographical data, presenting data type variances across the fields in a document and many other features. I found Compass one of the most appealing features as someone that constantly seeks to gain insight from data.&lt;/p&gt;
+&lt;p&gt;Queries within MongoDB are structured like a dictionary in Python, where the field in the document is passed the key and the criteria is the value. For example, a basic query to return all documents within a MongoDB database with score equal to 7 would be:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;As a mainly Python developer, I found this to be very appealing as I find myself using dictionaries constantly when writing Python code, and by MongoDB using this format makes for an easy connection between the two.&lt;/p&gt;
+&lt;p&gt;CRUD operations, are the fundamentals on actually using a database usefully. Through the Mongo shell you are able to add documents to the MongoDB database through JSON, XML, etc data formats.&lt;/p&gt;
+&lt;p&gt;Projections within MongoDB are used to specify or restrict the fields to return with the filtered documents if you are specifically looking at a few fields within a densely populated document.&lt;/p&gt;
+&lt;p&gt;In addition to the way queries are structured for filtering documents, it is also possible to use one of the many query or projection operators to further filter the documents. For example a query to return all documents with a score &lt;strong&gt;greater than&lt;/strong&gt; 7 would be:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;gte&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;This sums up all of the takeaways from the M001 course for MongoDB that I found. I look forward to taking more of the courses on MongoDB university to gain a greater understanding and be able to utilise MongoDB across some of my projects.&lt;/p&gt;</content><category term="Software Development"></category><category term="database"></category><category term="mongodb"></category></entry><entry><title>Episode 12 - What is Git?</title><link href="https://jackmckew.dev/episode-12-what-is-git.html" rel="alternate"></link><published>2019-02-08T06:30:00+11:00</published><updated>2019-02-08T06:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-02-08:/episode-12-what-is-git.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;One of the biggest issues when working on any project regardless of what industry, discipline or context, as soon as a new 'version' of design or update comes along, the issue of version control appears. When this change(s) come along in the life cycle of a project, it is …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;One of the biggest issues when working on any project regardless of what industry, discipline or context, as soon as a new 'version' of design or update comes along, the issue of version control appears. When this change(s) come along in the life cycle of a project, it is within everyone involved's best interests to maintain some type of version control, to manage and track changes between versions.&lt;/p&gt;
+&lt;p&gt;When it comes to software development version control, the most well-known and commonly used system is Git. Git is a actively maintained open source project originally developed by Linus Torvalds (creator of the Linux OS kernel) in 2005. Multitudes of software projects depend on git for version control, including both commercial and open source.&lt;/p&gt;
+&lt;p&gt;Git has a distributed architecture, meaning rather than having one single location for the full version history of the project, every developer's working copy of the project is also a location that can contain the full history. This also comes with the benefit that if one developer happens to lose the entire project, it can be restored from other developers (pending they have/are working on the latest version).&lt;/p&gt;
+&lt;h3 id="flexibility"&gt;Flexibility&lt;/h3&gt;
+&lt;p&gt;Git is flexible in several respects: efficiency at maintaining version control for both small and large projects, capable at handling numerous types of non-linear development workflows and compatibility with existing protocols and systems.&lt;/p&gt;
+&lt;p&gt;Git supports branching and tagging (unlike other commonly used version control systems), and operations that affect branches and tags such as reverting or merging are stored as part of the change history. This level of tracking is not available in many other version control systems.&lt;/p&gt;
+&lt;h3 id="security"&gt;Security&lt;/h3&gt;
+&lt;p&gt;The integrity of the source code of the project was identified as a top priority when Git was design. Cryptographically secure hashing algorithms are used to secure: file contents, file and directory relationships, versions, tags and commits. This defends the project's source files and change history against both malicious and accidental changes and ensures that all modifications is fully traceable.&lt;/p&gt;
+&lt;h3 id="use-case"&gt;Use-case&lt;/h3&gt;
+&lt;p&gt;Bob wants to implement a new feature to the project he is working on in anticipation of the upcoming 3.0 release, and commits the new feature with descriptive messages. After being inspired by the new feature, he works on a second new feature and commits those modifications as well.&lt;/p&gt;
+&lt;p&gt;Naturally, these two new features are logged as separate entities within the change history of the project. Bob then returns back to version 2.6 of the same project to fix a problem that only affects version 2.6. This allow Bob (and his team) to distribute that fix release (version 2.6.1), before version 3.0 is ready.&lt;/p&gt;
+&lt;p&gt;Bob can then return to the upcoming version 3.0 'branch' to continue implementing new features. Since Bob has his own copy of the entire project, all of these changes can occur without an network access, thus being reliable and fast. To submit all these committed features and fixes to the remote copy of the project, it simply done by the use of the 'push' command.&lt;/p&gt;</content><category term="Software Development"></category><category term="software"></category><category term="git"></category></entry><entry><title>Episode 6 - Containerization</title><link href="https://jackmckew.dev/episode-6-containerization.html" rel="alternate"></link><published>2018-12-28T08:30:00+11:00</published><updated>2018-12-28T08:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2018-12-28:/episode-6-containerization.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Recently I was researching into ways to more efficiently and effectively distribute software and I stumbled across containerization of applications. Containerization of application is when an application is run on an OS-level virtualization without spinning up an entire virtual machine for the application.&lt;/p&gt;
+&lt;p&gt;Previously the way I had been distributing …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Recently I was researching into ways to more efficiently and effectively distribute software and I stumbled across containerization of applications. Containerization of application is when an application is run on an OS-level virtualization without spinning up an entire virtual machine for the application.&lt;/p&gt;
+&lt;p&gt;Previously the way I had been distributing software I had been developing in my preferred language (Python) was by using PyInstaller (&lt;a href="https://pyinstaller.readthedocs.io/en/stable/)."&gt;https://pyinstaller.readthedocs.io/en/stable/).&lt;/a&gt; However I was running into issues with distributing a single executable throughout users, although since the software was only used by a small userbase at this stage, I was able to continue to use PyInstaller. I started researching containerization as in the future the software I will be developing will be used by a larger userbase. This will hopefully be more effective at managing versions and distributing updates to said userbase.&lt;/p&gt;
+&lt;p&gt;Most other professionals in the software space have been constantly mentioning the use of Docker (&lt;a href="https://www.docker.com/),"&gt;https://www.docker.com/),&lt;/a&gt; I am now integrating my projects into Docker and have had no issues thus far.&lt;/p&gt;
+&lt;p&gt;By utilizing OS-level containerization this also allows the developer to run on any OS they wish. For multiple projects of mine, I had been intending to use influxDB (&lt;a href="https://www.influxdata.com/),"&gt;https://www.influxdata.com/),&lt;/a&gt; however was limited to a strictly Windows only network. I see Docker as a solution to this problem, by being able to create a linux based container to run an instance of an influxDB that can be spun up within a Windows environment and communicate back to the Windows users in the network.&lt;/p&gt;
+&lt;p&gt;Lastly, I'd like to wish a happy holidays to everyone reading and will be bringing more weekly content in the new year. Please do not hesitate to comment below if there is any topics/projects that you would like for me to research and write about my findings.&lt;/p&gt;</content><category term="Software Development"></category></entry></feed>

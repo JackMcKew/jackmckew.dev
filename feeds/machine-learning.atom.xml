@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Machine Learning</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/machine-learning.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2019-10-12T15:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Hands On Machine Learning Chapter 3</title><link href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html" rel="alternate"></link><published>2019-10-12T15:00:00+11:00</published><updated>2019-10-12T15:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-10-12:/hands-on-machine-learning-chapter-3.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Chapter 3 is focusing in on classification systems. As brought up earlier, most common supervised machine learning tasks are regression (predicting values) and classification (predicting classes). This chapter goes through the 'Hello World' of classification tasks, the MNIST dataset. The MNIST dataset is a set of 70,000 images of …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Chapter 3 is focusing in on classification systems. As brought up earlier, most common supervised machine learning tasks are regression (predicting values) and classification (predicting classes). This chapter goes through the 'Hello World' of classification tasks, the MNIST dataset. The MNIST dataset is a set of 70,000 images of handwritten digits written by high school students and employees of the US Census Bureau. Thankfully each image is also labelled with the digit it represents.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="firefox_REN2sVWiQj" class="img-fluid" src="https://jackmckew.dev/img/firefox_REN2sVWiQj.png"/&gt;&lt;/p&gt;
+&lt;p&gt;Chapter 3 also introduces one of my personal favourite ways of evaluating classification performance, a confusion matrix. A confusion matrix is built up of rows and columns, rows representing the &lt;em&gt;actual classification&lt;/em&gt; and columns representing the &lt;em&gt;predicted classification&lt;/em&gt;. In a perfect classifier, the diagonal from left to right will be full of numbers (&lt;em&gt;true positives (TP) and true negatives (TN)&lt;/em&gt; and every where else will be 0. Whenever there is a number to the upper right of the diagonal, this represents any &lt;em&gt;false positives&lt;/em&gt; (FP), while the lower left of the diagonal, representing &lt;em&gt;false negatives&lt;/em&gt; (FN).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="1*Z54JgbS4DUwWSknhDCvNTQ.png" class="img-fluid" src="https://miro.medium.com/max/356/1*Z54JgbS4DUwWSknhDCvNTQ.png"/&gt;&lt;/p&gt;
+&lt;p&gt;Another way to assess the performance is to use the accuracy of the positive predicts, called the &lt;em&gt;precision&lt;/em&gt; of the classifier.
+&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\frac{TP}{TP + FP}
+$$&lt;/div&gt;
+&lt;p&gt;
+Another metric that goes hand-in-hand with precision is the &lt;em&gt;recall&lt;/em&gt; of a classifier. Which is the ratio of true positives that are correctly classified.
+&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\frac{TP}{TP+FN}
+$$&lt;/div&gt;
+&lt;p&gt;
+Or you can combine both precision and recall into a single metric, namely the &lt;em&gt;F1 score&lt;/em&gt;. The F1 score is the &lt;em&gt;harmonic mean&lt;/em&gt; of precision and recall. The harmonic mean gives much more weight to the low values, meaning the F1 score will only be high if the recall and precision are high.
+&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\frac{TP}{TP+\frac{FN+FP}{2}}
+$$&lt;/div&gt;
+&lt;h2 id="precisionrecall-tradeoff"&gt;Precision/Recall Tradeoff&lt;/h2&gt;
+&lt;p&gt;As above, when comparing precision and recall, you cannot have 100% of either, instead it is a trade off. With a precision of 100%, means all the samples classified as positive are true positives, however there may be a lot more that are now false positives. With a recall of 100%, all samples classified will include all of the true positives, however now all the false positives are included.&lt;/p&gt;
+&lt;p&gt;Deciding the trade off comes down to the application. For example, if you wanted to create a classifier that detects websites that are safe for kids, you would prefer a classifier that rejects many good websites (low recall), but keeps only safe ones (high precision). On the other hand, if you wanted to create a classifier that detects threats in messages, it is probably fine to have a 25% precision, as long as it has 99% recall; meaning the authorities will get a few false alerts, but almost all threats will be identified.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Machine Learning"></category><category term="machinelearning"></category><category term="ai"></category><category term="python"></category></entry><entry><title>Hands On Machine Learning Chapter 2</title><link href="https://jackmckew.dev/hands-on-machine-learning-chapter-2.html" rel="alternate"></link><published>2019-07-12T06:30:00+10:00</published><updated>2019-07-12T06:30:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-07-12:/hands-on-machine-learning-chapter-2.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Chapter 2 is an end to end machine learning project, in which you pretend to be a recently hired data scientist for a real estate company. It cannot be emphasized enough that when learning about machine learning or any topic for that matter, it is best to actually experiment with …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Chapter 2 is an end to end machine learning project, in which you pretend to be a recently hired data scientist for a real estate company. It cannot be emphasized enough that when learning about machine learning or any topic for that matter, it is best to actually experiment with real-world data and scenarios.&lt;/p&gt;
+&lt;p&gt;Firstly my personal opinion on how a machine learning (or data science) project is structured is a series of steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Get an understanding of the expected goal or outcome (eg frame the problem),&lt;/li&gt;
+&lt;li&gt;Get an understanding of the current process (if there is one),&lt;/li&gt;
+&lt;li&gt;Get the data behind the problem (or what you expect will be useful for solving the problem),&lt;/li&gt;
+&lt;li&gt;Explore and visualize the data to gain insights,&lt;/li&gt;
+&lt;li&gt;Prepare/massage the data ready for input into algorithms or models,&lt;/li&gt;
+&lt;li&gt;Select a model/algorithm and train it,&lt;/li&gt;
+&lt;li&gt;Tune your model/algorithm to the best you can,&lt;/li&gt;
+&lt;li&gt;Present the solution to the original stakeholder (take the stakeholder on a journey),&lt;/li&gt;
+&lt;li&gt;Launch, monitor and maintain your system.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I believe, that if you follow these steps at a minimum, you will find success with your data science/machine learning projects. This methodology also applies for any type of project and can be enhanced with tweaks where you see fit.&lt;/p&gt;
+&lt;p&gt;Anyway, back to Chapter 2, it is very much so reinforced that you should select an appropriate way of scoring performance of your algorithms/models (otherwise you can't compare them effectively). For regression tasks, generally the preferred performance measure is RMSE (Root Mean Square Error), but this may not always be the case depending on the context of the problem. For example, if the data set has many outliers (or outlier groups), it may prove beneficial to consider MAE (Mean Absolute Error).&lt;/p&gt;
+&lt;p&gt;Assumptions are in my opinion, the downfall of any collaborative project if they are not transparent or communicated. A practice that I personally do and recommend doing is to try your best to document every assumption you may make in a project, such that anyone later on can pick up where you were and understand why you chose to do something a certain way.&lt;/p&gt;
+&lt;p&gt;As per Chapter 1, it is again reinforced to split your data set up into a training set, a testing set and a validation set; albeit a more practical example of this concept in action. Whereas you use the K-fold validations with GridSearchCV to understand the best performing hyper parameters for your algorithm/model.&lt;/p&gt;
+&lt;p&gt;Personally, in Chapter 2, the most difficult part to understand is around the pipeline for preparing data ready for use in algorithms/models. Pipelines are essentially a sequence of steps that need to be completed in order before the data is ready. Stemming from the &lt;a href="https://arxiv.org/pdf/1309.0238v1.pdf"&gt;Scikit-learn&lt;/a&gt; design principles, I found this the best way to understand the possible steps in a data preparation pipeline:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Estimators&lt;ul&gt;
+&lt;li&gt;Any object that estimates parameters based on a data set is known as an Estimator. For example, if you had a data set with lots of missing values, you could estimate what to fill these gaps with an imputer, then you could choose to use the median of the dataset if appropriate.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Transformers&lt;ul&gt;
+&lt;li&gt;Any object that transformers a data set is known as a Transformer. For example, if you wanted to now fill those gaps in the data set previously mentioned with the mean, you would use a transformer to 'insert' the median wherever empty values were found.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Predictors&lt;ul&gt;
+&lt;li&gt;Any object that is capable of making predictions given a dataset is known as a Predictor. For example, a linear regression model is a predictor, using one feature to extrapolate another feature.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Machine Learning"></category><category term="machinelearning"></category></entry><entry><title>Hands On Machine Learning Chapter 1</title><link href="https://jackmckew.dev/hands-on-machine-learning-chapter-1.html" rel="alternate"></link><published>2019-06-14T06:30:00+10:00</published><updated>2019-06-14T06:30:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-06-14:/hands-on-machine-learning-chapter-1.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;I've recently been making my way through the book "Hands-On Machine Learning with Scikit-Learn and Tensorflow", and thought I will put a summary of the chapter as a post, along with my personal answers to each of the chapter's exercises. The book in particular is published by O'Reilly and can …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;I've recently been making my way through the book "Hands-On Machine Learning with Scikit-Learn and Tensorflow", and thought I will put a summary of the chapter as a post, along with my personal answers to each of the chapter's exercises. The book in particular is published by O'Reilly and can be found &lt;a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/"&gt;https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Chapter 1 is around defining when and where to apply machine learning to a problem, as it is not always the best approach to solving a problem. Following, making sure to be aware of the strengths and weaknesses of each 'type' of machine learning systems. Types of machine learning systems can be broken into three broad categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Is the model trained with human supervision? (supervised, unsupervised, semisupervised and reinforcement learning)&lt;/li&gt;
+&lt;li&gt;Does the model learn incrementally on the fly or not? (online or batch learning)&lt;/li&gt;
+&lt;li&gt;Does the model work by simply comparing new vs known data or detect patterns to build a prediction? (instance based or model based learning)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The book then goes into detail around these, I will not as many resources around these topics are abundantly available on the internet.&lt;/p&gt;
+&lt;p&gt;Chapter 1 also goes onto to detail the importance of defining the problem, 'clean' data, training vs testing data and comparing different techniques. From here on are the chapter 1 exercise questions, with my personal answer, and the book's answer.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1. How would you define Machine Learning?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Self-sufficiently improving on a technique.\
+Book's answer: Machine Learning is about building systems that can learn from data. Learning means getting better at some task, given some performance measure.&lt;/cite&gt;
+2. Can you name four types of problems where it shines?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Processes which either involve: many complex steps, steps that require 'tuning', ever-changing systems based on variables or to gain insight on a problem from a new perspective.\
+Book's answer: Machine Learning is great for complex problems for which we have no algorithmic solution, to replace long lists of hand-tuned rules, to build systems that adapt to fluctuating environments, and finally to help humans learn (e.g., data mining). &lt;/cite&gt;
+3. What is a labeled training set?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: A data set with the associated desired answer.\
+Book's answer: A labeled training set is a training set that contains the desired solution (a.k.a. alabel) for each instance. &lt;/cite&gt;
+4. What are the two most common supervised tasks?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Regression and classification.\
+Book's answer: The two most common supervised tasks are regression and classification. &lt;/cite&gt;
+5. Can you name four common unsupervised tasks?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Association rule learning, anomaly detection, simplification and clustering.\
+Book's answer: Common unsupervised tasks include clustering, visualization, dimensionality reduction, and association rule learning. &lt;/cite&gt;
+6. What type of Machine Learning algorithm would you use to allow a robot to walk in various unknown terrains?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer; Reinforcement learning.\
+Book's answer: Reinforcement Learning is likely to perform best if we want a robot to learn to walk in various unknown terrains since this is typically the type of problem that Reinforcement Learning tackles. It might be possible to express the problem as a supervised or semisupervised learning problem, but it would be less natural. &lt;/cite&gt;
+7. What type of algorithm would you use to segment your customers into multiple groups?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: k-neighbour clustering.\
+Book's answer: If you don’t know how to define the groups, then you can use a clustering algorithm (unsupervised learning) to segment your customers into clusters of similar customers. However, if you know what groups you would like to have, then you can feed many examples of each group to a classification algorithm (supervised learning), and it will classify all your customers into these groups .&lt;/cite&gt;
+8. Would you frame the problem of spam detection as a supervised learning problem or an unsupervised learning problem?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Supervised or semisupervised.\
+Book's answer: Spam detection is a typical supervised learning problem: the algorithm is fed many emails along with their label (spam or not spam). &lt;/cite&gt;
+9. What is an online learning system&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: A system that learns incrementally on the fly from new data.\
+Book's answer: An online learning system can learn incrementally, as opposed to a batch learning system. This makes it capable of adapting rapidly to both changing data and autonomous systems, and of training on very large quantities of data. &lt;/cite&gt;
+10. What is out-of-core learning?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Whenever the data set is too large to fit on a single machine.\
+Book's answer: Out-of-core algorithms can handle vast quantities of data that cannot fit in a computer’s main memory. An out-of-core learning algorithm chops the data into mini-batches and uses online learning techniques to learn from these minibatches.&lt;/cite&gt;
+11. What type of learning algorithm relies on a similarity measure to make predictions?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Instance based learning (comparison of new vs old).\
+Book's answer: An instance-based learning system learns the training data by heart; then, when given a new instance, it uses a similarity measure to find the most similar learned instances and uses them to make predictions.&lt;/cite&gt;
+12. What is the difference between a model parameter and a learning algorithm’s hyperparameter?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: A model parameter directly influences and influenced by the way the model behaves, while a hyperparameter is dictates how the model should behave (eg, learn fast or slow).\
+Book's answer: A model has one or more model parameters that determine what it will predict given a new instance (e.g., the slope of a linear model). A learning algorithm tries to find optimal values for these parameters such that the model generalizes well to new instances. A hyperparameter is a parameter of the learning algorithm itself, not of the model (e.g., the amount of regularization to apply). &lt;/cite&gt;
+13. What do model-based learning algorithms search for? What is the most common strategy they use to succeed? How do they make predictions?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Relationships or trends within the data. Regression is used to find a possible solution to fit to the data and predictions are then extrapolated.\
+Book's answer: Model-based learning algorithms search for an optimal value for the model parameters such that the model will generalize well to new instances. We usually train such systems by minimizing a cost function that measures how bad the system is at making predictions on the training data, plus a penalty for model complexity if the model is regularized. To make predictions, we feed the new instance’s features into the model’s prediction function, using the parameter values found by the learning algorithm. &lt;/cite&gt;
+14. Can you name four of the main challenges in Machine Learning?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Quality, quantity, irrelevant sections and incorrectly modeled.\
+Book's answer: Some of the main challenges in Machine Learning are the lack of data, poor data quality, nonrepresentative data, uninformative features, excessively simple models that underfit the training data, and excessively complex models that overfit the data &lt;/cite&gt;
+15. If your model performs great on the training data but generalizes poorly to new instances, what is happening? Can you name three possible solutions?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: Overfitted or underfitted to the data. Simplify the model, get more useful data and/or reduce noise.\
+Book's answer: If a model performs great on the training data but generalizes poorly to new instances, the model is likely overfitting the training data (or we got extremely lucky on the training data). Possible solutions to overfitting are getting more data, simplifying the model (selecting a simpler algorithm, reducing the number of parameters or features used, or regularizing the model), or reducing the noise in the training data. &lt;/cite&gt;
+16. What is a test set and why would you want to use it?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: A test set is used to understand how your model interacts with unseen data without having to collect new information.\
+Book's answer: A test set is used to estimate the generalization error that a model will make on new instances, before the model is launched in production. &lt;/cite&gt;
+17. What is the purpose of a validation set?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: To understand how accurate the system interfaces with unseen data.\
+Book's answer: A validation set is used to compare models. It makes it possible to select the best model and tune the hyperparameters. &lt;/cite&gt;
+18. What can go wrong if you tune hyperparameters using the test set?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: The system has been specifically setup to perform under these conditions and may perform unexpectedly in new situations.\
+Book's answer: If you tune hyperparameters using the test set, you risk overfitting the test set, and the generalization error you measure will be optimistic (you may launch a model that performs worse than you expect). &lt;/cite&gt;
+19. What is cross-validation and why would you prefer it to a validation set?&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;My answer: By dividing the training set further into categories, then trained and validated against combinations of other categories.\
+Book's answer: Cross-validation is a technique that makes it possible to compare models (for model selection and hyperparameter tuning) without the need for a separate vali‐ dation set. This saves precious training data.&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="Machine Learning"></category><category term="machinelearning"></category></entry><entry><title>Episode 14 - Types of Machine Learning</title><link href="https://jackmckew.dev/episode-13-types-of-machine-learning.html" rel="alternate"></link><published>2019-02-22T06:33:00+11:00</published><updated>2019-02-22T06:33:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-02-22:/episode-13-types-of-machine-learning.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;With AI and Machine Learning becoming the buzzwords in technology for 2018 and the real world applications now maturing to show the benefits of this technology. It can be very confusing when first entering the world of AI and machine learning with new techniques coming out every other day in …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;With AI and Machine Learning becoming the buzzwords in technology for 2018 and the real world applications now maturing to show the benefits of this technology. It can be very confusing when first entering the world of AI and machine learning with new techniques coming out every other day in search of improving the technology. Hopefully this article will help break down the barriers of the jargon and explain the types of machine learning algorithms out in the wild simplistically.&lt;/p&gt;
+&lt;p&gt;In general, there are 3 different broad categories that current machine learning algorithms fit into:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Supervised learning&lt;/li&gt;
+&lt;li&gt;Unsupervised learning&lt;/li&gt;
+&lt;li&gt;Reinforcement learning&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="supervised-learning"&gt;Supervised Learning&lt;/h3&gt;
+&lt;p&gt;Most practical machine learning algorithms use supervised learning. Supervised learning is where you have one or more input variables (x) and output variable(s) (y), and you use an algorithm to learn the mapping function from the input to the output.&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;y = f(x)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;The end goal of this algorithm is to approximate the mapping function accurately such that then you have a new data input (x), you can predict what the result (y) for that data would be.&lt;/p&gt;
+&lt;p&gt;The name supervised learning comes from the algorithm first learning from a training data set before we present the algorithm to a new data set. The training data set can be thought as the teacher who is supervising the learning process, and learning only stops when the algorithm reaches an acceptable level of performance on predicting the result.&lt;/p&gt;
+&lt;h3 id="unsupervised-learning"&gt;Unsupervised Learning&lt;/h3&gt;
+&lt;p&gt;Unsupervised learning is when you only have the input variable(s) (x) and no respective output (y). The end goal for unsupervised learning is to model the distribution or structure of the data in order to discover and learn about the data set.&lt;/p&gt;
+&lt;p&gt;Unsupervised learning in contrast to supervised learning is where the omnipresent teacher in supervised learning is gone and there is no correct answers. The algorithm is left alone to discover and present the distribution/structure in the data that it determines.&lt;/p&gt;
+&lt;h3 id="reinforcement-learning"&gt;Reinforcement Learning&lt;/h3&gt;
+&lt;p&gt;Reinforcement learning is the third broad category that a machine learning algorithm can fall into, where the algorithm has the input variable(s) (x) and through interacting with the input data set receives rewards for performing favoured actions.&lt;/p&gt;
+&lt;p&gt;Learning from interactions with the environment around us comes from our natural experiences in the world. For example, imagine you're a child in a room with a fire. You move closer to the fire and feel it's warmth and it makes you feel good, this is a positive reward; then you try a touch the fire and it burns you hand, this is a negative reward.&lt;/p&gt;
+&lt;p&gt;Reinforcement learning is just a computational approach to learning from interactions to achieve the most favourable result, in our example, we learnt that being close to the fire is a positive thing but too close is a negative thing so our result is to maintain a sufficient distance away to be warm but no burnt.&lt;/p&gt;</content><category term="Machine Learning"></category><category term="machinelearning"></category><category term="ai"></category></entry></feed>

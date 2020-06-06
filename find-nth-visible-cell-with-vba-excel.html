@@ -17,7 +17,7 @@
     <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
     <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
     <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -144,7 +144,7 @@
     </aside>
     <main>
         <nav>
-            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>         </nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
 <article class="single">
   <header>
       
@@ -158,7 +158,7 @@
 
 
   <div>
-    <body><p>Excel is the undisputed leader in the spreadsheet world, with over 750 million users worldwide. It is a household name when it comes to analyzing data, so personally I find myself in Excel for most of the work I do. One powerful option that in my experience is underused is formatting as table, this enables users to filter, create slicers, create data links, summarize as pivot tables and more.</p>
+    </head><body><p>Excel is the undisputed leader in the spreadsheet world, with over 750 million users worldwide. It is a household name when it comes to analyzing data, so personally I find myself in Excel for most of the work I do. One powerful option that in my experience is underused is formatting as table, this enables users to filter, create slicers, create data links, summarize as pivot tables and more.</p>
 <p>One sore point that I've faced in the past is being able to retrieve the first 5 results of the table after filtering, as index-match, vlookup, etc still search within the entire data space of the table, whether the cells are visible or not.</p>
 <p>Today, let's go through how to create a function in VBA that anyone in the spreadsheet can access to return the nth visible cell in the table (filtered or not).</p>
 <h1 id="working-example">Working Example</h1>
@@ -180,7 +180,7 @@
 <p>After googling 'Sample Excel Data', let's just use this data set to built &amp; test our function:</p>
 <p><a href="https://www.contextures.com/xlSampleData01.html">https://www.contextures.com/xlSampleData01.html</a></p>
 <p>A sample of this data set is:</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>OrderDate</th>
@@ -409,7 +409,7 @@
 
 <span class="k">End</span> <span class="k">Function</span>
 </code></pre></div>
-</td></tr></tbody></table></body>
+</td></tr></tbody></table>
   </div>
   <div class="tag-cloud">
     <p>

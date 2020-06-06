@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - VBA</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/vba.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-04-17T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Find Nth Visible Cell with VBA - Excel</title><link href="https://jackmckew.dev/find-nth-visible-cell-with-vba-excel.html" rel="alternate"></link><published>2020-04-17T00:00:00+10:00</published><updated>2020-04-17T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-04-17:/find-nth-visible-cell-with-vba-excel.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Excel is the undisputed leader in the spreadsheet world, with over 750 million users worldwide. It is a household name when it comes to analyzing data, so personally I find myself in Excel for most of the work I do. One powerful option that in my experience is underused is …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Excel is the undisputed leader in the spreadsheet world, with over 750 million users worldwide. It is a household name when it comes to analyzing data, so personally I find myself in Excel for most of the work I do. One powerful option that in my experience is underused is formatting as table, this enables users to filter, create slicers, create data links, summarize as pivot tables and more.&lt;/p&gt;
+&lt;p&gt;One sore point that I've faced in the past is being able to retrieve the first 5 results of the table after filtering, as index-match, vlookup, etc still search within the entire data space of the table, whether the cells are visible or not.&lt;/p&gt;
+&lt;p&gt;Today, let's go through how to create a function in VBA that anyone in the spreadsheet can access to return the nth visible cell in the table (filtered or not).&lt;/p&gt;
+&lt;h1 id="working-example"&gt;Working Example&lt;/h1&gt;
+&lt;p&gt;I always love to see what something does &amp;amp; how I could use it before learning how to do it, so here is a GIF of this function in action.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Application&lt;/strong&gt;: If you wanted to get the top 5 results after filtering, you can use this function and change the row index to be 1 through to 5.&lt;/p&gt;
+&lt;p&gt;The function searches in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sheet Name = &lt;code&gt;Data Table&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Table Name = &lt;code&gt;Table1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Row Index = &lt;code&gt;1&lt;/code&gt; (first visible row)&lt;/li&gt;
+&lt;li&gt;Column Index = &lt;code&gt;3&lt;/code&gt; (Rep)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You should see cell &lt;code&gt;I2&lt;/code&gt; changing to be whatever the first Rep value visible is.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Working Function GIF" class="img-fluid" src="https://jackmckew.dev/img/working-function.gif"/&gt;&lt;/p&gt;
+&lt;h1 id="example-source-file"&gt;Example Source File&lt;/h1&gt;
+&lt;p&gt;Here is the source file used to create the GIF above, with code already included, just make sure to enable macros.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://jackmckew.dev/files/NthVisibleExample.xlsm"&gt;Nth Visible Cell Excel Workbook&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="create-a-source-data-table"&gt;Create a Source Data Table&lt;/h1&gt;
+&lt;p&gt;After googling 'Sample Excel Data', let's just use this data set to built &amp;amp; test our function:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.contextures.com/xlSampleData01.html"&gt;https://www.contextures.com/xlSampleData01.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A sample of this data set is:&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;OrderDate&lt;/th&gt;
+&lt;th&gt;Region&lt;/th&gt;
+&lt;th&gt;Rep&lt;/th&gt;
+&lt;th&gt;Item&lt;/th&gt;
+&lt;th&gt;Units&lt;/th&gt;
+&lt;th&gt;UnitCost&lt;/th&gt;
+&lt;th&gt;Total&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1/06/2019&lt;/td&gt;
+&lt;td&gt;East&lt;/td&gt;
+&lt;td&gt;Jones&lt;/td&gt;
+&lt;td&gt;Pencil&lt;/td&gt;
+&lt;td&gt;95&lt;/td&gt;
+&lt;td&gt;1.99&lt;/td&gt;
+&lt;td&gt;189.05&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1/23/2019&lt;/td&gt;
+&lt;td&gt;Central&lt;/td&gt;
+&lt;td&gt;Kivell&lt;/td&gt;
+&lt;td&gt;Binder&lt;/td&gt;
+&lt;td&gt;50&lt;/td&gt;
+&lt;td&gt;19.99&lt;/td&gt;
+&lt;td&gt;999.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2/09/2019&lt;/td&gt;
+&lt;td&gt;Central&lt;/td&gt;
+&lt;td&gt;Jardine&lt;/td&gt;
+&lt;td&gt;Pencil&lt;/td&gt;
+&lt;td&gt;36&lt;/td&gt;
+&lt;td&gt;4.99&lt;/td&gt;
+&lt;td&gt;179.64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2/26/2019&lt;/td&gt;
+&lt;td&gt;Central&lt;/td&gt;
+&lt;td&gt;Gill&lt;/td&gt;
+&lt;td&gt;Pen&lt;/td&gt;
+&lt;td&gt;27&lt;/td&gt;
+&lt;td&gt;19.99&lt;/td&gt;
+&lt;td&gt;539.73&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3/15/2019&lt;/td&gt;
+&lt;td&gt;West&lt;/td&gt;
+&lt;td&gt;Sorvino&lt;/td&gt;
+&lt;td&gt;Pencil&lt;/td&gt;
+&lt;td&gt;56&lt;/td&gt;
+&lt;td&gt;2.99&lt;/td&gt;
+&lt;td&gt;167.44&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Once we've formatted the data source as a table in excel, this should result in:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Source Data Table" class="img-fluid" src="https://jackmckew.dev/img/source-data-table.png"/&gt;&lt;/p&gt;
+&lt;h1 id="enable-developer-mode-macros"&gt;Enable Developer Mode / Macros&lt;/h1&gt;
+&lt;p&gt;This post won't go into how to enable Developer mode/tab, there is many resources on the web for this, such as: &lt;a href="https://support.office.com/en-us/article/show-the-developer-tab-e1192344-5e56-4d45-931b-e5fd9bea2d45"&gt;https://support.office.com/en-us/article/show-the-developer-tab-e1192344-5e56-4d45-931b-e5fd9bea2d45&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="function-to-find-visible-row"&gt;Function to Find Visible Row&lt;/h1&gt;
+&lt;p&gt;After researching the internet when I came across this problem, I stumbled across a similar question on Stackoverflow:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/58381445/how-to-get-value-of-visible-cell-in-a-table-after-filtering-only-working-for-1"&gt;https://stackoverflow.com/questions/58381445/how-to-get-value-of-visible-cell-in-a-table-after-filtering-only-working-for-1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;With one of the answers from &lt;a href="https://stackoverflow.com/users/445425/chris-neilsen"&gt;Chris Neilsen&lt;/a&gt; being:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;Function&lt;/span&gt; &lt;span class="n"&gt;FindNthVisibleRow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lo&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;ListObject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Idx&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;Long&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;ListRow&lt;/span&gt;
+&lt;span class="s1"&gt;'The function takes in the Table as a ListObject (lo), and desired row index (Idx) and returns a ListRow&lt;/span&gt;
+&lt;span class="s1"&gt;    Dim RwCnt As Long&lt;/span&gt;
+&lt;span class="s1"&gt;    Dim lr As ListRow&lt;/span&gt;
+
+&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="k"&gt;Return&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;desired&lt;/span&gt; &lt;span class="k"&gt;row&lt;/span&gt; &lt;span class="k"&gt;index&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;less&lt;/span&gt; &lt;span class="k"&gt;than&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="n"&gt;Idx&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;Then&lt;/span&gt; &lt;span class="n"&gt;Exit&lt;/span&gt; &lt;span class="k"&gt;Function&lt;/span&gt;
+
+&lt;span class="s1"&gt;'Loop through each row in the table&lt;/span&gt;
+&lt;span class="s1"&gt;    For Each lr In lo.ListRows&lt;/span&gt;
+
+&lt;span class="s1"&gt;        '&lt;/span&gt;&lt;span class="k"&gt;Check&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;row&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;hidden&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;filtered&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Range&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;EntireRow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Hidden&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;False&lt;/span&gt; &lt;span class="k"&gt;Then&lt;/span&gt;
+
+            &lt;span class="s1"&gt;'Increment current number of rows found&lt;/span&gt;
+&lt;span class="s1"&gt;            RwCnt = RwCnt + 1&lt;/span&gt;
+
+&lt;span class="s1"&gt;            '&lt;/span&gt;&lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;current&lt;/span&gt; &lt;span class="k"&gt;row&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt; &lt;span class="n"&gt;matches&lt;/span&gt; &lt;span class="k"&gt;index&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;row&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ListRow&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="n"&gt;Idx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RwCnt&lt;/span&gt; &lt;span class="k"&gt;Then&lt;/span&gt;
+                &lt;span class="k"&gt;Set&lt;/span&gt; &lt;span class="n"&gt;FindNthVisibleRow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;
+                &lt;span class="n"&gt;Exit&lt;/span&gt; &lt;span class="k"&gt;For&lt;/span&gt;
+            &lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;If&lt;/span&gt;
+        &lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;If&lt;/span&gt;
+    &lt;span class="k"&gt;Next&lt;/span&gt;
+
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Function&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Fantastic, now we've got a function to locate the row, now we can make another function to determine the cell index and return the desired cell value.&lt;/p&gt;
+&lt;h2 id="how-to-create-functions"&gt;How to Create Functions&lt;/h2&gt;
+&lt;p&gt;Once you have the Developer tab open, select &lt;code&gt;Visual Basic&lt;/code&gt; button on the left hand side. This will present you with a window like:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Visual Basic Window" class="img-fluid" src="https://jackmckew.dev/img/visual-basic.png"/&gt;&lt;/p&gt;
+&lt;p&gt;Now, to create a space we're our functions will live, we need to insert a module:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Visual Basic Window" class="img-fluid" src="https://jackmckew.dev/img/insert-module.png"/&gt;&lt;/p&gt;
+&lt;p&gt;This is we're our functions live, copy &amp;amp; paste the above and you'll have made a function!&lt;/p&gt;
+&lt;h1 id="function-for-visible-cell"&gt;Function for Visible Cell&lt;/h1&gt;
+&lt;p&gt;To interface with the above &lt;code&gt;FindNthVisibleRow&lt;/code&gt; function, we need 3 new variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sheetName&lt;/code&gt; - The name of the sheet where the table lives. (This is only necessary if you have multiple tables spread across many sheets, as afaik VBA only selects table Objects through the worksheet object)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tableName&lt;/code&gt; - The name of the table to return data from&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iRow&lt;/code&gt; - The row index we want to return&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iCol&lt;/code&gt; - The column index we want to return&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Without further ado, here is the function. Note that another function &lt;code&gt;GetListObject&lt;/code&gt; is used to find the table in question see &lt;a href="#getlistobject-function"&gt;GetListObject Function&lt;/a&gt; for more information on this. Otherwise you can use &lt;code&gt;Application.Worksheets(sheetName)&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;Function&lt;/span&gt; &lt;span class="n"&gt;FindNthVisibleCell&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sheetName&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tableName&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iRow&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;Long&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iCol&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;Long&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;Volatile&lt;/span&gt; &lt;span class="k"&gt;True&lt;/span&gt; &lt;span class="s1"&gt;'This is set to True so the cell recalculates on changes&lt;/span&gt;
+
+&lt;span class="s1"&gt;    Dim lo As ListObject&lt;/span&gt;
+&lt;span class="s1"&gt;    Dim rng As Range&lt;/span&gt;
+&lt;span class="s1"&gt;    Dim address As String&lt;/span&gt;
+&lt;span class="s1"&gt;    Dim cellVal As Variant&lt;/span&gt;
+
+&lt;span class="s1"&gt;    '&lt;/span&gt; &lt;span class="n"&gt;GetListObject&lt;/span&gt; &lt;span class="k"&gt;returns&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;desired&lt;/span&gt; &lt;span class="k"&gt;Table&lt;/span&gt; &lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;sheetName&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;tableName&lt;/span&gt;
+    &lt;span class="k"&gt;Set&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;GetListObject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tableName&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Sheets&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sheetName&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="s1"&gt;'Get the address of the visible Row we want to look in&lt;/span&gt;
+&lt;span class="s1"&gt;    address = FindNthVisibleRow(lo, iRow).Range.address&lt;/span&gt;
+
+&lt;span class="s1"&gt;    '&lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;desired&lt;/span&gt; &lt;span class="n"&gt;visible&lt;/span&gt; &lt;span class="k"&gt;row&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;
+    &lt;span class="k"&gt;Set&lt;/span&gt; &lt;span class="n"&gt;rng&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Worksheets&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sheetName&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;Range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="k"&gt;Return&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;cell&lt;/span&gt; &lt;span class="k"&gt;at&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;desired&lt;/span&gt; &lt;span class="k"&gt;column&lt;/span&gt; &lt;span class="k"&gt;index&lt;/span&gt;
+    &lt;span class="n"&gt;FindNthVisibleCell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rng&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Cells&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iCol&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;Value&lt;/span&gt;
+
+
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Function&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="getlistobject-function"&gt;GetListObject Function&lt;/h2&gt;
+&lt;p&gt;Similarly, the GetListObject function was also found on Stackoverflow, by the user &lt;a href="https://stackoverflow.com/users/20151/andrewd"&gt;AndrewD&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/18030637/how-do-i-reference-tables-in-excel-using-vba"&gt;https://stackoverflow.com/questions/18030637/how-do-i-reference-tables-in-excel-using-vba&lt;/a&gt;&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;Public&lt;/span&gt; &lt;span class="k"&gt;Function&lt;/span&gt; &lt;span class="n"&gt;GetListObject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ByVal&lt;/span&gt; &lt;span class="n"&gt;ListObjectName&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt; &lt;span class="n"&gt;ParentWorksheet&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;Worksheet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;Nothing&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;As&lt;/span&gt; &lt;span class="n"&gt;Excel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ListObject&lt;/span&gt;
+&lt;span class="s1"&gt;' Source https://stackoverflow.com/questions/18030637/how-do-i-reference-tables-in-excel-using-vba&lt;/span&gt;
+&lt;span class="s1"&gt;On Error Resume Next&lt;/span&gt;
+
+&lt;span class="s1"&gt;    If (Not ParentWorksheet Is Nothing) Then&lt;/span&gt;
+&lt;span class="s1"&gt;        Set GetListObject = ParentWorksheet.ListObjects(ListObjectName)&lt;/span&gt;
+&lt;span class="s1"&gt;    Else&lt;/span&gt;
+&lt;span class="s1"&gt;        Set GetListObject = Application.Range(ListObjectName).ListObject&lt;/span&gt;
+&lt;span class="s1"&gt;    End If&lt;/span&gt;
+
+&lt;span class="s1"&gt;On Error GoTo 0 '&lt;/span&gt;&lt;span class="k"&gt;Or&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="k"&gt;handler&lt;/span&gt;
+
+    &lt;span class="k"&gt;If&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;Not&lt;/span&gt; &lt;span class="n"&gt;GetListObject&lt;/span&gt; &lt;span class="k"&gt;Is&lt;/span&gt; &lt;span class="k"&gt;Nothing&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;Then&lt;/span&gt;
+        &lt;span class="s1"&gt;'Success&lt;/span&gt;
+&lt;span class="s1"&gt;    ElseIf (Not ParentWorksheet Is Nothing) Then&lt;/span&gt;
+&lt;span class="s1"&gt;        Call Err.Raise(1004, ThisWorkbook.Name, "ListObject '&lt;/span&gt;&lt;span class="ss"&gt;" &amp;amp; ListObjectName &amp;amp; "&lt;/span&gt;&lt;span class="s1"&gt;' not found on sheet '&lt;/span&gt;&lt;span class="ss"&gt;" &amp;amp; ParentWorksheet.Name &amp;amp; "&lt;/span&gt;&lt;span class="s1"&gt;'!")&lt;/span&gt;
+&lt;span class="s1"&gt;    Else&lt;/span&gt;
+&lt;span class="s1"&gt;        Call Err.Raise(1004, ThisWorkbook.Name, "ListObject '&lt;/span&gt;&lt;span class="ss"&gt;" &amp;amp; ListObjectName &amp;amp; "&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;found&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="err"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;If&lt;/span&gt;
+
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Function&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</content><category term="Excel"></category><category term="vba"></category><category term="excel"></category></entry></feed>
