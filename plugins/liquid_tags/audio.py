@@ -23,14 +23,18 @@ import re
 from .mdx_liquid_tags import LiquidTags
 
 SYNTAX = "{% audio url/to/audio [url/to/audio] [/url/to/audio] %}"
-AUDIO = re.compile(r'(/\S+|https?:\S+)(?:\s+(/\S+|https?:\S+))?(?:\s+(/\S+|https?:\S+))?')
+AUDIO = re.compile(
+    r"(/\S+|https?:\S+)(?:\s+(/\S+|https?:\S+))?(?:\s+(/\S+|https?:\S+))?"
+)
 
-AUDIO_TYPEDICT = {'.mp3': 'audio/mpeg',
-                  '.ogg': 'audio/ogg',
-                  '.oga': 'audio/ogg',
-                  '.opus': 'audio/ogg',
-                  '.wav': 'audio/wav',
-                  '.mp4': 'audio/mp4'}
+AUDIO_TYPEDICT = {
+    ".mp3": "audio/mpeg",
+    ".ogg": "audio/ogg",
+    ".oga": "audio/ogg",
+    ".opus": "audio/ogg",
+    ".wav": "audio/wav",
+    ".mp4": "audio/mp4",
+}
 
 
 def create_html(markup):
@@ -40,32 +44,33 @@ def create_html(markup):
         audio_files = [g for g in groups if g]
 
     if any(audio_files):
-        audio_out = '<audio controls>'
+        audio_out = "<audio controls>"
 
         for audio_file in audio_files:
 
             base, ext = os.path.splitext(audio_file)
 
             if ext not in AUDIO_TYPEDICT:
-                raise ValueError("Unrecognized audio extension: "
-                                 "{0}".format(ext))
+                raise ValueError("Unrecognized audio extension: " "{0}".format(ext))
 
             # add audio source
             audio_out += '<source src="{}" type="{}">'.format(
-                audio_file, AUDIO_TYPEDICT[ext])
+                audio_file, AUDIO_TYPEDICT[ext]
+            )
 
         # close audio tag
-        audio_out += 'Your browser does not support the audio element.'
-        audio_out += '</audio>'
+        audio_out += "Your browser does not support the audio element."
+        audio_out += "</audio>"
 
     else:
-        raise ValueError("Error processing input, "
-                         "expected syntax: {0}".format(SYNTAX))
+        raise ValueError(
+            "Error processing input, " "expected syntax: {0}".format(SYNTAX)
+        )
 
     return audio_out
 
 
-@LiquidTags.register('audio')
+@LiquidTags.register("audio")
 def audio(preprocessor, tag, markup):
     return create_html(markup)
 

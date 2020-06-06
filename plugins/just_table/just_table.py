@@ -10,14 +10,14 @@ from __future__ import unicode_literals
 
 import re
 
-JTABLE_SEPARATOR = 'JTABLE_SEPARATOR'
-JTABLE_TEMPLATE = 'JTABLE_TEMPLATE'
-DEFAULT_SEPARATOR = ','
+JTABLE_SEPARATOR = "JTABLE_SEPARATOR"
+JTABLE_TEMPLATE = "JTABLE_TEMPLATE"
+DEFAULT_SEPARATOR = ","
 
 AUTO_INCREMENT_REGEX = re.compile(r"ai ?\= ?\" ?(1) ?\"")
 TABLE_HEADER_REGEX = re.compile(r"th ?\= ?\" ?(0) ?\"")
-CAPTION_REGEX = re.compile("caption ?\= ?\"(.+?)\"")
-SEPARATOR_REGEX = re.compile("separator ?\= ?\"(.+?)\"")
+CAPTION_REGEX = re.compile('caption ?\= ?"(.+?)"')
+SEPARATOR_REGEX = re.compile('separator ?\= ?"(.+?)"')
 MAIN_REGEX = re.compile(r"(\[jtable(.*?)\]([\s\S]*?)\[\/jtable\])")
 
 DEFAULT_TEMPATE = """
@@ -76,32 +76,36 @@ def generate_table(generator):
             param = {"ai": 0, "th": 1, "caption": "", "sep": separator}
 
             if AUTO_INCREMENT_REGEX.search(props):
-                param['ai'] = 1
+                param["ai"] = 1
             if CAPTION_REGEX.search(props):
-                param['caption'] = CAPTION_REGEX.findall(props)[0]
+                param["caption"] = CAPTION_REGEX.findall(props)[0]
             if TABLE_HEADER_REGEX.search(props):
                 param["th"] = 0
             if SEPARATOR_REGEX.search(props):
                 param["sep"] = SEPARATOR_REGEX.findall(props)[0]
 
-            table_data_list = table_data.strip().split('\n')
+            table_data_list = table_data.strip().split("\n")
 
             if len(table_data_list) >= 1:
-                heads = table_data_list[0].split(param["sep"]) if param['th'] else None
+                heads = table_data_list[0].split(param["sep"]) if param["th"] else None
                 if heads:
-                    bodies = [n.split(param["sep"], len(heads) - 1) for n in table_data_list[1:]]
+                    bodies = [
+                        n.split(param["sep"], len(heads) - 1)
+                        for n in table_data_list[1:]
+                    ]
                 else:
                     bodies = [n.split(param["sep"]) for n in table_data_list]
 
                 context = generator.context.copy()
-                context.update({
-                    'heads': heads,
-                    'bodies': bodies,
-                })
+                context.update(
+                    {"heads": heads, "bodies": bodies,}
+                )
                 context.update(param)
 
                 replacement = template.render(context)
-                article._content = article._content.replace(''.join(all_match_str), replacement)
+                article._content = article._content.replace(
+                    "".join(all_match_str), replacement
+                )
 
 
 def register():

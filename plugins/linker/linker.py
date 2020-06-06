@@ -12,6 +12,7 @@ from linker import content_objects
 
 logger = logging.getLogger("linker")
 
+
 class Link(object):
     """Represents an HTML link including a linker command.
 
@@ -19,6 +20,7 @@ class Link(object):
     provided Link.regex pattern to the HTML content of a content object.
 
     """
+
     # regex based on the one used in contents.py from pelican version 3.6.3
     regex = re.compile(
         r""" # EXAMPLE: <a rel="nofollow" href="{mailto}webmaster"
@@ -31,7 +33,9 @@ class Link(object):
         (?P<url>.*?)            # webmaster                 --> __url (see path)
         \2                      # "                         <-- quote
 
-        """, re.X)
+        """,
+        re.X,
+    )
 
     def __init__(self, context, content_object, match):
         """Construct a Link from an SRE_Match.
@@ -44,17 +48,17 @@ class Link(object):
         self.context = context
         self.content_object = content_object
 
-        self.markup = match.group('markup')
-        self.quote = match.group('quote')
-        self.cmd = match.group('cmd')
-        self.__url = urlparse(match.group('url'))
+        self.markup = match.group("markup")
+        self.quote = match.group("quote")
+        self.cmd = match.group("cmd")
+        self.__url = urlparse(match.group("url"))
         self.path = self.__url.path
 
-    def href(self): # rebuild matched URL using (possibly updated) self.path
-        return urlunparse( self.__url._replace(path=self.path) )
+    def href(self):  # rebuild matched URL using (possibly updated) self.path
+        return urlunparse(self.__url._replace(path=self.path))
 
-    def html_code(self): # rebuild matched pattern from (possibly updated) self
-        return ''.join((self.markup, self.quote, self.href(), self.quote))
+    def html_code(self):  # rebuild matched pattern from (possibly updated) self
+        return "".join((self.markup, self.quote, self.href(), self.quote))
 
 
 class LinkerBase(object):
@@ -66,9 +70,9 @@ class LinkerBase(object):
     the overridden Linker.link(Link) is called.
 
     """
-    commands = [] # link commands handled by the Linker. EXAMPLE: ['mailto']
-    builtins = ['filename', 'attach', 'category', 'tag', 'author', 'index']
 
+    commands = []  # link commands handled by the Linker. EXAMPLE: ['mailto']
+    builtins = ["filename", "attach", "category", "tag", "author", "index"]
 
     def __init__(self, settings):
         self.settings = settings
@@ -86,6 +90,7 @@ class Linkers(object):
     (Idea based on pelican.readers.Readers, but with less customization options.)
 
     """
+
     def __init__(self, settings):
         self.settings = settings
         self.linkers = {}
@@ -95,11 +100,13 @@ class Linkers(object):
                 self.register_linker(cmd, linker_class)
 
     def register_linker(self, cmd, linker_class):
-        if cmd in self.linkers: # check for existing registration of that cmd
+        if cmd in self.linkers:  # check for existing registration of that cmd
             current_linker_class = self.linkers[cmd].__class__
             logger.warning(
                 "%s is stealing the linker command %s from %s.",
-                linker_class.__name__, cmd, current_linker_class.__name__
+                linker_class.__name__,
+                cmd,
+                current_linker_class.__name__,
             )
         self.linkers[cmd] = linker_class(self.settings)
 
@@ -111,14 +118,15 @@ class Linkers(object):
             if link.cmd in LinkerBase.builtins:
                 return match.group(0)  # builtin commands not handled here
             elif link.cmd in self.linkers:
-                self.linkers[link.cmd].link(link) # let Linker process the Link
+                self.linkers[link.cmd].link(link)  # let Linker process the Link
             else:
                 logger.warning("Ignoring unknown linker command %s", link.cmd)
 
-            return link.html_code() # return HTML to replace the matched link
+            return link.html_code()  # return HTML to replace the matched link
 
-        content_object._content = Link.regex.sub( # match, process and replace
-            replace_link_match, content_object._content)
+        content_object._content = Link.regex.sub(  # match, process and replace
+            replace_link_match, content_object._content
+        )
 
 
 def feed_context_to_linkers(generators):
@@ -126,10 +134,13 @@ def feed_context_to_linkers(generators):
     linkers = Linkers(settings)
 
     context = generators[0].context
-    for co in context['content_objects']: # provided by plugin 'content_objects'
-        if isinstance(co, contents.Static): continue
-        if not co._content: continue
+    for co in context["content_objects"]:  # provided by plugin 'content_objects'
+        if isinstance(co, contents.Static):
+            continue
+        if not co._content:
+            continue
         linkers.handle_links_in_content_object(context, co)
+
 
 def register():
     content_objects.register()

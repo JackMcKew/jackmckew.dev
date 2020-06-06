@@ -38,6 +38,7 @@ Output
     <img src="http://photos-c.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/917172_604907902963826_254280879_n.jpg" width="450" title="warehouse window title" alt="alt text" class="test_class instagram">
 """
 import re
+
 try:
     from urllib.request import urlopen
 except ImportError:
@@ -48,12 +49,17 @@ SYNTAX = '{% gram shortcode [size] [width] [class name(s)] [title text | "title 
 
 # Regular expression for full syntax
 # ReGram = re.compile("""(?P<shortcode>\S+)(?:\s+(?P<size>[tml]?))?(?:\s+(?P<width>\d*))?(?:\s+(?P<class>\S*))?(?P<title>\s+.+)?""")
-ReGram = re.compile("""(?P<shortcode>\S+)(?:\s+(?P<size>[tml]?))?(?:\s+(?P<width>\d*))?(?:\s+(?P<class>[^']*))?(?P<title>.+)?""")
+ReGram = re.compile(
+    """(?P<shortcode>\S+)(?:\s+(?P<size>[tml]?))?(?:\s+(?P<width>\d*))?(?:\s+(?P<class>[^']*))?(?P<title>.+)?"""
+)
 
 # Regular expression to split the title and alt text
-ReTitleAlt = re.compile("""(?:"|')(?P<title>[^"']+)?(?:"|')\s+(?:"|')(?P<alt>[^"']+)?(?:"|')""")
+ReTitleAlt = re.compile(
+    """(?:"|')(?P<title>[^"']+)?(?:"|')\s+(?:"|')(?P<alt>[^"']+)?(?:"|')"""
+)
 
-@LiquidTags.register('gram')
+
+@LiquidTags.register("gram")
 def gram(preprocessor, tag, markup):
 
     attrs = None
@@ -61,43 +67,49 @@ def gram(preprocessor, tag, markup):
     # Parse the markup string
     match = ReGram.search(markup)
     if match:
-        attrs = dict([(key, val.strip())
-                      for (key, val) in match.groupdict().items() if val])
+        attrs = dict(
+            [(key, val.strip()) for (key, val) in match.groupdict().items() if val]
+        )
     else:
-        raise ValueError('Error processing input. '
-                         'Expected syntax: {0}'.format(SYNTAX))
+        raise ValueError(
+            "Error processing input. " "Expected syntax: {0}".format(SYNTAX)
+        )
 
     # Construct URI
-    #print(attrs)
-    shortcode = attrs['shortcode']
-    url = 'http://instagr.am/p/'+shortcode+'/media/'
-    del attrs['shortcode']
+    # print(attrs)
+    shortcode = attrs["shortcode"]
+    url = "http://instagr.am/p/" + shortcode + "/media/"
+    del attrs["shortcode"]
 
-    if 'size' in attrs:
-        size = '?size={0}'.format(attrs['size'])
-        url = url+size
-        del attrs['size']
+    if "size" in attrs:
+        size = "?size={0}".format(attrs["size"])
+        url = url + size
+        del attrs["size"]
 
     r = urlopen(url)
 
-    if(r.getcode()==404):
-        raise ValueError('%s isnt a photo.'%shortcode)
+    if r.getcode() == 404:
+        raise ValueError("%s isnt a photo." % shortcode)
 
     gram_url = r.geturl()
 
     # Check if alt text is present -- if so, split it from title
-    if 'title' in attrs:
-        match = ReTitleAlt.search(attrs['title'])
+    if "title" in attrs:
+        match = ReTitleAlt.search(attrs["title"])
         if match:
             attrs.update(match.groupdict())
-        if not attrs.get('alt'):
-            attrs['alt'] = attrs['title']
+        if not attrs.get("alt"):
+            attrs["alt"] = attrs["title"]
 
-    #print('updated dict: '+repr(attrs))
+    # print('updated dict: '+repr(attrs))
 
     # Return the formatted text
-    return '<img src="{0}"{1}>'.format(gram_url,' '.join(' {0}="{1}"'.format(key,val) for (key,val) in attrs.items()))
+    return '<img src="{0}"{1}>'.format(
+        gram_url,
+        " ".join(' {0}="{1}"'.format(key, val) for (key, val) in attrs.items()),
+    )
 
-#----------------------------------------------------------------------
+
+# ----------------------------------------------------------------------
 # This import allows image tag to be a Pelican plugin
 from liquid_tags import register

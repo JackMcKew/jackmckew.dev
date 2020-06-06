@@ -18,7 +18,7 @@ def list_themes(themesroot):
     allfiles = os.listdir(themesroot)
     for dirname in allfiles:
         dirname = dirname.lower()
-        if os.path.isdir('%s/%s/templates' % (themesroot, dirname)):
+        if os.path.isdir("%s/%s/templates" % (themesroot, dirname)):
             dirlist.append(dirname)
 
     return sorted(dirlist)
@@ -26,7 +26,7 @@ def list_themes(themesroot):
 
 # get all variable in template file
 def get_variables(filename):
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader("templates"))
     template_source = env.loader.get_source(env, filename)[0]
     parsed_content = env.parse(template_source)
 
@@ -36,20 +36,21 @@ def get_variables(filename):
 # Generate all themes article
 def generate_themes_article(themesroot):
     # Prepare content directory
-    if not os.path.exists('content'):
-        os.makedirs('content')
+    if not os.path.exists("content"):
+        os.makedirs("content")
 
     themes = list_themes(themesroot)
     os.system("rm content/*")
     for theme in themes:
-        print ("generate article for %s" % theme)
+        print("generate article for %s" % theme)
         article = ""
 
         # extract gitlog
-        gitlog = os.popen("cd %s ; " % themesroot
-                          + "git log --date=short --format='%ad~%s' " +
-                          theme +
-                          " | tail -n10"
+        gitlog = os.popen(
+            "cd %s ; " % themesroot
+            + "git log --date=short --format='%ad~%s' "
+            + theme
+            + " | tail -n10"
         )
         logs = []
         for line in gitlog.readlines():
@@ -62,7 +63,10 @@ def generate_themes_article(themesroot):
         article += "%s\n" % ("#" * len(title))
         article += ":date: %s\n" % logs[0][0]
         article += ":tags: pelican-themes, %s\n" % theme
-        article += ":summary: The last update for this theme is **%s** and they have **%s** modifications\n" % (logs[0][0], len(logs))
+        article += (
+            ":summary: The last update for this theme is **%s** and they have **%s** modifications\n"
+            % (logs[0][0], len(logs))
+        )
         article += "\n"
 
         # Preview
@@ -101,8 +105,9 @@ def generate_themes_article(themesroot):
         except IOError:
             pass
 
+
 def create_directories():
-    dirs = ['output', 'content/static', 'confs']
+    dirs = ["output", "content/static", "confs"]
     for directory in dirs:
         if not os.path.exists(directory):
             os.makedirs(directory)

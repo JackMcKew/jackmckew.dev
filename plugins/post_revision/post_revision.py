@@ -16,45 +16,51 @@ from pelican import signals
 
 
 def generate_post_revision(generator):
-  project_root = generator.settings.get('PROJECT_ROOT', None)
-  github_url = generator.settings.get('GITHUB_URL', None)
-  if github_url is not None and github_url.endswith('/'):
-    github_url = github_url.rstrip('/')
+    project_root = generator.settings.get("PROJECT_ROOT", None)
+    github_url = generator.settings.get("GITHUB_URL", None)
+    if github_url is not None and github_url.endswith("/"):
+        github_url = github_url.rstrip("/")
 
-  pages = []
-  pages += getattr(generator, 'articles', [])
-  pages += getattr(generator, 'pages', [])
-  for page in pages:
-    path = getattr(page, 'source_path', None)
-    if path is None:
-      continue
-    try:
-      output = subprocess.check_output('git log --format="%%ai|%%s" %s'\
-          % (path), shell=True, cwd=generator.path)
-      output = output.decode() if sys.version_info[0] == 3 else output
-      commits = []
-      for line in output.split('\n'):
-        line = line.strip()
-        if len(line) == 0:
-          continue
-        parts = line.split('|')
-        date, msg = dateutil.parser.parse(parts[0]), '|'.join(parts[1:])
-        commits.append((date, msg))
-      setattr(page, 'history', commits)
+    pages = []
+    pages += getattr(generator, "articles", [])
+    pages += getattr(generator, "pages", [])
+    for page in pages:
+        path = getattr(page, "source_path", None)
+        if path is None:
+            continue
+        try:
+            output = subprocess.check_output(
+                'git log --format="%%ai|%%s" %s' % (path),
+                shell=True,
+                cwd=generator.path,
+            )
+            output = output.decode() if sys.version_info[0] == 3 else output
+            commits = []
+            for line in output.split("\n"):
+                line = line.strip()
+                if len(line) == 0:
+                    continue
+                parts = line.split("|")
+                date, msg = dateutil.parser.parse(parts[0]), "|".join(parts[1:])
+                commits.append((date, msg))
+            setattr(page, "history", commits)
 
-      if github_url is None or project_root is None:
-        continue
+            if github_url is None or project_root is None:
+                continue
 
-      relative_path = path.replace(project_root, '')
-      if relative_path.startswith('/'):
-        relative_path = relative_path.lstrip('/')
+            relative_path = path.replace(project_root, "")
+            if relative_path.startswith("/"):
+                relative_path = relative_path.lstrip("/")
 
-      setattr(page, 'github_history_url', '%s/commits/master/%s' %\
-          (github_url, relative_path))
-    except:
-      continue
+            setattr(
+                page,
+                "github_history_url",
+                "%s/commits/master/%s" % (github_url, relative_path),
+            )
+        except:
+            continue
 
 
 def register():
-  signals.article_generator_finalized.connect(generate_post_revision)
-  signals.page_generator_finalized.connect(generate_post_revision)
+    signals.article_generator_finalized.connect(generate_post_revision)
+    signals.page_generator_finalized.connect(generate_post_revision)

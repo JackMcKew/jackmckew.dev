@@ -31,38 +31,38 @@ def calculate_stats(instance):
         WPM = 250
 
         # Use BeautifulSoup to get readable/visible text
-        raw_text = BeautifulSoup(content, 'html.parser').getText()
+        raw_text = BeautifulSoup(content, "html.parser").getText()
 
         # Process the text to remove entities
-        entities = r'\&\#?.+?;'
-        raw_text = raw_text.replace('&nbsp;', ' ')
-        raw_text = re.sub(entities, '', raw_text)
+        entities = r"\&\#?.+?;"
+        raw_text = raw_text.replace("&nbsp;", " ")
+        raw_text = re.sub(entities, "", raw_text)
 
         # Flesch-kincaid readbility stats counts sentances,
         # so save before removing punctuation
         tmp = raw_text
 
         # Process the text to remove punctuation
-        drop = u'.,?!@#$%^&*()_+-=\|/[]{}`~:;\'\"‘’—…“”'
-        raw_text = raw_text.translate(dict((ord(c), u'') for c in drop))
+        drop = u".,?!@#$%^&*()_+-=\|/[]{}`~:;'\"‘’—…“”"
+        raw_text = raw_text.translate(dict((ord(c), u"") for c in drop))
 
         # Count the words in the text
         words = raw_text.lower().split()
         word_count = Counter(words)
 
         # Return the stats
-        stats['word_counts'] = word_count
-        stats['wc'] = sum(word_count.values())
+        stats["word_counts"] = word_count
+        stats["wc"] = sum(word_count.values())
 
         # Calulate how long it'll take to read, rounding up
-        stats['read_mins'] = (stats['wc'] + WPM - 1) // WPM
-        if stats['read_mins'] == 0:
-            stats['read_mins'] = 1
+        stats["read_mins"] = (stats["wc"] + WPM - 1) // WPM
+        if stats["read_mins"] == 0:
+            stats["read_mins"] = 1
 
         # Calculate Flesch-kincaid readbility stats
-        readability_stats = stcs, words, sbls = text_stats(tmp, stats['wc'])
-        stats['fi'] = "{:.2f}".format(flesch_index(readability_stats))
-        stats['fk'] = "{:.2f}".format(flesch_kincaid_level(readability_stats))
+        readability_stats = stcs, words, sbls = text_stats(tmp, stats["wc"])
+        stats["fi"] = "{:.2f}".format(flesch_index(readability_stats))
+        stats["fk"] = "{:.2f}".format(flesch_kincaid_level(readability_stats))
 
         instance.stats = stats
 

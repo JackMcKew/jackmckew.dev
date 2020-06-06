@@ -22,81 +22,85 @@ from markdown.inlinepatterns import ReferenceInlineProcessor, REFERENCE_RE
 import re
 import sys
 
-LC_CONFIG = {'INTERNAL_CLASS': 'internal',
-             'EXTERNAL_CLASS': 'external'}
-LC_HELP = {'INTERNAL_CLASS': 'Name of the CSS class for internal links',
-           'EXTERNAL_CLASS': 'Name of the CSS class for external links'}
+LC_CONFIG = {"INTERNAL_CLASS": "internal", "EXTERNAL_CLASS": "external"}
+LC_HELP = {
+    "INTERNAL_CLASS": "Name of the CSS class for internal links",
+    "EXTERNAL_CLASS": "Name of the CSS class for external links",
+}
 
 ### Utlity function for adding the appropriate class attribute
-def add_class (elm, config):
+def add_class(elm, config):
     try:
-        m = re.match ('^https?://', elm.get ('href'))
-        elm.set ('class', m and config ['EXTERNAL_CLASS']
-                          or config ['INTERNAL_CLASS'])
+        m = re.match("^https?://", elm.get("href"))
+        elm.set("class", m and config["EXTERNAL_CLASS"] or config["INTERNAL_CLASS"])
     except AttributeError:
         pass
     return elm
 
-class LinkClassExtension (Extension):
+
+class LinkClassExtension(Extension):
     """Markdown extension for the Link Class plugin"""
 
     def __init__(self, config):
-        for key,value in LC_CONFIG.items():
-            self.config [key] = [value, LC_HELP [key]]
-        super (LinkClassExtension, self).__init__ (**config)
+        for key, value in LC_CONFIG.items():
+            self.config[key] = [value, LC_HELP[key]]
+        super(LinkClassExtension, self).__init__(**config)
 
-    def extendMarkdown (self, md):
+    def extendMarkdown(self, md):
         """Register the Markdown extension"""
 
         ## LinkClass instances is added to the list of inline pattern
         ## processors, with higher priority than the processor defined for the
         ## "link" and the "reference" objects, such that the normal behavior is
         ## overridden.
-        LinkClassPattern = LinkClass (LINK_RE, self.getConfigs ())
+        LinkClassPattern = LinkClass(LINK_RE, self.getConfigs())
         LinkClassPattern.md = md
-        md.inlinePatterns.register (LinkClassPattern, 'linkclass', 200)
-        ReferenceClassPattern = ReferenceClass (REFERENCE_RE, self.getConfigs ())
+        md.inlinePatterns.register(LinkClassPattern, "linkclass", 200)
+        ReferenceClassPattern = ReferenceClass(REFERENCE_RE, self.getConfigs())
         ReferenceClassPattern.md = md
-        md.inlinePatterns.register (ReferenceClassPattern, 'referenceclass', 200)
+        md.inlinePatterns.register(ReferenceClassPattern, "referenceclass", 200)
 
-class LinkClass (LinkInlineProcessor):
+
+class LinkClass(LinkInlineProcessor):
     """Markdown inline pattern processor for adding class attribute to
 inline-style hyperlinks"""
 
-    def __init__ (self, pattern, config):
+    def __init__(self, pattern, config):
         """Initialize the Markdwon inline pattern processor"""
 
-        super (LinkClass, self).__init__ (pattern)
+        super(LinkClass, self).__init__(pattern)
         ## Store the configuration dict
         self.config = config
 
-    def handleMatch (self, m, data):
+    def handleMatch(self, m, data):
         """Add the class attribute to the generated <a> element"""
 
         ## Build the <a> element using the parent class
-        elm, start, end = super (LinkClass, self).handleMatch (m, data)
+        elm, start, end = super(LinkClass, self).handleMatch(m, data)
         ## Return the <a> element with added class
-        return add_class (elm, self.config), start, end
+        return add_class(elm, self.config), start, end
 
-class ReferenceClass (ReferenceInlineProcessor):
+
+class ReferenceClass(ReferenceInlineProcessor):
     """Markdown inline pattern processor for adding class attribute to
 inline-style references"""
 
-    def __init__ (self, pattern, config):
+    def __init__(self, pattern, config):
         """Initialize the Markdwon inline pattern processor"""
 
-        super (ReferenceClass, self).__init__ (pattern)
+        super(ReferenceClass, self).__init__(pattern)
         ## Store the configuration dict
         self.config = config
 
-    def handleMatch (self, m, data):
+    def handleMatch(self, m, data):
         """Add the class attribute to the generated <a> element"""
 
         ## Build the <a> element using the parent class
-        elm, start, end = super (ReferenceClass, self).handleMatch (m, data)
+        elm, start, end = super(ReferenceClass, self).handleMatch(m, data)
         ## Return the <a> element with added class
-        return add_class (elm, self.config), start, end
+        return add_class(elm, self.config), start, end
 
-def makeExtension (config = None):
+
+def makeExtension(config=None):
     """Wrapper for a MarkDown extension"""
-    return LinkClassExtension (config = config)
+    return LinkClassExtension(config=config)

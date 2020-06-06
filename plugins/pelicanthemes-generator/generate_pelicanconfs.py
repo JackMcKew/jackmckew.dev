@@ -16,7 +16,7 @@ def list_themes(themesroot):
     dirlist = []
     allfiles = os.listdir(themesroot)
     for dirname in allfiles:
-        if os.path.isdir('%s/%s/templates' % (themesroot, dirname)):
+        if os.path.isdir("%s/%s/templates" % (themesroot, dirname)):
             dirlist.append(dirname)
 
     return sorted(dirlist)
@@ -25,9 +25,14 @@ def list_themes(themesroot):
 # get all variable in template file
 def get_variables(themesroot, themename, tplname):
     ignore = [
-        'AUTHOR', 'SITENAME', 'DISQUS_SITENAME', 'DEFAULT_LANG',
-        'DEFAULT_PAGINATION', 'FEED_ALL_ATOM', 'FEED_ALL_RSS',
-        'FEED_DOMAIN', 
+        "AUTHOR",
+        "SITENAME",
+        "DISQUS_SITENAME",
+        "DEFAULT_LANG",
+        "DEFAULT_PAGINATION",
+        "FEED_ALL_ATOM",
+        "FEED_ALL_RSS",
+        "FEED_DOMAIN",
     ]
 
     tpldir = "%s/%s/templates" % (themesroot, themename)
@@ -51,7 +56,7 @@ def get_all_tpl_vars(themesroot, themename):
     tpldir = "%s/%s/templates" % (themesroot, themename)
     files = os.listdir(tpldir)
     for fname in files:
-        filename = '%s/%s' % (tpldir, fname)
+        filename = "%s/%s" % (tpldir, fname)
         if os.path.isfile(filename):
             variables = get_variables(themesroot, themename, fname)
             for var in variables:
@@ -76,10 +81,10 @@ def themeconf(themesroot, themename):
     try:
         all_vars = get_all_tpl_vars(themesroot, themename)
 
-        pconf = '%s/%s/pelicanconf_sample.py' % (themesroot, themename)
+        pconf = "%s/%s/pelicanconf_sample.py" % (themesroot, themename)
         if os.path.exists(pconf):
             sys.path.append(os.path.abspath(os.path.dirname(pconf)))
-            m = __import__(os.path.basename(pconf.replace('.py', '')))
+            m = __import__(os.path.basename(pconf.replace(".py", "")))
         else:
             m = str  # tips, empty __dict__, todo, change this tips
 
@@ -94,15 +99,17 @@ def themeconf(themesroot, themename):
             else:
                 text += "# %s =\n" % var
 
-        writetext('./confs/%s_pelicanconf.py' % themename, text)
+        writetext("./confs/%s_pelicanconf.py" % themename, text)
     except Exception, e:
         print "### Error for %s theme(%s) ###" % (themename, e)
 
+
 def create_directories():
-    dirs = ['output', 'content/static', 'confs']
+    dirs = ["output", "content/static", "confs"]
     for directory in dirs:
         if not os.path.exists(directory):
             os.makedirs(directory)
+
 
 def generateconfs(themesroot):
     create_directories()

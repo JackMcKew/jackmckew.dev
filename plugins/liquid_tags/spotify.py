@@ -24,10 +24,10 @@ from .mdx_liquid_tags import LiquidTags
 
 SYNTAX = "{% spotify id %}"
 
-SPOTIFY = re.compile(r'(\w+)(\s+(\d+)\s(\d+))?')
+SPOTIFY = re.compile(r"(\w+)(\s+(\d+)\s(\d+))?")
 
 
-@LiquidTags.register('spotify')
+@LiquidTags.register("spotify")
 def spotify(preprocessor, tag, markup):
     spotify_id = None
 
@@ -42,10 +42,13 @@ def spotify(preprocessor, tag, markup):
           width='300'
           height='380'
           frameborder='0'
-          allowtransparency='true'></iframe>""".format(spotify_id).strip()
+          allowtransparency='true'></iframe>""".format(
+            spotify_id
+        ).strip()
     else:
-        raise ValueError("Error processing input, "
-                         "expected syntax: {0}".format(SYNTAX))
+        raise ValueError(
+            "Error processing input, " "expected syntax: {0}".format(SYNTAX)
+        )
 
     return spotify_out
 

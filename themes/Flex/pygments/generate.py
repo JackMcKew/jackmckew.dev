@@ -5,7 +5,7 @@ import os
 from pygments.styles import get_all_styles
 from pygments.formatters.html import HtmlFormatter
 
-PYGMENTS_PATH = './../static/pygments'
+PYGMENTS_PATH = "./../static/pygments"
 
 
 def export():
@@ -15,21 +15,21 @@ def export():
     styles = list(get_all_styles())
 
     for style in styles:
-        print('Generating CSS for %s' % style)
+        print("Generating CSS for %s" % style)
 
         opts = {
-            'style': style,
-            'noclasses': False,
-            'nobackground': False,
+            "style": style,
+            "noclasses": False,
+            "nobackground": False,
         }
 
-        path = os.path.join(PYGMENTS_PATH, '%s.css' % style)
+        path = os.path.join(PYGMENTS_PATH, "%s.css" % style)
         formatter = HtmlFormatter(**opts)
-        css_content = formatter.get_style_defs('.highlight')
+        css_content = formatter.get_style_defs(".highlight")
 
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             f.write(css_content)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     export()

@@ -1,1 +1,1 @@
-from . linkclass import *
+from .linkclass import *

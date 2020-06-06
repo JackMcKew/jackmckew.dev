@@ -23,10 +23,11 @@ from pelican import signals
 from pelican.generators import ArticlesGenerator, PagesGenerator
 
 import sys
-if (sys.version_info[0]>2):
+
+if sys.version_info[0] > 2:
     unicode = str
 
-__version__ = '0.0.1'
+__version__ = "0.0.1"
 
 REF_RE = re.compile("\{#\s*(\w+)\s*\}")
 LABEL_RE = re.compile("^\s*(\w+)\s*::")
@@ -35,39 +36,43 @@ LABEL = "<strong>Figure {}:</strong> "
 
 logger = logging.getLogger(__name__)
 
+
 def process_content(article):
     """
     Substitute reference links for an individual article or page.
     """
     try:
-        soup = BeautifulSoup(article._content,'lxml')
+        soup = BeautifulSoup(article._content, "lxml")
     except FeatureNotFound:
-        soup = BeautifulSoup(article._content,'html.parser')
-    
+        soup = BeautifulSoup(article._content, "html.parser")
+
     # Get figures and number them
     figlist = []
-    for fig in soup.find_all('figcaption'):
+    for fig in soup.find_all("figcaption"):
         caption = unicode(fig.string)
         m = LABEL_RE.search(caption)
         if m:
             figlist.append(m.group(1))
-            fig.parent['id'] = 'figref-' + m.group(1)
+            fig.parent["id"] = "figref-" + m.group(1)
             new_tag = soup.new_tag("strong")
-            fig.string.replace_with(' ' + caption[m.end():])
+            fig.string.replace_with(" " + caption[m.end() :])
             new_tag.string = "Figure {}:".format(len(figlist))
-            fig.insert(0,new_tag)
-    
+            fig.insert(0, new_tag)
+
     # Replace references to figures with links
     def substitute(match):
         try:
             num = figlist.index(match.group(1)) + 1
         except ValueError:
-            logger.warn('`figure_ref` unable to find figure with label "{}" in file {}'.format(match.group(1), article.source_path))
+            logger.warn(
+                '`figure_ref` unable to find figure with label "{}" in file {}'.format(
+                    match.group(1), article.source_path
+                )
+            )
             return match.string
-        return REF.format(match.group(1),num)
-        
-    article._content = REF_RE.sub(substitute, unicode(soup))
+        return REF.format(match.group(1), num)
 
+    article._content = REF_RE.sub(substitute, unicode(soup))
 
 
 def add_figure_refs(generators):
@@ -79,7 +84,6 @@ def add_figure_refs(generators):
         elif isinstance(generator, PagesGenerator):
             for page in generator.pages:
                 process_content(page)
-
 
 
 def register():

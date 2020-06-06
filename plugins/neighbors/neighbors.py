@@ -38,27 +38,30 @@ def set_neighbors(articles, next_name, prev_name):
 
         for translation in cur.translations:
             exec(
-                "translation.{} = get_translation(nxt, translation.lang)"
-                .format(next_name))
+                "translation.{} = get_translation(nxt, translation.lang)".format(
+                    next_name
+                )
+            )
             exec(
-                "translation.{} = get_translation(prv, translation.lang)"
-                .format(prev_name))
+                "translation.{} = get_translation(prv, translation.lang)".format(
+                    prev_name
+                )
+            )
 
 
 def neighbors(generator):
-    set_neighbors(generator.articles, 'next_article', 'prev_article')
+    set_neighbors(generator.articles, "next_article", "prev_article")
 
     for category, articles in generator.categories:
         articles.sort(key=lambda x: x.date, reverse=True)
-        set_neighbors(
-            articles, 'next_article_in_category', 'prev_article_in_category')
+        set_neighbors(articles, "next_article_in_category", "prev_article_in_category")
 
-    if hasattr(generator, 'subcategories'):
+    if hasattr(generator, "subcategories"):
         for subcategory, articles in generator.subcategories:
             articles.sort(key=lambda x: x.date, reverse=True)
-            index = subcategory.name.count('/')
-            next_name = 'next_article_in_subcategory{}'.format(index)
-            prev_name = 'prev_article_in_subcategory{}'.format(index)
+            index = subcategory.name.count("/")
+            next_name = "next_article_in_subcategory{}".format(index)
+            prev_name = "prev_article_in_subcategory{}".format(index)
             set_neighbors(articles, next_name, prev_name)
 
 

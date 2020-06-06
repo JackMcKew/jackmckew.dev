@@ -11,6 +11,7 @@ import jinja2
 from pygments.formatters import HtmlFormatter
 
 import IPython
+
 try:
     # Jupyter
     from traitlets.config import Config
@@ -35,6 +36,7 @@ except ImportError:
     import IPython.nbconvert as nbconvert
 
 from nbconvert.exporters import HTMLExporter
+
 try:
     from nbconvert.filters.highlight import _pygment_highlight
 except ImportError:
@@ -96,28 +98,34 @@ def get_config():
     return app.config
 
 
-def get_html_from_filepath(filepath, start=0, end=None, preprocessors=[], template=None):
+def get_html_from_filepath(
+    filepath, start=0, end=None, preprocessors=[], template=None
+):
     """Return the HTML from a Jupyter Notebook
     """
-    template_file = 'basic'
+    template_file = "basic"
     extra_loaders = []
     if template:
         extra_loaders.append(jinja2.FileSystemLoader([os.path.dirname(template)]))
         template_file = os.path.basename(template)
 
     config = get_config()
-    config.update({'CSSHTMLHeaderTransformer': {
-                        'enabled': True,
-                        'highlight_class': '.highlight-ipynb'},
-                     'SubCell': {
-                        'enabled':True,
-                        'start':start,
-                        'end':end}})
-    exporter = HTMLExporter(config=config,
-                            template_file=template_file,
-                            extra_loaders=extra_loaders,
-                            filters={'highlight2html': custom_highlighter},
-                            preprocessors=[SubCell] + preprocessors)
+    config.update(
+        {
+            "CSSHTMLHeaderTransformer": {
+                "enabled": True,
+                "highlight_class": ".highlight-ipynb",
+            },
+            "SubCell": {"enabled": True, "start": start, "end": end},
+        }
+    )
+    exporter = HTMLExporter(
+        config=config,
+        template_file=template_file,
+        extra_loaders=extra_loaders,
+        filters={"highlight2html": custom_highlighter},
+        preprocessors=[SubCell] + preprocessors,
+    )
 
     config.CSSHTMLHeaderPreprocessor.highlight_class = " .highlight pre "
     content, info = exporter.from_filename(filepath)
@@ -132,8 +140,9 @@ def parse_css(content, info, fix_css=True, ignore_css=False):
     fix_css is to do a basic filter to remove extra CSS from the Jupyter CSS
     ignore_css is to not include at all the Jupyter CSS
     """
+
     def style_tag(styles):
-        return '<style type=\"text/css\">{0}</style>'.format(styles)
+        return '<style type="text/css">{0}</style>'.format(styles)
 
     def filter_css(style):
         """
@@ -141,29 +150,35 @@ def parse_css(content, info, fix_css=True, ignore_css=False):
         Jupyter returns a lot of CSS including its own bootstrap.
         We try to get only the Jupyter Notebook CSS without the extra stuff.
         """
-        index = style.find('/*!\n*\n* IPython notebook\n*\n*/')
+        index = style.find("/*!\n*\n* IPython notebook\n*\n*/")
         if index > 0:
             style = style[index:]
-        index = style.find('/*!\n*\n* IPython notebook webapp\n*\n*/')
+        index = style.find("/*!\n*\n* IPython notebook webapp\n*\n*/")
         if index > 0:
             style = style[:index]
 
-        style = re.sub(r'color\:\#0+(;)?', '', style)
-        style = re.sub(r'\.rendered_html[a-z0-9,._ ]*\{[a-z0-9:;%.#\-\s\n]+\}', '', style)
+        style = re.sub(r"color\:\#0+(;)?", "", style)
+        style = re.sub(
+            r"\.rendered_html[a-z0-9,._ ]*\{[a-z0-9:;%.#\-\s\n]+\}", "", style
+        )
         return style_tag(style)
 
     if ignore_css:
         content = content + LATEX_CUSTOM_SCRIPT
     else:
         if fix_css:
-            jupyter_css = '\n'.join(filter_css(style) for style in info['inlining']['css'])
+            jupyter_css = "\n".join(
+                filter_css(style) for style in info["inlining"]["css"]
+            )
         else:
-            jupyter_css = '\n'.join(style_tag(style) for style in info['inlining']['css'])
+            jupyter_css = "\n".join(
+                style_tag(style) for style in info["inlining"]["css"]
+            )
         content = jupyter_css + content + LATEX_CUSTOM_SCRIPT
     return content
 
 
-def custom_highlighter(source, language='python', metadata=None):
+def custom_highlighter(source, language="python", metadata=None):
     """
     Makes the syntax highlighting from pygments have prefix(`highlight-ipynb`)
     So it doesn't break the theme pygments
@@ -173,18 +188,21 @@ def custom_highlighter(source, language='python', metadata=None):
     Returns new html content
     """
     if not language:
-        language = 'python'
+        language = "python"
 
-    formatter = HtmlFormatter(cssclass='highlight-ipynb')
+    formatter = HtmlFormatter(cssclass="highlight-ipynb")
     output = _pygments_highlight(source, formatter, language, metadata)
-    output = output.replace('<pre>', '<pre class="ipynb">')
+    output = output.replace("<pre>", '<pre class="ipynb">')
     return output
 
-#----------------------------------------------------------------------
+
+# ----------------------------------------------------------------------
 # Create a preprocessor to slice notebook by cells
+
 
 class SliceIndex(Integer):
     """An integer trait that accepts None"""
+
     default_value = None
 
     def validate(self, obj, value):
@@ -196,10 +214,11 @@ class SliceIndex(Integer):
 
 class SubCell(Preprocessor):
     """A preprocessor to select a slice of the cells of a notebook"""
+
     start = SliceIndex(0, config=True, help="first cell of notebook")
     end = SliceIndex(None, config=True, help="last cell of notebook")
 
     def preprocess(self, nb, resources):
         nbc = deepcopy(nb)
-        nbc.cells = nbc.cells[self.start:self.end]
+        nbc.cells = nbc.cells[self.start : self.end]
         return nbc, resources

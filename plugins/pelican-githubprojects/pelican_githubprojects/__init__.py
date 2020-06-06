@@ -18,14 +18,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-__title__ = 'pelican-githubprojects'
-__version__ = '0.1.0'
-__author__ = 'Kura'
-__credits__ = ["Kura", ]
+__title__ = "pelican-githubprojects"
+__version__ = "0.1.0"
+__author__ = "Kura"
+__credits__ = [
+    "Kura",
+]
 __maintainer__ = "Kura"
 __email__ = "kura@kura.io"
 __status__ = "Stable"
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2014'
+__license__ = "MIT"
+__copyright__ = "Copyright 2014"
 
 from pelican_githubprojects.github import register

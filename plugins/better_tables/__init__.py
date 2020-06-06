@@ -18,14 +18,14 @@
 # SOFTWARE.
 
 # -*- coding: utf-8 -*-
-__title__ = 'better-tables'
-__version__ = '0.1.0'
-__author__ = 'Alex Waite'
+__title__ = "better-tables"
+__version__ = "0.1.0"
+__author__ = "Alex Waite"
 __credits__ = ["Alex Waite"]
 __maintainer__ = "Alex Waite"
 __email__ = "Alexqw85@gmail.com"
 __status__ = "Stable"
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2015'
+__license__ = "MIT"
+__copyright__ = "Copyright 2015"
 
 from .better_tables import *

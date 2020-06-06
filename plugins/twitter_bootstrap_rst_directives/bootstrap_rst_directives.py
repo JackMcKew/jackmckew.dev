@@ -22,7 +22,6 @@ from pelican import signals
 from pelican.readers import RstReader, PelicanHTMLTranslator
 
 
-
 class CleanHTMLTranslator(PelicanHTMLTranslator):
 
     """
@@ -36,25 +35,25 @@ class CleanHTMLTranslator(PelicanHTMLTranslator):
     """
 
     def visit_literal(self, node):
-        classes = node.get('classes', node.get('class', []))
-        if 'code' in classes:
-            self.body.append(self.starttag(node, 'code'))
-        elif 'kbd' in classes:
-            self.body.append(self.starttag(node, 'kbd'))
+        classes = node.get("classes", node.get("class", []))
+        if "code" in classes:
+            self.body.append(self.starttag(node, "code"))
+        elif "kbd" in classes:
+            self.body.append(self.starttag(node, "kbd"))
         else:
-            self.body.append(self.starttag(node, 'pre'))
+            self.body.append(self.starttag(node, "pre"))
 
     def depart_literal(self, node):
-        classes = node.get('classes', node.get('class', []))
-        if 'code' in classes:
-            self.body.append('</code>\n')
-        elif 'kbd' in classes:
-            self.body.append('</kbd>\n')
+        classes = node.get("classes", node.get("class", []))
+        if "code" in classes:
+            self.body.append("</code>\n")
+        elif "kbd" in classes:
+            self.body.append("</kbd>\n")
         else:
-            self.body.append('</pre>\n')
+            self.body.append("</pre>\n")
 
     def visit_container(self, node):
-        self.body.append(self.starttag(node, 'div'))
+        self.body.append(self.starttag(node, "div"))
 
 
 class CleanRSTReader(RstReader):
@@ -65,16 +64,17 @@ class CleanRSTReader(RstReader):
     """
 
     def _get_publisher(self, source_path):
-        extra_params = {'initial_header_level': '2',
-                        'syntax_highlight': 'short',
-                        'input_encoding': 'utf-8'}
-        user_params = self.settings.get('DOCUTILS_SETTINGS')
+        extra_params = {
+            "initial_header_level": "2",
+            "syntax_highlight": "short",
+            "input_encoding": "utf-8",
+        }
+        user_params = self.settings.get("DOCUTILS_SETTINGS")
         if user_params:
             extra_params.update(user_params)
 
-        pub = docutils.core.Publisher(
-            destination_class=docutils.io.StringOutput)
-        pub.set_components('standalone', 'restructuredtext', 'html')
+        pub = docutils.core.Publisher(destination_class=docutils.io.StringOutput)
+        pub.set_components("standalone", "restructuredtext", "html")
         pub.writer.translator_class = CleanHTMLTranslator
         pub.process_programmatic_settings(None, extra_params, None)
         pub.set_source(source_path=source_path)
@@ -82,8 +82,7 @@ class CleanRSTReader(RstReader):
         return pub
 
 
-def keyboard_role(name, rawtext, text, lineno, inliner,
-                  options={}, content=[]):
+def keyboard_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
         This function creates an inline console input block as defined in the twitter bootstrap documentation
         overrides the default behaviour of the kbd role
@@ -98,13 +97,12 @@ def keyboard_role(name, rawtext, text, lineno, inliner,
         This code is not highlighted
     """
     new_element = nodes.literal(rawtext, text)
-    new_element.set_class('kbd')
+    new_element.set_class("kbd")
 
     return [new_element], []
 
 
-def code_role(name, rawtext, text, lineno, inliner,
-              options={}, content=[]):
+def code_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
         This function creates an inline code block as defined in the twitter bootstrap documentation
         overrides the default behaviour of the code role
@@ -119,13 +117,12 @@ def code_role(name, rawtext, text, lineno, inliner,
         This code is not highlighted
     """
     new_element = nodes.literal(rawtext, text)
-    new_element.set_class('code')
+    new_element.set_class("code")
 
     return [new_element], []
 
 
-def glyph_role(name, rawtext, text, lineno, inliner,
-               options={}, content=[]):
+def glyph_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
         This function defines a glyph inline role that show a glyph icon from the 
         twitter bootstrap framework
@@ -150,29 +147,30 @@ def glyph_role(name, rawtext, text, lineno, inliner,
 
     """
 
-    target = options.get('target', None)
-    glyph_name = 'glyphicon-{}'.format(text)
+    target = options.get("target", None)
+    glyph_name = "glyphicon-{}".format(text)
 
     if target:
         target = utils.unescape(target)
-        new_element = nodes.reference(rawtext, ' ', refuri=target)
+        new_element = nodes.reference(rawtext, " ", refuri=target)
     else:
         new_element = nodes.container()
-    classes = options.setdefault('class', [])
-    classes += ['glyphicon', glyph_name]
+    classes = options.setdefault("class", [])
+    classes += ["glyphicon", glyph_name]
     for custom_class in classes:
         new_element.set_class(custom_class)
     return [new_element], []
 
+
 glyph_role.options = {
-    'target': rst.directives.unchanged,
+    "target": rst.directives.unchanged,
 }
 glyph_role.content = False
 
 
 class Label(rst.Directive):
 
-    '''
+    """
         generic Label directive class definition.
         This class define a directive that shows 
         bootstrap Labels around its content
@@ -189,55 +187,54 @@ class Label(rst.Directive):
 
                 This is a default label content
 
-    '''
+    """
 
     has_content = True
-    custom_class = ''
+    custom_class = ""
 
     def run(self):
         # First argument is the name of the glyph
-        label_name = 'label-{}'.format(self.custom_class)
+        label_name = "label-{}".format(self.custom_class)
         # get the label content
-        text = '\n'.join(self.content)
+        text = "\n".join(self.content)
         # Create a new container element (div)
         new_element = nodes.container(text)
         # Update its content
-        self.state.nested_parse(self.content, self.content_offset,
-                                new_element)
+        self.state.nested_parse(self.content, self.content_offset, new_element)
         # Set its custom bootstrap classes
-        new_element['classes'] += ['label ', label_name]
+        new_element["classes"] += ["label ", label_name]
         # Return one single element
         return [new_element]
 
 
 class DefaultLabel(Label):
 
-    custom_class = 'default'
+    custom_class = "default"
 
 
 class PrimaryLabel(Label):
 
-    custom_class = 'primary'
+    custom_class = "primary"
 
 
 class SuccessLabel(Label):
 
-    custom_class = 'success'
+    custom_class = "success"
 
 
 class InfoLabel(Label):
 
-    custom_class = 'info'
+    custom_class = "info"
 
 
 class WarningLabel(Label):
 
-    custom_class = 'warning'
+    custom_class = "warning"
 
 
 class DangerLabel(Label):
 
-    custom_class = 'danger'
+    custom_class = "danger"
 
 
 class Panel(rst.Directive):
@@ -265,34 +262,32 @@ class Panel(rst.Directive):
 
     has_content = True
     option_spec = {
-        'title': rst.directives.unchanged,
+        "title": rst.directives.unchanged,
     }
-    custom_class = ''
+    custom_class = ""
 
     def run(self):
         # First argument is the name of the glyph
-        panel_name = 'panel-{}'.format(self.custom_class)
+        panel_name = "panel-{}".format(self.custom_class)
         # get the label title
-        title_text = self.options.get('title', self.custom_class.title())
+        title_text = self.options.get("title", self.custom_class.title())
         # get the label content
-        text = '\n'.join(self.content)
+        text = "\n".join(self.content)
         # Create the panel element
         panel_element = nodes.container()
-        panel_element['classes'] += ['panel', panel_name]
+        panel_element["classes"] += ["panel", panel_name]
         # Create the panel headings
         heading_element = nodes.container(title_text)
-        title_nodes, messages = self.state.inline_text(title_text,
-                                                       self.lineno)
-        title = nodes.paragraph(title_text, '', *title_nodes)
+        title_nodes, messages = self.state.inline_text(title_text, self.lineno)
+        title = nodes.paragraph(title_text, "", *title_nodes)
         heading_element.append(title)
-        heading_element['classes'] += ['panel-heading']
+        heading_element["classes"] += ["panel-heading"]
         # Create a new container element (div)
         body_element = nodes.container(text)
         # Update its content
-        self.state.nested_parse(self.content, self.content_offset,
-                                body_element)
+        self.state.nested_parse(self.content, self.content_offset, body_element)
         # Set its custom bootstrap classes
-        body_element['classes'] += ['panel-body']
+        body_element["classes"] += ["panel-body"]
         # add the heading and body to the panel
         panel_element.append(heading_element)
         panel_element.append(body_element)
@@ -302,32 +297,32 @@ class Panel(rst.Directive):
 
 class DefaultPanel(Panel):
 
-    custom_class = 'default'
+    custom_class = "default"
 
 
 class PrimaryPanel(Panel):
 
-    custom_class = 'primary'
+    custom_class = "primary"
 
 
 class SuccessPanel(Panel):
 
-    custom_class = 'success'
+    custom_class = "success"
 
 
 class InfoPanel(Panel):
 
-    custom_class = 'info'
+    custom_class = "info"
 
 
 class WarningPanel(Panel):
 
-    custom_class = 'warning'
+    custom_class = "warning"
 
 
 class DangerPanel(Panel):
 
-    custom_class = 'danger'
+    custom_class = "danger"
 
 
 class Alert(rst.Directive):
@@ -350,52 +345,52 @@ class Alert(rst.Directive):
                 This is a warning alert content
 
     """
+
     has_content = True
-    custom_class = ''
+    custom_class = ""
 
     def run(self):
         # First argument is the name of the glyph
-        alert_name = 'alert-{}'.format(self.custom_class)
+        alert_name = "alert-{}".format(self.custom_class)
         # get the label content
-        text = '\n'.join(self.content)
+        text = "\n".join(self.content)
         # Create a new container element (div)
         new_element = nodes.compound(text)
         # Update its content
-        self.state.nested_parse(self.content, self.content_offset,
-                                new_element)
+        self.state.nested_parse(self.content, self.content_offset, new_element)
         # Recurse inside its children and change the hyperlinks classes
         for child in new_element.traverse(include_self=False):
             if isinstance(child, nodes.reference):
-                child.set_class('alert-link')
+                child.set_class("alert-link")
         # Set its custom bootstrap classes
-        new_element['classes'] += ['alert ', alert_name]
+        new_element["classes"] += ["alert ", alert_name]
         # Return one single element
         return [new_element]
 
 
 class SuccessAlert(Alert):
 
-    custom_class = 'success'
+    custom_class = "success"
 
 
 class InfoAlert(Alert):
 
-    custom_class = 'info'
+    custom_class = "info"
 
 
 class WarningAlert(Alert):
 
-    custom_class = 'warning'
+    custom_class = "warning"
 
 
 class DangerAlert(Alert):
 
-    custom_class = 'danger'
+    custom_class = "danger"
 
 
 class Media(rst.Directive):
 
-    '''
+    """
         generic Media directive class definition.
         This class define a directive that shows 
         bootstrap media image with text according
@@ -425,116 +420,118 @@ class Media(rst.Directive):
 
 
 
-    '''
+    """
 
     has_content = True
     required_arguments = 1
 
     option_spec = {
-        'position': str,
-        'alt': rst.directives.unchanged,
-        'height': rst.directives.length_or_unitless,
-        'width': rst.directives.length_or_percentage_or_unitless,
-        'scale': rst.directives.percentage,
-        'target': rst.directives.unchanged_required,
+        "position": str,
+        "alt": rst.directives.unchanged,
+        "height": rst.directives.length_or_unitless,
+        "width": rst.directives.length_or_percentage_or_unitless,
+        "scale": rst.directives.percentage,
+        "target": rst.directives.unchanged_required,
     }
 
     def get_image_element(self):
         # Get the image url
         image_url = self.arguments[0]
         image_reference = rst.directives.uri(image_url)
-        self.options['uri'] = image_reference
+        self.options["uri"] = image_reference
 
         reference_node = None
         messages = []
-        if 'target' in self.options:
-            block = rst.states.escape2null(
-                self.options['target']).splitlines()
+        if "target" in self.options:
+            block = rst.states.escape2null(self.options["target"]).splitlines()
             block = [line for line in block]
             target_type, data = self.state.parse_target(
-                block, self.block_text, self.lineno)
-            if target_type == 'refuri':
+                block, self.block_text, self.lineno
+            )
+            if target_type == "refuri":
                 container_node = nodes.reference(refuri=data)
-            elif target_type == 'refname':
+            elif target_type == "refname":
                 container_node = nodes.reference(
                     refname=fully_normalize_name(data),
-                    name=whitespace_normalize_name(data))
+                    name=whitespace_normalize_name(data),
+                )
                 container_node.indirect_reference_name = data
                 self.state.document.note_refname(container_node)
-            else:                           # malformed target
-                messages.append(data)       # data is a system message
-            del self.options['target']
+            else:  # malformed target
+                messages.append(data)  # data is a system message
+            del self.options["target"]
         else:
             container_node = nodes.container()
 
         # get image position
-        position = self.options.get('position', 'left')
-        position_class = 'pull-{}'.format(position)
+        position = self.options.get("position", "left")
+        position_class = "pull-{}".format(position)
 
         container_node.set_class(position_class)
 
         image_node = nodes.image(self.block_text, **self.options)
-        image_node['classes'] += ['media-object']
+        image_node["classes"] += ["media-object"]
 
         container_node.append(image_node)
         return container_node
 
     def run(self):
         # now we get the content
-        text = '\n'.join(self.content)
+        text = "\n".join(self.content)
 
         # get image alternative text
-        alternative_text = self.options.get('alternative-text', '')
+        alternative_text = self.options.get("alternative-text", "")
 
         # get container element
         container_element = nodes.container()
-        container_element['classes'] += ['media']
+        container_element["classes"] += ["media"]
 
         # get image element
         image_element = self.get_image_element()
 
         # get body element
         body_element = nodes.container(text)
-        body_element['classes'] += ['media-body']
-        self.state.nested_parse(self.content, self.content_offset,
-                                body_element)
+        body_element["classes"] += ["media-body"]
+        self.state.nested_parse(self.content, self.content_offset, body_element)
 
         container_element.append(image_element)
         container_element.append(body_element)
-        return [container_element, ]
+        return [
+            container_element,
+        ]
 
 
 def register_directives():
-    rst.directives.register_directive('label-default', DefaultLabel)
-    rst.directives.register_directive('label-primary', PrimaryLabel)
-    rst.directives.register_directive('label-success', SuccessLabel)
-    rst.directives.register_directive('label-info', InfoLabel)
-    rst.directives.register_directive('label-warning', WarningLabel)
-    rst.directives.register_directive('label-danger', DangerLabel)
+    rst.directives.register_directive("label-default", DefaultLabel)
+    rst.directives.register_directive("label-primary", PrimaryLabel)
+    rst.directives.register_directive("label-success", SuccessLabel)
+    rst.directives.register_directive("label-info", InfoLabel)
+    rst.directives.register_directive("label-warning", WarningLabel)
+    rst.directives.register_directive("label-danger", DangerLabel)
 
-    rst.directives.register_directive('panel-default', DefaultPanel)
-    rst.directives.register_directive('panel-primary', PrimaryPanel)
-    rst.directives.register_directive('panel-success', SuccessPanel)
-    rst.directives.register_directive('panel-info', InfoPanel)
-    rst.directives.register_directive('panel-warning', WarningPanel)
-    rst.directives.register_directive('panel-danger', DangerPanel)
+    rst.directives.register_directive("panel-default", DefaultPanel)
+    rst.directives.register_directive("panel-primary", PrimaryPanel)
+    rst.directives.register_directive("panel-success", SuccessPanel)
+    rst.directives.register_directive("panel-info", InfoPanel)
+    rst.directives.register_directive("panel-warning", WarningPanel)
+    rst.directives.register_directive("panel-danger", DangerPanel)
 
-    rst.directives.register_directive('alert-success', SuccessAlert)
-    rst.directives.register_directive('alert-info', InfoAlert)
-    rst.directives.register_directive('alert-warning', WarningAlert)
-    rst.directives.register_directive('alert-danger', DangerAlert)
+    rst.directives.register_directive("alert-success", SuccessAlert)
+    rst.directives.register_directive("alert-info", InfoAlert)
+    rst.directives.register_directive("alert-warning", WarningAlert)
+    rst.directives.register_directive("alert-danger", DangerAlert)
 
-    rst.directives.register_directive( 'media', Media )
+    rst.directives.register_directive("media", Media)
 
 
 def register_roles():
-    rst.roles.register_local_role('glyph', glyph_role)
-    rst.roles.register_local_role('code', code_role)
-    rst.roles.register_local_role('kbd', keyboard_role)
+    rst.roles.register_local_role("glyph", glyph_role)
+    rst.roles.register_local_role("code", code_role)
+    rst.roles.register_local_role("kbd", keyboard_role)
 
 
 def add_reader(readers):
-    readers.reader_classes['rst'] = CleanRSTReader
+    readers.reader_classes["rst"] = CleanRSTReader
 
 
 def register():

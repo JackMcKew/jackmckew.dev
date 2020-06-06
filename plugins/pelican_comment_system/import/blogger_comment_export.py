@@ -27,10 +27,10 @@ import untangle
 # Constants                                                                   #
 ###############################################################################
 
-BLOGGER_EXPORT = r'c:\tmp\blog.xml'
-COMMENTS_DIR = 'comments'
-COMMENT_EXT = '.md'
-AUTHORS_FILENAME = 'authors.txt'
+BLOGGER_EXPORT = r"c:\tmp\blog.xml"
+COMMENTS_DIR = "comments"
+COMMENT_EXT = ".md"
+AUTHORS_FILENAME = "authors.txt"
 
 ###############################################################################
 # Main Code Body                                                              #
@@ -50,44 +50,44 @@ def main():
 
     for entry in obj.feed.entry:
         try:
-            full_type = entry.category['term']
+            full_type = entry.category["term"]
         except TypeError:
             # if a post is under multiple categories
             for my_category in entry.category:
-                full_type = my_category['term']
+                full_type = my_category["term"]
                 # str.find() uses a return of `-1` to denote failure
-                if full_type.find('#') != -1:
+                if full_type.find("#") != -1:
                     break
             else:
                 others += 1
 
-        simple_type = full_type[full_type.find('#')+1:]
+        simple_type = full_type[full_type.find("#") + 1 :]
 
-        if 'settings' == simple_type:
+        if "settings" == simple_type:
             settings += 1
-        elif 'post' == simple_type:
+        elif "post" == simple_type:
             posts += 1
             # process posts here
-        elif 'comment' == simple_type:
+        elif "comment" == simple_type:
             comments += 1
             process_comment(entry, obj)
-        elif 'template' == simple_type:
+        elif "template" == simple_type:
             templates += 1
         else:
             others += 1
 
     export_authors()
 
-    print('''
+    print(
+        """
             {} template
             {} posts (including drafts)
             {} comments
             {} settings
-            {} other entries'''.format(templates,
-                                       posts,
-                                       comments,
-                                       settings,
-                                       others))
+            {} other entries""".format(
+            templates, posts, comments, settings, others
+        )
+    )
 
 
 def process_comment(entry, obj):
@@ -96,9 +96,9 @@ def process_comment(entry, obj):
     # in ISO 8601 format, usable as is
     comment_published = entry.published.cdata
     comment_body = entry.content.cdata
-    comment_post_id = entry.thr_in_reply_to['ref']
+    comment_post_id = entry.thr_in_reply_to["ref"]
     comment_author = entry.author.name.cdata
-    comment_author_pic = entry.author.gd_image['src']
+    comment_author_pic = entry.author.gd_image["src"]
     comment_author_email = entry.author.email.cdata
 
     # add author and pic to global list
@@ -107,13 +107,11 @@ def process_comment(entry, obj):
 
     # use this for a filename for the comment
     # e.g. "4115122471434984978"
-    comment_short_id = comment_id[comment_id.find('post-')+5:]
+    comment_short_id = comment_id[comment_id.find("post-") + 5 :]
 
-    comment_text = "date: {}\nauthor: {}\nemail: {}\n\n{}\n"\
-                        .format(comment_published,
-                                comment_author,
-                                comment_author_email,
-                                comment_body)
+    comment_text = "date: {}\nauthor: {}\nemail: {}\n\n{}\n".format(
+        comment_published, comment_author, comment_author_email, comment_body
+    )
 
     # article
     for entry in obj.feed.entry:
@@ -128,16 +126,17 @@ def process_comment(entry, obj):
 
     # article slug
     for link in article_entry.link:
-        if link['rel'] == 'alternate':
-            article_link = link['href']
+        if link["rel"] == "alternate":
+            article_link = link["href"]
             break
     else:
         article_title = article_entry.title.cdata
-        print('Could not find slug for', article_title)
-        article_link = article_title.lower().replace(' ', '-')
+        print("Could not find slug for", article_title)
+        article_link = article_title.lower().replace(" ", "-")
 
-    article_slug = article_link[article_link.rfind('/')+1:
-                                                    article_link.find('.html')]
+    article_slug = article_link[
+        article_link.rfind("/") + 1 : article_link.find(".html")
+    ]
 
     comment_filename = Path(COMMENTS_DIR).resolve()
     # folder; if it doesn't exist, create it
@@ -153,9 +152,9 @@ def export_authors():
     to_export = list(to_export)
     to_export.sort()
 
-    str_export = ''
+    str_export = ""
     for i in to_export:
-        str_export += (i[0] + '\t\t' + i[1] + '\n')
+        str_export += i[0] + "\t\t" + i[1] + "\n"
 
     authors_filename = Path(COMMENTS_DIR).resolve() / AUTHORS_FILENAME
     authors_filename.write_text(str_export)

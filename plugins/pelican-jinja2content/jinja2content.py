@@ -12,21 +12,22 @@ def execjinja2(instance):
         jinja2_env = Environment(
             trim_blocks=True,
             lstrip_blocks=True,
-            loader=ChoiceLoader([
-                FileSystemLoader(
-                    os.path.join(base_path, instance.settings['THEME'],
-                                 'templates')
-                ),
-            ]),
-            extensions=instance.settings['JINJA_EXTENSIONS'],
+            loader=ChoiceLoader(
+                [
+                    FileSystemLoader(
+                        os.path.join(base_path, instance.settings["THEME"], "templates")
+                    ),
+                ]
+            ),
+            extensions=instance.settings["JINJA_EXTENSIONS"],
         )
         jinja2_template = jinja2_env.from_string(instance._content)
 
         kwargs = instance._context
         if type(instance) is contents.Article:
-            kwargs['article'] = instance
+            kwargs["article"] = instance
         elif type(instance) is contents.Page:
-            kwargs['page'] = instance
+            kwargs["page"] = instance
 
         instance._content = jinja2_template.render(**kwargs)
 

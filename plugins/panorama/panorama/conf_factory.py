@@ -27,7 +27,7 @@ class ConfFactory(object):
         :param producer: a data producer, a function returning a Series or a DataFrame.
         :param renderer: a data render, a function returning a Chart.
         """
-        self.confs[chart_id] = {'producer': producer, 'renderer': renderer}
+        self.confs[chart_id] = {"producer": producer, "renderer": renderer}
 
     def configure(self, yaml_file):
         """
@@ -36,32 +36,37 @@ class ConfFactory(object):
 
         :param yaml_file: the configuration file to use
         """
-        with open(yaml_file, 'r') as f:
+        with open(yaml_file, "r") as f:
             panorama_conf = yaml.load(f)
 
         # Configuring factories to:
         # - get only title, date and category from article metadata
         # - rename the first 4 tags with the names defined below
 
-        self.data_factory = DataFactory(metadata_columns=panorama_conf['metadata_columns'],
-                                        tag_columns=panorama_conf['tag_columns'])
+        self.data_factory = DataFactory(
+            metadata_columns=panorama_conf["metadata_columns"],
+            tag_columns=panorama_conf["tag_columns"],
+        )
         self.chart_factory = ChartFactory()
 
         # Configuring the charts if a chart configuration information is available in the conf file
-        if 'chart_conf' in panorama_conf:
-            self.chart_factory.chart_conf = panorama_conf['chart_conf']
+        if "chart_conf" in panorama_conf:
+            self.chart_factory.chart_conf = panorama_conf["chart_conf"]
 
         # Creating the configurations
-        for yaml_conf in panorama_conf['confs']:
-            chart_id = yaml_conf['chart_id']
+        for yaml_conf in panorama_conf["confs"]:
+            chart_id = yaml_conf["chart_id"]
             try:
-                producer = self._create_producer(yaml_conf['producer'])
-                renderer = self._create_renderer(yaml_conf['renderer'], chart_id)
-                self.append_conf(chart_id=chart_id, producer=producer, renderer=renderer)
+                producer = self._create_producer(yaml_conf["producer"])
+                renderer = self._create_renderer(yaml_conf["renderer"], chart_id)
+                self.append_conf(
+                    chart_id=chart_id, producer=producer, renderer=renderer
+                )
             except ValueError as err:
                 logger.exception(
-                    'Error while initializing [%s] conf. -> chart not available.',
-                    chart_id)
+                    "Error while initializing [%s] conf. -> chart not available.",
+                    chart_id,
+                )
 
     def _create_producer(self, yaml_producer):
         """
@@ -71,11 +76,19 @@ class ConfFactory(object):
         :return: the producer function
         """
         producer = None
-        if 'args' in yaml_producer:
-            producer = partial(self.data_factory.get_producer(function_name=yaml_producer['function_name']),
-                               **yaml_producer['args'])
+        if "args" in yaml_producer:
+            producer = partial(
+                self.data_factory.get_producer(
+                    function_name=yaml_producer["function_name"]
+                ),
+                **yaml_producer["args"]
+            )
         else:
-            producer = partial(self.data_factory.get_producer(function_name=yaml_producer['function_name']))
+            producer = partial(
+                self.data_factory.get_producer(
+                    function_name=yaml_producer["function_name"]
+                )
+            )
         return producer
 
     def _create_renderer(self, yaml_renderer, name):
@@ -86,4 +99,7 @@ class ConfFactory(object):
         :param name: the name of the renderer
         :return: the renderer function
         """
-        return partial(self.chart_factory.get_renderer(class_name=yaml_renderer['class_name']), name=name)
+        return partial(
+            self.chart_factory.get_renderer(class_name=yaml_renderer["class_name"]),
+            name=name,
+        )

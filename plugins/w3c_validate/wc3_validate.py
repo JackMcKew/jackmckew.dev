@@ -10,7 +10,7 @@ import os
 
 LOG = logging.getLogger(__name__)
 
-INCLUDE_TYPES = ['html']
+INCLUDE_TYPES = ["html"]
 
 
 def validate_files(pelican):
@@ -18,7 +18,7 @@ def validate_files(pelican):
     Validate a generated HTML file
     :param pelican: pelican object
     """
-    for dirpath, _, filenames in os.walk(pelican.settings['OUTPUT_PATH']):
+    for dirpath, _, filenames in os.walk(pelican.settings["OUTPUT_PATH"]):
         for name in filenames:
             if should_validate(name):
                 filepath = os.path.join(dirpath, name)
@@ -46,17 +46,21 @@ def validate(filename):
 
     # display errors and warning
     for err in vld.errors:
-        line = err.get('line') or err['lastLine']
-        col = err.get('col') or '{}-{}'.format(err['firstColumn'], err['lastColumn'])
-        LOG.error(u'line: {0}; col: {1}; message: {2}'.
-                  format(line, col, h.unescape(err['message']))
-                  )
+        line = err.get("line") or err["lastLine"]
+        col = err.get("col") or "{}-{}".format(err["firstColumn"], err["lastColumn"])
+        LOG.error(
+            u"line: {0}; col: {1}; message: {2}".format(
+                line, col, h.unescape(err["message"])
+            )
+        )
     for err in vld.warnings:
-        line = err.get('line') or err['lastLine']
-        col = err.get('col') or '{}-{}'.format(err['firstColumn'], err['lastColumn'])
-        LOG.warning(u'line: {0}; col: {1}; message: {2}'.
-                    format(line, col, h.unescape(err['message']))
-                    )
+        line = err.get("line") or err["lastLine"]
+        col = err.get("col") or "{}-{}".format(err["firstColumn"], err["lastColumn"])
+        LOG.warning(
+            u"line: {0}; col: {1}; message: {2}".format(
+                line, col, h.unescape(err["message"])
+            )
+        )
 
 
 def should_validate(filename):

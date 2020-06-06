@@ -18,14 +18,16 @@
 # SOFTWARE.
 
 # -*- coding: utf-8 -*-
-__title__ = 'pelican-vimeo'
-__version__ = '0.1.1'
-__author__ = 'Kura'
-__credits__ = ["Kura", ]
+__title__ = "pelican-vimeo"
+__version__ = "0.1.1"
+__author__ = "Kura"
+__credits__ = [
+    "Kura",
+]
 __maintainer__ = "Kura"
 __email__ = "kura@kura.io"
 __status__ = "Stable"
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2013'
+__license__ = "MIT"
+__copyright__ = "Copyright 2013"
 
 from pelican_vimeo.vimeo import register

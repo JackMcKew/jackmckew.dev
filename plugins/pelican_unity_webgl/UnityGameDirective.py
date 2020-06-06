@@ -34,10 +34,10 @@ class UnityWebgl(Directive):
     optional_arguments = 4
 
     option_spec = {
-        'width': directives.positive_int,
-        'height': directives.positive_int,
-        'gameroot': directives.unchanged_required,
-        'template': directives.unchanged_required,
+        "width": directives.positive_int,
+        "height": directives.positive_int,
+        "gameroot": directives.unchanged_required,
+        "template": directives.unchanged_required,
     }
 
     final_argument_whitespace = False
@@ -45,8 +45,8 @@ class UnityWebgl(Directive):
 
     def load_template(self, game, gamesroot, templatepath, width, height):
         basepath = os.path.dirname(__file__)
-        filepath = os.path.abspath(os.path.join(basepath, 'template.txt'))
-        with open(filepath, 'r') as template:
+        filepath = os.path.abspath(os.path.join(basepath, "template.txt"))
+        with open(filepath, "r") as template:
             data = template.read()
             return data.format(game, gamesroot, templatepath, width, height)
 
@@ -62,25 +62,24 @@ class UnityWebgl(Directive):
 
         # get params
 
-        if 'width' in self.options:
-            width = self.options['width']
-        if 'height' in self.options:
-            height = self.options['height']
-        if 'gameroot' in self.options:
-            games_path = self.options['gameroot']
-        if 'template' in self.options:
-            template_path = self.options['template']
+        if "width" in self.options:
+            width = self.options["width"]
+        if "height" in self.options:
+            height = self.options["height"]
+        if "gameroot" in self.options:
+            games_path = self.options["gameroot"]
+        if "template" in self.options:
+            template_path = self.options["template"]
 
         # remove slashes
 
-        games_path = games_path.rstrip('/')
-        template_path = template_path.rstrip('/')
+        games_path = games_path.rstrip("/")
+        template_path = template_path.rstrip("/")
 
         html = self.load_template(game, games_path, template_path, width, height)
 
-        return [
-            nodes.raw('', html, format='html')]
+        return [nodes.raw("", html, format="html")]
 
 
 def register():
-    directives.register_directive('unitywebgl', UnityWebgl)
+    directives.register_directive("unitywebgl", UnityWebgl)

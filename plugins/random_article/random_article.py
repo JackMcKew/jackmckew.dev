@@ -51,11 +51,11 @@ class RandomArticleGenerator(object):
 
         self.output_path = output_path
         self.context = context
-        self.siteurl = settings.get('SITEURL')
-        self.randomurl = settings.get('RANDOM')
+        self.siteurl = settings.get("SITEURL")
+        self.randomurl = settings.get("RANDOM")
 
     def write_url(self, article, fd):
-        if getattr(article, 'status', 'published') != 'published':
+        if getattr(article, "status", "published") != "published":
             return
 
         page_path = os.path.join(self.output_path, article.url)
@@ -64,22 +64,22 @@ class RandomArticleGenerator(object):
 
         fd.write(ARTICLE_URL.format(self.siteurl, article.url))
 
-
     def generate_output(self, writer):
         path = os.path.join(self.output_path, self.randomurl)
-        articles = self.context['articles']
-        info('writing {0}'.format(path))
+        articles = self.context["articles"]
+        info("writing {0}".format(path))
 
         if len(articles) == 0:
             return
 
-        with open(path, 'w', encoding='utf-8') as fd:
+        with open(path, "w", encoding="utf-8") as fd:
             fd.write(HTML_TOP)
 
             for art in articles:
                 self.write_url(art, fd)
 
             fd.write(HTML_BOTTOM)
+
 
 def get_generators(generators):
     return RandomArticleGenerator

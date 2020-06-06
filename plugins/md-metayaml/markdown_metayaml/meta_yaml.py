@@ -64,7 +64,8 @@ except ImportError:
 def construct_yaml_str(self, node):
     return self.construct_scalar(node)
 
-Loader.add_constructor(u'tag:yaml.org,2002:str', construct_yaml_str)
+
+Loader.add_constructor("tag:yaml.org,2002:str", construct_yaml_str)
 
 
 class MetaYamlExtension(Extension):
@@ -74,7 +75,6 @@ class MetaYamlExtension(Extension):
         """Add MetaYamlPreprocessor to Markdown instance."""
 
         md.preprocessors.add("meta_yaml", MetaYamlPreprocessor(md), "<meta")
-
 
 
 class MetaYamlPreprocessor(Preprocessor):
@@ -107,21 +107,26 @@ class MetaYamlPreprocessor(Preprocessor):
             meta = yaml.load("\n".join(yaml_block), Loader)
 
             # Compat with PyMarkdown's meta: Keys are lowercase, values are lists
-            meta = {k.lower(): v if isinstance(v, list) else [v] for k, v in meta.items()}
+            meta = {
+                k.lower(): v if isinstance(v, list) else [v] for k, v in meta.items()
+            }
 
-#           # this is what the code should look like, if the Markdown "meta"
-#           # extension would tolerate other extensions writing to markdown.Meta
-#           if hasattr(self.markdown, 'Meta'):
-#               self.markdown.update(meta)
-#           else:
-#               self.markdown.Meta = meta
+            #           # this is what the code should look like, if the Markdown "meta"
+            #           # extension would tolerate other extensions writing to markdown.Meta
+            #           if hasattr(self.markdown, 'Meta'):
+            #               self.markdown.update(meta)
+            #           else:
+            #               self.markdown.Meta = meta
 
             # hacky quick fix for the moment (see above)
-            if hasattr(self.markdown, 'Meta'):
+            if hasattr(self.markdown, "Meta"):
                 self.markdown._Meta_data = self.markdown.Meta
             else:
                 self.markdown._Meta_data = {}
-            self.markdown.__class__.Meta = property(lambda self: self._Meta_data, lambda self, value: self._Meta_data.update(value))
+            self.markdown.__class__.Meta = property(
+                lambda self: self._Meta_data,
+                lambda self, value: self._Meta_data.update(value),
+            )
             self.markdown.Meta = meta
 
         return lines

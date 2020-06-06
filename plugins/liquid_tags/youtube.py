@@ -29,10 +29,10 @@ from .mdx_liquid_tags import LiquidTags
 
 SYNTAX = "{% youtube id [width height] %}"
 
-YOUTUBE = re.compile(r'([\S]+)(\s+([\d%]+)\s([\d%]+))?')
+YOUTUBE = re.compile(r"([\S]+)(\s+([\d%]+)\s([\d%]+))?")
 
 
-@LiquidTags.register('youtube')
+@LiquidTags.register("youtube")
 def youtube(preprocessor, tag, markup):
     width = 640
     height = 390
@@ -54,10 +54,13 @@ def youtube(preprocessor, tag, markup):
                     allowFullScreen>
                 </iframe>
             </span>
-        """.format(width=width, height=height, youtube_id=youtube_id).strip()
+        """.format(
+            width=width, height=height, youtube_id=youtube_id
+        ).strip()
     else:
-        raise ValueError("Error processing input, "
-                         "expected syntax: {0}".format(SYNTAX))
+        raise ValueError(
+            "Error processing input, " "expected syntax: {0}".format(SYNTAX)
+        )
 
     return youtube_out
 

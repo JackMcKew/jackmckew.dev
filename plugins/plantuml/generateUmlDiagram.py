@@ -9,35 +9,35 @@ from pelican import logger
 
 def generate_uml_image(path, plantuml_code, imgformat):
     tf = tempfile.NamedTemporaryFile(delete=False)
-    tf.write('@startuml\n'.encode('utf8'))
-    tf.write(plantuml_code.encode('utf8'))
-    tf.write('\n@enduml'.encode('utf8'))
+    tf.write("@startuml\n".encode("utf8"))
+    tf.write(plantuml_code.encode("utf8"))
+    tf.write("\n@enduml".encode("utf8"))
     tf.flush()
 
-    logger.debug("[plantuml] Temporary PlantUML source at "+(tf.name))
+    logger.debug("[plantuml] Temporary PlantUML source at " + (tf.name))
 
-    if imgformat == 'png':
+    if imgformat == "png":
         imgext = ".png"
         outopt = "-tpng"
-    elif imgformat == 'svg':
+    elif imgformat == "svg":
         imgext = ".svg"
         outopt = "-tsvg"
     else:
-        logger.error("Bad uml image format '"+imgformat+"', using png")
+        logger.error("Bad uml image format '" + imgformat + "', using png")
         imgext = ".png"
         outopt = "-tpng"
 
     # make a name
-    name = tf.name+imgext
+    name = tf.name + imgext
     # build cmd line
-    cmdline = ['plantuml', '-o', path, outopt, tf.name]
+    cmdline = ["plantuml", "-o", path, outopt, tf.name]
 
     try:
-        logger.debug("[plantuml] About to execute "+" ".join(cmdline))
+        logger.debug("[plantuml] About to execute " + " ".join(cmdline))
         p = Popen(cmdline, stdout=PIPE, stderr=PIPE)
         out, err = p.communicate()
     except Exception as exc:
-        raise Exception('Failed to run plantuml: %s' % exc)
+        raise Exception("Failed to run plantuml: %s" % exc)
     else:
         if p.returncode == 0:
             # diagram was correctly generated, we can remove the temporary file (if not debugging)
@@ -46,7 +46,12 @@ def generate_uml_image(path, plantuml_code, imgformat):
             # renaming output image using an hash code, just to not pollute
             # output directory with a growing number of images
             name = os.path.join(path, os.path.basename(name))
-            newname = os.path.join(path, "%08x" % (adler32(plantuml_code.encode()) & 0xffffffff))+imgext
+            newname = (
+                os.path.join(
+                    path, "%08x" % (adler32(plantuml_code.encode()) & 0xFFFFFFFF)
+                )
+                + imgext
+            )
 
             if os.path.exists(newname):
                 os.remove(newname)
@@ -55,4 +60,4 @@ def generate_uml_image(path, plantuml_code, imgformat):
             return os.path.basename(newname)
         else:
             # the temporary file is still available as aid understanding errors
-            raise RuntimeError('Error calling plantuml: %s' % err)
+            raise RuntimeError("Error calling plantuml: %s" % err)

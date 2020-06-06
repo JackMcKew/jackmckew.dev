@@ -71,6 +71,7 @@ MENUITEMS = (
     ("Categories", "/categories.html"),
     ("Tags", "/tags.html"),
     ("Sitemap", "/sitemap.xml"),
+    # ('RSS', "feeds/all.atom.xml")
     # ("Search","/search.html")
 )
 
@@ -150,8 +151,8 @@ TIMEZONE = "Australia/Sydney"
 DEFAULT_LANG = "English"
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM: Any = None
-CATEGORY_FEED_ATOM: Any = None
+FEED_ALL_ATOM: Any = "feeds/all.atom.xml"
+CATEGORY_FEED_ATOM: Any = "feeds/%s.atom.xml"
 TRANSLATION_FEED_ATOM: Any = None
 AUTHOR_FEED_ATOM: Any = None
 AUTHOR_FEED_RSS: Any = None

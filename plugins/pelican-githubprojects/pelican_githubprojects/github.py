@@ -41,7 +41,6 @@ GITHUB_API = "https://api.github.com/users/{username}/repos?type={user_type}&sor
 
 
 class GithubProjects(object):
-
     def __init__(self, gen):
         self.content = None
         self.gen = gen
@@ -52,53 +51,60 @@ class GithubProjects(object):
         user_type = gen.settings.get("GITHUB_USER_TYPE", "owner")
         sort_by = gen.settings.get("GITHUB_SORT_BY", "full_name")
         direction = gen.settings.get(
-            "GITHUB_DIRECTION", "asc" if sort_by == "full_name" else "desc")
+            "GITHUB_DIRECTION", "asc" if sort_by == "full_name" else "desc"
+        )
 
-        github_url = GITHUB_API.format(username=username,
-                                       user_type=user_type,
-                                       sort_by=sort_by,
-                                       direction=direction)
+        github_url = GITHUB_API.format(
+            username=username, user_type=user_type, sort_by=sort_by, direction=direction
+        )
         try:
             f = urlopen(github_url)
             # 3 vs 2 makes us have to do nasty stuff to get encoding without
             # being 3 or 2 specific. So... Yeah.
-            encoding = f.headers['content-type'].split('charset=')[-1]
+            encoding = f.headers["content-type"].split("charset=")[-1]
             c = f.read().decode(encoding)
         except HTTPError:
             logger.warning("unable to open {0}".format(github_url))
             return
-        self.content =  json.loads(c)
+        self.content = json.loads(c)
 
     def process(self):
         if self.content is None:
             return []
         projects = []
         for repo in self.content:
-            if repo['private']:
+            if repo["private"]:
                 continue
             r = {
-                'name': repo['name'], 'language': repo['language'],
-                'description': repo['description'], 'github_url': repo['html_url'],
-                'homepage': repo['homepage'], 'stars': repo['stargazers_count'],
-                'size': repo['size'], 'fork': repo['fork'], 'private': repo['private'],
-                'created': repo['created_at'], 'updated': repo['updated_at'],
-                'forks': repo['forks'], 'id': repo['id']
+                "name": repo["name"],
+                "language": repo["language"],
+                "description": repo["description"],
+                "github_url": repo["html_url"],
+                "homepage": repo["homepage"],
+                "stars": repo["stargazers_count"],
+                "size": repo["size"],
+                "fork": repo["fork"],
+                "private": repo["private"],
+                "created": repo["created_at"],
+                "updated": repo["updated_at"],
+                "forks": repo["forks"],
+                "id": repo["id"],
             }
             projects.append(r)
         return projects
 
 
 def initialize(gen):
-    if not 'GITHUB_USER' in gen.settings.keys():
-        logger.warning('GITHUB_USER not set')
+    if not "GITHUB_USER" in gen.settings.keys():
+        logger.warning("GITHUB_USER not set")
     else:
         gen.plugin_instance = GithubProjects(gen)
 
+
 def fetch(gen, metadata):
-    gen.context['github_projects'] = gen.plugin_instance.process()
+    gen.context["github_projects"] = gen.plugin_instance.process()
 
 
 def register():
     signals.article_generator_init.connect(initialize)
     signals.article_generator_context.connect(fetch)
-

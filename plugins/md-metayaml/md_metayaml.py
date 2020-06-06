@@ -3,12 +3,13 @@ from pelican.readers import MarkdownReader
 
 from .markdown_metayaml.meta_yaml import MetaYamlExtension
 
+
 class MarkdownYAMLReader(MarkdownReader):
     """Reader for Markdown files with YAML metadata"""
 
     def __init__(self, *args, **kwargs):
         super(MarkdownYAMLReader, self).__init__(*args, **kwargs)
-        self.settings['MARKDOWN']['extensions'].append(MetaYamlExtension())
+        self.settings["MARKDOWN"]["extensions"].append(MetaYamlExtension())
 
     def _parse_metadata(self, meta):
         """Return the dict containing document metadata"""
@@ -21,9 +22,11 @@ class MarkdownYAMLReader(MarkdownReader):
 
         return super(MarkdownYAMLReader, self)._parse_metadata(meta)
 
+
 def add_reader(readers):
     for k in MarkdownYAMLReader.file_extensions:
         readers.reader_classes[k] = MarkdownYAMLReader
+
 
 def register():
     signals.readers_init.connect(add_reader)

@@ -27,10 +27,10 @@ from .mdx_liquid_tags import LiquidTags
 
 SYNTAX = "{% speakerdeck id [ratio] %}"
 
-REGEX = re.compile(r'([\S]+)(\s+(\d*\.?\d*))?')
+REGEX = re.compile(r"([\S]+)(\s+(\d*\.?\d*))?")
 
 
-@LiquidTags.register('speakerdeck')
+@LiquidTags.register("speakerdeck")
 def speakerdeck(preprocessor, tag, markup):
     ratio = 1.33333333333333
     id = None
@@ -43,11 +43,11 @@ def speakerdeck(preprocessor, tag, markup):
         speakerdeck_out = """
 <script async class="speakerdeck-embed" data-id="{id}"
 data-ratio="{ratio}" src="//speakerdeck.com/assets/embed.js"></script>
-        """.format(id=id, ratio=ratio)
-    else:
-        raise ValueError(
-            "Error processing input, expected syntax: {0}".format(SYNTAX)
+        """.format(
+            id=id, ratio=ratio
         )
+    else:
+        raise ValueError("Error processing input, expected syntax: {0}".format(SYNTAX))
     return speakerdeck_out
 
 

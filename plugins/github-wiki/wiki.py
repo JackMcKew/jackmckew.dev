@@ -4,6 +4,7 @@ import os
 import re
 import logging
 
+
 def add_to_structure(structure, path_list):
     folders = structure["folders"]
     articles = structure["articles"]
@@ -14,25 +15,25 @@ def add_to_structure(structure, path_list):
         if subdir in folders:
             folders[subdir] = add_to_structure(folders[subdir], rest)
         else:
-            folders[subdir] = add_to_structure({"folders":{},"articles":[]}, rest)
+            folders[subdir] = add_to_structure({"folders": {}, "articles": []}, rest)
     else:
-       if subdir in folders:
-           folders[subdir]["articles"] += rest
-       else:
-           folders[subdir] = { "folders": {}, "articles": rest }
+        if subdir in folders:
+            folders[subdir]["articles"] += rest
+        else:
+            folders[subdir] = {"folders": {}, "articles": rest}
 
-    return { "folders": folders, "articles": articles }
+    return {"folders": folders, "articles": articles}
+
 
 def parse_wiki_pages(generator):
     settings = generator.settings
     readers = generator.readers
     contentpath = settings.get("PATH", "content")
 
-    root = os.path.realpath(
-        os.path.abspath(os.path.join(contentpath, "wiki", "")))
+    root = os.path.realpath(os.path.abspath(os.path.join(contentpath, "wiki", "")))
 
     wikilist = []
-    structure = {"folders":{}, "articles":[]}
+    structure = {"folders": {}, "articles": []}
     for (dirname, dirnames, filenames) in os.walk(root):
         for filename in filenames:
             if ".git" not in dirname and ".git" not in filename:
@@ -46,14 +47,17 @@ def parse_wiki_pages(generator):
                     org = []
                 org.append(filename)
                 structure = add_to_structure(structure, org)
-                wikilist.append((path,filename,parsedfile))
+                wikilist.append((path, filename, parsedfile))
 
-    structure = { "articles": structure["folders"]['']["articles"], "folders":structure["folders"] }
+    structure = {
+        "articles": structure["folders"][""]["articles"],
+        "folders": structure["folders"],
+    }
 
-    del(structure["folders"][""])
+    del structure["folders"][""]
     wikilist.sort()
-    generator.context['wikilist'] = wikilist
-    generator.context['wiki'] = structure
+    generator.context["wikilist"] = wikilist
+    generator.context["wiki"] = structure
 
 
 def parse_dict(structure, level, nice_list):
@@ -70,27 +74,37 @@ def parse_dict(structure, level, nice_list):
         nice_list.append((item, "article", level))
     return nice_list
 
+
 def generate_wiki_pages(generator, writer):
-    wiki_list = generator.context['wikilist']
-    structure = generator.context['wiki']
-    template = generator.get_template('wikiarticle')
+    wiki_list = generator.context["wikilist"]
+    structure = generator.context["wiki"]
+    template = generator.get_template("wikiarticle")
     nice_list = parse_dict(structure, 0, [])
 
     for page in wiki_list:
-        filename = os.path.join('wiki', page[1].replace('.md', '.html'))
+        filename = os.path.join("wiki", page[1].replace(".md", ".html"))
         content = page[2].content
         metadata = page[2].metadata
         path = page[0]
         breadcrumbs = []
-        for name in path.split('/'):
+        for name in path.split("/"):
             name_match = [item[1] for item in nice_list if item[0] == name]
             if len(name_match) > 0 and name_match[0] == "indexdir":
                 breadcrumbs.append((name, "a"))
             else:
                 breadcrumbs.append((name, "p"))
         file = page[1]
-        writer.write_file(filename, template, generator.context,
-                          meta=metadata, content=content, file=file, path=path, links=nice_list, breadcrumbs=breadcrumbs)
+        writer.write_file(
+            filename,
+            template,
+            generator.context,
+            meta=metadata,
+            content=content,
+            file=file,
+            path=path,
+            links=nice_list,
+            breadcrumbs=breadcrumbs,
+        )
 
 
 def register():

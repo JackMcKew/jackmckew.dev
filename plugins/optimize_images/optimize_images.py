@@ -22,9 +22,13 @@ SHOW_OUTPUT = logger.getEffectiveLevel() <= logging.DEBUG
 # A list of file types with their respective commands
 COMMANDS = {
     # '.ext': ('command {flags} {filename', 'silent_flag', 'verbose_flag')
-    '.svg': ('svgo {flags} --input="{filename}" --output="{filename}"', '--quiet', ''),
-    '.jpg': ('jpegtran {flags} -copy none -optimize -outfile "{filename}" "{filename}"', '', '-v'),
-    '.png': ('optipng {flags} "{filename}"', '--quiet', ''),
+    ".svg": ('svgo {flags} --input="{filename}" --output="{filename}"', "--quiet", ""),
+    ".jpg": (
+        'jpegtran {flags} -copy none -optimize -outfile "{filename}" "{filename}"',
+        "",
+        "-v",
+    ),
+    ".png": ('optipng {flags} "{filename}"', "--quiet", ""),
 }
 
 
@@ -34,10 +38,11 @@ def optimize_images(pelican):
 
     :param pelican: The Pelican instance
     """
-    for dirpath, _, filenames in os.walk(pelican.settings['OUTPUT_PATH']):
+    for dirpath, _, filenames in os.walk(pelican.settings["OUTPUT_PATH"]):
         for name in filenames:
             if os.path.splitext(name)[1] in COMMANDS.keys():
                 optimize(dirpath, name)
+
 
 def optimize(dirpath, filename):
     """
@@ -48,7 +53,7 @@ def optimize(dirpath, filename):
     :param name: A file name to be optimized
     """
     filepath = os.path.join(dirpath, filename)
-    logger.info('optimizing %s', filepath)
+    logger.info("optimizing %s", filepath)
 
     ext = os.path.splitext(filename)[1]
     command, silent, verbose = COMMANDS[ext]

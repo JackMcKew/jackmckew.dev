@@ -37,22 +37,25 @@ from pelican import signals
 from bs4 import BeautifulSoup
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 def content_object_init(instance):
     if instance._content is not None:
         content = instance._content
         soup = BeautifulSoup(content, "html5lib")
 
-        if 'table' in content:
-            for ctbl in soup.find_all('table', class_="codehilitetable"):
-                wrapper_tag = soup.new_tag('div')
-                wrapper_tag['class'] = 'hilitewrapper'
+        if "table" in content:
+            for ctbl in soup.find_all("table", class_="codehilitetable"):
+                wrapper_tag = soup.new_tag("div")
+                wrapper_tag["class"] = "hilitewrapper"
                 ctbl.wrap(wrapper_tag)
         instance._content = soup.decode()
         # If beautiful soup appended html tags.
-        if instance._content.startswith('<html>'):
-          instance._content = instance._content[12:-14]
+        if instance._content.startswith("<html>"):
+            instance._content = instance._content[12:-14]
+
 
 def register():
     signals.content_object_init.connect(content_object_init)

@@ -30,7 +30,7 @@ import sys
 # Other dependency! dateutil.
 try:
     from dateutil import parser
-except ImportError:    # NOQA?
+except ImportError:  # NOQA?
     parser = False
 
 # Markdown-- a half-decent plaintext -> HTML converter, for now.
@@ -46,14 +46,15 @@ logger = logging.getLogger()
 # Settings methods, adapted from tag-cloud plugin.
 # https://github.com/getpelican/pelican-plugins/blob/master/tag_cloud/tag_cloud.py
 def set_default_settings(settings):
-    settings.setdefault('MBOX_PATH', '[input.mbox]')
-    settings.setdefault('MBOX_CATEGORY', '[Mailbox]')
-    settings.setdefault('MBOX_AUTHOR_STRING', '')
-    settings.setdefault('MBOX_MARKDOWNIFY', False)
+    settings.setdefault("MBOX_PATH", "[input.mbox]")
+    settings.setdefault("MBOX_CATEGORY", "[Mailbox]")
+    settings.setdefault("MBOX_AUTHOR_STRING", "")
+    settings.setdefault("MBOX_MARKDOWNIFY", False)
 
 
 def init_default_config(pelican):
     from pelican.settings import DEFAULT_CONFIG
+
     set_default_settings(DEFAULT_CONFIG)
     if pelican:
         set_default_settings(pelican.settings)
@@ -68,7 +69,7 @@ def plaintext_to_html(plaintext, markdownify=False):
             raise RuntimeError
         content = Markdown().convert(plaintext)
     except:
-        content = ''
+        content = ""
         plaintext = plaintext.replace("\r\n", "\n")
         strings = plaintext.split("\n\n")
         for paragraph in strings:
@@ -79,7 +80,6 @@ def plaintext_to_html(plaintext, markdownify=False):
 
 
 class MboxGenerator(ArticlesGenerator):
-
     def __init__(self, *args, **kwargs):
         """initialize properties"""
         self.articles = []  # only articles in default language
@@ -93,7 +93,7 @@ class MboxGenerator(ArticlesGenerator):
     def _generate_mbox_articles(self, mboxPath, mboxCategory):
 
         baseReader = BaseReader(self.settings)
-        category = baseReader.process_metadata('category', mboxCategory)
+        category = baseReader.process_metadata("category", mboxCategory)
 
         # Complain if the mbox path does not exist and is not readable.
         try:
@@ -101,12 +101,12 @@ class MboxGenerator(ArticlesGenerator):
                 raise RuntimeError
             mbox = mailbox.mbox(mboxPath)
         except:
-            logger.error('Could not process mbox file %s', mboxPath)
+            logger.error("Could not process mbox file %s", mboxPath)
             return
 
         # Retrieve some fields from the settings.
-        authorString = self.settings.get('MBOX_AUTHOR_STRING')
-        markdownify = self.settings.get('MBOX_MARKDOWNIFY')
+        authorString = self.settings.get("MBOX_AUTHOR_STRING")
+        markdownify = self.settings.get("MBOX_MARKDOWNIFY")
 
         # Loop over all messages, turn them into article objects.
         all_articles = []
@@ -114,32 +114,34 @@ class MboxGenerator(ArticlesGenerator):
 
         for message in mbox.itervalues():
             # Get author name.
-            author = message['from']
+            author = message["from"]
             if author is None:
-                author = 'Unknown'
+                author = "Unknown"
             else:
-                if '<' and '>' in author:
-                    author = author[:author.find(' <')]
-                author = author.replace('"', '').replace("'", '')
+                if "<" and ">" in author:
+                    author = author[: author.find(" <")]
+                author = author.replace('"', "").replace("'", "")
             # As a hack to avoid dealing with the fact that names can collide.
-            if authorString is not None and authorString != '':
-                author += ' ' + authorString
-            authorObject = baseReader.process_metadata('author', author)
+            if authorString is not None and authorString != "":
+                author += " " + authorString
+            authorObject = baseReader.process_metadata("author", author)
 
             # Get date object, using python-dateutil as an easy hack.
             # If there is no date in the message, abort, we shouldn't bother.
-            if message['date'] is None:
+            if message["date"] is None:
                 continue
             if parser:
-                date = parser.parse(message['date'])
+                date = parser.parse(message["date"])
             else:
-                logger.error('No python-dateutil, we cannot continue as ' +
-                             'date formats cannot be parsed. ')
+                logger.error(
+                    "No python-dateutil, we cannot continue as "
+                    + "date formats cannot be parsed. "
+                )
                 continue
-            monthYear = date.strftime('%B-%Y').lower()
+            monthYear = date.strftime("%B-%Y").lower()
 
             # Get title and slug; build year + month into slug.
-            subject = message['subject']
+            subject = message["subject"]
             slugSubject = slugify(subject)
             slug = os.path.join(slugify(mboxCategory), monthYear, slugSubject)
 
@@ -164,15 +166,19 @@ class MboxGenerator(ArticlesGenerator):
                     payload = part.get_payload(decode=True)
                     if payload is not None:
                         for charset in message.get_charsets():
-                            if charset is not None and charset != 'x-unknown':
+                            if charset is not None and charset != "x-unknown":
                                 # These probably shoudldn't be 'ignore'.
-                                if sys.version_info.major >= 3 and not isinstance(payload, str):
+                                if sys.version_info.major >= 3 and not isinstance(
+                                    payload, str
+                                ):
                                     payload = payload.decode(charset, "ignore")
                                 elif sys.version_info.major <= 2:
-                                    payload = unicode(payload, charset, "ignore").encode("ascii", "replace")
-                    if part.get_content_type() == 'text/plain':
+                                    payload = unicode(
+                                        payload, charset, "ignore"
+                                    ).encode("ascii", "replace")
+                    if part.get_content_type() == "text/plain":
                         plaintext = payload
-                    if part.get_content_type() == 'text/html':
+                    if part.get_content_type() == "text/html":
                         html = payload
                 if plaintext is None and html is None:
                     continue
@@ -185,9 +191,11 @@ class MboxGenerator(ArticlesGenerator):
             else:
                 payload = message.get_payload(decode=True)
                 for charset in message.get_charsets():
-                    if charset is not None and charset != 'x-unknown':
+                    if charset is not None and charset != "x-unknown":
                         if sys.version_info.major < 3:
-                            payload = unicode(payload, charset, "ignore").encode("ascii", "replace")
+                            payload = unicode(payload, charset, "ignore").encode(
+                                "ascii", "replace"
+                            )
                         else:
                             payload = payload.decode(charset)
                 if sys.version_info.major >= 3 and isinstance(payload, bytes):
@@ -196,19 +204,25 @@ class MboxGenerator(ArticlesGenerator):
 
             # On python 2, it seems that we need to do this final check of content.
             if sys.version_info.major <= 2:
-                content = unicode(content, "us-ascii", "ignore").encode("ascii", "replace")
+                content = unicode(content, "us-ascii", "ignore").encode(
+                    "ascii", "replace"
+                )
 
-            metadata = {'title': subject,
-                        'date': date,
-                        'category': category,
-                        'authors': [authorObject],
-                        'slug': slug}
+            metadata = {
+                "title": subject,
+                "date": date,
+                "category": category,
+                "authors": [authorObject],
+                "slug": slug,
+            }
 
-            article = Article(content=content,
-                              metadata=metadata,
-                              settings=self.settings,
-                              source_path=mboxPath,
-                              context=self.context)
+            article = Article(
+                content=content,
+                metadata=metadata,
+                settings=self.settings,
+                source_path=mboxPath,
+                context=self.context,
+            )
 
             # This seems like it cannot happen... but it does without fail.
             article.author = article.authors[0]
@@ -222,9 +236,11 @@ class MboxGenerator(ArticlesGenerator):
 
     def generate_pages(self, writer):
         """Generate the pages on the disk"""
-        write = partial(writer.write_file,
-                        relative_urls=self.settings['RELATIVE_URLS'],
-                        override_output=True)
+        write = partial(
+            writer.write_file,
+            relative_urls=self.settings["RELATIVE_URLS"],
+            override_output=True,
+        )
 
         # to minimize the number of relative path stuff modification
         # in writer, articles pass first
@@ -241,25 +257,33 @@ class MboxGenerator(ArticlesGenerator):
         # Hm... this is a bit clunky; it overrides override_output.
         # It appears that this is not a problem.
         for article in chain(self.translations, self.articles):
-            write(article.save_as, self.get_template(article.template),
-                  self.context, article=article, category=article.category,
-                  override_output=True, blog=True)
+            write(
+                article.save_as,
+                self.get_template(article.template),
+                self.context,
+                article=article,
+                category=article.category,
+                override_output=True,
+                blog=True,
+            )
 
     def generate_context(self):
         # Update the context (only articles in default language)
-        self.articles = self.context['articles']
+        self.articles = self.context["articles"]
 
         # Complain if MBOX_PATH and MBOX_CATEGORY are not of the same length.
-        mboxPaths = self.settings.get('MBOX_PATH')
-        mboxCategories = self.settings.get('MBOX_CATEGORY')
-        errMsg = 'MBOX_PATH, MBOX_CATEGORY not of equal length or non-empty.'
+        mboxPaths = self.settings.get("MBOX_PATH")
+        mboxCategories = self.settings.get("MBOX_CATEGORY")
+        errMsg = "MBOX_PATH, MBOX_CATEGORY not of equal length or non-empty."
         if len(mboxPaths) != len(mboxCategories) or len(mboxPaths) <= 0:
             logger.error(errMsg)
             return
 
         all_articles = []
         # To avoid pulling in a dependency, define this convenient lambda.
-        future_range = lambda x: range(x) if not sys.version_info.major <= 2 else xrange(x)
+        future_range = (
+            lambda x: range(x) if not sys.version_info.major <= 2 else xrange(x)
+        )
         for i in future_range(len(mboxPaths)):
             mboxPath = mboxPaths[i]
             mboxCategory = mboxCategories[i]
@@ -268,9 +292,14 @@ class MboxGenerator(ArticlesGenerator):
             all_articles.extend(new_articles)
 
             # Log that we did stuff.
-            print(('Read in %d messages from %s and converted to articles in ' +
-                  'category %s.') % (len(new_articles), mboxPath, mboxCategory))
-        print('Read in %d messages from all mailboxes.' % (len(all_articles)))
+            print(
+                (
+                    "Read in %d messages from %s and converted to articles in "
+                    + "category %s."
+                )
+                % (len(new_articles), mboxPath, mboxCategory)
+            )
+        print("Read in %d messages from all mailboxes." % (len(all_articles)))
 
         # Continue with the rest of ArticleGenerator, code adapted from:
         # https://github.com/getpelican/pelican/blob/master/pelican/generators.py#L548
@@ -293,29 +322,30 @@ class MboxGenerator(ArticlesGenerator):
                 article.date = pytz.UTC.localize(article.date)
             self.categories[article.category].append(article)
             # Support for Author and Authors.
-            if hasattr(article, 'author') and article.author.name != '':
+            if hasattr(article, "author") and article.author.name != "":
                 self.authors[article.author].append(article)
             else:
-                for author in getattr(article, 'authors', []):
+                for author in getattr(article, "authors", []):
                     self.authors[author].append(article)
 
         # This may not technically be right, but...
         # Sort the articles by date too.
         self.articles = list(self.articles)
         self.dates = self.articles
-        self.dates.sort(key=attrgetter('date'),
-                        reverse=self.context['NEWEST_FIRST_ARCHIVES'])
+        self.dates.sort(
+            key=attrgetter("date"), reverse=self.context["NEWEST_FIRST_ARCHIVES"]
+        )
 
         # and generate the output :)
 
         # order the categories per name
         self.categories = list(self.categories.items())
-        self.categories.sort(reverse=self.settings['REVERSE_CATEGORY_ORDER'])
+        self.categories.sort(reverse=self.settings["REVERSE_CATEGORY_ORDER"])
 
         self.authors = list(self.authors.items())
         self.authors.sort()
 
-        self._update_context(('articles', 'dates', 'categories', 'authors'))
+        self._update_context(("articles", "dates", "categories", "authors"))
         # Disabled for 3.3 compatibility for now, great.
         # self.save_cache()
         # self.readers.save_cache()
