@@ -78,14 +78,14 @@
                 
                 .bmc-button {
                     margin-top: 15px !important;
-                    margin-bottom: 15px !important;
+                    margin-bottom: 20px !important;
                     padding: 7px 15px 7px 10px !important;
                     line-height: 35px !important;
                     height: 51px !important;
                     text-decoration: none !important;
                     display: inline-flex !important;
                     color: #ffffff !important;
-                    background-color: #FF813F !important;
+                    /* background-color: #FF813F !important; */
                     border-radius: 5px !important;
                     border: 1px solid transparent !important;
                     padding: 7px 15px 7px 10px !important;
@@ -109,7 +109,7 @@
                 }
             </style>
             <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
             <br>
             <a href="https://feedburner.google.com/fb/a/mailverify?uri=JackMckewsBlog&amp;loc=en_US" class="mbscreenphone phonelink btn btn-info btn-lg">
                 Subscribe by Email <i class="fas fa-envelope"></i>
@@ -181,7 +181,7 @@
 </li>
 <li>The result from the minimize function is returned as a <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult">OptimizeResult</a> type.</li>
 </ul>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -207,7 +207,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Similarly to the maximum sharpe ratio we do the same for determining the minimum volatility portfolio programmatically. We minimise volatility by trying different weightings on our asset allocations to find the minima.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -235,7 +235,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>As above, we can also draw a line which depicts the efficient frontier for the portfolios for a given risk rate. Below some functions are defined for computing the efficient frontier. The first function, efficient_return is calculating the most efficient portfolio for a given target return, and the second function efficient frontier is compiling the most efficient portfolio for a range of targets.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -275,7 +275,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now it's time to plot the efficient frontier on the graph with the randomly selected portfolios to check if they have been calculated correctly. It is also an opportune time to check if the maximum Sharpe ratio and minimum volatility portfolios have been calculated correctly by comparing them to the previously randomly determined portfolios.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -388,7 +388,7 @@
 <p><img alt="Code_R2bA54PriC" class="img-fluid" src="https://jackmckew.dev/img/Code_R2bA54PriC.png"/></p>
 <p>The surprising part is that the calculated result is very close to what we have previously simulated by picking from randomly generated portfolios. The slight differences in allocations between the simulated vs calculated are in most cases less than 1%, which shows how powerful randomly estimating calculations can be albeit sometimes not reliable in small sample spaces.</p>
 <p>Rather than plotting every randomly generated portfolio, we can plot the individual stocks on the plot with the corresponding values of each stock's return and risk. This way we can compare how diversification is lowering the risk by optimizing the allocations.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
