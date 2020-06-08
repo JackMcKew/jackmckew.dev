@@ -25,7 +25,7 @@
 &lt;p&gt;In projects, typically it's best practice to not have to repeat yourself in multiple places (this the DRY principle). In the README, it's nice to have working examples on how a user may use the project. If we could tie the original README with live code that generates the examples, that would be ideal, enter &lt;code&gt;README.ipynb&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Jupyter supports markdown &amp;amp; code cells, thus all the current documentation in the &lt;code&gt;README.md&lt;/code&gt; can be copied within markdown cells. Similarly, the code used to generate examples or demonstrate usage can then be placed in code cells. Allowing the author, to run the entire notebook, generating the new examples &amp;amp; verifying the examples are working code. Fantastic, this is exactly where we want to go.&lt;/p&gt;
 &lt;p&gt;Now if you only have the &lt;code&gt;README.ipynb&lt;/code&gt; in the repository, GitHub will represent the file in it's raw form, JSON. For example would be hundreds of line like:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -84,7 +84,7 @@
 &lt;h4 id="python-highlighting-in-output"&gt;Python Highlighting in Output&lt;/h4&gt;
 &lt;p&gt;When first run, it was noticed that &lt;code&gt;nbconvert&lt;/code&gt; wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the &lt;code&gt;README.md&lt;/code&gt; with language specifics. The workaround for this, was to use &lt;code&gt;nbconvert&lt;/code&gt;'s support for custom templates. See the docs at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates"&gt;https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The resulting template "pythoncodeblocks.tpl" was:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -98,7 +98,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Which could be used with &lt;code&gt;nbconvert&lt;/code&gt; with:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="integration-into-documentation-with-sphinx"&gt;Integration into Documentation with Sphinx&lt;/h2&gt;
@@ -121,7 +121,7 @@
 &lt;p&gt;Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst"&gt;index.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -197,7 +197,7 @@ With &lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_ali
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst"&gt;developer.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -496,7 +496,7 @@ The real origin of pizza, however, is controversial: in addition to Naples, othe
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -761,7 +761,7 @@ Error translating.. `Error` placed in output dataset
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -906,7 +906,7 @@ Error translating.. `Error` placed in output dataset
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;Country&lt;/th&gt;
