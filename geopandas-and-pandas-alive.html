@@ -45,7 +45,7 @@
 <meta property="article:section" content="Python"/>
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="visualisation"/>
-<meta property="og:image" content="https://jackmckew.dev/img/gpd-area-chart.gif">
+<meta property="og:image" content="https://jackmckew.dev/img/gpd-nsw-covid.gif">
 
     <title>Jack McKew's Blog &ndash; Geopandas and Pandas Alive</title>
 
@@ -60,7 +60,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 68</p>
-            <p>Number of Words: 44,423</p>
+            <p>Number of Words: 44,437</p>
             <p>Number of Lines of Code 3,305</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -170,6 +170,8 @@
 <li><code>contextily</code> : <code>conda install -c conda-forge contextily</code></li>
 </ul>
 <p><code>pandas_alive</code> also supports progress bars with <code>tqdm</code>, this can be installed via <code>conda install tqdm</code> and enabled using the enable_progress_bar=True keyword in <code>plot_animated()</code></p>
+<p>First off let's check out the end-result visualisation we'll be building today:</p>
+<p><img alt="NSW COVID Visualisation" class="img-fluid" src="https://jackmckew.dev/img/gpd-nsw-covid.gif"/></p>
 <p>Now let's get started, as always we begin by importing all the neccessary libraries.</p>
 </div>
 </div>
@@ -242,7 +244,7 @@
         text-align: right;
     }
 </style>
-<table border="1" class="table-striped dataframe table">
+<table border="1" class="dataframe table-striped table">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -322,7 +324,7 @@
         text-align: right;
     }
 </style>
-<table border="1" class="table-striped dataframe table">
+<table border="1" class="dataframe table-striped table">
 <thead>
 <tr style="text-align: right;">
 <th></th>

@@ -14,6 +14,8 @@
 &lt;li&gt;&lt;code&gt;contextily&lt;/code&gt; : &lt;code&gt;conda install -c conda-forge contextily&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;pandas_alive&lt;/code&gt; also supports progress bars with &lt;code&gt;tqdm&lt;/code&gt;, this can be installed via &lt;code&gt;conda install tqdm&lt;/code&gt; and enabled using the enable_progress_bar=True keyword in &lt;code&gt;plot_animated()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;First off let's check out the end-result visualisation we'll be building today:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="NSW COVID Visualisation" class="img-fluid" src="https://jackmckew.dev/img/gpd-nsw-covid.gif"/&gt;&lt;/p&gt;
 &lt;p&gt;Now let's get started, as always we begin by importing all the neccessary libraries.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -86,7 +88,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -166,7 +168,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -810,7 +812,7 @@ The real origin of pizza, however, is controversial: in addition to Naples, othe
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1075,7 +1077,7 @@ Error translating.. `Error` placed in output dataset
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1220,7 +1222,7 @@ Error translating.. `Error` placed in output dataset
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;Country&lt;/th&gt;
