@@ -1,0 +1,782 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="Geopandas and Pandas_Alive Following on from a previous post on making animated charts with pandas_alive, let&#39;s go into generating animated charts specifically for geospatial data with geopandas. Support for geopandas was introduced into pandas_alive in version 0.2.0, along with functionality to interface with contextily for enabling basemaps. The …" />
+<meta name="keywords" content="python, visualisation">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Geopandas and Pandas Alive"/>
+<meta property="og:description" content="Geopandas and Pandas_Alive Following on from a previous post on making animated charts with pandas_alive, let&#39;s go into generating animated charts specifically for geospatial data with geopandas. Support for geopandas was introduced into pandas_alive in version 0.2.0, along with functionality to interface with contextily for enabling basemaps. The …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/geopandas-and-pandas-alive.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-06-12 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="visualisation"/>
+<meta property="og:image" content="https://jackmckew.dev/img/gpd-area-chart.gif">
+
+    <title>Jack McKew's Blog &ndash; Geopandas and Pandas Alive</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 68</p>
+            <p>Number of Words: 44,423</p>
+            <p>Number of Lines of Code 3,305</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 20px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    /* background-color: #FF813F !important; */
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <br>
+            <a href="https://feedburner.google.com/fb/a/mailverify?uri=JackMckewsBlog&amp;loc=en_US" class="mbscreenphone phonelink btn btn-info btn-lg">
+                Subscribe by Email <i class="fas fa-envelope"></i>
+              </a>             <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="geopandas-and-pandas-alive">Geopandas and Pandas Alive</h1>
+    <p>
+       Posted on Fri 12 June 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+
+        &#8226; 6 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Geopandas and Pandas_Alive</p>
+<p>Following on from a previous post on <a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">making animated charts with <code>pandas_alive</code></a>, let's go into generating animated charts specifically for geospatial data with <code>geopandas</code>. Support for <code>geopandas</code> was introduced into <code>pandas_alive</code> in version 0.2.0, along with functionality to interface with <code>contextily</code> for enabling basemaps. The visualisation(s) we will make today, are initially was <code>pandas_alive</code> was created for!</p>
+<p>When setting up <code>geopandas</code> &amp; <code>pandas_alive</code> on Windows, the recommended set up is using <a href="https://www.anaconda.com/">Anaconda</a> as <code>geopandas</code> requires GDAL, which is not a trivial process to set up on Windows. Luckily Anaconda distributes GDAL along with geopandas so we don't have to worry about it. We also need to install <code>descartes</code> (support for plotting polygons) and <code>contextily</code> for basemap support. These can be installed with:</p>
+<ul>
+<li><code>descartes</code> : <code>conda install -c conda-forge descartes</code></li>
+<li><code>contextily</code> : <code>conda install -c conda-forge contextily</code></li>
+</ul>
+<p><code>pandas_alive</code> also supports progress bars with <code>tqdm</code>, this can be installed via <code>conda install tqdm</code> and enabled using the enable_progress_bar=True keyword in <code>plot_animated()</code></p>
+<p>Now let's get started, as always we begin by importing all the neccessary libraries.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas_alive</span>
+<span class="kn">import</span> <span class="nn">contextily</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The data we wish to visualise is hosted through an API, so we will use <code>urllib</code> to load the json response and then find the dataset link (provided as a csv). Once we determine what the link is, we can use <code>pandas</code> to read the csv directly from the url. We also read in a dataset of matching geospatial co-ordinates to the postcodes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
+    <span class="s2">"https://data.nsw.gov.au/data/api/3/action/package_show?id=aefcde60-3b0c-4bc0-9af1-6fe652944ec2"</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">url</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+
+<span class="c1"># Extract url to csv component</span>
+<span class="n">covid_nsw_data_url</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"result"</span><span class="p">][</span><span class="s2">"resources"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"url"</span><span class="p">]</span>
+
+<span class="c1"># Read csv from data API url</span>
+<span class="n">nsw_covid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">covid_nsw_data_url</span><span class="p">)</span>
+
+<span class="c1"># Source for postcode dataset https://www.matthewproctor.com/australian_postcodes</span>
+<span class="n">postcode_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/postcode-data.csv"</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">nsw_covid</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">postcode_dataset</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>notification_date</th>
+<th>postcode</th>
+<th>lhd_2010_code</th>
+<th>lhd_2010_name</th>
+<th>lga_code19</th>
+<th>lga_name19</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>25/01/2020</td>
+<td>2134.0</td>
+<td>X700</td>
+<td>Sydney</td>
+<td>11300.0</td>
+<td>Burwood (A)</td>
+</tr>
+<tr>
+<th>1</th>
+<td>25/01/2020</td>
+<td>2121.0</td>
+<td>X760</td>
+<td>Northern Sydney</td>
+<td>16260.0</td>
+<td>Parramatta (C)</td>
+</tr>
+<tr>
+<th>2</th>
+<td>25/01/2020</td>
+<td>2071.0</td>
+<td>X760</td>
+<td>Northern Sydney</td>
+<td>14500.0</td>
+<td>Ku-ring-gai (A)</td>
+</tr>
+<tr>
+<th>3</th>
+<td>27/01/2020</td>
+<td>2033.0</td>
+<td>X720</td>
+<td>South Eastern Sydney</td>
+<td>16550.0</td>
+<td>Randwick (C)</td>
+</tr>
+<tr>
+<th>4</th>
+<td>1/03/2020</td>
+<td>2077.0</td>
+<td>X760</td>
+<td>Northern Sydney</td>
+<td>14000.0</td>
+<td>Hornsby (A)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table-striped table">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>ID</th>
+<th>Postcode</th>
+<th>Locality</th>
+<th>State</th>
+<th>Longitude</th>
+<th>Latitude</th>
+<th>Category</th>
+<th>Type</th>
+<th>SA3</th>
+<th>SA3 Name</th>
+<th>SA4</th>
+<th>SA4 Name</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>458</td>
+<td>1001</td>
+<td>SYDNEY</td>
+<td>NSW</td>
+<td>151.268071</td>
+<td>-33.794883</td>
+<td>LVR</td>
+<td>LVR</td>
+<td>11703.0</td>
+<td>Sydney Inner City</td>
+<td>117.0</td>
+<td>Sydney - City and Inner South</td>
+<td>Updated 25-Mar-2020 SA3</td>
+</tr>
+<tr>
+<th>1</th>
+<td>459</td>
+<td>1002</td>
+<td>SYDNEY</td>
+<td>NSW</td>
+<td>151.268071</td>
+<td>-33.794883</td>
+<td>LVR</td>
+<td>LVR</td>
+<td>11703.0</td>
+<td>Sydney Inner City</td>
+<td>117.0</td>
+<td>Sydney - City and Inner South</td>
+<td>Updated 25-Mar-2020 SA3</td>
+</tr>
+<tr>
+<th>2</th>
+<td>460</td>
+<td>1003</td>
+<td>SYDNEY</td>
+<td>NSW</td>
+<td>151.268071</td>
+<td>-33.794883</td>
+<td>LVR</td>
+<td>LVR</td>
+<td>11703.0</td>
+<td>Sydney Inner City</td>
+<td>117.0</td>
+<td>Sydney - City and Inner South</td>
+<td>Updated 25-Mar-2020 SA3</td>
+</tr>
+<tr>
+<th>3</th>
+<td>461</td>
+<td>1004</td>
+<td>SYDNEY</td>
+<td>NSW</td>
+<td>151.268071</td>
+<td>-33.794883</td>
+<td>LVR</td>
+<td>LVR</td>
+<td>11703.0</td>
+<td>Sydney Inner City</td>
+<td>117.0</td>
+<td>Sydney - City and Inner South</td>
+<td>Updated 25-Mar-2020 SA3</td>
+</tr>
+<tr>
+<th>4</th>
+<td>462</td>
+<td>1005</td>
+<td>SYDNEY</td>
+<td>NSW</td>
+<td>151.268071</td>
+<td>-33.794883</td>
+<td>LVR</td>
+<td>LVR</td>
+<td>11703.0</td>
+<td>Sydney Inner City</td>
+<td>117.0</td>
+<td>Sydney - City and Inner South</td>
+<td>Updated 25-Mar-2020 SA3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This data isn't in the format we need it to be, so let's do some preprocessing, in particular we:</p>
+<ul>
+<li>Fill in any gaps (with error value 9999)</li>
+<li>Convert the date string to a datetime object</li>
+<li>Groupby to get number of cases by date &amp; postcode</li>
+<li>Unstack the multi-index that groupby returns</li>
+<li>Drop the unused column level</li>
+<li>Fill any missing values now with 0 cases (as these would be unprovided)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Prepare data from NSW health dataset</span>
+<span class="n">nsw_covid</span> <span class="o">=</span> <span class="n">nsw_covid</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">9999</span><span class="p">)</span>
+<span class="n">nsw_covid</span><span class="p">[</span><span class="s2">"postcode"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nsw_covid</span><span class="p">[</span><span class="s2">"postcode"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Convert the date time string to a datetime object</span>
+<span class="n">nsw_covid</span><span class="p">[</span><span class="s1">'notification_date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">nsw_covid</span><span class="p">[</span><span class="s1">'notification_date'</span><span class="p">],</span><span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">grouped_df</span> <span class="o">=</span> <span class="n">nsw_covid</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"notification_date"</span><span class="p">,</span> <span class="s2">"postcode"</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">grouped_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grouped_df</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">grouped_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">droplevel</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">grouped_df</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">grouped_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">grouped_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">cases_df</span> <span class="o">=</span> <span class="n">grouped_df</span>
+
+<span class="n">cases_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'data/nsw-covid-cases-by-postcode.csv'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can start by creating an area chart, and labelling any events in particular with vertical bars.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">bar_chart</span> <span class="o">=</span> <span class="n">cases_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s1">'area-chart.gif'</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span>
+    <span class="n">label_events</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">'Ruby Princess Disembark'</span><span class="p">:</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"19/03/2020"</span><span class="p">,</span> <span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y"</span><span class="p">),</span>
+        <span class="s1">'Lockdown'</span><span class="p">:</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">"31/03/2020"</span><span class="p">,</span> <span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y"</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="n">fill_under_line_color</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">,</span>
+    <span class="n">enable_progress_bar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Generating LineChart, plotting ['0']
+100%|██████████| 941/941 [17:54&lt;00:00,  1.14s/it]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Area Chart" class="img-fluid" src="https://jackmckew.dev/img/gpd-area-chart.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now it's time to prepare the dataset for our geospatial visualisations with <code>geopandas</code>. In particular:</p>
+<ul>
+<li>Drop any invalid longitudes / latitudes from our postcode dataset</li>
+<li>Drop any longitudes / latitudes that are 0</li>
+<li>Match the postcodes in each dataset to retrieve the equivalent longitude / latitude</li>
+<li>Remove the redundant/duplicated columns</li>
+<li>Package into a geopackage (ensure to keep the index column separate)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Clean data in postcode dataset prior to matching</span>
+
+<span class="n">grouped_df</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">T</span>
+<span class="n">postcode_dataset</span> <span class="o">=</span> <span class="n">postcode_dataset</span><span class="p">[</span><span class="n">postcode_dataset</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="n">postcode_dataset</span> <span class="o">=</span> <span class="n">postcode_dataset</span><span class="p">[</span><span class="n">postcode_dataset</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">postcode_dataset</span> <span class="o">=</span> <span class="n">postcode_dataset</span><span class="p">[</span><span class="n">postcode_dataset</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="n">postcode_dataset</span> <span class="o">=</span> <span class="n">postcode_dataset</span><span class="p">[</span><span class="n">postcode_dataset</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">postcode_dataset</span><span class="p">[</span><span class="s1">'Postcode'</span><span class="p">]</span> <span class="o">=</span> <span class="n">postcode_dataset</span><span class="p">[</span><span class="s1">'Postcode'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="c1"># Build GeoDataFrame from Lat Long dataset and make map chart</span>
+<span class="n">grouped_df</span><span class="p">[</span><span class="s1">'Longitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">postcode_dataset</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'Postcode'</span><span class="p">)[</span><span class="s1">'Longitude'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="n">grouped_df</span><span class="p">[</span><span class="s1">'Latitude'</span><span class="p">]</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">postcode_dataset</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'Postcode'</span><span class="p">)[</span><span class="s1">'Latitude'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+    <span class="n">grouped_df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geopandas</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">grouped_df</span><span class="o">.</span><span class="n">Longitude</span><span class="p">,</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">Latitude</span><span class="p">),</span><span class="n">crs</span><span class="o">=</span><span class="s2">"EPSG:4326"</span><span class="p">)</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Prepare GeoDataFrame for writing to geopackage</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Longitude'</span><span class="p">,</span><span class="s1">'Latitude'</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">gdf</span><span class="p">[</span><span class="s1">'postcode'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">index</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">"data/nsw-covid19-cases-by-postcode.gpkg"</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s1">'nsw-postcode-covid'</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">"GPKG"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Before we merge together all the charts, let's plot the prepared geospatial data on it's own.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Prepare GeoDataFrame for plotting</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">postcode</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'postcode'</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">"EPSG:3857"</span><span class="p">)</span> <span class="c1">#Web Mercator</span>
+
+<span class="n">map_chart</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'map-chart.gif'</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">"Cases by Location"</span><span class="p">,</span><span class="n">basemap_format</span><span class="o">=</span><span class="p">{</span><span class="s1">'source'</span><span class="p">:</span><span class="n">contextily</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">Stamen</span><span class="o">.</span><span class="n">Terrain</span><span class="p">},</span><span class="n">cmap</span><span class="o">=</span><span class="s1">'cool'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Map Chart" class="img-fluid" src="https://jackmckew.dev/img/gpd-map-chart.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally let's merge all these charts together into a single chart!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">grouped_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/nsw-covid-cases-by-postcode.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">line_chart</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">grouped_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span> <span class="n">period_label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Cumulative Total Cases"</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">current_total</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Total : </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">total</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="o">.</span><span class="mi">85</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'s'</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="s1">'ha'</span><span class="p">:</span> <span class="s1">'right'</span><span class="p">,</span> <span class="s1">'size'</span><span class="p">:</span> <span class="mi">11</span><span class="p">}</span>
+
+<span class="n">race_chart</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span>
+    <span class="n">n_visible</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Cases by Postcode"</span><span class="p">,</span> <span class="n">period_label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">period_summary_func</span><span class="o">=</span><span class="n">current_total</span>
+<span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">timestr</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y"</span><span class="p">)</span>
+
+<span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">bar_chart</span><span class="p">,</span> <span class="n">line_chart</span><span class="p">,</span> <span class="n">map_chart</span><span class="p">,</span> <span class="n">race_chart</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+
+<span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"figure.autolayout"</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+
+<span class="n">figs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">figs</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">f3_ax1</span> <span class="o">=</span> <span class="n">figs</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">f3_ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">bar_chart</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+<span class="n">bar_chart</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">f3_ax1</span>
+
+<span class="n">f3_ax2</span> <span class="o">=</span> <span class="n">figs</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">f3_ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">line_chart</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+<span class="n">line_chart</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">f3_ax2</span>
+
+<span class="n">f3_ax3</span> <span class="o">=</span> <span class="n">figs</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">f3_ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">map_chart</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+<span class="n">map_chart</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">f3_ax3</span>
+
+<span class="n">f3_ax4</span> <span class="o">=</span> <span class="n">figs</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">f3_ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">race_chart</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+<span class="n">race_chart</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">f3_ax4</span>
+
+<span class="n">timestr</span> <span class="o">=</span> <span class="n">cases_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y"</span><span class="p">)</span>
+<span class="n">figs</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s2">"NSW COVID-19 Confirmed Cases up to </span><span class="si">{</span><span class="n">timestr</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">pandas_alive</span><span class="o">.</span><span class="n">animate_multiple_plots</span><span class="p">(</span>
+    <span class="s1">'nsw-covid.gif'</span><span class="p">,</span>
+    <span class="n">plots</span><span class="p">,</span>
+    <span class="n">figs</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Generating LineChart, plotting ['0']
+Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010', '2011', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032', '2033', '2034', '2035', '2036', '2037', '2038', '2039', '2040', '2041', '2042', '2043', '2044', '2045', '2046', '2047', '2048', '2049', '2050', '2060', '2061', '2062', '2063', '2064', '2065', '2066', '2067', '2068', '2069', '2070', '2071', '2072', '2073', '2074', '2075', '2076', '2077', '2079', '2080', '2081', '2084', '2085', '2086', '2087', '2088', '2089', '2090', '2091', '2092', '2093', '2094', '2095', '2096', '2097', '2099', '2100', '2101', '2102', '2103', '2104', '2106', '2107', '2108', '2110', '2111', '2112', '2113', '2114', '2115', '2116', '2117', '2118', '2119', '2120', '2121', '2122', '2125', '2126', '2127', '2128', '2130', '2131', '2132', '2134', '2135', '2137', '2138', '2140', '2141', '2142', '2144', '2145', '2147', '2148', '2150', '2151', '2152', '2153', '2154', '2155', '2156', '2158', '2159', '2160', '2161', '2162', '2163', '2164', '2165', '2166', '2168', '2170', '2171', '2172', '2173', '2176', '2177', '2178', '2179', '2190', '2191', '2192', '2193', '2194', '2195', '2196', '2197', '2198', '2199', '2200', '2203', '2204', '2205', '2206', '2207', '2208', '2209', '2210', '2211', '2212', '2213', '2216', '2217', '2218', '2219', '2220', '2221', '2223', '2224', '2225', '2226', '2227', '2228', '2229', '2230', '2231', '2232', '2233', '2234', '2250', '2251', '2256', '2257', '2258', '2259', '2260', '2261', '2262', '2263', '2264', '2265', '2278', '2280', '2281', '2282', '2283', '2284', '2285', '2286', '2287', '2289', '2290', '2291', '2292', '2297', '2298', '2299', '2300', '2303', '2304', '2305', '2306', '2315', '2316', '2317', '2318', '2319', '2320', '2321', '2322', '2323', '2324', '2325', '2327', '2330', '2333', '2334', '2335', '2337', '2340', '2343', '2345', '2350', '2357', '2358', '2360', '2371', '2372', '2380', '2400', '2420', '2421', '2422', '2423', '2425', '2427', '2428', '2430', '2431', '2439', '2440', '2443', '2444', '2445', '2446', '2447', '2448', '2450', '2452', '2454', '2456', '2460', '2463', '2464', '2465', '2470', '2476', '2477', '2478', '2479', '2480', '2481', '2482', '2483', '2484', '2485', '2486', '2487', '2490', '2500', '2505', '2506', '2508', '2515', '2516', '2517', '2518', '2519', '2525', '2526', '2527', '2528', '2529', '2530', '2533', '2535', '2536', '2537', '2539', '2540', '2541', '2546', '2548', '2550', '2557', '2558', '2560', '2564', '2565', '2566', '2567', '2568', '2569', '2570', '2571', '2575', '2576', '2577', '2578', '2580', '2581', '2582', '2583', '2586', '2590', '2619', '2620', '2621', '2627', '2628', '2630', '2631', '2640', '2641', '2642', '2643', '2644', '2646', '2647', '2650', '2660', '2680', '2700', '2711', '2713', '2714', '2716', '2722', '2745', '2747', '2748', '2749', '2750', '2752', '2753', '2754', '2756', '2757', '2758', '2759', '2760', '2761', '2763', '2765', '2766', '2767', '2768', '2769', '2770', '2773', '2774', '2777', '2779', '2780', '2782', '2783', '2785', '2786', '2790', '2795', '2799', '2800', '2810', '2820', '2821', '2824', '2830', '2843', '2849', '2850', '2865', '2866', '2870', '2880', '9999']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="NSW COVID Chart" class="img-fluid" src="https://jackmckew.dev/img/gpd-nsw-covid.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+      <a href="https://jackmckew.dev/tag/visualisation.html">visualisation</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html" title="Make a README & Documentation with Jupyter Notebooks">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/translating-text-in-python.html">Translating Text in Python</a></li>
+      <li><a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
+      <li><a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
+      <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
+      <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>
