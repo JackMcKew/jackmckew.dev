@@ -60,8 +60,8 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 68</p>
-            <p>Number of Words: 44,437</p>
-            <p>Number of Lines of Code 3,305</p>
+            <p>Number of Words: 44,447</p>
+            <p>Number of Lines of Code 3,314</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -244,7 +244,7 @@
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe table-striped table">
+<table border="1" class="table-striped table dataframe">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -324,7 +324,7 @@
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe table-striped table">
+<table border="1" class="table-striped table dataframe">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -685,6 +685,39 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img alt="NSW COVID Chart" class="img-fluid" src="https://jackmckew.dev/img/gpd-nsw-covid.gif"/></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pandas_Alive also supports animating polygon GeoDataFrames!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<span class="kn">import</span> <span class="nn">pandas_alive</span>
+<span class="kn">import</span> <span class="nn">contextily</span>
+
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">'data/italy-covid-region.gpkg'</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">region</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'region'</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">map_chart</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">plot_animated</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'examples/example-geo-polygon-chart.gif'</span><span class="p">,</span><span class="n">basemap_format</span><span class="o">=</span><span class="p">{</span><span class="s1">'source'</span><span class="p">:</span><span class="n">contextily</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">Stamen</span><span class="o">.</span><span class="n">Terrain</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Geopandas Polygon Chart" class="img-fluid" src="https://jackmckew.dev/img/gpd-polygon-chart.gif"/></p>
 </div>
 </div>
 </div>
