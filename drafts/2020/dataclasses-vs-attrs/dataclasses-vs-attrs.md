@@ -1,4 +1,4 @@
-Title: Dataclasses vs Attrs
+Title: Dataclasses vs Attrs vs Pydantic
 Date: 2020-05-xx
 Author: Jack McKew
 Category: Data Science, Python
