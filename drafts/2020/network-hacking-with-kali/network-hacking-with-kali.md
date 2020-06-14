@@ -4,7 +4,7 @@ Author: Jack McKew
 Category: Software
 Tags: software
 
-This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <https://www.kali.org/downloads/>.
+This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <https://www.kali.org/downloads/>. These are notes from the Udemy course: <https://www.udemy.com/course/learn-ethical-hacking-from-scratch/>, highly recommend this course, very practical and beginner friendly.
 
 > Thank you to Chris B for helping me with the notes in this post below!
 
@@ -72,7 +72,7 @@ For cracking WPA or WPA2, look out for WPS, this will enable the hack to much si
 2. to attack a network with WPS:
     1. run fake auth on the router `aireplay-ng --fakeauth [number of times (0 for 1 time)] -D -a [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]` + leave airodump-ng in background (see WEP step 1)
     2. use reaver `reaver --bssid [targetMAC] --channel [channel] --interface [WirelessAdapter] -vvv --no-associate`
-        > if reaver doesn't work use this version of reaver <https://ufile.io/lro4nkdv> make sure you run `chmod +x reaver` then `./rever [your command here]`
+        > if reaver doesn't work use this version of reaver <https://ufile.io/lro4nkdv> make sure you run `chmod +x reaver` then `./reaver [your command here]`
 
 #### Without WPS
 
@@ -96,7 +96,7 @@ For cracking WPA or WPA2, look out for WPS, this will enable the hack to much si
 - Disable WPS
 - Specify exact MAC addresses to connect (visitors won't like this)
 
-### Post Connection Attacks
+### Post Connection Attacks (MITM Attacks)
 
 #### Discovering Devices on the Network
 
@@ -174,8 +174,71 @@ To spoof:
     3. set dns.spoof.domains to the sites you wish to be redirected to you. `set dns.spoof.domains [domain1, domain2]` (use \* as a wildcard to do any subdoamin under a website eg.*.kali.org)
     4. start dns.spoof `dns.spoof on`
 
-How to insert javascript code:
+#### JavaScript Code Injection
 
-1. Have javascript code file 
+How to insert JavaScript code:
+
+1. Have JavaScript code file
 2. go to the hstshijack plugin /usr/share/bettercap/caplets
 3. go to the .cap file and add the js code under the payloads, \* means all domains then : eg. *:/code.js (otherwise use a domain).
+
+### WireShark
+
+Wireshark is the world's foremost and widely-used network protocol analyzer. Only analyses data flowing though your computer, so works with man in the middle. Go into settings and select the interface you want to start capturing (hold ctl if you want to cap multiple) in output you can send it to a cap file for later analysis. HTTPS will be encrypted so be sure to use hstshijack. Green = TCP packets, Darkblue = DNS, lightblue = UTP, BLACK = TCP with errors.
+
+Filtering packets:
+
+1. in the filters type: http
+2. Double Click to get more info. Under the Hypertext Transfer Protocol section important info is shown.
+3. can see what type next too the info
+4. right click a packet and go follow > http stream to see exactly what was sent.
+5. again under the double click > Hypertext Transfer Protocol you can see what was requested or responded.
+
+To find usernames and passwords check under POST requests and under the html form url encoded. ctl + f to find data, set search to packet details and set last one to string and oyu can type a name like admin etc.
+
+If you want to put BetterCap data in a file use `set net.sniff.output [file]`
+
+### Creating a Honeypot (fake access point)
+
+We use `hostapd-mana` to achieve this, mana is a featureful rogue access point first presented at Defcon 22 by Dominic White <https://github.com/sensepost/hostapd-mana>.
+
+Use Mana:
+
+1. `start-noupstream.sh` -Starts access point with no internet access
+2. `start-nat-simple.sh` -Starts an access point with internet access (use this)
+3. `start-nat-full.sh` -Starts a access point and automatically starts sniffing data, bypass https
+
+To install Mana on Linux:
+
+- `apt-get update`
+- `apt-get --yes install build-essential pkg-config git libnl-genl-3-dev libssl-dev`
+- `cd /tmp`
+- `git clone https://github.com/sensepost/hostapd-mana`
+- `cd hostapd-mana`
+- `make -C hostapd`
+- `mv /tmp/hostapd-mana/hostapd/ /usr/lib/mana-toolkit`
+- `cd /usr/share/`
+- `git clone --depth 1 https://github.com/sensepost/mana.git`
+- `mv mana mana-toolkit`
+- `mkdir /etc/mana-toolkit/`
+- `mv mana-toolkit/run-mana/conf/*.conf /etc/mana-toolkit/`
+
+Editing Mana:
+
+- edit mana settings in /etc/mana-toolkit/hostatp-mana.conf > check interface + SSID (Name).
+- edit start script in /usr/share/mana-toolkit/run-mana/start-nat-simple.sh > check upstream interface (set to the one that has internet access), check phy (the card that is going to broadcast the network[wlan0]).
+- start the script `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
+
+### Detection & Security
+
+#### Detecting ARP Attacks
+
+On Windows use `arp -a` if the gateway matches another MAC in the network = bad, not practical to type every time and constantly so use XARP (<http://www.xarp.net/>)!
+
+To discover suspicious activity on a network use wireshark. > go to preferances > protocols > ARP > enable detect arp request storms. Broadcast packets are dangerous that is the hacker detecting the network. If you go to Expert Information, you can see the storm info. Also under expert information you can see warning for arp poisoning and other things. You can use static arp tables (you must manually configure) system will refuse if arp changes. Problem if you need to connect to different networks.
+
+> This is only detection, not prevention. There is not much we can do after detecting except exiting that network or changing access control.
+
+#### Preventing MITM Attacks
+
+Make sure everything is encrypted using https (Plugin to do this automatically <https://www.eff.org/https-everywhere>) or use a VPN, preferably use both!.
