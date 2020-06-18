@@ -1,5 +1,5 @@
 Title: How to Make GitHub Actions
-Date: 2020-04-xx
+Date: 2020-06-19
 Author: Jack McKew
 Category: CICD
 Tags: cicd
