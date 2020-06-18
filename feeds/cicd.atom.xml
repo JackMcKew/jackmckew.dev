@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - CICD</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/cicd.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-04-23T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Github Actions for CI/CD</title><link href="https://jackmckew.dev/github-actions-for-cicd.html" rel="alternate"></link><published>2020-04-23T00:00:00+10:00</published><updated>2020-04-23T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-04-23:/github-actions-for-cicd.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Recently the &lt;a href="https://github.com/JackMcKew/awesome-python-bytes"&gt;Python Bytes Awesome Package List&lt;/a&gt; moved to it's own repository from the &lt;a href="https://jackmckew.dev/python-bytes-awesome-package-list.html#python-bytes-awesome-package-list"&gt;blog post&lt;/a&gt;. This was done to enable the community be able to contribute their packages that they thought were awesome, which was a success with many pull requests already merged.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - CICD</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/cicd.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-06-19T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>How to Make GitHub Actions</title><link href="https://jackmckew.dev/how-to-make-github-actions.html" rel="alternate"></link><published>2020-06-19T00:00:00+10:00</published><updated>2020-06-19T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-19:/how-to-make-github-actions.html</id><summary type="html">&lt;body&gt;&lt;p&gt;From a recent post on this blog on how to use &lt;a href="https://jackmckew.dev/github-actions-for-cicd.html"&gt;GitHub Actions to easily integrate CI/CD into your repository&lt;/a&gt;, this post will go into how to create your own GitHub Action!&lt;/p&gt;
+&lt;p&gt;This post was inspired from developing a few GitHub Actions of my own, which I recently released …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;From a recent post on this blog on how to use &lt;a href="https://jackmckew.dev/github-actions-for-cicd.html"&gt;GitHub Actions to easily integrate CI/CD into your repository&lt;/a&gt;, this post will go into how to create your own GitHub Action!&lt;/p&gt;
+&lt;p&gt;This post was inspired from developing a few GitHub Actions of my own, which I recently released!&lt;/p&gt;
+&lt;h2 id="pyinstaller-github-actions"&gt;PyInstaller GitHub Actions&lt;/h2&gt;
+&lt;p&gt;Do you ever want to share your Python code with others, but they don't have Python installed?&lt;/p&gt;
+&lt;p&gt;You can now easily package your code up as an executable (*.exe) file with GitHub Actions!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows: &lt;a href="https://github.com/marketplace/actions/pyinstaller-windows"&gt;https://github.com/marketplace/actions/pyinstaller-windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Linux: &lt;a href="https://github.com/marketplace/actions/pyinstaller-linux"&gt;https://github.com/marketplace/actions/pyinstaller-linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once activated on your repository, each time you push, the action will be kicked off and upload a packaged application to your repository.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="PyInstaller Actions" class="img-fluid" src="https://jackmckew.dev/img/pyinstaller-action.png"/&gt;&lt;/p&gt;
+&lt;h2 id="interrogate-github-action"&gt;Interrogate GitHub Action&lt;/h2&gt;
+&lt;p&gt;Interrogate checks your docstring coverage, integrate it easily into your CI workflow with GitHub Actions.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/marketplace/actions/python-interrogate-check"&gt;https://github.com/marketplace/actions/python-interrogate-check&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="how-these-actions-were-made"&gt;How These Actions were Made&lt;/h2&gt;
+&lt;p&gt;Currently GitHub actions supports two types of actions out of the box (with subsequent documentation):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://help.github.com/en/actions/creating-actions/creating-a-javascript-action"&gt;JavaScript&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://help.github.com/en/actions/creating-actions/creating-a-docker-container-action"&gt;Docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The actions mentioned above are all Docker actions, so this post will focus on how to create Docker GitHub actions. The two tutorials linked above are a great resource for creating GitHub Actions. To summarise the 'creating a docker container action' page linked above, we need a few elements to get a basic docker action working:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;README&lt;/li&gt;
+&lt;li&gt;Dockerfile&lt;/li&gt;
+&lt;li&gt;entrypoint.sh&lt;/li&gt;
+&lt;li&gt;action.yml&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let's take the &lt;a href="#interrogate-github-action"&gt;Interrogate Action&lt;/a&gt; as the example on how it was made:&lt;/p&gt;
+&lt;h3 id="readme"&gt;README&lt;/h3&gt;
+&lt;p&gt;This is essentially the 'documentation' behind an action, it should prescribe:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What the action does&lt;/li&gt;
+&lt;li&gt;Why someone should use it&lt;/li&gt;
+&lt;li&gt;How to integrate it into a CI/CD workflow&lt;/li&gt;
+&lt;li&gt;Descriptions of any inputs or outputs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="dockerfile"&gt;Dockerfile&lt;/h3&gt;
+&lt;p&gt;For those that haven't used Docker before, this may be the most daunting part. Essentially a Dockerfile is a set up of steps that should be run when starting the container (aka booting the computer). There's a multitude of available containers developed by the community to handle most of the underlying steps for you. In the case of the interrogate action, we use the container image &lt;code&gt;python:3.8.1-alpine&lt;/code&gt;.  What this does, it pulls a copy of the alpine distribution of Linux, pre-configured with Python for us and spins it up. See more variants of Python docker images here &lt;a href="https://hub.docker.com/_/python"&gt;https://hub.docker.com/_/python&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Consider a container as a standalone object, when you start it, it won't have any of your files automatically copied into it, so you have to add any files specifically that you may need. Next we copy both the &lt;code&gt;requirements.txt&lt;/code&gt; &amp;amp; &lt;code&gt;entrypoint.sh&lt;/code&gt; from the repository into our container. Fantastic now we can do something with them. We upgrade pip, install any requirements (eg, interrogate) and then finish up by starting the shell script &lt;code&gt;entrypoint.sh&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id="actionyml"&gt;Action.yml&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;action.yml&lt;/code&gt; file contains all the metadata around the action. The syntax is well defined here &lt;a href="https://help.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions"&gt;https://help.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions&lt;/a&gt;. The things you'll want to include in this file are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The name &amp;amp; description of the action&lt;/li&gt;
+&lt;li&gt;The branding of the action (eg, the 'logo' looks for the action on the marketplace)&lt;ul&gt;
+&lt;li&gt;There's a really good cheat sheet for branding here: &lt;a href="https://github.com/haya14busa/github-action-brandings"&gt;https://github.com/haya14busa/github-action-brandings&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Inputs &amp;amp; Output&lt;/li&gt;
+&lt;li&gt;How the action runs (on the Dockerfile in this case)&lt;/li&gt;
+&lt;li&gt;What arguments to pass to the runner (Docker)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All the arguments defined here if specified in the &lt;code&gt;args&lt;/code&gt; under the &lt;code&gt;runs&lt;/code&gt; tag will passed to the next file (&lt;code&gt;entrypoint.sh&lt;/code&gt;) upon runtime.&lt;/p&gt;
+&lt;h3 id="entrypointsh"&gt;Entrypoint.sh&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;entrypoint.sh&lt;/code&gt; is the equivalent of opening a terminal on the freshly booted PC, and running commands inside it, and thus the formatting is very specific. Ensure to follow the operating system's convention for the docker image that you are using. In this case, it was Linux, so bash is our convention.&lt;/p&gt;
+&lt;p&gt;First off in the entryooint we need to enable options, this is done in bash using the command &lt;code&gt;set&lt;/code&gt;. For most GitHub actions, they should at least enable the option to exit on first error with &lt;code&gt;set -e&lt;/code&gt;, as this will make the CI/CD fail under that circumstance. For the interrogate action, we also enable export of all variables, and to trace our commands (prints them to the console), with &lt;code&gt;set -eax&lt;/code&gt;. You can find more bash options here: &lt;a href="https://www.tldp.org/LDP/abs/html/options.html"&gt;https://www.tldp.org/LDP/abs/html/options.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As mentioed before, now it's time to interact with our arguments. These arguments are contained in a numeric variable as listed in &lt;code&gt;action.yml&lt;/code&gt; under &lt;code&gt;args&lt;/code&gt; (eg, $1, $2, etc). These arguments can then be used in CLI commands and more!&lt;/p&gt;
+&lt;p&gt;For the interrogate action in particular, the output of the CLI for the package contains a string of 'PASSED' if the coverage is higher than the &lt;code&gt;fail-under&lt;/code&gt; argument. In the &lt;code&gt;entrypoint.sh&lt;/code&gt; we call the interrogate CLI to check our package and then check the output if it contains 'PASSED' with grep. Grep is one of the most useful utilties as apart of linux, find out more about grep at &lt;a href="https://man7.org/linux/man-pages/man1/grep.1.html"&gt;https://man7.org/linux/man-pages/man1/grep.1.html&lt;/a&gt;. If the coverage failed, we still run the interrogate CLI to generate a badge if the user wanted to, except exit out of the shell file with &lt;code&gt;exit 1&lt;/code&gt; so this fails the action on GitHub; otherwise exit with &lt;code&gt;exit 0&lt;/code&gt; to pass!&lt;/p&gt;
+&lt;h2 id="publish-to-marketplace"&gt;Publish to Marketplace&lt;/h2&gt;
+&lt;p&gt;Once you've implemented these few files, you should get a warning at the top of the repository on GitHub hinting if you want to publish this on the marketplace. This is done smoothly with creating a release of your project, and that's it, done!&lt;/p&gt;
+&lt;p&gt;Now users can intergrate your action into the CI/CD pipeline as easily as:&lt;/p&gt;
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Python Interrogate Check&lt;/span&gt;
+  &lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JackMcKew/python-interrogate-check@v0.1.1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Personally, I absolutely love the building block structure of actions so you can piece together all the actions you want to get where you want to go so much easier!&lt;/p&gt;&lt;/body&gt;</content><category term="CICD"></category><category term="cicd"></category></entry><entry><title>Github Actions for CI/CD</title><link href="https://jackmckew.dev/github-actions-for-cicd.html" rel="alternate"></link><published>2020-04-23T00:00:00+10:00</published><updated>2020-04-23T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-04-23:/github-actions-for-cicd.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Recently the &lt;a href="https://github.com/JackMcKew/awesome-python-bytes"&gt;Python Bytes Awesome Package List&lt;/a&gt; moved to it's own repository from the &lt;a href="https://jackmckew.dev/python-bytes-awesome-package-list.html#python-bytes-awesome-package-list"&gt;blog post&lt;/a&gt;. This was done to enable the community be able to contribute their packages that they thought were awesome, which was a success with many pull requests already merged.&lt;/p&gt;
 &lt;p&gt;After getting a taste of CI …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Recently the &lt;a href="https://github.com/JackMcKew/awesome-python-bytes"&gt;Python Bytes Awesome Package List&lt;/a&gt; moved to it's own repository from the &lt;a href="https://jackmckew.dev/python-bytes-awesome-package-list.html#python-bytes-awesome-package-list"&gt;blog post&lt;/a&gt;. This was done to enable the community be able to contribute their packages that they thought were awesome, which was a success with many pull requests already merged.&lt;/p&gt;
 &lt;p&gt;After getting a taste of CI/CD principles with &lt;a href="https://travis-ci.com/"&gt;Travis CI&lt;/a&gt; in building this blog, an idea to integrate some CI/CD with the awesome package list repository to ensure spelling errors, broken links, etc are all checked automatically. This was a great opportunity to try out &lt;a href="https://github.com/features/actions"&gt;Github Actions&lt;/a&gt;, so then all the resources/dependencies live in one place, Github.&lt;/p&gt;
 &lt;p&gt;Initially, the things to automate were:&lt;/p&gt;
@@ -21,7 +87,7 @@
 &lt;h1 id="action-format-yaml"&gt;Action Format (.yaml)&lt;/h1&gt;
 &lt;p&gt;A Github Action is defined with a &lt;code&gt;&amp;lt;action_name&amp;gt;.yaml&lt;/code&gt; file which must be placed within &lt;code&gt;.github/workflows&lt;/code&gt; from the base of the repository. As many actions as you want can be placed in this folder, and will subsequently run when triggered.&lt;/p&gt;
 &lt;p&gt;The base structure of a &lt;code&gt;link_checker.yaml&lt;/code&gt; file is:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -96,7 +162,7 @@
 &lt;p&gt;Fork repository &amp;gt; Make changes &amp;gt; Submit Pull Request with changes &amp;gt; Check changes &amp;gt; Merge into repository&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;When the action was first set up for actions to run on pull requests, it kept throwing an error:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The process &lt;span class="s1"&gt;'/usr/bin/git'&lt;/span&gt; failed with &lt;span class="nb"&gt;exit&lt;/span&gt; code &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The process &lt;span class="s1"&gt;'/usr/bin/git'&lt;/span&gt; failed with &lt;span class="nb"&gt;exit&lt;/span&gt; code &lt;span class="m"&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;This was determined to be intentional design by Github as a mitigation against the possibility that a bad actor could open PRs against your repo and do things like list out secrets or just run up a large bill (once we start charging) on your account.&lt;/p&gt;
@@ -114,7 +180,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;Ensure to use &lt;code&gt;if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'&lt;/code&gt; in all subsequent jobs you want triggered if the phrase is found, otherwise the action will become recursive: check for comment, run checks, make a comment, check for comment, etc&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4

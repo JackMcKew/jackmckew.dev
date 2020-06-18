@@ -88,7 +88,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped table dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -168,7 +168,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped table dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -601,7 +601,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;p&gt;In projects, typically it's best practice to not have to repeat yourself in multiple places (this the DRY principle). In the README, it's nice to have working examples on how a user may use the project. If we could tie the original README with live code that generates the examples, that would be ideal, enter &lt;code&gt;README.ipynb&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Jupyter supports markdown &amp;amp; code cells, thus all the current documentation in the &lt;code&gt;README.md&lt;/code&gt; can be copied within markdown cells. Similarly, the code used to generate examples or demonstrate usage can then be placed in code cells. Allowing the author, to run the entire notebook, generating the new examples &amp;amp; verifying the examples are working code. Fantastic, this is exactly where we want to go.&lt;/p&gt;
 &lt;p&gt;Now if you only have the &lt;code&gt;README.ipynb&lt;/code&gt; in the repository, GitHub will represent the file in it's raw form, JSON. For example would be hundreds of line like:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -660,7 +660,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;h4 id="python-highlighting-in-output"&gt;Python Highlighting in Output&lt;/h4&gt;
 &lt;p&gt;When first run, it was noticed that &lt;code&gt;nbconvert&lt;/code&gt; wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the &lt;code&gt;README.md&lt;/code&gt; with language specifics. The workaround for this, was to use &lt;code&gt;nbconvert&lt;/code&gt;'s support for custom templates. See the docs at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates"&gt;https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The resulting template "pythoncodeblocks.tpl" was:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -674,7 +674,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Which could be used with &lt;code&gt;nbconvert&lt;/code&gt; with:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="integration-into-documentation-with-sphinx"&gt;Integration into Documentation with Sphinx&lt;/h2&gt;
@@ -697,7 +697,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;p&gt;Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst"&gt;index.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -773,7 +773,7 @@ With &lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_ali
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst"&gt;developer.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1072,7 +1072,7 @@ The real origin of pizza, however, is controversial: in addition to Naples, othe
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped table dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1279,7 +1279,7 @@ Error translating.. `Error` placed in output dataset
 &lt;/blockquote&gt;
 &lt;h2 id="package-structure"&gt;Package Structure&lt;/h2&gt;
 &lt;p&gt;Python packages require a standard structure (albeit lenient), which &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; sets up for you when a project is initialized.  If we run &lt;code&gt;poetry new test_package&lt;/code&gt; we will end up with the structure:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1326,7 +1326,7 @@ Error translating.. `Error` placed in output dataset
 &lt;h3 id="__init__py-files"&gt;&lt;code&gt;__init__.py&lt;/code&gt; Files&lt;/h3&gt;
 &lt;p&gt;What are all these &lt;code&gt;__init__.py&lt;/code&gt; files and what are they there for? To be able to import code from another folder, Python requires to see an &lt;code&gt;__init__.py&lt;/code&gt; inside a folder to mark it as a package.&lt;/p&gt;
 &lt;p&gt;If we create a function inside our test_package folder:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;+-- test_package
 &lt;span class="p"&gt;|&lt;/span&gt;   +-- __init__.py
@@ -1341,13 +1341,13 @@ Error translating.. `Error` placed in output dataset
 &lt;p&gt;If you have read this blog previously, I did a post on answering the question "How many words have I written in this blog?" which you can reach at: &lt;a href="https://jackmckew.dev/counting-words-with-python.html"&gt;https://jackmckew.dev/counting-words-with-python.html&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;This was great, I had wrote 2 functions which count how many words were inside markdown files &amp;amp; Jupyter notebooks. Following this, I had a great idea, why not make a 'ticker' of how many words have been written in this blog and display this on the website. Making sure that whenever a new post is added the 'word ticker' increments by how many words were in that post.&lt;/p&gt;
 &lt;p&gt;This in the inspiration behind &lt;a href="https://github.com/JackMcKew/wordsum"&gt;Wordsum&lt;/a&gt; which is also available on &lt;a href="https://pypi.org/project/wordsum/"&gt;PyPI&lt;/a&gt;. Meaning you can install it with:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="wordsum-package-structure"&gt;Wordsum Package Structure&lt;/h3&gt;
 &lt;p&gt;To make the two functions more extensible, the two functions were further broken into smaller functions and contained in their own 'internal' package (folder).&lt;/p&gt;
 &lt;p&gt;The basic structure we ended up with was:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1378,7 +1378,7 @@ Error translating.. `Error` placed in output dataset
 &lt;p&gt;The main functions of the package are kept within &lt;code&gt;word_sum.py&lt;/code&gt; (which uses the functions in the &lt;code&gt;_xxx&lt;/code&gt; folders).&lt;/p&gt;
 &lt;h3 id="user-interaction"&gt;User Interaction&lt;/h3&gt;
 &lt;p&gt;To make the main functions within &lt;code&gt;word_sum.py&lt;/code&gt; accessible to users of the package we can import them in the 'top' &lt;code&gt;__init__.py&lt;/code&gt; of the wordsum package.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1390,7 +1390,7 @@ Error translating.. `Error` placed in output dataset
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;This will allow users to interact with the package like:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1403,7 +1403,7 @@ Error translating.. `Error` placed in output dataset
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="publishing-to-pypi"&gt;Publishing to PyPI&lt;/h3&gt;
 &lt;p&gt;Since we've used Poetry with the development of this package, our &lt;code&gt;pyproject.toml&lt;/code&gt; should be a bit more fleshed out. Wordsum's &lt;code&gt;pyproject.toml&lt;/code&gt; ended up as:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1455,12 +1455,12 @@ Error translating.. `Error` placed in output dataset
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;All that is left to do is to sign up for an account on PyPI and run:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry publish
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry publish
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;This will ask for your PyPI credentials, build the package (a step done by &lt;code&gt;setuptools&lt;/code&gt; previously) and upload the package for you.&lt;/p&gt;
 &lt;p&gt;Now users can install your package with:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="integrating-wordsum-into-this-website"&gt;Integrating Wordsum Into This Website&lt;/h2&gt;
@@ -1469,7 +1469,7 @@ Error translating.. `Error` placed in output dataset
 &lt;p&gt;So there was only 3 files that I needed to edit: &lt;code&gt;pelicanconf.py&lt;/code&gt;, &lt;code&gt;requirements.txt&lt;/code&gt; and a html file for the theme. &lt;code&gt;pelicanconf.py&lt;/code&gt; contains all the instructions to provide to pelican when building the site, &lt;code&gt;requirements.txt&lt;/code&gt; contains the list of packages required for TravisCI to use and the template html file is how it is to represented on the web.&lt;/p&gt;
 &lt;h3 id="update-requirementstxt"&gt;Update &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;First off we add &lt;code&gt;wordsum&lt;/code&gt; to the virtual environment for the project and freeze it within &lt;code&gt;requirements.txt&lt;/code&gt; with&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
 pip freeze requirements.txt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1479,7 +1479,7 @@ pip freeze requirements.txt
 &lt;/blockquote&gt;
 &lt;h3 id="update-pelicanconfpy"&gt;Update &lt;code&gt;pelicanconf.py&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;This file contains the code that will run when &lt;code&gt;pelican content&lt;/code&gt; is called upon the folder to build this website. To interface with &lt;code&gt;wordsum&lt;/code&gt; we add the code:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;wordsum&lt;/span&gt;
@@ -1494,7 +1494,7 @@ pip freeze requirements.txt
 &lt;/blockquote&gt;
 &lt;h3 id="update-basehtml"&gt;Update &lt;code&gt;base.html&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;Now we just need to show our word ticker on the website. In the Flex theme, all pages inherit from a &lt;code&gt;base.html&lt;/code&gt; file. To squeeze our new metrics onto the page we add the lines:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{% if WORD_TICKER %}
