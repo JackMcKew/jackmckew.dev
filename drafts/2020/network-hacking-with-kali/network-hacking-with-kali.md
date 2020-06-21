@@ -1,12 +1,42 @@
 Title: Network Hacking with Kali Linux
 Date: 2020-05-xx
 Author: Jack McKew
-Category: Software
-Tags: software
+Category: Software, Infosec
+Tags: software, infosec
 
 This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <https://www.kali.org/downloads/>. These are notes from the Udemy course: <https://www.udemy.com/course/learn-ethical-hacking-from-scratch/>, highly recommend this course, very practical and beginner friendly.
 
 > Thank you to Chris B for helping me with the notes in this post below!
+
+## Table of Contents <!-- omit in toc -->
+
+- [Network Hacking](#network-hacking)
+    - [Networking Fundamentals](#networking-fundamentals)
+        - [Checking Network Configuration](#checking-network-configuration)
+        - [Checking Wireless Networks](#checking-wireless-networks)
+        - [Sniffing Data from Specific Device](#sniffing-data-from-specific-device)
+        - [DeAuthentication Attack](#deauthentication-attack)
+    - [Gaining Access](#gaining-access)
+        - [Cracking WEP](#cracking-wep)
+        - [Fake Authentication Attack](#fake-authentication-attack)
+    - [Cracking WPA/WPA2](#cracking-wpawpa2)
+        - [With WPS](#with-wps)
+        - [Without WPS](#without-wps)
+    - [Securing your Network](#securing-your-network)
+    - [Post Connection Attacks (MITM Attacks)](#post-connection-attacks-mitm-attacks)
+        - [Discovering Devices on the Network](#discovering-devices-on-the-network)
+            - [NetDiscover](#netdiscover)
+            - [Nmap](#nmap)
+        - [ARP Attack](#arp-attack)
+            - [BetterCap](#bettercap)
+        - [HTTPS](#https)
+        - [DNS Spoofing](#dns-spoofing)
+        - [JavaScript Code Injection](#javascript-code-injection)
+    - [WireShark](#wireshark)
+    - [Creating a Honeypot (fake access point)](#creating-a-honeypot-fake-access-point)
+    - [Detection & Security](#detection--security)
+        - [Detecting ARP Attacks](#detecting-arp-attacks)
+        - [Preventing MITM Attacks](#preventing-mitm-attacks)
 
 ## Network Hacking
 

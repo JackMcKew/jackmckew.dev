@@ -1,12 +1,36 @@
 Title: Gaining Access with Kali Linux
 Date: 2020-05-xx
 Author: Jack McKew
-Category: Software
-Tags: software
+Category: Software, infosec
+Tags: software, infosec
 
 This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <https://www.kali.org/downloads/>.
 
 > Thank you to Chris B for helping me with the notes in this post below!
+
+## Table of Contents <!-- omit in toc -->
+
+- [Gaining Access](#gaining-access)
+    - [Server Side Attacks](#server-side-attacks)
+        - [Metasploit](#metasploit)
+        - [Exploiting Backdoors](#exploiting-backdoors)
+            - [An Example Backdoor Attack](#an-example-backdoor-attack)
+            - [Payloads](#payloads)
+        - [Nexpose](#nexpose)
+    - [Client Side Attacks](#client-side-attacks)
+        - [Creating Backdoors](#creating-backdoors)
+            - [Connecting from the Backdoor](#connecting-from-the-backdoor)
+            - [Deploying Backdoors via Fake Updates](#deploying-backdoors-via-fake-updates)
+            - [Deploying Backdoors via Exe Downloads](#deploying-backdoors-via-exe-downloads)
+        - [Protection](#protection)
+    - [Social Engineering](#social-engineering)
+        - [Maltego](#maltego)
+        - [Backdooring Any File Type](#backdooring-any-file-type)
+            - [Spoofing File Type](#spoofing-file-type)
+        - [Spoofing Fake Emails](#spoofing-fake-emails)
+        - [BeEF (Browser Exploitation Framework)](#beef-browser-exploitation-framework)
+        - [Using the Above - Outside the Local Network](#using-the-above---outside-the-local-network)
+- [Post Exploitation](#post-exploitation)
 
 ## Gaining Access
 
@@ -106,8 +130,8 @@ To use Veil: (use evasion, and use a rev_https (aka reverse https connection)):
 11. `options` to see options.
 
 > For bypassing more antivirus programs, the more options you change, the less likely an existing identified signature is out there, we can change these options with
-    1.  <set PROCESSERS [number(1)]> change processers.
-    2.  <set SLEEP [number(6)]
+    1.  `set PROCESSORS [number(1)]` change processors.
+    2.  `set SLEEP [number(6)]`
 
 Finally use `generate` to make backdoor.
 
@@ -170,4 +194,36 @@ In the above example, we highlighted concerns that our file will prompt to be ru
 So what we will do is if our target file that we want to disguise as is name `the-book-of-reflex.pdf`. We will name our malicious executable as `the-book-of-reflfdp.exe`, and insert a right to left unicode character before `fdp.exe`, which will reverse the end of our file, thus ending up with `the-book-of-reflexe.pdf`.
 
 > Browsers will typically remove the right to left unicode character in file names, so make sure to zip the malicious file to bypass this.
+
+#### Spoofing Fake Emails
+
+There's lots of free options out there on the web for sending fake emails, but they will likely end up in the spam box of the target's email. Another option is to find a SMTP (Simple Mail Transfer Protocol) server that offers a free program, typically these are used for marketing by companies so less likely to end up in the spam.
+
+Kali also provides a utility called `sendemail` which we can use once we have a SMTP server to use. Find out more about this utility (with the source code) over at: <https://github.com/mogaal/sendemail>.
+
+Once we're able to send a fake email, we can now embed our spoofed malicious executable on a file sharing website (eg, Google drive) and include it in the email (see [Backdooring Any File Type](#backdooring-any-file-type)).
+
+> It's advisable to use an existing email that you know your target is familiar with from the information that you've gathered.
+
+#### BeEF (Browser Exploitation Framework)
+
+From the BeEF website itself: "BeEF is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser.". You can also find the source code over at <https://github.com/beefproject/beef>.
+
+What BeEF let's us do is insert some JavaScript code onto a website to 'hook' the website, allowing us to do lots of different things (eg, fake login pages, etc). Since the hook is just embedded in sites with JavaScript, this will enable attacks on any modern browser and device (eg, phones, tablets, laptops, etc).
+
+Once hooked you get all sorts of information on the target system including browser version, operating system, versions of capabilities (plugins) installed etc.
+
+> It is easiest to deploy BeEF and run the commands when you are the MITM in the network. This will also allow us to hook **all** websites the user visits rather than just the one.
+
+One example command we can use is to mimic a browser plug-in update to get the target to download and run a malicious backdoor.
+
+#### Using the Above - Outside the Local Network
+
+If you are using any of these attacks external to your local network, there's a few steps to configure to ensure:
+
+1. Router must handle reverse connections
+2. Use public IP vs Private IP of the router
+3. Forward the targeted port of the router to the attacking machine in the local network
+
+## Post Exploitation
 
