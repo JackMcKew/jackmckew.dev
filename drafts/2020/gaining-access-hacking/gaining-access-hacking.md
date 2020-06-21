@@ -4,7 +4,11 @@ Author: Jack McKew
 Category: Software, infosec
 Tags: software, infosec
 
-This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <https://www.kali.org/downloads/>.
+This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <https://www.kali.org/downloads/>.
+
+This post is apart of a series of posts, see the other posts at:
+
+- INSERT NETWORK POST
 
 > Thank you to Chris B for helping me with the notes in this post below!
 
