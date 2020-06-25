@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-06-12T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Geopandas and Pandas Alive</title><link href="https://jackmckew.dev/geopandas-and-pandas-alive.html" rel="alternate"></link><published>2020-06-12T00:00:00+10:00</published><updated>2020-06-12T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-12:/geopandas-and-pandas-alive.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-06-27T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>How Pandas_Alive was Made</title><link href="https://jackmckew.dev/how-pandas_alive-was-made.html" rel="alternate"></link><published>2020-06-27T00:00:00+10:00</published><updated>2020-06-27T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-27:/how-pandas_alive-was-made.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Pandas-Alive is an open source Python package for making animated charts from Pandas dataframes. This project was first inspired by a very specific COVID-19 visualisation, so I set out to make this visualisation a reality.&lt;/p&gt;
+&lt;p&gt;This visualisation consisted of a bar chart race showing regions, a line chart showing new …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Pandas-Alive is an open source Python package for making animated charts from Pandas dataframes. This project was first inspired by a very specific COVID-19 visualisation, so I set out to make this visualisation a reality.&lt;/p&gt;
+&lt;p&gt;This visualisation consisted of a bar chart race showing regions, a line chart showing new cases by date, a line chart showing cumulative cases and a map chart showing cases by location.&lt;/p&gt;
+&lt;p&gt;Whenever starting a new project, it's always best to do some research to see:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;has this already been done?&lt;/li&gt;
+&lt;li&gt;is there anything similar out there?&lt;ul&gt;
+&lt;li&gt;if so, what can you learn from the similar tool&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;what architecture should this utilise&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pandas-Alive took inspiration from &lt;a href="https://github.com/PatrikHlobil/Pandas-Bokeh"&gt;Pandas-Bokeh&lt;/a&gt;, a Python package which is absolutely magic for making interactive charts from dataframes. For bar chart races in particular, Pandas alive took inspiration from &lt;a href="https://github.com/dexplo/bar_chart_race"&gt;bar_chart_race&lt;/a&gt;. This enables us to build and extend the work of others, so we're not running into the same problems that has already been solved.&lt;/p&gt;
+&lt;h2 id="architecture"&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;It's always beneficial to consider what type of architecture or design pattern the overall project should use, as from experience it's painful to change architecture after starting.&lt;/p&gt;
+&lt;p&gt;A few design patterns seemed beneficial for this project such as&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;factory&lt;/li&gt;
+&lt;li&gt;templates&lt;/li&gt;
+&lt;li&gt;facade&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One of the biggest contributing factors to this decision, was that all these charts should have some shared functionality (they are all charts) and then each specific chart type has additional functionality. Due to this, the template design pattern was chosen, this would enable us to implement a base chart class for which all the other charts can inherit from, allowing access to common methods that all charts should have. While the decision of template may not be perfect, it's definitely worked out so far.&lt;/p&gt;
+&lt;h2 id="base-class"&gt;Base Class&lt;/h2&gt;
+&lt;p&gt;Now that we've decided to go with template design pattern, we need to implement the base chart class with the shared functionality. At this point, since there would be so many parameters going into the class constructor (&lt;code&gt;__init__&lt;/code&gt;) in Python, it was frustrating having to put this information in two places.&lt;/p&gt;
+&lt;p&gt;Here is a basic example, but imagine if you had 10s of arguments (eg, name, species) and had to replicate this information so many times.&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Animal&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Animal'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'JackRussell'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;species&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;species&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the &lt;code&gt;__init__&lt;/code&gt; and other dunder methods generated for us (see a previous post on dunder methods here).&lt;/p&gt;
+&lt;p&gt;This allows us to write the same class as above like:&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@attr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Animal&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Animal'&lt;/span&gt;
+    &lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'JackRussell&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;This will create the same class but initalise dunder methods for us!&lt;/p&gt;
+&lt;p&gt;I've written multiple posts on these topics which you can find:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/dunders-in-python.html"&gt;Dunders&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/inheritance-in-python.html"&gt;Class Inheritance&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we write the methods which all charts should share such as create figure, save, etc. We also create methods which will raise errors unless overridden, this is for future developers as a reminder to make sure that any classes that inherit from base chart ensure to override these methods with custom functionality. By having these methods shared, this allows us to change one part of code and have it ripple through the project. The benefit was definitely realised later on in version 0.2.0 where we could add in memory functionality to write to gif and not have to copy paste throughout the project.&lt;/p&gt;
+&lt;h2 id="chart-class"&gt;Chart Class&lt;/h2&gt;
+&lt;p&gt;Now that we have a base class, let's make a class which inherits from base class and implements the functionality.&lt;/p&gt;
+&lt;p&gt;The first one typically takes the longest amount of time, and we refactored many times to move things around.&lt;/p&gt;
+&lt;p&gt;We can create new methods and parameters to extend the functionality of our base chart and make the magic happen.&lt;/p&gt;
+&lt;h2 id="api"&gt;API&lt;/h2&gt;
+&lt;p&gt;Now we need to make the interface between our users and the classes we've just created.&lt;/p&gt;
+&lt;p&gt;Taking inspiration from Pandas-Bokeh, using an accessor on pandas Dataframes allowing users to just call &lt;code&gt;df.plot_animated()&lt;/code&gt; and have it work like magic.&lt;/p&gt;
+&lt;p&gt;This was actually quite straightforward to implement, thanks to the amazing work by contributors to the pandas project&lt;/p&gt;
+&lt;p&gt;See source code for this here: &lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/pandas_alive/__init__.py"&gt;https://github.com/JackMcKew/pandas_alive/blob/master/pandas_alive/__init__.py&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="documentation"&gt;Documentation&lt;/h2&gt;
+&lt;p&gt;As a user of others projects, sifting through the documentation is where most of the time is spent. So we wanted to ensure documentation was friendly and up to date. To ensure this a few steps were made&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;add docstrings to all functions&lt;/li&gt;
+&lt;li&gt;generate documentation from docstrings with sphinx &lt;a href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html"&gt;https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check all methods and classes have docstrings with interrogate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="interrogate-action"&gt;Interrogate Action&lt;/h3&gt;
+&lt;p&gt;Once interrogate was implemented to check all classes, methods and functions were captured by docstrings, we wanted to make sure that this was routinely checked. The best way to ensure this, is to automate it! Thus another project was started to create a GitHub action that uses interrogate.&lt;/p&gt;
+&lt;p&gt;For more information on GitHub actions and how to use them, check out a previous write up here: &lt;a href="https://jackmckew.dev/github-actions-for-cicd.html"&gt;https://jackmckew.dev/github-actions-for-cicd.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;GitHub actions can be created from a Docker file, which spins up an instance of a specified container (we use alpine python in this case), install our dependencies and run the package. There was a bit of a hurdle in debugging the action and making sure the shell script was functional. The beauty of GitHub actions is then shown as we can string multiple actions together to get our workflow as we want it.&lt;/p&gt;
+&lt;p&gt;In the end the workflow for the interrogate action on the Pandas-Alive project was:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Spin up Python container&lt;/li&gt;
+&lt;li&gt;install dependencies (interrogate)&lt;/li&gt;
+&lt;li&gt;run interrogate on project to check level of docstring coverage&lt;/li&gt;
+&lt;li&gt;generate a new badge to show in the README&lt;/li&gt;
+&lt;li&gt;commit this badge back to the repository if the level of coverage was met&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This action is now available for anyone to use with GitHub actions &lt;a href="https://github.com/marketplace/actions/python-interrogate-check"&gt;https://github.com/marketplace/actions/python-interrogate-check&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="tutorials"&gt;Tutorials&lt;/h2&gt;
+&lt;p&gt;Everything anyone creates should come with instructions on how to use it, thus it is imperative to have tutorials on how to use something. In the beginning, this was a standalone Python file in the root of the repo, that would be copy pasted on each release into the README, this became undone when unexpectedly the copy paste was forgotten to be done. Thus we decided to have the README be a Jupyter notebook, which would both generate the examples and contain the source code for each example.&lt;/p&gt;
+&lt;p&gt;Further to this, why can't we include all this tutorials and examples in the documentation? This was a bit of a challenge to get working in the first place, but here is a previous write up on how this problem was tackled and solved: &lt;a href="https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html"&gt;https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I'm very happy and proud of how Pandas-Alive turned out, and the amount of community response was outstanding as well (over 11,000 downloads in the first month). I built the visualisation I had set out to build, and is now an example in the tutorials. Got the opportunity to use Pandas-Alive on another project I was working on, which enabled me to produce a similar visualisation on another dataset in under an hour, which making this process as easy as possible was a goal I'd set for this project.&lt;/p&gt;
+&lt;p&gt;All in all, I believe this project has furthered my confidence in releasing open source software and I'm very happy with the result.&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Geopandas and Pandas Alive</title><link href="https://jackmckew.dev/geopandas-and-pandas-alive.html" rel="alternate"></link><published>2020-06-12T00:00:00+10:00</published><updated>2020-06-12T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-12:/geopandas-and-pandas-alive.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Geopandas and Pandas_Alive&lt;/p&gt;
@@ -601,7 +687,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;p&gt;In projects, typically it's best practice to not have to repeat yourself in multiple places (this the DRY principle). In the README, it's nice to have working examples on how a user may use the project. If we could tie the original README with live code that generates the examples, that would be ideal, enter &lt;code&gt;README.ipynb&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Jupyter supports markdown &amp;amp; code cells, thus all the current documentation in the &lt;code&gt;README.md&lt;/code&gt; can be copied within markdown cells. Similarly, the code used to generate examples or demonstrate usage can then be placed in code cells. Allowing the author, to run the entire notebook, generating the new examples &amp;amp; verifying the examples are working code. Fantastic, this is exactly where we want to go.&lt;/p&gt;
 &lt;p&gt;Now if you only have the &lt;code&gt;README.ipynb&lt;/code&gt; in the repository, GitHub will represent the file in it's raw form, JSON. For example would be hundreds of line like:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -660,7 +746,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;h4 id="python-highlighting-in-output"&gt;Python Highlighting in Output&lt;/h4&gt;
 &lt;p&gt;When first run, it was noticed that &lt;code&gt;nbconvert&lt;/code&gt; wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the &lt;code&gt;README.md&lt;/code&gt; with language specifics. The workaround for this, was to use &lt;code&gt;nbconvert&lt;/code&gt;'s support for custom templates. See the docs at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates"&gt;https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The resulting template "pythoncodeblocks.tpl" was:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -674,7 +760,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Which could be used with &lt;code&gt;nbconvert&lt;/code&gt; with:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="integration-into-documentation-with-sphinx"&gt;Integration into Documentation with Sphinx&lt;/h2&gt;
@@ -697,7 +783,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;p&gt;Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst"&gt;index.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -773,7 +859,7 @@ With &lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_ali
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst"&gt;developer.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1243,268 +1329,4 @@ Error translating.. `Error` placed in output dataset
 &lt;p&gt;Once virtualenv is installed and accessible from anywhere, whenever a new folder is created for a project, you can run &lt;code&gt;virtualenv --prompt folder_name .env&lt;/code&gt;. This command will create a new virtual environment in a folder named .env, when using with VS Code, you can select this as the current environment with the Python extension. This setting lives in it's own folder &lt;code&gt;.vscode/settings.json&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To install new packages inside the virtual environment, either run &lt;code&gt;.env/Scripts/activate.bat&lt;/code&gt; or open a new terminal in VS Code once selected. That's it!&lt;/p&gt;
 &lt;h2 id="poetry"&gt;Poetry&lt;/h2&gt;
-&lt;p&gt;The use-case for Poetry is solely for packaging &amp;amp; distributing packages, something personally I don't do very much. To read further around packaging projects with Poetry, I've written a post at &lt;a href="https://jackmckew.dev/packaging-python-packages-with-poetry.html#packaging-python-packages-with-poetry"&gt;Packaging Python Packages with Poetry&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Packaging Python Packages with Poetry</title><link href="https://jackmckew.dev/packaging-python-packages-with-poetry.html" rel="alternate"></link><published>2020-03-25T00:00:00+11:00</published><updated>2020-03-25T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-03-25:/packaging-python-packages-with-poetry.html</id><summary type="html">&lt;body&gt;&lt;p&gt;&lt;strong&gt;Packaging Python code to easily share code with others!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Building upon a previous post on &lt;a href="https://jackmckew.dev/counting-words-with-python.html"&gt;"How many words have I written in this blog?"&lt;/a&gt;, let's dive into how to share this code with other on &lt;a href="https://pypi.org/"&gt;PyPI&lt;/a&gt; and integrate into this website with a 'word ticker' which updates whenever a new …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;&lt;strong&gt;Packaging Python code to easily share code with others!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Building upon a previous post on &lt;a href="https://jackmckew.dev/counting-words-with-python.html"&gt;"How many words have I written in this blog?"&lt;/a&gt;, let's dive into how to share this code with other on &lt;a href="https://pypi.org/"&gt;PyPI&lt;/a&gt; and integrate into this website with a 'word ticker' which updates whenever a new post is uploaded.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#what-is-poetry"&gt;What is Poetry&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#package-structure"&gt;Package Structure&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#initpy-files"&gt;&lt;code&gt;__init__.py&lt;/code&gt; Files&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#wordsum---my-first-package"&gt;Wordsum - My First Package&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#wordsum-package-structure"&gt;Wordsum Package Structure&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#user-interaction"&gt;User Interaction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#publishing-to-pypi"&gt;Publishing to PyPI&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#integrating-wordsum-into-this-website"&gt;Integrating Wordsum Into This Website&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#update-requirementstxt"&gt;Update &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#update-pelicanconfpy"&gt;Update &lt;code&gt;pelicanconf.py&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#update-basehtml"&gt;Update &lt;code&gt;base.html&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you are using Python, you've most likely used pip, conda or similar to install packages from other developers such that you aren't reinventing the wheel. This functionality is by far one of my favourite features of the language. If you aren't already aware, (most) of these packages you install with pip live on &lt;a href="https://pypi.org/"&gt;PyPI&lt;/a&gt;, the Python Package Index.&lt;/p&gt;
-&lt;p&gt;This post is for how to structure a package in Python with &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; and publish it on &lt;a href="https://pypi.org/"&gt;PyPI&lt;/a&gt; (I was amazed how easy this was).&lt;/p&gt;
-&lt;h2 id="what-is-poetry"&gt;What is Poetry&lt;/h2&gt;
-&lt;p&gt;A quote from the creator of &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I built Poetry because I wanted a single tool to manage my Python projects from start to finish. I wanted something reliable and intuitive that the community could use and enjoy. - Sébastien Eustace&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In it's essence, &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; manages the Python project workflow so you don't have to.&lt;/p&gt;
-&lt;p&gt;Same as venv, virtualenv, conda create virtual environments for a project, &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; will also create a virtual environment to go with your project.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If you are working in VS Code, the &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python"&gt;Python extension&lt;/a&gt; doesn't automatically detect the virtual environment location that Poetry defaults to. To tell VS Code where the virtual environments live for Poetry head to &lt;code&gt;Settings &amp;gt; python.venvFolders&lt;/code&gt; and add &lt;code&gt;C:\\Users\\USERNAME\\AppData\\Local\\pypoetry\\Cache\\virtualenvs&lt;/code&gt; for Windows.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="package-structure"&gt;Package Structure&lt;/h2&gt;
-&lt;p&gt;Python packages require a standard structure (albeit lenient), which &lt;a href="https://python-poetry.org/"&gt;Poetry&lt;/a&gt; sets up for you when a project is initialized.  If we run &lt;code&gt;poetry new test_package&lt;/code&gt; we will end up with the structure:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5
-6
-7
-8&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;test-package
-+-- pyproject.toml
-+-- README.rst
-+-- test_package
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- __init__.py
-+-- tests
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- __init__.py
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- test_test_package.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Inside the top directory of our package we have 2 folders and 2 files.&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;File&lt;/th&gt;
-&lt;th&gt;Use&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;pyproject.toml&lt;/td&gt;
-&lt;td&gt;Contains all the information about your package, dependancies, versions, etc.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;README.rst&lt;/td&gt;
-&lt;td&gt;Readme file as to what the project does, any instructions of use, etc (see &lt;a href="https://github.com/PatrikHlobil/Pandas-Bokeh"&gt;Pandas-Bokeh&lt;/a&gt; for a great example).&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;test_package&lt;/td&gt;
-&lt;td&gt;This is where all our Python code will live for the project.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;tests&lt;/td&gt;
-&lt;td&gt;Following test driven development, this is where any automated tests live to make sure the code runs as expected.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id="__init__py-files"&gt;&lt;code&gt;__init__.py&lt;/code&gt; Files&lt;/h3&gt;
-&lt;p&gt;What are all these &lt;code&gt;__init__.py&lt;/code&gt; files and what are they there for? To be able to import code from another folder, Python requires to see an &lt;code&gt;__init__.py&lt;/code&gt; inside a folder to mark it as a package.&lt;/p&gt;
-&lt;p&gt;If we create a function inside our test_package folder:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;+-- test_package
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- __init__.py
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- &lt;span class="k"&gt;function&lt;/span&gt;.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Now users can use:
-&lt;code&gt;import test_package.function&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;or&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;from test_package import function&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="wordsum-my-first-package"&gt;Wordsum - My First Package&lt;/h2&gt;
-&lt;p&gt;If you have read this blog previously, I did a post on answering the question "How many words have I written in this blog?" which you can reach at: &lt;a href="https://jackmckew.dev/counting-words-with-python.html"&gt;https://jackmckew.dev/counting-words-with-python.html&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This was great, I had wrote 2 functions which count how many words were inside markdown files &amp;amp; Jupyter notebooks. Following this, I had a great idea, why not make a 'ticker' of how many words have been written in this blog and display this on the website. Making sure that whenever a new post is added the 'word ticker' increments by how many words were in that post.&lt;/p&gt;
-&lt;p&gt;This in the inspiration behind &lt;a href="https://github.com/JackMcKew/wordsum"&gt;Wordsum&lt;/a&gt; which is also available on &lt;a href="https://pypi.org/project/wordsum/"&gt;PyPI&lt;/a&gt;. Meaning you can install it with:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h3 id="wordsum-package-structure"&gt;Wordsum Package Structure&lt;/h3&gt;
-&lt;p&gt;To make the two functions more extensible, the two functions were further broken into smaller functions and contained in their own 'internal' package (folder).&lt;/p&gt;
-&lt;p&gt;The basic structure we ended up with was:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wordsum
-+-- word_sum.py
-+-- __init__.py
-+-- _file_types
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- __init__.py
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- jupyter.py
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- markdown.py
-+-- _io
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- __init__.py
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- read_files.py
-+-- _util
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- __init__.py
-&lt;span class="p"&gt;|&lt;/span&gt;   +-- file_locate.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Now the &lt;code&gt;_&lt;/code&gt; prefix to the folders is to nominate that functions contained in these folders are internal to the package. Meaning the user shouldn't be able to access these functions.&lt;/p&gt;
-&lt;p&gt;The main functions of the package are kept within &lt;code&gt;word_sum.py&lt;/code&gt; (which uses the functions in the &lt;code&gt;_xxx&lt;/code&gt; folders).&lt;/p&gt;
-&lt;h3 id="user-interaction"&gt;User Interaction&lt;/h3&gt;
-&lt;p&gt;To make the main functions within &lt;code&gt;word_sum.py&lt;/code&gt; accessible to users of the package we can import them in the 'top' &lt;code&gt;__init__.py&lt;/code&gt; of the wordsum package.&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;__version__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'0.1.3'&lt;/span&gt;
-
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;wordsum.word_sum&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;count_words&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;wordsum.word_sum&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;list_supported_formats&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;wordsum.word_sum&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;count_files&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;This will allow users to interact with the package like:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;wordsum&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wordsum&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;count_words&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./example_files'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'.md'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'.ipynb'&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
-    &lt;span class="n"&gt;wordsum&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list_supported_formats&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h3 id="publishing-to-pypi"&gt;Publishing to PyPI&lt;/h3&gt;
-&lt;p&gt;Since we've used Poetry with the development of this package, our &lt;code&gt;pyproject.toml&lt;/code&gt; should be a bit more fleshed out. Wordsum's &lt;code&gt;pyproject.toml&lt;/code&gt; ended up as:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[tool.poetry]&lt;/span&gt;
-&lt;span class="na"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"wordsum"&lt;/span&gt;
-&lt;span class="na"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"0.1.3"&lt;/span&gt;
-&lt;span class="na"&gt;description&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"Counting words within a folder of files recursively."&lt;/span&gt;
-&lt;span class="na"&gt;readme&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"README.md"&lt;/span&gt;
-&lt;span class="na"&gt;repository&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"https://github.com/JackMcKew/wordsum"&lt;/span&gt;
-&lt;span class="na"&gt;authors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;["JackMcKew &amp;lt;jackmckew2@gmail.com&amp;gt;"]&lt;/span&gt;
-
-&lt;span class="k"&gt;[tool.poetry.dependencies]&lt;/span&gt;
-&lt;span class="na"&gt;python&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"^3.6"&lt;/span&gt;
-&lt;span class="na"&gt;mypy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"^0.770"&lt;/span&gt;
-&lt;span class="na"&gt;nbformat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"^5.0.4"&lt;/span&gt;
-&lt;span class="na"&gt;black&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"^19.10b0"&lt;/span&gt;
-&lt;span class="na"&gt;flake8&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"^3.7.9"&lt;/span&gt;
-
-&lt;span class="k"&gt;[tool.poetry.dev-dependencies]&lt;/span&gt;
-&lt;span class="na"&gt;pytest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"^5.2"&lt;/span&gt;
-&lt;span class="na"&gt;black&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{version = "^19.10b0", allow-prereleases = true}&lt;/span&gt;
-
-&lt;span class="k"&gt;[tool.poetry.urls]&lt;/span&gt;
-&lt;span class="na"&gt;issues&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"https://github.com/JackMcKew/wordsum/issues"&lt;/span&gt;
-
-&lt;span class="k"&gt;[build-system]&lt;/span&gt;
-&lt;span class="na"&gt;requires&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;["poetry&amp;gt;=0.12"]&lt;/span&gt;
-&lt;span class="na"&gt;build-backend&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"poetry.masonry.api"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;All that is left to do is to sign up for an account on PyPI and run:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry publish
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;This will ask for your PyPI credentials, build the package (a step done by &lt;code&gt;setuptools&lt;/code&gt; previously) and upload the package for you.&lt;/p&gt;
-&lt;p&gt;Now users can install your package with:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h2 id="integrating-wordsum-into-this-website"&gt;Integrating Wordsum Into This Website&lt;/h2&gt;
-&lt;p&gt;Previously I've written a blog post on how I moved from Wordpress to Pelican (&lt;a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html"&gt;https://jackmckew.dev/migrating-from-wordpress-to-pelican.html&lt;/a&gt;). This goes into detail about how this site utilizes a continuous integration (CI) service (TravisCI), that rebuilds the site each time a new file is pushed to the GitHub repository. Following this, Netlify fires up and pushes the freshly built website out to the internet.&lt;/p&gt;
-&lt;p&gt;This site uses the theme &lt;a href="https://github.com/alexandrevicenzi/Flex"&gt;Flex&lt;/a&gt; as a basis, except a local 'fork' of Flex is retained in the repository such that I can make edit without disrupting other users of Flex.&lt;/p&gt;
-&lt;p&gt;So there was only 3 files that I needed to edit: &lt;code&gt;pelicanconf.py&lt;/code&gt;, &lt;code&gt;requirements.txt&lt;/code&gt; and a html file for the theme. &lt;code&gt;pelicanconf.py&lt;/code&gt; contains all the instructions to provide to pelican when building the site, &lt;code&gt;requirements.txt&lt;/code&gt; contains the list of packages required for TravisCI to use and the template html file is how it is to represented on the web.&lt;/p&gt;
-&lt;h3 id="update-requirementstxt"&gt;Update &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;First off we add &lt;code&gt;wordsum&lt;/code&gt; to the virtual environment for the project and freeze it within &lt;code&gt;requirements.txt&lt;/code&gt; with&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install wordsum
-pip freeze requirements.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Since most CI services use Ubuntu as a base, pywin32 is installed be default as a dependancy on wordsum, this can be removed with &lt;code&gt;pip uninstall pywin32&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="update-pelicanconfpy"&gt;Update &lt;code&gt;pelicanconf.py&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;This file contains the code that will run when &lt;code&gt;pelican content&lt;/code&gt; is called upon the folder to build this website. To interface with &lt;code&gt;wordsum&lt;/code&gt; we add the code:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;wordsum&lt;/span&gt;
-
-&lt;span class="n"&gt;WORD_TICKER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wordsum&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;count_words&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./content'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'.md'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'.ipynb'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;span class="n"&gt;WORD_TICKER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;WORD_TICKER&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;,&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;This creates a variable &lt;code&gt;WORD_TICKER&lt;/code&gt; that can be used later on to show the number of words counted across all markdown files &amp;amp; Jupyter notebooks.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The line &lt;code&gt;WORD_TICKER = f"{WORD_TICKER:,}"&lt;/code&gt; adds thousand separators to numbers in Python with f-strings. For example this converts 123456 to 123,456.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="update-basehtml"&gt;Update &lt;code&gt;base.html&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Now we just need to show our word ticker on the website. In the Flex theme, all pages inherit from a &lt;code&gt;base.html&lt;/code&gt; file. To squeeze our new metrics onto the page we add the lines:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;{% if WORD_TICKER %}
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Number of Posts: {{ articles|count }}&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Number of Words: {{ WORD_TICKER}}&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-{% endif %}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;First we check if the variable &lt;code&gt;WORD_TICKER&lt;/code&gt; is used to ensure we only include the metrics if the variable has been set. Followed by two paragraph markers which will show:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;How many posts are on the website&lt;/li&gt;
-&lt;li&gt;How many words are used in all of those posts&lt;/li&gt;
-&lt;/ol&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category></entry></feed>
+&lt;p&gt;The use-case for Poetry is solely for packaging &amp;amp; distributing packages, something personally I don't do very much. To read further around packaging projects with Poetry, I've written a post at &lt;a href="https://jackmckew.dev/packaging-python-packages-with-poetry.html#packaging-python-packages-with-poetry"&gt;Packaging Python Packages with Poetry&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="Python"></category></entry></feed>

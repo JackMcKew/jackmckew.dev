@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-06-19T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>How to Make GitHub Actions</title><link href="https://jackmckew.dev/how-to-make-github-actions.html" rel="alternate"></link><published>2020-06-19T00:00:00+10:00</published><updated>2020-06-19T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-19:/how-to-make-github-actions.html</id><summary type="html">&lt;body&gt;&lt;p&gt;From a recent post on this blog on how to use &lt;a href="https://jackmckew.dev/github-actions-for-cicd.html"&gt;GitHub Actions to easily integrate CI/CD into your repository&lt;/a&gt;, this post will go into how to create your own GitHub Action!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-06-27T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>How Pandas_Alive was Made</title><link href="https://jackmckew.dev/how-pandas_alive-was-made.html" rel="alternate"></link><published>2020-06-27T00:00:00+10:00</published><updated>2020-06-27T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-27:/how-pandas_alive-was-made.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Pandas-Alive is an open source Python package for making animated charts from Pandas dataframes. This project was first inspired by a very specific COVID-19 visualisation, so I set out to make this visualisation a reality.&lt;/p&gt;
+&lt;p&gt;This visualisation consisted of a bar chart race showing regions, a line chart showing new …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Pandas-Alive is an open source Python package for making animated charts from Pandas dataframes. This project was first inspired by a very specific COVID-19 visualisation, so I set out to make this visualisation a reality.&lt;/p&gt;
+&lt;p&gt;This visualisation consisted of a bar chart race showing regions, a line chart showing new cases by date, a line chart showing cumulative cases and a map chart showing cases by location.&lt;/p&gt;
+&lt;p&gt;Whenever starting a new project, it's always best to do some research to see:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;has this already been done?&lt;/li&gt;
+&lt;li&gt;is there anything similar out there?&lt;ul&gt;
+&lt;li&gt;if so, what can you learn from the similar tool&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;what architecture should this utilise&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pandas-Alive took inspiration from &lt;a href="https://github.com/PatrikHlobil/Pandas-Bokeh"&gt;Pandas-Bokeh&lt;/a&gt;, a Python package which is absolutely magic for making interactive charts from dataframes. For bar chart races in particular, Pandas alive took inspiration from &lt;a href="https://github.com/dexplo/bar_chart_race"&gt;bar_chart_race&lt;/a&gt;. This enables us to build and extend the work of others, so we're not running into the same problems that has already been solved.&lt;/p&gt;
+&lt;h2 id="architecture"&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;It's always beneficial to consider what type of architecture or design pattern the overall project should use, as from experience it's painful to change architecture after starting.&lt;/p&gt;
+&lt;p&gt;A few design patterns seemed beneficial for this project such as&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;factory&lt;/li&gt;
+&lt;li&gt;templates&lt;/li&gt;
+&lt;li&gt;facade&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One of the biggest contributing factors to this decision, was that all these charts should have some shared functionality (they are all charts) and then each specific chart type has additional functionality. Due to this, the template design pattern was chosen, this would enable us to implement a base chart class for which all the other charts can inherit from, allowing access to common methods that all charts should have. While the decision of template may not be perfect, it's definitely worked out so far.&lt;/p&gt;
+&lt;h2 id="base-class"&gt;Base Class&lt;/h2&gt;
+&lt;p&gt;Now that we've decided to go with template design pattern, we need to implement the base chart class with the shared functionality. At this point, since there would be so many parameters going into the class constructor (&lt;code&gt;__init__&lt;/code&gt;) in Python, it was frustrating having to put this information in two places.&lt;/p&gt;
+&lt;p&gt;Here is a basic example, but imagine if you had 10s of arguments (eg, name, species) and had to replicate this information so many times.&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Animal&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Animal'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'JackRussell'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;species&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;species&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the &lt;code&gt;__init__&lt;/code&gt; and other dunder methods generated for us (see a previous post on dunder methods here).&lt;/p&gt;
+&lt;p&gt;This allows us to write the same class as above like:&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@attr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Animal&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Animal'&lt;/span&gt;
+    &lt;span class="n"&gt;species&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'JackRussell&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;This will create the same class but initalise dunder methods for us!&lt;/p&gt;
+&lt;p&gt;I've written multiple posts on these topics which you can find:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/dunders-in-python.html"&gt;Dunders&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/inheritance-in-python.html"&gt;Class Inheritance&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we write the methods which all charts should share such as create figure, save, etc. We also create methods which will raise errors unless overridden, this is for future developers as a reminder to make sure that any classes that inherit from base chart ensure to override these methods with custom functionality. By having these methods shared, this allows us to change one part of code and have it ripple through the project. The benefit was definitely realised later on in version 0.2.0 where we could add in memory functionality to write to gif and not have to copy paste throughout the project.&lt;/p&gt;
+&lt;h2 id="chart-class"&gt;Chart Class&lt;/h2&gt;
+&lt;p&gt;Now that we have a base class, let's make a class which inherits from base class and implements the functionality.&lt;/p&gt;
+&lt;p&gt;The first one typically takes the longest amount of time, and we refactored many times to move things around.&lt;/p&gt;
+&lt;p&gt;We can create new methods and parameters to extend the functionality of our base chart and make the magic happen.&lt;/p&gt;
+&lt;h2 id="api"&gt;API&lt;/h2&gt;
+&lt;p&gt;Now we need to make the interface between our users and the classes we've just created.&lt;/p&gt;
+&lt;p&gt;Taking inspiration from Pandas-Bokeh, using an accessor on pandas Dataframes allowing users to just call &lt;code&gt;df.plot_animated()&lt;/code&gt; and have it work like magic.&lt;/p&gt;
+&lt;p&gt;This was actually quite straightforward to implement, thanks to the amazing work by contributors to the pandas project&lt;/p&gt;
+&lt;p&gt;See source code for this here: &lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/pandas_alive/__init__.py"&gt;https://github.com/JackMcKew/pandas_alive/blob/master/pandas_alive/__init__.py&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="documentation"&gt;Documentation&lt;/h2&gt;
+&lt;p&gt;As a user of others projects, sifting through the documentation is where most of the time is spent. So we wanted to ensure documentation was friendly and up to date. To ensure this a few steps were made&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;add docstrings to all functions&lt;/li&gt;
+&lt;li&gt;generate documentation from docstrings with sphinx &lt;a href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html"&gt;https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check all methods and classes have docstrings with interrogate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="interrogate-action"&gt;Interrogate Action&lt;/h3&gt;
+&lt;p&gt;Once interrogate was implemented to check all classes, methods and functions were captured by docstrings, we wanted to make sure that this was routinely checked. The best way to ensure this, is to automate it! Thus another project was started to create a GitHub action that uses interrogate.&lt;/p&gt;
+&lt;p&gt;For more information on GitHub actions and how to use them, check out a previous write up here: &lt;a href="https://jackmckew.dev/github-actions-for-cicd.html"&gt;https://jackmckew.dev/github-actions-for-cicd.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;GitHub actions can be created from a Docker file, which spins up an instance of a specified container (we use alpine python in this case), install our dependencies and run the package. There was a bit of a hurdle in debugging the action and making sure the shell script was functional. The beauty of GitHub actions is then shown as we can string multiple actions together to get our workflow as we want it.&lt;/p&gt;
+&lt;p&gt;In the end the workflow for the interrogate action on the Pandas-Alive project was:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Spin up Python container&lt;/li&gt;
+&lt;li&gt;install dependencies (interrogate)&lt;/li&gt;
+&lt;li&gt;run interrogate on project to check level of docstring coverage&lt;/li&gt;
+&lt;li&gt;generate a new badge to show in the README&lt;/li&gt;
+&lt;li&gt;commit this badge back to the repository if the level of coverage was met&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This action is now available for anyone to use with GitHub actions &lt;a href="https://github.com/marketplace/actions/python-interrogate-check"&gt;https://github.com/marketplace/actions/python-interrogate-check&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="tutorials"&gt;Tutorials&lt;/h2&gt;
+&lt;p&gt;Everything anyone creates should come with instructions on how to use it, thus it is imperative to have tutorials on how to use something. In the beginning, this was a standalone Python file in the root of the repo, that would be copy pasted on each release into the README, this became undone when unexpectedly the copy paste was forgotten to be done. Thus we decided to have the README be a Jupyter notebook, which would both generate the examples and contain the source code for each example.&lt;/p&gt;
+&lt;p&gt;Further to this, why can't we include all this tutorials and examples in the documentation? This was a bit of a challenge to get working in the first place, but here is a previous write up on how this problem was tackled and solved: &lt;a href="https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html"&gt;https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I'm very happy and proud of how Pandas-Alive turned out, and the amount of community response was outstanding as well (over 11,000 downloads in the first month). I built the visualisation I had set out to build, and is now an example in the tutorials. Got the opportunity to use Pandas-Alive on another project I was working on, which enabled me to produce a similar visualisation on another dataset in under an hour, which making this process as easy as possible was a goal I'd set for this project.&lt;/p&gt;
+&lt;p&gt;All in all, I believe this project has furthered my confidence in releasing open source software and I'm very happy with the result.&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>How to Make GitHub Actions</title><link href="https://jackmckew.dev/how-to-make-github-actions.html" rel="alternate"></link><published>2020-06-19T00:00:00+10:00</published><updated>2020-06-19T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-19:/how-to-make-github-actions.html</id><summary type="html">&lt;body&gt;&lt;p&gt;From a recent post on this blog on how to use &lt;a href="https://jackmckew.dev/github-actions-for-cicd.html"&gt;GitHub Actions to easily integrate CI/CD into your repository&lt;/a&gt;, this post will go into how to create your own GitHub Action!&lt;/p&gt;
 &lt;p&gt;This post was inspired from developing a few GitHub Actions of my own, which I recently released …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;From a recent post on this blog on how to use &lt;a href="https://jackmckew.dev/github-actions-for-cicd.html"&gt;GitHub Actions to easily integrate CI/CD into your repository&lt;/a&gt;, this post will go into how to create your own GitHub Action!&lt;/p&gt;
 &lt;p&gt;This post was inspired from developing a few GitHub Actions of my own, which I recently released!&lt;/p&gt;
 &lt;h2 id="pyinstaller-github-actions"&gt;PyInstaller GitHub Actions&lt;/h2&gt;
@@ -60,7 +146,7 @@
 &lt;h2 id="publish-to-marketplace"&gt;Publish to Marketplace&lt;/h2&gt;
 &lt;p&gt;Once you've implemented these few files, you should get a warning at the top of the repository on GitHub hinting if you want to publish this on the marketplace. This is done smoothly with creating a release of your project, and that's it, done!&lt;/p&gt;
 &lt;p&gt;Now users can intergrate your action into the CI/CD pipeline as easily as:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Python Interrogate Check&lt;/span&gt;
   &lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JackMcKew/python-interrogate-check@v0.1.1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -667,7 +753,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;p&gt;In projects, typically it's best practice to not have to repeat yourself in multiple places (this the DRY principle). In the README, it's nice to have working examples on how a user may use the project. If we could tie the original README with live code that generates the examples, that would be ideal, enter &lt;code&gt;README.ipynb&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Jupyter supports markdown &amp;amp; code cells, thus all the current documentation in the &lt;code&gt;README.md&lt;/code&gt; can be copied within markdown cells. Similarly, the code used to generate examples or demonstrate usage can then be placed in code cells. Allowing the author, to run the entire notebook, generating the new examples &amp;amp; verifying the examples are working code. Fantastic, this is exactly where we want to go.&lt;/p&gt;
 &lt;p&gt;Now if you only have the &lt;code&gt;README.ipynb&lt;/code&gt; in the repository, GitHub will represent the file in it's raw form, JSON. For example would be hundreds of line like:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -726,7 +812,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;h4 id="python-highlighting-in-output"&gt;Python Highlighting in Output&lt;/h4&gt;
 &lt;p&gt;When first run, it was noticed that &lt;code&gt;nbconvert&lt;/code&gt; wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the &lt;code&gt;README.md&lt;/code&gt; with language specifics. The workaround for this, was to use &lt;code&gt;nbconvert&lt;/code&gt;'s support for custom templates. See the docs at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates"&gt;https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The resulting template "pythoncodeblocks.tpl" was:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -740,7 +826,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Which could be used with &lt;code&gt;nbconvert&lt;/code&gt; with:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="integration-into-documentation-with-sphinx"&gt;Integration into Documentation with Sphinx&lt;/h2&gt;
@@ -763,7 +849,7 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;p&gt;Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst"&gt;index.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -839,7 +925,7 @@ With &lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_ali
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst"&gt;developer.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1285,672 +1371,4 @@ Error translating.. `Error` placed in output dataset
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Creating Animated Plots with Pandas_Alive</title><link href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html" rel="alternate"></link><published>2020-05-21T00:00:00+10:00</published><updated>2020-05-21T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-05-21:/creating-animated-plots-with-pandas_alive.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In this tutorial we'll learn how to create a series of animations using Pandas_Alive. This post is rendered in the style of a Jupyter Notebook. Find the source here: &lt;a href="https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb"&gt;https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Pandas_Alive&lt;/code&gt; was created by me! I set …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In this tutorial we'll learn how to create a series of animations using Pandas_Alive. This post is rendered in the style of a Jupyter Notebook. Find the source here: &lt;a href="https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb"&gt;https://github.com/JackMcKew/jackmckew.dev/tree/master/content/2020/pandas_alive/notebooks/pandas_alive_demo.ipynb&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Pandas_Alive&lt;/code&gt; was created by me! I set out to develop this package to build a very specific data visualisation, which is also apart of a prior blog post which you can see at: &lt;a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html"&gt;https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Pandas_Alive Example" class="img-fluid" src="https://jackmckew.dev/img/population-combined-charts.gif"/&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="pandas_alive-python-package"&gt;pandas_alive python package&lt;a class="anchor-link" href="#pandas_alive-python-package"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive"&gt;pandas_alive&lt;/a&gt; is a python package that automates the process of making these animations. Head over to the &lt;a href="https://github.com/JackMcKew/pandas_alive"&gt;github repository&lt;/a&gt; to see even more examples!&lt;/p&gt;
-&lt;h4 id="Installation"&gt;Installation&lt;a class="anchor-link" href="#Installation"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Install with &lt;code&gt;pip install pandas_alive&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="Supported-Chart-Types"&gt;Supported Chart Types&lt;a class="anchor-link" href="#Supported-Chart-Types"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;See the README on GitHub for current chart types at &lt;a href="https://github.com/JackMcKew/pandas_alive#currently-supported-chart-types"&gt;https://github.com/JackMcKew/pandas_alive#currently-supported-chart-types&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;At the time of writing the currently supported chart types are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Horizontal Bar Chart Races&lt;/li&gt;
-&lt;li&gt;Vertical Bar Chart Races&lt;/li&gt;
-&lt;li&gt;Line Charts&lt;/li&gt;
-&lt;li&gt;Scatter Charts&lt;/li&gt;
-&lt;li&gt;Pie Charts&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="Requirements"&gt;Requirements&lt;a class="anchor-link" href="#Requirements"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;pandas_alive&lt;/code&gt; utilises the &lt;a href="https://matplotlib.org/3.2.1/api/animation_api.html"&gt;matplotlib.animation function&lt;/a&gt;, thus requiring a writer library.&lt;/p&gt;
-&lt;p&gt;Ensure to have one of the supported tooling software installed prior to use!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://ffmpeg.org/"&gt;ffmpeg&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://imagemagick.org/index.php"&gt;ImageMagick&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pillow.readthedocs.io/en/stable/"&gt;Pillow&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;See more at &lt;a href="https://matplotlib.org/3.2.1/api/animation_api.html#writer-classes"&gt;https://matplotlib.org/3.2.1/api/animation_api.html#writer-classes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Bar-Chart-Race"&gt;Bar Chart Race&lt;a class="anchor-link" href="#Bar-Chart-Race"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Firstly let's build a bar chart race of the population change by year in all the countries of the world.&lt;/p&gt;
-&lt;p&gt;Once pandas_alive is installed with &lt;code&gt;pip install pandas_alive&lt;/code&gt;, we import the package, along with &lt;code&gt;pandas&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas_alive&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Next we need to import the data!&lt;/p&gt;
-&lt;p&gt;We do the following steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Using &lt;code&gt;pandas&lt;/code&gt;, we can read the data into a DataFrame using &lt;code&gt;pd.read_csv&lt;/code&gt;, ensuring to use the keyword &lt;code&gt;parse_dates&lt;/code&gt; on the Year column in our dataset.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Next we rename the columns to make life easier.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;We're only interested in years 1800 onwards, so we can make a selection and drop the data that isn't on or after the year 1800.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Finally we convert the 'Year' column into datetime format, read more about datetime format here: &lt;a href="https://docs.python.org/3/library/datetime.html"&gt;https://docs.python.org/3/library/datetime.html&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Data Source: https://ourworldindata.org/grapher/population-by-country&lt;/span&gt;
-&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'population-by-country.csv'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;parse_dates&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Rename columns&lt;/span&gt;
-&lt;span class="n"&gt;column_names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Country'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Country Code'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Population'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;column_names&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Only years from 1800 onwards&lt;/span&gt;
-&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;astype&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;1800&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Convert Year column to datetime&lt;/span&gt;
-&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_datetime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea"&gt;
-&lt;div&gt;
-&lt;style scoped=""&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border="1" class="table-striped table dataframe"&gt;
-&lt;thead&gt;
-&lt;tr style="text-align: right;"&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Country&lt;/th&gt;
-&lt;th&gt;Country Code&lt;/th&gt;
-&lt;th&gt;Year&lt;/th&gt;
-&lt;th&gt;Population&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;3&lt;/th&gt;
-&lt;td&gt;Afghanistan&lt;/td&gt;
-&lt;td&gt;AFG&lt;/td&gt;
-&lt;td&gt;1800-01-01&lt;/td&gt;
-&lt;td&gt;3280000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;4&lt;/th&gt;
-&lt;td&gt;Afghanistan&lt;/td&gt;
-&lt;td&gt;AFG&lt;/td&gt;
-&lt;td&gt;1820-01-01&lt;/td&gt;
-&lt;td&gt;3280000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;5&lt;/th&gt;
-&lt;td&gt;Afghanistan&lt;/td&gt;
-&lt;td&gt;AFG&lt;/td&gt;
-&lt;td&gt;1850-01-01&lt;/td&gt;
-&lt;td&gt;3750000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;6&lt;/th&gt;
-&lt;td&gt;Afghanistan&lt;/td&gt;
-&lt;td&gt;AFG&lt;/td&gt;
-&lt;td&gt;1870-01-01&lt;/td&gt;
-&lt;td&gt;4207000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;7&lt;/th&gt;
-&lt;td&gt;Afghanistan&lt;/td&gt;
-&lt;td&gt;AFG&lt;/td&gt;
-&lt;td&gt;1900-01-01&lt;/td&gt;
-&lt;td&gt;5000000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;...&lt;/th&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3216&lt;/th&gt;
-&lt;td&gt;Zimbabwe&lt;/td&gt;
-&lt;td&gt;ZWE&lt;/td&gt;
-&lt;td&gt;1960-01-01&lt;/td&gt;
-&lt;td&gt;3751000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3217&lt;/th&gt;
-&lt;td&gt;Zimbabwe&lt;/td&gt;
-&lt;td&gt;ZWE&lt;/td&gt;
-&lt;td&gt;1970-01-01&lt;/td&gt;
-&lt;td&gt;5514536.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3218&lt;/th&gt;
-&lt;td&gt;Zimbabwe&lt;/td&gt;
-&lt;td&gt;ZWE&lt;/td&gt;
-&lt;td&gt;1980-01-01&lt;/td&gt;
-&lt;td&gt;7169968.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3219&lt;/th&gt;
-&lt;td&gt;Zimbabwe&lt;/td&gt;
-&lt;td&gt;ZWE&lt;/td&gt;
-&lt;td&gt;1990-01-01&lt;/td&gt;
-&lt;td&gt;10156000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3220&lt;/th&gt;
-&lt;td&gt;Zimbabwe&lt;/td&gt;
-&lt;td&gt;ZWE&lt;/td&gt;
-&lt;td&gt;2000-01-01&lt;/td&gt;
-&lt;td&gt;11820000.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;2923 rows × 4 columns&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As we can see, our data is currently in a 'long' format; where each row is one time point per subject. Meaning each row (country) will have data in multiple rows.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;pandas_alive&lt;/code&gt; requires the data to be in a 'wide' format, where:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Each row represents a single point/period in time&lt;/li&gt;
-&lt;li&gt;Each column holds the value for a particular category (country in this case)&lt;/li&gt;
-&lt;li&gt;The index contains the time component (optional, if not used ensure to use &lt;code&gt;interpolate_period=False&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;To convert our data from 'long' to 'wide' format, we can use the &lt;code&gt;pandas&lt;/code&gt; function &lt;code&gt;pivot&lt;/code&gt; to achieve this!&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;For any missing data we fill this with 0 using &lt;code&gt;.fillna(0)&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Pivot data to turn from `long` to `wide` format&lt;/span&gt;
-&lt;span class="n"&gt;pivoted_df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pivot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Country'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Population'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fillna&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pivoted_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea"&gt;
-&lt;div&gt;
-&lt;style scoped=""&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border="1" class="table-striped table dataframe"&gt;
-&lt;thead&gt;
-&lt;tr style="text-align: right;"&gt;
-&lt;th&gt;Country&lt;/th&gt;
-&lt;th&gt;Afghanistan&lt;/th&gt;
-&lt;th&gt;Albania&lt;/th&gt;
-&lt;th&gt;Algeria&lt;/th&gt;
-&lt;th&gt;Andorra&lt;/th&gt;
-&lt;th&gt;Angola&lt;/th&gt;
-&lt;th&gt;Antigua and Barbuda&lt;/th&gt;
-&lt;th&gt;Argentina&lt;/th&gt;
-&lt;th&gt;Armenia&lt;/th&gt;
-&lt;th&gt;Australia&lt;/th&gt;
-&lt;th&gt;Austria&lt;/th&gt;
-&lt;th&gt;...&lt;/th&gt;
-&lt;th&gt;United Kingdom&lt;/th&gt;
-&lt;th&gt;United States&lt;/th&gt;
-&lt;th&gt;Uruguay&lt;/th&gt;
-&lt;th&gt;Uzbekistan&lt;/th&gt;
-&lt;th&gt;Vanuatu&lt;/th&gt;
-&lt;th&gt;Venezuela&lt;/th&gt;
-&lt;th&gt;Vietnam&lt;/th&gt;
-&lt;th&gt;Yemen&lt;/th&gt;
-&lt;th&gt;Zambia&lt;/th&gt;
-&lt;th&gt;Zimbabwe&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;Year&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;1800-01-01&lt;/th&gt;
-&lt;td&gt;3280000.0&lt;/td&gt;
-&lt;td&gt;400000.0&lt;/td&gt;
-&lt;td&gt;2500000.0&lt;/td&gt;
-&lt;td&gt;2654.0&lt;/td&gt;
-&lt;td&gt;1567028.0&lt;/td&gt;
-&lt;td&gt;37000.0&lt;/td&gt;
-&lt;td&gt;534000.0&lt;/td&gt;
-&lt;td&gt;413326.0&lt;/td&gt;
-&lt;td&gt;200000.0&lt;/td&gt;
-&lt;td&gt;3000000.0&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;10750000.0&lt;/td&gt;
-&lt;td&gt;6000000.0&lt;/td&gt;
-&lt;td&gt;55000.0&lt;/td&gt;
-&lt;td&gt;1919159.0&lt;/td&gt;
-&lt;td&gt;27791.0&lt;/td&gt;
-&lt;td&gt;1000000.0&lt;/td&gt;
-&lt;td&gt;4000000.0&lt;/td&gt;
-&lt;td&gt;2593000.0&lt;/td&gt;
-&lt;td&gt;747000.0&lt;/td&gt;
-&lt;td&gt;1085814.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1810-01-01&lt;/th&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;406000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;11970000.0&lt;/td&gt;
-&lt;td&gt;7240000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;802000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1820-01-01&lt;/th&gt;
-&lt;td&gt;3280000.0&lt;/td&gt;
-&lt;td&gt;437000.0&lt;/td&gt;
-&lt;td&gt;2689000.0&lt;/td&gt;
-&lt;td&gt;2654.0&lt;/td&gt;
-&lt;td&gt;1567028.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;534000.0&lt;/td&gt;
-&lt;td&gt;413326.0&lt;/td&gt;
-&lt;td&gt;334000.0&lt;/td&gt;
-&lt;td&gt;3369000.0&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;21239000.0&lt;/td&gt;
-&lt;td&gt;9980510.2&lt;/td&gt;
-&lt;td&gt;55000.0&lt;/td&gt;
-&lt;td&gt;1919159.0&lt;/td&gt;
-&lt;td&gt;27791.0&lt;/td&gt;
-&lt;td&gt;718000.0&lt;/td&gt;
-&lt;td&gt;6551000.0&lt;/td&gt;
-&lt;td&gt;2593000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;1085814.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1830-01-01&lt;/th&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;634000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;330000.0&lt;/td&gt;
-&lt;td&gt;3538000.0&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;24139000.0&lt;/td&gt;
-&lt;td&gt;13240313.9&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;887000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1840-01-01&lt;/th&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;768000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;420000.0&lt;/td&gt;
-&lt;td&gt;3716000.0&lt;/td&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;26745000.0&lt;/td&gt;
-&lt;td&gt;17443768.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;1219000.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;5 rows × 190 columns&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now that our data is prepared in 'wide' format, we're ready to create the animation!&lt;/p&gt;
-&lt;p&gt;Ensuring that &lt;code&gt;pandas_alive&lt;/code&gt; has been imported, we can now call &lt;code&gt;.plot_animated()&lt;/code&gt; on our DataFrame. If a &lt;code&gt;filename&lt;/code&gt; is passed, along with an extension (eg, .mp4, .gif), &lt;code&gt;pandas_alive&lt;/code&gt; will export the animation to a file. Otherwise, &lt;code&gt;pandas_alive&lt;/code&gt; creates an instance of the animation for use in &lt;code&gt;pandas_alive.animate_multiple_plots()&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;We can configure settings of &lt;code&gt;.plot_animated&lt;/code&gt;, such as:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;n_visible&lt;/code&gt; - Change the number of visible bars on the plot&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;period_fmt&lt;/code&gt; - Change the way the date is represented on the plot (eg, '%d/%m/%Y')&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;title&lt;/code&gt; - Set a title for the plot&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;fixed_max&lt;/code&gt; - Set the x-axis to be fixed from the lowest - biggest number&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;perpendicular_bar_func&lt;/code&gt; - Set the function to show a perpendicular bar (eg 'mean', 'min','max', custom function, etc)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There are many more settings which you can read more over at the documentation:  &lt;a href="https://jackmckew.github.io/pandas_alive/generated/pandas_alive.plotting.plot.html#pandas_alive.plotting.plot"&gt;https://jackmckew.github.io/pandas_alive/generated/pandas_alive.plotting.plot.html#pandas_alive.plotting.plot&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Generate bar chart race&lt;/span&gt;
-&lt;span class="n"&gt;pivoted_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_animated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'population-over-time-bar-chart-race.gif'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;n_visible&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;period_fmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"%Y"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Top 10 Populous Countries 1800-2000'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fixed_max&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;perpendicular_bar_func&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'mean'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="Population Bar Chart Race" class="img-fluid" src="https://jackmckew.dev/img/population-over-time-bar-chart-race.gif"/&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;What if we wanted to show a custom function for each time period. This can be achieved with defining a function and returns a dictionary on where the label should be located. Let's show the total population for each time period in the bottom left.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;current_total&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;'Total Population : &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;,&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'x'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;85&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'y'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'s'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'ha'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'right'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'size'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Generate bar chart race&lt;/span&gt;
-
-&lt;span class="n"&gt;pivoted_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_animated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'population-over-time-bar-chart-race.gif'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;n_visible&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;period_fmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"%Y"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Top 10 Populous Countries 1800-2000'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fixed_max&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;perpendicular_bar_func&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'mean'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;period_summary_func&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;current_total&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="Population Bar Chart Race With Total" class="img-fluid" src="https://jackmckew.dev/img/population-over-time-bar-chart-race-with-total.gif"/&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Line-Charts"&gt;Line Charts&lt;a class="anchor-link" href="#Line-Charts"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Let's show the total population over time.&lt;/p&gt;
-&lt;p&gt;Get the total population for each year by summing the entire row &lt;code&gt;.sum(axis=1)&lt;/code&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;total_df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pivoted_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_df&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;Year
-1800-01-01    6.706962e+08
-1810-01-01    3.742780e+08
-1820-01-01    1.013967e+09
-1830-01-01    8.385709e+08
-1840-01-01    8.768713e+08
-1850-01-01    1.095515e+09
-1860-01-01    1.005687e+09
-1870-01-01    1.201439e+09
-1880-01-01    1.096303e+09
-1890-01-01    1.266791e+09
-1900-01-01    1.382444e+09
-1910-01-01    1.593107e+09
-1920-01-01    1.619245e+09
-1930-01-01    1.804095e+09
-1940-01-01    1.994912e+09
-1950-01-01    2.417460e+09
-1960-01-01    2.911371e+09
-1970-01-01    3.536889e+09
-1980-01-01    4.245110e+09
-1990-01-01    5.030435e+09
-2000-01-01    5.800368e+09
-dtype: float64&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now let's create an animated line chart with this data using &lt;code&gt;pandas_alive&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;total_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_animated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'line'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"total-population-over-time-line.gif"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;period_fmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"%Y"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Total Population Over Time"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="Population Line Chart" class="img-fluid" src="https://jackmckew.dev/img/total-population-over-time-line.gif"/&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Combining-Both-Charts"&gt;Combining Both Charts&lt;a class="anchor-link" href="#Combining-Both-Charts"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now that we've created a bar chart race &amp;amp; a line chart, let's combine the two charts into a single animation!&lt;/p&gt;
-&lt;p&gt;Luckily, &lt;code&gt;pandas_alive&lt;/code&gt; makes this simple, as we can pass a list of animations we'd like to combine into &lt;code&gt;pandas_alive.animate_multiple_plots&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bar_chart_race&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pivoted_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_animated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_visible&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;period_fmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"%Y"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Top 10 Populous Countries 1800-2000'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;animated_line_chart&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;total_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_animated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'line'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;period_label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Total Population Over Time"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;pandas_alive&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;animate_multiple_plots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'population-combined-charts.gif'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="n"&gt;bar_chart_race&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;animated_line_chart&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="Combined Charts" class="img-fluid" src="https://jackmckew.dev/img/population-combined-charts.gif"/&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Obligatory-XKCD-Style-Plot"&gt;Obligatory XKCD Style Plot&lt;a class="anchor-link" href="#Obligatory-XKCD-Style-Plot"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;a href="https://xkcd.com/"&gt;XKCD&lt;/a&gt; is an amazing comic by one of my favourite authors Randall Munro. Even better, we can style our plots in the same style of the comit with &lt;code&gt;plt.xkcd()&lt;/code&gt;. See more at &lt;a href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.xkcd.html"&gt;https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.xkcd.html&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
-
-&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xkcd&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;animated_line_chart&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;total_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_animated&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'xkcd-line-plot.gif'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;kind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'line'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;period_label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Total Population Over Time"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Generating LineChart, plotting ['0']
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="XKCD Line Plot" class="img-fluid" src="https://jackmckew.dev/img/xkcd-line-plot.gif"/&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category><category term="data-viz"></category><category term="datavisualisation"></category></entry></feed>
+&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry></feed>
