@@ -1,5 +1,5 @@
 Title: How Pandas_Alive was Made
-Date: 2020-06-27
+Date: 2020-06-26
 Author: Jack McKew
 Category: Python
 Tags: Python
