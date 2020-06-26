@@ -39,7 +39,7 @@
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://jackmckew.dev/how-pandas_alive-was-made.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2020-06-27 00:00:00+10:00"/>
+<meta property="article:published_time" content="2020-06-26 00:00:00+10:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
 <meta property="article:section" content="Python"/>
@@ -150,7 +150,7 @@
       
     <h1 id="how-pandas_alive-was-made">How Pandas_Alive was Made</h1>
     <p>
-       Posted on Sat 27 June 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+       Posted on Fri 26 June 2020 in <a href="https://jackmckew.dev/category/python.html">Python</a>
 
         &#8226; 5 min read
     </p>
@@ -182,7 +182,7 @@
 <h2 id="base-class">Base Class</h2>
 <p>Now that we've decided to go with template design pattern, we need to implement the base chart class with the shared functionality. At this point, since there would be so many parameters going into the class constructor (<code>__init__</code>) in Python, it was frustrating having to put this information in two places.</p>
 <p>Here is a basic example, but imagine if you had 10s of arguments (eg, name, species) and had to replicate this information so many times.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
@@ -193,7 +193,7 @@
 </td></tr></tbody></table>
 <p>So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the <code>__init__</code> and other dunder methods generated for us (see a previous post on dunder methods here).</p>
 <p>This allows us to write the same class as above like:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
