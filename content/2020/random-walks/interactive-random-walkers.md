@@ -1,5 +1,5 @@
 Title: Interactive Random Walkers with Javascript
-Date: 2020-04-13
+Date: 2020-07-03
 Author: Jack McKew
 Category: Javascript, Data Visualisation
 Tags: javascript, data-viz
@@ -7,7 +7,6 @@ Stylesheets: random-walkers.css
 JavaScripts: random-walkers.js, dat.gui.js
 
 Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the number of random walkers, the line thickness of each, the number of directions they can move (eg, 4 as seen in the GIF) and how fast they move.
-
 
 If you get a cool pattern out of the visualisation, please share it in the comments!
 
