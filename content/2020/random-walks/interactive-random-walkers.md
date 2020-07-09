@@ -49,14 +49,16 @@ To be able to limit the angles that our walkers can move at, we need some method
 
 *This is all well and good for making funky pictures, but what can this actually be used for?*
 
-|Field|Use|
-|---|---|
-|Finance|Model share prices & other factors, also known as the [random walk hypothesis](https://en.wikipedia.org/wiki/Random_walk_hypothesis)|
-|Genetics|Genetic drift, the change in frequency of which genes are passed on or not|
-|Physics|Brownian motion, the movement of molecules in liquid & gases|
-|Ecology|Model individual animal movements|
+| Field    | Use                                                                                                                                  |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Finance  | Model share prices & other factors, also known as the [random walk hypothesis](https://en.wikipedia.org/wiki/Random_walk_hypothesis) |
+| Genetics | Genetic drift, the change in frequency of which genes are passed on or not                                                           |
+| Physics  | Brownian motion, the movement of molecules in liquid & gases                                                                         |
+| Ecology  | Model individual animal movements                                                                                                    |
 
 There are many, many more applications for this, if you'd like to add to this list, leave a comment below!
+
+> Vladimir Illevski has a number of articles on uses for random walks which you can find at <https://isquared.digital/blog/2020-04-12-random-walk/>.
 
 Javascript Source(s):
 
