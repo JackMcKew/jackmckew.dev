@@ -29,13 +29,13 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics --><meta name="author" content="Jack McKew" />
-<meta name="description" content="Projects Mentioned A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path …" />
+<meta name="description" content="I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber. This blog post serves as the show notes, if I&#39;ve missed anything, please drop a comment below! Projects Mentioned A project where the …" />
 <meta name="keywords" content="software, datascience">
 
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
 <meta property="og:title" content="Profitable Python Podcast - Show Notes"/>
-<meta property="og:description" content="Projects Mentioned A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path …"/>
+<meta property="og:description" content="I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber. This blog post serves as the show notes, if I&#39;ve missed anything, please drop a comment below! Projects Mentioned A project where the …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://jackmckew.dev/profitable-python-podcast-show-notes.html"/>
 <meta property="og:type" content="article"/>
@@ -60,7 +60,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 72</p>
-            <p>Number of Words: 47,803</p>
+            <p>Number of Words: 47,840</p>
             <p>Number of Lines of Code 3,412</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -159,7 +159,8 @@
 
 
   <div>
-    <body><h2 id="projects-mentioned">Projects Mentioned</h2>
+    <body><p>I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: <a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber">https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber</a>. This blog post serves as the show notes, if I've missed anything, please drop a comment below!</p>
+<h2 id="projects-mentioned">Projects Mentioned</h2>
 <p>A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path from the black box in GPX format, and the air quality team modelled the scenario per second to export a contour. This contour and flight path data was then passed into <a href="https://plotly.com/">Plotly</a> and an interactive visualisation was created. In particular the contour was shown at a fixed height using 3D scatter while the flight path was displayed using lines.</p>
 <p>One of my first experiences automating a real task with Python was in my first engineering position, where we were creating human machine interaces (HMI) for dams &amp; weirs using <a href="https://www.se.com/ww/en/product-range/1054-vijeo-designer/">Vijeo</a>. I was tasked with placing buttons on the screens for each and every spillway. As this was monotonous and there was lots of buttons, I decided to automate it. In particular I used <a href="https://pyautogui.readthedocs.io/en/latest/"><code>pyautogui</code></a>. The script mimicked the mouse and keyboard dragging and dropping the buttons onto the screen and worked a treat.</p>
 <p>After I had been writing this blog for some time, I wanted to count the number of words I had written. These posts are spread across markdown &amp; jupyter notebooks, so I set out to create a Python package to count this figure for me. I have done a previous write up on how this package was created at <a href="https://jackmckew.dev/counting-words-with-python.html">https://jackmckew.dev/counting-words-with-python.html</a>. The package <code>wordsum</code> can also be installed via <code>pip install wordsum</code> : <a href="https://pypi.org/project/wordsum/">https://pypi.org/project/wordsum/</a>. This is how the figure on each page is calculated, and is integrated into TravisCI to update the value whenever the site is built.</p>

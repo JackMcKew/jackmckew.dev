@@ -59,7 +59,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 72</p>
-            <p>Number of Words: 47,803</p>
+            <p>Number of Words: 47,840</p>
             <p>Number of Lines of Code 3,412</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -160,7 +160,7 @@
   <div>
     <body><p>Today we will go through how to go from a python script to packaged executable with a guided user interface (GUI) for users. First off we still start by writing the scripts that we would like to share with others to be able to use, especially for users that may be uncomfortable in a programming environment and would feel at home with a GUI.</p>
 <p>My personal favourite part about <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, is that you are essentially creating a command line interface (CLI) tool, which Gooey then uses to generate a GUI. This eliminates having two separate code bases to facilitate CLI &amp; GUI users, which can be very painful at times.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -217,7 +217,7 @@
 </td></tr></tbody></table>
 <p>The 2 functions defined above are for getting information of selected files, or returning a list of files found within a folder (and subfolders).</p>
 <p>Now to use <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, we need to define a 'main' function for parsing the arguments for the GUI to generate controls. As Gooey is based on the argparse library, if you have previously built CLI tools with argparse, the migration to Gooey is quite simplistic. However as there is always edge cases, ensure to check your tools functionality once you have developed it.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -265,7 +265,7 @@
 <p>By using the Gooey decorator we are able to define many different layout options for our GUI. Since we are trying to enable users to use multiple scripts which are different and separate, I personally like to the optional columns layout, but there are many other types of layouts which can be seen here: <a href="https://github.com/chriskiehl/Gooey#layout-customization">https://github.com/chriskiehl/Gooey#layout-customization</a>.</p>
 <p>Following this we create our argument parsing function, and in which we define parsers, subparsers and add the arguments. This post will not be covering how to write CLIs, but it is on the list for future posts.</p>
 <p>To complete the script, we need to put in the functionality at startup.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -288,7 +288,7 @@
 <p>This will then generate a build folder and a dist folder within your current directory. The build folder will contain all the files used in generating the executable, which is found within the dist folder.</p>
 <p><img alt="image-20191102174758361" class="img-fluid" src="https://jackmckew.dev/img/image-20191102174758361.png"/></p>
 <p>The code in it's entirety is:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

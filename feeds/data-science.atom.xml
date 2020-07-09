@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-10T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
-&lt;p&gt;A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-10T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
+&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
+&lt;p&gt;A project where the …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
+&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
 &lt;p&gt;A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path from the black box in GPX format, and the air quality team modelled the scenario per second to export a contour. This contour and flight path data was then passed into &lt;a href="https://plotly.com/"&gt;Plotly&lt;/a&gt; and an interactive visualisation was created. In particular the contour was shown at a fixed height using 3D scatter while the flight path was displayed using lines.&lt;/p&gt;
 &lt;p&gt;One of my first experiences automating a real task with Python was in my first engineering position, where we were creating human machine interaces (HMI) for dams &amp;amp; weirs using &lt;a href="https://www.se.com/ww/en/product-range/1054-vijeo-designer/"&gt;Vijeo&lt;/a&gt;. I was tasked with placing buttons on the screens for each and every spillway. As this was monotonous and there was lots of buttons, I decided to automate it. In particular I used &lt;a href="https://pyautogui.readthedocs.io/en/latest/"&gt;&lt;code&gt;pyautogui&lt;/code&gt;&lt;/a&gt;. The script mimicked the mouse and keyboard dragging and dropping the buttons onto the screen and worked a treat.&lt;/p&gt;
 &lt;p&gt;After I had been writing this blog for some time, I wanted to count the number of words I had written. These posts are spread across markdown &amp;amp; jupyter notebooks, so I set out to create a Python package to count this figure for me. I have done a previous write up on how this package was created at &lt;a href="https://jackmckew.dev/counting-words-with-python.html"&gt;https://jackmckew.dev/counting-words-with-python.html&lt;/a&gt;. The package &lt;code&gt;wordsum&lt;/code&gt; can also be installed via &lt;code&gt;pip install wordsum&lt;/code&gt; : &lt;a href="https://pypi.org/project/wordsum/"&gt;https://pypi.org/project/wordsum/&lt;/a&gt;. This is how the figure on each page is calculated, and is integrated into TravisCI to update the value whenever the site is built.&lt;/p&gt;
@@ -137,7 +139,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -217,7 +219,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -894,7 +896,7 @@ The real origin of pizza, however, is controversial: in addition to Naples, othe
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1159,7 +1161,7 @@ Error translating.. `Error` placed in output dataset
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1304,7 +1306,7 @@ Error translating.. `Error` placed in output dataset
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;Country&lt;/th&gt;

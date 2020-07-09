@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-10T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
-&lt;p&gt;A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-10T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
+&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
+&lt;p&gt;A project where the …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
+&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
 &lt;p&gt;A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path from the black box in GPX format, and the air quality team modelled the scenario per second to export a contour. This contour and flight path data was then passed into &lt;a href="https://plotly.com/"&gt;Plotly&lt;/a&gt; and an interactive visualisation was created. In particular the contour was shown at a fixed height using 3D scatter while the flight path was displayed using lines.&lt;/p&gt;
 &lt;p&gt;One of my first experiences automating a real task with Python was in my first engineering position, where we were creating human machine interaces (HMI) for dams &amp;amp; weirs using &lt;a href="https://www.se.com/ww/en/product-range/1054-vijeo-designer/"&gt;Vijeo&lt;/a&gt;. I was tasked with placing buttons on the screens for each and every spillway. As this was monotonous and there was lots of buttons, I decided to automate it. In particular I used &lt;a href="https://pyautogui.readthedocs.io/en/latest/"&gt;&lt;code&gt;pyautogui&lt;/code&gt;&lt;/a&gt;. The script mimicked the mouse and keyboard dragging and dropping the buttons onto the screen and worked a treat.&lt;/p&gt;
 &lt;p&gt;After I had been writing this blog for some time, I wanted to count the number of words I had written. These posts are spread across markdown &amp;amp; jupyter notebooks, so I set out to create a Python package to count this figure for me. I have done a previous write up on how this package was created at &lt;a href="https://jackmckew.dev/counting-words-with-python.html"&gt;https://jackmckew.dev/counting-words-with-python.html&lt;/a&gt;. The package &lt;code&gt;wordsum&lt;/code&gt; can also be installed via &lt;code&gt;pip install wordsum&lt;/code&gt; : &lt;a href="https://pypi.org/project/wordsum/"&gt;https://pypi.org/project/wordsum/&lt;/a&gt;. This is how the figure on each page is calculated, and is integrated into TravisCI to update the value whenever the site is built.&lt;/p&gt;
@@ -90,7 +92,7 @@
 &lt;/blockquote&gt;
 &lt;h2 id="applications-for-random-walk"&gt;Applications for Random Walk&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;This is all well and good for making funky pictures, but what can this actually be used for?&lt;/em&gt;&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Field&lt;/th&gt;
@@ -153,7 +155,7 @@
 &lt;h2 id="base-class"&gt;Base Class&lt;/h2&gt;
 &lt;p&gt;Now that we've decided to go with template design pattern, we need to implement the base chart class with the shared functionality. At this point, since there would be so many parameters going into the class constructor (&lt;code&gt;__init__&lt;/code&gt;) in Python, it was frustrating having to put this information in two places.&lt;/p&gt;
 &lt;p&gt;Here is a basic example, but imagine if you had 10s of arguments (eg, name, species) and had to replicate this information so many times.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Animal&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -164,7 +166,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the &lt;code&gt;__init__&lt;/code&gt; and other dunder methods generated for us (see a previous post on dunder methods here).&lt;/p&gt;
 &lt;p&gt;This allows us to write the same class as above like:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@attr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
@@ -275,7 +277,7 @@
 &lt;h2 id="publish-to-marketplace"&gt;Publish to Marketplace&lt;/h2&gt;
 &lt;p&gt;Once you've implemented these few files, you should get a warning at the top of the repository on GitHub hinting if you want to publish this on the marketplace. This is done smoothly with creating a release of your project, and that's it, done!&lt;/p&gt;
 &lt;p&gt;Now users can intergrate your action into the CI/CD pipeline as easily as:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Python Interrogate Check&lt;/span&gt;
   &lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JackMcKew/python-interrogate-check@v0.1.1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -369,7 +371,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -449,7 +451,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
