@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-03T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Interactive Random Walkers with Javascript</title><link href="https://jackmckew.dev/interactive-random-walkers-with-javascript.html" rel="alternate"></link><published>2020-07-03T00:00:00+10:00</published><updated>2020-07-03T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-03:/interactive-random-walkers-with-javascript.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the number of random walkers, the line thickness of each, the number of directions they can move (eg, 4 as seen in the GIF) and how fast they move.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-10T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
+&lt;p&gt;A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
+&lt;p&gt;A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path from the black box in GPX format, and the air quality team modelled the scenario per second to export a contour. This contour and flight path data was then passed into &lt;a href="https://plotly.com/"&gt;Plotly&lt;/a&gt; and an interactive visualisation was created. In particular the contour was shown at a fixed height using 3D scatter while the flight path was displayed using lines.&lt;/p&gt;
+&lt;p&gt;One of my first experiences automating a real task with Python was in my first engineering position, where we were creating human machine interaces (HMI) for dams &amp;amp; weirs using &lt;a href="https://www.se.com/ww/en/product-range/1054-vijeo-designer/"&gt;Vijeo&lt;/a&gt;. I was tasked with placing buttons on the screens for each and every spillway. As this was monotonous and there was lots of buttons, I decided to automate it. In particular I used &lt;a href="https://pyautogui.readthedocs.io/en/latest/"&gt;&lt;code&gt;pyautogui&lt;/code&gt;&lt;/a&gt;. The script mimicked the mouse and keyboard dragging and dropping the buttons onto the screen and worked a treat.&lt;/p&gt;
+&lt;p&gt;After I had been writing this blog for some time, I wanted to count the number of words I had written. These posts are spread across markdown &amp;amp; jupyter notebooks, so I set out to create a Python package to count this figure for me. I have done a previous write up on how this package was created at &lt;a href="https://jackmckew.dev/counting-words-with-python.html"&gt;https://jackmckew.dev/counting-words-with-python.html&lt;/a&gt;. The package &lt;code&gt;wordsum&lt;/code&gt; can also be installed via &lt;code&gt;pip install wordsum&lt;/code&gt; : &lt;a href="https://pypi.org/project/wordsum/"&gt;https://pypi.org/project/wordsum/&lt;/a&gt;. This is how the figure on each page is calculated, and is integrated into TravisCI to update the value whenever the site is built.&lt;/p&gt;
+&lt;p&gt;In Home Appliance Scheduler Using Home Area Network, this was my engineering thesis, which can be read in full at: &lt;a href="https://jackmckew.dev/pages/Final_Year_Project_Part_B.pdf"&gt;https://jackmckew.dev/pages/Final_Year_Project_Part_B.pdf&lt;/a&gt;. In particular I used a multi-objective evolutionary algorithm (MOEA) to optimise the price of electricity over a 24hr period by shifting the time when appliances start.&lt;/p&gt;
+&lt;h2 id="other-mentions"&gt;Other Mentions&lt;/h2&gt;
+&lt;p&gt;LEGO Mindstorms &lt;a href="https://www.lego.com/en-au/product/lego-mindstorms-ev3-31313"&gt;https://www.lego.com/en-au/product/lego-mindstorms-ev3-31313&lt;/a&gt;. I was a participant in &lt;a href="https://www.robocupjunior.org.au/"&gt;RoboCup Junior&lt;/a&gt; when I was in high school and built a LEGO team to play soccer.&lt;/p&gt;
+&lt;p&gt;AlphaGo documentary &lt;a href="https://www.youtube.com/watch?v=WXuK6gekU1Y"&gt;https://www.youtube.com/watch?v=WXuK6gekU1Y&lt;/a&gt;. &lt;em&gt;With more board configurations than there are atoms in the universe, the ancient Chinese game of Go has long been considered a grand challenge for artificial intelligence. On March 9, 2016, the worlds of Go and artificial intelligence collided in South Korea for an extraordinary best-of-five-game competition, coined The DeepMind Challenge Match. Hundreds of millions of people around the world watched as a legendary Go master took on an unproven AI challenger for the first time in history.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="concepts"&gt;Concepts&lt;/h2&gt;
+&lt;p&gt;Openly sharing learning journey - don't be scared to show your mistakes.&lt;/p&gt;
+&lt;p&gt;Users typically don't care how your software works, just as long as it works.&lt;/p&gt;
+&lt;p&gt;Building passive income(s), gives you more time in the day to pursue what you enjoy.&lt;/p&gt;
+&lt;p&gt;Scalability is core to making a business become extremely profitable.&lt;/p&gt;
+&lt;p&gt;If you want to gain a skill, start by spending at least 5 minutes on something a day. In a month, you'll be much further ahead then if you keep putting it off.&lt;/p&gt;
+&lt;p&gt;Spend more time upfront when discovering a client's problem. Answer the who, what, why, where and how of the problem statement, will make your life much easier. Get constant feedback and engage with your clients as you are building the solution. This will open up many more avenues for future work as well.&lt;/p&gt;
+&lt;p&gt;Demonstrate value in time saved vs upfront cost. It's much easier to sell that someone will save $10,000/year every year going forward than $25,000 upfront to solve it.&lt;/p&gt;
+&lt;p&gt;Put yourself in the shoes of the end-user of a data visualisation. If you can relate with your end-users, the data visualisation will be much more engaging. Look out for more examples out there, and note what you like/disliked with the visualisation.&lt;/p&gt;
+&lt;p&gt;The more simple &amp;amp; relatable you can make something, the more it will be appreciated. Use relatable analogies if you can!&lt;/p&gt;
+&lt;p&gt;Don't feel ashamed to stop something if you aren't engaging with it. If you're halfway through a book and it's not serving you, don't feel any guilt in stopping.&lt;/p&gt;
+&lt;p&gt;Live for today, not the past or the present.&lt;/p&gt;
+&lt;h3 id="python-packages"&gt;Python Packages&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Gooey - &lt;a href="https://github.com/chriskiehl/Gooey"&gt;https://github.com/chriskiehl/Gooey&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;PyInstaller - &lt;a href="https://www.pyinstaller.org/"&gt;https://www.pyinstaller.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bokeh - &lt;a href="https://docs.bokeh.org/en/latest/index.html"&gt;https://docs.bokeh.org/en/latest/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Plotly - &lt;a href="https://plot.ly/python/"&gt;https://plot.ly/python/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Matplotlib - &lt;a href="https://matplotlib.org/"&gt;https://matplotlib.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Pandas-Bokeh - &lt;a href="https://github.com/PatrikHlobil/Pandas-Bokeh"&gt;https://github.com/PatrikHlobil/Pandas-Bokeh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Folium - &lt;a href="https://python-visualization.github.io/folium/quickstart.html"&gt;https://python-visualization.github.io/folium/quickstart.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Black - &lt;a href="https://github.com/psf/black"&gt;https://github.com/psf/black&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Pandas_Alive - &lt;a href="https://github.com/JackMcKew/pandas_alive"&gt;https://github.com/JackMcKew/pandas_alive&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Poetry - &lt;a href="https://python-poetry.org/"&gt;https://python-poetry.org/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="resources"&gt;Resources&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Crowd Fight COVID-19 - &lt;a href="http://crowdfightcovid19.org/volunteers"&gt;http://crowdfightcovid19.org/volunteers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Automate the Boring Stuff - &lt;a href="https://automatetheboringstuff.com/"&gt;https://automatetheboringstuff.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Jake VanderPlas Python data visualisation ecosystem - &lt;a href="https://www.youtube.com/watch?v=FytuB8nFHPQ"&gt;https://www.youtube.com/watch?v=FytuB8nFHPQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Vega &amp;amp; Vega-lite - &lt;a href="https://vega.github.io/vega-lite/"&gt;https://vega.github.io/vega-lite/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Vladimir Illevski Javascript data visualisation ecosystem - &lt;a href="https://medium.com/analytics-vidhya/javascript-visualization-discover-different-visualization-tools-part-1-e4a77595fb97"&gt;https://medium.com/analytics-vidhya/javascript-visualization-discover-different-visualization-tools-part-1-e4a77595fb97&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Courage to be Disliked - &lt;a href="https://jackmckew.dev/book-review-courage-to-be-disliked.html#book-review-courage-to-be-disliked"&gt;https://jackmckew.dev/book-review-courage-to-be-disliked.html#book-review-courage-to-be-disliked&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Never Split the Difference - &lt;a href="https://jackmckew.dev/book-review-never-split-the-difference.html"&gt;https://jackmckew.dev/book-review-never-split-the-difference.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Apache Airflow - &lt;a href="https://airflow.apache.org/"&gt;https://airflow.apache.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Harry Stevens - &lt;a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/"&gt;https://www.washingtonpost.com/graphics/2020/world/corona-simulator/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sourcery - &lt;a href="https://sourcery.ai/"&gt;https://sourcery.ai/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hunter Data Analytics - &lt;a href="http://data.newwwie.com/"&gt;http://data.newwwie.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ShareX - &lt;a href="https://getsharex.com/"&gt;https://getsharex.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Dropbox moving to Rust from Python - &lt;a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine"&gt;https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="datascience"></category></entry><entry><title>Interactive Random Walkers with Javascript</title><link href="https://jackmckew.dev/interactive-random-walkers-with-javascript.html" rel="alternate"></link><published>2020-07-03T00:00:00+10:00</published><updated>2020-07-03T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-03:/interactive-random-walkers-with-javascript.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the number of random walkers, the line thickness of each, the number of directions they can move (eg, 4 as seen in the GIF) and how fast they move.&lt;/p&gt;
 &lt;p&gt;If you get a cool pattern out of the visualisation, please share it in the comments!&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Random Walkers GIF" class="img-fluid" src="https://jackmckew.dev/img/random-walkers.gif"/&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -68,6 +117,9 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;There are many, many more applications for this, if you'd like to add to this list, leave a comment below!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Vladimir Illevski has a number of articles on uses for random walks which you can find at &lt;a href="https://isquared.digital/blog/2020-04-12-random-walk/"&gt;https://isquared.digital/blog/2020-04-12-random-walk/&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Javascript Source(s):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/js/random-walkers.js"&gt;random-walkers.js&lt;/a&gt;&lt;/li&gt;
@@ -317,7 +369,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped table dataframe"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -397,7 +449,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped table dataframe"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -804,231 +856,4 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category></entry><entry><title>Make a README &amp; Documentation with Jupyter Notebooks</title><link href="https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html" rel="alternate"></link><published>2020-06-05T00:00:00+10:00</published><updated>2020-06-05T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-05:/make-a-readme-documentation-with-jupyter-notebooks.html</id><summary type="html">&lt;body&gt;&lt;p&gt;README is typically the front page of a project, and should contain relevant information for current users &amp;amp; prospective users. As to make sure documentation across a project is consistent as well, imagine if we could include this README that is the front page of our project, both on the repository …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;README is typically the front page of a project, and should contain relevant information for current users &amp;amp; prospective users. As to make sure documentation across a project is consistent as well, imagine if we could include this README that is the front page of our project, both on the repository, and in the documentation. This post goes into how to set this workflow up. Find a live example of this being implemented on: &lt;a href="https://github.com/JackMcKew/pandas_alive"&gt;https://github.com/JackMcKew/pandas_alive&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;A good starting structure for a project's README is:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Intro - A short description &amp;amp; output (if applicable) of the project.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Usage - A section on how the project is to be used (if applicable).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Documentation - Link to documentation for the project.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Contributing Guidelines - If this is an open source project, a note whether contributions are welcome &amp;amp; instructions how to get involved is well received.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Changelog - Keeping a changelog of what is changing as the project evolves.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Other useful sections when applicable are requirements, future plans and inspiration.&lt;/p&gt;
-&lt;h2 id="inspiration-for-this-post"&gt;Inspiration for This Post&lt;/h2&gt;
-&lt;p&gt;The inspiration for this post also comes from &lt;a href="https://github.com/JackMcKew/pandas_alive"&gt;Pandas_Alive&lt;/a&gt;, wherein there is working examples with output hosted on the README. Initially, this was contained in a &lt;code&gt;generate_examples.py&lt;/code&gt; file and as the package evolved, the code to match the examples, was being copied over into code blocks in the &lt;code&gt;README.md&lt;/code&gt;. If you can see where this is going, obviously whenever some new examples were made, the code to generate the examples was being forgotten to be copied over. This is very frustrating for new users to the package, as the examples simply don't work. Thus the workflow we go into in this post was adopted.&lt;/p&gt;
-&lt;h2 id="readmeipynb"&gt;README.ipynb&lt;/h2&gt;
-&lt;p&gt;In projects, typically it's best practice to not have to repeat yourself in multiple places (this the DRY principle). In the README, it's nice to have working examples on how a user may use the project. If we could tie the original README with live code that generates the examples, that would be ideal, enter &lt;code&gt;README.ipynb&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Jupyter supports markdown &amp;amp; code cells, thus all the current documentation in the &lt;code&gt;README.md&lt;/code&gt; can be copied within markdown cells. Similarly, the code used to generate examples or demonstrate usage can then be placed in code cells. Allowing the author, to run the entire notebook, generating the new examples &amp;amp; verifying the examples are working code. Fantastic, this is exactly where we want to go.&lt;/p&gt;
-&lt;p&gt;Now if you only have the &lt;code&gt;README.ipynb&lt;/code&gt; in the repository, GitHub will represent the file in it's raw form, JSON. For example would be hundreds of line like:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;
- &lt;span class="nt"&gt;"cells"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-  &lt;span class="p"&gt;{&lt;/span&gt;
-   &lt;span class="nt"&gt;"cell_type"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"markdown"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="nt"&gt;"metadata"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt;
-   &lt;span class="nt"&gt;"source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="s2"&gt;"# Pandas_Alive\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"Animated plotting extension for Pandas with Matplotlib\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"**Pandas_Alive** is intended to provide a plotting backend for animated [matplotlib](https://matplotlib.org/) charts for [Pandas](https://pandas.pydata.org/) DataFrames, similar to the already [existing Visualization feature of Pandas](https://pandas.pydata.org/pandas-docs/stable/visualization.html).\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"With **Pandas_Alive**, creating stunning, animated visualisations is as easy as calling:\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"`df.plot_animated()`\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"![Example Bar Chart](examples/example-barh-chart.gif)"&lt;/span&gt;
-   &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;This is not ideal whatsoever, this is nowhere near as attractive as the nicely rendered &lt;code&gt;README.md&lt;/code&gt;. Enter &lt;code&gt;nbconvert&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id="readmeipynb-readmemd-with-nbconvert"&gt;README.ipynb -&amp;gt; README.md with nbconvert&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;nbconvert&lt;/code&gt; is a package built to convert Jupyter notebooks to other formats and can be installed similar to jupyter (eg, &lt;code&gt;pip install jupyter&lt;/code&gt;, &lt;code&gt;pip install nbconvert&lt;/code&gt;). See the documentation at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/"&gt;https://nbconvert.readthedocs.io/en/latest/&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Now let's check the &lt;a href="https://nbconvert.readthedocs.io/en/latest/usage.html#supported-output-formats"&gt;supported output types for nbconvert&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;HTML,&lt;/li&gt;
-&lt;li&gt;LaTeX,&lt;/li&gt;
-&lt;li&gt;PDF,&lt;/li&gt;
-&lt;li&gt;Reveal.js HTML slideshow,&lt;/li&gt;
-&lt;li&gt;Markdown,&lt;/li&gt;
-&lt;li&gt;Ascii,&lt;/li&gt;
-&lt;li&gt;reStructuredText,&lt;/li&gt;
-&lt;li&gt;executable script,&lt;/li&gt;
-&lt;li&gt;notebook.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;nbconvert&lt;/code&gt; supports Markdown! Fantastic, we can add this step into our CI process (eg, &lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/.github/workflows/update-readme.yml"&gt;GitHub Action&lt;/a&gt;). This will allow us to generate a new &lt;code&gt;README.md&lt;/code&gt; whenever our &lt;code&gt;README.ipynb&lt;/code&gt; changes.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;In Pandas_Alive, we clear the output output of the cells in &lt;code&gt;README.ipynb&lt;/code&gt; with the flags: &lt;code&gt;jupyter nbconvert --ClearMetadataPreprocessor.enabled=True --ClearOutput.enabled=True  --to markdown README.ipynb&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="python-highlighting-in-output"&gt;Python Highlighting in Output&lt;/h4&gt;
-&lt;p&gt;When first run, it was noticed that &lt;code&gt;nbconvert&lt;/code&gt; wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the &lt;code&gt;README.md&lt;/code&gt; with language specifics. The workaround for this, was to use &lt;code&gt;nbconvert&lt;/code&gt;'s support for custom templates. See the docs at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates"&gt;https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The resulting template "pythoncodeblocks.tpl" was:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5
-6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    {% extends 'markdown.tpl' %}
-    {% block codecell %}
-    ``` python
-    {{cell.source}}
-    ```
-    {% endblock codecell %}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Which could be used with &lt;code&gt;nbconvert&lt;/code&gt; with:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h2 id="integration-into-documentation-with-sphinx"&gt;Integration into Documentation with Sphinx&lt;/h2&gt;
-&lt;p&gt;If you haven't already, check out my previous post &lt;a href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html"&gt;Automatically Generate Documentation with Sphinx&lt;/a&gt;. The post goes into detail on how to implement Sphinx as to generate all of the documentation for a project from docstrings automatically.&lt;/p&gt;
-&lt;p&gt;Before going on, the live site of the documentation in reference can be reached at: &lt;a href="https://jackmckew.github.io/pandas_alive/"&gt;https://jackmckew.github.io/pandas_alive/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Now, we've:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Stored our working code &amp;amp; documentation for a our project's front page in a Jupyter notebook &lt;code&gt;README.ipynb&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Converted &lt;code&gt;README.ipynb&lt;/code&gt; into markdown format with &lt;code&gt;nbconvert&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Inserted language specific (python) into the code blocks within the markdown&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The next step is to make the README content also live in the documentation.&lt;/p&gt;
-&lt;p&gt;Since Sphinx relies on reStructuredText format, so we'll need to convert &lt;code&gt;README.md&lt;/code&gt; to &lt;code&gt;README.rst&lt;/code&gt;. Enter &lt;a href="https://github.com/miyakogi/m2r"&gt;&lt;code&gt;m2r&lt;/code&gt;&lt;/a&gt;, a markdown to reStructuredText converter.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;nbconvert&lt;/code&gt; could be used in this step over &lt;code&gt;m2r&lt;/code&gt;, in saying that this step was originally developed prior to the &lt;code&gt;README.ipynb&lt;/code&gt; being created, thus only &lt;code&gt;README.md&lt;/code&gt; existed. Please drop a comment if you try using &lt;code&gt;nbconvert&lt;/code&gt; over &lt;code&gt;m2r&lt;/code&gt; for this step and your results!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Firstly, &lt;code&gt;m2r&lt;/code&gt; can be installed with pip (&lt;code&gt;pip install m2r&lt;/code&gt;) and we can convert &lt;code&gt;README.md&lt;/code&gt; with the command &lt;code&gt;m2r README.md&lt;/code&gt; which will generate &lt;code&gt;README.rst&lt;/code&gt; in the same directory.&lt;/p&gt;
-&lt;p&gt;Now we need to include our &lt;code&gt;README.rst&lt;/code&gt; in the documentation. After much tweaking, the documentation structure set up landed upon for Pandas_Alive, with use of autosummary to automatically generate documentation from docstrings was:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst"&gt;index.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;module&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt; pandas_alive
-
-&lt;span class="gh"&gt;Pandas_Alive |version|&lt;/span&gt;
-&lt;span class="gh"&gt;========================================&lt;/span&gt;
-
-Animated plotting extension for Pandas with Matplotlib
-
-&lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_alive`&lt;/span&gt; is intended to provide a plotting backend for animated matplotlib charts for Pandas DataFrames, similar to the already existing Visualization feature of Pandas.
-
-With &lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_alive`&lt;/span&gt;, creating stunning, animated visualisations is as easy as calling:
-
-&lt;span class="s"&gt;``df.plot_animated()``&lt;/span&gt;
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;image&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt; ../../examples/example-barh-chart.gif
-   &lt;span class="nc"&gt;:target:&lt;/span&gt; examples/example-barh-chart.gif
-   &lt;span class="nc"&gt;:alt:&lt;/span&gt; Example Bar Chart
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;toctree&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
-   &lt;span class="nc"&gt;:caption:&lt;/span&gt; Getting Started
-
-   Installation &amp;amp; Examples &amp;lt;README&amp;gt;
-
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;toctree&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
-   &lt;span class="nc"&gt;:caption:&lt;/span&gt; Developers
-
-   developer
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;rubric&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt; Modules
-
-
-&lt;span class="gh"&gt;Indices and tables&lt;/span&gt;
-&lt;span class="gh"&gt;==================&lt;/span&gt;
-
-&lt;span class="m"&gt;*&lt;/span&gt; &lt;span class="na"&gt;:ref:&lt;/span&gt;&lt;span class="nv"&gt;`genindex`&lt;/span&gt;
-&lt;span class="m"&gt;*&lt;/span&gt; &lt;span class="na"&gt;:ref:&lt;/span&gt;&lt;span class="nv"&gt;`modindex`&lt;/span&gt;
-&lt;span class="m"&gt;*&lt;/span&gt; &lt;span class="na"&gt;:ref:&lt;/span&gt;&lt;span class="nv"&gt;`search`&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst"&gt;developer.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;API Reference&lt;/span&gt;
-&lt;span class="gh"&gt;=============&lt;/span&gt;
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;autosummary&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
-   &lt;span class="nc"&gt;:toctree:&lt;/span&gt; generated
-
-   pandas_alive.plotting.plot
-   pandas_alive.plotting
-   pandas_alive.base
-   pandas_alive._base_chart
-   pandas_alive.charts
-   pandas_alive.__init__
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/conf.py"&gt;conf.py&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="integration-with-github-actions"&gt;Integration with GitHub Actions&lt;/h2&gt;
-&lt;p&gt;All the steps above mentioned are currently being used to maintain the project Pandas_Alive.&lt;/p&gt;
-&lt;p&gt;Find the GitHub Action yml files at: &lt;a href="https://github.com/JackMcKew/pandas_alive/tree/master/.github/workflows"&gt;https://github.com/JackMcKew/pandas_alive/tree/master/.github/workflows&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Find the Sphinx configuration files at: &lt;a href="https://github.com/JackMcKew/pandas_alive/tree/master/docs"&gt;https://github.com/JackMcKew/pandas_alive/tree/master/docs&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category></entry></feed>
+&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category></entry></feed>

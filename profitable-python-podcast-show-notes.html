@@ -29,25 +29,25 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics --><meta name="author" content="Jack McKew" />
-<meta name="description" content="From the MicroPython docs themselves “MicroPython is a lean and efficient implementation of the Python 3 programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …" />
-<meta name="keywords" content="python, micropython">
+<meta name="description" content="Projects Mentioned A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path …" />
+<meta name="keywords" content="software, datascience">
 
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="What is MicroPython?"/>
-<meta property="og:description" content="From the MicroPython docs themselves “MicroPython is a lean and efficient implementation of the Python 3 programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …"/>
+<meta property="og:title" content="Profitable Python Podcast - Show Notes"/>
+<meta property="og:description" content="Projects Mentioned A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/what-is-micropython.html"/>
+<meta property="og:url" content="https://jackmckew.dev/profitable-python-podcast-show-notes.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-03-29 06:39:00+11:00"/>
+<meta property="article:published_time" content="2020-07-10 00:00:00+10:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
-<meta property="article:section" content="Python"/>
-<meta property="article:tag" content="python"/>
-<meta property="article:tag" content="micropython"/>
+<meta property="article:section" content="Software"/>
+<meta property="article:tag" content="software"/>
+<meta property="article:tag" content="datascience"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-    <title>Jack McKew's Blog &ndash; What is MicroPython?</title>
+    <title>Jack McKew's Blog &ndash; Profitable Python Podcast - Show Notes</title>
 
 </head>
 
@@ -149,82 +149,88 @@
 <article class="single">
   <header>
       
-    <h1 id="what-is-micropython">What is MicroPython?</h1>
+    <h1 id="profitable-python-podcast-show-notes">Profitable Python Podcast - Show Notes</h1>
     <p>
-       Posted on Fri 29 March 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+       Posted on Fri 10 July 2020 in <a href="https://jackmckew.dev/category/software.html">Software</a>
 
-        &#8226; 2 min read
+        &#8226; 4 min read
     </p>
   </header>
 
 
   <div>
-    <body><p>From the MicroPython docs themselves <em>“MicroPython is a lean and efficient implementation of the</em> <a href="http://www.python.org/"><em>Python 3</em></a> <em>programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”.</em> But what does all this mean? Python 3 is one of the most widely used, easy to write/read programming languages in the world that is rapidly growing. By default Python comes with a ‘standard library’ which includes basic functions such as if statements, loops, printing, etc.</p>
-<p>Where MicroPython comes in is that the standard library for Python might take up valuable space/computations to run as efficiently it does on a PC, so MicroPython is a slice of the standard library that is able to run more efficiently and take up less space on a microcontroller (RAM and space is crucial when working with microcontrollers).</p>
-<p>MicroPython also comes with an interactive REPL (Read-Evaluate-Print Loop), which is an often overlooked amazing feature of MicroPython. The REPL allows you to connect to a microcontroller, execute code quickly without the need to compile or upload code. Which gives immediate feedback on whether your program is working as intended.</p>
-<h2 id="differences-between-micropython-python"><strong>Differences between MicroPython &amp; Python</strong></h2>
-<p>There obviously had to be some changes between Python and MicroPython to make it work efficiently on processors a fraction of the power, but what are they? If you are a beginner-intermediate Python programmer, you’ll only run into trouble in very specific scenarios, which can be easily worked around. For example you cannot delete from a list with a step greater than 1.</p>
-<h3 id="sample-python-code"><strong>Sample Python Code</strong></h3>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-<span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>You’d expect for the output here in Python normally to be:</p>
-<table class="table-striped table">
-<thead>
-<tr>
-<th><strong>Python Output</strong></th>
-<th><strong>MicroPython Output</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>[2,4]</td>
-<td>TypeError: object 'range' isn't a tuple or list</td>
-</tr>
-</tbody>
-</table>
-<p>However this can be easily worked around with an explicit loop for example:</p>
-<h3 id="sample-micropythonpython-code"><strong>Sample MicroPython/Python Code</strong></h3>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
-        <span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>For more information on differences between Python (in particular CPython) and MicroPython you can find the MicroPython documentation here: <a href="http://docs.micropython.org/en/latest/genrst/index.html">http://docs.micropython.org/en/latest/genrst/index.html</a></p></body>
+    <body><h2 id="projects-mentioned">Projects Mentioned</h2>
+<p>A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path from the black box in GPX format, and the air quality team modelled the scenario per second to export a contour. This contour and flight path data was then passed into <a href="https://plotly.com/">Plotly</a> and an interactive visualisation was created. In particular the contour was shown at a fixed height using 3D scatter while the flight path was displayed using lines.</p>
+<p>One of my first experiences automating a real task with Python was in my first engineering position, where we were creating human machine interaces (HMI) for dams &amp; weirs using <a href="https://www.se.com/ww/en/product-range/1054-vijeo-designer/">Vijeo</a>. I was tasked with placing buttons on the screens for each and every spillway. As this was monotonous and there was lots of buttons, I decided to automate it. In particular I used <a href="https://pyautogui.readthedocs.io/en/latest/"><code>pyautogui</code></a>. The script mimicked the mouse and keyboard dragging and dropping the buttons onto the screen and worked a treat.</p>
+<p>After I had been writing this blog for some time, I wanted to count the number of words I had written. These posts are spread across markdown &amp; jupyter notebooks, so I set out to create a Python package to count this figure for me. I have done a previous write up on how this package was created at <a href="https://jackmckew.dev/counting-words-with-python.html">https://jackmckew.dev/counting-words-with-python.html</a>. The package <code>wordsum</code> can also be installed via <code>pip install wordsum</code> : <a href="https://pypi.org/project/wordsum/">https://pypi.org/project/wordsum/</a>. This is how the figure on each page is calculated, and is integrated into TravisCI to update the value whenever the site is built.</p>
+<p>In Home Appliance Scheduler Using Home Area Network, this was my engineering thesis, which can be read in full at: <a href="https://jackmckew.dev/pages/Final_Year_Project_Part_B.pdf">https://jackmckew.dev/pages/Final_Year_Project_Part_B.pdf</a>. In particular I used a multi-objective evolutionary algorithm (MOEA) to optimise the price of electricity over a 24hr period by shifting the time when appliances start.</p>
+<h2 id="other-mentions">Other Mentions</h2>
+<p>LEGO Mindstorms <a href="https://www.lego.com/en-au/product/lego-mindstorms-ev3-31313">https://www.lego.com/en-au/product/lego-mindstorms-ev3-31313</a>. I was a participant in <a href="https://www.robocupjunior.org.au/">RoboCup Junior</a> when I was in high school and built a LEGO team to play soccer.</p>
+<p>AlphaGo documentary <a href="https://www.youtube.com/watch?v=WXuK6gekU1Y">https://www.youtube.com/watch?v=WXuK6gekU1Y</a>. <em>With more board configurations than there are atoms in the universe, the ancient Chinese game of Go has long been considered a grand challenge for artificial intelligence. On March 9, 2016, the worlds of Go and artificial intelligence collided in South Korea for an extraordinary best-of-five-game competition, coined The DeepMind Challenge Match. Hundreds of millions of people around the world watched as a legendary Go master took on an unproven AI challenger for the first time in history.</em></p>
+<h2 id="concepts">Concepts</h2>
+<p>Openly sharing learning journey - don't be scared to show your mistakes.</p>
+<p>Users typically don't care how your software works, just as long as it works.</p>
+<p>Building passive income(s), gives you more time in the day to pursue what you enjoy.</p>
+<p>Scalability is core to making a business become extremely profitable.</p>
+<p>If you want to gain a skill, start by spending at least 5 minutes on something a day. In a month, you'll be much further ahead then if you keep putting it off.</p>
+<p>Spend more time upfront when discovering a client's problem. Answer the who, what, why, where and how of the problem statement, will make your life much easier. Get constant feedback and engage with your clients as you are building the solution. This will open up many more avenues for future work as well.</p>
+<p>Demonstrate value in time saved vs upfront cost. It's much easier to sell that someone will save $10,000/year every year going forward than $25,000 upfront to solve it.</p>
+<p>Put yourself in the shoes of the end-user of a data visualisation. If you can relate with your end-users, the data visualisation will be much more engaging. Look out for more examples out there, and note what you like/disliked with the visualisation.</p>
+<p>The more simple &amp; relatable you can make something, the more it will be appreciated. Use relatable analogies if you can!</p>
+<p>Don't feel ashamed to stop something if you aren't engaging with it. If you're halfway through a book and it's not serving you, don't feel any guilt in stopping.</p>
+<p>Live for today, not the past or the present.</p>
+<h3 id="python-packages">Python Packages</h3>
+<ul>
+<li>Gooey - <a href="https://github.com/chriskiehl/Gooey">https://github.com/chriskiehl/Gooey</a></li>
+<li>PyInstaller - <a href="https://www.pyinstaller.org/">https://www.pyinstaller.org/</a></li>
+<li>Bokeh - <a href="https://docs.bokeh.org/en/latest/index.html">https://docs.bokeh.org/en/latest/index.html</a></li>
+<li>Plotly - <a href="https://plot.ly/python/">https://plot.ly/python/</a></li>
+<li>Matplotlib - <a href="https://matplotlib.org/">https://matplotlib.org/</a></li>
+<li>Pandas-Bokeh - <a href="https://github.com/PatrikHlobil/Pandas-Bokeh">https://github.com/PatrikHlobil/Pandas-Bokeh</a></li>
+<li>Folium - <a href="https://python-visualization.github.io/folium/quickstart.html">https://python-visualization.github.io/folium/quickstart.html</a></li>
+<li>Black - <a href="https://github.com/psf/black">https://github.com/psf/black</a></li>
+<li>Pandas_Alive - <a href="https://github.com/JackMcKew/pandas_alive">https://github.com/JackMcKew/pandas_alive</a></li>
+<li>Poetry - <a href="https://python-poetry.org/">https://python-poetry.org/</a></li>
+</ul>
+<h3 id="resources">Resources</h3>
+<ul>
+<li>Crowd Fight COVID-19 - <a href="http://crowdfightcovid19.org/volunteers">http://crowdfightcovid19.org/volunteers</a></li>
+<li>Automate the Boring Stuff - <a href="https://automatetheboringstuff.com/">https://automatetheboringstuff.com/</a></li>
+<li>Jake VanderPlas Python data visualisation ecosystem - <a href="https://www.youtube.com/watch?v=FytuB8nFHPQ">https://www.youtube.com/watch?v=FytuB8nFHPQ</a></li>
+<li>Vega &amp; Vega-lite - <a href="https://vega.github.io/vega-lite/">https://vega.github.io/vega-lite/</a></li>
+<li>Vladimir Illevski Javascript data visualisation ecosystem - <a href="https://medium.com/analytics-vidhya/javascript-visualization-discover-different-visualization-tools-part-1-e4a77595fb97">https://medium.com/analytics-vidhya/javascript-visualization-discover-different-visualization-tools-part-1-e4a77595fb97</a></li>
+<li>Courage to be Disliked - <a href="https://jackmckew.dev/book-review-courage-to-be-disliked.html#book-review-courage-to-be-disliked">https://jackmckew.dev/book-review-courage-to-be-disliked.html#book-review-courage-to-be-disliked</a></li>
+<li>Never Split the Difference - <a href="https://jackmckew.dev/book-review-never-split-the-difference.html">https://jackmckew.dev/book-review-never-split-the-difference.html</a></li>
+<li>Apache Airflow - <a href="https://airflow.apache.org/">https://airflow.apache.org/</a></li>
+<li>Harry Stevens - <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">https://www.washingtonpost.com/graphics/2020/world/corona-simulator/</a></li>
+<li>Sourcery - <a href="https://sourcery.ai/">https://sourcery.ai/</a></li>
+<li>Hunter Data Analytics - <a href="http://data.newwwie.com/">http://data.newwwie.com/</a></li>
+<li>ShareX - <a href="https://getsharex.com/">https://getsharex.com/</a></li>
+<li>Dropbox moving to Rust from Python - <a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine">https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine</a></li>
+</ul></body>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/python.html">python</a>
-      <a href="https://jackmckew.dev/tag/micropython.html">micropython</a>
+      <a href="https://jackmckew.dev/tag/software.html">software</a>
+      <a href="https://jackmckew.dev/tag/datascience.html">datascience</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/introduction-to-esp32-esp8266.html" title="Introduction to ESP32/ESP8266">
+    <a class="btn float-left" href="https://jackmckew.dev/interactive-random-walkers-with-javascript.html" title="Interactive Random Walkers with Javascript">
       <i class="fa fa-angle-left"></i>  Previous Post
-    </a>
-    <a class="btn float-right" href="https://jackmckew.dev/how-to-program-an-esp8266-with-micropython.html" title="How to Program an ESP8266 with MicroPython">
-       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/episode-12-what-is-git.html">Episode 12 - What is Git?</a></li>
       <li><a href="https://jackmckew.dev/translating-text-in-python.html">Translating Text in Python</a></li>
       <li><a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
       <li><a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
-      <li><a href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html">Migrating from Wordpress to Pelican</a></li>
-      <li><a href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html">Making Executables Installable with Inno Setup</a></li>
+      <li><a href="https://jackmckew.dev/looking-for-patterns-in-city-names-interactive-plotting.html">Looking for Patterns in City Names & Interactive Plotting</a></li>
     </ul>
   </div>
 

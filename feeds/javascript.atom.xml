@@ -68,6 +68,9 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;There are many, many more applications for this, if you'd like to add to this list, leave a comment below!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Vladimir Illevski has a number of articles on uses for random walks which you can find at &lt;a href="https://isquared.digital/blog/2020-04-12-random-walk/"&gt;https://isquared.digital/blog/2020-04-12-random-walk/&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Javascript Source(s):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/js/random-walkers.js"&gt;random-walkers.js&lt;/a&gt;&lt;/li&gt;

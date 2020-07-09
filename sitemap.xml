@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2020-07-02T08:00:45-00:00</lastmod>
+<lastmod>2020-07-09T10:05:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2020-07-02T08:00:45-00:00</lastmod>
+<lastmod>2020-07-09T10:05:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2020-07-02T08:00:45-00:00</lastmod>
+<lastmod>2020-07-09T10:05:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2020-07-02T08:00:45-00:00</lastmod>
+<lastmod>2020-07-09T10:05:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -43,6 +43,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-03-13T21:18:00+11:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/profitable-python-podcast-show-notes.html</loc>
+<lastmod>2020-07-10T00:00:00+10:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -565,7 +572,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/data-science.html</loc>
-<lastmod>2020-06-12T00:00:00+10:05</lastmod>
+<lastmod>2020-07-10T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -621,7 +628,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/software.html</loc>
-<lastmod>2020-04-23T00:00:00+10:05</lastmod>
+<lastmod>2020-07-10T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -636,6 +643,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/category/vba.html</loc>
 <lastmod>2020-04-17T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/software.html</loc>
+<lastmod>2020-07-10T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/datascience.html</loc>
+<lastmod>2020-07-10T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -676,13 +697,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jackmckew.dev/tag/datascience.html</loc>
-<lastmod>2020-05-29T00:00:00+10:05</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
 <loc>https://jackmckew.dev/tag/datavisualisation.html</loc>
 <lastmod>2020-05-21T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
@@ -706,13 +720,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/tag/principles.html</loc>
 <lastmod>2020-05-07T00:00:00+10:05</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://jackmckew.dev/tag/software.html</loc>
-<lastmod>2020-04-23T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -929,7 +936,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/author/jack-mckew.html</loc>
-<lastmod>2020-07-03T00:00:00+10:05</lastmod>
+<lastmod>2020-07-10T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
