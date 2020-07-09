@@ -4,6 +4,8 @@ Author: Jack McKew
 Category: Software, Data Science
 Tags: software, datascience
 
+I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: <https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber>. This blog post serves as the show notes, if I've missed anything, please drop a comment below!
+
 ## Projects Mentioned
 
 A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path from the black box in GPX format, and the air quality team modelled the scenario per second to export a contour. This contour and flight path data was then passed into [Plotly](https://plotly.com/) and an interactive visualisation was created. In particular the contour was shown at a fixed height using 3D scatter while the flight path was displayed using lines.
