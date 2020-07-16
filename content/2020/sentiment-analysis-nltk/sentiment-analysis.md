@@ -1,5 +1,5 @@
 Title: Sentiment Analysis & Text Cleaning in Python with Vader
-Date: 2020-05-xx
+Date: 2020-07-17
 Author: Jack McKew
 Category: Data Science, Python
 Tags: datascience, python
