@@ -60,7 +60,7 @@
 &lt;h2 id="publish-to-marketplace"&gt;Publish to Marketplace&lt;/h2&gt;
 &lt;p&gt;Once you've implemented these few files, you should get a warning at the top of the repository on GitHub hinting if you want to publish this on the marketplace. This is done smoothly with creating a release of your project, and that's it, done!&lt;/p&gt;
 &lt;p&gt;Now users can intergrate your action into the CI/CD pipeline as easily as:&lt;/p&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Python Interrogate Check&lt;/span&gt;
   &lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JackMcKew/python-interrogate-check@v0.1.1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -87,7 +87,7 @@
 &lt;h1 id="action-format-yaml"&gt;Action Format (.yaml)&lt;/h1&gt;
 &lt;p&gt;A Github Action is defined with a &lt;code&gt;&amp;lt;action_name&amp;gt;.yaml&lt;/code&gt; file which must be placed within &lt;code&gt;.github/workflows&lt;/code&gt; from the base of the repository. As many actions as you want can be placed in this folder, and will subsequently run when triggered.&lt;/p&gt;
 &lt;p&gt;The base structure of a &lt;code&gt;link_checker.yaml&lt;/code&gt; file is:&lt;/p&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -162,7 +162,7 @@
 &lt;p&gt;Fork repository &amp;gt; Make changes &amp;gt; Submit Pull Request with changes &amp;gt; Check changes &amp;gt; Merge into repository&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;When the action was first set up for actions to run on pull requests, it kept throwing an error:&lt;/p&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The process &lt;span class="s1"&gt;'/usr/bin/git'&lt;/span&gt; failed with &lt;span class="nb"&gt;exit&lt;/span&gt; code &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The process &lt;span class="s1"&gt;'/usr/bin/git'&lt;/span&gt; failed with &lt;span class="nb"&gt;exit&lt;/span&gt; code &lt;span class="m"&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;This was determined to be intentional design by Github as a mitigation against the possibility that a bad actor could open PRs against your repo and do things like list out secrets or just run up a large bill (once we start charging) on your account.&lt;/p&gt;
@@ -180,7 +180,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;Ensure to use &lt;code&gt;if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'&lt;/code&gt; in all subsequent jobs you want triggered if the phrase is found, otherwise the action will become recursive: check for comment, run checks, make a comment, check for comment, etc&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4

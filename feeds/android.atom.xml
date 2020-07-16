@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Android</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/android.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2018-12-21T01:30:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Episode 5 - Android Multi-Touch</title><link href="https://jackmckew.dev/episode-5-android-multi-touch.html" rel="alternate"></link><published>2018-12-21T01:30:00+11:00</published><updated>2018-12-21T01:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2018-12-21:/episode-5-android-multi-touch.html</id><summary type="html">&lt;body&gt;&lt;p&gt;This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can be seen below it contains 3 values: x_pos, y_pos and id. It is also useful to create a constructor so that other classes can easily construct the Finger class.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="ezgif.com-video-to-gif-2" class="img-fluid" src="https://jackmckew.dev/img/ezgif.com-video-to-gif-2.gif"/&gt;&lt;/p&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -31,7 +31,7 @@
 &lt;p&gt;Now that we have a class to store our details on how each finger is touching the screen, we now need to interact with some base level Java. Firstly we need to extend a view within the Android application so that the application knows what boundaries to deal, in my test application, I've just used the entire screen as a view.&lt;/p&gt;
 &lt;p&gt;After that an array is needed to store the data of multiple inputs touching the screen. I've used a TreeMap in this example as this allows for ease later on so that they are in order on how they were input, however this comes with a downside to this example as lifting a input in the middle of the order touched crashes the array, this will be fixed in a later episode.&lt;/p&gt;
 &lt;p&gt;A paint is initialized for both the stroke paint for drawing lines between the touches and a paint for the text that is to come. Generic constructors for the view are also listed below.&lt;/p&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -97,7 +97,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Now that everything is initialized and ready to draw some graphics on the screen so that the application is interactive, now we have to interface with touch events. This is done by creating a new function within our View class, that takes in a MotionEvent on the View so that we can detect different types of touch events. Documentation on this can be found (&lt;a href="https://developer.android.com/training/graphics/opengl/touch#java"&gt;https://developer.android.com/training/graphics/opengl/touch#java&lt;/a&gt;).&lt;/p&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -208,7 +208,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Now that we've created a new Finger class inside our TreeMap by the order that the screen is touched in and we're removing that class when the screen input has been released, we are now ready to draw on the screen from our inputs.&lt;/p&gt;
 &lt;p&gt;By iterating through the TreeMap, in each loop we know what the previous and what the next value in the array we can draw a circle for where the input is and a line between. This also allows us to determine whereabouts is the point in between these two points so we can write text. For this example, I've chosen to write the length of the distance between the two inputs to demonstrate that this can also be dynamic in nature.&lt;/p&gt;
-&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
