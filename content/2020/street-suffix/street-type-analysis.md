@@ -1,5 +1,5 @@
 Title: Street Suffix Analysis & Colouring with Python
-Date: 2020-05-xx
+Date: 2020-07-24
 Author: Jack McKew
 Category: Data Science, Python
 Tags: datascience, python
