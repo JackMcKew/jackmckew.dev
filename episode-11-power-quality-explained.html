@@ -60,9 +60,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 73</p>
-            <p>Number of Words: 48,597</p>
-            <p>Number of Lines of Code 3,529</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 74</p>
+            <p>Number of Words: 49,164</p>
+            <p>Number of Lines of Code 3,574</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -160,7 +160,7 @@
 
 
   <div>
-    <body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up that I found difficult to explain clearly was power quality and it's issues. So I decided why not dedicate a blog post about it and write a basic example power factor capacitor calculator in Python.</p>
+    </head><body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up that I found difficult to explain clearly was power quality and it's issues. So I decided why not dedicate a blog post about it and write a basic example power factor capacitor calculator in Python.</p>
 <p>Power quality is defined as "the concept of powering and grounding sensitive electronic equipment in a manner suitable for the equipment with precise wiring system and other connected equipment" by the IEEE (The Institute of Electrical and Electronics Engineers). In a simplistic view this is just trying to say that electrical equipment is to be installed/configured in a way that is operates as intended.</p>
 <p>Quality of power is not determined by the one who produces it, it's defined by the end user of the power. Eg, like a physical product, if you buy something from a store and it's poor quality, that's being defined by the end user. Similar to that of a physical product, quality of power can be lost in a variety of forms/ways.</p>
 <p>Issues with power quality can be categorized into three main categories:</p>
@@ -171,7 +171,7 @@
 </ul>
 <h2 id="harmonics">Harmonics</h2>
 <p>AC (Alternating Current) electricity is generated as a sinusoidal waveform, and harmonics are signals/waves whose frequency is a whole number multiple of the frequency of the reference signal/wave. To visualize this phenomenon, we can use packages like NumPy and Matplotlib, to calculate and plot our base signal and it's harmonics (I encourage you to run this code and change the harmonics to see what they look like).</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -241,7 +241,7 @@
 <p><img alt="CodeCogsEqn-6.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-6.gif"/></p>
 <p><img alt="CodeCogsEqn-7.gif" class="img-fluid" src="https://jackmckew.dev/img/CodeCogsEqn-7.gif"/></p>
 <p>Once we input all these required formulas, and our initial data points, we are now able to easily compute the required size of capacitor to amend power factor issues.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -311,7 +311,7 @@
 <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Current power factor &gt; 1"</span><span class="p">)</span>
 </code></pre></div>
-</td></tr></tbody></table></body>
+</td></tr></tbody></table>
   </div>
   <div class="tag-cloud">
     <p>
@@ -334,11 +334,11 @@
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html">Street Suffix Analysis & Colouring with Python</a></li>
       <li><a href="https://jackmckew.dev/sentiment-analysis-text-cleaning-in-python-with-vader.html">Sentiment Analysis & Text Cleaning in Python with Vader</a></li>
       <li><a href="https://jackmckew.dev/how-pandas_alive-was-made.html">How Pandas_Alive was Made</a></li>
       <li><a href="https://jackmckew.dev/geopandas-and-pandas-alive.html">Geopandas and Pandas Alive</a></li>
       <li><a href="https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html">Make a README & Documentation with Jupyter Notebooks</a></li>
-      <li><a href="https://jackmckew.dev/translating-text-in-python.html">Translating Text in Python</a></li>
     </ul>
   </div>
 
