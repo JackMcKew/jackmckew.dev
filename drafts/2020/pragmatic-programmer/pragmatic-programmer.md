@@ -91,3 +91,19 @@ By doing this, we enable the function to potentially raise an error, multiply by
 ## Design by Contract
 
 A correct program does no more and no less then what it claims to do. Ensure conditions (both pre & post) are met before anything begins, and promise as little as possible in return. This also helps enforcing [Crash Early](#crash-early), by verifying conditions have been satisfied, enables developers to crash the program if anything is unsatisfactory.
+
+## Build End to End
+
+There are many ways when it comes how something is built. More commonly things are viewed upon as being top-down or bottom-up. Top down is when we define the problem statement and break it down into smaller actionable chunks until it's pieced together. Bottom up is when we build more amd more of the smaller actionable pieces and plan to join them all together to meet the requirements in the future (very helpful when the problem isn't well defined).
+
+Rather than either of these, if we look through the perspective of building things end-to-end this can be a more holistic methodology. Which can also be adopted with either of the prior methodologies mentioned beforehand ensuring to build complete pipelines which can be combined or amended later on in development when the problem is further understood.
+
+## Debugging
+
+Don't assume how a bug occurred, prove it. This is also a fantastic practice to tie in with testing, by discovering a bug, determine how it was created and then prove that's how the bug occurred. This brings the workflow into:
+
+- Bug occurs
+- Find out why/how the bug occurred
+- Prove that's how it occurred
+- Add it to the test suite to ensure the bug never occurs again
+
