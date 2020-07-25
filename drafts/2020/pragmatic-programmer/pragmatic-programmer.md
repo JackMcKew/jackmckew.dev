@@ -23,6 +23,14 @@ Skills for being an effective communicator include:
 - Adaptability
 - Conflict Resolution
 
+## No Broken Windows
+
+The broken window theory is a criminological theory in that visible signs of damage create an environment that encourages further damage. If a street has a broken window, what's the big deal if another broken window happens, rinse and repeat until chaos. By ensuring that no broken windows are left in your designs, this encourages further quality contributions.
+
+## Boiled Frogs
+
+If a team works without communication, it may be difficult to see that the entire project may be boiling over. By constant communication, responsibility and transparency throughout the team, this can be minimized. Each member should feel comfortable in raising possible issues with others, and likewise in receiving feedback.
+
 ## Know When to Stop
 
 *Great software today is often preferable to perfect software tomorrow.*
@@ -105,5 +113,22 @@ Don't assume how a bug occurred, prove it. This is also a fantastic practice to 
 - Bug occurs
 - Find out why/how the bug occurred
 - Prove that's how it occurred
-- Add it to the test suite to ensure the bug never occurs again
+- Add it to the test suite to ensure the bug never occurs again (or is captured appropriately)
+
+## Rename ASAP & Rename Well
+
+As a project changes, the intention behind the name of a variable/function may also change. It is important to ensure that naming conventions ensure that the intention behind the name matches the functionality. No one wants to have to explain to a new user why `getData()` actually writes data.
+
+## Define Requirements with User Stories
+
+Rather than defining concrete technical requirements on how an application should behave and what outcomes are to be expected, developers can make the most of user stories to define the requirements. This puts the power in the hands of the developers to thoroughly understand and ask questions about how a story is to be completed. Typically written informally and from the perspective of the end user.
+
+Some examples include:
+
+- As a user, I want to see other users progress, so I can understand where I'm at
+- As a manager, I want to see the overall number of outstanding tasks, so I can allocate resources appropriately
+
+## Project Glossary
+
+Along with naming things appropriately, chaos can ensue when meaning behind words are not the same across different people. Ensure to keep a project glossary around project specific words and their meaning to ensure that everyone in the project is on the same page.
 
