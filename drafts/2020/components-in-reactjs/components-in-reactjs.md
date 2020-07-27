@@ -23,7 +23,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 ```
 
-The first line is to import React library, while this isn't used explicitly in the remaining code we will write, it will not work without it. This is due to when the code is transpiled into JavaScript, it'll then used React directly with `React.createElement()`. 
+The first line is to import React library, while this isn't used explicitly in the remaining code we will write, it will not work without it. This is due to when the code is transpiled into JavaScript, it'll then used React directly with `React.createElement()`.
 
 Next up is `Link` and `Redirect`, note the curly braces around these, this is known as destructuring, meaning we only want to take the two classes from the library. This method is useful for making more readable code when dealing with objects. `Link` is `react-router-dom`'s class for creating anchor tags (aka <a/> in HTML), and similarly `Redirect` is as you'd expect, a class to dynamically redirect to another route.
 
@@ -81,8 +81,49 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(Landing)
 ```
 
-`mapStateToProps` is a function that takes in the current state of the application, and deconstructs the relevant element to use. `connect` is a wrapper function, so when it's called with `connect(mapStateToProps)` it returns another function which we can then use to pass our component into.
+`mapStateToProps` is a function that takes in the current state of the application, and deconstructs the relevant element to use. `connect` is a wrapper function (aka curried function), so when it's called with `connect(mapStateToProps)` it returns another function which we can then use to pass our component into.
 
 ## Conclusion
 
 Now we can use the statement `import Landing from './Landing'` and use our component similar to that of `Link` in our app!
+
+The full source of `Landing.js` is:
+
+```js
+import React from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+const Landing = ({ isAuthenticated }) => {
+    if(isAuthenticated){
+        return <Redirect to="/user-profile" />
+    }
+
+    return (
+        <div className="homepage">
+            <h1 className="site-title">
+                An Awesome Landing Page
+            </h1>
+            <div className="buttons">
+                <Link to="/register">
+                    Sign Up
+                </Link>
+                <Link to="/login">
+                    Log In
+                </Link>
+            </div>
+        </div>
+    )
+}
+
+Landing.propTypes = {
+    isAuthenticated: PropTypes.bool,
+}
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+})
+
+export default connect(mapStateToProps)(Landing)
+```
