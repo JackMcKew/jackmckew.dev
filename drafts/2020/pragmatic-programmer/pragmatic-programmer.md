@@ -35,7 +35,7 @@ If a team works without communication, it may be difficult to see that the entir
 
 *Great software today is often preferable to perfect software tomorrow.*
 
-When building software, it is often tempting to think *gee this feature would be better if I just added this*, then chasing that feature down a rabbit hole and suddenly the day is over. By doing this, it is potentially delaying the software from potentially being used by the end user. 
+When building software, it is often tempting to think *gee this feature would be better if I just added this*, then chasing that feature down a rabbit hole and suddenly the day is over. By doing this, it is potentially delaying the software from potentially being used by the end user.
 
 ## DRY Principle
 
@@ -131,4 +131,3 @@ Some examples include:
 ## Project Glossary
 
 Along with naming things appropriately, chaos can ensue when meaning behind words are not the same across different people. Ensure to keep a project glossary around project specific words and their meaning to ensure that everyone in the project is on the same page.
-
