@@ -159,7 +159,7 @@
 
 
   <div>
-    </head><body><p>Following last weeks' post (<a href="https://jackmckew.dev/python-for-the-finance-industry.html">Python for the Finance Industry</a>). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data.</p>
+    <body><p>Following last weeks' post (<a href="https://jackmckew.dev/python-for-the-finance-industry.html">Python for the Finance Industry</a>). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data.</p>
 <p>First of all while attempting to tackle this problem, I stumbled across many very informative articles in which based on what I learned throughout reading them, and trying to replicate their findings with the ASX stocks' data.</p>
 <ul>
 <li>Ricky Kim (<a href="https://towardsdatascience.com/efficient-frontier-portfolio-optimisation-in-python-e7844051e7f">Efficient Frontier Portfolio Optimisation in Python)</a></li>
@@ -174,7 +174,7 @@
 <li>Pick the desired solution.</li>
 </ol>
 <p>To generate random portfolios, we define a function such that we can pass it differing variables as to tweak our outcomes in the future.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -212,7 +212,7 @@
 <p><img alt="\
 Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https://cdn-images-1.medium.com/max/1600/1*IabrYvsgHE07z2CJwoE9Zw.jpeg"/></p>
 <p><a href="https://medium.com/@bbrenyah">Bernard Brenyah</a>, whom I mentioned at the beginning of the post, has provided a clear explanation of how the above formula can be expressed in matrix calculation in one of <a href="https://medium.com/python-data/assessing-risks-and-return-with-probabilities-of-events-with-python-c564d9be4db4">his blog post</a>s. In which we just take the matrix calculation and multiply by 253 for number of trading days in Australia.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -224,7 +224,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that we have X number of randomly generated portfolios, all ranked against one another, it's time to plot so that our results can be visualized.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -298,7 +298,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Using the above function 'display_random_efficient_frontier', this will determine our max sharpe ratio portfolio generated and the minimum volatility portfolio with their respective returns. Now it is entirely up to the trader on how much risk they are willing to take on board with their portfolio. With the settings below in conjunction with the previously defined functions and stock data to generate the portfolios (risk free rate determined from <a href="http://www.worldgovernmentbonds.com/country/australia/">this website</a>).</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -316,7 +316,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 <p><img alt="sharpe_ratios" class="img-fluid" src="https://jackmckew.dev/img/image-12.png"/></p>
 <p><img alt="efficient_frontier" class="img-fluid" src="https://jackmckew.dev/img/image-20.png"/></p>
 <p>With the two portfolios determined, the one gives us the best risk-adjusted (as long as the trader is prepared to take the risk) is the one with the maximum Sharpe ratio, allocating a 67% portion to WOW and 32% to BHP, as these stocks were quite volatile from the daily percentage change calculations.</p>
-<p>On the other hand, the minimum volatility portfolio is reflecting the more stable of the stocks from the daily percentage change calculations distributing portions over NAB and TLS due to their stability from the percentage change calculations and reducing the portion to WOW.</p>
+<p>On the other hand, the minimum volatility portfolio is reflecting the more stable of the stocks from the daily percentage change calculations distributing portions over NAB and TLS due to their stability from the percentage change calculations and reducing the portion to WOW.</p></body>
   </div>
   <div class="tag-cloud">
     <p>
