@@ -6,6 +6,8 @@ Tags: software
 
 What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the *'But it works on my machine'* problem. This post will go through an intro to docker and how you can use it. A crucial part to Docker is the container, *a Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings*
 
+I did a post back in 2018 on containerization and mentioned Docker too! <https://jackmckew.dev/episode-6-containerization.html>
+
 ## Docker Ecosystem
 
 Docker isn't a single program, it's a suite of programs which we'll refer to as an ecosystem. A brief description of all the components that make the ecosystem is:
