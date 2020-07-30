@@ -21305,7 +21305,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -21591,7 +21591,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41813,7 +41813,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41968,7 +41968,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42608,7 +42608,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;/blockquote&gt;
 &lt;h2 id="applications-for-random-walk"&gt;Applications for Random Walk&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;This is all well and good for making funky pictures, but what can this actually be used for?&lt;/em&gt;&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Field&lt;/th&gt;
@@ -42671,7 +42671,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;h2 id="base-class"&gt;Base Class&lt;/h2&gt;
 &lt;p&gt;Now that we've decided to go with template design pattern, we need to implement the base chart class with the shared functionality. At this point, since there would be so many parameters going into the class constructor (&lt;code&gt;__init__&lt;/code&gt;) in Python, it was frustrating having to put this information in two places.&lt;/p&gt;
 &lt;p&gt;Here is a basic example, but imagine if you had 10s of arguments (eg, name, species) and had to replicate this information so many times.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Animal&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -42682,7 +42682,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the &lt;code&gt;__init__&lt;/code&gt; and other dunder methods generated for us (see a previous post on dunder methods here).&lt;/p&gt;
 &lt;p&gt;This allows us to write the same class as above like:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@attr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;

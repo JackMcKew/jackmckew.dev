@@ -21305,7 +21305,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -21591,7 +21591,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41813,7 +41813,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41968,7 +41968,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42655,7 +42655,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42735,7 +42735,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -43412,7 +43412,7 @@ The real origin of pizza, however, is controversial: in addition to Naples, othe
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
