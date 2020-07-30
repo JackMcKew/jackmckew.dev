@@ -1,5 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-24T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Street Suffix Analysis &amp; Colouring with Python</title><link href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html" rel="alternate"></link><published>2020-07-24T00:00:00+10:00</published><updated>2020-07-24T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-24:/street-suffix-analysis-colouring-with-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-30T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Generators in Python</title><link href="https://jackmckew.dev/generators-in-python.html" rel="alternate"></link><published>2020-07-30T00:00:00+10:00</published><updated>2020-07-30T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-30:/generators-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as opposed to loading the entire data set. While this gives marginal increases in efficiency/speed with small data sets, it can provide dramatic improvements on larger data sets; especially if you are using a system with limited memory.&lt;/p&gt;
+&lt;p&gt;Before we dive into some examples on where you could use generators, let's look where you should &lt;strong&gt;not&lt;/strong&gt; use generators:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the data needs to be accessed &lt;strong&gt;multiple&lt;/strong&gt; times (eg, &lt;code&gt;join&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;need to access the data &lt;strong&gt;randomly&lt;/strong&gt; (or any other method of access that's not forward)&lt;/li&gt;
+&lt;li&gt;using a different compiler&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some examples where you should use generators are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;you don't know if you'll need &lt;strong&gt;all&lt;/strong&gt; the results&lt;/li&gt;
+&lt;li&gt;you don't want to allocate all the results into memory&lt;/li&gt;
+&lt;li&gt;you don't know how many results there may be (eg, user interaction)&lt;/li&gt;
+&lt;li&gt;a potentially infinite series&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A great example use is that of a search, it could be implemented to gather all the elements to search and return them after the search is complete. Rather by using a generator you can return the results as they are found!&lt;/p&gt;
+&lt;p&gt;First off, let's start with the hello world of generators, the fibonacci sequence. If you don't know what the fibonacci sequence is, it's just adding the number that precedes itself and so on (eg, 1,1,2,3,5,8,etc), this is an infinite series.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="s2"&gt;"Generator version"&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+        &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;You can also generate the entire sequence into memory by using the list function on the generator function!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;If we were to use a function for this instead, which compiles the entire list of the fibonacci sequence before returning, this would mean &lt;code&gt;fibon(number_of_elements)&lt;/code&gt; would need to be computed and stored in memory. By using generators we can provide &lt;code&gt;fibon(number_of_elements)&lt;/code&gt; any number of elements and only the latest and it's preceding value are stored in memory.&lt;/p&gt;
+&lt;p&gt;Now imagine if you had a database with 100 million records, and you needed to calculate something for every single row. If you tried to retrieve the entire database and store it in memory, it would possibly just fall over. Rather by using a generator we can iterate through the database in smaller chunks. Another handy feature is to have separate generator instances which you can interweave throughout your project if you need to maintain multiple states in a simplistic manner.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;In this example, the entire 'data set' is stored in memory, but in a real use we'd request the small chunk from a database&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The generator function returns a generator object, so to get each 'iteration' we use the &lt;code&gt;next&lt;/code&gt; function.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_big_data&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;grouper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# While big_data is currently stored entirely in memory, if you are requesting from an external database you could just fetch n results&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_big_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;grouper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;batch_processor_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;batch_processor_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[0, 1, 2, 3, 4]
+[5, 6, 7, 8, 9]
+[0, 1, 2]
+[10, 11, 12, 13, 14]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Another good example is to use generators for user interaction (UI), where the program is waiting on the user to input something, but you don't know how long the program will have to wait for interaction. This enables the program to run until the user decides to close it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Do something with command&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;hello computer
+i am user
+
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;&lt;span class="ansi-red-intense-fg ansi-bold"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;KeyboardInterrupt&lt;/span&gt;                         Traceback (most recent call last)
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-4-3e09f71ee7b6&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt;         &lt;span class="ansi-green-intense-fg ansi-bold"&gt;yield&lt;/span&gt; cmd
+&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; 
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 6&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt; &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;for&lt;/span&gt; command &lt;span class="ansi-green-intense-fg ansi-bold"&gt;in&lt;/span&gt; user_input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      7&lt;/span&gt;     &lt;span class="ansi-red-intense-fg ansi-bold"&gt;# Do something with command&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      8&lt;/span&gt;     print&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;command&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-4-3e09f71ee7b6&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;user_input&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;()&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      1&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; user_input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      2&lt;/span&gt;     &lt;span class="ansi-green-intense-fg ansi-bold"&gt;while&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;True&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 3&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         &lt;/span&gt;cmd &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt; input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt;         &lt;span class="ansi-green-intense-fg ansi-bold"&gt;yield&lt;/span&gt; cmd
+&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; 
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;raw_input&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(self, prompt)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    858&lt;/span&gt;                 &lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"raw_input was called, but this frontend does not support input requests."&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    859&lt;/span&gt;             )
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;--&amp;gt; 860&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         return self._input_request(str(prompt),
+&lt;/span&gt;&lt;span class="ansi-green-fg"&gt;    861&lt;/span&gt;             self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;_parent_ident&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    862&lt;/span&gt;             self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;_parent_header&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;_input_request&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(self, prompt, ident, parent, password)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    902&lt;/span&gt;             &lt;span class="ansi-green-intense-fg ansi-bold"&gt;except&lt;/span&gt; KeyboardInterrupt&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    903&lt;/span&gt;                 &lt;span class="ansi-red-intense-fg ansi-bold"&gt;# re-raise KeyboardInterrupt, to truncate traceback&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;--&amp;gt; 904&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;                 &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;raise&lt;/span&gt; KeyboardInterrupt&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"Interrupted by user"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;from&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;None&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    905&lt;/span&gt;             &lt;span class="ansi-green-intense-fg ansi-bold"&gt;except&lt;/span&gt; Exception &lt;span class="ansi-green-intense-fg ansi-bold"&gt;as&lt;/span&gt; e&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    906&lt;/span&gt;                 self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;log&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;warning&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"Invalid Message:"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; exc_info&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;True&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;KeyboardInterrupt&lt;/span&gt;: Interrupted by user&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Street Suffix Analysis &amp; Colouring with Python</title><link href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html" rel="alternate"></link><published>2020-07-24T00:00:00+10:00</published><updated>2020-07-24T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-24:/street-suffix-analysis-colouring-with-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Street Suffix Visualisation with Python&lt;/p&gt;
@@ -21305,7 +21530,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -21591,7 +21816,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41813,7 +42038,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41968,7 +42193,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42690,7 +42915,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42770,7 +42995,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -43177,231 +43402,4 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category></entry><entry><title>Make a README &amp; Documentation with Jupyter Notebooks</title><link href="https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html" rel="alternate"></link><published>2020-06-05T00:00:00+10:00</published><updated>2020-06-05T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-06-05:/make-a-readme-documentation-with-jupyter-notebooks.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;README is typically the front page of a project, and should contain relevant information for current users &amp;amp; prospective users. As to make sure documentation across a project is consistent as well, imagine if we could include this README that is the front page of our project, both on the repository …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;README is typically the front page of a project, and should contain relevant information for current users &amp;amp; prospective users. As to make sure documentation across a project is consistent as well, imagine if we could include this README that is the front page of our project, both on the repository, and in the documentation. This post goes into how to set this workflow up. Find a live example of this being implemented on: &lt;a href="https://github.com/JackMcKew/pandas_alive"&gt;https://github.com/JackMcKew/pandas_alive&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;A good starting structure for a project's README is:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Intro - A short description &amp;amp; output (if applicable) of the project.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Usage - A section on how the project is to be used (if applicable).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Documentation - Link to documentation for the project.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Contributing Guidelines - If this is an open source project, a note whether contributions are welcome &amp;amp; instructions how to get involved is well received.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Changelog - Keeping a changelog of what is changing as the project evolves.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Other useful sections when applicable are requirements, future plans and inspiration.&lt;/p&gt;
-&lt;h2 id="inspiration-for-this-post"&gt;Inspiration for This Post&lt;/h2&gt;
-&lt;p&gt;The inspiration for this post also comes from &lt;a href="https://github.com/JackMcKew/pandas_alive"&gt;Pandas_Alive&lt;/a&gt;, wherein there is working examples with output hosted on the README. Initially, this was contained in a &lt;code&gt;generate_examples.py&lt;/code&gt; file and as the package evolved, the code to match the examples, was being copied over into code blocks in the &lt;code&gt;README.md&lt;/code&gt;. If you can see where this is going, obviously whenever some new examples were made, the code to generate the examples was being forgotten to be copied over. This is very frustrating for new users to the package, as the examples simply don't work. Thus the workflow we go into in this post was adopted.&lt;/p&gt;
-&lt;h2 id="readmeipynb"&gt;README.ipynb&lt;/h2&gt;
-&lt;p&gt;In projects, typically it's best practice to not have to repeat yourself in multiple places (this the DRY principle). In the README, it's nice to have working examples on how a user may use the project. If we could tie the original README with live code that generates the examples, that would be ideal, enter &lt;code&gt;README.ipynb&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Jupyter supports markdown &amp;amp; code cells, thus all the current documentation in the &lt;code&gt;README.md&lt;/code&gt; can be copied within markdown cells. Similarly, the code used to generate examples or demonstrate usage can then be placed in code cells. Allowing the author, to run the entire notebook, generating the new examples &amp;amp; verifying the examples are working code. Fantastic, this is exactly where we want to go.&lt;/p&gt;
-&lt;p&gt;Now if you only have the &lt;code&gt;README.ipynb&lt;/code&gt; in the repository, GitHub will represent the file in it's raw form, JSON. For example would be hundreds of line like:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;
- &lt;span class="nt"&gt;"cells"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-  &lt;span class="p"&gt;{&lt;/span&gt;
-   &lt;span class="nt"&gt;"cell_type"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"markdown"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="nt"&gt;"metadata"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt;
-   &lt;span class="nt"&gt;"source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="s2"&gt;"# Pandas_Alive\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"Animated plotting extension for Pandas with Matplotlib\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"**Pandas_Alive** is intended to provide a plotting backend for animated [matplotlib](https://matplotlib.org/) charts for [Pandas](https://pandas.pydata.org/) DataFrames, similar to the already [existing Visualization feature of Pandas](https://pandas.pydata.org/pandas-docs/stable/visualization.html).\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"With **Pandas_Alive**, creating stunning, animated visualisations is as easy as calling:\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"`df.plot_animated()`\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"\n"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"![Example Bar Chart](examples/example-barh-chart.gif)"&lt;/span&gt;
-   &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;This is not ideal whatsoever, this is nowhere near as attractive as the nicely rendered &lt;code&gt;README.md&lt;/code&gt;. Enter &lt;code&gt;nbconvert&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id="readmeipynb-readmemd-with-nbconvert"&gt;README.ipynb -&amp;gt; README.md with nbconvert&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;nbconvert&lt;/code&gt; is a package built to convert Jupyter notebooks to other formats and can be installed similar to jupyter (eg, &lt;code&gt;pip install jupyter&lt;/code&gt;, &lt;code&gt;pip install nbconvert&lt;/code&gt;). See the documentation at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/"&gt;https://nbconvert.readthedocs.io/en/latest/&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Now let's check the &lt;a href="https://nbconvert.readthedocs.io/en/latest/usage.html#supported-output-formats"&gt;supported output types for nbconvert&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;HTML,&lt;/li&gt;
-&lt;li&gt;LaTeX,&lt;/li&gt;
-&lt;li&gt;PDF,&lt;/li&gt;
-&lt;li&gt;Reveal.js HTML slideshow,&lt;/li&gt;
-&lt;li&gt;Markdown,&lt;/li&gt;
-&lt;li&gt;Ascii,&lt;/li&gt;
-&lt;li&gt;reStructuredText,&lt;/li&gt;
-&lt;li&gt;executable script,&lt;/li&gt;
-&lt;li&gt;notebook.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;nbconvert&lt;/code&gt; supports Markdown! Fantastic, we can add this step into our CI process (eg, &lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/.github/workflows/update-readme.yml"&gt;GitHub Action&lt;/a&gt;). This will allow us to generate a new &lt;code&gt;README.md&lt;/code&gt; whenever our &lt;code&gt;README.ipynb&lt;/code&gt; changes.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;In Pandas_Alive, we clear the output output of the cells in &lt;code&gt;README.ipynb&lt;/code&gt; with the flags: &lt;code&gt;jupyter nbconvert --ClearMetadataPreprocessor.enabled=True --ClearOutput.enabled=True  --to markdown README.ipynb&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="python-highlighting-in-output"&gt;Python Highlighting in Output&lt;/h4&gt;
-&lt;p&gt;When first run, it was noticed that &lt;code&gt;nbconvert&lt;/code&gt; wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the &lt;code&gt;README.md&lt;/code&gt; with language specifics. The workaround for this, was to use &lt;code&gt;nbconvert&lt;/code&gt;'s support for custom templates. See the docs at: &lt;a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates"&gt;https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The resulting template "pythoncodeblocks.tpl" was:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5
-6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    {% extends 'markdown.tpl' %}
-    {% block codecell %}
-    ``` python
-    {{cell.source}}
-    ```
-    {% endblock codecell %}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Which could be used with &lt;code&gt;nbconvert&lt;/code&gt; with:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter nbconvert --template &lt;span class="s2"&gt;"pythoncodeblocks.tpl"&lt;/span&gt; --to markdown README.ipynb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h2 id="integration-into-documentation-with-sphinx"&gt;Integration into Documentation with Sphinx&lt;/h2&gt;
-&lt;p&gt;If you haven't already, check out my previous post &lt;a href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html"&gt;Automatically Generate Documentation with Sphinx&lt;/a&gt;. The post goes into detail on how to implement Sphinx as to generate all of the documentation for a project from docstrings automatically.&lt;/p&gt;
-&lt;p&gt;Before going on, the live site of the documentation in reference can be reached at: &lt;a href="https://jackmckew.github.io/pandas_alive/"&gt;https://jackmckew.github.io/pandas_alive/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Now, we've:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Stored our working code &amp;amp; documentation for a our project's front page in a Jupyter notebook &lt;code&gt;README.ipynb&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Converted &lt;code&gt;README.ipynb&lt;/code&gt; into markdown format with &lt;code&gt;nbconvert&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Inserted language specific (python) into the code blocks within the markdown&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The next step is to make the README content also live in the documentation.&lt;/p&gt;
-&lt;p&gt;Since Sphinx relies on reStructuredText format, so we'll need to convert &lt;code&gt;README.md&lt;/code&gt; to &lt;code&gt;README.rst&lt;/code&gt;. Enter &lt;a href="https://github.com/miyakogi/m2r"&gt;&lt;code&gt;m2r&lt;/code&gt;&lt;/a&gt;, a markdown to reStructuredText converter.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;nbconvert&lt;/code&gt; could be used in this step over &lt;code&gt;m2r&lt;/code&gt;, in saying that this step was originally developed prior to the &lt;code&gt;README.ipynb&lt;/code&gt; being created, thus only &lt;code&gt;README.md&lt;/code&gt; existed. Please drop a comment if you try using &lt;code&gt;nbconvert&lt;/code&gt; over &lt;code&gt;m2r&lt;/code&gt; for this step and your results!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Firstly, &lt;code&gt;m2r&lt;/code&gt; can be installed with pip (&lt;code&gt;pip install m2r&lt;/code&gt;) and we can convert &lt;code&gt;README.md&lt;/code&gt; with the command &lt;code&gt;m2r README.md&lt;/code&gt; which will generate &lt;code&gt;README.rst&lt;/code&gt; in the same directory.&lt;/p&gt;
-&lt;p&gt;Now we need to include our &lt;code&gt;README.rst&lt;/code&gt; in the documentation. After much tweaking, the documentation structure set up landed upon for Pandas_Alive, with use of autosummary to automatically generate documentation from docstrings was:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst"&gt;index.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;module&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt; pandas_alive
-
-&lt;span class="gh"&gt;Pandas_Alive |version|&lt;/span&gt;
-&lt;span class="gh"&gt;========================================&lt;/span&gt;
-
-Animated plotting extension for Pandas with Matplotlib
-
-&lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_alive`&lt;/span&gt; is intended to provide a plotting backend for animated matplotlib charts for Pandas DataFrames, similar to the already existing Visualization feature of Pandas.
-
-With &lt;span class="na"&gt;:mod:&lt;/span&gt;&lt;span class="nv"&gt;`Pandas_alive`&lt;/span&gt;, creating stunning, animated visualisations is as easy as calling:
-
-&lt;span class="s"&gt;``df.plot_animated()``&lt;/span&gt;
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;image&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt; ../../examples/example-barh-chart.gif
-   &lt;span class="nc"&gt;:target:&lt;/span&gt; examples/example-barh-chart.gif
-   &lt;span class="nc"&gt;:alt:&lt;/span&gt; Example Bar Chart
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;toctree&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
-   &lt;span class="nc"&gt;:caption:&lt;/span&gt; Getting Started
-
-   Installation &amp;amp; Examples &amp;lt;README&amp;gt;
-
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;toctree&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
-   &lt;span class="nc"&gt;:caption:&lt;/span&gt; Developers
-
-   developer
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;rubric&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt; Modules
-
-
-&lt;span class="gh"&gt;Indices and tables&lt;/span&gt;
-&lt;span class="gh"&gt;==================&lt;/span&gt;
-
-&lt;span class="m"&gt;*&lt;/span&gt; &lt;span class="na"&gt;:ref:&lt;/span&gt;&lt;span class="nv"&gt;`genindex`&lt;/span&gt;
-&lt;span class="m"&gt;*&lt;/span&gt; &lt;span class="na"&gt;:ref:&lt;/span&gt;&lt;span class="nv"&gt;`modindex`&lt;/span&gt;
-&lt;span class="m"&gt;*&lt;/span&gt; &lt;span class="na"&gt;:ref:&lt;/span&gt;&lt;span class="nv"&gt;`search`&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst"&gt;developer.rst&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;API Reference&lt;/span&gt;
-&lt;span class="gh"&gt;=============&lt;/span&gt;
-
-&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;autosummary&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
-   &lt;span class="nc"&gt;:toctree:&lt;/span&gt; generated
-
-   pandas_alive.plotting.plot
-   pandas_alive.plotting
-   pandas_alive.base
-   pandas_alive._base_chart
-   pandas_alive.charts
-   pandas_alive.__init__
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;&lt;a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/conf.py"&gt;conf.py&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="integration-with-github-actions"&gt;Integration with GitHub Actions&lt;/h2&gt;
-&lt;p&gt;All the steps above mentioned are currently being used to maintain the project Pandas_Alive.&lt;/p&gt;
-&lt;p&gt;Find the GitHub Action yml files at: &lt;a href="https://github.com/JackMcKew/pandas_alive/tree/master/.github/workflows"&gt;https://github.com/JackMcKew/pandas_alive/tree/master/.github/workflows&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Find the Sphinx configuration files at: &lt;a href="https://github.com/JackMcKew/pandas_alive/tree/master/docs"&gt;https://github.com/JackMcKew/pandas_alive/tree/master/docs&lt;/a&gt;&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry></feed>
+&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category></entry></feed>

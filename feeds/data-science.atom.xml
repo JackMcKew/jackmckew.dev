@@ -1,5 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-24T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Street Suffix Analysis &amp; Colouring with Python</title><link href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html" rel="alternate"></link><published>2020-07-24T00:00:00+10:00</published><updated>2020-07-24T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-24:/street-suffix-analysis-colouring-with-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-30T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Generators in Python</title><link href="https://jackmckew.dev/generators-in-python.html" rel="alternate"></link><published>2020-07-30T00:00:00+10:00</published><updated>2020-07-30T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-30:/generators-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as opposed to loading the entire data set. While this gives marginal increases in efficiency/speed with small data sets, it can provide dramatic improvements on larger data sets; especially if you are using a system with limited memory.&lt;/p&gt;
+&lt;p&gt;Before we dive into some examples on where you could use generators, let's look where you should &lt;strong&gt;not&lt;/strong&gt; use generators:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the data needs to be accessed &lt;strong&gt;multiple&lt;/strong&gt; times (eg, &lt;code&gt;join&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;need to access the data &lt;strong&gt;randomly&lt;/strong&gt; (or any other method of access that's not forward)&lt;/li&gt;
+&lt;li&gt;using a different compiler&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some examples where you should use generators are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;you don't know if you'll need &lt;strong&gt;all&lt;/strong&gt; the results&lt;/li&gt;
+&lt;li&gt;you don't want to allocate all the results into memory&lt;/li&gt;
+&lt;li&gt;you don't know how many results there may be (eg, user interaction)&lt;/li&gt;
+&lt;li&gt;a potentially infinite series&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A great example use is that of a search, it could be implemented to gather all the elements to search and return them after the search is complete. Rather by using a generator you can return the results as they are found!&lt;/p&gt;
+&lt;p&gt;First off, let's start with the hello world of generators, the fibonacci sequence. If you don't know what the fibonacci sequence is, it's just adding the number that precedes itself and so on (eg, 1,1,2,3,5,8,etc), this is an infinite series.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="s2"&gt;"Generator version"&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+        &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;You can also generate the entire sequence into memory by using the list function on the generator function!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;If we were to use a function for this instead, which compiles the entire list of the fibonacci sequence before returning, this would mean &lt;code&gt;fibon(number_of_elements)&lt;/code&gt; would need to be computed and stored in memory. By using generators we can provide &lt;code&gt;fibon(number_of_elements)&lt;/code&gt; any number of elements and only the latest and it's preceding value are stored in memory.&lt;/p&gt;
+&lt;p&gt;Now imagine if you had a database with 100 million records, and you needed to calculate something for every single row. If you tried to retrieve the entire database and store it in memory, it would possibly just fall over. Rather by using a generator we can iterate through the database in smaller chunks. Another handy feature is to have separate generator instances which you can interweave throughout your project if you need to maintain multiple states in a simplistic manner.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;In this example, the entire 'data set' is stored in memory, but in a real use we'd request the small chunk from a database&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The generator function returns a generator object, so to get each 'iteration' we use the &lt;code&gt;next&lt;/code&gt; function.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_big_data&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;grouper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# While big_data is currently stored entirely in memory, if you are requesting from an external database you could just fetch n results&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_big_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;grouper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;batch_processor_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;batch_processor_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[0, 1, 2, 3, 4]
+[5, 6, 7, 8, 9]
+[0, 1, 2]
+[10, 11, 12, 13, 14]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Another good example is to use generators for user interaction (UI), where the program is waiting on the user to input something, but you don't know how long the program will have to wait for interaction. This enables the program to run until the user decides to close it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Do something with command&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;hello computer
+i am user
+
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;&lt;span class="ansi-red-intense-fg ansi-bold"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;KeyboardInterrupt&lt;/span&gt;                         Traceback (most recent call last)
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-4-3e09f71ee7b6&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt;         &lt;span class="ansi-green-intense-fg ansi-bold"&gt;yield&lt;/span&gt; cmd
+&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; 
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 6&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt; &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;for&lt;/span&gt; command &lt;span class="ansi-green-intense-fg ansi-bold"&gt;in&lt;/span&gt; user_input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      7&lt;/span&gt;     &lt;span class="ansi-red-intense-fg ansi-bold"&gt;# Do something with command&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      8&lt;/span&gt;     print&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;command&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-4-3e09f71ee7b6&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;user_input&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;()&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      1&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; user_input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      2&lt;/span&gt;     &lt;span class="ansi-green-intense-fg ansi-bold"&gt;while&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;True&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 3&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         &lt;/span&gt;cmd &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt; input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt;         &lt;span class="ansi-green-intense-fg ansi-bold"&gt;yield&lt;/span&gt; cmd
+&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; 
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;raw_input&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(self, prompt)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    858&lt;/span&gt;                 &lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"raw_input was called, but this frontend does not support input requests."&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    859&lt;/span&gt;             )
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;--&amp;gt; 860&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         return self._input_request(str(prompt),
+&lt;/span&gt;&lt;span class="ansi-green-fg"&gt;    861&lt;/span&gt;             self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;_parent_ident&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    862&lt;/span&gt;             self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;_parent_header&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;_input_request&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(self, prompt, ident, parent, password)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    902&lt;/span&gt;             &lt;span class="ansi-green-intense-fg ansi-bold"&gt;except&lt;/span&gt; KeyboardInterrupt&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    903&lt;/span&gt;                 &lt;span class="ansi-red-intense-fg ansi-bold"&gt;# re-raise KeyboardInterrupt, to truncate traceback&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;--&amp;gt; 904&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;                 &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;raise&lt;/span&gt; KeyboardInterrupt&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"Interrupted by user"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;from&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;None&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    905&lt;/span&gt;             &lt;span class="ansi-green-intense-fg ansi-bold"&gt;except&lt;/span&gt; Exception &lt;span class="ansi-green-intense-fg ansi-bold"&gt;as&lt;/span&gt; e&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;    906&lt;/span&gt;                 self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;log&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;warning&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"Invalid Message:"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; exc_info&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;True&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;KeyboardInterrupt&lt;/span&gt;: Interrupted by user&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Street Suffix Analysis &amp; Colouring with Python</title><link href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html" rel="alternate"></link><published>2020-07-24T00:00:00+10:00</published><updated>2020-07-24T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-24:/street-suffix-analysis-colouring-with-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Street Suffix Visualisation with Python&lt;/p&gt;
@@ -21305,7 +21530,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -21591,7 +21816,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41813,7 +42038,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -41968,7 +42193,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42655,7 +42880,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42735,7 +42960,7 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -43142,421 +43367,4 @@ Generating BarChartRace, plotting ['1871', '2000', '2007', '2008', '2009', '2010
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category></entry><entry><title>Translating Text in Python</title><link href="https://jackmckew.dev/translating-text-in-python.html" rel="alternate"></link><published>2020-05-29T00:00:00+10:00</published><updated>2020-05-29T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-05-29:/translating-text-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Working with data in a connected digital world, means you will possibly encounter data in a language outside your own. In this post we'll go into ways to translate this data in Python.&lt;/p&gt;
-&lt;p&gt;First off we need some sample text, and what is better to read about then pizza!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In …&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Working with data in a connected digital world, means you will possibly encounter data in a language outside your own. In this post we'll go into ways to translate this data in Python.&lt;/p&gt;
-&lt;p&gt;First off we need some sample text, and what is better to read about then pizza!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Source: http://saberitaliano.com.ar/reading/pizza.html&lt;/span&gt;
-&lt;span class="n"&gt;sample_text_it&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"""La pizza è un prodotto gastronomico che ha per base un impasto di acqua, farina di frumento, e lievito, lavorato fino a ottenere una forma piatta, cotto al forno e variamente condito.&lt;/span&gt;
-
-&lt;span class="s2"&gt;Benché si tratti ormai di un prodotto diffuso in quasi tutto il mondo, la pizza è generalmente considerata un piatto originario della cucina italiana ed in particolar modo napoletana. Nel sentire comune, infatti, ci si riferisce con questo termine alla pizza tonda condita con pomodoro e mozzarella, ossia la variante più conosciuta della cosiddetta pizza napoletana.&lt;/span&gt;
-
-&lt;span class="s2"&gt;La vera e propria origine della pizza è tuttavia argomento controverso: oltre a Napoli, altre città ne rivendicano la paternità. Esiste, del resto, anche un significato più ampio del termine "pizza". Infatti, trattandosi in ultima analisi di una particolare specie di pane o focaccia, la pizza si presenta in innumerevoli derivazioni e varianti, cambiando nome e caratteristiche a seconda delle diverse tradizioni locali. In particolare, in alcune aree dell'Italia centrale, viene chiamata "pizza" qualsiasi tipo di torta cotta al forno, salata o dolce e alta o bassa che sia."""&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Note that we use triple quotes to contain this string, because this is a multiline string. Care must be taken when using triple quotes, as these strings will also contain special characters such as newline, tabs and more.&lt;/p&gt;
-&lt;h2 id="Google-Translate-API---Free!"&gt;Google Translate API - Free!&lt;a class="anchor-link" href="#Google-Translate-API---Free!"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;If you've ever needed to translate anything from a language that you didn't know, chances are you've used Google Translate. It's almost magic how well this software performs, and the features it boasts are nothing short of amazing. On top of all of this, they offer a free API that we can access directly from our code! While there is some limitations, this is still an amazing start and if the program isn't required to translate mass amounts of text, this would be a straightforward solution.&lt;/p&gt;
-&lt;p&gt;To make this even simpler in Python, there is a package aptly named &lt;code&gt;googletrans&lt;/code&gt;, which interfaces with the Google Translate API for us &lt;a href="https://pypi.org/project/googletrans/"&gt;https://pypi.org/project/googletrans/&lt;/a&gt;. Let's begin by importing the package, and seeing what languages are supported.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;googletrans&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;googletrans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LANGUAGES&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;{'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian', 'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian', 'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa', 'zh-cn': 'chinese (simplified)', 'zh-tw': 'chinese (traditional)', 'co': 'corsican', 'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto', 'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian', 'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati', 'ht': 'haitian creole', 'ha': 'hausa', 'haw': 'hawaiian', 'iw': 'hebrew', 'hi': 'hindi', 'hmn': 'hmong', 'hu': 'hungarian', 'is': 'icelandic', 'ig': 'igbo', 'id': 'indonesian', 'ga': 'irish', 'it': 'italian', 'ja': 'japanese', 'jw': 'javanese', 'kn': 'kannada', 'kk': 'kazakh', 'km': 'khmer', 'ko': 'korean', 'ku': 'kurdish (kurmanji)', 'ky': 'kyrgyz', 'lo': 'lao', 'la': 'latin', 'lv': 'latvian', 'lt': 'lithuanian', 'lb': 'luxembourgish', 'mk': 'macedonian', 'mg': 'malagasy', 'ms': 'malay', 'ml': 'malayalam', 'mt': 'maltese', 'mi': 'maori', 'mr': 'marathi', 'mn': 'mongolian', 'my': 'myanmar (burmese)', 'ne': 'nepali', 'no': 'norwegian', 'ps': 'pashto', 'fa': 'persian', 'pl': 'polish', 'pt': 'portuguese', 'pa': 'punjabi', 'ro': 'romanian', 'ru': 'russian', 'sm': 'samoan', 'gd': 'scots gaelic', 'sr': 'serbian', 'st': 'sesotho', 'sn': 'shona', 'sd': 'sindhi', 'si': 'sinhala', 'sk': 'slovak', 'sl': 'slovenian', 'so': 'somali', 'es': 'spanish', 'su': 'sundanese', 'sw': 'swahili', 'sv': 'swedish', 'tg': 'tajik', 'ta': 'tamil', 'te': 'telugu', 'th': 'thai', 'tr': 'turkish', 'uk': 'ukrainian', 'ur': 'urdu', 'uz': 'uzbek', 'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu', 'fil': 'Filipino', 'he': 'Hebrew'}
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Next we need to create an instance of the translator class within &lt;code&gt;googletrans&lt;/code&gt;. Another feature of Google Translate, is that it can automatically detect the language that the text is in, and we can use this feature in our code too! This is straightforward by passing our string to the method &lt;code&gt;translator.detect()&lt;/code&gt;. This will return an instance of a class named &lt;code&gt;Detected&lt;/code&gt;, in which we can see the detected language and how confident the package is in it's prediction.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;translator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;googletrans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Translator&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;translator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sample_text_it&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Detected(lang=it, confidence=1.0)
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now time to get translating! Once again, a straightforward method of &lt;code&gt;translator.translate()&lt;/code&gt; is used by passing the string. We can also define the source &amp;amp; destination language to translate to. This returns an instance of the &lt;code&gt;Translated&lt;/code&gt; class containing attributes of:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;src&lt;/code&gt; - The source language to translate from&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dest&lt;/code&gt; - The destination language to translate to&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;text&lt;/code&gt; - The translated text&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;origin&lt;/code&gt; - The original text&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;pronunciation&lt;/code&gt; - How to pronounce the translated text (although this only returns &lt;code&gt;None&lt;/code&gt; in my experience)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;translated&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;translator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;translate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sample_text_it&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'it'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'en'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;translated&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Translated(src=it, dest=en, text=The pizza is a gourmet product that has as its base a mixture of water, wheat flour, and yeast, worked up to obtain a flat shape, baked and variously seasoned.
-
-Although it now is a widespread product in almost all over the world, pizza is generally considered an original dish of Italian cuisine and especially Neapolitan way. In common feeling, in fact, we are referring to with this term round pizza topped with tomato sauce and mozzarella, which is the most well-known variant of the so-called Neapolitan pizza.
-
-The real origin of pizza, however, is controversial: in addition to Naples, other cities claim its paternity. There is, moreover, also a broader meaning of the term "pizza". In fact, since in the final analysis of a particular kind of bread or focaccia, pizza presents itself in countless derivations and variations, changing name and characteristics depending on the different local traditions. In particular, in some areas of central Italy, it is called "pizza" any type of baked cake baked, salty or sweet, high or low it is., pronunciation=None, extra_data="{'translat...")
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;What if we had many strings that needed translating? Let's start by breaking our sample text into sections with the method &lt;code&gt;str.splitlines()&lt;/code&gt;, this will create a &lt;code&gt;list&lt;/code&gt; of each string that is separate by a newline (separate paragraphs).&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;We use the &lt;code&gt;filter()&lt;/code&gt; function to rid the list of empty strings for neatness sake&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sentence_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sample_text_it&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;splitlines&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="c1"&gt;# Remove empty strings&lt;/span&gt;
-&lt;span class="n"&gt;sentence_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sentence_list&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentence_list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;['La pizza è un prodotto gastronomico che ha per base un impasto di acqua, farina di frumento, e lievito, lavorato fino a ottenere una forma piatta, cotto al forno e variamente condito.', 'Benché si tratti ormai di un prodotto diffuso in quasi tutto il mondo, la pizza è generalmente considerata un piatto originario della cucina italiana ed in particolar modo napoletana. Nel sentire comune, infatti, ci si riferisce con questo termine alla pizza tonda condita con pomodoro e mozzarella, ossia la variante più conosciuta della cosiddetta pizza napoletana.', 'La vera e propria origine della pizza è tuttavia argomento controverso: oltre a Napoli, altre città ne rivendicano la paternità. Esiste, del resto, anche un significato più ampio del termine "pizza". Infatti, trattandosi in ultima analisi di una particolare specie di pane o focaccia, la pizza si presenta in innumerevoli derivazioni e varianti, cambiando nome e caratteristiche a seconda delle diverse tradizioni locali. In particolare, in alcune aree dell\'Italia centrale, viene chiamata "pizza" qualsiasi tipo di torta cotta al forno, salata o dolce e alta o bassa che sia.']
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's create a function to handle the translation step. We instantiate a new translator each time the function is called, this also helps to reinitalise the Google Translate API on each time we translate. If the &lt;code&gt;src_lang&lt;/code&gt; isn't defined the function call, let's use the magical method &lt;code&gt;translator.detect()&lt;/code&gt; to make a prediction for us.&lt;/p&gt;
-&lt;p&gt;Now we iterate over the list, calling our new function repeatedly and finally appending the translated data into a new list &lt;code&gt;translated_list&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;translate_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;src_lang&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;dest_lang&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"en"&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;translator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;googletrans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Translator&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;src_lang&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;src_lang&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;translator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lang&lt;/span&gt;
-    
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;translator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;translate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;src_lang&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;dest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dest_lang&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;
-        
-&lt;span class="n"&gt;translated_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;sentence&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sentence_list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;translated_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;translate_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentence&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;translated_list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;['The pizza is a gourmet product that has as its base a mixture of water, wheat flour, and yeast, worked up to obtain a flat shape, baked and variously seasoned.', 'Although it now is a widespread product in almost all over the world, pizza is generally considered an original dish of Italian cuisine and especially Neapolitan way. In common feeling, in fact, we are referring to with this term round pizza topped with tomato sauce and mozzarella, which is the most well-known variant of the so-called Neapolitan pizza.', 'The real origin of pizza, however, is controversial: in addition to Naples, other cities claim its paternity. There is, moreover, also a broader meaning of the term "pizza". In fact, since in the final analysis of a particular kind of bread or focaccia, pizza presents itself in countless derivations and variations, changing name and characteristics depending on the different local traditions. In particular, in some areas of central Italy, it is called "pizza" any type of baked cake baked, salty or sweet, high or low it is.']
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="DeepL-Translator"&gt;&lt;a href="https://www.deepl.com/translator"&gt;DeepL Translator&lt;/a&gt;&lt;a class="anchor-link" href="#DeepL-Translator"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Sometimes we need to translate much larger datasets. I recently faced this problem while volunteering for a COVID-19 project in which we wanted to run analysis on the tweets of Italy during the pandemic. We were supplied with millions of tweets over weeks in May 2020, all in Italian. As most of the team only spoke English, and as far as we knew sentiment analysis was developed for English extensively; we would need to translate all of this data. While Google Translate can be paid for, we were kindly donated an API key from the DeepL team for our cause. Following this, will be how the team &amp;amp; I set up the mass translator with &lt;code&gt;pandas&lt;/code&gt;, &lt;code&gt;requests&lt;/code&gt; and the DeepL Translator API.&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;As to not share the donated API key, responses from the DeepL translator will not be shown in this post.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Firstly, we will initialise our sample text (split by paragraph) from before, in a &lt;code&gt;pandas DataFrame&lt;/code&gt; to represent our mass datasets.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;source_text_df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentence_list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"Source Text"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
-&lt;span class="n"&gt;source_text_df&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
-&lt;div&gt;
-&lt;style scoped=""&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
-&lt;thead&gt;
-&lt;tr style="text-align: right;"&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Source Text&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;0&lt;/th&gt;
-&lt;td&gt;La pizza è un prodotto gastronomico che ha per...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1&lt;/th&gt;
-&lt;td&gt;Benché si tratti ormai di un prodotto diffuso ...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;2&lt;/th&gt;
-&lt;td&gt;La vera e propria origine della pizza è tuttav...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now that we have our data arranged in a &lt;code&gt;pandas DataFrame&lt;/code&gt;, we create a function for interfacing with the DeepL Translator API.&lt;/p&gt;
-&lt;p&gt;The documentation for the DeepL Translator API is fantastic, and can be reached at &lt;a href="https://www.deepl.com/docs-api/introduction/"&gt;https://www.deepl.com/docs-api/introduction/&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Using build our request as a dictionary to be used with the &lt;code&gt;requests&lt;/code&gt; package. Read more details about how payloads are formatted in the &lt;a href="https://requests.readthedocs.io/en/master/user/quickstart/#passing-parameters-in-urls"&gt;requests documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The response back from DeepL is then in the JSON format, which we can then convert back into a dictionary with the &lt;code&gt;response.json()&lt;/code&gt; method.&lt;/p&gt;
-&lt;p&gt;Finally we loop through the returned response, and reconstruct a list of the translated data to return from the function.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;translate_text_deepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;api_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;src_lang&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"IT"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;target_lang&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"EN"&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="c1"&gt;# Create empty list&lt;/span&gt;
-    &lt;span class="n"&gt;translated_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-
-    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="c1"&gt;# Translate all tweets and add to list&lt;/span&gt;
-        &lt;span class="c1"&gt;# Request should not exceed 30KB&lt;/span&gt;
-        &lt;span class="n"&gt;parameters&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="s2"&gt;"text"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="s2"&gt;"source_lang"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;src_lang&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="s2"&gt;"target_lang"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;target_lang&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="s2"&gt;"auth_key"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;api_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"https://api.deepl.com/v2/translate"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;parameters&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;deepl_response_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deepl_response_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                &lt;span class="n"&gt;translated_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"text"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decoder&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;JSONDecodeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="c1"&gt;# Insert error for each line in data&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="n"&gt;translated_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Error"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Error translating.. `Error` placed in output dataset"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;translated_list&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now that we have our function that interfaces with the DeepL Translator API, we can use this to translate all of our data easily by calling the function, that's it, done!&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;The output shows Error due to the API Key not being valid&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;source_text_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Translated Text'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;translate_text_deepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source_text_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Source Text'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="s2"&gt;"APIKEY"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;"IT"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;"EN"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Error translating.. `Error` placed in output dataset
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;If the DataFrame is much larger in size, we may need to process this data in chunks. This can be done by using our new &lt;code&gt;translate_text_deepl&lt;/code&gt; function from a different perspective.&lt;/p&gt;
-&lt;p&gt;Similarly we create a new list to store all of our translated data, and add in new data iteratively in chunks in our DataFrame. Chunks can be iterated through a DataFrame using the &lt;code&gt;groupby&lt;/code&gt; method, along with with &lt;code&gt;arange&lt;/code&gt; function in &lt;code&gt;numpy&lt;/code&gt;.&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;The output shows Error due to the API Key not being valid&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;all_translated_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-
-&lt;span class="n"&gt;chunk_size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;chunk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;source_text_df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;groupby&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source_text_df&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;chunk_size&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# Add new data to list&lt;/span&gt;
-    &lt;span class="c1"&gt;# We use extend as the function returns a list&lt;/span&gt;
-    &lt;span class="n"&gt;all_translated_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;translate_text_deepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chunk&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Source Text'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="s2"&gt;"APIKEY"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;"IT"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;"EN"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="n"&gt;source_text_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Translated Text'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;all_translated_data&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Error translating.. `Error` placed in output dataset
-Error translating.. `Error` placed in output dataset
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry></feed>
+&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category></entry></feed>

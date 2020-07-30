@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="Generators are a special type of function in python, letting you &#39;lazy load&#39; data; a function becomes a generator is with the yield statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …" />
+<meta name="keywords" content="datascience, python">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Generators in Python"/>
+<meta property="og:description" content="Generators are a special type of function in python, letting you &#39;lazy load&#39; data; a function becomes a generator is with the yield statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/generators-in-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-07-30 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Data Science"/>
+<meta property="article:tag" content="datascience"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+    <title>Jack McKew's Blog &ndash; Generators in Python</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 75</p>
+            <p>Number of Words: 49,685</p>
+            <p>Number of Lines of Code 3,621</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 20px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    /* background-color: #FF813F !important; */
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <br>
+            <a href="https://feedburner.google.com/fb/a/mailverify?uri=JackMckewsBlog&amp;loc=en_US" class="mbscreenphone phonelink btn btn-info btn-lg">
+                Subscribe by Email <i class="fas fa-envelope"></i>
+              </a>             <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="generators-in-python">Generators in Python</h1>
+    <p>
+       Posted on Thu 30 July 2020 in <a href="https://jackmckew.dev/category/data-science.html">Data Science</a>
+
+        &#8226; 4 min read
+    </p>
+  </header>
+
+
+  <div>
+    </head><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the <code>yield</code> statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as opposed to loading the entire data set. While this gives marginal increases in efficiency/speed with small data sets, it can provide dramatic improvements on larger data sets; especially if you are using a system with limited memory.</p>
+<p>Before we dive into some examples on where you could use generators, let's look where you should <strong>not</strong> use generators:</p>
+<ul>
+<li>the data needs to be accessed <strong>multiple</strong> times (eg, <code>join</code>)</li>
+<li>need to access the data <strong>randomly</strong> (or any other method of access that's not forward)</li>
+<li>using a different compiler</li>
+</ul>
+<p>Some examples where you should use generators are:</p>
+<ul>
+<li>you don't know if you'll need <strong>all</strong> the results</li>
+<li>you don't want to allocate all the results into memory</li>
+<li>you don't know how many results there may be (eg, user interaction)</li>
+<li>a potentially infinite series</li>
+</ul>
+<p>A great example use is that of a search, it could be implemented to gather all the elements to search and return them after the search is complete. Rather by using a generator you can return the results as they are found!</p>
+<p>First off, let's start with the hello world of generators, the fibonacci sequence. If you don't know what the fibonacci sequence is, it's just adding the number that precedes itself and so on (eg, 1,1,2,3,5,8,etc), this is an infinite series.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fibon</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="s2">"Generator version"</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">a</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fibon</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can also generate the entire sequence into memory by using the list function on the generator function!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">fibon</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we were to use a function for this instead, which compiles the entire list of the fibonacci sequence before returning, this would mean <code>fibon(number_of_elements)</code> would need to be computed and stored in memory. By using generators we can provide <code>fibon(number_of_elements)</code> any number of elements and only the latest and it's preceding value are stored in memory.</p>
+<p>Now imagine if you had a database with 100 million records, and you needed to calculate something for every single row. If you tried to retrieve the entire database and store it in memory, it would possibly just fall over. Rather by using a generator we can iterate through the database in smaller chunks. Another handy feature is to have separate generator instances which you can interweave throughout your project if you need to maintain multiple states in a simplistic manner.</p>
+<blockquote><p>In this example, the entire 'data set' is stored in memory, but in a real use we'd request the small chunk from a database</p>
+</blockquote>
+<p>The generator function returns a generator object, so to get each 'iteration' we use the <code>next</code> function.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_big_data</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">batch_process</span><span class="p">(</span><span class="n">chunksize</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
+
+    <span class="k">def</span> <span class="nf">grouper</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">zip_longest</span><span class="p">(</span><span class="n">fillvalue</span><span class="o">=</span><span class="n">fillvalue</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="c1"># While big_data is currently stored entirely in memory, if you are requesting from an external database you could just fetch n results</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">load_big_data</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">grouper</span><span class="p">(</span><span class="n">chunksize</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+
+        <span class="k">yield</span> <span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">batch_processor_1</span> <span class="o">=</span> <span class="n">batch_process</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">batch_processor_2</span> <span class="o">=</span> <span class="n">batch_process</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">batch_processor_1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">batch_processor_1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">batch_processor_2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">batch_processor_1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0, 1, 2, 3, 4]
+[5, 6, 7, 8, 9]
+[0, 1, 2]
+[10, 11, 12, 13, 14]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another good example is to use generators for user interaction (UI), where the program is waiting on the user to input something, but you don't know how long the program will have to wait for interaction. This enables the program to run until the user decides to close it.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">user_input</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="n">cmd</span>
+
+<span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">user_input</span><span class="p">():</span>
+    <span class="c1"># Do something with command</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hello computer
+i am user
+
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre><span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-4-3e09f71ee7b6&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">      4</span>         <span class="ansi-green-intense-fg ansi-bold">yield</span> cmd
+<span class="ansi-green-fg">      5</span> 
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 6</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">for</span> command <span class="ansi-green-intense-fg ansi-bold">in</span> user_input<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">      7</span>     <span class="ansi-red-intense-fg ansi-bold"># Do something with command</span>
+<span class="ansi-green-fg">      8</span>     print<span class="ansi-yellow-intense-fg ansi-bold">(</span>command<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-4-3e09f71ee7b6&gt;</span> in <span class="ansi-cyan-fg">user_input</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-fg">      1</span> <span class="ansi-green-intense-fg ansi-bold">def</span> user_input<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">      2</span>     <span class="ansi-green-intense-fg ansi-bold">while</span> <span class="ansi-green-intense-fg ansi-bold">True</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 3</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>cmd <span class="ansi-yellow-intense-fg ansi-bold">=</span> input<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">      4</span>         <span class="ansi-green-intense-fg ansi-bold">yield</span> cmd
+<span class="ansi-green-fg">      5</span> 
+
+<span class="ansi-green-intense-fg ansi-bold">c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ansi-cyan-fg">raw_input</span><span class="ansi-blue-intense-fg ansi-bold">(self, prompt)</span>
+<span class="ansi-green-fg">    858</span>                 <span class="ansi-blue-intense-fg ansi-bold">"raw_input was called, but this frontend does not support input requests."</span>
+<span class="ansi-green-fg">    859</span>             )
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 860</span><span class="ansi-yellow-intense-fg ansi-bold">         return self._input_request(str(prompt),
+</span><span class="ansi-green-fg">    861</span>             self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_parent_ident<span class="ansi-yellow-intense-fg ansi-bold">,</span>
+<span class="ansi-green-fg">    862</span>             self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_parent_header<span class="ansi-yellow-intense-fg ansi-bold">,</span>
+
+<span class="ansi-green-intense-fg ansi-bold">c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ansi-cyan-fg">_input_request</span><span class="ansi-blue-intense-fg ansi-bold">(self, prompt, ident, parent, password)</span>
+<span class="ansi-green-fg">    902</span>             <span class="ansi-green-intense-fg ansi-bold">except</span> KeyboardInterrupt<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">    903</span>                 <span class="ansi-red-intense-fg ansi-bold"># re-raise KeyboardInterrupt, to truncate traceback</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 904</span><span class="ansi-yellow-intense-fg ansi-bold">                 </span><span class="ansi-green-intense-fg ansi-bold">raise</span> KeyboardInterrupt<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">"Interrupted by user"</span><span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-green-intense-fg ansi-bold">from</span> <span class="ansi-green-intense-fg ansi-bold">None</span>
+<span class="ansi-green-fg">    905</span>             <span class="ansi-green-intense-fg ansi-bold">except</span> Exception <span class="ansi-green-intense-fg ansi-bold">as</span> e<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">    906</span>                 self<span class="ansi-yellow-intense-fg ansi-bold">.</span>log<span class="ansi-yellow-intense-fg ansi-bold">.</span>warning<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">"Invalid Message:"</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> exc_info<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">True</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-red-intense-fg ansi-bold">KeyboardInterrupt</span>: Interrupted by user</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/datascience.html">datascience</a>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html" title="Street Suffix Analysis & Colouring with Python">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/looking-for-patterns-in-city-names-interactive-plotting.html">Looking for Patterns in City Names & Interactive Plotting</a></li>
+      <li><a href="https://jackmckew.dev/profitable-python-podcast-show-notes.html">Profitable Python Podcast - Show Notes</a></li>
+      <li><a href="https://jackmckew.dev/how-pandas_alive-was-made.html">How Pandas_Alive was Made</a></li>
+      <li><a href="https://jackmckew.dev/geopandas-and-pandas-alive.html">Geopandas and Pandas Alive</a></li>
+      <li><a href="https://jackmckew.dev/make-a-readme-documentation-with-jupyter-notebooks.html">Make a README & Documentation with Jupyter Notebooks</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>
