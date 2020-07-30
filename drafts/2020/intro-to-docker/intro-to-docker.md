@@ -6,6 +6,8 @@ Tags: software
 
 What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the *'But it works on my machine'* problem. This post will go through an intro to docker and how you can use it. A crucial part to Docker is the container, *a Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings*
 
+I did a post back in 2018 on containerization and mentioned Docker too! <https://jackmckew.dev/episode-6-containerization.html>
+
 ## Docker Ecosystem
 
 Docker isn't a single program, it's a suite of programs which we'll refer to as an ecosystem. A brief description of all the components that make the ecosystem is:
@@ -72,3 +74,38 @@ So for me to tag an image I'd run:
 `docker build -t jackmckew/my-new-docker-image:latest Dockerfile`
 
 Which if we wanted to run this image, we can do this now with `docker run jackmckew/my-new-docker-image`
+
+> The version is optional to provide, if it isn't provided it will default to latest.
+
+### Alpine Docker Images
+
+Note that we used `FROM alpine` earlier on in our Dockerfile. `alpine` is a term used in Docker to represent the most compressed and stripped down version of an image. If we wanted to use a different image like those listed on Docker Hub (https://hub.docker.com/search?q=&type=image), we could easily specify to get the `alpine` version of an image by using `FROM node:alpine`.  
+
+> Check the description of an image to check whether an alpine version is available.
+
+### Change Working Directory
+
+We can change the working directory inside the container with `WORKDIR`. This is very useful if we don't want to copy things into the root directory of the container. If a folder isn't found in the argument to `WORKDIR`, it'll be created automatically.
+
+## Mounting Files
+
+Docker defaults to NOT include any files inside an image from the local PC. We always must mount any files we want to use inside the container in the Dockerfile. One way to do this is using the `COPY` argument in the Dockerfile.
+
+This can be done with: `COPY [location_on_local_PC_to_copy] [place_to_story]`
+
+An example of this is: `COPY ./ ./`, this will copy the current folder relative to where the terminal is, and places it in the current working directory inside the container.
+
+## Port Mapping
+
+By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.
+
+This is not changed within the Dockerfile, but rather when we run the container with the `-p` flag. This can be done with:
+
+```bash
+docker run -p [local_pc_port] : [container_port] [image_name]
+```
+
+> By default there is no limitation on default traffic getting out of a container, only limitations on traffic getting in.
+
+> This local PC port and the container port do NOT have to match.
+
