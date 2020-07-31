@@ -109,3 +109,55 @@ docker run -p [local_pc_port] : [container_port] [image_name]
 
 > This local PC port and the container port do NOT have to match.
 
+## Docker Compose
+
+Docker compose is a separate tool apart of the Docker CLI, this is used to start up multiple containers at the same time. This helps automate the arguments that would be need to connect multiple containers to talk to each other.
+
+We need to create `docker-compose.yml` files that we can feed into the docker compose CLI, this is essentially replacing the arguments that we've been typing into the Docker CLI previously.
+
+Here's an example of a `docker-compose.yml` which will:
+
+1. Create an container that will host a redis server
+2. Create an container that will host a nodejs app
+3. Network the ports of the nodejs app container
+
+``` yaml
+version: "3"
+services:
+  redis-server:
+    image: "redis"
+  node-app:
+    build: .
+    ports:
+      - "8000:8000"
+```
+
+Let's break it down, first we specify the version of docker-compose to run on. Following that under services, each container that we want to run is indented and then named. Inside the service declaration we can either specify an image to use, or whether to use docker build to build a Dockerfile (note this will look in the current directory for a Dockerfile). Finally mapping port 8000 of the local PC to port 8000 of the docker container.
+
+By using docker-compose, this also automates that the docker containers run on the same network. This would be a major pain to do without using docker-compose.
+
+Once we've created a `docker-compose.yml`, we can run this by running the command `docker-compose up` inside the same directory. We can also specify that we want to rebuild all the images inside the `docker-compose.yml` file with `--build`, so the new command becomes `docker-compose up --build`.
+
+### Stopping Docker Compose
+
+Rather than using `docker stop` with each of the IDs of the containers that we created. Luckily, we can simply run `docker-compose down` to stop all the containers after using `docker-compose up`. This is particularly useful when we run `docker-compose up -d` which will run the containers in the background, so we can't just CTRL+C out of it.
+
+### Restart Policies
+
+If any container crashes, docker-compose defaults to the restart policy of `"no"`, which never attempts to restart the container. Potential restart policies in docker-compose are:
+
+| Policy         | Description                                                    |
+| -------------- | -------------------------------------------------------------- |
+| "no"           | Never restart a container on stop/crash                        |
+| always         | If a container stops for any reason at all, attempt to restart |
+| on-failure     | Only restart if a container stops with an error                |
+| unless-stopped | Always restart unless forcibly stopped                         |
+
+The restart policy is defined along with other arguments under the service name.
+
+### Check Docker Compose Status
+
+Similarly to running `docker ps`, we can run `docker-compose ps` to check all the running containers that we started with `docker-compose up`. 
+
+> This must be used in the same directory as the `docker-compose.yml` file.
+
