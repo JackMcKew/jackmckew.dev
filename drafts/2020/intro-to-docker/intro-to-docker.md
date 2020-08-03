@@ -79,7 +79,7 @@ Which if we wanted to run this image, we can do this now with `docker run jackmc
 
 ### Alpine Docker Images
 
-Note that we used `FROM alpine` earlier on in our Dockerfile. `alpine` is a term used in Docker to represent the most compressed and stripped down version of an image. If we wanted to use a different image like those listed on Docker Hub (https://hub.docker.com/search?q=&type=image), we could easily specify to get the `alpine` version of an image by using `FROM node:alpine`.  
+Note that we used `FROM alpine` earlier on in our Dockerfile. `alpine` is a term used in Docker to represent the most compressed and stripped down version of an image. If we wanted to use a different image like those listed on Docker Hub (<https://hub.docker.com/search?q=&type=image>), we could easily specify to get the `alpine` version of an image by using `FROM node:alpine`.  
 
 > Check the description of an image to check whether an alpine version is available.
 
@@ -106,7 +106,6 @@ docker run -p [local_pc_port] : [container_port] [image_name]
 ```
 
 > By default there is no limitation on default traffic getting out of a container, only limitations on traffic getting in.
-
 > This local PC port and the container port do NOT have to match.
 
 ## Docker Compose
@@ -157,7 +156,6 @@ The restart policy is defined along with other arguments under the service name.
 
 ### Check Docker Compose Status
 
-Similarly to running `docker ps`, we can run `docker-compose ps` to check all the running containers that we started with `docker-compose up`. 
+Similarly to running `docker ps`, we can run `docker-compose ps` to check all the running containers that we started with `docker-compose up`.
 
 > This must be used in the same directory as the `docker-compose.yml` file.
-
