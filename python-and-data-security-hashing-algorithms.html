@@ -59,9 +59,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 75</p>
-            <p>Number of Words: 49,685</p>
-            <p>Number of Lines of Code 3,621</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 76</p>
+            <p>Number of Words: 50,723</p>
+            <p>Number of Lines of Code 3,719</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -225,11 +225,11 @@
 </ol>
 <p>From this, we will use the argon2 hashing algorithm. As normal, it is best practice to set up a virtual environment (or conda environment) and install the dependencies, in this case passlib.</p>
 <p>First of all, import the hashing algorithm you wish to use from the passlib package:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">argon2</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">argon2</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Following importing the hashing algorithm, to hash the password in our case is very simple and we can have a peak at what the output hash looks like:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">)</span>
 
@@ -248,7 +248,7 @@
 <li>\$mvLTquN71JPjuC+S9QNXYA - the base64-encoded hashed password (derived key), using standard base64 encoding and no padding.</li>
 </ul>
 <p>If we run this again, we can check that the outputs are completely different due to the randomly generated salt.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">hash</span> <span class="o">=</span> <span class="n">argon2</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">)</span>
 
@@ -260,14 +260,14 @@
 </blockquote>
 <p>Now that we've generated our new passwords, stored them away in a secure database somewhere, using a secure method of communication somehow, our user wants to login with the password they signed up with ("super_secret_password") and we have to check if this is the correct password.</p>
 <p>To do this with passlib, it is as simply as calling the .verify function with the plaintext and the equivalent hash which will return a boolean value determining whether of not the password is correct or not.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"super_secret_password"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
 <p>True</p>
 </blockquote>
 <p>Hooray! Our password verification system works, now we would like to check that if the user inputs a incorrect password that our algorithm returns correctly (false).</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"user_name"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">argon2</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">"user_name"</span><span class="p">,</span><span class="nb">hash</span><span class="p">))</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -358,11 +358,11 @@
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html">Dataclasses vs Attrs vs Pydantic</a></li>
       <li><a href="https://jackmckew.dev/generators-in-python.html">Generators in Python</a></li>
       <li><a href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html">Street Suffix Analysis & Colouring with Python</a></li>
       <li><a href="https://jackmckew.dev/sentiment-analysis-text-cleaning-in-python-with-vader.html">Sentiment Analysis & Text Cleaning in Python with Vader</a></li>
       <li><a href="https://jackmckew.dev/translating-text-in-python.html">Translating Text in Python</a></li>
-      <li><a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
     </ul>
   </div>
 
