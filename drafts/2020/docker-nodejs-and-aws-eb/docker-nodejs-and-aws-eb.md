@@ -78,3 +78,7 @@ Next up we need to set up our instance of Elastic Beanstalk on AWS. We need to c
 Since the previous post relies upon a multi-stage Dockerfile to build the app and run the app within nginx, we must ensure to use the platform `Docker running on 64bit Amazon Linux/2.15.2`, as `Docker running on Amazon Linux 2`, [does not support multi-stage Dockerfiles](https://stackoverflow.com/questions/61462646/unable-to-deploy-docker-application-in-elasticbeanstalk-using-travis-ci). Furthermore, we exposed the ports in the Dockerfile through docker-compose or the Docker CLI previously, we can also do this by adding the command `EXPOSE 80` in the production Dockerfile.
 
 Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.
+
+## Conclusion
+
+This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: <https://github.com/JackMcKew/docker-react>
