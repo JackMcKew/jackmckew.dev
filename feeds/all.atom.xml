@@ -12,7 +12,7 @@
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Attrs-vs-Dataclasses:-Features"&gt;Attrs vs Dataclasses: Features&lt;a class="anchor-link" href="#Attrs-vs-Dataclasses:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
+&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
 &lt;thead&gt;&lt;tr&gt;
 &lt;th&gt;Feature&lt;/th&gt;
 &lt;th style="text-align:center"&gt;Dataclass&lt;/th&gt;
@@ -91,7 +91,7 @@
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;First off let's start with our example class in the default way that it would be implemented in Python.&lt;/p&gt;
+&lt;h2 id="Example-Class"&gt;Example Class&lt;a class="anchor-link" href="#Example-Class"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;First off let's start with our example class in the default way that it would be implemented in Python.&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;We will also use type hints in our class defintions, this is best practice for ensuring our variables are the type we intend them to be. Type hints are also integrated into attrs for creating classes.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
@@ -159,7 +159,7 @@ Equality dunder method (using is) (should be True if implemented): False
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Dataclasses by default automatically initialise a bunch of dunder methods for us in a class such as:&lt;/p&gt;
+&lt;h2 id="Dataclasses"&gt;Dataclasses&lt;a class="anchor-link" href="#Dataclasses"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Dataclasses by default automatically initialise a bunch of dunder methods for us in a class such as:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;__init__&lt;/code&gt; The initialisation method for the class&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;__repr__&lt;/code&gt; How the class is represented with print() is called&lt;/li&gt;
@@ -245,7 +245,8 @@ Equality dunder method (using is) (should be True if implemented): False
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Validators-in-attrs"&gt;Validators in attrs&lt;a class="anchor-link" href="#Validators-in-attrs"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One major functionality that &lt;code&gt;attrs&lt;/code&gt; has but dataclasses doesn't, is validators. This enables us to ensure that when our classes are being created that we validate the inputs to any specific values. Let's build an example that ensure our parameter &lt;code&gt;x&lt;/code&gt; is greater than 42, and if not raise an error to the user.&lt;/p&gt;
+&lt;h2 id="Attrs"&gt;Attrs&lt;a class="anchor-link" href="#Attrs"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Next let's dive into &lt;code&gt;attrs&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="Validators-in-attrs"&gt;Validators in attrs&lt;a class="anchor-link" href="#Validators-in-attrs"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;One major functionality that &lt;code&gt;attrs&lt;/code&gt; has but dataclasses doesn't, is validators. This enables us to ensure that when our classes are being created that we validate the inputs to any specific values. Let's build an example that ensure our parameter &lt;code&gt;x&lt;/code&gt; is greater than 42, and if not raise an error to the user.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -314,7 +315,7 @@ Equality dunder method (using is) (should be True if implemented): False
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Converters-in-Attrs"&gt;Converters in Attrs&lt;a class="anchor-link" href="#Converters-in-Attrs"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Converters are used for the sanitisation of the input data when creating classes. If we want to support our users to create our parameters which are intended to be integers, we can santise this input with converters. This let's our classes be much more flexible with our users while still keeping stability in the typing behind the parameters.&lt;/p&gt;
+&lt;h3 id="Converters-in-Attrs"&gt;Converters in Attrs&lt;a class="anchor-link" href="#Converters-in-Attrs"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Converters are used for the sanitisation of the input data when creating classes. If we want to support our users to create our parameters which are intended to be integers, we can santise this input with converters. This let's our classes be much more flexible with our users while still keeping stability in the typing behind the parameters.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -363,7 +364,7 @@ ConvertedData(x=42, y=None, kwargs=None)
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Programmatic-Creation-of-Attrs"&gt;Programmatic Creation of Attrs&lt;a class="anchor-link" href="#Programmatic-Creation-of-Attrs"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;In some cases you may want to create classes programmatically, well attrs doesn't let us down and provides a method for us! We can easily just pass a dictionary of all the parameters we need.&lt;/p&gt;
+&lt;h3 id="Programmatic-Creation-of-Attrs"&gt;Programmatic Creation of Attrs&lt;a class="anchor-link" href="#Programmatic-Creation-of-Attrs"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In some cases you may want to create classes programmatically, well attrs doesn't let us down and provides a method for us! We can easily just pass a dictionary of all the parameters we need.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -22023,7 +22024,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -22309,7 +22310,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42527,7 +42528,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42682,7 +42683,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;

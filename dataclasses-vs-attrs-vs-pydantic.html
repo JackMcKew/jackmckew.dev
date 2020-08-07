@@ -60,7 +60,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 76</p>
-            <p>Number of Words: 50,724</p>
+            <p>Number of Words: 50,732</p>
             <p>Number of Lines of Code 3,719</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -169,7 +169,7 @@
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Attrs-vs-Dataclasses:-Features">Attrs vs Dataclasses: Features<a class="anchor-link" href="#Attrs-vs-Dataclasses:-Features">¶</a></h2><table class="table table-striped">
+<h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features">Dataclasses vs Attrs vs Pydantic: Features<a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features">¶</a></h2><table class="table table-striped">
 <thead><tr>
 <th>Feature</th>
 <th style="text-align:center">Dataclass</th>
@@ -248,7 +248,7 @@
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First off let's start with our example class in the default way that it would be implemented in Python.</p>
+<h2 id="Example-Class">Example Class<a class="anchor-link" href="#Example-Class">¶</a></h2><p>First off let's start with our example class in the default way that it would be implemented in Python.</p>
 <blockquote><p>We will also use type hints in our class defintions, this is best practice for ensuring our variables are the type we intend them to be. Type hints are also integrated into attrs for creating classes.</p>
 </blockquote>
 </div>
@@ -316,7 +316,7 @@ Equality dunder method (using is) (should be True if implemented): False
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Dataclasses by default automatically initialise a bunch of dunder methods for us in a class such as:</p>
+<h2 id="Dataclasses">Dataclasses<a class="anchor-link" href="#Dataclasses">¶</a></h2><p>Dataclasses by default automatically initialise a bunch of dunder methods for us in a class such as:</p>
 <ul>
 <li><code>__init__</code> The initialisation method for the class</li>
 <li><code>__repr__</code> How the class is represented with print() is called</li>
@@ -402,7 +402,8 @@ Equality dunder method (using is) (should be True if implemented): False
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Validators-in-attrs">Validators in attrs<a class="anchor-link" href="#Validators-in-attrs">¶</a></h2><p>One major functionality that <code>attrs</code> has but dataclasses doesn't, is validators. This enables us to ensure that when our classes are being created that we validate the inputs to any specific values. Let's build an example that ensure our parameter <code>x</code> is greater than 42, and if not raise an error to the user.</p>
+<h2 id="Attrs">Attrs<a class="anchor-link" href="#Attrs">¶</a></h2><p>Next let's dive into <code>attrs</code></p>
+<h3 id="Validators-in-attrs">Validators in attrs<a class="anchor-link" href="#Validators-in-attrs">¶</a></h3><p>One major functionality that <code>attrs</code> has but dataclasses doesn't, is validators. This enables us to ensure that when our classes are being created that we validate the inputs to any specific values. Let's build an example that ensure our parameter <code>x</code> is greater than 42, and if not raise an error to the user.</p>
 </div>
 </div>
 </div>
@@ -471,7 +472,7 @@ Equality dunder method (using is) (should be True if implemented): False
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Converters-in-Attrs">Converters in Attrs<a class="anchor-link" href="#Converters-in-Attrs">¶</a></h2><p>Converters are used for the sanitisation of the input data when creating classes. If we want to support our users to create our parameters which are intended to be integers, we can santise this input with converters. This let's our classes be much more flexible with our users while still keeping stability in the typing behind the parameters.</p>
+<h3 id="Converters-in-Attrs">Converters in Attrs<a class="anchor-link" href="#Converters-in-Attrs">¶</a></h3><p>Converters are used for the sanitisation of the input data when creating classes. If we want to support our users to create our parameters which are intended to be integers, we can santise this input with converters. This let's our classes be much more flexible with our users while still keeping stability in the typing behind the parameters.</p>
 </div>
 </div>
 </div>
@@ -520,7 +521,7 @@ ConvertedData(x=42, y=None, kwargs=None)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Programmatic-Creation-of-Attrs">Programmatic Creation of Attrs<a class="anchor-link" href="#Programmatic-Creation-of-Attrs">¶</a></h2><p>In some cases you may want to create classes programmatically, well attrs doesn't let us down and provides a method for us! We can easily just pass a dictionary of all the parameters we need.</p>
+<h3 id="Programmatic-Creation-of-Attrs">Programmatic Creation of Attrs<a class="anchor-link" href="#Programmatic-Creation-of-Attrs">¶</a></h3><p>In some cases you may want to create classes programmatically, well attrs doesn't let us down and provides a method for us! We can easily just pass a dictionary of all the parameters we need.</p>
 </div>
 </div>
 </div>
