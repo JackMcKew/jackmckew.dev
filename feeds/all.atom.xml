@@ -1,11 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-08-07T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Dataclasses vs Attrs vs Pydantic</title><link href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html" rel="alternate"></link><published>2020-08-07T00:00:00+10:00</published><updated>2020-08-07T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-07:/dataclasses-vs-attrs-vs-pydantic.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-08-07T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Dataclasses vs Attrs vs Pydantic</title><link href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html" rel="alternate"></link><published>2020-08-07T00:00:00+10:00</published><updated>2020-08-07T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-07:/dataclasses-vs-attrs-vs-pydantic.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Python 3.7 introduced dataclasses, a handy decorator that can make creating classes so much easier and seamless. This post will go into comparing a regular class, a 'dataclass' and a class using attrs. Dataclasses were based on attrs, which is a python package that also aims to make creating …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Python 3.7 introduced dataclasses, a handy decorator that can make creating classes so much easier and seamless. This post will go into comparing a regular class, a 'dataclass' and a class using attrs. Dataclasses were based on attrs, which is a python package that also aims to make creating …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Python 3.7 introduced dataclasses, a handy decorator that can make creating classes so much easier and seamless. This post will go into comparing a regular class, a 'dataclass' and a class using attrs. Dataclasses were based on attrs, which is a python package that also aims to make creating classes a much more enjoyable experience. Dataclasses are included in the standard library (provided 3.7+), while to enable attrs, it must be installed with pip (eg, &lt;code&gt;pip install attrs&lt;/code&gt;). Mainly they are for automating the (sometimes) painful experience of writing dunder methods. You can read more about dunder methods in a prevous post here: &lt;a href="https://jackmckew.dev/dunders-in-python.html"&gt;https://jackmckew.dev/dunders-in-python.html&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Attrs-vs-Dataclasses:-Features"&gt;Attrs vs Dataclasses: Features&lt;a class="anchor-link" href="#Attrs-vs-Dataclasses:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
+&lt;thead&gt;&lt;tr&gt;
+&lt;th&gt;Feature&lt;/th&gt;
+&lt;th style="text-align:center"&gt;Dataclass&lt;/th&gt;
+&lt;th style="text-align:center"&gt;Attrs&lt;/th&gt;
+&lt;th style="text-align:center"&gt;Pydantic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;frozen&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;defaults&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;totuple&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;todict&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;validators&lt;/td&gt;
+&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;converters&lt;/td&gt;
+&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;slotted&lt;/td&gt;
+&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;programmatic creation&lt;/td&gt;
+&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
+&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
+&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="When-to-use-Dataclasses"&gt;When to use Dataclasses&lt;a class="anchor-link" href="#When-to-use-Dataclasses"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Dataclasses are mainly about 'grouping' variables together. Choose dataclasses if:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The main concern is around the type of the variable, not the value&lt;/li&gt;
+&lt;li&gt;Adding another package dependancy isn't trivial&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="When-to-use-Attrs"&gt;When to use Attrs&lt;a class="anchor-link" href="#When-to-use-Attrs"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Attrs are about both grouping &amp;amp; validating. Choose attrs if:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You're concerned around the performance (attrs supports slotted class generation which are optimized for CPython)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="When-to-use-Pydantic"&gt;When to use Pydantic&lt;a class="anchor-link" href="#When-to-use-Pydantic"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pydantic is about thorough data validation. Choose &lt;code&gt;pydantic&lt;/code&gt; if:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You want to validate the values inside each class&lt;/li&gt;
+&lt;li&gt;You want to santise the input&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;First off let's start with our example class in the default way that it would be implemented in Python.&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;We will also use type hints in our class defintions, this is best practice for ensuring our variables are the type we intend them to be. Type hints are also integrated into attrs for creating classes.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -409,89 +494,10 @@ x
 &lt;p&gt;As we can see above, it gives the developers a nicely formatted error message when the data validation failed, and smoothly sanitises the input when it needs to.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Generators in Python</title><link href="https://jackmckew.dev/generators-in-python.html" rel="alternate"></link><published>2020-07-30T00:00:00+10:00</published><updated>2020-07-30T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-30:/generators-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Attrs-vs-Dataclasses:-Features"&gt;Attrs vs Dataclasses: Features&lt;a class="anchor-link" href="#Attrs-vs-Dataclasses:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
-&lt;thead&gt;&lt;tr&gt;
-&lt;th&gt;Feature&lt;/th&gt;
-&lt;th style="text-align:center"&gt;Dataclass&lt;/th&gt;
-&lt;th style="text-align:center"&gt;Attrs&lt;/th&gt;
-&lt;th style="text-align:center"&gt;Pydantic&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;frozen&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;defaults&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;totuple&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;todict&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;validators&lt;/td&gt;
-&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;converters&lt;/td&gt;
-&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;slotted&lt;/td&gt;
-&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;programmatic creation&lt;/td&gt;
-&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
-&lt;td style="text-align:center"&gt;✅&lt;/td&gt;
-&lt;td style="text-align:center"&gt;❌&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="When-to-use-Dataclasses"&gt;When to use Dataclasses&lt;a class="anchor-link" href="#When-to-use-Dataclasses"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Dataclasses are mainly about 'grouping' variables together. Choose dataclasses if:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The main concern is around the type of the variable, not the value&lt;/li&gt;
-&lt;li&gt;Adding another package dependancy isn't trivial&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="When-to-use-Attrs"&gt;When to use Attrs&lt;a class="anchor-link" href="#When-to-use-Attrs"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Attrs are about both grouping &amp;amp; validating. Choose attrs if:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;You're concerned around the performance (attrs supports slotted class generation which are optimized for CPython)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="When-to-use-Pydantic"&gt;When to use Pydantic&lt;a class="anchor-link" href="#When-to-use-Pydantic"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pydantic is about thorough data validation. Choose &lt;code&gt;pydantic&lt;/code&gt; if:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;You want to validate the values inside each class&lt;/li&gt;
-&lt;li&gt;You want to santise the input&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Generators in Python</title><link href="https://jackmckew.dev/generators-in-python.html" rel="alternate"></link><published>2020-07-30T00:00:00+10:00</published><updated>2020-07-30T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-30:/generators-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as opposed to loading the entire data set. While this gives marginal increases in efficiency/speed with small data sets, it can provide dramatic improvements on larger data sets; especially if you are using a system with limited memory.&lt;/p&gt;
@@ -713,11 +719,11 @@ i am user
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Street Suffix Analysis &amp; Colouring with Python</title><link href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html" rel="alternate"></link><published>2020-07-24T00:00:00+10:00</published><updated>2020-07-24T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-24:/street-suffix-analysis-colouring-with-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Street Suffix Analysis &amp; Colouring with Python</title><link href="https://jackmckew.dev/street-suffix-analysis-colouring-with-python.html" rel="alternate"></link><published>2020-07-24T00:00:00+10:00</published><updated>2020-07-24T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-24:/street-suffix-analysis-colouring-with-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Street Suffix Visualisation with Python&lt;/p&gt;
-&lt;p&gt;Ever thought about how roads and streets are named where you live? How many are roads versus how many are streets? Is there a specific pattern to it where you live or is it just random? This post is going to go into how to …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Ever thought about how roads and streets are named where you live? How many are roads versus how many are streets? Is there a specific pattern to it where you live or is it just random? This post is going to go into how to …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Street Suffix Visualisation with Python&lt;/p&gt;
@@ -796,10 +802,8 @@ i am user
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="340.56pt" version="1.1" viewBox="0 0 314.940926 340.56" width="314.940926pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="340.56pt" version="1.1" viewbox="0 0 314.940926 340.56" width="314.940926pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -21965,9 +21969,9 @@ L 120.986815 60.183216
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="pd39e9eca0e"&gt;
+&lt;clippath id="pd39e9eca0e"&gt;
 &lt;rect height="326.16" width="300.540926" x="7.2" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -22019,7 +22023,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -22305,7 +22309,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -22584,10 +22588,8 @@ L 120.986815 60.183216
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="353.458875pt" version="1.1" viewBox="0 0 280.801562 353.458875" width="280.801562pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="353.458875pt" version="1.1" viewbox="0 0 280.801562 353.458875" width="280.801562pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -40802,9 +40804,9 @@ z
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="p9b80c8ffc5"&gt;
+&lt;clippath id="p9b80c8ffc5"&gt;
 &lt;rect height="217.44" width="238.894708" x="20.953427" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -40842,10 +40844,8 @@ z
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="712.15625pt" version="1.1" viewBox="0 0 856.476562 712.15625" width="856.476562pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="712.15625pt" version="1.1" viewbox="0 0 856.476562 712.15625" width="856.476562pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -42400,9 +42400,9 @@ L 849.276563 7.2
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="p4206923535"&gt;
+&lt;clippath id="p4206923535"&gt;
 &lt;rect height="667.4" width="767.525" x="81.751563" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -42428,10 +42428,10 @@ L 849.276563 7.2
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Sentiment Analysis &amp; Text Cleaning in Python with Vader</title><link href="https://jackmckew.dev/sentiment-analysis-text-cleaning-in-python-with-vader.html" rel="alternate"></link><published>2020-07-17T00:00:00+10:00</published><updated>2020-07-17T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-17:/sentiment-analysis-text-cleaning-in-python-with-vader.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Sentiment Analysis &amp; Text Cleaning in Python with Vader</title><link href="https://jackmckew.dev/sentiment-analysis-text-cleaning-in-python-with-vader.html" rel="alternate"></link><published>2020-07-17T00:00:00+10:00</published><updated>2020-07-17T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-17:/sentiment-analysis-text-cleaning-in-python-with-vader.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Sentiment-Analysis-in-Python-with-Vader"&gt;Sentiment Analysis in Python with Vader&lt;a class="anchor-link" href="#Sentiment-Analysis-in-Python-with-Vader"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Sentiment analysis is the interpretation and classification of emotions (positive, negative and neutral) within text data using text analysis techniques. Essentially just trying to judge the amount of emotion from the written words &amp;amp; determine what type of emotion. This post we'll go into how …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;h2 id="Sentiment-Analysis-in-Python-with-Vader"&gt;Sentiment Analysis in Python with Vader&lt;a class="anchor-link" href="#Sentiment-Analysis-in-Python-with-Vader"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Sentiment analysis is the interpretation and classification of emotions (positive, negative and neutral) within text data using text analysis techniques. Essentially just trying to judge the amount of emotion from the written words &amp;amp; determine what type of emotion. This post we'll go into how …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Sentiment-Analysis-in-Python-with-Vader"&gt;Sentiment Analysis in Python with Vader&lt;a class="anchor-link" href="#Sentiment-Analysis-in-Python-with-Vader"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Sentiment analysis is the interpretation and classification of emotions (positive, negative and neutral) within text data using text analysis techniques. Essentially just trying to judge the amount of emotion from the written words &amp;amp; determine what type of emotion. This post we'll go into how to do this with Python and specifically the package Vader &lt;a href="https://github.com/cjhutto/vaderSentiment"&gt;https://github.com/cjhutto/vaderSentiment&lt;/a&gt;. This post comes from a recent research project I helped out with the University of San Diego for investigating the sentiment of Twitter users in Italy during the pandemic against when the policy changes were enacted (eg, Lockdowns, etc). Sentiment analysis was the step after translating the data, which was detailed on a previous post: &lt;a href="https://jackmckew.dev/translating-text-in-python.html"&gt;https://jackmckew.dev/translating-text-in-python.html&lt;/a&gt;.&lt;/p&gt;
@@ -42527,7 +42527,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -42682,7 +42682,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -43018,10 +43018,8 @@ Name: clean_lemmatized, dtype: object&lt;/pre&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="181.8pt" version="1.1" viewBox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="181.8pt" version="1.1" viewbox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -43044,9 +43042,9 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="pb9d8b5e6ee"&gt;
+&lt;clippath id="pb9d8b5e6ee"&gt;
 &lt;rect height="167.4" width="334.8" x="7.2" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -43083,10 +43081,8 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="181.8pt" version="1.1" viewBox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="181.8pt" version="1.1" viewbox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -43109,9 +43105,9 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="p21c7262b90"&gt;
+&lt;clippath id="p21c7262b90"&gt;
 &lt;rect height="167.4" width="334.8" x="7.2" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -43135,10 +43131,8 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="181.8pt" version="1.1" viewBox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="181.8pt" version="1.1" viewbox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -43161,9 +43155,9 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="pcc0d1c2681"&gt;
+&lt;clippath id="pcc0d1c2681"&gt;
 &lt;rect height="167.4" width="334.8" x="7.2" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -43187,10 +43181,8 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="181.8pt" version="1.1" viewBox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="181.8pt" version="1.1" viewbox="0 0 349.2 181.8" width="349.2pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -43213,9 +43205,9 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="peb3a34596f"&gt;
+&lt;clippath id="peb3a34596f"&gt;
 &lt;rect height="167.4" width="334.8" x="7.2" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -43229,9 +43221,9 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;p&gt;Done! This is an extremely useful skill in natural language processing and powers a lot of recommendation engines you'll come across in real life.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
 &lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
-&lt;p&gt;A project where the …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
+&lt;p&gt;A project where the …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
 &lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
 &lt;p&gt;A project where the team was investigating the air quality impacts of air show smoke cans. The scenario was where the planes were mounted with smoke cans which leave a trail of smoke behind them while they fly around and complete stunts. We were given the flight path from the black box in GPX format, and the air quality team modelled the scenario per second to export a contour. This contour and flight path data was then passed into &lt;a href="https://plotly.com/"&gt;Plotly&lt;/a&gt; and an interactive visualisation was created. In particular the contour was shown at a fixed height using 3D scatter while the flight path was displayed using lines.&lt;/p&gt;
 &lt;p&gt;One of my first experiences automating a real task with Python was in my first engineering position, where we were creating human machine interaces (HMI) for dams &amp;amp; weirs using &lt;a href="https://www.se.com/ww/en/product-range/1054-vijeo-designer/"&gt;Vijeo&lt;/a&gt;. I was tasked with placing buttons on the screens for each and every spillway. As this was monotonous and there was lots of buttons, I decided to automate it. In particular I used &lt;a href="https://pyautogui.readthedocs.io/en/latest/"&gt;&lt;code&gt;pyautogui&lt;/code&gt;&lt;/a&gt;. The script mimicked the mouse and keyboard dragging and dropping the buttons onto the screen and worked a treat.&lt;/p&gt;
@@ -43280,4 +43272,4 @@ iVBORw0KGgoAAAANSUhEUgAAAU8AAACoCAYAAABg+2x8AAAABHNCSVQICAgIfAhkiAAAIABJREFUeJzs
 &lt;li&gt;Hunter Data Analytics - &lt;a href="http://data.newwwie.com/"&gt;http://data.newwwie.com/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;ShareX - &lt;a href="https://getsharex.com/"&gt;https://getsharex.com/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Dropbox moving to Rust from Python - &lt;a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine"&gt;https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="Software"></category><category term="software"></category><category term="datascience"></category></entry></feed>
+&lt;/ul&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="datascience"></category></entry></feed>
