@@ -21,7 +21,12 @@ Let's start by diving into each of the services inside our application and how t
 
 > This post won't go into how to Dockerize each service in particular, more so how to connect them all together.
 
+*Find all the source code for this project at: <https://github.com/JackMcKew/multi-docker>*
+
+
 ## Vue
+
+*Find all the source code for the front end client at: <https://github.com/JackMcKew/multi-docker/tree/master/client>*
 
 Vue is a JavaScript framework for creating user interfaces. We will be using it for the 'front-end' portion of the application. Vue can be installed through npm and once installed, we can run `vue create project_name` in the command line to create a template project for us. There is many options to enable in the creation of a project, a good option is to enable both unit testing & typescript. Once the project has been created, we can navigate into the directory and run `npm run serve`, this will set up our Vue project to enable us to visit `localhost:8080`.
 
@@ -30,8 +35,6 @@ Now to set up the user interface for our users to input the index of the fibonac
 This is what we will be building with Vue:
 
 ![Vue Fib Input Page]({static img/vue-fib.png})
-
-Find all the source code for the front end client at: <https://github.com/JackMcKew/multi-docker/tree/master/client>
 
 ### FibInputForm Component
 
@@ -178,6 +181,8 @@ Next to ensure the route is accessible from a link on the page, add a `router-li
 
 ## Redis
 
+*Find all the source code for the redis service at: <https://github.com/JackMcKew/multi-docker/tree/master/worker>*
+
 Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it. 
 
 We do this by creating 3 files: `package.json`, `index.js` and `keys.js`. `package.json` defines what dependencies need to be installed, and how to run the project. `index.js` manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. `keys.js` contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.
@@ -212,6 +217,8 @@ sub.subscribe("insert");
 As we can see, we initialise a redis client as per the environment variables set in `keys.js`, we create a duplicate of the client because we wish to interact with it (must duplicate the client otherwise when communicating we'll end up with one big mess). We define our ever so special fibonacci function (this is slow on purpose) and finally we set a method that when given a message will communicate with redis for us.
 
 ## PostgreSQL
+
+*Find all the source code for the PostgreSQL service at: <https://github.com/JackMcKew/multi-docker/tree/master/server>*
 
 We are going to use the PostgreSQL service part of our project to contain the interface with the database, and the API with `express`. Very similar to our redis project, we need a `package.json`, `index.js` and `keys.js`. Let's dive straight into the code inside `index.js`:
 
