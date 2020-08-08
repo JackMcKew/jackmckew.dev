@@ -12,6 +12,10 @@ This post is intended to work through setting up a workflow with Docker. In part
 
 We also want to be able to come back at a later date, further develop a feature and have the remaining steps be automated. At the centre of the workflow will be a repository (hosted in Github).
 
+Here's a screenshot of the final application:
+
+![React Application Screenshot]({static img/react-application.png})
+
 > This post will not be going through the details of how to utilise git/github.
 > This workflow is 100% achievable without Docker, although Docker will make things much easier.
 
