@@ -23,7 +23,6 @@ Let's start by diving into each of the services inside our application and how t
 
 *Find all the source code for this project at: <https://github.com/JackMcKew/multi-docker>*
 
-
 ## Vue
 
 *Find all the source code for the front end client at: <https://github.com/JackMcKew/multi-docker/tree/master/client>*
@@ -183,7 +182,7 @@ Next to ensure the route is accessible from a link on the page, add a `router-li
 
 *Find all the source code for the redis service at: <https://github.com/JackMcKew/multi-docker/tree/master/worker>*
 
-Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it. 
+Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it.
 
 We do this by creating 3 files: `package.json`, `index.js` and `keys.js`. `package.json` defines what dependencies need to be installed, and how to run the project. `index.js` manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. `keys.js` contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.
 
@@ -498,6 +497,21 @@ jobs:
           repository: jackmckew/multi-docker-worker
           tags: latest
           path: ./worker
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v11
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: mulit-docker
+          environment_name: MulitDocker-env
+          version_label: 12345
+          version_description: ${{github.SHA}}
+          region: ap-southeast-2
+          deployment_package: deploy.zip
 ```
 
 We are doing the following steps:
@@ -505,7 +519,62 @@ We are doing the following steps:
 1. Get the latest copy of all the source code
 2. Build & Test our application to make sure it works
 3. Build & Publish each container to Docker Hub so any other deployment service can pull directly from there
+4. Deploy our application to Elastic Beanstalk
 
 ## Docker Hub
 
 Everything's now set up! For another user or a deployment service to get each of the images for the services they've created they can now simply run `docker run jackmckew/multi-docker-client` and that's it! It should run on any operating system provided Docker is installed, how cool is that!
+
+## Deploying to AWS Elastic Beanstalk
+
+Now we want to deploy this application to Elastic Beanstalk, that means we need to create a `Dockerrun.aws.json` which is very similar to that of the `docker-compose.yml`. The contents of the json file will be:
+
+``` json
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [{
+            "name": "client",
+            "image": "jackmckew/multi-docker-client",
+            "hostname": "client",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "server",
+            "image": "jackmckew/multi-docker-server",
+            "hostname": "api",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "worker",
+            "image": "jackmckew/multi-docker-worker",
+            "hostname": "worker",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "nginx",
+            "image": "jackmckew/multi-docker-nginx",
+            "essential": true,
+            "portMappings": [{
+                "hostPort": 80,
+                "containerPort": 80
+            }],
+            "links": [
+                "client", "server"
+            ],
+            "memory": 128
+        }
+    ]
+}
+```
+
+Now provided we've set up the following:
+
+- RDS - Redis
+- ElasticCache - PostgreSQL
+- VPC - Security Group
+- Initialized all the environment variables in the EB instance
+
+We should be able to push to Github and see our application be deployed!
