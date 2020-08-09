@@ -51,4 +51,4 @@ Services let us set up networking within a Kubernetes cluster. There is also 4 s
 - Ingress
 - LoadBalancer
 
-NodePort services allow us to expose a container to the outside network (only for development purposes). 
+NodePort services allow us to expose a container to the outside network (only for development purposes). We can use selectors and labels to be the equivalent of our service names in docker-compose.
