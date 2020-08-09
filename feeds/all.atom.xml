@@ -12,7 +12,7 @@
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
+&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table-striped table"&gt;
 &lt;thead&gt;&lt;tr&gt;
 &lt;th&gt;Feature&lt;/th&gt;
 &lt;th style="text-align:center"&gt;Dataclass&lt;/th&gt;
@@ -168,6 +168,8 @@ Equality dunder method (using is) (should be True if implemented): False
 &lt;li&gt;&lt;code&gt;__hash__&lt;/code&gt; The hash for the class (called with &lt;code&gt;__eq__&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;There's also a stack of other dunder methods that can also be automated which are detailed at: &lt;a href="https://docs.python.org/3/library/dataclasses.html"&gt;https://docs.python.org/3/library/dataclasses.html&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Thank you to &lt;a href="https://twitter.com/ElevenPhonons"&gt;Michael Kosher&lt;/a&gt; over on Twitter: &lt;em&gt;It's worth noting validation can be added to dataclasses using a __post_init hook. However, it's pretty low level relative to attrs/#pydantic. I did a similar comparison &lt;a href="https://mpkocher.github.io/2019/05/22/Dataclasses-in-Python-3-7/"&gt;https://mpkocher.github.io/2019/05/22/Dataclasses-in-Python-3-7/&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

@@ -60,7 +60,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 76</p>
-            <p>Number of Words: 50,732</p>
+            <p>Number of Words: 50,770</p>
             <p>Number of Lines of Code 3,719</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -169,7 +169,7 @@
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features">Dataclasses vs Attrs vs Pydantic: Features<a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features">¶</a></h2><table class="table table-striped">
+<h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features">Dataclasses vs Attrs vs Pydantic: Features<a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features">¶</a></h2><table class="table-striped table">
 <thead><tr>
 <th>Feature</th>
 <th style="text-align:center">Dataclass</th>
@@ -325,6 +325,8 @@ Equality dunder method (using is) (should be True if implemented): False
 <li><code>__hash__</code> The hash for the class (called with <code>__eq__</code>)</li>
 </ul>
 <p>There's also a stack of other dunder methods that can also be automated which are detailed at: <a href="https://docs.python.org/3/library/dataclasses.html">https://docs.python.org/3/library/dataclasses.html</a></p>
+<blockquote><p>Thank you to <a href="https://twitter.com/ElevenPhonons">Michael Kosher</a> over on Twitter: <em>It's worth noting validation can be added to dataclasses using a __post_init hook. However, it's pretty low level relative to attrs/#pydantic. I did a similar comparison <a href="https://mpkocher.github.io/2019/05/22/Dataclasses-in-Python-3-7/">https://mpkocher.github.io/2019/05/22/Dataclasses-in-Python-3-7/</a></em></p>
+</blockquote>
 </div>
 </div>
 </div>
