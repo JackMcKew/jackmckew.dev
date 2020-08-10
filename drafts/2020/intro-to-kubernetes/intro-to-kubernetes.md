@@ -52,3 +52,9 @@ Services let us set up networking within a Kubernetes cluster. There is also 4 s
 - LoadBalancer
 
 NodePort services allow us to expose a container to the outside network (only for development purposes). We can use selectors and labels to be the equivalent of our service names in docker-compose.
+
+## Kubectl
+
+Kubectl is the tool that we use to manage our Kubernetes clusters. If we want to pass a config file into `kubectl` we use the command `kubectl apply -f [filename]`. Similar to `docker ps`, if we want to see all the running pods in our cluster, we can run `kubectl get pods`. Furthermore, to get all the running services we can run `kubectl get services`.
+
+Once we have a pod running, we can check to see what containers are running with `docker ps`. If we kill the container running inside the pod, we will notice that if we run `docker ps` once again, it'll be live again. Kubernetes will try to restart any containers if anything goes wrong. Kubernetes will try it's best to keep the application in the state that we provide in the configuration.
