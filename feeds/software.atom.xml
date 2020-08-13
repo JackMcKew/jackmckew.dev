@@ -1,5 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-07-10T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-08-14T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Book Review: The Pragmatic Programmer</title><link href="https://jackmckew.dev/book-review-the-pragmatic-programmer.html" rel="alternate"></link><published>2020-08-14T00:00:00+10:00</published><updated>2020-08-14T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-14:/book-review-the-pragmatic-programmer.html</id><summary type="html">&lt;body&gt;&lt;p&gt;The Pragmatic Programmer is heiled as one of the must-reads for all developers and is extremely well known. It is comparable to a hand book full of tips and tricks to develop more robust software, and also introduces lots of concepts throughout that can be used to improve the development …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;The Pragmatic Programmer is heiled as one of the must-reads for all developers and is extremely well known. It is comparable to a hand book full of tips and tricks to develop more robust software, and also introduces lots of concepts throughout that can be used to improve the development workflow as it evolves for projects. Thus here are my key takeaways, I strongly believe that this is a book you read once, learn a stack from and when you revisit it with more experience down the line, you'll learn even more.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This review is based on the 20th anniversary edition of the book.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Most of the points below relate to specific chapters/sections.&lt;/p&gt;
+&lt;h2 id="soft-skills"&gt;Soft Skills&lt;/h2&gt;
+&lt;p&gt;While software development is a technical role, soft skills are still one of the most paramount traits in effective developers and working with others in any scenario. No matter what you do, if you are an effective communicator, this will make you much more valuable in any context.&lt;/p&gt;
+&lt;p&gt;Skills for being an effective communicator include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Active Listening&lt;/li&gt;
+&lt;li&gt;Collaboration&lt;/li&gt;
+&lt;li&gt;Presentation of Ideas&lt;/li&gt;
+&lt;li&gt;Teamwork&lt;/li&gt;
+&lt;li&gt;Adaptability&lt;/li&gt;
+&lt;li&gt;Conflict Resolution&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="no-broken-windows"&gt;No Broken Windows&lt;/h2&gt;
+&lt;p&gt;The broken window theory is a criminological theory in that visible signs of damage create an environment that encourages further damage. If a street has a broken window, what's the big deal if another broken window happens, rinse and repeat until chaos. By ensuring that no broken windows are left in your designs, this encourages further quality contributions.&lt;/p&gt;
+&lt;h2 id="boiled-frogs"&gt;Boiled Frogs&lt;/h2&gt;
+&lt;p&gt;If a team works without communication, it may be difficult to see that the entire project may be boiling over. By constant communication, responsibility and transparency throughout the team, this can be minimized. Each member should feel comfortable in raising possible issues with others, and likewise in receiving feedback.&lt;/p&gt;
+&lt;h2 id="know-when-to-stop"&gt;Know When to Stop&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Great software today is often preferable to perfect software tomorrow.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;When building software, it is often tempting to think &lt;em&gt;gee this feature would be better if I just added this&lt;/em&gt;, then chasing that feature down a rabbit hole and suddenly the day is over. By doing this, it is potentially delaying the software from potentially being used by the end user.&lt;/p&gt;
+&lt;h2 id="dry-principle"&gt;DRY Principle&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Don't repeat yourself.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;There are many ways information can be duplicated throughout a project, this presents a problem when you need to change that piece of information. By having a single, unambiguous representation means changes can be much more easily handled, and as we all know change is inevitable.&lt;/p&gt;
+&lt;p&gt;There are multiple types of duplication:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Imposed duplication&lt;/strong&gt; - Developers feel they have no choice—the environment seems to require duplication.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inadvertent duplication&lt;/strong&gt; - Developers don't realize that they are duplicating information.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Impatient duplication&lt;/strong&gt; - Developers get lazy and duplicate because it seems easier.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Interdeveloper duplication&lt;/strong&gt; - Multiple people on a team (or on different teams) duplicate a piece of information.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="orthogonality"&gt;Orthogonality&lt;/h2&gt;
+&lt;p&gt;Two or more things are orthogonal if changes in one don't affect the others. By writing orthogonal code &amp;amp; developing orthogonal systems, the benefits ripple throughout the entire project.&lt;/p&gt;
+&lt;p&gt;Some of the benefits include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Changes are now localised&lt;/li&gt;
+&lt;li&gt;Promotes reuse of existing code&lt;/li&gt;
+&lt;li&gt;Allows for more combinations of existing modules&lt;/li&gt;
+&lt;li&gt;Bugs are now contained &amp;amp; isolated&lt;/li&gt;
+&lt;li&gt;Functionality can be divided for working with multiple teams&lt;/li&gt;
+&lt;li&gt;Easier to test&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="tracer-design"&gt;Tracer Design&lt;/h2&gt;
+&lt;p&gt;Whenever a project begins, knowing what it'll need to do and the requirements by the end of the project is extremely difficult to know; with change also being evitable the first thoughts for requirements may not be the same by the end. The name tracer design comes from tracer bullets, which are bullets used that light up so that the shooter can readjust their aim until they're on target; the same concept can be applied to design. This also brings the end-users into the design process by giving them early access to a working product.&lt;/p&gt;
+&lt;p&gt;Some of the benefits include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Users get to see/use something early on&lt;/li&gt;
+&lt;li&gt;Bugs and requirements can be captured earlier&lt;/li&gt;
+&lt;li&gt;Developers get a structure to build upon&lt;/li&gt;
+&lt;li&gt;Feel better for seeing progress&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tracer design is different to prototyping, with prototyping a developer is exploring aspects on what may be in the final product. Tracer designs aims to have the code that is being develop be apart of the final product, essentially verifying that the product hangs together and runs as intended.&lt;/p&gt;
+&lt;h2 id="risk-in-prototypes-being-deployed"&gt;Risk in Prototypes being Deployed&lt;/h2&gt;
+&lt;p&gt;When a prototype is presented to the end-user, there is potential for the user to believe it is almost finished or worse finished. Managing the expectations of your users or stakeholders comes back to &lt;a href="#soft-skills"&gt;Soft Skills&lt;/a&gt;, in that developers need to be effective communicators on informing that this is incomplete and there is much left to go!&lt;/p&gt;
+&lt;h2 id="crash-early"&gt;Crash Early&lt;/h2&gt;
+&lt;p&gt;By crashing early, it means the program does a lot less damage than a crippled program. This concept can be implemented by checking for the inverse of the requirement and erroring. By doing this, it means the code is more readable in finding the requirements that it must meet. It captures more potential issues before they cause damage versus checking all the ducks are lined up.&lt;/p&gt;
+&lt;p&gt;For demonstrating this, we will use the example of a square root function. As we know, square root wants to have a positive number given to it (unless using complex numbers).&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Value must be positive to get the square root"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;By doing this, we enable the function to potentially raise an error, multiply by -1 or even append an &lt;em&gt;i&lt;/em&gt; for complex numbers. Another example of this is, before querying a database check if there isn't a connection to the database and raise an error rather than checking if the connection is established (thus making for quite the nested beast sometimes).&lt;/p&gt;
+&lt;h2 id="design-by-contract"&gt;Design by Contract&lt;/h2&gt;
+&lt;p&gt;A correct program does no more and no less then what it claims to do. Ensure conditions (both pre &amp;amp; post) are met before anything begins, and promise as little as possible in return. This also helps enforcing &lt;a href="#crash-early"&gt;Crash Early&lt;/a&gt;, by verifying conditions have been satisfied, enables developers to crash the program if anything is unsatisfactory.&lt;/p&gt;
+&lt;h2 id="build-end-to-end"&gt;Build End to End&lt;/h2&gt;
+&lt;p&gt;There are many ways when it comes how something is built. More commonly things are viewed upon as being top-down or bottom-up. Top down is when we define the problem statement and break it down into smaller actionable chunks until it's pieced together. Bottom up is when we build more amd more of the smaller actionable pieces and plan to join them all together to meet the requirements in the future (very helpful when the problem isn't well defined).&lt;/p&gt;
+&lt;p&gt;Rather than either of these, if we look through the perspective of building things end-to-end this can be a more holistic methodology. Which can also be adopted with either of the prior methodologies mentioned beforehand ensuring to build complete pipelines which can be combined or amended later on in development when the problem is further understood.&lt;/p&gt;
+&lt;h2 id="debugging"&gt;Debugging&lt;/h2&gt;
+&lt;p&gt;Don't assume how a bug occurred, prove it. This is also a fantastic practice to tie in with testing, by discovering a bug, determine how it was created and then prove that's how the bug occurred. This brings the workflow into:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bug occurs&lt;/li&gt;
+&lt;li&gt;Find out why/how the bug occurred&lt;/li&gt;
+&lt;li&gt;Prove that's how it occurred&lt;/li&gt;
+&lt;li&gt;Add it to the test suite to ensure the bug never occurs again (or is captured appropriately)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="rename-asap-rename-well"&gt;Rename ASAP &amp;amp; Rename Well&lt;/h2&gt;
+&lt;p&gt;As a project changes, the intention behind the name of a variable/function may also change. It is important to ensure that naming conventions ensure that the intention behind the name matches the functionality. No one wants to have to explain to a new user why &lt;code&gt;getData()&lt;/code&gt; actually writes data.&lt;/p&gt;
+&lt;h2 id="define-requirements-with-user-stories"&gt;Define Requirements with User Stories&lt;/h2&gt;
+&lt;p&gt;Rather than defining concrete technical requirements on how an application should behave and what outcomes are to be expected, developers can make the most of user stories to define the requirements. This puts the power in the hands of the developers to thoroughly understand and ask questions about how a story is to be completed. Typically written informally and from the perspective of the end user.&lt;/p&gt;
+&lt;p&gt;Some examples include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;As a user, I want to see other users progress, so I can understand where I'm at&lt;/li&gt;
+&lt;li&gt;As a manager, I want to see the overall number of outstanding tasks, so I can allocate resources appropriately&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="project-glossary"&gt;Project Glossary&lt;/h2&gt;
+&lt;p&gt;Along with naming things appropriately, chaos can ensue when meaning behind words are not the same across different people. Ensure to keep a project glossary around project specific words and their meaning to ensure that everyone in the project is on the same page.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Bookcover" class="img-fluid" src="https://jackmckew.dev/img/bookcover.jpg"/&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="bookreview"></category></entry><entry><title>Profitable Python Podcast - Show Notes</title><link href="https://jackmckew.dev/profitable-python-podcast-show-notes.html" rel="alternate"></link><published>2020-07-10T00:00:00+10:00</published><updated>2020-07-10T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-10:/profitable-python-podcast-show-notes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
 &lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
 &lt;p&gt;A project where the …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I was recently a guest on the Profitable Python podcast with host Ben McNeill, the episode can be found at: &lt;a href="https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber"&gt;https://anchor.fm/profitablepythonfm/episodes/Pandas-Alive--Jack-McKew-efui92/a-a2idber&lt;/a&gt;. This blog post serves as the show notes, if I've missed anything, please drop a comment below!&lt;/p&gt;
 &lt;h2 id="projects-mentioned"&gt;Projects Mentioned&lt;/h2&gt;
@@ -72,7 +167,7 @@
 &lt;h1 id="action-format-yaml"&gt;Action Format (.yaml)&lt;/h1&gt;
 &lt;p&gt;A Github Action is defined with a &lt;code&gt;&amp;lt;action_name&amp;gt;.yaml&lt;/code&gt; file which must be placed within &lt;code&gt;.github/workflows&lt;/code&gt; from the base of the repository. As many actions as you want can be placed in this folder, and will subsequently run when triggered.&lt;/p&gt;
 &lt;p&gt;The base structure of a &lt;code&gt;link_checker.yaml&lt;/code&gt; file is:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -147,7 +242,7 @@
 &lt;p&gt;Fork repository &amp;gt; Make changes &amp;gt; Submit Pull Request with changes &amp;gt; Check changes &amp;gt; Merge into repository&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;When the action was first set up for actions to run on pull requests, it kept throwing an error:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The process &lt;span class="s1"&gt;'/usr/bin/git'&lt;/span&gt; failed with &lt;span class="nb"&gt;exit&lt;/span&gt; code &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The process &lt;span class="s1"&gt;'/usr/bin/git'&lt;/span&gt; failed with &lt;span class="nb"&gt;exit&lt;/span&gt; code &lt;span class="m"&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;This was determined to be intentional design by Github as a mitigation against the possibility that a bad actor could open PRs against your repo and do things like list out secrets or just run up a large bill (once we start charging) on your account.&lt;/p&gt;
@@ -165,7 +260,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;Ensure to use &lt;code&gt;if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'&lt;/code&gt; in all subsequent jobs you want triggered if the phrase is found, otherwise the action will become recursive: check for comment, run checks, make a comment, check for comment, etc&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
