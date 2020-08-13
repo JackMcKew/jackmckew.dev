@@ -1,5 +1,5 @@
 Title: Book Review: The Pragmatic Programmer
-Date: 2020-05-xx
+Date: 2020-08-14
 Author: Jack McKew
 Category: Software, Book Reviews
 Tags: software, bookreview
@@ -131,3 +131,5 @@ Some examples include:
 ## Project Glossary
 
 Along with naming things appropriately, chaos can ensue when meaning behind words are not the same across different people. Ensure to keep a project glossary around project specific words and their meaning to ensure that everyone in the project is on the same page.
+
+![Bookcover]({static img/bookcover.jpg})
