@@ -53,8 +53,54 @@ Services let us set up networking within a Kubernetes cluster. There is also 4 s
 
 NodePort services allow us to expose a container to the outside network (only for development purposes). We can use selectors and labels to be the equivalent of our service names in docker-compose.
 
+#### Deployment
+
+The deployment object type is better for running groups of identical pods, as the master can manage all the changes & updates for our pods for us (see below for limitations when using pods alone).
+
+Similar to the pod yaml file, the `template` tag takes the exact same information to create any number of pods (replicas) as specified.
+
+> Ensure to use matchLabels if using labels for the pods, as this will give the master information for updating the cluster.
+
+We can check all the deployments currently running with `kubectl get deployments`.
+
 ## Kubectl
 
 Kubectl is the tool that we use to manage our Kubernetes clusters. If we want to pass a config file into `kubectl` we use the command `kubectl apply -f [filename]`. Similar to `docker ps`, if we want to see all the running pods in our cluster, we can run `kubectl get pods`. Furthermore, to get all the running services we can run `kubectl get services`.
 
 Once we have a pod running, we can check to see what containers are running with `docker ps`. If we kill the container running inside the pod, we will notice that if we run `docker ps` once again, it'll be live again. Kubernetes will try to restart any containers if anything goes wrong. Kubernetes will try it's best to keep the application in the state that we provide in the configuration.
+
+### Update Existing Object
+
+If a configuration has been provided a `name` in the `metadata`, the running object can be updated by changing the configuration provided the `name` remains the same.
+
+This updated configuration can then be applied with `kubectl apply -f [filename]`.
+
+> There is only a specific number of parameters we can change with this (eg for pods: image, activeDeadlineSeconds, etc). Which you will see an error if the variable falls outside the provided.
+
+For maintaining sets of identical pods, we can bypass the limitations on what fields we can update with the `Deployment` object kind. Pods are good for one-off development purposes, while Deployments are better for development & production.
+
+> Deployment updates work by attempting to make the changes, and if the above error occurs, it'll automatically kill the pod and restart with the updated configuration.
+
+### Get Info about an Existing Object
+
+If we had an object running within a cluster, and we wanted to get information about it, we can run `kubectl describe [object_type] [object_name]`.
+
+Similarly, we can extract information about all objects of a certain type in the cluster by omitting the `object_name`. So our command would be `kubectl [object_type]`.
+
+### Deleting Existing Objects
+
+Similar to `docker stop`, we can use `kubectl delete -f [config_yaml]` to stop and delete an object from the cluster.
+
+### Update Deployment Images
+
+A workflow for Kubernetes is we want our application to keep running, and when we push a new image to Docker Hub, we want our Kubernetes cluster to update the objects running on this image, with the updated image.
+
+> This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: <https://github.com/kubernetes/kubernetes/issues/33664>
+
+To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command
+
+``` bash
+kubectl set image [object_type] / [object_name] [container_name] = [new_image_to_use]
+```
+
+After running this command, the deployment will update the running pods with the new image.
