@@ -77,3 +77,4 @@ Note that we keep the same selector as our deployments.
 
 A persistent volume allows a pod to share memory and read/write data on the host PC. The use-case for this are if our PostgreSQL database pod had crashed without a PVC, the data would essentially be lost as it was entirely contained within the pod, but with a persistent volume claim, our pod can restart by using the data that is stored on the host PC.
 
+> Volumes on their lonesome are tied directly to pods, and thus if the pod crashes, the volume will be lost. Hence why we are not using volumes in this case. A volume is also different between Kubernetes and Docker.
