@@ -61,7 +61,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 78</p>
-            <p>Number of Words: 52,802</p>
+            <p>Number of Words: 52,841</p>
             <p>Number of Lines of Code 3,829</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -164,23 +164,23 @@
 <p>This post won't go into testing structures for complex applications, but rather just a simple introduction on how to write, run and check the output of a test in Python with pytest.</p>
 <p>As this post is on testing, I also thought it might be quite apt for trialing out a difference package for dependency management. In the past I've used anaconda, virtualenv and just pip, but this time I wanted to try out pipenv.</p>
 <p>Similar to my post <a href="https://jackmckew.dev/python-project-workflow.html">Python Project Workflow</a> where I used virtualenv, you must install pipenv in your base Python directory, and typically add the Scripts folder to your path for ease later on. Now all we need to do is navigate to the folder and run:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pipenv</span> <span class="n">shell</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pipenv</span> <span class="n">shell</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This will create a virtual environment somewhere on your computer (unless specified) and create a pipfile in the current folder. The pipfile is a file that essentially describes all the packages used within the project, their version number &amp; so on. This is extremely useful when you pick it back up later on and find where you were at or if you wish to share this with others, they can generate their own virtual environment simply from the pipfile with:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pipenv</span> <span class="n">install</span> <span class="o">--</span><span class="n">dev</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pipenv</span> <span class="n">install</span> <span class="o">--</span><span class="n">dev</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Enough about pipenv, let's get onto trying out pytest.</p>
 <p>For this post I will place both my function and it's tests in the same file, however, from my understanding it's best practice to separate them, specifically keeping all tests within an aptly named 'tests' directory for your project/package.</p>
 <p>First off let's define the function we intend to test later:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span> <span class="n">number_2</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">number_1</span> <span class="o">-</span> <span class="n">number_2</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now we want to test if our function returns 1 if we give it number_1 = 2 and number_2 = 1:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
@@ -190,18 +190,18 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>To run this test, open the pipenv shell like above in the directory of the file where you've written your tests and run:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This will output the following:</p>
 <p><img alt="image0.png" class="img-fluid" src="https://jackmckew.dev/img/image0.png"/></p>
 <p>Each green dot represents a single test, and we can see that our 1 test passes in 0.02 seconds.</p>
 <p>To get more information from pytest, use the same command with -v (verbose) option:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now we might want to check that it works for multiple cases, to do this we can use the parametrize functionality of pytest like so:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
