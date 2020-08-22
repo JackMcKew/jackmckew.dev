@@ -153,3 +153,6 @@ Consuming a secret as an environment variable for a container is a little differ
       name: secret_name
       key: key
 ```
+
+## Ingress Service
+
