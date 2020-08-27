@@ -1,5 +1,5 @@
 Title: Network Hacking with Kali Linux
-Date: 2020-05-xx
+Date: 2020-08-28
 Author: Jack McKew
 Category: Software, Infosec
 Tags: software, infosec
