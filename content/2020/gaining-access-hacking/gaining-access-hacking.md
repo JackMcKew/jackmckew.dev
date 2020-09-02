@@ -1,5 +1,5 @@
 Title: Gaining Access with Kali Linux
-Date: 2020-05-xx
+Date: 2020-09-04
 Author: Jack McKew
 Category: Software, infosec
 Tags: software, infosec
@@ -8,7 +8,7 @@ This post will go into ways we can use Kali Linux to gain access to the target P
 
 This post is apart of a series of posts, see the other posts at:
 
-- INSERT NETWORK POST
+- [Network Hacking with Kali Linux](https://jackmckew.dev/network-hacking-with-kali-linux.html)
 
 > Thank you to Chris B for helping me with the notes in this post below!
 
