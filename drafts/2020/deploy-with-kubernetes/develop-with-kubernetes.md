@@ -7,16 +7,14 @@ JavaScripts: mermaid.min.js
 
 Following on with previous posts on this blog. This post will be going through how to develop & deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:
 
-| Technology                | Use                                                                          |
-| ------------------------- | ---------------------------------------------------------------------------- |
-| Docker                    | Docker will be used to containerization of the services inside our app       |
-| Amazon Web Services (AWS) | AWS will host and run our Kubernetes cluster                                 |
-| Vue                       | Vue is the front-end JavaScript framework that we will use                   |
-| Express                   | Express is responsible for the API between Redis, PostgreSQL and Vue         |
-| Redis                     | Redis will store/retrieve any local data used by our users                   |
-| PostgreSQL                | PostgreSQL will be our database                                              |
-| Nginx                     | Nginx will handle the routing between our services                           |
-| Github Actions            | Github Actions will be our CI/CD platform for running tests before deploying |
+| Technology | Use                                                                    |
+| ---------- | ---------------------------------------------------------------------- |
+| Docker     | Docker will be used to containerization of the services inside our app |
+| Vue        | Vue is the front-end JavaScript framework that we will use             |
+| Express    | Express is responsible for the API between Redis, PostgreSQL and Vue   |
+| Redis      | Redis will store/retrieve any local data used by our users             |
+| PostgreSQL | PostgreSQL will be our database                                        |
+| Nginx      | Nginx will handle the routing between our services                     |
 
 > Previously we made use of services provided by AWS for Redis & PostgreSQL, in this post these services will be run inside their own pods.
 
@@ -156,3 +154,45 @@ Consuming a secret as an environment variable for a container is a little differ
 
 ## Ingress Service
 
+The ingress service allows us to connect to other Kubernetes cluster from outside, and thus maintains how we should treat incoming requests and how to route them.
+
+The entirety of our configuration for the ingress service is:
+
+``` yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 8080
+          - path: /fib/?(.*)
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 8080
+          - path: /api/?(.*)
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 5000
+```
+
+Note that we make use of rewrite-target, this means that:
+
+- `test.com/something` rewrites to `test.com/`
+- `test.com/somethingelse` rewrites to `test.com/`
+- `test.com/fib` rewrites to `test.com/fib/`
+
+Any requests for `test.com/api` get routed to the specific server service for handling, while any others get sent to the front end.
+
+## Deploy!
+
+Now we are ready to deploy our Kubernetes cluster onto a cloud provider, this was originally detailed in this part of the post, but grew far longer than expected so another post was created!
