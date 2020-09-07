@@ -5,7 +5,7 @@ Category: Software
 Tags: software
 JavaScripts: mermaid.min.js
 
-Following on with previous posts on this blog. This post will be going through how to develop & deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:
+Following on with previous posts on this blog. This post will be going through how to develop & later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:
 
 | Technology | Use                                                                    |
 | ---------- | ---------------------------------------------------------------------- |
