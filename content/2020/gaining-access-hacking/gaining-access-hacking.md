@@ -9,6 +9,7 @@ This post will go into ways we can use Kali Linux to gain access to the target P
 This post is apart of a series of posts, see the other posts at:
 
 - [Network Hacking with Kali Linux](https://jackmckew.dev/network-hacking-with-kali-linux.html)
+- [Web Penetration Testing with Kali Linux](https://jackmckew.dev/web-penetration-testing-with-kali-linux.html)
 
 > Thank you to Chris B for helping me with the notes in this post below!
 

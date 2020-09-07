@@ -8,8 +8,8 @@ This post will go into ways we can use Kali Linux to gain access to the target P
 
 This post is apart of a series of posts, see the other posts at:
 
-- INSERT NETWORK POST
-- INSERT ACCESS POST
+- [Network Hacking with Kali Linux](https://jackmckew.dev/network-hacking-with-kali-linux.html)
+- [Gaining Access with Kali Linux](https://jackmckew.dev/gaining-access-with-kali-linux.html)
 
 > Thank you to Chris B for helping me with the notes in this post below!
 
