@@ -1,5 +1,5 @@
 Title: Web Penetration Testing with Kali Linux
-Date: 2020-05-xx
+Date: 2020-09-11
 Author: Jack McKew
 Category: Software, infosec
 Tags: software, infosec
