@@ -58,9 +58,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 80</p>
-            <p>Number of Words: 57,101</p>
-            <p>Number of Lines of Code 4,025</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 81</p>
+            <p>Number of Words: 58,959</p>
+            <p>Number of Lines of Code 4,139</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -182,7 +182,7 @@
 <h2 id="base-class">Base Class</h2>
 <p>Now that we've decided to go with template design pattern, we need to implement the base chart class with the shared functionality. At this point, since there would be so many parameters going into the class constructor (<code>__init__</code>) in Python, it was frustrating having to put this information in two places.</p>
 <p>Here is a basic example, but imagine if you had 10s of arguments (eg, name, species) and had to replicate this information so many times.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
@@ -193,7 +193,7 @@
 </td></tr></tbody></table>
 <p>So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the <code>__init__</code> and other dunder methods generated for us (see a previous post on dunder methods here).</p>
 <p>This allows us to write the same class as above like:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
