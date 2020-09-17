@@ -1,5 +1,5 @@
 Title: Components in React.js
-Date: 2020-07-xx
+Date: 2020-09-18
 Author: Jack McKew
 Category: Javascript
 Tags: javascript
@@ -7,6 +7,8 @@ Tags: javascript
 To put it simply, components are the building blocks that make up the app in React.js. A component more specifically is a JavaScript class or function that optionally accepts inputs (aka properties or props) and returns a React element that describes how a section of the interface should appear.
 
 In this post let's break down the general structure of a React component. More specifically this will also include using `react-redux` for state management in the browser and `react-router-dom` for handling dynamic routing. These can both be installed through `npm`.
+
+![React Logo]({static img/react-logo.png})
 
 Let's try to building a component which will represent a landing page on our React app with `create-react-app`. We will also want to show a different page whether the user is logged in or not, so our `Landing` component will take an input of (aka prop) of `isAuthenticated`.
 
@@ -25,7 +27,7 @@ import PropTypes from "prop-types";
 
 The first line is to import React library, while this isn't used explicitly in the remaining code we will write, it will not work without it. This is due to when the code is transpiled into JavaScript, it'll then used React directly with `React.createElement()`.
 
-Next up is `Link` and `Redirect`, note the curly braces around these, this is known as destructuring, meaning we only want to take the two classes from the library. This method is useful for making more readable code when dealing with objects. `Link` is `react-router-dom`'s class for creating anchor tags (aka <a/> in HTML), and similarly `Redirect` is as you'd expect, a class to dynamically redirect to another route.
+Next up is `Link` and `Redirect`, note the curly braces around these, this is known as destructuring, meaning we only want to take the two classes from the library. This method is useful for making more readable code when dealing with objects. `Link` is `react-router-dom`'s class for creating anchor tags (aka `<a/>` in HTML), and similarly `Redirect` is as you'd expect, a class to dynamically redirect to another route.
 
 `connect` is a function that connects a React component to a Redux store. Consider a redux store as the immutable (can't be changed after creation) state of the application. The only way to change the state of the store is to dispatch an action, which is typically handled by a reducer.
 
