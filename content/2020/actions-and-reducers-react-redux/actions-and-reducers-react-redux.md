@@ -1,5 +1,5 @@
 Title: Actions and Reducers in React-Redux
-Date: 2020-07-xx
+Date: 2020-09-25
 Author: Jack McKew
 Category: Javascript
 Tags: javascript
