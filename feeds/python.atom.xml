@@ -26528,7 +26528,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -26814,7 +26814,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -47032,7 +47032,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -47187,7 +47187,7 @@ L 849.276563 7.2
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
