@@ -1,5 +1,5 @@
 Title: API Routes in Node.js
-Date: 2020-07-xx
+Date: 2020-10-02
 Author: Jack McKew
 Category: Javascript
 Tags: javascript
