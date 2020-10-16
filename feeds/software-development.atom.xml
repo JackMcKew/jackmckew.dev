@@ -1,7 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software Development</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software-development.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-02-20T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Getting Started in Python</title><link href="https://jackmckew.dev/getting-started-in-python.html" rel="alternate"></link><published>2020-02-20T00:00:00+11:00</published><updated>2020-02-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-02-20:/getting-started-in-python.html</id><summary type="html">&lt;body&gt;&lt;h2 id="resources-tips-for-getting-started-in-python"&gt;&lt;strong&gt;Resources &amp;amp; tips for getting started in Python&lt;/strong&gt;&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software Development</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software-development.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-10-16T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Property Based Testing in Python</title><link href="https://jackmckew.dev/property-based-testing-in-python.html" rel="alternate"></link><published>2020-10-16T00:00:00+11:00</published><updated>2020-10-16T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-16:/property-based-testing-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Building software can be challenging, but maintaining it after that initial build can be even moreso. Being able to test the software such that it verifies the software behaves as expected is crucial in building robust software applications that users depend upon, being able to automate this testing is even …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Building software can be challenging, but maintaining it after that initial build can be even moreso. Being able to test the software such that it verifies the software behaves as expected is crucial in building robust software applications that users depend upon, being able to automate this testing is even better! There's other blog posts on this blog around the topic of testing &lt;a href="https://jackmckew.dev/introduction-to-pytest-pipenv.html"&gt;Introduction to Pytest &amp;amp; Pipenv&lt;/a&gt;, but for this post we're going to focus on a very specific type of testing, &lt;strong&gt;property based testing&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Property based testing differs itself from the conventional example based testing by being able to generate the test data that drives your tests, and even better, can help find the boundaries of where the tests fail.&lt;/p&gt;
+&lt;p&gt;To demonstrate the power of property based testing, we're going to build some testing for the old faithful multiplication operator in Python.&lt;/p&gt;
+&lt;p&gt;To help with this, we are going to use a few packages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pytest (testing framework)&lt;/li&gt;
+&lt;li&gt;hypothesis (property testing package)&lt;/li&gt;
+&lt;li&gt;ipytest (to enable running tests in jupyter notebooks)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Before we dive in, let's set up ipytest and use some &lt;strong&gt;example-based testing&lt;/strong&gt; to verify the multiplication operator.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ipytest&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytest&lt;/span&gt;
+&lt;span class="n"&gt;ipytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;autoconfig&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;multiply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;number_1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;number_1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+def test_example():
+    assert multiply(3,3) == 9
+    assert multiply(5,5) == 25
+    assert multiply(4,6) == 24
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;.                                                                        [100%]
+1 passed in 0.02s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Fantastic, our examples passed the test! Now let's ensure that the test fails.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+def test_fail_example():
+    assert multiply(3,3) == 9
+    assert multiply(3,5) == 150
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;F                                                                        [100%]
+================================== FAILURES ===================================
+______________________________ test_fail_example ______________________________
+
+    def test_fail_example():
+        assert multiply(3,3) == 9
+&amp;gt;       assert multiply(3,5) == 150
+E       assert 15 == 150
+E        +  where 15 = multiply(3, 5)
+
+&amp;lt;ipython-input-7-212df0aaa8ed&amp;gt;:3: AssertionError
+=========================== short test summary info ===========================
+FAILED tmpg6kq2sek.py::test_fail_example - assert 15 == 150
+1 failed in 0.34s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Perfect! We can see that the test fails as expected and even nicely tells us which line of code it failed on. Let's say we had lots of these examples that we wanted to test for, so to simplify it we could potentially use pytest's &lt;strong&gt;parametrize&lt;/strong&gt; decorator.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+@pytest.mark.parametrize('number_1, number_2 , expected', [
+    (3,3,9),
+    (5,5,25),
+    (4,6,24)
+])
+def test_multiply(number_1,number_2,expected):
+    assert expected == multiply(number_1,number_2)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;...                                                                      [100%]
+3 passed in 0.02s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Is this enough testing to verify our function? Really, we're only testing a few conditions that we'd expect to work, but in reality it's the ones that nobody foresees that would be ideal to capture in our tests. This also raises a few more things, the developer writing the tests may choose to write 2 or 2000 test cases but this doesn't guarantee anything when it comes to if it's truly covered.&lt;/p&gt;
+&lt;h2 id="Introduce-Property-Based-Testing"&gt;Introduce Property Based Testing&lt;a class="anchor-link" href="#Introduce-Property-Based-Testing"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Property based testing is considered as generative testing, we don't supply specific examples with inputs and expected outputs. Rather we define certain properties and generate randomized inputs to ensure the properties are correct. In addition to this, property based testing can also &lt;code&gt;shrink&lt;/code&gt; outputs to find the exact boundary condition where a test fails.&lt;/p&gt;
+&lt;p&gt;While this doesn't 100% replace example-based testing, they definitely have their use and have a lot of potential for effective testing. Now let's implement the same tests above, using property based testing with &lt;code&gt;hypothesis&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;hypothesis&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hypothesis.strategies&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;st&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+@given(st.integers(),st.integers())
+def test_multiply(number_1,number_2):
+    assert multiply(number_1,number_2) == number_1 * number_2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;.                                                                        [100%]
+1 passed in 0.14s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Note that we've used the &lt;code&gt;given&lt;/code&gt; decorator which makes our test parametrized, and use strategies which cover the types of input data to generate. As per the hypothesis documentation &lt;em&gt;Most things should be easy to generate and everything should be possible&lt;/em&gt;, we can find more information on them here: &lt;a href="https://hypothesis.readthedocs.io/en/latest/data.html"&gt;https://hypothesis.readthedocs.io/en/latest/data.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now this doesn't look any different to last time, so what even changed! Let's change our multiply function so it behaves strangely and see if we can see hypothesis shrink the failures in action. Shrinking is whenever it finds a failure, it'll try to get to the absolute boundary case to help us find the potential cause and even better it'll remember this failure for next time so it doesn't poke it's head up again!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [15]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bad_multiply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;number_1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;number_2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;number_1&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;number_1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;number_2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;run_pytest&lt;/span&gt;[clean]
+
+@given(st.integers(),st.integers())
+def test_bad_multiply(number_1,number_2):
+    assert bad_multiply(number_1,number_2) == number_1 * number_2
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;F                                                                        [100%]
+================================== FAILURES ===================================
+______________________________ test_bad_multiply ______________________________
+
+    @given(st.integers(),st.integers())
+&amp;gt;   def test_bad_multiply(number_1,number_2):
+
+&amp;lt;ipython-input-16-3e2ec463c8ad&amp;gt;:2: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+number_1 = 31, number_2 = 1
+
+    @given(st.integers(),st.integers())
+    def test_bad_multiply(number_1,number_2):
+&amp;gt;       assert bad_multiply(number_1,number_2) == number_1 * number_2
+E       assert 0 == (31 * 1)
+E        +  where 0 = bad_multiply(31, 1)
+
+&amp;lt;ipython-input-16-3e2ec463c8ad&amp;gt;:3: AssertionError
+--------------------------------- Hypothesis ----------------------------------
+Falsifying example: test_bad_multiply(
+    number_1=31, number_2=1,
+)
+=========================== short test summary info ===========================
+FAILED tmp8uis7_kv.py::test_bad_multiply - assert 0 == (31 * 1)
+1 failed in 0.22s
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Fantastic, we can see that the failure has been shrunken to &lt;code&gt;number_1&lt;/code&gt; being 31 and &lt;code&gt;number_2&lt;/code&gt; being 1 which is one integer off the 'bad' boundary conditions we'd introduced into the multiply function.&lt;/p&gt;
+&lt;p&gt;Hopefully this has introduced the power of property based testing and can help make software more robust for everyone!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="software-development"></category></entry><entry><title>Getting Started in Python</title><link href="https://jackmckew.dev/getting-started-in-python.html" rel="alternate"></link><published>2020-02-20T00:00:00+11:00</published><updated>2020-02-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-02-20:/getting-started-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="resources-tips-for-getting-started-in-python"&gt;&lt;strong&gt;Resources &amp;amp; tips for getting started in Python&lt;/strong&gt;&lt;/h2&gt;
 &lt;h3 id="glossary"&gt;Glossary&lt;/h3&gt;
-&lt;p&gt;One of the most useful skills in my opinion in all walks of life is the ability to find information &amp;amp; answers. A very useful tool for doing this is the internet &amp;amp; search engines like Google. In my opinion being able to search …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;h2 id="resources-tips-for-getting-started-in-python"&gt;&lt;strong&gt;Resources &amp;amp; tips for getting started in Python&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;One of the most useful skills in my opinion in all walks of life is the ability to find information &amp;amp; answers. A very useful tool for doing this is the internet &amp;amp; search engines like Google. In my opinion being able to search …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="resources-tips-for-getting-started-in-python"&gt;&lt;strong&gt;Resources &amp;amp; tips for getting started in Python&lt;/strong&gt;&lt;/h2&gt;
 &lt;h3 id="glossary"&gt;Glossary&lt;/h3&gt;
 &lt;p&gt;One of the most useful skills in my opinion in all walks of life is the ability to find information &amp;amp; answers. A very useful tool for doing this is the internet &amp;amp; search engines like Google. In my opinion being able to search the internet for answers to your programming questions is a skill in itself, knowing the right words or phrases to use is a massive part of that, so I will begin with a glossary of terminology for things that may make it easier to answer your questions.&lt;/p&gt;
 &lt;table class="table table-striped"&gt;
@@ -148,12 +425,12 @@ code, markup and prose".&lt;/p&gt;
 &lt;h3 id="packages"&gt;Packages&lt;/h3&gt;
 &lt;p&gt;The best part about Python is the community and abundance of free, open source packages that you can utilise to not re-invent the wheel when solving problems.&lt;/p&gt;
 &lt;p&gt;I did a blog post on useful packages in 2019, check it out at: &lt;a href="https://jackmckew.dev/episode-10-python-package-cheat-sheet.html"&gt;https://jackmckew.dev/episode-10-python-package-cheat-sheet.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;If there is anything I have missed, please feel free to drop a comment below and I will update this post!&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>Automatically Generate Documentation with Sphinx</title><link href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html" rel="alternate"></link><published>2020-02-03T00:00:00+11:00</published><updated>2020-02-03T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-02-03:/automatically-generate-documentation-with-sphinx.html</id><summary type="html">&lt;body&gt;&lt;h2 id="document-code-automatically-through-docstrings-with-sphinx"&gt;&lt;strong&gt;Document code automatically through docstrings with Sphinx&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;If there is anything I have missed, please feel free to drop a comment below and I will update this post!&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>Automatically Generate Documentation with Sphinx</title><link href="https://jackmckew.dev/automatically-generate-documentation-with-sphinx.html" rel="alternate"></link><published>2020-02-03T00:00:00+11:00</published><updated>2020-02-03T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-02-03:/automatically-generate-documentation-with-sphinx.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="document-code-automatically-through-docstrings-with-sphinx"&gt;&lt;strong&gt;Document code automatically through docstrings with Sphinx&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;This post goes into how to generate documentation for your python projects automatically with Sphinx!&lt;/p&gt;
 &lt;p&gt;First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following&lt;/p&gt;
 &lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
-3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install sphinx …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;h2 id="document-code-automatically-through-docstrings-with-sphinx"&gt;&lt;strong&gt;Document code automatically through docstrings with Sphinx&lt;/strong&gt;&lt;/h2&gt;
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install sphinx …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;h2 id="document-code-automatically-through-docstrings-with-sphinx"&gt;&lt;strong&gt;Document code automatically through docstrings with Sphinx&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;This post goes into how to generate documentation for your python projects automatically with Sphinx!&lt;/p&gt;
 &lt;p&gt;First off we have to install sphinx into our virtual environment. Pending on your flavour, we can do any of the following&lt;/p&gt;
 &lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
@@ -636,7 +913,7 @@ where &lt;span class="s2"&gt;"builder"&lt;/span&gt; is one of the supported buil
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;This will generate all the stubs for our documentation and compile them into HTML format.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Generated Docs" class="img-fluid" src="https://jackmckew.dev/img/generated_docs.png"/&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>Migrating from Wordpress to Pelican</title><link href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html" rel="alternate"></link><published>2019-12-20T06:30:00+11:00</published><updated>2019-12-20T06:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-12-20:/migrating-from-wordpress-to-pelican.html</id><summary type="html">&lt;body&gt;&lt;p&gt;For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a Jupyter notebook, sometimes even writing the post in markdown within the notebook, then copying all of this out of the notebook into a Wordpress post and fiddling around with formatting for much too long.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Generated Docs" class="img-fluid" src="https://jackmckew.dev/img/generated_docs.png"/&gt;&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>Migrating from Wordpress to Pelican</title><link href="https://jackmckew.dev/migrating-from-wordpress-to-pelican.html" rel="alternate"></link><published>2019-12-20T06:30:00+11:00</published><updated>2019-12-20T06:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-12-20:/migrating-from-wordpress-to-pelican.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;For some time now I have been wanting to move away from Wordpress, due to my specific case of wanting to embed custom HTML and JavaScript code snippets to enable interactive data visualisation. Furthermore my previous workflow of posts was disjointed in which I would develop the code in a Jupyter notebook, sometimes even writing the post in markdown within the notebook, then copying all of this out of the notebook into a Wordpress post and fiddling around with formatting for much too long.&lt;/p&gt;
 &lt;p&gt;What tipped me over the edge was when I was looking back on previous posts (as this blog is mainly for storing previous projects, concepts and ideas), I was finding that I would go through the post and then have no idea whatsoever on where the project actually lived, this had to be fixed.&lt;/p&gt;
 &lt;p&gt;I started noticing more and more people online had moved to &lt;a href="https://pages.github.com/"&gt;Github Pages&lt;/a&gt;, which is primarily used with Jekyll. This rabbit hole went on as follows:&lt;/p&gt;
 &lt;ol&gt;
@@ -811,8 +1088,8 @@ deploy:
 &lt;li&gt;Travis CI will then push the created site to the gh-pages branch of the repository,&lt;/li&gt;
 &lt;li&gt;Netlify will detect the change and process the new site,&lt;/li&gt;
 &lt;li&gt;The new site is deployed with updated posts!&lt;/li&gt;
-&lt;/ol&gt;&lt;/body&gt;</content><category term="Software Development"></category><category term="python"></category></entry><entry><title>Making Executables Installable with Inno Setup</title><link href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html" rel="alternate"></link><published>2019-11-08T06:30:00+11:00</published><updated>2019-11-08T06:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-11-08:/making-executables-installable-with-inno-setup.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.&lt;/p&gt;
-&lt;p&gt;Once we have created the executable file for our GUI (which will be located in …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.&lt;/p&gt;
+&lt;/ol&gt;</content><category term="Software Development"></category><category term="python"></category></entry><entry><title>Making Executables Installable with Inno Setup</title><link href="https://jackmckew.dev/making-executables-installable-with-inno-setup.html" rel="alternate"></link><published>2019-11-08T06:30:00+11:00</published><updated>2019-11-08T06:30:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-11-08:/making-executables-installable-with-inno-setup.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.&lt;/p&gt;
+&lt;p&gt;Once we have created the executable file for our GUI (which will be located in …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on from last week's post on making executable GUIs with Gooey, this post will cover how to make the executables we have packaged up into installable files so our users can run them easily.&lt;/p&gt;
 &lt;p&gt;Once we have created the executable file for our GUI (which will be located in the dist folder:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="explorer_QxD96RKedI" class="img-fluid" src="https://jackmckew.dev/img/explorer_QxD96RKedI.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Now we are going to use a program called Inno Setup, which can be downloaded from: &lt;a href="http://www.jrsoftware.org/isinfo.php."&gt;http://www.jrsoftware.org/isinfo.php.&lt;/a&gt;&lt;/p&gt;
@@ -866,27 +1143,4 @@ deploy:
 &lt;/ol&gt;
 &lt;p&gt;&lt;img alt="image-20191106201801891" class="img-fluid" src="https://jackmckew.dev/img/explorer_d4QCQTi5sE.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Once installed, it will now act and behave like any other software installed on your computer!&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image-20191106201903238" class="img-fluid" src="https://jackmckew.dev/img/main_W1DbyAXofL.png"/&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software Development"></category><category term="python"></category></entry><entry><title>What is MongoDB?</title><link href="https://jackmckew.dev/what-is-mongodb.html" rel="alternate"></link><published>2019-05-03T06:30:00+10:00</published><updated>2019-05-03T06:30:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2019-05-03:/what-is-mongodb.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.&lt;/p&gt;
-&lt;p&gt;I completed their very first …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product.&lt;/p&gt;
-&lt;p&gt;I completed their very first introductory course M001: MongoDB Basics last week, I found it very gentle in the introduction to database management and exploring data sets. This post is dedicated my take on the course and the key takeaways from my point of view.&lt;/p&gt;
-&lt;p&gt;The course is broken into multiple chapters in which a chapter is released each week for the duration of the course. For example, the basics course was broken up into:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Intro to MongoDB, Mongo Compass and Basic Queries,&lt;/li&gt;
-&lt;li&gt;Create, Read, Update and Delete (CRUD) operations and more,&lt;/li&gt;
-&lt;li&gt;MongoDB queries.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Following all the chapters, you are faced with a final exam which tests if you were participating/listening in the earlier chapters. If you are concerned that you may struggle, this final exam is made up of a few multiple choice questions based on querying the data sets used in the chapters.&lt;/p&gt;
-&lt;p&gt;MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilizes JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.&lt;/p&gt;
-&lt;p&gt;Personally, I really enjoy the functionality within Compass with plotting geographical data, presenting data type variances across the fields in a document and many other features. I found Compass one of the most appealing features as someone that constantly seeks to gain insight from data.&lt;/p&gt;
-&lt;p&gt;Queries within MongoDB are structured like a dictionary in Python, where the field in the document is passed the key and the criteria is the value. For example, a basic query to return all documents within a MongoDB database with score equal to 7 would be:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;As a mainly Python developer, I found this to be very appealing as I find myself using dictionaries constantly when writing Python code, and by MongoDB using this format makes for an easy connection between the two.&lt;/p&gt;
-&lt;p&gt;CRUD operations, are the fundamentals on actually using a database usefully. Through the Mongo shell you are able to add documents to the MongoDB database through JSON, XML, etc data formats.&lt;/p&gt;
-&lt;p&gt;Projections within MongoDB are used to specify or restrict the fields to return with the filtered documents if you are specifically looking at a few fields within a densely populated document.&lt;/p&gt;
-&lt;p&gt;In addition to the way queries are structured for filtering documents, it is also possible to use one of the many query or projection operators to further filter the documents. For example a query to return all documents with a score &lt;strong&gt;greater than&lt;/strong&gt; 7 would be:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;gte&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;This sums up all of the takeaways from the M001 course for MongoDB that I found. I look forward to taking more of the courses on MongoDB university to gain a greater understanding and be able to utilise MongoDB across some of my projects.&lt;/p&gt;&lt;/body&gt;</content><category term="Software Development"></category><category term="database"></category><category term="mongodb"></category></entry></feed>
+&lt;p&gt;&lt;img alt="image-20191106201903238" class="img-fluid" src="https://jackmckew.dev/img/main_W1DbyAXofL.png"/&gt;&lt;/p&gt;</content><category term="Software Development"></category><category term="python"></category></entry></feed>

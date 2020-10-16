@@ -58,9 +58,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 85</p>
-            <p>Number of Words: 61,675</p>
-            <p>Number of Lines of Code 4,309</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 86</p>
+            <p>Number of Words: 62,281</p>
+            <p>Number of Lines of Code 4,359</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -158,7 +158,7 @@
 
 
   <div>
-    <body><p>I have a habit of misplacing all kinds of remotes within the house, TV, air conditioner, fans, etc, and having a different remote for everything can be quite annoying at times. So I decided to re-use some leftover components from a previous project to make a web enabled universal remote.</p>
+    </head><body><p>I have a habit of misplacing all kinds of remotes within the house, TV, air conditioner, fans, etc, and having a different remote for everything can be quite annoying at times. So I decided to re-use some leftover components from a previous project to make a web enabled universal remote.</p>
 <p>Since most existing remotes use infrared to send the signal from the remote to the device, I figured it would be simple enough to create a infrared signal 'decoder' and then use a infrared diode to then replicate this signal back to the device. Next consideration was what do hardware is needed to get this project up and running.</p>
 <p>After researching a few other DIY remote control guides on the internet, I came up with a plan to use a wifi-enabled microcontroller together with an infrared receiver and an infrared diode. After rummaging through my spare hardware box, I happened to find a spare NodeMCU (ESP8266) that I could use for this project, this brings my part list to:</p>
 <ul>
@@ -217,7 +217,7 @@
 <p>Since the NodeMCU can only pass a maximum current of 12mA through the GPIO pins, this will not be enough for the infrared diode peak spectrum which occurs at 20mA. To boost the current up from 12mA to 20mA+, it is best to use a simple transistor, for this project I had some 2N2222 transistors lying around so decided to use them. The following circuit diagram shows how the infrared diode, transistor and microcontroller integrate together.</p>
 <p><img alt="Fritzing_LqJjWJppSm.png" class="img-fluid" src="https://jackmckew.dev/img/Fritzing_LqJjWJppSm.png"/></p>
 <p>Since the human eye cannot see the infrared diode turning on/off, this creates a challenge for testing this component before implementing the project. I did not create a test specifically for the diode, and will test whether it works correctly later on in some function testing of the project.</p>
-<p>This completes the hardware component of this project, the next part of this project will be the software. I am planning to utilise both docker and django on my home Raspberry Pi to act as a webserver that will issue commands to the microcontroller over a network to mimic the device's remote control.</p></body>
+<p>This completes the hardware component of this project, the next part of this project will be the software. I am planning to utilise both docker and django on my home Raspberry Pi to act as a webserver that will issue commands to the microcontroller over a network to mimic the device's remote control.</p>
   </div>
   <div class="tag-cloud">
     <p>
