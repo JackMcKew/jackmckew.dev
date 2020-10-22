@@ -1,5 +1,5 @@
 Title: Intro to Docker
-Date: 2020-07-xx
+Date: 2020-10-23
 Author: Jack McKew
 Category: Software
 Tags: software
@@ -9,6 +9,8 @@ What is docker? Docker is a platform for running software that is agnostic to th
 I did a post back in 2018 on containerization and mentioned Docker too! <https://jackmckew.dev/episode-6-containerization.html>
 
 ## Docker Ecosystem
+
+![Docker Logo]({static img/Moby-logo.png})
 
 Docker isn't a single program, it's a suite of programs which we'll refer to as an ecosystem. A brief description of all the components that make the ecosystem is:
 
