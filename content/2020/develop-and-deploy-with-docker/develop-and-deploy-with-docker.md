@@ -1,5 +1,5 @@
 Title: Develop and Deploy with Docker
-Date: 2020-07-xx
+Date: 2020-10-30
 Author: Jack McKew
 Category: Software
 Tags: software
@@ -18,6 +18,10 @@ Here's a screenshot of the final application:
 
 > This post will not be going through the details of how to utilise git/github.
 > This workflow is 100% achievable without Docker, although Docker will make things much easier.
+
+This post is apart of a series on Docker/Kubernetes, find the other posts at:
+
+- [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
 
 ## The Web Application
 
