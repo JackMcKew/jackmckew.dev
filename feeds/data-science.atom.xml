@@ -4926,7 +4926,7 @@ Harmonic Mean: 15.05101860509987
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table-striped table"&gt;
+&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
 &lt;thead&gt;&lt;tr&gt;
 &lt;th&gt;Feature&lt;/th&gt;
 &lt;th style="text-align:center"&gt;Dataclass&lt;/th&gt;
@@ -26942,7 +26942,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -27228,7 +27228,7 @@ L 120.986815 60.183216
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
