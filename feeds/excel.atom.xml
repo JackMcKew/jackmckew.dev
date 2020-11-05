@@ -89,7 +89,7 @@
 &lt;p&gt;After researching the internet when I came across this problem, I stumbled across a similar question on Stackoverflow:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://stackoverflow.com/questions/58381445/how-to-get-value-of-visible-cell-in-a-table-after-filtering-only-working-for-1"&gt;https://stackoverflow.com/questions/58381445/how-to-get-value-of-visible-cell-in-a-table-after-filtering-only-working-for-1&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;With one of the answers from &lt;a href="https://stackoverflow.com/users/445425/chris-neilsen"&gt;Chris Neilsen&lt;/a&gt; being:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -158,7 +158,7 @@
 &lt;li&gt;&lt;code&gt;iCol&lt;/code&gt; - The column index we want to return&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Without further ado, here is the function. Note that another function &lt;code&gt;GetListObject&lt;/code&gt; is used to find the table in question see &lt;a href="#getlistobject-function"&gt;GetListObject Function&lt;/a&gt; for more information on this. Otherwise you can use &lt;code&gt;Application.Worksheets(sheetName)&lt;/code&gt;.&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -208,7 +208,7 @@
 &lt;h2 id="getlistobject-function"&gt;GetListObject Function&lt;/h2&gt;
 &lt;p&gt;Similarly, the GetListObject function was also found on Stackoverflow, by the user &lt;a href="https://stackoverflow.com/users/20151/andrewd"&gt;AndrewD&lt;/a&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://stackoverflow.com/questions/18030637/how-do-i-reference-tables-in-excel-using-vba"&gt;https://stackoverflow.com/questions/18030637/how-do-i-reference-tables-in-excel-using-vba&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
