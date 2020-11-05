@@ -22,7 +22,7 @@ Here's a screenshot of the final application:
 This post is apart of a series on Docker/Kubernetes, find the other posts at:
 
 - [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
-- [Develop and Develop with Docker Compose](https://jackmckew.dev/develop-and-deploy-with-docker-compose.html)
+- [Develop and Develop Multi Container Applications](https://jackmckew.dev/develop-and-deploy-multi-container-applications.html)
 
 ## The Web Application
 
