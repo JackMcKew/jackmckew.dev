@@ -1,5 +1,5 @@
 Title: Develop and Deploy Multi-Container Applications
-Date: 2020-08-xx
+Date: 2020-11-06
 Author: Jack McKew
 Category: Software
 Tags: software
@@ -22,6 +22,12 @@ Let's start by diving into each of the services inside our application and how t
 > This post won't go into how to Dockerize each service in particular, more so how to connect them all together.
 
 *Find all the source code for this project at: <https://github.com/JackMcKew/multi-docker>*
+
+
+This post is apart of a series on Docker/Kubernetes, find the other posts at:
+
+- [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
+- [Develop and Develop with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html)
 
 ## Vue
 

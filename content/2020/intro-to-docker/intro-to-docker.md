@@ -11,6 +11,7 @@ I did a post back in 2018 on containerization and mentioned Docker too! <https:/
 This post is apart of a series on Docker/Kubernetes, find the other posts at:
 
 - [Develop and Develop with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html)
+- [Develop and Develop with Docker Compose](https://jackmckew.dev/develop-and-deploy-with-docker-compose.html)
 
 ## Docker Ecosystem
 
