@@ -1,5 +1,5 @@
 Title: Intro to Kubernetes
-Date: 2020-08-xx
+Date: 2020-11-13
 Author: Jack McKew
 Category: Software
 Tags: software
@@ -7,6 +7,14 @@ Tags: software
 Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.
 
 Kubernetes is managed via a master node, and worker nodes, in combination we call this a cluster. We give instructions to the master node on how we want the cluster to run, and how many workers we need.
+
+This post is apart of a series on Docker/Kubernetes, find the other posts at:
+
+- [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
+- [Develop and Develop with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html)
+- [Develop and Develop Multi Container Applications](https://jackmckew.dev/develop-and-deploy-multi-container-applications.html)
+
+![Kubernetes Logo]({static img/Kubernetes-logo.png})
 
 ## Minikube
 
