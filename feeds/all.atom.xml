@@ -1,5 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-11-06T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Develop and Deploy Multi-Container Applications</title><link href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html" rel="alternate"></link><published>2020-11-06T00:00:00+11:00</published><updated>2020-11-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-06:/develop-and-deploy-multi-container-applications.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-11-13T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Intro to Kubernetes</title><link href="https://jackmckew.dev/intro-to-kubernetes.html" rel="alternate"></link><published>2020-11-13T00:00:00+11:00</published><updated>2020-11-13T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-13:/intro-to-kubernetes.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.&lt;/p&gt;
+&lt;p&gt;Kubernetes is managed via a master node, and …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.&lt;/p&gt;
+&lt;p&gt;Kubernetes is managed via a master node, and worker nodes, in combination we call this a cluster. We give instructions to the master node on how we want the cluster to run, and how many workers we need.&lt;/p&gt;
+&lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="Kubernetes Logo" class="img-fluid" src="https://jackmckew.dev/img/Kubernetes-logo.png"/&gt;&lt;/p&gt;
+&lt;h2 id="minikube"&gt;Minikube&lt;/h2&gt;
+&lt;p&gt;Minikube is a way of running a development cluster on our local PC. When running in production however, we use managed services offered by different platforms (eg, AWS, GCP, etc). To interact with &lt;code&gt;minikube&lt;/code&gt; as it is running though, we use another tool called &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="docker-compose-to-kubernetes"&gt;Docker Compose to Kubernetes&lt;/h2&gt;
+&lt;table class="table-striped table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Docker Compose Terminology&lt;/th&gt;
+&lt;th&gt;Kubernetes Terminology&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Each entry could build an image&lt;/td&gt;
+&lt;td&gt;Kubernetes expects all images to be built&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Each entry represents a container&lt;/td&gt;
+&lt;td&gt;One config file per object we want to create&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Each entry defines the networking configuration (ports)&lt;/td&gt;
+&lt;td&gt;We have to set up all networking manually&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="whats-an-object"&gt;What's an Object?&lt;/h3&gt;
+&lt;p&gt;Notice that we mentioned objects as the equivalent in Kubernetes, but what does this mean? Objects serve different purposes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Running a container&lt;/li&gt;
+&lt;li&gt;Monitoring a container&lt;/li&gt;
+&lt;li&gt;Setting up networking&lt;/li&gt;
+&lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example object types include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;StatefulSet&lt;/li&gt;
+&lt;li&gt;ReplicaController&lt;/li&gt;
+&lt;li&gt;Pod&lt;/li&gt;
+&lt;li&gt;Service&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are multiple API versions which gives us access to a different set of object types&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id="pods"&gt;Pods&lt;/h4&gt;
+&lt;p&gt;Pods let us run containers within nodes. These are one of the most basic objects we can create within Kubernetes. Typically we only put containers that are tightly coupled together within a pod. For example, we might run a database pod which is comprised of 3 containers, the database runtime, a logger and a backup manager. Since if any of these are solely dependant on other containers running, it makes sense to group them together in a pod.&lt;/p&gt;
+&lt;h4 id="services"&gt;Services&lt;/h4&gt;
+&lt;p&gt;Services let us set up networking within a Kubernetes cluster. There is also 4 sub-types of services:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ClusterIP&lt;/li&gt;
+&lt;li&gt;NodePort&lt;/li&gt;
+&lt;li&gt;Ingress&lt;/li&gt;
+&lt;li&gt;LoadBalancer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;NodePort services allow us to expose a container to the outside network (only for development purposes). We can use selectors and labels to be the equivalent of our service names in docker-compose.&lt;/p&gt;
+&lt;h4 id="deployment"&gt;Deployment&lt;/h4&gt;
+&lt;p&gt;The deployment object type is better for running groups of identical pods, as the master can manage all the changes &amp;amp; updates for our pods for us (see below for limitations when using pods alone).&lt;/p&gt;
+&lt;p&gt;Similar to the pod yaml file, the &lt;code&gt;template&lt;/code&gt; tag takes the exact same information to create any number of pods (replicas) as specified.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ensure to use matchLabels if using labels for the pods, as this will give the master information for updating the cluster.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We can check all the deployments currently running with &lt;code&gt;kubectl get deployments&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="kubectl"&gt;Kubectl&lt;/h2&gt;
+&lt;p&gt;Kubectl is the tool that we use to manage our Kubernetes clusters. If we want to pass a config file into &lt;code&gt;kubectl&lt;/code&gt; we use the command &lt;code&gt;kubectl apply -f [filename]&lt;/code&gt;. Similar to &lt;code&gt;docker ps&lt;/code&gt;, if we want to see all the running pods in our cluster, we can run &lt;code&gt;kubectl get pods&lt;/code&gt;. Furthermore, to get all the running services we can run &lt;code&gt;kubectl get services&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once we have a pod running, we can check to see what containers are running with &lt;code&gt;docker ps&lt;/code&gt;. If we kill the container running inside the pod, we will notice that if we run &lt;code&gt;docker ps&lt;/code&gt; once again, it'll be live again. Kubernetes will try to restart any containers if anything goes wrong. Kubernetes will try it's best to keep the application in the state that we provide in the configuration.&lt;/p&gt;
+&lt;h3 id="update-existing-object"&gt;Update Existing Object&lt;/h3&gt;
+&lt;p&gt;If a configuration has been provided a &lt;code&gt;name&lt;/code&gt; in the &lt;code&gt;metadata&lt;/code&gt;, the running object can be updated by changing the configuration provided the &lt;code&gt;name&lt;/code&gt; remains the same.&lt;/p&gt;
+&lt;p&gt;This updated configuration can then be applied with &lt;code&gt;kubectl apply -f [filename]&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is only a specific number of parameters we can change with this (eg for pods: image, activeDeadlineSeconds, etc). Which you will see an error if the variable falls outside the provided.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For maintaining sets of identical pods, we can bypass the limitations on what fields we can update with the &lt;code&gt;Deployment&lt;/code&gt; object kind. Pods are good for one-off development purposes, while Deployments are better for development &amp;amp; production.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Deployment updates work by attempting to make the changes, and if the above error occurs, it'll automatically kill the pod and restart with the updated configuration.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="get-info-about-an-existing-object"&gt;Get Info about an Existing Object&lt;/h3&gt;
+&lt;p&gt;If we had an object running within a cluster, and we wanted to get information about it, we can run &lt;code&gt;kubectl describe [object_type] [object_name]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, we can extract information about all objects of a certain type in the cluster by omitting the &lt;code&gt;object_name&lt;/code&gt;. So our command would be &lt;code&gt;kubectl [object_type]&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id="deleting-existing-objects"&gt;Deleting Existing Objects&lt;/h3&gt;
+&lt;p&gt;Similar to &lt;code&gt;docker stop&lt;/code&gt;, we can use &lt;code&gt;kubectl delete -f [config_yaml]&lt;/code&gt; to stop and delete an object from the cluster.&lt;/p&gt;
+&lt;h3 id="update-deployment-images"&gt;Update Deployment Images&lt;/h3&gt;
+&lt;p&gt;A workflow for Kubernetes is we want our application to keep running, and when we push a new image to Docker Hub, we want our Kubernetes cluster to update the objects running on this image, with the updated image.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: &lt;a href="https://github.com/kubernetes/kubernetes/issues/33664"&gt;https://github.com/kubernetes/kubernetes/issues/33664&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl &lt;span class="nb"&gt;set&lt;/span&gt; image &lt;span class="o"&gt;[&lt;/span&gt;object_type&lt;span class="o"&gt;]&lt;/span&gt; / &lt;span class="o"&gt;[&lt;/span&gt;object_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;container_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;new_image_to_use&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;After running this command, the deployment will update the running pods with the new image.&lt;/p&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Develop and Deploy Multi-Container Applications</title><link href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html" rel="alternate"></link><published>2020-11-06T00:00:00+11:00</published><updated>2020-11-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-06:/develop-and-deploy-multi-container-applications.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:&lt;/p&gt;
 &lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -51,6 +149,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="vue"&gt;Vue&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Find all the source code for the front end client at: &lt;a href="https://github.com/JackMcKew/multi-docker/tree/master/client"&gt;https://github.com/JackMcKew/multi-docker/tree/master/client&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
@@ -61,7 +160,7 @@
 &lt;h3 id="fibinputform-component"&gt;FibInputForm Component&lt;/h3&gt;
 &lt;p&gt;Components are pieces of user interface that we can access in multiple parts of our application, we build a component which will contain both the HTML and javascript for driving the user input, and for displaying the output retrieved from Redis or PostgreSQL. Vue components are typically comprised of a &lt;code&gt;template&lt;/code&gt; block and a corresponding &lt;code&gt;script&lt;/code&gt; and &lt;code&gt;style&lt;/code&gt; block. When writing the template for a component, there is numerous Vue specific attributes that we can provide the elements in the HTML. For this project we will make use of Bulma/Buefy CSS (which can be installed with &lt;code&gt;npm install bulma&lt;/code&gt; or &lt;code&gt;npm install buefy&lt;/code&gt;) for our styling.&lt;/p&gt;
 &lt;p&gt;We create a file named &lt;code&gt;FibInputForm.vue&lt;/code&gt; inside &lt;code&gt;project_name/src/components&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -217,7 +316,7 @@
 &lt;p&gt;To briefly cover the functionality above, the template is built up of 3 parts, the input form where users submit an index to query, a list of the latest indexes as stored in Redis separated by a comma and finally a list of the calculated as retrieved from the PostgreSQL database. We use &lt;code&gt;axios&lt;/code&gt; to interface we the API that we will create with &lt;code&gt;express&lt;/code&gt;. We query the API upon load, and the page is always reloaded when submit is pressed. Now that this has been exported, it can be imported from any other point in our web application and placed in with a &lt;code&gt;&amp;lt;FibInputForm/&amp;gt;&lt;/code&gt; element! Neat!&lt;/p&gt;
 &lt;h3 id="fibinputpage-view"&gt;FibInputPage View&lt;/h3&gt;
 &lt;p&gt;Now that we have our component, we need a page to put it on! We create a new file within &lt;code&gt;project_name/src/views&lt;/code&gt; named &lt;code&gt;FibInputPage.vue&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -267,7 +366,7 @@
 &lt;p&gt;As we can see above, we've imported our neat little &lt;code&gt;FibInputForm&lt;/code&gt; and used it after placing it in a centered section. Again we export the page view so we can import into the router to make sure it's linked to a URL.&lt;/p&gt;
 &lt;h3 id="routing-the-page"&gt;Routing the Page&lt;/h3&gt;
 &lt;p&gt;Lastly for Vue, we need to set up a route so users can reach our page, both within the &lt;code&gt;vue-router&lt;/code&gt; and on the main page (&lt;code&gt;App.vue&lt;/code&gt;). Routes are all defined within &lt;code&gt;project_name/router/index.ts&lt;/code&gt;. So we need to add in a new one for our &lt;code&gt;FibInputPage&lt;/code&gt; by adding the following object into the routes array:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -287,7 +386,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Next to ensure the route is accessible from a link on the page, add a &lt;code&gt;router-link&lt;/code&gt; element into the template of &lt;code&gt;App.vue&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="redis"&gt;Redis&lt;/h2&gt;
@@ -295,7 +394,7 @@
 &lt;p&gt;Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it.&lt;/p&gt;
 &lt;p&gt;We do this by creating 3 files: &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. &lt;code&gt;package.json&lt;/code&gt; defines what dependencies need to be installed, and how to run the project. &lt;code&gt;index.js&lt;/code&gt; manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. &lt;code&gt;keys.js&lt;/code&gt; contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.&lt;/p&gt;
 &lt;p&gt;Here is the code for the core of this project, &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -342,7 +441,7 @@
 &lt;h2 id="postgresql"&gt;PostgreSQL&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Find all the source code for the PostgreSQL service at: &lt;a href="https://github.com/JackMcKew/multi-docker/tree/master/server"&gt;https://github.com/JackMcKew/multi-docker/tree/master/server&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;We are going to use the PostgreSQL service part of our project to contain the interface with the database, and the API with &lt;code&gt;express&lt;/code&gt;. Very similar to our redis project, we need a &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. Let's dive straight into the code inside &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -529,7 +628,7 @@
 &lt;h2 id="nginx"&gt;Nginx&lt;/h2&gt;
 &lt;p&gt;Nginx in this project helps us create all the connections between the services and for them all to play nicely. How nginx works is by defining any connections in a configuration file, and pass that configuration file upon runtime.&lt;/p&gt;
 &lt;p&gt;This is our &lt;code&gt;default.conf&lt;/code&gt; nginx configuration for this project:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -579,7 +678,7 @@
 &lt;p&gt;We also set up a few locations, these help nginx 'finish' the route. &lt;code&gt;/&lt;/code&gt; means any incoming connection, pass it off to the front end to render. If any request connection comes in containing &lt;code&gt;/api&lt;/code&gt; then we want to pass that request to the service, so we rewrite the URL to be the correct URL.&lt;/p&gt;
 &lt;h2 id="docker-compose"&gt;Docker Compose&lt;/h2&gt;
 &lt;p&gt;Now that we've got our individual services all configured, we need a way to run them all at the same time. We need to create a &lt;code&gt;docker-compose.yml&lt;/code&gt; which will contain all the environment variables, and how each service depend/connect to each other so we can run it all!&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -714,7 +813,7 @@
 &lt;p&gt;Note that our environment variables (which were set in &lt;code&gt;keys.js&lt;/code&gt; earlier), are just the name of the service given in the &lt;code&gt;docker-compose.yml&lt;/code&gt; file. Docker Compose handles all the renaming when each service is connected up for us! How awesome is that!&lt;/p&gt;
 &lt;h2 id="github-actions"&gt;Github Actions&lt;/h2&gt;
 &lt;p&gt;Now that we've set all of services and make sure they place nice in Docker Compose, it's time to implement CI/CD with Github Actions so whenever we push new versions of our code, it'll automatically test that everything works and deploy our new version of the application. We do this by creating a &lt;code&gt;test-and-deploy.yml&lt;/code&gt; within &lt;code&gt;.github/workflows/&lt;/code&gt; which contains:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -874,7 +973,7 @@
 &lt;p&gt;Everything's now set up! For another user or a deployment service to get each of the images for the services they've created they can now simply run &lt;code&gt;docker run jackmckew/multi-docker-client&lt;/code&gt; and that's it! It should run on any operating system provided Docker is installed, how cool is that!&lt;/p&gt;
 &lt;h2 id="deploying-to-aws-elastic-beanstalk"&gt;Deploying to AWS Elastic Beanstalk&lt;/h2&gt;
 &lt;p&gt;Now we want to deploy this application to Elastic Beanstalk, that means we need to create a &lt;code&gt;Dockerrun.aws.json&lt;/code&gt; which is very similar to that of the &lt;code&gt;docker-compose.yml&lt;/code&gt;. The contents of the json file will be:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -981,10 +1080,11 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="the-web-application"&gt;The Web Application&lt;/h2&gt;
 &lt;p&gt;For the web app we will use React, which is a javascript framework for managing the front end of applications. To generate the web app boilerplate for us, we will use &lt;code&gt;create-react-app&lt;/code&gt;. For running this, ensure that Node.js is installed on the local PC. Finally run the command below, to initialise the front end component of React of our web app.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -993,7 +1093,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;For this workflow we're going to set up two Dockerfiles, one for developing and one for production. Let's start with the developers Dockerfile, which we will aptly name &lt;code&gt;Dockerfile.dev&lt;/code&gt;, we must ensure to add the &lt;code&gt;-f&lt;/code&gt; flag along with the filename when building the Docker image with &lt;code&gt;docker build -f Dockerfile.dev .&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The contents of our &lt;code&gt;Dockerfile.dev&lt;/code&gt; will contain:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1023,16 +1123,16 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;To circumvent the issue in that Docker typically takes snapshots of the code and we want our app to update on save, we use mount to create a 'reference' to our folder on the local PC. We do this by running the command:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;If using Windows, replace the &lt;code&gt;${pwd}&lt;/code&gt; with the full path to the folder, ensuring to swap all backslashes to forwards slashes and changing &lt;code&gt;C:&lt;/code&gt; to &lt;code&gt;/C/&lt;/code&gt;. Here is an example:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="docker-compose"&gt;Docker Compose&lt;/h3&gt;
 &lt;p&gt;Rather than using the rather large command above, let's use Docker Compose.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1066,7 +1166,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;li&gt;We mount the current directory to the app directory in the container for updating in sync&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Again, if using Windows, we need to add some more options to our service:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;stdin_open&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
@@ -1083,7 +1183,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;p&gt;Option 1 can be cumbersome as we will need to do this each time when running a container.&lt;/p&gt;
 &lt;p&gt;Option 2 is achieved by creating a new service in our &lt;code&gt;docker-compose.yml&lt;/code&gt; file:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1130,7 +1230,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;h3 id="multi-stage-dockerfile"&gt;Multi-stage Dockerfile&lt;/h3&gt;
 &lt;p&gt;To implement our multi-stage Dockerfile as above we do this we the following yaml:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1162,6 +1262,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="docker-ecosystem"&gt;Docker Ecosystem&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="Docker Logo" class="img-fluid" src="https://jackmckew.dev/img/Moby-logo.png"/&gt;&lt;/p&gt;
@@ -1237,7 +1338,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/table&gt;
 &lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1286,7 +1387,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;h2 id="port-mapping"&gt;Port Mapping&lt;/h2&gt;
 &lt;p&gt;By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.&lt;/p&gt;
 &lt;p&gt;This is not changed within the Dockerfile, but rather when we run the container with the &lt;code&gt;-p&lt;/code&gt; flag. This can be done with:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -p &lt;span class="o"&gt;[&lt;/span&gt;local_pc_port&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="o"&gt;[&lt;/span&gt;container_port&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;image_name&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -p &lt;span class="o"&gt;[&lt;/span&gt;local_pc_port&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="o"&gt;[&lt;/span&gt;container_port&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;image_name&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -1302,7 +1403,7 @@ This local PC port and the container port do NOT have to match.&lt;/p&gt;
 &lt;li&gt;Create an container that will host a nodejs app&lt;/li&gt;
 &lt;li&gt;Network the ports of the nodejs app container&lt;/li&gt;
 &lt;/ol&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1634,404 +1735,4 @@ FAILED tmp8uis7_kv.py::test_bad_multiply - assert 0 == (31 * 1)
 &lt;p&gt;Hopefully this has introduced the power of property based testing and can help make software more robust for everyone!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="software-development"></category></entry><entry><title>Shallow vs Deep Copy in Python</title><link href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html" rel="alternate"></link><published>2020-10-09T00:00:00+11:00</published><updated>2020-10-09T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-09:/shallow-vs-deep-copy-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5 …&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5&lt;/code&gt;), but sometimes this doesn't always do what we expect. This is going to be a deep  dive into different types of &lt;code&gt;copy&lt;/code&gt; in Python.&lt;/p&gt;
-&lt;p&gt;When we say &lt;code&gt;x = 5&lt;/code&gt;, we're actually not creating a new object (as in object oriented software), we're creating a binding between a target and an object. We can see this in action by using the &lt;code&gt;id()&lt;/code&gt; function on our variables to see the 'identity' of an object.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;140711684720416
-140711684720416
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As we can see, both &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;5&lt;/code&gt; share an 'identity' meaning they are both the same object and the variable is merely a 'pointer' to the right object.&lt;/p&gt;
-&lt;p&gt;But sometimes we actually want to create a new object, and this comes into using the &lt;code&gt;copy&lt;/code&gt; module. But even with &lt;code&gt;copy&lt;/code&gt; there's still 2 types of copy:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;shallow copy&lt;/li&gt;
-&lt;li&gt;deep copy&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Let's take a look at this a bit closer, we'll start by creating a list (an object itself), with some integer elements and an embedded list.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A contents:  [1, 2, [3, 4], 5]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now similar to our &lt;code&gt;x = 5&lt;/code&gt; example before, let's assign a new variable &lt;code&gt;B&lt;/code&gt; and set it to &lt;code&gt;A&lt;/code&gt; to see what happens to the identities.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"B's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A's object id is 2392779886784
-B's object id is 2392779886784
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Funnily enough, the ids are the same! Meaning they are both the same object. This would mean if we were to modify the contents of the elements in &lt;code&gt;A&lt;/code&gt;, the same modifications would be made in &lt;code&gt;B&lt;/code&gt;, which is not obvious.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify A[2][0] = 100"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"B contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A == B? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's modify A[2][0] = 100
-A contents:  [1, 2, [100, 4], 5]
-B contents:  [1, 2, [100, 4], 5]
-Is A == B?  True
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now if we were trying to use &lt;code&gt;B&lt;/code&gt; as a separate entity to &lt;code&gt;A&lt;/code&gt; this could cause all sorts of grief, and be very difficult to track down.&lt;/p&gt;
-&lt;p&gt;Let's reset our variable(s) back to it's original state so we can see how shallow &amp;amp; deep copies could change this behaviour.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's reset A[2][0] = 3"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's reset A[2][0] = 3
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-Copy"&gt;Shallow Copy&lt;a class="anchor-link" href="#Shallow-Copy"&gt;¶&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;copy&lt;/span&gt;
-
-&lt;span class="n"&gt;C&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"C's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A's object id is 2392779886784
-C's object id is 2392779896256
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Fantastic! Now we can see that our &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;C&lt;/code&gt; have separate identities, now we would expect this to behave like separate entities, right? Unfortunately not, while this does have a use case, the contents inside the list still have matching identities, meaning if we modify the contents of &lt;code&gt;C&lt;/code&gt;, it'll be reflected in &lt;code&gt;A&lt;/code&gt;, again a not obvious behaviour. But this is known as a shallow copy, meaning a new object is created but it still references the original data.&lt;/p&gt;
-&lt;p&gt;Let's demonstrate this by modifying one of the elements, and seeing if it's reflected in both variables.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A[2][0]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"C[2][0]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify C[2][0] = 100 (note if this was not an embedded list this will creates a new instance of the C[0] element and won't update original list)"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"C contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A == C? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A[2][0] == C[2][0]? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A[2][0]'s object id is 140711684720352
-C[2][0]'s object id is 140711684720352
-Let's modify C[2][0] = 100 (note if this was not an embedded list this will creates a new instance of the C[0] element and won't update original list)
-A contents:  [1, 2, [100, 4], 5]
-C contents:  [1, 2, [100, 4], 5]
-Is A == C?  True
-Is A[2][0] == C[2][0]?  True
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;But why are we using an embedded list specifically? This is one percularity, that like most things in this blog post, isn't obvious. Note that if we modified the contents of an element in the shallow copy that was an integer, it wou;dn't be reflected in both variables. Let's try this out.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A[1]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"C[1]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify C[1] = 100"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"C contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A == C? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A[1] == C[1]? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A[1]'s object id is 140711684720320
-C[1]'s object id is 140711684720320
-Let's modify C[1] = 100
-A contents:  [1, 2, [100, 4], 5]
-C contents:  [1, 100, [100, 4], 5]
-Is A == C?  False
-Is A[1] == C[1]?  False
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This is due to the fact that the only difference between shallow and deep copies is for compound objects (objects that contain other objects, like lists within lists).&lt;/p&gt;
-&lt;p&gt;Next let's reset our list, and take a look at deep copy.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's reset A[2][0] = 3 and A[1] = 2"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's reset A[2][0] = 3 and A[1] = 2
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Deep-Copy"&gt;Deep Copy&lt;a class="anchor-link" href="#Deep-Copy"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now we're at the deep copy, and as we'd expect it creates a completely new object, and recursively creates new objects for embedded objects (compound objects). This means when we edit anything inside one of these compound objects, the changes won't be reflected in the other object as we'd sometimes originally expect. Let's demonstrate this.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's do a deep copy"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;D&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deepcopy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"D's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify A[2][0] = 100"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's do a deep copy
-A's object id is 2392779886784
-D's object id is 2392779846656
-Let's modify A[2][0] = 100
-[1, 2, [100, 4], 5]
-[1, 2, [3, 4], 5]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Hopefully being aware of how the default behaviour works, and the potential solutions will help when debugging strange behaviour when using variables in Python!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry></feed>
+&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="software-development"></category></entry></feed>

