@@ -28,6 +28,7 @@ This post is apart of a series on Docker/Kubernetes, find the other posts at:
 
 - [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
 - [Develop and Develop with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html)
+- [Intro to Kubernetes](https://jackmckew.dev/intro-to-kubernetes.html)
 
 ## Vue
 
