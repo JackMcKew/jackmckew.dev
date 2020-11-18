@@ -94,7 +94,7 @@
 &lt;p&gt;This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: &lt;a href="https://github.com/kubernetes/kubernetes/issues/33664"&gt;https://github.com/kubernetes/kubernetes/issues/33664&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl &lt;span class="nb"&gt;set&lt;/span&gt; image &lt;span class="o"&gt;[&lt;/span&gt;object_type&lt;span class="o"&gt;]&lt;/span&gt; / &lt;span class="o"&gt;[&lt;/span&gt;object_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;container_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;new_image_to_use&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl &lt;span class="nb"&gt;set&lt;/span&gt; image &lt;span class="o"&gt;[&lt;/span&gt;object_type&lt;span class="o"&gt;]&lt;/span&gt; / &lt;span class="o"&gt;[&lt;/span&gt;object_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;container_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;new_image_to_use&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;After running this command, the deployment will update the running pods with the new image.&lt;/p&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Develop and Deploy Multi-Container Applications</title><link href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html" rel="alternate"></link><published>2020-11-06T00:00:00+11:00</published><updated>2020-11-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-06:/develop-and-deploy-multi-container-applications.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:&lt;/p&gt;
@@ -160,7 +160,7 @@
 &lt;h3 id="fibinputform-component"&gt;FibInputForm Component&lt;/h3&gt;
 &lt;p&gt;Components are pieces of user interface that we can access in multiple parts of our application, we build a component which will contain both the HTML and javascript for driving the user input, and for displaying the output retrieved from Redis or PostgreSQL. Vue components are typically comprised of a &lt;code&gt;template&lt;/code&gt; block and a corresponding &lt;code&gt;script&lt;/code&gt; and &lt;code&gt;style&lt;/code&gt; block. When writing the template for a component, there is numerous Vue specific attributes that we can provide the elements in the HTML. For this project we will make use of Bulma/Buefy CSS (which can be installed with &lt;code&gt;npm install bulma&lt;/code&gt; or &lt;code&gt;npm install buefy&lt;/code&gt;) for our styling.&lt;/p&gt;
 &lt;p&gt;We create a file named &lt;code&gt;FibInputForm.vue&lt;/code&gt; inside &lt;code&gt;project_name/src/components&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -316,7 +316,7 @@
 &lt;p&gt;To briefly cover the functionality above, the template is built up of 3 parts, the input form where users submit an index to query, a list of the latest indexes as stored in Redis separated by a comma and finally a list of the calculated as retrieved from the PostgreSQL database. We use &lt;code&gt;axios&lt;/code&gt; to interface we the API that we will create with &lt;code&gt;express&lt;/code&gt;. We query the API upon load, and the page is always reloaded when submit is pressed. Now that this has been exported, it can be imported from any other point in our web application and placed in with a &lt;code&gt;&amp;lt;FibInputForm/&amp;gt;&lt;/code&gt; element! Neat!&lt;/p&gt;
 &lt;h3 id="fibinputpage-view"&gt;FibInputPage View&lt;/h3&gt;
 &lt;p&gt;Now that we have our component, we need a page to put it on! We create a new file within &lt;code&gt;project_name/src/views&lt;/code&gt; named &lt;code&gt;FibInputPage.vue&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -366,7 +366,7 @@
 &lt;p&gt;As we can see above, we've imported our neat little &lt;code&gt;FibInputForm&lt;/code&gt; and used it after placing it in a centered section. Again we export the page view so we can import into the router to make sure it's linked to a URL.&lt;/p&gt;
 &lt;h3 id="routing-the-page"&gt;Routing the Page&lt;/h3&gt;
 &lt;p&gt;Lastly for Vue, we need to set up a route so users can reach our page, both within the &lt;code&gt;vue-router&lt;/code&gt; and on the main page (&lt;code&gt;App.vue&lt;/code&gt;). Routes are all defined within &lt;code&gt;project_name/router/index.ts&lt;/code&gt;. So we need to add in a new one for our &lt;code&gt;FibInputPage&lt;/code&gt; by adding the following object into the routes array:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -386,7 +386,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Next to ensure the route is accessible from a link on the page, add a &lt;code&gt;router-link&lt;/code&gt; element into the template of &lt;code&gt;App.vue&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="redis"&gt;Redis&lt;/h2&gt;
@@ -394,7 +394,7 @@
 &lt;p&gt;Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it.&lt;/p&gt;
 &lt;p&gt;We do this by creating 3 files: &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. &lt;code&gt;package.json&lt;/code&gt; defines what dependencies need to be installed, and how to run the project. &lt;code&gt;index.js&lt;/code&gt; manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. &lt;code&gt;keys.js&lt;/code&gt; contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.&lt;/p&gt;
 &lt;p&gt;Here is the code for the core of this project, &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -441,7 +441,7 @@
 &lt;h2 id="postgresql"&gt;PostgreSQL&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Find all the source code for the PostgreSQL service at: &lt;a href="https://github.com/JackMcKew/multi-docker/tree/master/server"&gt;https://github.com/JackMcKew/multi-docker/tree/master/server&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;We are going to use the PostgreSQL service part of our project to contain the interface with the database, and the API with &lt;code&gt;express&lt;/code&gt;. Very similar to our redis project, we need a &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. Let's dive straight into the code inside &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -628,7 +628,7 @@
 &lt;h2 id="nginx"&gt;Nginx&lt;/h2&gt;
 &lt;p&gt;Nginx in this project helps us create all the connections between the services and for them all to play nicely. How nginx works is by defining any connections in a configuration file, and pass that configuration file upon runtime.&lt;/p&gt;
 &lt;p&gt;This is our &lt;code&gt;default.conf&lt;/code&gt; nginx configuration for this project:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -678,7 +678,7 @@
 &lt;p&gt;We also set up a few locations, these help nginx 'finish' the route. &lt;code&gt;/&lt;/code&gt; means any incoming connection, pass it off to the front end to render. If any request connection comes in containing &lt;code&gt;/api&lt;/code&gt; then we want to pass that request to the service, so we rewrite the URL to be the correct URL.&lt;/p&gt;
 &lt;h2 id="docker-compose"&gt;Docker Compose&lt;/h2&gt;
 &lt;p&gt;Now that we've got our individual services all configured, we need a way to run them all at the same time. We need to create a &lt;code&gt;docker-compose.yml&lt;/code&gt; which will contain all the environment variables, and how each service depend/connect to each other so we can run it all!&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -813,7 +813,7 @@
 &lt;p&gt;Note that our environment variables (which were set in &lt;code&gt;keys.js&lt;/code&gt; earlier), are just the name of the service given in the &lt;code&gt;docker-compose.yml&lt;/code&gt; file. Docker Compose handles all the renaming when each service is connected up for us! How awesome is that!&lt;/p&gt;
 &lt;h2 id="github-actions"&gt;Github Actions&lt;/h2&gt;
 &lt;p&gt;Now that we've set all of services and make sure they place nice in Docker Compose, it's time to implement CI/CD with Github Actions so whenever we push new versions of our code, it'll automatically test that everything works and deploy our new version of the application. We do this by creating a &lt;code&gt;test-and-deploy.yml&lt;/code&gt; within &lt;code&gt;.github/workflows/&lt;/code&gt; which contains:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -973,7 +973,7 @@
 &lt;p&gt;Everything's now set up! For another user or a deployment service to get each of the images for the services they've created they can now simply run &lt;code&gt;docker run jackmckew/multi-docker-client&lt;/code&gt; and that's it! It should run on any operating system provided Docker is installed, how cool is that!&lt;/p&gt;
 &lt;h2 id="deploying-to-aws-elastic-beanstalk"&gt;Deploying to AWS Elastic Beanstalk&lt;/h2&gt;
 &lt;p&gt;Now we want to deploy this application to Elastic Beanstalk, that means we need to create a &lt;code&gt;Dockerrun.aws.json&lt;/code&gt; which is very similar to that of the &lt;code&gt;docker-compose.yml&lt;/code&gt;. The contents of the json file will be:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1084,7 +1084,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ul&gt;
 &lt;h2 id="the-web-application"&gt;The Web Application&lt;/h2&gt;
 &lt;p&gt;For the web app we will use React, which is a javascript framework for managing the front end of applications. To generate the web app boilerplate for us, we will use &lt;code&gt;create-react-app&lt;/code&gt;. For running this, ensure that Node.js is installed on the local PC. Finally run the command below, to initialise the front end component of React of our web app.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -1093,7 +1093,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;For this workflow we're going to set up two Dockerfiles, one for developing and one for production. Let's start with the developers Dockerfile, which we will aptly name &lt;code&gt;Dockerfile.dev&lt;/code&gt;, we must ensure to add the &lt;code&gt;-f&lt;/code&gt; flag along with the filename when building the Docker image with &lt;code&gt;docker build -f Dockerfile.dev .&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The contents of our &lt;code&gt;Dockerfile.dev&lt;/code&gt; will contain:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1123,16 +1123,16 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;To circumvent the issue in that Docker typically takes snapshots of the code and we want our app to update on save, we use mount to create a 'reference' to our folder on the local PC. We do this by running the command:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;If using Windows, replace the &lt;code&gt;${pwd}&lt;/code&gt; with the full path to the folder, ensuring to swap all backslashes to forwards slashes and changing &lt;code&gt;C:&lt;/code&gt; to &lt;code&gt;/C/&lt;/code&gt;. Here is an example:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="docker-compose"&gt;Docker Compose&lt;/h3&gt;
 &lt;p&gt;Rather than using the rather large command above, let's use Docker Compose.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1166,7 +1166,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;li&gt;We mount the current directory to the app directory in the container for updating in sync&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Again, if using Windows, we need to add some more options to our service:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;stdin_open&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
@@ -1183,7 +1183,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;p&gt;Option 1 can be cumbersome as we will need to do this each time when running a container.&lt;/p&gt;
 &lt;p&gt;Option 2 is achieved by creating a new service in our &lt;code&gt;docker-compose.yml&lt;/code&gt; file:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1230,7 +1230,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;h3 id="multi-stage-dockerfile"&gt;Multi-stage Dockerfile&lt;/h3&gt;
 &lt;p&gt;To implement our multi-stage Dockerfile as above we do this we the following yaml:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1338,7 +1338,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/table&gt;
 &lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -1387,7 +1387,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;h2 id="port-mapping"&gt;Port Mapping&lt;/h2&gt;
 &lt;p&gt;By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.&lt;/p&gt;
 &lt;p&gt;This is not changed within the Dockerfile, but rather when we run the container with the &lt;code&gt;-p&lt;/code&gt; flag. This can be done with:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -p &lt;span class="o"&gt;[&lt;/span&gt;local_pc_port&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="o"&gt;[&lt;/span&gt;container_port&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;image_name&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -p &lt;span class="o"&gt;[&lt;/span&gt;local_pc_port&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="o"&gt;[&lt;/span&gt;container_port&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;image_name&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -1403,7 +1403,7 @@ This local PC port and the container port do NOT have to match.&lt;/p&gt;
 &lt;li&gt;Create an container that will host a nodejs app&lt;/li&gt;
 &lt;li&gt;Network the ports of the nodejs app container&lt;/li&gt;
 &lt;/ol&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
