@@ -158,7 +158,7 @@
 
 
   <div>
-    </head><body><p>What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the <em>'But it works on my machine'</em> problem. This post will go through an intro to docker and how you can use it. A crucial part to Docker is the container, <em>a Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings</em></p>
+    <body><p>What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the <em>'But it works on my machine'</em> problem. This post will go through an intro to docker and how you can use it. A crucial part to Docker is the container, <em>a Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings</em></p>
 <p>I did a post back in 2018 on containerization and mentioned Docker too! <a href="https://jackmckew.dev/episode-6-containerization.html">https://jackmckew.dev/episode-6-containerization.html</a></p>
 <p>This post is apart of a series on Docker/Kubernetes, find the other posts at:</p>
 <ul>
@@ -169,7 +169,7 @@
 <h2 id="docker-ecosystem">Docker Ecosystem</h2>
 <p><img alt="Docker Logo" class="img-fluid" src="https://jackmckew.dev/img/Moby-logo.png"/></p>
 <p>Docker isn't a single program, it's a suite of programs which we'll refer to as an ecosystem. A brief description of all the components that make the ecosystem is:</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Service</th>
@@ -208,7 +208,7 @@
 <p><a href="https://www.docker.com/products/docker-desktop">https://www.docker.com/products/docker-desktop</a></p>
 <h2 id="maintaining-docker-in-the-command-line">Maintaining Docker in the Command Line</h2>
 <p>There are many useful commands for interacting with the Docker client.</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Command</th>
@@ -329,7 +329,7 @@ This local PC port and the container port do NOT have to match.</p>
 <p>Rather than using <code>docker stop</code> with each of the IDs of the containers that we created. Luckily, we can simply run <code>docker-compose down</code> to stop all the containers after using <code>docker-compose up</code>. This is particularly useful when we run <code>docker-compose up -d</code> which will run the containers in the background, so we can't just CTRL+C out of it.</p>
 <h3 id="restart-policies">Restart Policies</h3>
 <p>If any container crashes, docker-compose defaults to the restart policy of <code>"no"</code>, which never attempts to restart the container. Potential restart policies in docker-compose are:</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Policy</th>
@@ -360,7 +360,7 @@ This local PC port and the container port do NOT have to match.</p>
 <p>Similarly to running <code>docker ps</code>, we can run <code>docker-compose ps</code> to check all the running containers that we started with <code>docker-compose up</code>.</p>
 <blockquote>
 <p>This must be used in the same directory as the <code>docker-compose.yml</code> file.</p>
-</blockquote>
+</blockquote></body>
   </div>
   <div class="tag-cloud">
     <p>

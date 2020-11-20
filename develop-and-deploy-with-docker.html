@@ -158,7 +158,7 @@
 
 
   <div>
-    </head><body><p>This post is intended to work through setting up a workflow with Docker. In particular, we will be setting up a production workflow for a web app. For this web app, we will need a workflow which supports:</p>
+    <body><p>This post is intended to work through setting up a workflow with Docker. In particular, we will be setting up a production workflow for a web app. For this web app, we will need a workflow which supports:</p>
 <ol>
 <li>Develop</li>
 <li>Test</li>
@@ -351,7 +351,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 <p>Note that there is no explicit end to the first stage, this is handled for us whenever a new <code>FROM</code> command is used. Further, the <code>WORKDIR</code> command isn't shared across stages, so be sure to prepend any paths if you want to use data created by different stages.</p>
 <blockquote>
 <p>If attempting to run our new image, the default port for nginx is 80 and needs to be mapped to the local PC.</p>
-</blockquote>
+</blockquote></body>
   </div>
   <div class="tag-cloud">
     <p>
