@@ -1,5 +1,5 @@
-Title: Develop and Deploy with Kubernetes
-Date: 2020-08-19
+Title: Developing with Kubernetes
+Date: 2020-11-20
 Author: Jack McKew
 Category: Software
 Tags: software
@@ -17,6 +17,14 @@ Following on with previous posts on this blog. This post will be going through h
 | Nginx      | Nginx will handle the routing between our services                     |
 
 > Previously we made use of services provided by AWS for Redis & PostgreSQL, in this post these services will be run inside their own pods.
+
+This post is apart of a series on Docker/Kubernetes, find the other posts at:
+
+- [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
+- [Develop and Develop with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html)
+- [Develop and Develop Multi Container Applications](https://jackmckew.dev/develop-and-deploy-multi-container-applications.html)
+- [Intro to Kubernetes](https://jackmckew.dev/intro-to-kubernetes.html)
+- [Developing with Kubernetes](https://jackmckew.dev/developing-with-kubernetes.html)
 
 ## The Architecture
 

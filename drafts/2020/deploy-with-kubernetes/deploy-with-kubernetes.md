@@ -1,4 +1,4 @@
-Title: Develop and Deploy with Kubernetes
+Title: Deploying with Kubernetes
 Date: 2020-08-19
 Author: Jack McKew
 Category: Software
