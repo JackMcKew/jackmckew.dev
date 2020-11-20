@@ -204,3 +204,6 @@ Any requests for `test.com/api` get routed to the specific server service for ha
 ## Deploy!
 
 Now we are ready to deploy our Kubernetes cluster onto a cloud provider, this was originally detailed in this part of the post, but grew far longer than expected so another post was created!
+
+Javascript Source(s):
+[mermaid.min.js]({static js/mermaid.min.js})
