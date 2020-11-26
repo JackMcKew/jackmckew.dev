@@ -1,5 +1,5 @@
 Title: Deploying with Kubernetes
-Date: 2020-08-19
+Date: 2020-11-26
 Author: Jack McKew
 Category: Software
 Tags: software
@@ -17,6 +17,15 @@ Following on with previous posts on this blog. This post will be going through h
 | PostgreSQL     | PostgreSQL will be our database                                        |
 | Nginx          | Nginx will handle the routing between our services                     |
 | Github Actions | The CI/CD for our project                                              |
+
+
+This post is apart of a series on Docker/Kubernetes, find the other posts at:
+
+- [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
+- [Develop and Develop with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html)
+- [Develop and Develop Multi Container Applications](https://jackmckew.dev/develop-and-deploy-multi-container-applications.html)
+- [Intro to Kubernetes](https://jackmckew.dev/intro-to-kubernetes.html)
+- [Developing with Kubernetes](https://jackmckew.dev/developing-with-kubernetes.html)
 
 > Previously we made use of services provided by AWS for Redis & PostgreSQL, in this post these services will be run inside their own pods.
 
@@ -114,3 +123,6 @@ Now we head to our `Services & Ingress` page in our project, where we can see al
 ![Kubernetes In Action on Google Cloud]({ static img/google-cloud-kubernetes.gif })
 
 > If we wanted to set up an actual web address, we'd need to purchase a domain, set the A record as the IP for our external load balancer, and finally set up a certificate manager to handle the https authentication.
+
+Javascript Source(s):
+[mermaid.min.js]({static js/mermaid.min.js})

@@ -25,6 +25,7 @@ This post is apart of a series on Docker/Kubernetes, find the other posts at:
 - [Develop and Develop Multi Container Applications](https://jackmckew.dev/develop-and-deploy-multi-container-applications.html)
 - [Intro to Kubernetes](https://jackmckew.dev/intro-to-kubernetes.html)
 - [Developing with Kubernetes](https://jackmckew.dev/developing-with-kubernetes.html)
+- [Deploying with Kubernetes](https://jackmckew.dev/deploying-with-kubernetes.html)
 
 ## The Web Application
 
