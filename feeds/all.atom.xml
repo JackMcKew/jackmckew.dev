@@ -1,6 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-11-20T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Developing with Kubernetes</title><link href="https://jackmckew.dev/developing-with-kubernetes.html" rel="alternate"></link><published>2020-11-20T00:00:00+11:00</published><updated>2020-11-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-20:/developing-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-11-26T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Deploying with Kubernetes</title><link href="https://jackmckew.dev/deploying-with-kubernetes.html" rel="alternate"></link><published>2020-11-26T00:00:00+11:00</published><updated>2020-11-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-26:/deploying-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Docker&lt;/td&gt;
+&lt;td&gt;Docker will be used to containerization of the services inside our …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Docker&lt;/td&gt;
+&lt;td&gt;Docker will be used to containerization of the services inside our app&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Vue&lt;/td&gt;
+&lt;td&gt;Vue is the front-end JavaScript framework that we will use&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Google Cloud&lt;/td&gt;
+&lt;td&gt;The cloud provider that will host our Kubernetes cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Express&lt;/td&gt;
+&lt;td&gt;Express is responsible for the API between Redis, PostgreSQL and Vue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Redis&lt;/td&gt;
+&lt;td&gt;Redis will store/retrieve any local data used by our users&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PostgreSQL&lt;/td&gt;
+&lt;td&gt;PostgreSQL will be our database&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nginx&lt;/td&gt;
+&lt;td&gt;Nginx will handle the routing between our services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Github Actions&lt;/td&gt;
+&lt;td&gt;The CI/CD for our project&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Previously we made use of services provided by AWS for Redis &amp;amp; PostgreSQL, in this post these services will be run inside their own pods.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="the-architecture"&gt;The Architecture&lt;/h2&gt;
+&lt;p&gt;To make our application run on Kubernetes, we need to make a few changes. In essence though the architecture will&lt;/p&gt;
+&lt;div class="mermaid"&gt;
+  graph LR
+    subgraph Node
+        tr&amp;gt;Traffic] --&amp;gt; is[Ingress Service]
+
+        is --&amp;gt; cl[Client Deployment]
+
+        is --&amp;gt; se[Server Deployment]
+
+        se --&amp;gt; re[(Redis Deployment)]
+
+        se --&amp;gt; po[(PostgreSQL Deployment)]
+
+        po --&amp;gt; pv[PostgreSQL PVC]
+
+        wo(Worker Deployment) --&amp;gt; re
+    end
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The above chart was made with &lt;a href="https://mermaid-js.github.io/mermaid/#/"&gt;mermaid.js&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;See the following posts for developing in different contexts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Container context: [INSERT DOCKER COMPOSE POST]&lt;/li&gt;
+&lt;li&gt;Kubernetes context: [INSERT DEVELOP KUBERNETES POST]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="cloud-provider"&gt;Cloud Provider&lt;/h2&gt;
+&lt;p&gt;To deploy our Kubernetes cluster, we need a cloud provider, for this post we will be using Google Cloud. Other options are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Amazon Web Services (AWS)&lt;/li&gt;
+&lt;li&gt;Digital Ocean&lt;/li&gt;
+&lt;li&gt;Microsoft Azure&lt;/li&gt;
+&lt;li&gt;Many more&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="google-cloud"&gt;Google Cloud&lt;/h2&gt;
+&lt;p&gt;Now that we've logged into our Google Cloud console, we create a new project, enable billing and then head to Kubernetes Engine. This will go through some one time set up to enable the Kubernetes Engine API for our project and upon completion we can create a cluster. As soon as we hit &lt;code&gt;Create Cluster&lt;/code&gt;, this begins the billing so be careful!&lt;/p&gt;
+&lt;h3 id="service-account"&gt;Service Account&lt;/h3&gt;
+&lt;p&gt;Before moving onto the next step, we need to authorize Github Actions to be able run inside the cluster on Google Cloud. This is done by creating a service account, exporting the keys as JSON and storing it as a secret within the repository on Github.&lt;/p&gt;
+&lt;h2 id="cicd"&gt;CI/CD&lt;/h2&gt;
+&lt;p&gt;For our CI/CD we will be using GitHub Actions. Github Actions are free to public repositories, and I presented at PyconAU 2020 on the topic, find the recording at: &lt;a href="https://www.youtube.com/watch?v=7aBjzZkaGhU&amp;amp;feature=emb_logo"&gt;https://www.youtube.com/watch?v=7aBjzZkaGhU&amp;amp;feature=emb_logo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let's get into setting up the action for this project, we will be aiming to achieve a few things in this action:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Initialise &amp;amp; configure the Google Cloud SDK&lt;/li&gt;
+&lt;li&gt;Login to Docker Hub so we can push our images up&lt;/li&gt;
+&lt;li&gt;Build our application and run tests&lt;/li&gt;
+&lt;li&gt;Build and tag images ready to be pushed to Docker Hub&lt;/li&gt;
+&lt;li&gt;Push our tagged images to Docker Hub&lt;/li&gt;
+&lt;li&gt;Update the Kubernetes configuration on Google Cloud&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To see the full configuration which achieves this head to: &lt;a href="https://github.com/JackMcKew/multi-docker/blob/master/.github/workflows/google-cloud-cluster.yaml"&gt;https://github.com/JackMcKew/multi-docker/blob/master/.github/workflows/google-cloud-cluster.yaml&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We make sure to use the &lt;code&gt;${GITHUB_SHA}&lt;/code&gt;, when we're tagging our images versions, this is due to ensure that our kubernetes cluster ensures to update the images when we are running &lt;code&gt;kubectl apply -f k8s&lt;/code&gt;. If we didn't add the SHA, they would be all tagged with &lt;code&gt;:latest&lt;/code&gt;, and kubernetes wouldn't see an update.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure to update the cluster id in the command &lt;code&gt;gcloud container clusters get-credentials my-first-cluster-1&lt;/code&gt; with the cluster desired to update the kubernetes configuration, otherwise there'll be errors.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Once this action has successfully completed, we can head to the Workloads page of our project and we should be able to see all the deployment configurations that we set up to be deployed.&lt;/p&gt;
+&lt;h2 id="setting-up-ingress-nginx"&gt;Setting up Ingress-Nginx&lt;/h2&gt;
+&lt;p&gt;Before we can access our application through an IP or web address, we need to set up &lt;code&gt;ingress-nginx&lt;/code&gt;, similar to how we did with &lt;code&gt;docker-compose&lt;/code&gt; in previous posts. Luckily, we can make use of &lt;code&gt;helm&lt;/code&gt; to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.&lt;/p&gt;
+&lt;p&gt;Firstly which we need to install helm (&lt;a href="https://helm.sh/docs/intro/install/#from-script"&gt;https://helm.sh/docs/intro/install/#from-script&lt;/a&gt;):&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
+./get_helm.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Followed by setting up &lt;code&gt;ingress-nginx&lt;/code&gt; (&lt;a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm"&gt;https://kubernetes.github.io/ingress-nginx/deploy/#using-helm&lt;/a&gt;):&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="success"&gt;Success&lt;/h2&gt;
+&lt;p&gt;Now we head to our &lt;code&gt;Services &amp;amp; Ingress&lt;/code&gt; page in our project, where we can see all the pods that are used for hosting endpoints. Provided the &lt;code&gt;ingress-nginx&lt;/code&gt; service has been created, there should be a &lt;code&gt;External Load Balancer&lt;/code&gt; service with an IP, that we can access. Heading to this IP will lead us to our application!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Kubernetes In Action on Google Cloud" class="img-fluid" src="{ static img/google-cloud-kubernetes.gif }"/&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If we wanted to set up an actual web address, we'd need to purchase a domain, set the A record as the IP for our external load balancer, and finally set up a certificate manager to handle the https authentication.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Javascript Source(s):
+&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Developing with Kubernetes</title><link href="https://jackmckew.dev/developing-with-kubernetes.html" rel="alternate"></link><published>2020-11-20T00:00:00+11:00</published><updated>2020-11-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-20:/developing-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -11,7 +156,7 @@
 &lt;tr&gt;
 &lt;td&gt;Docker&lt;/td&gt;
 &lt;td&gt;Docker will be used to containerization of the …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -55,6 +200,7 @@
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/deploying-with-kubernetes.html"&gt;Deploying with Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="the-architecture"&gt;The Architecture&lt;/h2&gt;
 &lt;p&gt;To make our application run on Kubernetes, we need to make a few changes. In essence though the architecture will&lt;/p&gt;
@@ -83,7 +229,7 @@
 &lt;h2 id="clusterip-service"&gt;ClusterIP Service&lt;/h2&gt;
 &lt;p&gt;We need to set up a ClusterIP service for each of our deployments except the worker deployment. This will allow our services to communicate with others inside the node.&lt;/p&gt;
 &lt;p&gt;To do this, we create a configuration &lt;code&gt;yaml&lt;/code&gt; file:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -118,7 +264,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/blockquote&gt;
 &lt;h3 id="pvc-configuration"&gt;PVC Configuration&lt;/h3&gt;
 &lt;p&gt;Similar to how we attach a ClusterIP service to a pod, let's attach a PVC to a pod. What this will do, will instruct Kubernetes to 'advertise' storage space for pods to consume. If a pod consumes this claim, then it'll go and create a persistent volume or point to an already created persistent volume for us automatically. There is also many access modes we can define for our PVC:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Access Mode&lt;/th&gt;
@@ -140,7 +286,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -169,7 +315,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="environment-variables"&gt;Environment Variables&lt;/h2&gt;
 &lt;p&gt;Some of our pods depend on environment variables being set to work correctly (eg, REDIS_HOST, PGUSER, etc). We add using the &lt;code&gt;env&lt;/code&gt; key to our &lt;code&gt;spec&lt;/code&gt; &amp;gt; &lt;code&gt;containers&lt;/code&gt; configuration.&lt;/p&gt;
 &lt;p&gt;For example, for our worker to connect to the redis deployment:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -191,7 +337,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;Note that for the value of the &lt;code&gt;REDIS_HOST&lt;/code&gt; we are stating the name of the ClusterIP service we had previously set up. Kubernetes will automatically resolve this for us to be the correct IP, how neat!&lt;/p&gt;
 &lt;h3 id="secrets"&gt;Secrets&lt;/h3&gt;
 &lt;p&gt;Secrets are another type of object inside of Kubernetes that are used to store sensitive information we don't want to live in the plain text of the configuration files. We do this through a &lt;code&gt;kubectl&lt;/code&gt; commad:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl create secret &lt;span class="o"&gt;[&lt;/span&gt;secret_type&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;secret_name&lt;span class="o"&gt;]&lt;/span&gt; --from-literal &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;value
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl create secret &lt;span class="o"&gt;[&lt;/span&gt;secret_type&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;secret_name&lt;span class="o"&gt;]&lt;/span&gt; --from-literal &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;value
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;There are 3 types of secret types, &lt;code&gt;generic&lt;/code&gt;, &lt;code&gt;docker_registry&lt;/code&gt; and &lt;code&gt;tls&lt;/code&gt;, most of the time we'll be making use of the &lt;code&gt;generic&lt;/code&gt; secret type. Similar to how we consume other services, we will be consuming the secret from the &lt;code&gt;secret_name&lt;/code&gt; parameter. The names (but not the value) can always be retrieved through &lt;code&gt;kubectl get secrets&lt;/code&gt;.&lt;/p&gt;
@@ -200,7 +346,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/blockquote&gt;
 &lt;h3 id="consuming-secrets-as-environment-variable"&gt;Consuming Secrets as Environment Variable&lt;/h3&gt;
 &lt;p&gt;Consuming a secret as an environment variable for a container is a little different to other environment variables. As secrets can contain multiple key value pairs, we need to specify the secret and the key to retrieve the value from:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -214,7 +360,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="ingress-service"&gt;Ingress Service&lt;/h2&gt;
 &lt;p&gt;The ingress service allows us to connect to other Kubernetes cluster from outside, and thus maintains how we should treat incoming requests and how to route them.&lt;/p&gt;
 &lt;p&gt;The entirety of our configuration for the ingress service is:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -282,12 +428,13 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/deploying-with-kubernetes.html"&gt;Deploying with Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img alt="Kubernetes Logo" class="img-fluid" src="https://jackmckew.dev/img/Kubernetes-logo.png"/&gt;&lt;/p&gt;
 &lt;h2 id="minikube"&gt;Minikube&lt;/h2&gt;
 &lt;p&gt;Minikube is a way of running a development cluster on our local PC. When running in production however, we use managed services offered by different platforms (eg, AWS, GCP, etc). To interact with &lt;code&gt;minikube&lt;/code&gt; as it is running though, we use another tool called &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="docker-compose-to-kubernetes"&gt;Docker Compose to Kubernetes&lt;/h2&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Docker Compose Terminology&lt;/th&gt;
@@ -369,11 +516,11 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: &lt;a href="https://github.com/kubernetes/kubernetes/issues/33664"&gt;https://github.com/kubernetes/kubernetes/issues/33664&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl &lt;span class="nb"&gt;set&lt;/span&gt; image &lt;span class="o"&gt;[&lt;/span&gt;object_type&lt;span class="o"&gt;]&lt;/span&gt; / &lt;span class="o"&gt;[&lt;/span&gt;object_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;container_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;new_image_to_use&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl &lt;span class="nb"&gt;set&lt;/span&gt; image &lt;span class="o"&gt;[&lt;/span&gt;object_type&lt;span class="o"&gt;]&lt;/span&gt; / &lt;span class="o"&gt;[&lt;/span&gt;object_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;container_name&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;new_image_to_use&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;After running this command, the deployment will update the running pods with the new image.&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Develop and Deploy Multi-Container Applications</title><link href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html" rel="alternate"></link><published>2020-11-06T00:00:00+11:00</published><updated>2020-11-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-06:/develop-and-deploy-multi-container-applications.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -426,6 +573,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/deploying-with-kubernetes.html"&gt;Deploying with Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="vue"&gt;Vue&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Find all the source code for the front end client at: &lt;a href="https://github.com/JackMcKew/multi-docker/tree/master/client"&gt;https://github.com/JackMcKew/multi-docker/tree/master/client&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
@@ -436,7 +584,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h3 id="fibinputform-component"&gt;FibInputForm Component&lt;/h3&gt;
 &lt;p&gt;Components are pieces of user interface that we can access in multiple parts of our application, we build a component which will contain both the HTML and javascript for driving the user input, and for displaying the output retrieved from Redis or PostgreSQL. Vue components are typically comprised of a &lt;code&gt;template&lt;/code&gt; block and a corresponding &lt;code&gt;script&lt;/code&gt; and &lt;code&gt;style&lt;/code&gt; block. When writing the template for a component, there is numerous Vue specific attributes that we can provide the elements in the HTML. For this project we will make use of Bulma/Buefy CSS (which can be installed with &lt;code&gt;npm install bulma&lt;/code&gt; or &lt;code&gt;npm install buefy&lt;/code&gt;) for our styling.&lt;/p&gt;
 &lt;p&gt;We create a file named &lt;code&gt;FibInputForm.vue&lt;/code&gt; inside &lt;code&gt;project_name/src/components&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -592,7 +740,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;To briefly cover the functionality above, the template is built up of 3 parts, the input form where users submit an index to query, a list of the latest indexes as stored in Redis separated by a comma and finally a list of the calculated as retrieved from the PostgreSQL database. We use &lt;code&gt;axios&lt;/code&gt; to interface we the API that we will create with &lt;code&gt;express&lt;/code&gt;. We query the API upon load, and the page is always reloaded when submit is pressed. Now that this has been exported, it can be imported from any other point in our web application and placed in with a &lt;code&gt;&amp;lt;FibInputForm/&amp;gt;&lt;/code&gt; element! Neat!&lt;/p&gt;
 &lt;h3 id="fibinputpage-view"&gt;FibInputPage View&lt;/h3&gt;
 &lt;p&gt;Now that we have our component, we need a page to put it on! We create a new file within &lt;code&gt;project_name/src/views&lt;/code&gt; named &lt;code&gt;FibInputPage.vue&lt;/code&gt; with the contents:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -642,7 +790,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;As we can see above, we've imported our neat little &lt;code&gt;FibInputForm&lt;/code&gt; and used it after placing it in a centered section. Again we export the page view so we can import into the router to make sure it's linked to a URL.&lt;/p&gt;
 &lt;h3 id="routing-the-page"&gt;Routing the Page&lt;/h3&gt;
 &lt;p&gt;Lastly for Vue, we need to set up a route so users can reach our page, both within the &lt;code&gt;vue-router&lt;/code&gt; and on the main page (&lt;code&gt;App.vue&lt;/code&gt;). Routes are all defined within &lt;code&gt;project_name/router/index.ts&lt;/code&gt;. So we need to add in a new one for our &lt;code&gt;FibInputPage&lt;/code&gt; by adding the following object into the routes array:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -662,7 +810,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Next to ensure the route is accessible from a link on the page, add a &lt;code&gt;router-link&lt;/code&gt; element into the template of &lt;code&gt;App.vue&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt; &lt;span class="na"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"/fib"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Fib&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;router-link&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; |
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="redis"&gt;Redis&lt;/h2&gt;
@@ -670,7 +818,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it.&lt;/p&gt;
 &lt;p&gt;We do this by creating 3 files: &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. &lt;code&gt;package.json&lt;/code&gt; defines what dependencies need to be installed, and how to run the project. &lt;code&gt;index.js&lt;/code&gt; manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. &lt;code&gt;keys.js&lt;/code&gt; contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.&lt;/p&gt;
 &lt;p&gt;Here is the code for the core of this project, &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -717,7 +865,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="postgresql"&gt;PostgreSQL&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Find all the source code for the PostgreSQL service at: &lt;a href="https://github.com/JackMcKew/multi-docker/tree/master/server"&gt;https://github.com/JackMcKew/multi-docker/tree/master/server&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;We are going to use the PostgreSQL service part of our project to contain the interface with the database, and the API with &lt;code&gt;express&lt;/code&gt;. Very similar to our redis project, we need a &lt;code&gt;package.json&lt;/code&gt;, &lt;code&gt;index.js&lt;/code&gt; and &lt;code&gt;keys.js&lt;/code&gt;. Let's dive straight into the code inside &lt;code&gt;index.js&lt;/code&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -904,7 +1052,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="nginx"&gt;Nginx&lt;/h2&gt;
 &lt;p&gt;Nginx in this project helps us create all the connections between the services and for them all to play nicely. How nginx works is by defining any connections in a configuration file, and pass that configuration file upon runtime.&lt;/p&gt;
 &lt;p&gt;This is our &lt;code&gt;default.conf&lt;/code&gt; nginx configuration for this project:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -954,7 +1102,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;We also set up a few locations, these help nginx 'finish' the route. &lt;code&gt;/&lt;/code&gt; means any incoming connection, pass it off to the front end to render. If any request connection comes in containing &lt;code&gt;/api&lt;/code&gt; then we want to pass that request to the service, so we rewrite the URL to be the correct URL.&lt;/p&gt;
 &lt;h2 id="docker-compose"&gt;Docker Compose&lt;/h2&gt;
 &lt;p&gt;Now that we've got our individual services all configured, we need a way to run them all at the same time. We need to create a &lt;code&gt;docker-compose.yml&lt;/code&gt; which will contain all the environment variables, and how each service depend/connect to each other so we can run it all!&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1089,7 +1237,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;Note that our environment variables (which were set in &lt;code&gt;keys.js&lt;/code&gt; earlier), are just the name of the service given in the &lt;code&gt;docker-compose.yml&lt;/code&gt; file. Docker Compose handles all the renaming when each service is connected up for us! How awesome is that!&lt;/p&gt;
 &lt;h2 id="github-actions"&gt;Github Actions&lt;/h2&gt;
 &lt;p&gt;Now that we've set all of services and make sure they place nice in Docker Compose, it's time to implement CI/CD with Github Actions so whenever we push new versions of our code, it'll automatically test that everything works and deploy our new version of the application. We do this by creating a &lt;code&gt;test-and-deploy.yml&lt;/code&gt; within &lt;code&gt;.github/workflows/&lt;/code&gt; which contains:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1249,7 +1397,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;Everything's now set up! For another user or a deployment service to get each of the images for the services they've created they can now simply run &lt;code&gt;docker run jackmckew/multi-docker-client&lt;/code&gt; and that's it! It should run on any operating system provided Docker is installed, how cool is that!&lt;/p&gt;
 &lt;h2 id="deploying-to-aws-elastic-beanstalk"&gt;Deploying to AWS Elastic Beanstalk&lt;/h2&gt;
 &lt;p&gt;Now we want to deploy this application to Elastic Beanstalk, that means we need to create a &lt;code&gt;Dockerrun.aws.json&lt;/code&gt; which is very similar to that of the &lt;code&gt;docker-compose.yml&lt;/code&gt;. The contents of the json file will be:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1358,10 +1506,11 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/deploying-with-kubernetes.html"&gt;Deploying with Kubernetes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="the-web-application"&gt;The Web Application&lt;/h2&gt;
 &lt;p&gt;For the web app we will use React, which is a javascript framework for managing the front end of applications. To generate the web app boilerplate for us, we will use &lt;code&gt;create-react-app&lt;/code&gt;. For running this, ensure that Node.js is installed on the local PC. Finally run the command below, to initialise the front end component of React of our web app.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npx create-react-app frontend --template typescript
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -1370,7 +1519,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;For this workflow we're going to set up two Dockerfiles, one for developing and one for production. Let's start with the developers Dockerfile, which we will aptly name &lt;code&gt;Dockerfile.dev&lt;/code&gt;, we must ensure to add the &lt;code&gt;-f&lt;/code&gt; flag along with the filename when building the Docker image with &lt;code&gt;docker build -f Dockerfile.dev .&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The contents of our &lt;code&gt;Dockerfile.dev&lt;/code&gt; will contain:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1400,16 +1549,16 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;To circumvent the issue in that Docker typically takes snapshots of the code and we want our app to update on save, we use mount to create a 'reference' to our folder on the local PC. We do this by running the command:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pwd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;If using Windows, replace the &lt;code&gt;${pwd}&lt;/code&gt; with the full path to the folder, ensuring to swap all backslashes to forwards slashes and changing &lt;code&gt;C:&lt;/code&gt; to &lt;code&gt;/C/&lt;/code&gt;. Here is an example:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -it -p &lt;span class="m"&gt;8000&lt;/span&gt;:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app &lt;span class="o"&gt;[&lt;/span&gt;image_id&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="docker-compose"&gt;Docker Compose&lt;/h3&gt;
 &lt;p&gt;Rather than using the rather large command above, let's use Docker Compose.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1443,7 +1592,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;li&gt;We mount the current directory to the app directory in the container for updating in sync&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Again, if using Windows, we need to add some more options to our service:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;stdin_open&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
@@ -1460,7 +1609,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;p&gt;Option 1 can be cumbersome as we will need to do this each time when running a container.&lt;/p&gt;
 &lt;p&gt;Option 2 is achieved by creating a new service in our &lt;code&gt;docker-compose.yml&lt;/code&gt; file:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1507,7 +1656,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;/ol&gt;
 &lt;h3 id="multi-stage-dockerfile"&gt;Multi-stage Dockerfile&lt;/h3&gt;
 &lt;p&gt;To implement our multi-stage Dockerfile as above we do this we the following yaml:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1533,207 +1682,4 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 &lt;p&gt;Note that there is no explicit end to the first stage, this is handled for us whenever a new &lt;code&gt;FROM&lt;/code&gt; command is used. Further, the &lt;code&gt;WORKDIR&lt;/code&gt; command isn't shared across stages, so be sure to prepend any paths if you want to use data created by different stages.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If attempting to run our new image, the default port for nginx is 80 and needs to be mapped to the local PC.&lt;/p&gt;
-&lt;/blockquote&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Intro to Docker</title><link href="https://jackmckew.dev/intro-to-docker.html" rel="alternate"></link><published>2020-10-23T00:00:00+11:00</published><updated>2020-10-23T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-23:/intro-to-docker.html</id><summary type="html">&lt;body&gt;&lt;p&gt;What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the &lt;em&gt;'But it works on my machine'&lt;/em&gt; problem. This post will go through an intro to docker and how you can use it. A …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the &lt;em&gt;'But it works on my machine'&lt;/em&gt; problem. This post will go through an intro to docker and how you can use it. A crucial part to Docker is the container, &lt;em&gt;a Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;I did a post back in 2018 on containerization and mentioned Docker too! &lt;a href="https://jackmckew.dev/episode-6-containerization.html"&gt;https://jackmckew.dev/episode-6-containerization.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="docker-ecosystem"&gt;Docker Ecosystem&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="Docker Logo" class="img-fluid" src="https://jackmckew.dev/img/Moby-logo.png"/&gt;&lt;/p&gt;
-&lt;p&gt;Docker isn't a single program, it's a suite of programs which we'll refer to as an ecosystem. A brief description of all the components that make the ecosystem is:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Service&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker Client&lt;/td&gt;
-&lt;td&gt;The docker client is how we interact with Docker (eg on the command line)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker Server&lt;/td&gt;
-&lt;td&gt;The docker server manages running programs inside isolated containers&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker Machine&lt;/td&gt;
-&lt;td&gt;Docker machine lets us install docker engine on virtual hosts (essentially an operating system inside a operation system)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker Images&lt;/td&gt;
-&lt;td&gt;A docker image is a read-only template of instructions on how to create a docker container&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker Hub&lt;/td&gt;
-&lt;td&gt;Docker hub is a free service provided by Dockeer for finding and sharing container images&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker Compose&lt;/td&gt;
-&lt;td&gt;Docker compose is how we can run multi-container applications.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="installing-docker"&gt;Installing Docker&lt;/h2&gt;
-&lt;p&gt;Docker is free to download from &lt;docker.com&gt; along with instructions on installing on your given operating system.&lt;/docker.com&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.docker.com/products/docker-desktop"&gt;https://www.docker.com/products/docker-desktop&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="maintaining-docker-in-the-command-line"&gt;Maintaining Docker in the Command Line&lt;/h2&gt;
-&lt;p&gt;There are many useful commands for interacting with the Docker client.&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Command&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;docker run [container_id/image]&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Docker run allows us to both create &amp;amp; start a container from either an ID or an image name. If the docker image isn't found on the local PC, it'll attempt to download from Docker Hub&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;docker ps&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This shows all running containers on the current PC&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;docker ps --all&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This shows all running &amp;amp; stopped containers on the current PC&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;docker stop [container_id]&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This stops a running container, if it doesn't stop after 10 seconds, it will kill the container&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;docker kill [container_id]&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This immediately shuts the container without allowing applications to stop inside the container&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id="dockerfile"&gt;Dockerfile&lt;/h2&gt;
-&lt;p&gt;A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5
-6
-7
-8
-9&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Use an existing docker image as a base&lt;/span&gt;
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;FROM alpine&lt;/span&gt;
-
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;# Download and install a dependency&lt;/span&gt;
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;RUN apk add --update redis&lt;/span&gt;
-
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;# Tell the the image what to do when it starts&lt;/span&gt;
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;# as a container&lt;/span&gt;
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;CMD ["redis-server"]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;When we create this Docker image with &lt;code&gt;docker build Dockerfile&lt;/code&gt;:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;We use a base starting point of Alpine (a distribution of Linux), if this isn't found on the local PC, it'll download from Docker Hub&lt;/li&gt;
-&lt;li&gt;We install a program called &lt;code&gt;redis&lt;/code&gt; using a pre-installed &lt;code&gt;apk&lt;/code&gt; tool&lt;/li&gt;
-&lt;li&gt;We run &lt;code&gt;redis-server&lt;/code&gt; inside the container&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="tagging-images"&gt;Tagging Images&lt;/h3&gt;
-&lt;p&gt;Normally when we run &lt;code&gt;docker build&lt;/code&gt; it'll return a container ID, which we'll use to run the container with &lt;code&gt;docker run&lt;/code&gt;. Rather than having to copy/paste the container ID each time, we can tag an image with a human-readable name.&lt;/p&gt;
-&lt;p&gt;To do this we can use the &lt;code&gt;-t&lt;/code&gt; option for &lt;code&gt;docker build&lt;/code&gt;. An example is:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;docker build -t [docker_id] / [project_name] : [version]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;So for me to tag an image I'd run:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;docker build -t jackmckew/my-new-docker-image:latest Dockerfile&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Which if we wanted to run this image, we can do this now with &lt;code&gt;docker run jackmckew/my-new-docker-image&lt;/code&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The version is optional to provide, if it isn't provided it will default to latest.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="alpine-docker-images"&gt;Alpine Docker Images&lt;/h3&gt;
-&lt;p&gt;Note that we used &lt;code&gt;FROM alpine&lt;/code&gt; earlier on in our Dockerfile. &lt;code&gt;alpine&lt;/code&gt; is a term used in Docker to represent the most compressed and stripped down version of an image. If we wanted to use a different image like those listed on Docker Hub (&lt;a href="https://hub.docker.com/search?q=&amp;amp;type=image"&gt;https://hub.docker.com/search?q=&amp;amp;type=image&lt;/a&gt;), we could easily specify to get the &lt;code&gt;alpine&lt;/code&gt; version of an image by using &lt;code&gt;FROM node:alpine&lt;/code&gt;.  &lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Check the description of an image to check whether an alpine version is available.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="change-working-directory"&gt;Change Working Directory&lt;/h3&gt;
-&lt;p&gt;We can change the working directory inside the container with &lt;code&gt;WORKDIR&lt;/code&gt;. This is very useful if we don't want to copy things into the root directory of the container. If a folder isn't found in the argument to &lt;code&gt;WORKDIR&lt;/code&gt;, it'll be created automatically.&lt;/p&gt;
-&lt;h2 id="mounting-files"&gt;Mounting Files&lt;/h2&gt;
-&lt;p&gt;Docker defaults to NOT include any files inside an image from the local PC. We always must mount any files we want to use inside the container in the Dockerfile. One way to do this is using the &lt;code&gt;COPY&lt;/code&gt; argument in the Dockerfile.&lt;/p&gt;
-&lt;p&gt;This can be done with: &lt;code&gt;COPY [location_on_local_PC_to_copy] [place_to_story]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;An example of this is: &lt;code&gt;COPY ./ ./&lt;/code&gt;, this will copy the current folder relative to where the terminal is, and places it in the current working directory inside the container.&lt;/p&gt;
-&lt;h2 id="port-mapping"&gt;Port Mapping&lt;/h2&gt;
-&lt;p&gt;By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.&lt;/p&gt;
-&lt;p&gt;This is not changed within the Dockerfile, but rather when we run the container with the &lt;code&gt;-p&lt;/code&gt; flag. This can be done with:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker run -p &lt;span class="o"&gt;[&lt;/span&gt;local_pc_port&lt;span class="o"&gt;]&lt;/span&gt; : &lt;span class="o"&gt;[&lt;/span&gt;container_port&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;image_name&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;blockquote&gt;
-&lt;p&gt;By default there is no limitation on default traffic getting out of a container, only limitations on traffic getting in.
-This local PC port and the container port do NOT have to match.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="docker-compose"&gt;Docker Compose&lt;/h2&gt;
-&lt;p&gt;Docker compose is a separate tool apart of the Docker CLI, this is used to start up multiple containers at the same time. This helps automate the arguments that would be need to connect multiple containers to talk to each other.&lt;/p&gt;
-&lt;p&gt;We need to create &lt;code&gt;docker-compose.yml&lt;/code&gt; files that we can feed into the docker compose CLI, this is essentially replacing the arguments that we've been typing into the Docker CLI previously.&lt;/p&gt;
-&lt;p&gt;Here's an example of a &lt;code&gt;docker-compose.yml&lt;/code&gt; which will:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Create an container that will host a redis server&lt;/li&gt;
-&lt;li&gt;Create an container that will host a nodejs app&lt;/li&gt;
-&lt;li&gt;Network the ports of the nodejs app container&lt;/li&gt;
-&lt;/ol&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5
-6
-7
-8&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"3"&lt;/span&gt;
-&lt;span class="nt"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="nt"&gt;redis-server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"redis"&lt;/span&gt;
-  &lt;span class="nt"&gt;node-app&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nt"&gt;build&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;.&lt;/span&gt;
-    &lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"8000:8000"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Let's break it down, first we specify the version of docker-compose to run on. Following that under services, each container that we want to run is indented and then named. Inside the service declaration we can either specify an image to use, or whether to use docker build to build a Dockerfile (note this will look in the current directory for a Dockerfile). Finally mapping port 8000 of the local PC to port 8000 of the docker container.&lt;/p&gt;
-&lt;p&gt;By using docker-compose, this also automates that the docker containers run on the same network. This would be a major pain to do without using docker-compose.&lt;/p&gt;
-&lt;p&gt;Once we've created a &lt;code&gt;docker-compose.yml&lt;/code&gt;, we can run this by running the command &lt;code&gt;docker-compose up&lt;/code&gt; inside the same directory. We can also specify that we want to rebuild all the images inside the &lt;code&gt;docker-compose.yml&lt;/code&gt; file with &lt;code&gt;--build&lt;/code&gt;, so the new command becomes &lt;code&gt;docker-compose up --build&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id="stopping-docker-compose"&gt;Stopping Docker Compose&lt;/h3&gt;
-&lt;p&gt;Rather than using &lt;code&gt;docker stop&lt;/code&gt; with each of the IDs of the containers that we created. Luckily, we can simply run &lt;code&gt;docker-compose down&lt;/code&gt; to stop all the containers after using &lt;code&gt;docker-compose up&lt;/code&gt;. This is particularly useful when we run &lt;code&gt;docker-compose up -d&lt;/code&gt; which will run the containers in the background, so we can't just CTRL+C out of it.&lt;/p&gt;
-&lt;h3 id="restart-policies"&gt;Restart Policies&lt;/h3&gt;
-&lt;p&gt;If any container crashes, docker-compose defaults to the restart policy of &lt;code&gt;"no"&lt;/code&gt;, which never attempts to restart the container. Potential restart policies in docker-compose are:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Policy&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;"no"&lt;/td&gt;
-&lt;td&gt;Never restart a container on stop/crash&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;always&lt;/td&gt;
-&lt;td&gt;If a container stops for any reason at all, attempt to restart&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;on-failure&lt;/td&gt;
-&lt;td&gt;Only restart if a container stops with an error&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;unless-stopped&lt;/td&gt;
-&lt;td&gt;Always restart unless forcibly stopped&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;The restart policy is defined along with other arguments under the service name.&lt;/p&gt;
-&lt;h3 id="check-docker-compose-status"&gt;Check Docker Compose Status&lt;/h3&gt;
-&lt;p&gt;Similarly to running &lt;code&gt;docker ps&lt;/code&gt;, we can run &lt;code&gt;docker-compose ps&lt;/code&gt; to check all the running containers that we started with &lt;code&gt;docker-compose up&lt;/code&gt;.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This must be used in the same directory as the &lt;code&gt;docker-compose.yml&lt;/code&gt; file.&lt;/p&gt;
 &lt;/blockquote&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry></feed>
