@@ -120,7 +120,7 @@ helm install my-release ingress-nginx/ingress-nginx
 
 Now we head to our `Services & Ingress` page in our project, where we can see all the pods that are used for hosting endpoints. Provided the `ingress-nginx` service has been created, there should be a `External Load Balancer` service with an IP, that we can access. Heading to this IP will lead us to our application!
 
-![Kubernetes In Action on Google Cloud]({ static img/google-cloud-kubernetes.gif })
+![Kubernetes In Action on Google Cloud]({static img/google-cloud-kubernetes.gif})
 
 > If we wanted to set up an actual web address, we'd need to purchase a domain, set the A record as the IP for our external load balancer, and finally set up a certificate manager to handle the https authentication.
 
