@@ -44,7 +44,7 @@
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
 <meta property="article:section" content="Software"/>
 <meta property="article:tag" content="software"/>
-<meta property="og:image" content="{ static img/google-cloud-kubernetes.gif }">
+<meta property="og:image" content="https://jackmckew.dev/img/google-cloud-kubernetes.gif">
 
     <title>Jack McKew's Blog &ndash; Deploying with Kubernetes</title>
 
@@ -287,7 +287,7 @@ helm install my-release ingress-nginx/ingress-nginx
 </td></tr></tbody></table>
 <h2 id="success">Success</h2>
 <p>Now we head to our <code>Services &amp; Ingress</code> page in our project, where we can see all the pods that are used for hosting endpoints. Provided the <code>ingress-nginx</code> service has been created, there should be a <code>External Load Balancer</code> service with an IP, that we can access. Heading to this IP will lead us to our application!</p>
-<p><img alt="Kubernetes In Action on Google Cloud" class="img-fluid" src="{ static img/google-cloud-kubernetes.gif }"/></p>
+<p><img alt="Kubernetes In Action on Google Cloud" class="img-fluid" src="https://jackmckew.dev/img/google-cloud-kubernetes.gif"/></p>
 <blockquote>
 <p>If we wanted to set up an actual web address, we'd need to purchase a domain, set the A record as the IP for our external load balancer, and finally set up a certificate manager to handle the https authentication.</p>
 </blockquote>
