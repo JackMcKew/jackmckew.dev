@@ -56,8 +56,8 @@ To make our application run on Kubernetes, we need to make a few changes. In ess
 
 See the following posts for developing in different contexts:
 
-- Container context: [INSERT DOCKER COMPOSE POST]
-- Kubernetes context: [INSERT DEVELOP KUBERNETES POST]
+- Container context: [Develop and Develop Multi Container Applications](https://jackmckew.dev/develop-and-deploy-multi-container-applications.html)
+- Kubernetes context: [Developing with Kubernetes](https://jackmckew.dev/developing-with-kubernetes.html)
 
 ## Cloud Provider
 
