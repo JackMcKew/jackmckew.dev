@@ -163,7 +163,7 @@
 <p>Now once these are installed (if you put them in the default location), Python will default to be located in: C:\Users\Jack\AppData\Local\Programs\Python\Python37-32. For the next few steps to ensure we are setting up virtual environments for our projects open command prompt here if you are on windows. This will look something like this:</p>
 <p><img alt="image-11.png" class="img-fluid" src="https://jackmckew.dev/img/image-11.png"/></p>
 <p>The 'cd' command in windows (and other OS) stands for change directory, follow this with a path and you will be brought to that directory. Next whenever I first install Python I like to update pip to it's latest release, to do this use the command in this window:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python -m pip install --upgrade pip
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python -m pip install --upgrade pip
 </code></pre></div>
 </td></tr></tbody></table>
 <p>With pip upgraded to it's current release, it's time to install some very helpful packages for setting up projects: virtualenv and cookiecutter. To install these navigate to the the Scripts folder within the current directory with cd ('cd Scripts') and run 'pip.exe install virtualenv cookiecutter', pip will then work it's magic and install these packages for you.</p>
@@ -179,24 +179,24 @@ Now something that I personally like to do is add this folder to your system env
 <p>If you chose to do this step, you will now be able to create virtual environments and cookiecutter templates without having to specify the directory to the executables.</p>
 <p>It's now time to create a project from scratch. So navigate to where you like to keep your projects (mostly mine is in Documents\Github\) but you can put them anywhere you like. Now run command prompt again (or keep the one you have open) and navigate to the dedicated folder (or folders) using cd.</p>
 <p>For most of my projects lately being of data science in nature, I like to use the cookiecutter-data-science template which you can find all the information about here: <a href="https://drivendata.github.io/cookiecutter-data-science/">https://drivendata.github.io/cookiecutter-data-science/</a>. To then create a project it is as simple as running:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cookiecutter https://github.com/drivendata/cookiecutter-data-science
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cookiecutter https://github.com/drivendata/cookiecutter-data-science
 </code></pre></div>
 </td></tr></tbody></table>
 <p><img alt="image-3.png" class="img-fluid" src="https://jackmckew.dev/img/image-3.png"/></p>
 <p>Provide as much information as you wish into the questions and you will now have a folder created wherever you ran the command with all the relevant sections from the template.</p>
 <p>Whenever starting a new Python project, my personal preference is to keep the virtual environment within the directory, however this is not always a normal practice. To create a virtual environment for our Python packages, navigate into the project and run (if you added Scripts to your Path):</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>virtualenv env
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>virtualenv env
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This will then initialise a folder within your current directory to install a copy of Python and all it's relevant tools with a folder ('env').</p>
 <p>Before we go any further, this is the point that I like to initialise a git repository. To do this, run git init from your command line from within the project directory.</p>
 <p>Now to finish off the final steps of the workflow that will affect the day-to-day development, I like to use pre-commit hooks to reformat my with black and on some projects check for PEP conformance with flake8 on every commit to my projects repository. This is purely a personal preference on how you would like to work, others like to use pytest and more to ensure their projects are working as intended, however I am not at that stage just yet.</p>
 <p>To install these pre-commits into our workflow, firstly initialise the virtual environment from within our project by navigating to env/Scripts/activate.bat. This will activate your project's Python package management system and runtime, following this you can install packages from pip and otherwise. For our pre-commits we install the package 'pre-commit':</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install pre-commit
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install pre-commit
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Following this to set up the commit hooks create a '.pre-commit-config.yaml' within your main project directory. This is where we will specify what hooks we would like to run before being able to commit. Below is a sample .pre-commit-config.yaml that I use in my projects:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -227,7 +227,7 @@ Now something that I personally like to do is add this folder to your system env
 <p>On the default cookiecutter data science template with the settings as per above this will show on the pre-commit run (after you have staged changes in git (use git add -A for all)):</p>
 <p><img alt="image-4.png" class="img-fluid" src="https://jackmckew.dev/img/image-4.png"/></p>
 <p>We can see a different opinions in code formatting appearing already from flake8's output. The black code formatter in Python's code length is 88 characters , not 79 like PEP8. So we will add a pyproject.toml to the project directory where we can specify settings within the black tool:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -263,7 +263,7 @@ Now something that I personally like to do is add this folder to your system env
 </code></pre></div>
 </td></tr></tbody></table>
 <p>For any flake8 specific settings (such as error codes to ignore), we can set a .flake8 file in the project directory as well, which may look like:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4

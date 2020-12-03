@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2020-12-03T03:07:28-00:00</lastmod>
+<lastmod>2020-12-03T03:11:39-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2020-12-03T03:07:28-00:00</lastmod>
+<lastmod>2020-12-03T03:11:39-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2020-12-03T03:07:28-00:00</lastmod>
+<lastmod>2020-12-03T03:11:39-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2020-12-03T03:07:28-00:00</lastmod>
+<lastmod>2020-12-03T03:11:39-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -47,7 +47,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html</loc>
-<lastmod>2020-12-03T00:00:00+11:00</lastmod>
+<lastmod>2020-12-04T00:00:00+11:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -782,7 +782,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/software.html</loc>
-<lastmod>2020-12-03T00:00:00+10:05</lastmod>
+<lastmod>2020-12-04T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -803,7 +803,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/tag/software.html</loc>
-<lastmod>2020-12-03T00:00:00+10:05</lastmod>
+<lastmod>2020-12-04T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -1104,7 +1104,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/author/jack-mckew.html</loc>
-<lastmod>2020-12-03T00:00:00+10:05</lastmod>
+<lastmod>2020-12-04T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
