@@ -31,6 +31,7 @@ This post is apart of a series on Docker/Kubernetes, find the other posts at:
 - [Intro to Kubernetes](https://jackmckew.dev/intro-to-kubernetes.html)
 - [Developing with Kubernetes](https://jackmckew.dev/developing-with-kubernetes.html)
 - [Deploying with Kubernetes](https://jackmckew.dev/deploying-with-kubernetes.html)
+- [Deploy a Node Web App to AWS Elastic Beanstalk with Docker](https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html)
 
 ## Vue
 

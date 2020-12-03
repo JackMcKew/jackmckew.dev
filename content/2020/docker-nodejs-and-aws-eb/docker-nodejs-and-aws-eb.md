@@ -1,12 +1,21 @@
 Title: Deploy a Node Web App to AWS Elastic Beanstalk with Docker
-Date: 2020-07-xx
+Date: 2020-12-03
 Author: Jack McKew
 Category: Software
 Tags: software
 
 We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make use of! We will also be making use of GitHub actions to automate the CI/CD, in which it'll build the Docker container to test our web application, and then deploy it to AWS automatically.
 
-Let's deploy the application we built in a previous post [Develop and Deploy with Docker](ADD LINK HERE). It's the default output from `create-react-app`, but we can further develop this and it'll update as soon as we push to the repository. This post assumes that we've already set up the `create-react-app` and dockerized it as such in the previous post.
+Let's deploy the application we built in a previous post [Develop and Deploy with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html). It's the default output from `create-react-app`, but we can further develop this and it'll update as soon as we push to the repository. This post assumes that we've already set up the `create-react-app` and dockerized it as such in the previous post.
+
+This post is apart of a series on Docker/Kubernetes, find the other posts at:
+
+- [Intro to Docker](https://jackmckew.dev/intro-to-docker.html)
+- [Develop and Develop with Docker](https://jackmckew.dev/develop-and-deploy-with-docker.html)
+- [Develop and Develop Multi Container Applications](https://jackmckew.dev/develop-and-deploy-multi-container-applications.html)
+- [Intro to Kubernetes](https://jackmckew.dev/intro-to-kubernetes.html)
+- [Developing with Kubernetes](https://jackmckew.dev/developing-with-kubernetes.html)
+- [Deploying with Kubernetes](https://jackmckew.dev/deploying-with-kubernetes.html)
 
 ## GitHub Action
 
