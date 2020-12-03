@@ -58,9 +58,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 92</p>
-            <p>Number of Words: 69,458</p>
-            <p>Number of Lines of Code 4,868</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 93</p>
+            <p>Number of Words: 70,123</p>
+            <p>Number of Lines of Code 4,917</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -208,6 +208,7 @@
 <li><a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html">Develop and Develop Multi Container Applications</a></li>
 <li><a href="https://jackmckew.dev/intro-to-kubernetes.html">Intro to Kubernetes</a></li>
 <li><a href="https://jackmckew.dev/developing-with-kubernetes.html">Developing with Kubernetes</a></li>
+<li><a href="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html">Deploy a Node Web App to AWS Elastic Beanstalk with Docker</a></li>
 </ul>
 <blockquote>
 <p>Previously we made use of services provided by AWS for Redis &amp; PostgreSQL, in this post these services will be run inside their own pods.</p>
@@ -237,8 +238,8 @@
 </blockquote>
 <p>See the following posts for developing in different contexts:</p>
 <ul>
-<li>Container context: [INSERT DOCKER COMPOSE POST]</li>
-<li>Kubernetes context: [INSERT DEVELOP KUBERNETES POST]</li>
+<li>Container context: <a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html">Develop and Develop Multi Container Applications</a></li>
+<li>Kubernetes context: <a href="https://jackmckew.dev/developing-with-kubernetes.html">Developing with Kubernetes</a></li>
 </ul>
 <h2 id="cloud-provider">Cloud Provider</h2>
 <p>To deploy our Kubernetes cluster, we need a cloud provider, for this post we will be using Google Cloud. Other options are:</p>
@@ -272,7 +273,7 @@
 <h2 id="setting-up-ingress-nginx">Setting up Ingress-Nginx</h2>
 <p>Before we can access our application through an IP or web address, we need to set up <code>ingress-nginx</code>, similar to how we did with <code>docker-compose</code> in previous posts. Luckily, we can make use of <code>helm</code> to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.</p>
 <p>Firstly which we need to install helm (<a href="https://helm.sh/docs/intro/install/#from-script">https://helm.sh/docs/intro/install/#from-script</a>):</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod <span class="m">700</span> get_helm.sh
@@ -280,7 +281,7 @@ chmod <span class="m">700</span> get_helm.sh
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Followed by setting up <code>ingress-nginx</code> (<a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm">https://kubernetes.github.io/ingress-nginx/deploy/#using-helm</a>):</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 </code></pre></div>
@@ -304,6 +305,9 @@ helm install my-release ingress-nginx/ingress-nginx
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/developing-with-kubernetes.html" title="Developing with Kubernetes">
       <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html" title="Deploy a Node Web App to AWS Elastic Beanstalk with Docker">
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 

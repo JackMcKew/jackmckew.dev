@@ -29,26 +29,24 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics --><meta name="author" content="Jack McKew" />
-<meta name="description" content="I&#39;ve just finished reading Ray Dalio&#39;s book Principles, and wanted to use this space to jot down some of my personal takeaways and thoughts. To give some background, Ray Dalio, founder of Bridgewater Assosciates, one of the largest hedge funds in the world, wrote this book around the unique principles …" />
-<meta name="keywords" content="bookreview, principles, habits">
+<meta name="description" content="We&#39;ve gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let&#39;s use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make …" />
+<meta name="keywords" content="software">
 
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="Book Review: Principles by Ray Dalio"/>
-<meta property="og:description" content="I&#39;ve just finished reading Ray Dalio&#39;s book Principles, and wanted to use this space to jot down some of my personal takeaways and thoughts. To give some background, Ray Dalio, founder of Bridgewater Assosciates, one of the largest hedge funds in the world, wrote this book around the unique principles …"/>
+<meta property="og:title" content="Deploy a Node Web App to AWS Elastic Beanstalk with Docker"/>
+<meta property="og:description" content="We&#39;ve gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let&#39;s use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/book-review-principles.html"/>
+<meta property="og:url" content="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-10-11 06:30:00+11:00"/>
+<meta property="article:published_time" content="2020-12-03 00:00:00+11:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
-<meta property="article:section" content="Book Reviews"/>
-<meta property="article:tag" content="bookreview"/>
-<meta property="article:tag" content="principles"/>
-<meta property="article:tag" content="habits"/>
+<meta property="article:section" content="Software"/>
+<meta property="article:tag" content="software"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-    <title>Jack McKew's Blog &ndash; Book Review: Principles by Ray Dalio</title>
+    <title>Jack McKew's Blog &ndash; Deploy a Node Web App to AWS Elastic Beanstalk with Docker</title>
 
 </head>
 
@@ -150,70 +148,152 @@
 <article class="single">
   <header>
       
-    <h1 id="book-review-principles">Book Review: Principles by Ray Dalio</h1>
+    <h1 id="deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker">Deploy a Node Web App to AWS Elastic Beanstalk with Docker</h1>
     <p>
-       Posted on Fri 11 October 2019 in <a href="https://jackmckew.dev/category/book-reviews.html">Book Reviews</a>
+       Posted on Thu 03 December 2020 in <a href="https://jackmckew.dev/category/software.html">Software</a>
 
-        &#8226; 4 min read
+        &#8226; 3 min read
     </p>
   </header>
 
 
   <div>
-    <body><p>I've just finished reading <a href="https://www.principles.com/">Ray Dalio's book Principles</a>, and wanted to use this space to jot down some of my personal takeaways and thoughts. To give some background, Ray Dalio, founder of Bridgewater Assosciates, one of the largest hedge funds in the world, wrote this book around the unique principles that he discovered through his over forty year career that led to his and Bridgewater's success. Dalio believes that it is these principles, that are the reason behind whatever success he has had.</p>
-<p>Before I get into the thick of it, I would recommend this book to anyone that is feeling they are lacking some direction in their life. One of the organizational techniques I've picked up lately is <a href="https://bulletjournal.com/">Bullet Journaling</a>, and one of the takeaways I got from the book was to start prioritizing my to-dos, in comparison to what I do now which is just dump it all onto the paper.</p>
-<p>The book is broken into two major sections: Life Principles and Work Principles, followed by descriptions of the tools developed to work alongside the principles to help keep the concept of an idea meritocracy intact. The concept of an idea meritocracy, is where you can have a community/company in which the best idea wins, no matter who/where it came from. This is in comparison to regular company structures where the decisions come from top down, which has its pros/cons as well.</p>
-<h2 id="life-principles">Life Principles</h2>
-<p>On page 246, there is a summary of the life principles which are fully detailed in the preceding chapter. While I won't go into detail on Ray's perspective of the points, however I'll give a brief description on my personal takeaway. Please note the points are listed in no particular order.</p>
+    <body><p>We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make use of! We will also be making use of GitHub actions to automate the CI/CD, in which it'll build the Docker container to test our web application, and then deploy it to AWS automatically.</p>
+<p>Let's deploy the application we built in a previous post <a href="https://jackmckew.dev/develop-and-deploy-with-docker.html">Develop and Deploy with Docker</a>. It's the default output from <code>create-react-app</code>, but we can further develop this and it'll update as soon as we push to the repository. This post assumes that we've already set up the <code>create-react-app</code> and dockerized it as such in the previous post.</p>
+<p>This post is apart of a series on Docker/Kubernetes, find the other posts at:</p>
 <ul>
-<li>1.1 - Be a hyperrealist - you need to understand, accept and work with reality to be able to appreciate and move forward with things effectively</li>
-<li>1.3 - Radical transparency - while this can be a tough habit to develop, it pays itself off time and time again for both yourself and the people around you</li>
-<li>1.4 - Look to nature to learn how reality works - if you haven't noticed in my blog posts, I am extremely curious about the natural way of evolution and look to bring it's methods into my everyday life and projects. I believe that Dalio also appreciates the power of evolution and is integrating it into his work (as he later describes)</li>
-<li>2 - 5 Step process to get what you want out of life<ul>
-<li>Have clear goals</li>
-<li>Identify and don't tolerate the problems that stand in the way of our achieving those goals</li>
-<li>Accurately diagnose the problems to get at their root causes</li>
-<li>Design plans that will get you around them</li>
-<li>Do what's necessary to push these designs through to results</li>
+<li><a href="https://jackmckew.dev/intro-to-docker.html">Intro to Docker</a></li>
+<li><a href="https://jackmckew.dev/develop-and-deploy-with-docker.html">Develop and Develop with Docker</a></li>
+<li><a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html">Develop and Develop Multi Container Applications</a></li>
+<li><a href="https://jackmckew.dev/intro-to-kubernetes.html">Intro to Kubernetes</a></li>
+<li><a href="https://jackmckew.dev/developing-with-kubernetes.html">Developing with Kubernetes</a></li>
+<li><a href="https://jackmckew.dev/deploying-with-kubernetes.html">Deploying with Kubernetes</a></li>
 </ul>
-</li>
-<li>3 - Radical open mind - something that I have blogged about in the past, open mindedness, you can find that post here: <a href="https://jackmckew.dev/episode-3-open-mind.html">https://jackmckew.dev/episode-3-open-mind.html</a></li>
-<li>4.5 - Getting the right people in the right roles in support of your goal is the key to succeeding at whatever you choose to accomplish</li>
-<li>5.10 - Believability weight your decision making - I believe when gathering opinions and thoughts on something, you must weight the opinions based upon how 'believable' the source is</li>
-</ul>
-<h2 id="work-principles">Work Principles</h2>
-<p>Dalio believes that culture is the most important part of any organization. I also share the same perspective that any company consists of two major components: culture and people. If the culture isn't right, the right people won't stay.</p>
-<ul>
-<li>1.1 - Realize you have nothing to fear from knowing the truth - while sometimes harsh, having more information can always be beneficial if looked at from the right perspective</li>
-<li>3.1 - Recognize that mistakes are a natural part of the evolutionary process - keeping with the theme of evolution is one of the greatest things in nature, it must be accepted that mistakes are apart of it all and are inevitable</li>
-<li>3.2 - Don't worry about looking good, worry about achieving your goals - this is one that I try to embrace more and more each time I do something, admittedly at times I will withhold from sharing with others from how much progress has been made, by not sharing, everyone is losing out from sharing the learning experience as well</li>
-<li>3.4 - Remember to reflect when you experience pain - it is always a good idea to look back on an experience that didn't go to plan or badly to make sure you adapt and evolve for next time</li>
-<li>5.2 - Find the most believable people possible to disagree with you and try to understand their reasoning - a great way at validating your reasoning behind something is to ask someone else to poke holes through it to see if it still stands</li>
-</ul>
-<p>I believe that the way that you perceive the points in this book is dependent on the stage of life that you are at personally. However, even reading through them now, while I can't resonate with them at this point in time, I am glad that they have planted the seed for later on, which may be of great assistance. That is why I believe you should read this book.</p></body>
+<h2 id="github-action">GitHub Action</h2>
+<p>Let's begin by setting up the CI/CD workflow in GitHub Actions. We create a yml file in our repository under <code>.github/workflows/build-docker.yml</code>. To step through the actions we want to do each time a new version is pushed into our repository are:</p>
+<ol>
+<li>Clone the latest version of the repository</li>
+<li>Build the development Docker container</li>
+<li>Execute tests on our web app and fail if there's any failing tests</li>
+<li>Generate a packaged version to deploy</li>
+<li>Deploy to AWS</li>
+</ol>
+<p>For the most part, we will be making use of <code>run</code> commands, as if we are interacting with the terminal in the runtime of ubuntu (Linux). Otherwise, we can make use of pre-made actions from the marketplace. One note to be made is that the AWS Elastic Beanstalk application has been set up to run specifically on Docker, and as such we need to upload the relevant Dockerfile (production) along with any assets.</p>
+<p>The contents of the Github Action in whole will be:</p>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Test &amp; Deploy</span>
+<span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
+    <span class="nt">branches</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">test-and-deploy</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout Latest Repo</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@master</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Build Dev Docker Image</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker build -t jackmckew/docker-react-dev -f Dockerfile.dev .</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Run Test Suite</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker run -e CI=true jackmckew/docker-react-dev npm run test -- --coverage</span>
+
+      <span class="c1"># Zip Dockerfile for upload</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Generate Deployment Package</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">zip -r deploy.zip * -x "**node_modules**"</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get Timestamp</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gerred/actions/current-time@master</span>
+        <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">current-time</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Run String Replace</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">frabert/replace-string-action@master</span>
+        <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">format-time</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">pattern</span><span class="p">:</span> <span class="s">'[:\.]+'</span>
+          <span class="nt">string</span><span class="p">:</span> <span class="s">"${{</span><span class="nv"> </span><span class="s">steps.current-time.outputs.time</span><span class="nv"> </span><span class="s">}}"</span>
+          <span class="nt">replace-with</span><span class="p">:</span> <span class="s">"-"</span>
+          <span class="nt">flags</span><span class="p">:</span> <span class="s">"g"</span>
+
+      <span class="c1"># Deploy to AWS</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install Dependencies &amp; Deploy to AWS</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">sudo npm install -g beanstalk-deploy --unsafe-perm</span>
+          <span class="no">sudo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID}} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY}} beanstalk-deploy "docker-react" "DockerReact-env-1" "docker-react-${{ steps.format-time.outputs.replaced }}" "us-east-2" deploy.zip</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<blockquote>
+<p>There is an action for <a href="https://github.com/marketplace/actions/beanstalk-deploy">beanstalk-deploy</a>, although it didn't work properly, and as such the workaround is to use the npm package on it's own.</p>
+</blockquote>
+<h2 id="aws-elastic-beanstalk">AWS Elastic Beanstalk</h2>
+<p>Next up we need to set up our instance of Elastic Beanstalk on AWS. We need to complete a few steps:</p>
+<ol>
+<li>Create a new application &amp; environment in AWS Elastic Beanstalk</li>
+<li>Create API keys for our GitHub Action (these go in as secrets)</li>
+</ol>
+<p>Since the previous post relies upon a multi-stage Dockerfile to build the app and run the app within nginx, we must ensure to use the platform <code>Docker running on 64bit Amazon Linux/2.15.2</code>, as <code>Docker running on Amazon Linux 2</code>, <a href="https://stackoverflow.com/questions/61462646/unable-to-deploy-docker-application-in-elasticbeanstalk-using-travis-ci">does not support multi-stage Dockerfiles</a>. Furthermore, we exposed the ports in the Dockerfile through docker-compose or the Docker CLI previously, we can also do this by adding the command <code>EXPOSE 80</code> in the production Dockerfile.</p>
+<p>Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: <a href="https://github.com/JackMcKew/docker-react">https://github.com/JackMcKew/docker-react</a></p></body>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/bookreview.html">bookreview</a>
-      <a href="https://jackmckew.dev/tag/principles.html">principles</a>
-      <a href="https://jackmckew.dev/tag/habits.html">habits</a>
+      <a href="https://jackmckew.dev/tag/software.html">software</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/intro-to-games-in-python-with-pyglet.html" title="Intro to Games in Python with Pyglet">
+    <a class="btn float-left" href="https://jackmckew.dev/deploying-with-kubernetes.html" title="Deploying with Kubernetes">
       <i class="fa fa-angle-left"></i>  Previous Post
-    </a>
-    <a class="btn float-right" href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html" title="Hands On Machine Learning Chapter 3">
-       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
-      <li><a href="https://jackmckew.dev/book-review-the-pragmatic-programmer.html">Book Review: The Pragmatic Programmer</a></li>
+      <li><a href="https://jackmckew.dev/episode-12-what-is-git.html">Episode 12 - What is Git?</a></li>
     </ul>
   </div>
 
