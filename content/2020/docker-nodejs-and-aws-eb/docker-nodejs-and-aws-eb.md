@@ -1,5 +1,5 @@
 Title: Deploy a Node Web App to AWS Elastic Beanstalk with Docker
-Date: 2020-12-03
+Date: 2020-12-04
 Author: Jack McKew
 Category: Software
 Tags: software
