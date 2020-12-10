@@ -1,5 +1,5 @@
 Title: Releasing Cordova Apps on Google Play & App Store
-Date: 2020-11-xx
+Date: 2020-12-11
 Author: Jack McKew
 Category: Software
 Tags: Software, javascript
