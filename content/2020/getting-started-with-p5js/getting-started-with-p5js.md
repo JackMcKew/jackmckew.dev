@@ -12,7 +12,7 @@ Next in the `draw` function, which is repeatedly called while the browser has th
 
 Finally to add interactivity, we make use of the `mouseIsPressed` variable to determine if the user has clicked on the visualization and add a drop into the array at the X & Y position of where the user clicked.
 
-<p align="center"><iframe src="https://editor.p5js.org/JackMcKew/embed/u2ga-k6rk" width="100%" height="400" frameborder="0" scrolling="no"></iframe></p>
+<p align="center"><iframe src="https://editor.p5js.org/JackMcKew/embed/u2ga-k6rk" width="100%" height="400" frameborder="0"></iframe></p>
 
 ``` js
 let drops = []
