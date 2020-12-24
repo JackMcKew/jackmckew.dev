@@ -29,26 +29,25 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics --><meta name="author" content="Jack McKew" />
-<meta name="description" content="Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the &#39;unit&#39;) meets its design and behaves as intended. This post won&#39;t go into testing structures for complex applications, but rather …" />
-<meta name="keywords" content="python, pytest, pipenv">
+<meta name="description" content="In this post we&#39;re going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We&#39;re going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch …" />
+<meta name="keywords" content="javascript, data-viz">
 
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="Introduction to Pytest &amp; Pipenv"/>
-<meta property="og:description" content="Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the &#39;unit&#39;) meets its design and behaves as intended. This post won&#39;t go into testing structures for complex applications, but rather …"/>
+<meta property="og:title" content="Getting Started with P5.js"/>
+<meta property="og:description" content="In this post we&#39;re going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We&#39;re going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/introduction-to-pytest-pipenv.html"/>
+<meta property="og:url" content="https://jackmckew.dev/getting-started-with-p5js.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-09-20 06:30:00+10:00"/>
+<meta property="article:published_time" content="2020-12-25 00:00:00+11:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
-<meta property="article:section" content="Python"/>
-<meta property="article:tag" content="python"/>
-<meta property="article:tag" content="pytest"/>
-<meta property="article:tag" content="pipenv"/>
-<meta property="og:image" content="https://jackmckew.dev/img/image0.png">
+<meta property="article:section" content="Javascript"/>
+<meta property="article:tag" content="javascript"/>
+<meta property="article:tag" content="data-viz"/>
+<meta property="og:image" content="/jm-photo.jpg">
 
-    <title>Jack McKew's Blog &ndash; Introduction to Pytest &amp; Pipenv</title>
+    <title>Jack McKew's Blog &ndash; Getting Started with P5.js</title>
 
 </head>
 
@@ -150,9 +149,9 @@
 <article class="single">
   <header>
       
-    <h1 id="introduction-to-pytest-pipenv">Introduction to Pytest & Pipenv</h1>
+    <h1 id="getting-started-with-p5js">Getting Started with P5.js</h1>
     <p>
-       Posted on Fri 20 September 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+       Posted on Fri 25 December 2020 in <a href="https://jackmckew.dev/category/javascript.html">Javascript</a>
 
         &#8226; 2 min read
     </p>
@@ -160,47 +159,11 @@
 
 
   <div>
-    <body><p>Unit tests in general are good practice within software development, they are typically automated tests written to ensure that a function or section of a program (a.k.a the 'unit') meets its design and behaves as intended.</p>
-<p>This post won't go into testing structures for complex applications, but rather just a simple introduction on how to write, run and check the output of a test in Python with pytest.</p>
-<p>As this post is on testing, I also thought it might be quite apt for trialing out a difference package for dependency management. In the past I've used anaconda, virtualenv and just pip, but this time I wanted to try out pipenv.</p>
-<p>Similar to my post <a href="https://jackmckew.dev/python-project-workflow.html">Python Project Workflow</a> where I used virtualenv, you must install pipenv in your base Python directory, and typically add the Scripts folder to your path for ease later on. Now all we need to do is navigate to the folder and run:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pipenv</span> <span class="n">shell</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>This will create a virtual environment somewhere on your computer (unless specified) and create a pipfile in the current folder. The pipfile is a file that essentially describes all the packages used within the project, their version number &amp; so on. This is extremely useful when you pick it back up later on and find where you were at or if you wish to share this with others, they can generate their own virtual environment simply from the pipfile with:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pipenv</span> <span class="n">install</span> <span class="o">--</span><span class="n">dev</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>Enough about pipenv, let's get onto trying out pytest.</p>
-<p>For this post I will place both my function and it's tests in the same file, however, from my understanding it's best practice to separate them, specifically keeping all tests within an aptly named 'tests' directory for your project/package.</p>
-<p>First off let's define the function we intend to test later:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span> <span class="n">number_2</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">number_1</span> <span class="o">-</span> <span class="n">number_2</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>Now we want to test if our function returns 1 if we give it number_1 = 2 and number_2 = 1:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
-
-<span class="k">def</span> <span class="nf">test_subtract</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">subtract</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>To run this test, open the pipenv shell like above in the directory of the file where you've written your tests and run:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>This will output the following:</p>
-<p><img alt="image0.png" class="img-fluid" src="https://jackmckew.dev/img/image0.png"/></p>
-<p>Each green dot represents a single test, and we can see that our 1 test passes in 0.02 seconds.</p>
-<p>To get more information from pytest, use the same command with -v (verbose) option:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">pytest</span> <span class="n">file_name</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span>
-</code></pre></div>
-</td></tr></tbody></table>
-<p>Now we might want to check that it works for multiple cases, to do this we can use the parametrize functionality of pytest like so:</p>
+    <body><p>In this post we're going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We're going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch it expand. As such not to have an empty screen, we'll also create a bunch of random drops that will consistently 'rain' down on our pond. There's even an interactive web editor for p5.js which is extremely useful for iterating through as we're creating something, this can be reached at: https://editor.p5js.org/.</p>
+<p>There's a lot of special variable names that p5 defines for us such as <code>mouseIsPressed</code> for the state of if a user has clicked on the visualisation, or the functions <code>setup</code> and <code>draw</code> which do exactly as expected. We start by initializing a few global variables which will define how our visualisation will behave such as the number of drops, how big a drop should go before disappearing, how fast they'll expand and how big they'll start off as. After this we create an array of objects which each object represents a single raindrop to be displayed.</p>
+<p>Next in the <code>draw</code> function, which is repeatedly called while the browser has the page open, we loop through all the objects in the array and draw a circle (ellipse with equal radii) and colour it according to how big it's radius is (this is as to watch it fade as it grows). We make use of the <code>stroke</code> function to define the colour of the lines for what we'll be drawing in that instance. If a drop has become too big we remove it from the array and add a new random drop, if it's still undersize we increase it's radius and colour.</p>
+<p>Finally to add interactivity, we make use of the <code>mouseIsPressed</code> variable to determine if the user has clicked on the visualization and add a drop into the array at the X &amp; Y position of where the user clicked.</p>
+<iframe src="https://editor.p5js.org/JackMcKew/embed/u2ga-k6rk"></iframe>
 <table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -213,51 +176,128 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">drops</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="kd">let</span> <span class="nx">totalDropSize</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="kd">let</span> <span class="nx">initialRadius</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">let</span> <span class="nx">radiusIncrementMax</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">let</span> <span class="nx">numberOfDrops</span> <span class="o">=</span> <span class="mi">50</span>
 
-<span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span> <span class="n">number_2</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">number_1</span> <span class="o">-</span> <span class="n">number_2</span>
+<span class="kd">function</span> <span class="nx">addRandomDrop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">drops</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+      <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="p">),</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span><span class="p">),</span>
+        <span class="nx">radius</span><span class="o">:</span> <span class="nx">initialRadius</span><span class="p">,</span>
+        <span class="nx">colour</span><span class="o">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">}</span>
 
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">'number_1, number_2, expected'</span><span class="p">,</span> <span class="p">[</span>
-    <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
-    <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span>
-<span class="p">])</span>
-<span class="k">def</span> <span class="nf">test_subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span><span class="n">number_2</span><span class="p">,</span><span class="n">expected</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expected</span> <span class="o">==</span> <span class="n">subtract</span><span class="p">(</span><span class="n">number_1</span><span class="p">,</span><span class="n">number_2</span><span class="p">)</span>
+<span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">createCanvas</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="nx">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">random</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">numberOfDrops</span><span class="p">);</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">addRandomDrop</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">background</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">drops</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">drops</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">stroke</span><span class="p">(</span><span class="nx">drops</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">colour</span><span class="p">)</span>
+      <span class="nx">ellipse</span><span class="p">(</span><span class="nx">drops</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">x</span><span class="p">,</span> <span class="nx">drops</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">y</span><span class="p">,</span><span class="nx">drops</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">radius</span><span class="p">)</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">drops</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">radius</span> <span class="o">&lt;</span> <span class="nx">totalDropSize</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">drops</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">radius</span> <span class="o">+=</span> <span class="nx">random</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">radiusIncrementMax</span><span class="p">)</span>
+        <span class="nx">drops</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">colour</span> <span class="o">+=</span> <span class="mi">10</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">drops</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="nx">addRandomDrop</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">mouseIsPressed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">drops</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+      <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="nx">mouseX</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="nx">mouseY</span><span class="p">,</span>
+        <span class="nx">radius</span><span class="o">:</span> <span class="nx">initialRadius</span><span class="p">,</span>
+        <span class="nx">colour</span><span class="o">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+
+
+<span class="p">}</span>
 </code></pre></div>
-</td></tr></tbody></table>
-<p>Once run with the verbose command, we get the output:</p>
-<p><img alt="image-10.png" class="img-fluid" src="https://jackmckew.dev/img/image-10.png"/></p>
-<p>Hopefully this post is a gentle introduction to what unit testing can be in Python.</p></body>
+</td></tr></tbody></table></body>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://jackmckew.dev/tag/python.html">python</a>
-      <a href="https://jackmckew.dev/tag/pytest.html">pytest</a>
-      <a href="https://jackmckew.dev/tag/pipenv.html">pipenv</a>
+      <a href="https://jackmckew.dev/tag/javascript.html">javascript</a>
+      <a href="https://jackmckew.dev/tag/data-viz.html">data-viz</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/inheritance-in-python.html" title="Inheritance in Python">
+    <a class="btn float-left" href="https://jackmckew.dev/differential-privacy.html" title="Differential Privacy">
       <i class="fa fa-angle-left"></i>  Previous Post
-    </a>
-    <a class="btn float-right" href="https://jackmckew.dev/intro-to-games-in-python-with-pyglet.html" title="Intro to Games in Python with Pyglet">
-       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
-      <li><a href="https://jackmckew.dev/differential-privacy.html">Differential Privacy</a></li>
-      <li><a href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html">Shallow vs Deep Copy in Python</a></li>
-      <li><a href="https://jackmckew.dev/types-of-averages-means.html">Types of Averages (Means)</a></li>
-      <li><a href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html">Dataclasses vs Attrs vs Pydantic</a></li>
-      <li><a href="https://jackmckew.dev/generators-in-python.html">Generators in Python</a></li>
+      <li><a href="https://jackmckew.dev/releasing-cordova-apps-on-google-play-app-store.html">Releasing Cordova Apps on Google Play & App Store</a></li>
+      <li><a href="https://jackmckew.dev/creating-animated-plots-with-pandas_alive.html">Creating Animated Plots with Pandas_Alive</a></li>
+      <li><a href="https://jackmckew.dev/covid-19-confirmed-cases-nsw-australia-animated-statistics-over-time.html">COVID-19 Confirmed Cases NSW Australia - Animated Statistics over Time</a></li>
     </ul>
   </div>
 
