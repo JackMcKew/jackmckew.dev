@@ -1,5 +1,5 @@
 Title: Getting Started with P5.js
-Date: 2020-11-xx
+Date: 2020-12-25
 Author: Jack McKew
 Category: Javascript, Data Visualisation
 Tags: javascript, data-viz
