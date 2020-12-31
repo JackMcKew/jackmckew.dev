@@ -1,10 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-12-25T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Getting Started with P5.js</title><link href="https://jackmckew.dev/getting-started-with-p5js.html" rel="alternate"></link><published>2020-12-25T00:00:00+11:00</published><updated>2020-12-25T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-25:/getting-started-with-p5js.html</id><summary type="html">&lt;body&gt;&lt;p&gt;In this post we're going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We're going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;In this post we're going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We're going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch it expand. As such not to have an empty screen, we'll also create a bunch of random drops that will consistently 'rain' down on our pond. There's even an interactive web editor for p5.js which is extremely useful for iterating through as we're creating something, this can be reached at: https://editor.p5js.org/.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2021-01-01T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Define Functions Iteratively With Python</title><link href="https://jackmckew.dev/define-functions-iteratively-with-python.html" rel="alternate"></link><published>2021-01-01T00:00:00+11:00</published><updated>2021-01-01T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2021-01-01:/define-functions-iteratively-with-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;An interesting problem came up recently, there was a piece of code absolutely full of the same function calls over and over again, meaning if anything ever need to change, that would have to be changed in over 500 places, not ideal. Thoughts go back to single responsbility, and don't …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;An interesting problem came up recently, there was a piece of code absolutely full of the same function calls over and over again, meaning if anything ever need to change, that would have to be changed in over 500 places, not ideal. Thoughts go back to single responsbility, and don't repeat yourself principles for software engineering. So research &amp;amp; thinking begun on the best way to manage this issue. The first thing that came to mind, how could we define these functions and their combinations iteratively.&lt;/p&gt;
+&lt;p&gt;Before we dive into this could be implemented, we need to really understand the problem.&lt;/p&gt;
+&lt;p&gt;The use case for this repeated code, was to check the variables being passed to an endpoint were what they were expected to be. For example, if an endpoint is awaiting for a string, and an optional number, we want to check these before the operation goes through and potentially breaks something else down the line (bringing us back to the crash early principle).&lt;/p&gt;
+&lt;p&gt;We'll start by defining two functions which will check that a variable is the type it's expected to be, and another to ensure it exists (not None in Python).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;variable_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;variable_name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;variable_type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Variable '&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;variable_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;' is invalid type! Expected: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;variable_type&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;variable_name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Variable '&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;variable_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;' is None! Check variable exists."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Now that we've defined these functions, let's test that they work as expected and raise Exceptions when a problem statement comes up.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;check_type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'lucky_number'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;check_type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Hello world'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;float&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'I thought this was a number'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;&lt;span class="ansi-red-intense-fg ansi-bold"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;Exception&lt;/span&gt;                                 Traceback (most recent call last)
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-10-bb70c914c0df&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      1&lt;/span&gt; check_type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-cyan-intense-fg ansi-bold"&gt;24&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;int&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;'lucky_number'&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 2&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt; &lt;/span&gt;check_type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;'Hello world'&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; float&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; &lt;span class="ansi-blue-intense-fg ansi-bold"&gt;'I thought this was a number'&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-6-22c582f36d19&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;check_type&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(value, variable_type, variable_name)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      1&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; check_type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;value&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; variable_type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; variable_name&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      2&lt;/span&gt;     &lt;span class="ansi-green-intense-fg ansi-bold"&gt;if&lt;/span&gt; type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;value&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt; &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;!=&lt;/span&gt; variable_type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 3&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;raise&lt;/span&gt; Exception&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;f"Variable '{variable_name}' is invalid type! Expected: {variable_type}."&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt; 
+&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; check_exists&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;value&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;variable_name&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;Exception&lt;/span&gt;: Variable 'I thought this was a number' is invalid type! Expected: &amp;lt;class 'float'&amp;gt;.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;55&lt;/span&gt;
+&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;span class="n"&gt;check_exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Fifty five'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;check_exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Fifty six'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;&lt;span class="ansi-red-intense-fg ansi-bold"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;Exception&lt;/span&gt;                                 Traceback (most recent call last)
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-11-355540618803&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      2&lt;/span&gt; y &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;None&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      3&lt;/span&gt; check_exists&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;x&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;'Fifty five'&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 4&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt; &lt;/span&gt;check_exists&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;y&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; &lt;span class="ansi-blue-intense-fg ansi-bold"&gt;'Fifty six'&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-6-22c582f36d19&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;check_exists&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(value, variable_name)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; check_exists&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;value&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;variable_name&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      6&lt;/span&gt;     &lt;span class="ansi-green-intense-fg ansi-bold"&gt;if&lt;/span&gt; value &lt;span class="ansi-green-intense-fg ansi-bold"&gt;is&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;None&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 7&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;raise&lt;/span&gt; Exception&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;f"Variable '{variable_name}' is None! Check variable exists."&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;Exception&lt;/span&gt;: Variable 'Fifty six' is None! Check variable exists.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Defining-Functions-Iteratively"&gt;Defining Functions Iteratively&lt;a class="anchor-link" href="#Defining-Functions-Iteratively"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now let's make use of the beauty that is looping to create all the combinations for us to use! We're going to encapsulate all these functions inside a dictionary to encapsulate them and provide a common interface for developers to use.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [140]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;log_and_raise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;exception_text&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# Add logging here&lt;/span&gt;
+    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;exception_text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create_validators&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;types&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;validators&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;variable_type&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;types&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;validators&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;variable_type&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;variable_type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;variable_type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;variable_type&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;log_and_raise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Variable isn't of type '&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;variable_type&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;'! D:"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;validators&lt;/span&gt;
+
+&lt;span class="n"&gt;validate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_validators&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;float&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Now in a handful lines of code, we've created a dictionary with a way to easily generate functions to check variable types, and then log out the error (eg, write to a file) and raise an exception.&lt;/p&gt;
+&lt;p&gt;Before we deconstruct what's happening here, let's see it in action.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [141]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'str'&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="s1"&gt;'This is a string!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'int'&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'float'&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mf"&gt;42.42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'The number forty two'&lt;/span&gt;
+
+&lt;span class="n"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'str'&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[141]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;'The number forty two'&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Fantastic, as we can see, it's not throwing any errors and continuing through our validations, now let's ensure our exception is raised (and subsequently any logging would be completed).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [142]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'str'&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;&lt;span class="ansi-red-intense-fg ansi-bold"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;Exception&lt;/span&gt;                                 Traceback (most recent call last)
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-142-fd464241a319&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 1&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt; &lt;/span&gt;validate&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;[&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;'str'&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;]&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-cyan-intense-fg ansi-bold"&gt;42&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-140-4899cd219b78&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;lambda&amp;gt;&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(value, variable_type)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      6&lt;/span&gt;     validators &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt; &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;{&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;}&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      7&lt;/span&gt;     &lt;span class="ansi-green-intense-fg ansi-bold"&gt;for&lt;/span&gt; variable_type &lt;span class="ansi-green-intense-fg ansi-bold"&gt;in&lt;/span&gt; types&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 8&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         &lt;/span&gt;validators&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;[&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;f"{variable_type.__name__}"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;]&lt;/span&gt; &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;lambda&lt;/span&gt; value&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; variable_type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt;variable_type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt; value &lt;span class="ansi-green-intense-fg ansi-bold"&gt;if&lt;/span&gt; type&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;value&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt; &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;==&lt;/span&gt; variable_type &lt;span class="ansi-green-intense-fg ansi-bold"&gt;else&lt;/span&gt; log_and_raise&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;f"Variable isn't of type '{variable_type.__name__}'! D:"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      9&lt;/span&gt;     &lt;span class="ansi-green-intense-fg ansi-bold"&gt;return&lt;/span&gt; validators
+&lt;span class="ansi-green-fg"&gt;     10&lt;/span&gt; 
+
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-140-4899cd219b78&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;log_and_raise&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(exception_text)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      1&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; log_and_raise&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;exception_text&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      2&lt;/span&gt;     &lt;span class="ansi-red-intense-fg ansi-bold"&gt;# Add logging here&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 3&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;     &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;raise&lt;/span&gt; Exception&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;exception_text&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt; 
+&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; create_validators&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;types&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
+
+&lt;span class="ansi-red-intense-fg ansi-bold"&gt;Exception&lt;/span&gt;: Variable isn't of type 'str'! D:&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Even better, we get raise an exception when our validation fails ensuring to alert the developers with information about why it failed. Now let's deconstruct how we created it in depth.&lt;/p&gt;
+&lt;h3 id="Deconstruction-of-How"&gt;Deconstruction of How&lt;a class="anchor-link" href="#Deconstruction-of-How"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Admittedly, there's a lot going on in those handful of lines which isn't obvious as to whats happening.&lt;/p&gt;
+&lt;p&gt;First we define the overarching functions which contains the creation of all these functions, and thereafter initialise a dictionary to store all the following functions within. Next we loop over each of the types provided as a list to the function to create an entry in the dictionary using the &lt;code&gt;__name__&lt;/code&gt; dunder function (eg, &lt;code&gt;str&lt;/code&gt; has a dunder &lt;code&gt;__name__&lt;/code&gt; of 'str'), this let's our developers use the type they want as the key of the dictionary when wanting to validate a variables type.&lt;/p&gt;
+&lt;h3 id="Lambdas!"&gt;Lambdas!&lt;a class="anchor-link" href="#Lambdas!"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The trickiest part here is how we are actually defining the functions. We make use of the lambda operator in Python to create &lt;strong&gt;anonymous functions&lt;/strong&gt;. The structure of a lambda function definition follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;arguments&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;true_statement&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;conditional_statement&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;false_statement&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We make use of a keyword argument of the &lt;code&gt;variable_type&lt;/code&gt; in our loop otherwise the &lt;code&gt;variable_type&lt;/code&gt; from the list passed in won't be correctly passed into the lambda function (which we won't discuss in this post).&lt;/p&gt;
+&lt;p&gt;Finally we make use of an external function to centralise how we handle errors (making it easy to keep a consistent logging approach), and raise an Exception within that function to ensure any logging occurs before the program ultimately exits.&lt;/p&gt;
+&lt;h2 id="Conclusion"&gt;Conclusion&lt;a class="anchor-link" href="#Conclusion"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;There are pros and cons to this approach to this problem.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Concise way of creating lots of functions&lt;/li&gt;
+&lt;li&gt;Consistent interface to use&lt;/li&gt;
+&lt;li&gt;Stores all similar functions inside one object (dictionary)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Cons&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not straightforward as to how it works&lt;/li&gt;
+&lt;li&gt;Not straightforward to change functionality&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="software-development"></category></entry><entry><title>Getting Started with P5.js</title><link href="https://jackmckew.dev/getting-started-with-p5js.html" rel="alternate"></link><published>2020-12-25T00:00:00+11:00</published><updated>2020-12-25T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-25:/getting-started-with-p5js.html</id><summary type="html">&lt;body&gt;&lt;p&gt;In this post we're going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We're going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;In this post we're going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We're going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch it expand. As such not to have an empty screen, we'll also create a bunch of random drops that will consistently 'rain' down on our pond. There's even an interactive web editor for p5.js which is extremely useful for iterating through as we're creating something, this can be reached at: https://editor.p5js.org/.&lt;/p&gt;
 &lt;p&gt;There's a lot of special variable names that p5 defines for us such as &lt;code&gt;mouseIsPressed&lt;/code&gt; for the state of if a user has clicked on the visualisation, or the functions &lt;code&gt;setup&lt;/code&gt; and &lt;code&gt;draw&lt;/code&gt; which do exactly as expected. We start by initializing a few global variables which will define how our visualisation will behave such as the number of drops, how big a drop should go before disappearing, how fast they'll expand and how big they'll start off as. After this we create an array of objects which each object represents a single raindrop to be displayed.&lt;/p&gt;
 &lt;p&gt;Next in the &lt;code&gt;draw&lt;/code&gt; function, which is repeatedly called while the browser has the page open, we loop through all the objects in the array and draw a circle (ellipse with equal radii) and colour it according to how big it's radius is (this is as to watch it fade as it grows). We make use of the &lt;code&gt;stroke&lt;/code&gt; function to define the colour of the lines for what we'll be drawing in that instance. If a drop has become too big we remove it from the array and add a new random drop, if it's still undersize we increase it's radius and colour.&lt;/p&gt;
 &lt;p&gt;Finally to add interactivity, we make use of the &lt;code&gt;mouseIsPressed&lt;/code&gt; variable to determine if the user has clicked on the visualization and add a drop into the array at the X &amp;amp; Y position of where the user clicked.&lt;/p&gt;
 &lt;p align="center"&gt;&lt;iframe frameborder="0" height="400" src="https://editor.p5js.org/JackMcKew/embed/u2ga-k6rk" width="100%"&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -187,7 +434,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="table-striped table dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -462,7 +709,7 @@ Private mean income: 55589.33064063336, 0.1 privacy budget
 &lt;/ol&gt;
 &lt;p&gt;For the most part, we will be making use of &lt;code&gt;run&lt;/code&gt; commands, as if we are interacting with the terminal in the runtime of ubuntu (Linux). Otherwise, we can make use of pre-made actions from the marketplace. One note to be made is that the AWS Elastic Beanstalk application has been set up to run specifically on Docker, and as such we need to upload the relevant Dockerfile (production) along with any assets.&lt;/p&gt;
 &lt;p&gt;The contents of the Github Action in whole will be:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -557,150 +804,4 @@ Private mean income: 55589.33064063336, 0.1 privacy budget
 &lt;p&gt;Since the previous post relies upon a multi-stage Dockerfile to build the app and run the app within nginx, we must ensure to use the platform &lt;code&gt;Docker running on 64bit Amazon Linux/2.15.2&lt;/code&gt;, as &lt;code&gt;Docker running on Amazon Linux 2&lt;/code&gt;, &lt;a href="https://stackoverflow.com/questions/61462646/unable-to-deploy-docker-application-in-elasticbeanstalk-using-travis-ci"&gt;does not support multi-stage Dockerfiles&lt;/a&gt;. Furthermore, we exposed the ports in the Dockerfile through docker-compose or the Docker CLI previously, we can also do this by adding the command &lt;code&gt;EXPOSE 80&lt;/code&gt; in the production Dockerfile.&lt;/p&gt;
 &lt;p&gt;Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.&lt;/p&gt;
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Deploying with Kubernetes</title><link href="https://jackmckew.dev/deploying-with-kubernetes.html" rel="alternate"></link><published>2020-11-26T00:00:00+11:00</published><updated>2020-11-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-26:/deploying-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Technology&lt;/th&gt;
-&lt;th&gt;Use&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker&lt;/td&gt;
-&lt;td&gt;Docker will be used to containerization of the services inside our …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Technology&lt;/th&gt;
-&lt;th&gt;Use&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Docker&lt;/td&gt;
-&lt;td&gt;Docker will be used to containerization of the services inside our app&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Vue&lt;/td&gt;
-&lt;td&gt;Vue is the front-end JavaScript framework that we will use&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Google Cloud&lt;/td&gt;
-&lt;td&gt;The cloud provider that will host our Kubernetes cluster&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Express&lt;/td&gt;
-&lt;td&gt;Express is responsible for the API between Redis, PostgreSQL and Vue&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Redis&lt;/td&gt;
-&lt;td&gt;Redis will store/retrieve any local data used by our users&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;PostgreSQL&lt;/td&gt;
-&lt;td&gt;PostgreSQL will be our database&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Nginx&lt;/td&gt;
-&lt;td&gt;Nginx will handle the routing between our services&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Github Actions&lt;/td&gt;
-&lt;td&gt;The CI/CD for our project&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html"&gt;Deploy a Node Web App to AWS Elastic Beanstalk with Docker&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Previously we made use of services provided by AWS for Redis &amp;amp; PostgreSQL, in this post these services will be run inside their own pods.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="the-architecture"&gt;The Architecture&lt;/h2&gt;
-&lt;p&gt;To make our application run on Kubernetes, we need to make a few changes. In essence though the architecture will&lt;/p&gt;
-&lt;div class="mermaid"&gt;
-  graph LR
-    subgraph Node
-        tr&amp;gt;Traffic] --&amp;gt; is[Ingress Service]
-
-        is --&amp;gt; cl[Client Deployment]
-
-        is --&amp;gt; se[Server Deployment]
-
-        se --&amp;gt; re[(Redis Deployment)]
-
-        se --&amp;gt; po[(PostgreSQL Deployment)]
-
-        po --&amp;gt; pv[PostgreSQL PVC]
-
-        wo(Worker Deployment) --&amp;gt; re
-    end
-&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The above chart was made with &lt;a href="https://mermaid-js.github.io/mermaid/#/"&gt;mermaid.js&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;See the following posts for developing in different contexts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Container context: &lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Kubernetes context: &lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="cloud-provider"&gt;Cloud Provider&lt;/h2&gt;
-&lt;p&gt;To deploy our Kubernetes cluster, we need a cloud provider, for this post we will be using Google Cloud. Other options are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Amazon Web Services (AWS)&lt;/li&gt;
-&lt;li&gt;Digital Ocean&lt;/li&gt;
-&lt;li&gt;Microsoft Azure&lt;/li&gt;
-&lt;li&gt;Many more&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="google-cloud"&gt;Google Cloud&lt;/h2&gt;
-&lt;p&gt;Now that we've logged into our Google Cloud console, we create a new project, enable billing and then head to Kubernetes Engine. This will go through some one time set up to enable the Kubernetes Engine API for our project and upon completion we can create a cluster. As soon as we hit &lt;code&gt;Create Cluster&lt;/code&gt;, this begins the billing so be careful!&lt;/p&gt;
-&lt;h3 id="service-account"&gt;Service Account&lt;/h3&gt;
-&lt;p&gt;Before moving onto the next step, we need to authorize Github Actions to be able run inside the cluster on Google Cloud. This is done by creating a service account, exporting the keys as JSON and storing it as a secret within the repository on Github.&lt;/p&gt;
-&lt;h2 id="cicd"&gt;CI/CD&lt;/h2&gt;
-&lt;p&gt;For our CI/CD we will be using GitHub Actions. Github Actions are free to public repositories, and I presented at PyconAU 2020 on the topic, find the recording at: &lt;a href="https://www.youtube.com/watch?v=7aBjzZkaGhU&amp;amp;feature=emb_logo"&gt;https://www.youtube.com/watch?v=7aBjzZkaGhU&amp;amp;feature=emb_logo&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Let's get into setting up the action for this project, we will be aiming to achieve a few things in this action:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Initialise &amp;amp; configure the Google Cloud SDK&lt;/li&gt;
-&lt;li&gt;Login to Docker Hub so we can push our images up&lt;/li&gt;
-&lt;li&gt;Build our application and run tests&lt;/li&gt;
-&lt;li&gt;Build and tag images ready to be pushed to Docker Hub&lt;/li&gt;
-&lt;li&gt;Push our tagged images to Docker Hub&lt;/li&gt;
-&lt;li&gt;Update the Kubernetes configuration on Google Cloud&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;To see the full configuration which achieves this head to: &lt;a href="https://github.com/JackMcKew/multi-docker/blob/master/.github/workflows/google-cloud-cluster.yaml"&gt;https://github.com/JackMcKew/multi-docker/blob/master/.github/workflows/google-cloud-cluster.yaml&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We make sure to use the &lt;code&gt;${GITHUB_SHA}&lt;/code&gt;, when we're tagging our images versions, this is due to ensure that our kubernetes cluster ensures to update the images when we are running &lt;code&gt;kubectl apply -f k8s&lt;/code&gt;. If we didn't add the SHA, they would be all tagged with &lt;code&gt;:latest&lt;/code&gt;, and kubernetes wouldn't see an update.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Make sure to update the cluster id in the command &lt;code&gt;gcloud container clusters get-credentials my-first-cluster-1&lt;/code&gt; with the cluster desired to update the kubernetes configuration, otherwise there'll be errors.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Once this action has successfully completed, we can head to the Workloads page of our project and we should be able to see all the deployment configurations that we set up to be deployed.&lt;/p&gt;
-&lt;h2 id="setting-up-ingress-nginx"&gt;Setting up Ingress-Nginx&lt;/h2&gt;
-&lt;p&gt;Before we can access our application through an IP or web address, we need to set up &lt;code&gt;ingress-nginx&lt;/code&gt;, similar to how we did with &lt;code&gt;docker-compose&lt;/code&gt; in previous posts. Luckily, we can make use of &lt;code&gt;helm&lt;/code&gt; to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.&lt;/p&gt;
-&lt;p&gt;Firstly which we need to install helm (&lt;a href="https://helm.sh/docs/intro/install/#from-script"&gt;https://helm.sh/docs/intro/install/#from-script&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
-./get_helm.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Followed by setting up &lt;code&gt;ingress-nginx&lt;/code&gt; (&lt;a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm"&gt;https://kubernetes.github.io/ingress-nginx/deploy/#using-helm&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install my-release ingress-nginx/ingress-nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;h2 id="success"&gt;Success&lt;/h2&gt;
-&lt;p&gt;Now we head to our &lt;code&gt;Services &amp;amp; Ingress&lt;/code&gt; page in our project, where we can see all the pods that are used for hosting endpoints. Provided the &lt;code&gt;ingress-nginx&lt;/code&gt; service has been created, there should be a &lt;code&gt;External Load Balancer&lt;/code&gt; service with an IP, that we can access. Heading to this IP will lead us to our application!&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Kubernetes In Action on Google Cloud" class="img-fluid" src="https://jackmckew.dev/img/google-cloud-kubernetes.gif"/&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If we wanted to set up an actual web address, we'd need to purchase a domain, set the A record as the IP for our external load balancer, and finally set up a certificate manager to handle the https authentication.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Javascript Source(s):
-&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry></feed>
+&lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry></feed>
