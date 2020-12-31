@@ -187,7 +187,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table dataframe table-striped"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -558,7 +558,7 @@ Private mean income: 55589.33064063336, 0.1 privacy budget
 &lt;p&gt;Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.&lt;/p&gt;
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Deploying with Kubernetes</title><link href="https://jackmckew.dev/deploying-with-kubernetes.html" rel="alternate"></link><published>2020-11-26T00:00:00+11:00</published><updated>2020-11-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-26:/deploying-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -569,7 +569,7 @@ Private mean income: 55589.33064063336, 0.1 privacy budget
 &lt;tr&gt;
 &lt;td&gt;Docker&lt;/td&gt;
 &lt;td&gt;Docker will be used to containerization of the services inside our …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
