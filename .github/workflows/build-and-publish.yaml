@@ -27,7 +27,7 @@ jobs:
     
     - name: Generate with Pelican
       run: |
-        pelican content
+        pelican -D content
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.7.1
