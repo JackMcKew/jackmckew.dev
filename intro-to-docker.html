@@ -58,9 +58,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 97</p>
-            <p>Number of Words: 72,650</p>
-            <p>Number of Lines of Code 5,038</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 98</p>
+            <p>Number of Words: 73,062</p>
+            <p>Number of Lines of Code 5,086</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -243,7 +243,7 @@
 </table>
 <h2 id="dockerfile">Dockerfile</h2>
 <p>A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -292,7 +292,7 @@
 <h2 id="port-mapping">Port Mapping</h2>
 <p>By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.</p>
 <p>This is not changed within the Dockerfile, but rather when we run the container with the <code>-p</code> flag. This can be done with:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -308,7 +308,7 @@ This local PC port and the container port do NOT have to match.</p>
 <li>Create an container that will host a nodejs app</li>
 <li>Network the ports of the nodejs app container</li>
 </ol>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
