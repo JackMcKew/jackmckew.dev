@@ -1,8 +1,8 @@
 Title: Designing for Change not Requirements
-Date: 2020-05-xx
+Date: 2021-01-15
 Author: Jack McKew
-Category: Data Science, Software
-Tags: datascience, Software
+Category: Software
+Tags: software, principles
 
 Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: <https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy>.
 
