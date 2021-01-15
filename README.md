@@ -20,11 +20,11 @@ The blog is generated from the main branch of this repository, there's a Github 
 ### Latest Blog Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Designing for Change not Requirements](https://jackmckew.dev/designing-for-change-not-requirements.html)
 - [Typography With Matplotlib](https://jackmckew.dev/typography-with-matplotlib.html)
 - [Define Functions Iteratively With Python](https://jackmckew.dev/define-functions-iteratively-with-python.html)
 - [Getting Started with P5.js](https://jackmckew.dev/getting-started-with-p5js.html)
 - [Differential Privacy](https://jackmckew.dev/differential-privacy.html)
-- [Releasing Cordova Apps on Google Play & App Store](https://jackmckew.dev/releasing-cordova-apps-on-google-play-app-store.html)
 <!-- BLOG-POST-LIST:END -->
 
 ### You can also find me on
