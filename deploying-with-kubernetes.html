@@ -159,7 +159,7 @@
 
   <div>
     <body><p>Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Technology</th>
@@ -273,7 +273,7 @@
 <h2 id="setting-up-ingress-nginx">Setting up Ingress-Nginx</h2>
 <p>Before we can access our application through an IP or web address, we need to set up <code>ingress-nginx</code>, similar to how we did with <code>docker-compose</code> in previous posts. Luckily, we can make use of <code>helm</code> to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.</p>
 <p>Firstly which we need to install helm (<a href="https://helm.sh/docs/intro/install/#from-script">https://helm.sh/docs/intro/install/#from-script</a>):</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod <span class="m">700</span> get_helm.sh
@@ -281,7 +281,7 @@ chmod <span class="m">700</span> get_helm.sh
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Followed by setting up <code>ingress-nginx</code> (<a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm">https://kubernetes.github.io/ingress-nginx/deploy/#using-helm</a>):</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 </code></pre></div>
