@@ -21,7 +21,7 @@
 &lt;p&gt;After googling 'Sample Excel Data', let's just use this data set to built &amp;amp; test our function:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.contextures.com/xlSampleData01.html"&gt;https://www.contextures.com/xlSampleData01.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;A sample of this data set is:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;OrderDate&lt;/th&gt;
