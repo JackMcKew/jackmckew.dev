@@ -55,7 +55,7 @@ Pillow>=7.1.0
 prometheus-client==0.7.1
 prompt-toolkit==2.0.10
 pycparser==2.19
-Pygments==2.6.1
+Pygments==2.7.4
 pygount==1.2.1
 PyPDF2==1.26.0
 pyperclip==1.7.0
