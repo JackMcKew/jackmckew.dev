@@ -158,19 +158,19 @@
 
 
   <div>
-    <body><p>Redux is a <em>predictable state container for JavaScript applications</em>, and React is <em>a JavaScript library for building user interfaces</em>. To bridge the two, you get <code>react-redux</code> which allows our user interfaces to interact &amp; respond to the current state of the application.</p>
+    </head><body><p>Redux is a <em>predictable state container for JavaScript applications</em>, and React is <em>a JavaScript library for building user interfaces</em>. To bridge the two, you get <code>react-redux</code> which allows our user interfaces to interact &amp; respond to the current state of the application.</p>
 <p>In this post let's go into actions and reducers. First off, what is an action and what is a reducer in this context? <strong>Actions</strong> are payloads of information that send data from the application to the redux store. <strong>Reducers</strong> specify how the application's state changes in response to actions sent to the store. It is summarized in the graphic:</p>
 <p><img alt="Redux State Diagram" class="img-fluid" src="https://jackmckew.dev/img/redux-diagram.png"/></p>
 <p>Let's use <code>react-redux</code> to build a system which we can alert users when things trigger. For this we will need to build an action, a reducer and a component to display the alert.</p>
 <p>To ensure that these three components are speaking the same language, we need to initialise types which will represent the states being passed around. These variables contain a string. For our alert system we need two variables</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">export</span> <span class="kr">const</span> <span class="nx">SET_ALERT</span> <span class="o">=</span> <span class="s2">"SET_ALERT"</span>
 <span class="kr">export</span> <span class="kr">const</span> <span class="nx">REMOVE_ALERT</span> <span class="o">=</span> <span class="s2">"REMOVE_ALERT"</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="action">Action</h2>
 <p>We'll start by creating the action which will signify when an alert is triggered. We want all of our alerts to be unique so multiple alerts can handled without a problem which we will use <code>uuid</code>.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -213,7 +213,7 @@
 </td></tr></tbody></table>
 <p>The action is declared as a function, which takes in 3 arguments (2 required): <code>msg</code>, <code>alertType</code> and <code>timeout</code>. Which we then use call the dispatch function with an object constructed from the arguments, and then after a specified timeout we dispatch another object to remove the same alert.</p>
 <p>Note that we curry the dispatch function in this case, this is only possible from using the middleware <code>redux-thunk</code>, which can also be represented as:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -231,7 +231,7 @@
 <blockquote>
 <p>This post won't go into detail around how to build a React component, which you can find over at another post: [INSERT REACT COMPONENT POST]</p>
 </blockquote>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -279,7 +279,7 @@
 <p>To break it down, we've created a React component (class) <code>Alert</code> which takes in <code>alerts</code> as an array, verifies it isn't null or empty, and finally iterates over each element in the <code>alerts</code> array to return a <code>div</code> stylized with the appropriate information.</p>
 <h2 id="reducer">Reducer</h2>
 <p>Lastly we have the reducer which we want to handle all the states that can be created by the <code>alert</code> action. Luckily we can do this with a switch statement:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -318,7 +318,7 @@
 <h3 id="default">Default</h3>
 <p>If neither setting or removing an alert, don't change the state at all.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Using <code>react-redux</code> we can create a responsive web application which enhances the user experience!</p></body>
+<p>Using <code>react-redux</code> we can create a responsive web application which enhances the user experience!</p>
   </div>
   <div class="tag-cloud">
     <p>

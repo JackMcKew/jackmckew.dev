@@ -159,7 +159,7 @@
 
 
   <div>
-    <body><p>Recently the <a href="https://github.com/JackMcKew/awesome-python-bytes">Python Bytes Awesome Package List</a> moved to it's own repository from the <a href="https://jackmckew.dev/python-bytes-awesome-package-list.html#python-bytes-awesome-package-list">blog post</a>. This was done to enable the community be able to contribute their packages that they thought were awesome, which was a success with many pull requests already merged.</p>
+    </head><body><p>Recently the <a href="https://github.com/JackMcKew/awesome-python-bytes">Python Bytes Awesome Package List</a> moved to it's own repository from the <a href="https://jackmckew.dev/python-bytes-awesome-package-list.html#python-bytes-awesome-package-list">blog post</a>. This was done to enable the community be able to contribute their packages that they thought were awesome, which was a success with many pull requests already merged.</p>
 <p>After getting a taste of CI/CD principles with <a href="https://travis-ci.com/">Travis CI</a> in building this blog, an idea to integrate some CI/CD with the awesome package list repository to ensure spelling errors, broken links, etc are all checked automatically. This was a great opportunity to try out <a href="https://github.com/features/actions">Github Actions</a>, so then all the resources/dependencies live in one place, Github.</p>
 <p>Initially, the things to automate were:</p>
 <ul>
@@ -180,7 +180,7 @@
 <h1 id="action-format-yaml">Action Format (.yaml)</h1>
 <p>A Github Action is defined with a <code>&lt;action_name&gt;.yaml</code> file which must be placed within <code>.github/workflows</code> from the base of the repository. As many actions as you want can be placed in this folder, and will subsequently run when triggered.</p>
 <p>The base structure of a <code>link_checker.yaml</code> file is:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -255,7 +255,7 @@
 <p>Fork repository &gt; Make changes &gt; Submit Pull Request with changes &gt; Check changes &gt; Merge into repository</p>
 </blockquote>
 <p>When the action was first set up for actions to run on pull requests, it kept throwing an error:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The process <span class="s1">'/usr/bin/git'</span> failed with <span class="nb">exit</span> code <span class="m">1</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The process <span class="s1">'/usr/bin/git'</span> failed with <span class="nb">exit</span> code <span class="m">1</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This was determined to be intentional design by Github as a mitigation against the possibility that a bad actor could open PRs against your repo and do things like list out secrets or just run up a large bill (once we start charging) on your account.</p>
@@ -273,7 +273,7 @@
 <blockquote>
 <p>Ensure to use <code>if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'</code> in all subsequent jobs you want triggered if the phrase is found, otherwise the action will become recursive: check for comment, run checks, make a comment, check for comment, etc</p>
 </blockquote>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -413,7 +413,7 @@
               <span class="no">body: 'Some checks failled :(, check Github Actions for more details.'</span>
             <span class="no">})</span>
 </code></pre></div>
-</td></tr></tbody></table></body>
+</td></tr></tbody></table>
   </div>
   <div class="tag-cloud">
     <p>

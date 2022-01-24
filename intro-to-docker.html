@@ -158,7 +158,7 @@
 
 
   <div>
-    <body><p>What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the <em>'But it works on my machine'</em> problem. This post will go through an intro to docker and how you can use it. A crucial part to Docker is the container, <em>a Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings</em></p>
+    </head><body><p>What is docker? Docker is a platform for running software that is agnostic to the operating system it runs on. This is extremely useful around solving the <em>'But it works on my machine'</em> problem. This post will go through an intro to docker and how you can use it. A crucial part to Docker is the container, <em>a Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings</em></p>
 <p>I did a post back in 2018 on containerization and mentioned Docker too! <a href="https://jackmckew.dev/episode-6-containerization.html">https://jackmckew.dev/episode-6-containerization.html</a></p>
 <p>This post is apart of a series on Docker/Kubernetes, find the other posts at:</p>
 <ul>
@@ -243,7 +243,7 @@
 </table>
 <h2 id="dockerfile">Dockerfile</h2>
 <p>A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -292,7 +292,7 @@
 <h2 id="port-mapping">Port Mapping</h2>
 <p>By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.</p>
 <p>This is not changed within the Dockerfile, but rather when we run the container with the <code>-p</code> flag. This can be done with:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -308,7 +308,7 @@ This local PC port and the container port do NOT have to match.</p>
 <li>Create an container that will host a nodejs app</li>
 <li>Network the ports of the nodejs app container</li>
 </ol>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -363,7 +363,7 @@ This local PC port and the container port do NOT have to match.</p>
 <p>Similarly to running <code>docker ps</code>, we can run <code>docker-compose ps</code> to check all the running containers that we started with <code>docker-compose up</code>.</p>
 <blockquote>
 <p>This must be used in the same directory as the <code>docker-compose.yml</code> file.</p>
-</blockquote></body>
+</blockquote>
   </div>
   <div class="tag-cloud">
     <p>

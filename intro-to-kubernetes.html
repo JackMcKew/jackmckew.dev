@@ -158,7 +158,7 @@
 
 
   <div>
-    <body><p>Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.</p>
+    </head><body><p>Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.</p>
 <p>Kubernetes is managed via a master node, and worker nodes, in combination we call this a cluster. We give instructions to the master node on how we want the cluster to run, and how many workers we need.</p>
 <p>This post is apart of a series on Docker/Kubernetes, find the other posts at:</p>
 <ul>
@@ -255,10 +255,10 @@
 <p>This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: <a href="https://github.com/kubernetes/kubernetes/issues/33664">https://github.com/kubernetes/kubernetes/issues/33664</a></p>
 </blockquote>
 <p>To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl <span class="nb">set</span> image <span class="o">[</span>object_type<span class="o">]</span> / <span class="o">[</span>object_name<span class="o">]</span> <span class="o">[</span>container_name<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>new_image_to_use<span class="o">]</span>
+<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl <span class="nb">set</span> image <span class="o">[</span>object_type<span class="o">]</span> / <span class="o">[</span>object_name<span class="o">]</span> <span class="o">[</span>container_name<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>new_image_to_use<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
-<p>After running this command, the deployment will update the running pods with the new image.</p></body>
+<p>After running this command, the deployment will update the running pods with the new image.</p>
   </div>
   <div class="tag-cloud">
     <p>
