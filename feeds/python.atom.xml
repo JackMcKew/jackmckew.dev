@@ -1737,7 +1737,7 @@ z
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
