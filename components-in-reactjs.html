@@ -59,8 +59,8 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 99</p>
-            <p>Number of Words: 73,484</p>
-            <p>Number of Lines of Code 5,093</p>
+            <p>Number of Words: 73,501</p>
+            <p>Number of Lines of Code 4,552</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -158,7 +158,7 @@
 
 
   <div>
-    </head><body><p>To put it simply, components are the building blocks that make up the app in React.js. A component more specifically is a JavaScript class or function that optionally accepts inputs (aka properties or props) and returns a React element that describes how a section of the interface should appear.</p>
+    <body><p>To put it simply, components are the building blocks that make up the app in React.js. A component more specifically is a JavaScript class or function that optionally accepts inputs (aka properties or props) and returns a React element that describes how a section of the interface should appear.</p>
 <p>In this post let's break down the general structure of a React component. More specifically this will also include using <code>react-redux</code> for state management in the browser and <code>react-router-dom</code> for handling dynamic routing. These can both be installed through <code>npm</code>.</p>
 <p><img alt="React Logo" class="img-fluid" src="https://jackmckew.dev/img/react-logo.png"/></p>
 <p>Let's try to building a component which will represent a landing page on our React app with <code>create-react-app</code>. We will also want to show a different page whether the user is logged in or not, so our <code>Landing</code> component will take an input of (aka prop) of <code>isAuthenticated</code>.</p>
@@ -167,13 +167,13 @@
 </blockquote>
 <p>Let's create a file <code>Landing.js</code> (similarly could be named <code>Landing.jsx</code> for react specific file extension, <code>Landing.ts</code> for TypeScript or <code>Landing.tsx</code> for both react specific extension with TypeScript). This is followed by by importing all the necessary requirements for our javascript file.</p>
 <h2 id="import-requirements">Import Requirements</h2>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">"react"</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">Link</span><span class="p">,</span> <span class="nx">Redirect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-router-dom"</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">connect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-redux"</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">PropTypes</span> <span class="nx">from</span> <span class="s2">"prop-types"</span><span class="p">;</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">"react"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Link</span><span class="p">,</span> <span class="nx">Redirect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-router-dom"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">connect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-redux"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">PropTypes</span> <span class="nx">from</span> <span class="s2">"prop-types"</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>The first line is to import React library, while this isn't used explicitly in the remaining code we will write, it will not work without it. This is due to when the code is transpiled into JavaScript, it'll then used React directly with <code>React.createElement()</code>.</p>
@@ -182,7 +182,7 @@
 <p><code>PropTypes</code> is a way of implementing runtime type checking for React props. If TypeScript is used for the project, this is somewhat extra type checking, which we can never have enough of!</p>
 <h2 id="the-component">The Component</h2>
 <p>Now that we've imported everything that we need, it's time to actually create the component! A component in React is a function, where the props are the inputs and the element to be rendered is the return statement. We do this with an arrow function (aka Lambda function) for clarity.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -206,7 +206,7 @@
 22
 23
 24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">Landing</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">isAuthenticated</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">Landing</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">isAuthenticated</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">isAuthenticated</span><span class="p">){</span>
         <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Redirect</span> <span class="nx">to</span><span class="o">=</span><span class="s2">"/user-profile"</span> <span class="o">/&gt;</span>
     <span class="p">}</span>
@@ -240,22 +240,22 @@
 <blockquote>
 <p>This post is not intended to go through how to set up the redux store or interactions with it.</p>
 </blockquote>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">mapStateToProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">({</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">mapStateToProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">({</span>
     <span class="nx">isAuthenticated</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">,</span>
 <span class="p">})</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">connect</span><span class="p">(</span><span class="nx">mapStateToProps</span><span class="p">)(</span><span class="nx">Landing</span><span class="p">)</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">connect</span><span class="p">(</span><span class="nx">mapStateToProps</span><span class="p">)(</span><span class="nx">Landing</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p><code>mapStateToProps</code> is a function that takes in the current state of the application, and deconstructs the relevant element to use. <code>connect</code> is a wrapper function (aka curried function), so when it's called with <code>connect(mapStateToProps)</code> it returns another function which we can then use to pass our component into.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Now we can use the statement <code>import Landing from './Landing'</code> and use our component similar to that of <code>Link</code> in our app!</p>
 <p>The full source of <code>Landing.js</code> is:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -290,12 +290,12 @@
 33
 34
 35
-36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">"react"</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">Link</span><span class="p">,</span> <span class="nx">Redirect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-router-dom"</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">connect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-redux"</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">PropTypes</span> <span class="nx">from</span> <span class="s2">"prop-types"</span><span class="p">;</span>
+36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s2">"react"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Link</span><span class="p">,</span> <span class="nx">Redirect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-router-dom"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">connect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"react-redux"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">PropTypes</span> <span class="nx">from</span> <span class="s2">"prop-types"</span><span class="p">;</span>
 
-<span class="kr">const</span> <span class="nx">Landing</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">isAuthenticated</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="kd">const</span> <span class="nx">Landing</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">isAuthenticated</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">isAuthenticated</span><span class="p">){</span>
         <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Redirect</span> <span class="nx">to</span><span class="o">=</span><span class="s2">"/user-profile"</span> <span class="o">/&gt;</span>
     <span class="p">}</span>
@@ -321,13 +321,13 @@
     <span class="nx">isAuthenticated</span><span class="o">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">bool</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="kr">const</span> <span class="nx">mapStateToProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">({</span>
+<span class="kd">const</span> <span class="nx">mapStateToProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">({</span>
     <span class="nx">isAuthenticated</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">,</span>
 <span class="p">})</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">connect</span><span class="p">(</span><span class="nx">mapStateToProps</span><span class="p">)(</span><span class="nx">Landing</span><span class="p">)</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">connect</span><span class="p">(</span><span class="nx">mapStateToProps</span><span class="p">)(</span><span class="nx">Landing</span><span class="p">)</span>
 </code></pre></div>
-</td></tr></tbody></table>
+</td></tr></tbody></table></body>
   </div>
   <div class="tag-cloud">
     <p>

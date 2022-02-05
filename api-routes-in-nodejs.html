@@ -59,8 +59,8 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 99</p>
-            <p>Number of Words: 73,484</p>
-            <p>Number of Lines of Code 5,093</p>
+            <p>Number of Words: 73,501</p>
+            <p>Number of Lines of Code 4,552</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -158,11 +158,11 @@
 
 
   <div>
-    </head><body><p>First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post will dive into how to set up API routes in Nodejs with express.</p>
+    <body><p>First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post will dive into how to set up API routes in Nodejs with express.</p>
 <p>We start by 'importing' express into our route and instantiating a router from the express library.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Typically we group API routes together in standalone javascript files. For example, if our application needed authentication for users logging in, we could create an <code>auth.js</code> file which will contain all the API routes to do with authentication.</p>
@@ -171,7 +171,7 @@
 </blockquote>
 <p>Next we can create routes as straightforward as using the corresponding method within <code>router</code>. Pending on the type of API that is being created, if you are using Express.js, it's mostly likely a web API and thus the methods follow HTTP method routes.</p>
 <p>The primary or most-commonly-used HTTP methods are:</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Method Name</th>
@@ -205,7 +205,7 @@
 <p>These 4 methods make up the basic CRUD functionality (Create, Read, Update and Delete) of an application.</p>
 <h2 id="post">POST</h2>
 <p>Let's create a scaffold <code>POST</code> method in node.js.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'POST request to homepage'</span><span class="p">);</span>
@@ -213,51 +213,51 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Similarly to do this asynchronously with arrow functions:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="nx">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="k">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'POST request to homepage'</span><span class="p">);</span>
 <span class="p">})</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>As we can see above, the first argument to our API route method is the path, and the following is the callback function (what should happen when this path is hit). The callback function can be a function, array of functions, series of functions (separated by commas), or a combination of all of them. This is useful if you are wanting to do validation before the final POST request is made. An example of this is:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,[</span><span class="nx">checkInputs</span><span class="p">()],</span> <span class="nx">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,[</span><span class="nx">checkInputs</span><span class="p">()],</span> <span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'POST request to homepage and inputs are valid'</span><span class="p">);</span>
 <span class="p">})</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="get">GET</h2>
 <p>All the methods within Express.js follow the same principles so to create a scaffold <code>GET</code> request:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="nx">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'GET request to homepage'</span><span class="p">);</span>
 <span class="p">})</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="put">PUT</h2>
 <p>Similarly:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="nx">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'PUT request to homepage'</span><span class="p">);</span>
 <span class="p">})</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="delete">DELETE</h2>
 <p>Similarly:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="nx">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="k">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'PUT request to homepage'</span><span class="p">);</span>
 <span class="p">})</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="express-middleware">Express Middleware</h2>
 <p>All of the callback functions defined above are known as Middleware functions in Express.js. Middleware functions have access to 3 elements: <code>req</code>, <code>res</code>, and <code>next</code>.</p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Argument</th>
@@ -280,18 +280,18 @@
 </tbody>
 </table>
 <p>An example of using all of the arguments is:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="nx">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="k">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'GET request to homepage'</span><span class="p">);</span>
     <span class="nx">next</span><span class="p">();</span>
 <span class="p">})</span>
 </code></pre></div>
 </td></tr></tbody></table>
-<p>By piecing together many of these API routes (also known as endpoints) we can build a functional API that can drive our applications. For example, the application in the end may make a <code>GET</code> request to get all the latest posts by other users, and makes a <code>POST</code> request when you add a new post, and so on with all the different types of API routes.</p>
+<p>By piecing together many of these API routes (also known as endpoints) we can build a functional API that can drive our applications. For example, the application in the end may make a <code>GET</code> request to get all the latest posts by other users, and makes a <code>POST</code> request when you add a new post, and so on with all the different types of API routes.</p></body>
   </div>
   <div class="tag-cloud">
     <p>

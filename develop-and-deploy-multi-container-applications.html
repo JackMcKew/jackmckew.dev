@@ -59,8 +59,8 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 99</p>
-            <p>Number of Words: 73,484</p>
-            <p>Number of Lines of Code 5,093</p>
+            <p>Number of Words: 73,501</p>
+            <p>Number of Lines of Code 4,552</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -158,8 +158,8 @@
 
 
   <div>
-    </head><body><p>Following on with previous posts on this blog. This post will be going through how to develop &amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:</p>
-<table class="table table-striped">
+    <body><p>Following on with previous posts on this blog. This post will be going through how to develop &amp; deploy a multi-container application, our application (albeit basic) will allow users to input a number which will correspond to the index in the Fibonacci sequence, and our application will respond with the computed number. Redis will store this number locally to give users a list of recently requested indexes, and PostgreSQL will store the input and output. More specifically we will be using the following technologies:</p>
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Technology</th>
@@ -224,7 +224,7 @@
 <h3 id="fibinputform-component">FibInputForm Component</h3>
 <p>Components are pieces of user interface that we can access in multiple parts of our application, we build a component which will contain both the HTML and javascript for driving the user input, and for displaying the output retrieved from Redis or PostgreSQL. Vue components are typically comprised of a <code>template</code> block and a corresponding <code>script</code> and <code>style</code> block. When writing the template for a component, there is numerous Vue specific attributes that we can provide the elements in the HTML. For this project we will make use of Bulma/Buefy CSS (which can be installed with <code>npm install bulma</code> or <code>npm install buefy</code>) for our styling.</p>
 <p>We create a file named <code>FibInputForm.vue</code> inside <code>project_name/src/components</code> with the contents:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -336,9 +336,9 @@
 <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s2">"axios"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s2">"axios"</span><span class="p">;</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
   <span class="nx">name</span><span class="o">:</span> <span class="s2">"FibInput"</span><span class="p">,</span>
   <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
@@ -350,12 +350,12 @@
   <span class="p">},</span>
 
   <span class="c1">// // Fetches posts when the component is created.</span>
-  <span class="nx">async</span> <span class="nx">created</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nx">created</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
-      <span class="kr">const</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/api/values/current"</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">values</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/api/values/current"</span><span class="p">);</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">values</span> <span class="o">=</span> <span class="nx">values</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
       <span class="c1">// this.values = await axios.get("/api/values/current");</span>
-      <span class="kr">const</span> <span class="nx">indexes</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/api/values/all"</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">indexes</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/api/values/all"</span><span class="p">);</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">seenIndexes</span> <span class="o">=</span> <span class="nx">indexes</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
     <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
@@ -363,8 +363,8 @@
   <span class="p">},</span>
 
   <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">async</span> <span class="nx">handleSubmit</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"/api/values"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">handleSubmit</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"/api/values"</span><span class="p">,</span> <span class="p">{</span>
         <span class="nx">index</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">inputValue</span><span class="p">,</span>
       <span class="p">});</span>
 
@@ -380,7 +380,7 @@
 <p>To briefly cover the functionality above, the template is built up of 3 parts, the input form where users submit an index to query, a list of the latest indexes as stored in Redis separated by a comma and finally a list of the calculated as retrieved from the PostgreSQL database. We use <code>axios</code> to interface we the API that we will create with <code>express</code>. We query the API upon load, and the page is always reloaded when submit is pressed. Now that this has been exported, it can be imported from any other point in our web application and placed in with a <code>&lt;FibInputForm/&gt;</code> element! Neat!</p>
 <h3 id="fibinputpage-view">FibInputPage View</h3>
 <p>Now that we have our component, we need a page to put it on! We create a new file within <code>project_name/src/views</code> named <code>FibInputPage.vue</code> with the contents:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -416,9 +416,9 @@
 
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="c1">// @ is an alias to /src</span>
-<span class="kr">import</span> <span class="nx">FibInputForm</span> <span class="nx">from</span> <span class="s2">"@/components/FibInputForm.vue"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">FibInputForm</span> <span class="nx">from</span> <span class="s2">"@/components/FibInputForm.vue"</span><span class="p">;</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
   <span class="nx">name</span><span class="o">:</span> <span class="s2">"Fib"</span><span class="p">,</span>
   <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">FibInputForm</span><span class="p">,</span>
@@ -430,7 +430,7 @@
 <p>As we can see above, we've imported our neat little <code>FibInputForm</code> and used it after placing it in a centered section. Again we export the page view so we can import into the router to make sure it's linked to a URL.</p>
 <h3 id="routing-the-page">Routing the Page</h3>
 <p>Lastly for Vue, we need to set up a route so users can reach our page, both within the <code>vue-router</code> and on the main page (<code>App.vue</code>). Routes are all defined within <code>project_name/router/index.ts</code>. So we need to add in a new one for our <code>FibInputPage</code> by adding the following object into the routes array:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -450,7 +450,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Next to ensure the route is accessible from a link on the page, add a <code>router-link</code> element into the template of <code>App.vue</code>:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">router-link</span> <span class="na">to</span><span class="o">=</span><span class="s">"/fib"</span><span class="p">&gt;</span>Fib<span class="p">&lt;/</span><span class="nt">router-link</span><span class="p">&gt;</span> |
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">router-link</span> <span class="na">to</span><span class="o">=</span><span class="s">"/fib"</span><span class="p">&gt;</span>Fib<span class="p">&lt;/</span><span class="nt">router-link</span><span class="p">&gt;</span> |
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="redis">Redis</h2>
@@ -458,7 +458,7 @@
 <p>Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it.</p>
 <p>We do this by creating 3 files: <code>package.json</code>, <code>index.js</code> and <code>keys.js</code>. <code>package.json</code> defines what dependencies need to be installed, and how to run the project. <code>index.js</code> manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. <code>keys.js</code> contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.</p>
 <p>Here is the code for the core of this project, <code>index.js</code>:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -478,20 +478,20 @@
 18
 19
 20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./keys"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"redis"</span><span class="p">);</span>
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./keys"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"redis"</span><span class="p">);</span>
 
-<span class="kr">const</span> <span class="nx">redisClient</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">({</span>
+<span class="kd">const</span> <span class="nx">redisClient</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">({</span>
   <span class="nx">host</span><span class="o">:</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">redisHost</span><span class="p">,</span>
   <span class="nx">port</span><span class="o">:</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">redisPort</span><span class="p">,</span>
-  <span class="nx">retry_strategy</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="nx">retry_strategy</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="mf">1000</span><span class="p">,</span>
 <span class="p">});</span>
 
-<span class="kr">const</span> <span class="nx">sub</span> <span class="o">=</span> <span class="nx">redisClient</span><span class="p">.</span><span class="nx">duplicate</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">sub</span> <span class="o">=</span> <span class="nx">redisClient</span><span class="p">.</span><span class="nx">duplicate</span><span class="p">();</span>
 
 <span class="kd">function</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="k">return</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">index</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&lt;</span> <span class="mf">2</span><span class="p">)</span> <span class="k">return</span> <span class="mf">1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">index</span> <span class="o">-</span> <span class="mf">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">index</span> <span class="o">-</span> <span class="mf">2</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">sub</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"message"</span><span class="p">,</span> <span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -505,7 +505,7 @@
 <h2 id="postgresql">PostgreSQL</h2>
 <p><em>Find all the source code for the PostgreSQL service at: <a href="https://github.com/JackMcKew/multi-docker/tree/master/server">https://github.com/JackMcKew/multi-docker/tree/master/server</a></em></p>
 <p>We are going to use the PostgreSQL service part of our project to contain the interface with the database, and the API with <code>express</code>. Very similar to our redis project, we need a <code>package.json</code>, <code>index.js</code> and <code>keys.js</code>. Let's dive straight into the code inside <code>index.js</code>:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -591,25 +591,25 @@
 84
 85
 86
-87</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./keys"</span><span class="p">);</span>
+87</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./keys"</span><span class="p">);</span>
 
 <span class="c1">// Express App Setup</span>
-<span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"express"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"body-parser"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">cors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"cors"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"express"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"body-parser"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">cors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"cors"</span><span class="p">);</span>
 
-<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
 
 <span class="c1">// Create and Connect to Postgres Client</span>
 
-<span class="kr">const</span> <span class="p">{</span>
+<span class="kd">const</span> <span class="p">{</span>
     <span class="nx">Pool</span>
 <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"pg"</span><span class="p">);</span>
 
-<span class="kr">const</span> <span class="nx">pgClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pool</span><span class="p">({</span>
+<span class="kd">const</span> <span class="nx">pgClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pool</span><span class="p">({</span>
     <span class="nx">user</span><span class="o">:</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">pgUser</span><span class="p">,</span>
     <span class="nx">host</span><span class="o">:</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">pgHost</span><span class="p">,</span>
     <span class="nx">database</span><span class="o">:</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">pgDatabase</span><span class="p">,</span>
@@ -624,14 +624,14 @@
 
 
 <span class="c1">// Create and Connect to Redis Client</span>
-<span class="kr">const</span> <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"redis"</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">redisClient</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">({</span>
+<span class="kd">const</span> <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"redis"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">redisClient</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">({</span>
     <span class="nx">host</span><span class="o">:</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">redisHost</span><span class="p">,</span>
     <span class="nx">port</span><span class="o">:</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">redisPort</span><span class="p">,</span>
-    <span class="nx">retry_strategy</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">retry_strategy</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="mf">1000</span><span class="p">,</span>
 <span class="p">});</span>
 
-<span class="kr">const</span> <span class="nx">redisPublisher</span> <span class="o">=</span> <span class="nx">redisClient</span><span class="p">.</span><span class="nx">duplicate</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">redisPublisher</span> <span class="o">=</span> <span class="nx">redisClient</span><span class="p">.</span><span class="nx">duplicate</span><span class="p">();</span>
 
 <span class="c1">// Express Route Handlers</span>
 
@@ -641,27 +641,27 @@
 <span class="p">});</span>
 
 <span class="c1">// All indices submitted to DB</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/values/all"</span><span class="p">,</span> <span class="nx">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">pgClient</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"SELECT * FROM values"</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/values/all"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">values</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">pgClient</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"SELECT * FROM values"</span><span class="p">);</span>
 
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">values</span><span class="p">.</span><span class="nx">rows</span><span class="p">);</span>
     <span class="c1">// res.send(values.map(x =&gt; x.number))</span>
 <span class="p">});</span>
 
 <span class="c1">// Get current indices in Redis</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/values/current"</span><span class="p">,</span> <span class="nx">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"/values/current"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">redisClient</span><span class="p">.</span><span class="nx">hgetall</span><span class="p">(</span><span class="s2">"values"</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">values</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
         <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
     <span class="p">});</span>
 <span class="p">});</span>
 
 <span class="c1">// Receive new values</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"/values"</span><span class="p">,</span> <span class="nx">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"/values"</span><span class="p">,</span> <span class="k">async</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
 
-    <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">422</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">"Index too high, try smaller number"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">40</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">422</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">"Index too high, try smaller number"</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="nx">redisClient</span><span class="p">.</span><span class="nx">hset</span><span class="p">(</span><span class="s2">"values"</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="s2">"Nothing yet!"</span><span class="p">);</span>
@@ -675,7 +675,7 @@
     <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mf">5000</span><span class="p">,</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Listening"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -692,7 +692,7 @@
 <h2 id="nginx">Nginx</h2>
 <p>Nginx in this project helps us create all the connections between the services and for them all to play nicely. How nginx works is by defining any connections in a configuration file, and pass that configuration file upon runtime.</p>
 <p>This is our <code>default.conf</code> nginx configuration for this project:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -742,7 +742,7 @@
 <p>We also set up a few locations, these help nginx 'finish' the route. <code>/</code> means any incoming connection, pass it off to the front end to render. If any request connection comes in containing <code>/api</code> then we want to pass that request to the service, so we rewrite the URL to be the correct URL.</p>
 <h2 id="docker-compose">Docker Compose</h2>
 <p>Now that we've got our individual services all configured, we need a way to run them all at the same time. We need to create a <code>docker-compose.yml</code> which will contain all the environment variables, and how each service depend/connect to each other so we can run it all!</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -877,7 +877,7 @@
 <p>Note that our environment variables (which were set in <code>keys.js</code> earlier), are just the name of the service given in the <code>docker-compose.yml</code> file. Docker Compose handles all the renaming when each service is connected up for us! How awesome is that!</p>
 <h2 id="github-actions">Github Actions</h2>
 <p>Now that we've set all of services and make sure they place nice in Docker Compose, it's time to implement CI/CD with Github Actions so whenever we push new versions of our code, it'll automatically test that everything works and deploy our new version of the application. We do this by creating a <code>test-and-deploy.yml</code> within <code>.github/workflows/</code> which contains:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -1037,7 +1037,7 @@
 <p>Everything's now set up! For another user or a deployment service to get each of the images for the services they've created they can now simply run <code>docker run jackmckew/multi-docker-client</code> and that's it! It should run on any operating system provided Docker is installed, how cool is that!</p>
 <h2 id="deploying-to-aws-elastic-beanstalk">Deploying to AWS Elastic Beanstalk</h2>
 <p>Now we want to deploy this application to Elastic Beanstalk, that means we need to create a <code>Dockerrun.aws.json</code> which is very similar to that of the <code>docker-compose.yml</code>. The contents of the json file will be:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -1121,7 +1121,7 @@
 <li>VPC - Security Group</li>
 <li>Initialized all the environment variables in the EB instance</li>
 </ul>
-<p>We should be able to push to Github and see our application be deployed!</p>
+<p>We should be able to push to Github and see our application be deployed!</p></body>
   </div>
   <div class="tag-cloud">
     <p>
