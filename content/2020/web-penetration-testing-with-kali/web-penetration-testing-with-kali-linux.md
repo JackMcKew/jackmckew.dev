@@ -13,7 +13,7 @@ This post is apart of a series of posts, see the other posts at:
 
 > Thank you to Chris B for helping me with the notes in this post below!
 
-> Thank you to Sarah H who shared a neat cheat sheet which can be found at: https://www.comparitech.com/net-admin/kali-linux-cheat-sheet/
+Thank you to Sarah H who shared a neat cheat sheet which can be found at: https://www.comparitech.com/net-admin/kali-linux-cheat-sheet/
 
 - [Web Information Gathering](#web-information-gathering)
     - [Discovering Subdomains](#discovering-subdomains)
