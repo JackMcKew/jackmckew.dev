@@ -2,7 +2,8 @@ name: Build and Publish Site
 
 on:
   push:
-    branches: [ main ]
+    paths:
+      - 'content/**'
 
 jobs:
   build:
