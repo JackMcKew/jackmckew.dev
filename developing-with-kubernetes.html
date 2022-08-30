@@ -233,7 +233,7 @@
 <h2 id="clusterip-service">ClusterIP Service</h2>
 <p>We need to set up a ClusterIP service for each of our deployments except the worker deployment. This will allow our services to communicate with others inside the node.</p>
 <p>To do this, we create a configuration <code>yaml</code> file:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -290,7 +290,7 @@ A <em>persistant</em> volume is not tied directly to pods, but is tied to the no
 </tr>
 </tbody>
 </table>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -319,7 +319,7 @@ A <em>persistant</em> volume is not tied directly to pods, but is tied to the no
 <h2 id="environment-variables">Environment Variables</h2>
 <p>Some of our pods depend on environment variables being set to work correctly (eg, REDIS_HOST, PGUSER, etc). We add using the <code>env</code> key to our <code>spec</code> &gt; <code>containers</code> configuration.</p>
 <p>For example, for our worker to connect to the redis deployment:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -341,7 +341,7 @@ A <em>persistant</em> volume is not tied directly to pods, but is tied to the no
 <p>Note that for the value of the <code>REDIS_HOST</code> we are stating the name of the ClusterIP service we had previously set up. Kubernetes will automatically resolve this for us to be the correct IP, how neat!</p>
 <h3 id="secrets">Secrets</h3>
 <p>Secrets are another type of object inside of Kubernetes that are used to store sensitive information we don't want to live in the plain text of the configuration files. We do this through a <code>kubectl</code> commad:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl create secret <span class="o">[</span>secret_type<span class="o">]</span> <span class="o">[</span>secret_name<span class="o">]</span> --from-literal <span class="nv">key</span><span class="o">=</span>value
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl create secret <span class="o">[</span>secret_type<span class="o">]</span> <span class="o">[</span>secret_name<span class="o">]</span> --from-literal <span class="nv">key</span><span class="o">=</span>value
 </code></pre></div>
 </td></tr></tbody></table>
 <p>There are 3 types of secret types, <code>generic</code>, <code>docker_registry</code> and <code>tls</code>, most of the time we'll be making use of the <code>generic</code> secret type. Similar to how we consume other services, we will be consuming the secret from the <code>secret_name</code> parameter. The names (but not the value) can always be retrieved through <code>kubectl get secrets</code>.</p>
@@ -350,7 +350,7 @@ A <em>persistant</em> volume is not tied directly to pods, but is tied to the no
 </blockquote>
 <h3 id="consuming-secrets-as-environment-variable">Consuming Secrets as Environment Variable</h3>
 <p>Consuming a secret as an environment variable for a container is a little different to other environment variables. As secrets can contain multiple key value pairs, we need to specify the secret and the key to retrieve the value from:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -364,7 +364,7 @@ A <em>persistant</em> volume is not tied directly to pods, but is tied to the no
 <h2 id="ingress-service">Ingress Service</h2>
 <p>The ingress service allows us to connect to other Kubernetes cluster from outside, and thus maintains how we should treat incoming requests and how to route them.</p>
 <p>The entirety of our configuration for the ingress service is:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
