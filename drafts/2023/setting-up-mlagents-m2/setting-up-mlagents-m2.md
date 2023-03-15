@@ -60,8 +60,8 @@ Which gets us past the last error, and unfortunately onto the next.
 Which was resolved through <https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app>
 
 ```sh
-pip uninstall grpcio
-conda install grpcio
+pip uninstall grpcio -y
+conda install grpcio -y
 ```
 
 While writing this blog post, I tried to go through my notes that I took while going through this, and interestingly didn't need to downgrade numpy after going the process the first time, but I know I definitely did once, so this is how I resolved that floating number issue.
