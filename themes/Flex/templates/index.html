@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.index_top %}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ GOOGLE_ADSENSE.ca_id }}"
      crossorigin="anonymous"></script>
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -12,7 +11,6 @@
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-{% endif %}
 
 {% for article in articles_page.object_list %}
 <article>
