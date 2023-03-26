@@ -36,7 +36,7 @@ GOOGLE_ADSENSE = {
 
 USE_TIPUE_SEARCH = True
 
-GITHUB_CORNER_URL = "https://github.com/JackMcKew/jackmckew.dev"
+# GITHUB_CORNER_URL = "https://github.com/JackMcKew/jackmckew.dev"
 
 ARTICLE_URL = "{slug}.html"
 # ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
@@ -119,6 +119,7 @@ PLUGINS = [
     "related_posts",
     "autostatic",
     "clean_summary",
+    "seo",
 ]
 CLEAN_SUMMARY_MAXIMUM = 1
 # MARKUP = ('md', 'ipynb')
@@ -193,3 +194,6 @@ language_stat = count_loc.get_total_loc(
 
 LOC_TICKER = sum(language_stat.values())
 LOC_TICKER = f"{LOC_TICKER:,}"
+
+SEO_REPORT = True
+SEO_ENHANCER = True
