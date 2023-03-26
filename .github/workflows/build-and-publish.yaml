@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'content/**'
+      - pelicanconf.py
+      - requirements.txt
 
 jobs:
   build:

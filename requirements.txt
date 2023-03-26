@@ -90,4 +90,4 @@ webencodings==0.5.1
 widgetsnbextension==3.5.1
 wordsum==0.1.2
 zipp==3.1.0
-pelican-seo=1.2.2
+pelican-seo==1.2.2

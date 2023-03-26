@@ -25,4 +25,3 @@ This site is just meant to function as half blog, half showcase of a few things 
     <button type="submit">Send</button>
   </p>
 </form> 
-
