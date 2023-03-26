@@ -36,6 +36,7 @@
     </p>
   </header>
 
+  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle ads-responsive"
          data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
@@ -43,6 +44,7 @@
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+  {% endif %}
 
   <div>
     {{ article.content }}
@@ -81,6 +83,7 @@
     <div class="addthis_relatedposts_inline"></div>
   {% endif %}
 
+  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_bottom %}
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle ads-responsive"
          data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
@@ -88,6 +91,7 @@
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+  {% endif %}
 
   {% include "partial/disqus.html" %}
 </article>

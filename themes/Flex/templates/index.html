@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.index_top %}
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <ins class="adsbygoogle ads-responsive"
        data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
@@ -9,6 +10,7 @@
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
+{% endif %}
 
 {% for article in articles_page.object_list %}
 <article>
@@ -55,6 +57,7 @@
 
 {% include "partial/pagination.html" %}
 
+{% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.index_bottom %}
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <ins class="adsbygoogle ads-responsive"
        data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
@@ -62,6 +65,7 @@
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
+{% endif %}
 
 
 {% endblock %}
