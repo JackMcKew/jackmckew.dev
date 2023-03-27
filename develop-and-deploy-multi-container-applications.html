@@ -226,7 +226,7 @@
 <h3 id="fibinputform-component">FibInputForm Component</h3>
 <p>Components are pieces of user interface that we can access in multiple parts of our application, we build a component which will contain both the HTML and javascript for driving the user input, and for displaying the output retrieved from Redis or PostgreSQL. Vue components are typically comprised of a <code>template</code> block and a corresponding <code>script</code> and <code>style</code> block. When writing the template for a component, there is numerous Vue specific attributes that we can provide the elements in the HTML. For this project we will make use of Bulma/Buefy CSS (which can be installed with <code>npm install bulma</code> or <code>npm install buefy</code>) for our styling.</p>
 <p>We create a file named <code>FibInputForm.vue</code> inside <code>project_name/src/components</code> with the contents:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -382,7 +382,7 @@
 <p>To briefly cover the functionality above, the template is built up of 3 parts, the input form where users submit an index to query, a list of the latest indexes as stored in Redis separated by a comma and finally a list of the calculated as retrieved from the PostgreSQL database. We use <code>axios</code> to interface we the API that we will create with <code>express</code>. We query the API upon load, and the page is always reloaded when submit is pressed. Now that this has been exported, it can be imported from any other point in our web application and placed in with a <code>&lt;FibInputForm/&gt;</code> element! Neat!</p>
 <h3 id="fibinputpage-view">FibInputPage View</h3>
 <p>Now that we have our component, we need a page to put it on! We create a new file within <code>project_name/src/views</code> named <code>FibInputPage.vue</code> with the contents:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -432,7 +432,7 @@
 <p>As we can see above, we've imported our neat little <code>FibInputForm</code> and used it after placing it in a centered section. Again we export the page view so we can import into the router to make sure it's linked to a URL.</p>
 <h3 id="routing-the-page">Routing the Page</h3>
 <p>Lastly for Vue, we need to set up a route so users can reach our page, both within the <code>vue-router</code> and on the main page (<code>App.vue</code>). Routes are all defined within <code>project_name/router/index.ts</code>. So we need to add in a new one for our <code>FibInputPage</code> by adding the following object into the routes array:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -452,7 +452,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Next to ensure the route is accessible from a link on the page, add a <code>router-link</code> element into the template of <code>App.vue</code>:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">router-link</span> <span class="na">to</span><span class="o">=</span><span class="s">"/fib"</span><span class="p">&gt;</span>Fib<span class="p">&lt;/</span><span class="nt">router-link</span><span class="p">&gt;</span> |
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">router-link</span> <span class="na">to</span><span class="o">=</span><span class="s">"/fib"</span><span class="p">&gt;</span>Fib<span class="p">&lt;/</span><span class="nt">router-link</span><span class="p">&gt;</span> |
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="redis">Redis</h2>
@@ -460,7 +460,7 @@
 <p>Redis is an open source, in-memory data store, we give it a key and a value, which it'll store. Later we can ask with the key, and get the value back. We are going to set up two parts to make this service work as expected. The redis runtime is managed for us directly from using the redis image as provided on Docker Hub, but we need to make a node.js project to interface with it.</p>
 <p>We do this by creating 3 files: <code>package.json</code>, <code>index.js</code> and <code>keys.js</code>. <code>package.json</code> defines what dependencies need to be installed, and how to run the project. <code>index.js</code> manages the redis client and contains the functionality for calculating the fibonacci sequence when given an index. <code>keys.js</code> contains any environment variables that the project may need. In particular we use environment variables so docker-compose can link all the services together later on.</p>
 <p>Here is the code for the core of this project, <code>index.js</code>:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -507,7 +507,7 @@
 <h2 id="postgresql">PostgreSQL</h2>
 <p><em>Find all the source code for the PostgreSQL service at: <a href="https://github.com/JackMcKew/multi-docker/tree/master/server">https://github.com/JackMcKew/multi-docker/tree/master/server</a></em></p>
 <p>We are going to use the PostgreSQL service part of our project to contain the interface with the database, and the API with <code>express</code>. Very similar to our redis project, we need a <code>package.json</code>, <code>index.js</code> and <code>keys.js</code>. Let's dive straight into the code inside <code>index.js</code>:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -694,7 +694,7 @@
 <h2 id="nginx">Nginx</h2>
 <p>Nginx in this project helps us create all the connections between the services and for them all to play nicely. How nginx works is by defining any connections in a configuration file, and pass that configuration file upon runtime.</p>
 <p>This is our <code>default.conf</code> nginx configuration for this project:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -744,7 +744,7 @@
 <p>We also set up a few locations, these help nginx 'finish' the route. <code>/</code> means any incoming connection, pass it off to the front end to render. If any request connection comes in containing <code>/api</code> then we want to pass that request to the service, so we rewrite the URL to be the correct URL.</p>
 <h2 id="docker-compose">Docker Compose</h2>
 <p>Now that we've got our individual services all configured, we need a way to run them all at the same time. We need to create a <code>docker-compose.yml</code> which will contain all the environment variables, and how each service depend/connect to each other so we can run it all!</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -879,7 +879,7 @@
 <p>Note that our environment variables (which were set in <code>keys.js</code> earlier), are just the name of the service given in the <code>docker-compose.yml</code> file. Docker Compose handles all the renaming when each service is connected up for us! How awesome is that!</p>
 <h2 id="github-actions">Github Actions</h2>
 <p>Now that we've set all of services and make sure they place nice in Docker Compose, it's time to implement CI/CD with Github Actions so whenever we push new versions of our code, it'll automatically test that everything works and deploy our new version of the application. We do this by creating a <code>test-and-deploy.yml</code> within <code>.github/workflows/</code> which contains:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -1039,7 +1039,7 @@
 <p>Everything's now set up! For another user or a deployment service to get each of the images for the services they've created they can now simply run <code>docker run jackmckew/multi-docker-client</code> and that's it! It should run on any operating system provided Docker is installed, how cool is that!</p>
 <h2 id="deploying-to-aws-elastic-beanstalk">Deploying to AWS Elastic Beanstalk</h2>
 <p>Now we want to deploy this application to Elastic Beanstalk, that means we need to create a <code>Dockerrun.aws.json</code> which is very similar to that of the <code>docker-compose.yml</code>. The contents of the json file will be:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
