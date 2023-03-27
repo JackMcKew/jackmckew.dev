@@ -47,9 +47,9 @@
 
     <title>{{ SITENAME }}{% block title %}{% endblock %}</title>
 
-    {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.page_level_ads %}
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ GOOGLE_ADSENSE.ca_id }}"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ GOOGLE_ADSENSE_ID }}"
      crossorigin="anonymous"></script>
+    {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.page_level_ads %}
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
