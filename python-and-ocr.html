@@ -51,13 +51,6 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1052275056735196"
      crossorigin="anonymous"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1052275056735196",
-            enable_page_level_ads: true
-        });
-    </script>
 </head>
 
 <body>
@@ -150,19 +143,9 @@
             </ul>
         </div>
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
 
     </aside>
     <main>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
         <nav>
             <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
 <article class="single">
@@ -176,13 +159,6 @@
     </p>
   </header>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234565"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
   <div>
     <body><p>This post will demonstrate how to extract the text out of a photo, whether it being handwritten, typed or just a photo of text in the world using Python and OCR (Optical Character Recognition). While this is something that humans do particularly well at distinguishing letters, it is a form of semi-structured data. OCR just like humans also has it's limitations, for example, if you were trying to read someone with really difficult handwriting, it could be a big challenge. In this post, we will use the <a href="https://opensource.google.com/projects/tesseract">Tesseract</a> engine (an open source Google project) to undertake the OCR process for us.</p>
@@ -190,7 +166,7 @@
 <p>Now we are finally ready to test the engine and see if we can extract text out of an image, first of all we will start with a 'well' written example, the 'logo' of this website!</p>
 <p><img alt="test_image" class="img-fluid" src="https://jackmckew.dev/img/example.png"/></p>
 <p>Of course, we have still yet to write any code, so naturally, that is the next step. As always in a python project, you will need to import all the dependencies of the project, in this case, it will be Image from the PIL (pillow) package, and pytesseract (the python wrapper around the Tesseract Engine).</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">pytesseract</span>
 </code></pre></div>
@@ -201,7 +177,7 @@
 <li><a href="https://pytesseract.readthedocs.io/">PyTesseract</a>.</li>
 </ul>
 <p>Luckily for us, the developers have made this so simple it could be a one liner:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)))</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'images/example.png'</span><span class="p">)))</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which outputs in the console from the example image above:</p>
@@ -213,7 +189,7 @@ tinkerer</p>
 </blockquote>
 <p>Great! We can confirm that the text that the tesseract engine detected, is in fact, exactly what the example we gave it was.</p>
 <p>However, let's go a bit out of the way to make this a function such that it can be called more easily with the filepath to the image as a string.</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -357,13 +333,6 @@ X2ZH:709) EEH:133) (GAA729)</p>
     </ul>
   </div>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234566"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>

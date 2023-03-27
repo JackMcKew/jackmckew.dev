@@ -50,13 +50,6 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1052275056735196"
      crossorigin="anonymous"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1052275056735196",
-            enable_page_level_ads: true
-        });
-    </script>
 </head>
 
 <body>
@@ -149,19 +142,9 @@
             </ul>
         </div>
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
 
     </aside>
     <main>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
         <nav>
             <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
 <article class="single">
@@ -175,13 +158,6 @@
     </p>
   </header>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234565"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
   <div>
     <body><p>Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. We use Kubernetes as a platform for orchestrating multiple Docker containers for our application, and enables us to scale our application easily.</p>
@@ -199,7 +175,7 @@
 <h2 id="minikube">Minikube</h2>
 <p>Minikube is a way of running a development cluster on our local PC. When running in production however, we use managed services offered by different platforms (eg, AWS, GCP, etc). To interact with <code>minikube</code> as it is running though, we use another tool called <code>kubectl</code>.</p>
 <h2 id="docker-compose-to-kubernetes">Docker Compose to Kubernetes</h2>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Docker Compose Terminology</th>
@@ -281,7 +257,7 @@
 <p>This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: <a href="https://github.com/kubernetes/kubernetes/issues/33664">https://github.com/kubernetes/kubernetes/issues/33664</a></p>
 </blockquote>
 <p>To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl <span class="nb">set</span> image <span class="o">[</span>object_type<span class="o">]</span> / <span class="o">[</span>object_name<span class="o">]</span> <span class="o">[</span>container_name<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>new_image_to_use<span class="o">]</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl <span class="nb">set</span> image <span class="o">[</span>object_type<span class="o">]</span> / <span class="o">[</span>object_name<span class="o">]</span> <span class="o">[</span>container_name<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>new_image_to_use<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>After running this command, the deployment will update the running pods with the new image.</p></body>
@@ -309,13 +285,6 @@
     </ul>
   </div>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234566"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>

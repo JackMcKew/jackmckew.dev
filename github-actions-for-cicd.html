@@ -51,13 +51,6 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1052275056735196"
      crossorigin="anonymous"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1052275056735196",
-            enable_page_level_ads: true
-        });
-    </script>
 </head>
 
 <body>
@@ -150,19 +143,9 @@
             </ul>
         </div>
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-aside" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234561"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
 
     </aside>
     <main>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle ads-responsive" data-ad-client="ca-pub-1052275056735196" data-ad-slot="1234562"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
         <nav>
             <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
 <article class="single">
@@ -176,13 +159,6 @@
     </p>
   </header>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234565"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
   <div>
     <body><p>Recently the <a href="https://github.com/JackMcKew/awesome-python-bytes">Python Bytes Awesome Package List</a> moved to it's own repository from the <a href="https://jackmckew.dev/python-bytes-awesome-package-list.html#python-bytes-awesome-package-list">blog post</a>. This was done to enable the community be able to contribute their packages that they thought were awesome, which was a success with many pull requests already merged.</p>
@@ -206,7 +182,7 @@
 <h1 id="action-format-yaml">Action Format (.yaml)</h1>
 <p>A Github Action is defined with a <code>&lt;action_name&gt;.yaml</code> file which must be placed within <code>.github/workflows</code> from the base of the repository. As many actions as you want can be placed in this folder, and will subsequently run when triggered.</p>
 <p>The base structure of a <code>link_checker.yaml</code> file is:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -236,7 +212,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>To break this down:</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Field</th>
@@ -281,7 +257,7 @@
 <p>Fork repository &gt; Make changes &gt; Submit Pull Request with changes &gt; Check changes &gt; Merge into repository</p>
 </blockquote>
 <p>When the action was first set up for actions to run on pull requests, it kept throwing an error:</p>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The process <span class="s1">'/usr/bin/git'</span> failed with <span class="nb">exit</span> code <span class="m">1</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The process <span class="s1">'/usr/bin/git'</span> failed with <span class="nb">exit</span> code <span class="m">1</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This was determined to be intentional design by Github as a mitigation against the possibility that a bad actor could open PRs against your repo and do things like list out secrets or just run up a large bill (once we start charging) on your account.</p>
@@ -299,7 +275,7 @@
 <blockquote>
 <p>Ensure to use <code>if: steps.prcomm.outputs.BOOL_TRIGGERED == 'true'</code> in all subsequent jobs you want triggered if the phrase is found, otherwise the action will become recursive: check for comment, run checks, make a comment, check for comment, etc</p>
 </blockquote>
-<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -466,13 +442,6 @@
     </ul>
   </div>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle ads-responsive"
-         data-ad-client="ca-pub-1052275056735196"
-         data-ad-slot="1234566"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>
