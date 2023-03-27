@@ -55,6 +55,7 @@ EXTRA_PATH_METADATA = {
     "extra/favicon.ico": {"path": "favicon.ico"},
     "extra/jm-photo.jpg": {"path": "jm-photo.jpg"},
     "extra/CNAME": {"path": "CNAME"},
+    "extra/ads.txt": {"path": "ads.txt"},
 }
 SITELOGO = "/jm-photo.jpg"
 # EXTRA_PATH_METADATA = {
