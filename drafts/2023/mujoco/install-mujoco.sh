@@ -7,17 +7,17 @@ ln -sf /Applications/MuJoCo.app/Contents/Frameworks/MuJoCo.framework/Versions/Cu
 sudo ln -sf /Applications/MuJoCo.app/Contents/Frameworks/MuJoCo.framework/Versions/Current/libmujoco.2.1.1.dylib /usr/local/lib/
 
 # For M1 (arm64) mac users:
-# brew install glfw
-# brew install gcc@11
+brew install glfw
+brew install gcc@11
 ln -sf /opt/homebrew/lib/libglfw.3.dylib $HOME/.mujoco/mujoco210/bin
 
 # remove old installation
-rm -rf /opt/homebrew/Caskroom/miniforge/base/lib/python3.9/site-packages/mujoco_py
+# rm -rf /opt/homebrew/Caskroom/miniforge/base/lib/python3.9/site-packages/mujoco_py
 
 # which python
 # exit
 
 export CC=/opt/homebrew/bin/gcc-11         # see https://github.com/openai/mujoco-py/issues/605
 eval "$(conda shell.bash hook)"
-conda activate mujoco
+conda activate gym
 pip install mujoco-py && python -c 'import mujoco_py'
