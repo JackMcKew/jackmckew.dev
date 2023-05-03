@@ -13,3 +13,4 @@ __pycache__
 20*/**/img
 drafts/2020/nth-visible-table-excel/~$NthVisibleExample.xlsm
 *data
+.DS_Store
