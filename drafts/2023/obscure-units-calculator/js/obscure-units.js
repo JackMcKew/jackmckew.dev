@@ -10637,10 +10637,12 @@ function findCombinations() {
     const row = document.createElement("tr");
     const countCell = document.createElement("td");
     const nameCell = document.createElement("td");
+    const heightCell = document.createElement("td");
     const photoCell = document.createElement("td");
 
     countCell.innerText = count;
     nameCell.innerText = name;
+    heightCell.innerText = data.filter((e) => e.name == name)[0].maximum_base.toFixed(4);
 
     axios
       .get(
@@ -10664,6 +10666,7 @@ function findCombinations() {
 
     row.appendChild(countCell);
     row.appendChild(nameCell);
+    row.appendChild(heightCell)
     row.appendChild(photoCell);
     tableBody.appendChild(row);
   });
