@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Obscure Unit Calculator</title>
+    <script src="./js/obscure-units.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 48px;
+        margin-top: 50px;
+      }
+
+      input[type="number"] {
+        font-size: 24px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        outline: none;
+        margin: 30px;
+        width: 300px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        font-size: 24px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      img {
+        height: 150px;
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
+        display: block;
+      }
+
+      .result {
+        font-size: 36px;
+        margin: 50px;
+      }
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Obscure Unit Calculator</h1>
+    <label for="target-number">Enter target distance (in metres):</label>
+    <input type="number" id="target-number" placeholder="Target distance (m)" />
+    <br />
+    <input
+      type="submit"
+      value="Find Combinations"
+      onclick="findCombinations()"
+    />
+    <div id="result"></div>
+    <br />
+    <table class="center">
+      <thead>
+        <tr>
+          <th>Count</th>
+          <th>Name</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </body>
+</html>
