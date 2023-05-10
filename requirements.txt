@@ -55,7 +55,7 @@ parso==0.5.1
 pathspec==0.7.0
 pdfrw==0.4
 pelican==4.8.0
-pelican-autostatic==0.2.2
+pelican-autostatic==1.0.0
 pelican-seo==1.0.0
 pexpect==4.8.0
 pickleshare==0.7.5
