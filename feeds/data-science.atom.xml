@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-12-18T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Differential Privacy</title><link href="https://jackmckew.dev/differential-privacy.html" rel="alternate"></link><published>2020-12-18T00:00:00+11:00</published><updated>2020-12-18T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-18:/differential-privacy.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-12-18T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Differential Privacy</title><link href="https://jackmckew.dev/differential-privacy.html" rel="alternate"></link><published>2020-12-18T00:00:00+11:00</published><updated>2020-12-18T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-18:/differential-privacy.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;It's quite clear in today's age that the biggest companies in the world, make most of their profits from harvesting and productionalising their user's data. With privacy becoming more and more of a concern in everyday life as we become more connected, it's almost becoming a human right for our …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;It's quite clear in today's age that the biggest companies in the world, make most of their profits from harvesting and productionalising their user's data. With privacy becoming more and more of a concern in everyday life as we become more connected, it's almost becoming a human right for our …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;It's quite clear in today's age that the biggest companies in the world, make most of their profits from harvesting and productionalising their user's data. With privacy becoming more and more of a concern in everyday life as we become more connected, it's almost becoming a human right for our privacy to be protected, especially by those who profit from it.&lt;/p&gt;
@@ -70,7 +70,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -286,10 +286,10 @@ Private mean income: 55589.33064063336, 0.1 privacy budget
 &lt;p&gt;As we can see from the above while the outcome achieves the same result, we have protected the users privacy!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Shallow vs Deep Copy in Python</title><link href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html" rel="alternate"></link><published>2020-10-09T00:00:00+11:00</published><updated>2020-10-09T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-09:/shallow-vs-deep-copy-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Shallow vs Deep Copy in Python</title><link href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html" rel="alternate"></link><published>2020-10-09T00:00:00+11:00</published><updated>2020-10-09T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-09:/shallow-vs-deep-copy-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5 …&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5 …&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5&lt;/code&gt;), but sometimes this doesn't always do what we expect. This is going to be a deep  dive into different types of &lt;code&gt;copy&lt;/code&gt; in Python.&lt;/p&gt;
@@ -686,10 +686,10 @@ Let's modify A[2][0] = 100
 &lt;p&gt;Hopefully being aware of how the default behaviour works, and the potential solutions will help when debugging strange behaviour when using variables in Python!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Types of Averages (Means)</title><link href="https://jackmckew.dev/types-of-averages-means.html" rel="alternate"></link><published>2020-08-21T00:00:00+10:00</published><updated>2020-08-21T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-21:/types-of-averages-means.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Types of Averages (Means)</title><link href="https://jackmckew.dev/types-of-averages-means.html" rel="alternate"></link><published>2020-08-21T00:00:00+10:00</published><updated>2020-08-21T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-21:/types-of-averages-means.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The most common analytical task is to take a bunch of numbers in dataset and summarise it with fewer numbers, preferably a single number. Enter the 'average', sum all the numbers and divide by the count of the numbers. In mathematical terms this is known as the 'arithmetic mean', and …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;The most common analytical task is to take a bunch of numbers in dataset and summarise it with fewer numbers, preferably a single number. Enter the 'average', sum all the numbers and divide by the count of the numbers. In mathematical terms this is known as the 'arithmetic mean', and …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;The most common analytical task is to take a bunch of numbers in dataset and summarise it with fewer numbers, preferably a single number. Enter the 'average', sum all the numbers and divide by the count of the numbers. In mathematical terms this is known as the 'arithmetic mean', and doesn't always summarise a dataset correctly. This post looks into the other types of ways that we can summarise a dataset.&lt;/p&gt;
@@ -745,8 +745,10 @@ Let's modify A[2][0] = 100
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
+
+
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="248.518125pt" version="1.1" viewbox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="248.518125pt" version="1.1" viewBox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -1249,9 +1251,9 @@ L 364.903125 7.2
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clippath id="p784cd75deb"&gt;
+&lt;clipPath id="p784cd75deb"&gt;
 &lt;rect height="217.44" width="334.8" x="30.103125" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clippath&gt;
+&lt;/clipPath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -1304,8 +1306,10 @@ L 364.903125 7.2
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
+
+
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="248.518125pt" version="1.1" viewbox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="248.518125pt" version="1.1" viewBox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -1972,9 +1976,9 @@ z
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clippath id="pcea03801a9"&gt;
+&lt;clipPath id="pcea03801a9"&gt;
 &lt;rect height="217.44" width="334.8" x="30.103125" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clippath&gt;
+&lt;/clipPath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -2025,8 +2029,10 @@ z
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
+
+
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="248.518125pt" version="1.1" viewbox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="248.518125pt" version="1.1" viewBox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -2650,9 +2656,9 @@ z
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clippath id="p373fd62d38"&gt;
+&lt;clipPath id="p373fd62d38"&gt;
 &lt;rect height="217.44" width="334.8" x="30.103125" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clippath&gt;
+&lt;/clipPath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -2704,8 +2710,10 @@ z
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
+
+
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="248.518125pt" version="1.1" viewbox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="248.518125pt" version="1.1" viewBox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -3476,9 +3484,9 @@ z
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clippath id="p135daa0e99"&gt;
+&lt;clipPath id="p135daa0e99"&gt;
 &lt;rect height="217.44" width="334.8" x="30.103125" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clippath&gt;
+&lt;/clipPath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -3540,8 +3548,10 @@ z
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
+
+
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="248.518125pt" version="1.1" viewbox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="248.518125pt" version="1.1" viewBox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -4324,9 +4334,9 @@ z
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clippath id="p87ada79b58"&gt;
+&lt;clipPath id="p87ada79b58"&gt;
 &lt;rect height="217.44" width="334.8" x="30.103125" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clippath&gt;
+&lt;/clipPath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -4389,8 +4399,10 @@ z
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
+
+
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="248.518125pt" version="1.1" viewbox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="248.518125pt" version="1.1" viewBox="0 0 372.704232 248.518125" width="372.704232pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;defs&gt;
 &lt;style type="text/css"&gt;
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -5141,9 +5153,9 @@ z
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clippath id="p087627c021"&gt;
+&lt;clipPath id="p087627c021"&gt;
 &lt;rect height="217.44" width="334.8" x="30.103125" y="7.2"&gt;&lt;/rect&gt;
-&lt;/clippath&gt;
+&lt;/clipPath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -5188,10 +5200,10 @@ Harmonic Mean: 15.05101860509987
 &lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Dataclasses vs Attrs vs Pydantic</title><link href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html" rel="alternate"></link><published>2020-08-07T00:00:00+10:00</published><updated>2020-08-07T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-07:/dataclasses-vs-attrs-vs-pydantic.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Dataclasses vs Attrs vs Pydantic</title><link href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html" rel="alternate"></link><published>2020-08-07T00:00:00+10:00</published><updated>2020-08-07T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-08-07:/dataclasses-vs-attrs-vs-pydantic.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Python 3.7 introduced dataclasses, a handy decorator that can make creating classes so much easier and seamless. This post will go into comparing a regular class, a 'dataclass' and a class using attrs. Dataclasses were based on attrs, which is a python package that also aims to make creating …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Python 3.7 introduced dataclasses, a handy decorator that can make creating classes so much easier and seamless. This post will go into comparing a regular class, a 'dataclass' and a class using attrs. Dataclasses were based on attrs, which is a python package that also aims to make creating …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Python 3.7 introduced dataclasses, a handy decorator that can make creating classes so much easier and seamless. This post will go into comparing a regular class, a 'dataclass' and a class using attrs. Dataclasses were based on attrs, which is a python package that also aims to make creating classes a much more enjoyable experience. Dataclasses are included in the standard library (provided 3.7+), while to enable attrs, it must be installed with pip (eg, &lt;code&gt;pip install attrs&lt;/code&gt;). Mainly they are for automating the (sometimes) painful experience of writing dunder methods. You can read more about dunder methods in a prevous post here: &lt;a href="https://jackmckew.dev/dunders-in-python.html"&gt;https://jackmckew.dev/dunders-in-python.html&lt;/a&gt;&lt;/p&gt;
@@ -5686,10 +5698,10 @@ x
 &lt;p&gt;As we can see above, it gives the developers a nicely formatted error message when the data validation failed, and smoothly sanitises the input when it needs to.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Generators in Python</title><link href="https://jackmckew.dev/generators-in-python.html" rel="alternate"></link><published>2020-07-30T00:00:00+10:00</published><updated>2020-07-30T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-30:/generators-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Generators in Python</title><link href="https://jackmckew.dev/generators-in-python.html" rel="alternate"></link><published>2020-07-30T00:00:00+10:00</published><updated>2020-07-30T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-30:/generators-in-python.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as opposed to loading the entire data set. While this gives marginal increases in efficiency/speed with small data sets, it can provide dramatic improvements on larger data sets; especially if you are using a system with limited memory.&lt;/p&gt;
@@ -5911,4 +5923,4 @@ i am user
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry></feed>
+&lt;/div&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry></feed>

@@ -62,9 +62,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 99</p>
-            <p>Number of Words: 73,501</p>
-            <p>Number of Lines of Code 4,552</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 100</p>
+            <p>Number of Words: 74,224</p>
+            <p>Number of Lines of Code 4,557</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -162,7 +162,7 @@
 
 
   <div>
-    <body><p>Following last 2 weeks’ posts (<a href="https://jackmckew.dev/python-for-the-finance-industry.html">Python for the Finance Industry</a> &amp; <a href="https://jackmckew.dev/portfolio-balancing-with-historical-stock-data.html">Portfolio Balancing with Historical Stock Data</a>), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.</p>
+    </head><body><p>Following last 2 weeks’ posts (<a href="https://jackmckew.dev/python-for-the-finance-industry.html">Python for the Finance Industry</a> &amp; <a href="https://jackmckew.dev/portfolio-balancing-with-historical-stock-data.html">Portfolio Balancing with Historical Stock Data</a>), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios.</p>
 <p>This post is to demonstrate a method in balancing portfolios that does not depend on generating random portfolios, but rather mathematically determining the extremities of boundaries for effective portfolios using the <a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html">SciPy optimize function</a> (similar to that of <a href="https://support.office.com/en-ie/article/define-and-solve-a-problem-by-using-solver-5d1a388f-079d-43ac-a7eb-f63e45925040">Excel's 'solver'</a>).</p>
 <p>Returning to last weeks' post when the budget allocations to assets were determined from randomly generated portfolios, it was presented on the graph below:</p>
 <p><img alt="image-20" class="img-fluid" src="https://jackmckew.dev/img/image-20.png"/></p>
@@ -183,7 +183,7 @@
 </li>
 <li>The result from the minimize function is returned as a <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult">OptimizeResult</a> type.</li>
 </ul>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -209,7 +209,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Similarly to the maximum sharpe ratio we do the same for determining the minimum volatility portfolio programmatically. We minimise volatility by trying different weightings on our asset allocations to find the minima.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -237,7 +237,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>As above, we can also draw a line which depicts the efficient frontier for the portfolios for a given risk rate. Below some functions are defined for computing the efficient frontier. The first function, efficient_return is calculating the most efficient portfolio for a given target return, and the second function efficient frontier is compiling the most efficient portfolio for a range of targets.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -277,7 +277,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now it's time to plot the efficient frontier on the graph with the randomly selected portfolios to check if they have been calculated correctly. It is also an opportune time to check if the maximum Sharpe ratio and minimum volatility portfolios have been calculated correctly by comparing them to the previously randomly determined portfolios.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -390,7 +390,7 @@
 <p><img alt="Code_R2bA54PriC" class="img-fluid" src="https://jackmckew.dev/img/Code_R2bA54PriC.png"/></p>
 <p>The surprising part is that the calculated result is very close to what we have previously simulated by picking from randomly generated portfolios. The slight differences in allocations between the simulated vs calculated are in most cases less than 1%, which shows how powerful randomly estimating calculations can be albeit sometimes not reliable in small sample spaces.</p>
 <p>Rather than plotting every randomly generated portfolio, we can plot the individual stocks on the plot with the corresponding values of each stock's return and risk. This way we can compare how diversification is lowering the risk by optimizing the allocations.</p>
-<table class="table highlighttable table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -487,7 +487,7 @@
 </td></tr></tbody></table>
 <p><img alt="Code_3sKudlcKG6" class="img-fluid" src="https://jackmckew.dev/img/Code_3sKudlcKG6.png"/></p>
 <p>From the plot above, the stock with the highest risk is BHP, which accompanies the highest returns. This shows that if the investor is willing to take the risk than they will be rewarded with the higher return.</p>
-<p>This concludes the 3 part series on Python in the finance industry, if there is any topics in particular you would like to see how software can integrate and improve a service/product please feel free to get in touch!</p></body>
+<p>This concludes the 3 part series on Python in the finance industry, if there is any topics in particular you would like to see how software can integrate and improve a service/product please feel free to get in touch!</p>
   </div>
   <div class="tag-cloud">
     <p>
