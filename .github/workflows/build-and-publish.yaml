@@ -6,6 +6,7 @@ on:
       - 'content/**'
       - pelicanconf.py
       - requirements.txt
+      - .github/workflows/build-and-publish.yaml
 
 jobs:
   build:
