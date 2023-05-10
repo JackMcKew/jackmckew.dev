@@ -1,5 +1,5 @@
 Title: Lessons Learnt After 100 Blog Posts
-Date: 2020-12-xx
+Date: 2023-05-10
 Author: Jack McKew
 Category: Principles
 Tags: habits, principles
