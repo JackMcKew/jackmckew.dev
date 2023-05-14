@@ -10611,7 +10611,7 @@ function createAttribution(username, userURL) {
   const div = document.createElement("div");
 
   const link1 = document.createElement("a");
-  link1.href = userURL;
+  link1.href = `${userURL}?utm_source=obscure_units_calculator&utm_medium=referral`;
   link1.innerText = `Photo by ${username}`;
   div.appendChild(link1);
   const link2 = document.createElement("a");
