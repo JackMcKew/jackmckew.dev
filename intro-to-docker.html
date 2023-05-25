@@ -110,10 +110,7 @@
             </style>
             <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
             <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
-            <br>
-            <a href="https://feedburner.google.com/fb/a/mailverify?uri=JackMckewsBlog&amp;loc=en_US" class="mbscreenphone phonelink btn btn-info btn-lg">
-                Subscribe by Email <i class="fas fa-envelope"></i>
-              </a>             <nav>
+            <nav>
                 <ul class="list">
                     <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
                     <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
@@ -245,7 +242,7 @@
 </table>
 <h2 id="dockerfile">Dockerfile</h2>
 <p>A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -294,7 +291,7 @@
 <h2 id="port-mapping">Port Mapping</h2>
 <p>By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.</p>
 <p>This is not changed within the Dockerfile, but rather when we run the container with the <code>-p</code> flag. This can be done with:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -310,7 +307,7 @@ This local PC port and the container port do NOT have to match.</p>
 <li>Create an container that will host a nodejs app</li>
 <li>Network the ports of the nodejs app container</li>
 </ol>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
