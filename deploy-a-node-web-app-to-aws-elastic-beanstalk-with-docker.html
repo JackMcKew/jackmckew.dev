@@ -157,7 +157,7 @@
 
 
   <div>
-    </head><body><p>We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make use of! We will also be making use of GitHub actions to automate the CI/CD, in which it'll build the Docker container to test our web application, and then deploy it to AWS automatically.</p>
+    <body><p>We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make use of! We will also be making use of GitHub actions to automate the CI/CD, in which it'll build the Docker container to test our web application, and then deploy it to AWS automatically.</p>
 <p>Let's deploy the application we built in a previous post <a href="https://jackmckew.dev/develop-and-deploy-with-docker.html">Develop and Deploy with Docker</a>. It's the default output from <code>create-react-app</code>, but we can further develop this and it'll update as soon as we push to the repository. This post assumes that we've already set up the <code>create-react-app</code> and dockerized it as such in the previous post.</p>
 <p>This post is apart of a series on Docker/Kubernetes, find the other posts at:</p>
 <ul>
@@ -179,7 +179,7 @@
 </ol>
 <p>For the most part, we will be making use of <code>run</code> commands, as if we are interacting with the terminal in the runtime of ubuntu (Linux). Otherwise, we can make use of pre-made actions from the marketplace. One note to be made is that the AWS Elastic Beanstalk application has been set up to run specifically on Docker, and as such we need to upload the relevant Dockerfile (production) along with any assets.</p>
 <p>The contents of the Github Action in whole will be:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -274,7 +274,7 @@
 <p>Since the previous post relies upon a multi-stage Dockerfile to build the app and run the app within nginx, we must ensure to use the platform <code>Docker running on 64bit Amazon Linux/2.15.2</code>, as <code>Docker running on Amazon Linux 2</code>, <a href="https://stackoverflow.com/questions/61462646/unable-to-deploy-docker-application-in-elasticbeanstalk-using-travis-ci">does not support multi-stage Dockerfiles</a>. Furthermore, we exposed the ports in the Dockerfile through docker-compose or the Docker CLI previously, we can also do this by adding the command <code>EXPOSE 80</code> in the production Dockerfile.</p>
 <p>Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: <a href="https://github.com/JackMcKew/docker-react">https://github.com/JackMcKew/docker-react</a></p>
+<p>This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: <a href="https://github.com/JackMcKew/docker-react">https://github.com/JackMcKew/docker-react</a></p></body>
   </div>
   <div class="tag-cloud">
     <p>

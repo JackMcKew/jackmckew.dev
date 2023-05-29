@@ -157,7 +157,7 @@
 
 
   <div>
-    </head><body><p>README is typically the front page of a project, and should contain relevant information for current users &amp; prospective users. As to make sure documentation across a project is consistent as well, imagine if we could include this README that is the front page of our project, both on the repository, and in the documentation. This post goes into how to set this workflow up. Find a live example of this being implemented on: <a href="https://github.com/JackMcKew/pandas_alive">https://github.com/JackMcKew/pandas_alive</a>.</p>
+    <body><p>README is typically the front page of a project, and should contain relevant information for current users &amp; prospective users. As to make sure documentation across a project is consistent as well, imagine if we could include this README that is the front page of our project, both on the repository, and in the documentation. This post goes into how to set this workflow up. Find a live example of this being implemented on: <a href="https://github.com/JackMcKew/pandas_alive">https://github.com/JackMcKew/pandas_alive</a>.</p>
 <p>A good starting structure for a project's README is:</p>
 <ol>
 <li>
@@ -183,7 +183,7 @@
 <p>In projects, typically it's best practice to not have to repeat yourself in multiple places (this the DRY principle). In the README, it's nice to have working examples on how a user may use the project. If we could tie the original README with live code that generates the examples, that would be ideal, enter <code>README.ipynb</code>.</p>
 <p>Jupyter supports markdown &amp; code cells, thus all the current documentation in the <code>README.md</code> can be copied within markdown cells. Similarly, the code used to generate examples or demonstrate usage can then be placed in code cells. Allowing the author, to run the entire notebook, generating the new examples &amp; verifying the examples are working code. Fantastic, this is exactly where we want to go.</p>
 <p>Now if you only have the <code>README.ipynb</code> in the repository, GitHub will represent the file in it's raw form, JSON. For example would be hundreds of line like:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -242,7 +242,7 @@
 <h4 id="python-highlighting-in-output">Python Highlighting in Output</h4>
 <p>When first run, it was noticed that <code>nbconvert</code> wasn't marking the code blocks with the language (python). This is required to highlight the code blocks in the <code>README.md</code> with language specifics. The workaround for this, was to use <code>nbconvert</code>'s support for custom templates. See the docs at: <a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates">https://nbconvert.readthedocs.io/en/latest/customizing.html#Custom-Templates</a>.</p>
 <p>The resulting template "pythoncodeblocks.tpl" was:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -256,7 +256,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which could be used with <code>nbconvert</code> with:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>jupyter nbconvert --template <span class="s2">"pythoncodeblocks.tpl"</span> --to markdown README.ipynb
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>jupyter nbconvert --template <span class="s2">"pythoncodeblocks.tpl"</span> --to markdown README.ipynb
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="integration-into-documentation-with-sphinx">Integration into Documentation with Sphinx</h2>
@@ -279,7 +279,7 @@
 <p>Autosummary generated documentation is included within a separate rst file (developer.rst) to nest all the generated with autosummary within one heading with the ReadTheDocs theme</p>
 </blockquote>
 <p><a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/index.rst">index.rst</a></p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -355,7 +355,7 @@ With <span class="na">:mod:</span><span class="nv">`Pandas_alive`</span>, creati
 </code></pre></div>
 </td></tr></tbody></table>
 <p><a href="https://github.com/JackMcKew/pandas_alive/blob/master/docs/source/developer.rst">developer.rst</a></p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -384,7 +384,7 @@ With <span class="na">:mod:</span><span class="nv">`Pandas_alive`</span>, creati
 <h2 id="integration-with-github-actions">Integration with GitHub Actions</h2>
 <p>All the steps above mentioned are currently being used to maintain the project Pandas_Alive.</p>
 <p>Find the GitHub Action yml files at: <a href="https://github.com/JackMcKew/pandas_alive/tree/master/.github/workflows">https://github.com/JackMcKew/pandas_alive/tree/master/.github/workflows</a></p>
-<p>Find the Sphinx configuration files at: <a href="https://github.com/JackMcKew/pandas_alive/tree/master/docs">https://github.com/JackMcKew/pandas_alive/tree/master/docs</a></p>
+<p>Find the Sphinx configuration files at: <a href="https://github.com/JackMcKew/pandas_alive/tree/master/docs">https://github.com/JackMcKew/pandas_alive/tree/master/docs</a></p></body>
   </div>
   <div class="tag-cloud">
     <p>

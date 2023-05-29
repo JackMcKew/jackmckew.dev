@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2021-01-15T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Designing for Change not Requirements</title><link href="https://jackmckew.dev/designing-for-change-not-requirements.html" rel="alternate"></link><published>2021-01-15T00:00:00+11:00</published><updated>2021-01-15T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2021-01-15:/designing-for-change-not-requirements.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: &lt;a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy"&gt;https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Typically projects usually …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: &lt;a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy"&gt;https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2021-01-15T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Designing for Change not Requirements</title><link href="https://jackmckew.dev/designing-for-change-not-requirements.html" rel="alternate"></link><published>2021-01-15T00:00:00+11:00</published><updated>2021-01-15T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2021-01-15:/designing-for-change-not-requirements.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: &lt;a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy"&gt;https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Typically projects usually …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: &lt;a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy"&gt;https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Typically projects usually start by trying to understand what the end-user wants and deciphering what the requirements are to implement this. These requirements are then broken up into bite size chunks, and development begins. But then what (almost) always happens is, the user comes back with a new idea or something was excommunicated and the project needs to change. This can be a painful experience to implement this new feature, especially if the work done to date isn't compatible.&lt;/p&gt;
 &lt;p&gt;By amending our approach to the design procedure to:&lt;/p&gt;
 &lt;ol&gt;
@@ -10,7 +10,7 @@
 &lt;/ol&gt;
 &lt;p&gt;The 3rd step above, could be viewed through many perspectives. The perspectives that are typically the most valuable are to consider for change later on, is how could we implement this that the developer can make changes easily, and how can we implement this such that the user can change their approach to using the tool. While the latter may be counterintuitive to implementing a tool that is responsible for one thing, it does pay off in the situations where users can utilise the software for more than one way!&lt;/p&gt;
 &lt;p&gt;By adopting this approach along with tracer design, the end-user/client is tightly interwoven into the development cycle, which has proven successful time and time again. Tracer design is the concept of sharing the works in progress as soon as possible with the client, and determining whether it hits the target or not. Rinse and repeat, and you'll get closer and closer to the target, this idea is similar to that of tracer bullets which light up where they land to adjust your aim closer to the target. &lt;/p&gt;
-&lt;p&gt;A great way to think of this during implementation is to make it as easy as possible put in &amp;amp; take out tools in your projects. For example, if you can make it as easy as possible to swap out the database implementation without breaking your project then this will improve cohesion in your project and make the inevitable changes much, much easier to handle.&lt;/p&gt;</content><category term="Software"></category><category term="software"></category><category term="principles"></category></entry><entry><title>Releasing Cordova Apps on Google Play &amp; App Store</title><link href="https://jackmckew.dev/releasing-cordova-apps-on-google-play-app-store.html" rel="alternate"></link><published>2020-12-11T00:00:00+11:00</published><updated>2020-12-11T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-11:/releasing-cordova-apps-on-google-play-app-store.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;This post is going to go into how to upload and release a Cordova app on both the Google Play Store and the Apple App Store. Cordova is an open source framework that wraps HTML/Javascript apps into a native container which can access the device's functionality, akin to a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;This post is going to go into how to upload and release a Cordova app on both the Google Play Store and the Apple App Store. Cordova is an open source framework that wraps HTML/Javascript apps into a native container which can access the device's functionality, akin to a 'borderless windowed' browser on a mobile device. The beauties of Cordova is it enables developers to have a single codebase which builds to:&lt;/p&gt;
+&lt;p&gt;A great way to think of this during implementation is to make it as easy as possible put in &amp;amp; take out tools in your projects. For example, if you can make it as easy as possible to swap out the database implementation without breaking your project then this will improve cohesion in your project and make the inevitable changes much, much easier to handle.&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category><category term="principles"></category></entry><entry><title>Releasing Cordova Apps on Google Play &amp; App Store</title><link href="https://jackmckew.dev/releasing-cordova-apps-on-google-play-app-store.html" rel="alternate"></link><published>2020-12-11T00:00:00+11:00</published><updated>2020-12-11T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-11:/releasing-cordova-apps-on-google-play-app-store.html</id><summary type="html">&lt;body&gt;&lt;p&gt;This post is going to go into how to upload and release a Cordova app on both the Google Play Store and the Apple App Store. Cordova is an open source framework that wraps HTML/Javascript apps into a native container which can access the device's functionality, akin to a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;This post is going to go into how to upload and release a Cordova app on both the Google Play Store and the Apple App Store. Cordova is an open source framework that wraps HTML/Javascript apps into a native container which can access the device's functionality, akin to a 'borderless windowed' browser on a mobile device. The beauties of Cordova is it enables developers to have a single codebase which builds to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Android&lt;/li&gt;
 &lt;li&gt;iOS&lt;/li&gt;
@@ -47,7 +47,7 @@
 &lt;p&gt;&lt;img alt="Archive Option" class="img-fluid" src="https://jackmckew.dev/img/ios-archive.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Upon archiving the project, this will build the project and bundle it with whichever developer certificates you've enabled with your XCode account. Finally opening &lt;code&gt;Organizer&lt;/code&gt; when finished (and can be found within &lt;code&gt;Window &amp;gt; Organizer&lt;/code&gt;) containing all previously built versions of this project. By then selecting the version which was archived, we can then send this straight to App Store Connect via the &lt;code&gt;Distribute App&lt;/code&gt; button.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Distribute Option" class="img-fluid" src="https://jackmckew.dev/img/ios-distribute.png"/&gt;&lt;/p&gt;
-&lt;p&gt;Once clicking this option, it'll go through the process of validating all certificates and such, and send it straight to your Apple Developer account. Now's the time to head back to App Store Connect (after some time), for which that select build button will now have an option and allow you to submit your app to the Apple App Store!&lt;/p&gt;</content><category term="Software"></category><category term="Software"></category><category term="javascript"></category></entry><entry><title>Deploy a Node Web App to AWS Elastic Beanstalk with Docker</title><link href="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html" rel="alternate"></link><published>2020-12-04T00:00:00+11:00</published><updated>2020-12-04T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-04:/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make use of! We will also be making use of GitHub actions to automate the CI/CD, in which it'll build the Docker container to test our web application, and then deploy it to AWS automatically.&lt;/p&gt;
+&lt;p&gt;Once clicking this option, it'll go through the process of validating all certificates and such, and send it straight to your Apple Developer account. Now's the time to head back to App Store Connect (after some time), for which that select build button will now have an option and allow you to submit your app to the Apple App Store!&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="Software"></category><category term="javascript"></category></entry><entry><title>Deploy a Node Web App to AWS Elastic Beanstalk with Docker</title><link href="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html" rel="alternate"></link><published>2020-12-04T00:00:00+11:00</published><updated>2020-12-04T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-04:/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html</id><summary type="html">&lt;body&gt;&lt;p&gt;We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;We've gone through how to use Docker to help develop our web applications, now we want to be able to deploy them out in the wild. Let's use Amazon Web Services (AWS) Elastic Beanstalk to do this. Note that there is a free tier of AWS that we can make use of! We will also be making use of GitHub actions to automate the CI/CD, in which it'll build the Docker container to test our web application, and then deploy it to AWS automatically.&lt;/p&gt;
 &lt;p&gt;Let's deploy the application we built in a previous post &lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Deploy with Docker&lt;/a&gt;. It's the default output from &lt;code&gt;create-react-app&lt;/code&gt;, but we can further develop this and it'll update as soon as we push to the repository. This post assumes that we've already set up the &lt;code&gt;create-react-app&lt;/code&gt; and dockerized it as such in the previous post.&lt;/p&gt;
 &lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
 &lt;ul&gt;
@@ -69,7 +69,7 @@
 &lt;/ol&gt;
 &lt;p&gt;For the most part, we will be making use of &lt;code&gt;run&lt;/code&gt; commands, as if we are interacting with the terminal in the runtime of ubuntu (Linux). Otherwise, we can make use of pre-made actions from the marketplace. One note to be made is that the AWS Elastic Beanstalk application has been set up to run specifically on Docker, and as such we need to upload the relevant Dockerfile (production) along with any assets.&lt;/p&gt;
 &lt;p&gt;The contents of the Github Action in whole will be:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -164,8 +164,8 @@
 &lt;p&gt;Since the previous post relies upon a multi-stage Dockerfile to build the app and run the app within nginx, we must ensure to use the platform &lt;code&gt;Docker running on 64bit Amazon Linux/2.15.2&lt;/code&gt;, as &lt;code&gt;Docker running on Amazon Linux 2&lt;/code&gt;, &lt;a href="https://stackoverflow.com/questions/61462646/unable-to-deploy-docker-application-in-elasticbeanstalk-using-travis-ci"&gt;does not support multi-stage Dockerfiles&lt;/a&gt;. Furthermore, we exposed the ports in the Dockerfile through docker-compose or the Docker CLI previously, we can also do this by adding the command &lt;code&gt;EXPOSE 80&lt;/code&gt; in the production Dockerfile.&lt;/p&gt;
 &lt;p&gt;Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.&lt;/p&gt;
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Deploying with Kubernetes</title><link href="https://jackmckew.dev/deploying-with-kubernetes.html" rel="alternate"></link><published>2020-11-26T00:00:00+11:00</published><updated>2020-11-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-26:/deploying-with-kubernetes.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Deploying with Kubernetes</title><link href="https://jackmckew.dev/deploying-with-kubernetes.html" rel="alternate"></link><published>2020-11-26T00:00:00+11:00</published><updated>2020-11-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-26:/deploying-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -175,8 +175,8 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Docker&lt;/td&gt;
-&lt;td&gt;Docker will be used to containerization of the services inside our …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;td&gt;Docker will be used to containerization of the services inside our …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -290,7 +290,7 @@
 &lt;h2 id="setting-up-ingress-nginx"&gt;Setting up Ingress-Nginx&lt;/h2&gt;
 &lt;p&gt;Before we can access our application through an IP or web address, we need to set up &lt;code&gt;ingress-nginx&lt;/code&gt;, similar to how we did with &lt;code&gt;docker-compose&lt;/code&gt; in previous posts. Luckily, we can make use of &lt;code&gt;helm&lt;/code&gt; to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.&lt;/p&gt;
 &lt;p&gt;Firstly which we need to install helm (&lt;a href="https://helm.sh/docs/intro/install/#from-script"&gt;https://helm.sh/docs/intro/install/#from-script&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
@@ -298,7 +298,7 @@ chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Followed by setting up &lt;code&gt;ingress-nginx&lt;/code&gt; (&lt;a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm"&gt;https://kubernetes.github.io/ingress-nginx/deploy/#using-helm&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -310,8 +310,8 @@ helm install my-release ingress-nginx/ingress-nginx
 &lt;p&gt;If we wanted to set up an actual web address, we'd need to purchase a domain, set the A record as the IP for our external load balancer, and finally set up a certificate manager to handle the https authentication.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Javascript Source(s):
-&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Developing with Kubernetes</title><link href="https://jackmckew.dev/developing-with-kubernetes.html" rel="alternate"></link><published>2020-11-20T00:00:00+11:00</published><updated>2020-11-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-20:/developing-with-kubernetes.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Developing with Kubernetes</title><link href="https://jackmckew.dev/developing-with-kubernetes.html" rel="alternate"></link><published>2020-11-20T00:00:00+11:00</published><updated>2020-11-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-20:/developing-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -321,8 +321,8 @@ helm install my-release ingress-nginx/ingress-nginx
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Docker&lt;/td&gt;
-&lt;td&gt;Docker will be used to containerization of the …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;td&gt;Docker will be used to containerization of the …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -396,7 +396,7 @@ helm install my-release ingress-nginx/ingress-nginx
 &lt;h2 id="clusterip-service"&gt;ClusterIP Service&lt;/h2&gt;
 &lt;p&gt;We need to set up a ClusterIP service for each of our deployments except the worker deployment. This will allow our services to communicate with others inside the node.&lt;/p&gt;
 &lt;p&gt;To do this, we create a configuration &lt;code&gt;yaml&lt;/code&gt; file:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -431,7 +431,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/blockquote&gt;
 &lt;h3 id="pvc-configuration"&gt;PVC Configuration&lt;/h3&gt;
 &lt;p&gt;Similar to how we attach a ClusterIP service to a pod, let's attach a PVC to a pod. What this will do, will instruct Kubernetes to 'advertise' storage space for pods to consume. If a pod consumes this claim, then it'll go and create a persistent volume or point to an already created persistent volume for us automatically. There is also many access modes we can define for our PVC:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Access Mode&lt;/th&gt;
@@ -453,7 +453,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -482,7 +482,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="environment-variables"&gt;Environment Variables&lt;/h2&gt;
 &lt;p&gt;Some of our pods depend on environment variables being set to work correctly (eg, REDIS_HOST, PGUSER, etc). We add using the &lt;code&gt;env&lt;/code&gt; key to our &lt;code&gt;spec&lt;/code&gt; &amp;gt; &lt;code&gt;containers&lt;/code&gt; configuration.&lt;/p&gt;
 &lt;p&gt;For example, for our worker to connect to the redis deployment:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -504,7 +504,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;Note that for the value of the &lt;code&gt;REDIS_HOST&lt;/code&gt; we are stating the name of the ClusterIP service we had previously set up. Kubernetes will automatically resolve this for us to be the correct IP, how neat!&lt;/p&gt;
 &lt;h3 id="secrets"&gt;Secrets&lt;/h3&gt;
 &lt;p&gt;Secrets are another type of object inside of Kubernetes that are used to store sensitive information we don't want to live in the plain text of the configuration files. We do this through a &lt;code&gt;kubectl&lt;/code&gt; commad:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl create secret &lt;span class="o"&gt;[&lt;/span&gt;secret_type&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;secret_name&lt;span class="o"&gt;]&lt;/span&gt; --from-literal &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;value
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl create secret &lt;span class="o"&gt;[&lt;/span&gt;secret_type&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;secret_name&lt;span class="o"&gt;]&lt;/span&gt; --from-literal &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;value
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;There are 3 types of secret types, &lt;code&gt;generic&lt;/code&gt;, &lt;code&gt;docker_registry&lt;/code&gt; and &lt;code&gt;tls&lt;/code&gt;, most of the time we'll be making use of the &lt;code&gt;generic&lt;/code&gt; secret type. Similar to how we consume other services, we will be consuming the secret from the &lt;code&gt;secret_name&lt;/code&gt; parameter. The names (but not the value) can always be retrieved through &lt;code&gt;kubectl get secrets&lt;/code&gt;.&lt;/p&gt;
@@ -513,7 +513,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/blockquote&gt;
 &lt;h3 id="consuming-secrets-as-environment-variable"&gt;Consuming Secrets as Environment Variable&lt;/h3&gt;
 &lt;p&gt;Consuming a secret as an environment variable for a container is a little different to other environment variables. As secrets can contain multiple key value pairs, we need to specify the secret and the key to retrieve the value from:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -527,7 +527,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="ingress-service"&gt;Ingress Service&lt;/h2&gt;
 &lt;p&gt;The ingress service allows us to connect to other Kubernetes cluster from outside, and thus maintains how we should treat incoming requests and how to route them.&lt;/p&gt;
 &lt;p&gt;The entirety of our configuration for the ingress service is:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -586,4 +586,4 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="deploy"&gt;Deploy!&lt;/h2&gt;
 &lt;p&gt;Now we are ready to deploy our Kubernetes cluster onto a cloud provider, this was originally detailed in this part of the post, but grew far longer than expected so another post was created!&lt;/p&gt;
 &lt;p&gt;Javascript Source(s):
-&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;</content><category term="Software"></category><category term="software"></category></entry></feed>
+&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry></feed>
