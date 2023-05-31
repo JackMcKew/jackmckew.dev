@@ -62,7 +62,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 101</p>
-            <p>Number of Words: 74,602</p>
+            <p>Number of Words: 74,595</p>
             <p>Number of Lines of Code 4,655</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -152,7 +152,7 @@
     <p>
        Posted on Mon 29 May 2023 in <a href="https://jackmckew.dev/category/python.html">Python</a>
 
-        &#8226; 4 min read
+        &#8226; 3 min read
     </p>
   </header>
 
@@ -818,19 +818,19 @@
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First of all, we'll need to get the data of each postcode in Australia and a relevant latitude/longitude such that we can process and plot it. A big thank you to Matthew Proctor who has already gone through this data gathering for us! The data can be found at: <a href="https://www.matthewproctor.com/australian_postcodes#downloadlinks">https://www.matthewproctor.com/australian_postcodes#downloadlinks</a>.</p>
+<p>First of all, we'll need to get the data of each postcode in Australia and a relevant latitude/longitude such that we can process and plot it. A big thank you to <a href="https://www.matthewproctor.com/australian_postcodes#downloadlinks">Matthew Proctor who has already gone through this data</a> gathering for us!</p>
 <p>Now let's look into what data points have come along in this dataset.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'../data/australian_postcodes.csv'</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,:</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -838,7 +838,7 @@
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <style scoped="">
@@ -854,7 +854,7 @@
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>
@@ -864,21 +864,6 @@
 <th>state</th>
 <th>long</th>
 <th>lat</th>
-<th>dc</th>
-<th>type</th>
-<th>status</th>
-<th>sa3</th>
-<th>...</th>
-<th>MMM_2019</th>
-<th>ced</th>
-<th>altitude</th>
-<th>chargezone</th>
-<th>phn_code</th>
-<th>phn_name</th>
-<th>lgaregion</th>
-<th>lgacode</th>
-<th>electorate</th>
-<th>electoraterating</th>
 </tr>
 </thead>
 <tbody>
@@ -890,21 +875,6 @@
 <td>ACT</td>
 <td>149.11900</td>
 <td>-35.277700</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Updated 3-Dec-2022</td>
-<td>NaN</td>
-<td>...</td>
-<td>1.0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>N2</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unincorporated ACT</td>
-<td>89399.0</td>
-<td>Durack</td>
-<td>NaN</td>
 </tr>
 <tr>
 <th>1</th>
@@ -914,21 +884,6 @@
 <td>ACT</td>
 <td>149.11890</td>
 <td>-35.277700</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Updated 3-Dec-2022</td>
-<td>NaN</td>
-<td>...</td>
-<td>1.0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>N2</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Unincorporated ACT</td>
-<td>89399.0</td>
-<td>Durack</td>
-<td>NaN</td>
 </tr>
 <tr>
 <th>2</th>
@@ -938,21 +893,6 @@
 <td>NT</td>
 <td>130.83668</td>
 <td>-12.458684</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Updated 3-Dec-2022</td>
-<td>70101.0</td>
-<td>...</td>
-<td>2.0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NT1</td>
-<td>PHN701</td>
-<td>Northern Territory</td>
-<td>Darwin Waterfront Precinct</td>
-<td>71150.0</td>
-<td>Solomon</td>
-<td>Inner Metropolitan</td>
 </tr>
 <tr>
 <th>3</th>
@@ -962,21 +902,6 @@
 <td>NT</td>
 <td>130.83668</td>
 <td>-12.458684</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Updated 3-Dec-2022</td>
-<td>70101.0</td>
-<td>...</td>
-<td>2.0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NT1</td>
-<td>PHN701</td>
-<td>Northern Territory</td>
-<td>Darwin Waterfront Precinct</td>
-<td>71150.0</td>
-<td>Solomon</td>
-<td>Inner Metropolitan</td>
 </tr>
 <tr>
 <th>4</th>
@@ -986,25 +911,9 @@
 <td>NT</td>
 <td>130.83668</td>
 <td>-12.458684</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>Updated 3-Dec-2022</td>
-<td>70101.0</td>
-<td>...</td>
-<td>2.0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NT1</td>
-<td>PHN701</td>
-<td>NaN</td>
-<td>Darwin Waterfront Precinct</td>
-<td>71150.0</td>
-<td>Lingiari</td>
-<td>Rural</td>
 </tr>
 </tbody>
 </table>
-<p>5 rows × 37 columns</p>
 </div>
 </div>
 </div>
@@ -1200,7 +1109,7 @@
         text-align: right;
     }
 </style>
-<table border="1" class="table table-striped dataframe">
+<table border="1" class="table dataframe table-striped">
 <thead>
 <tr style="text-align: right;">
 <th></th>

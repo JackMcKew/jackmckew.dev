@@ -61,7 +61,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 101</p>
-            <p>Number of Words: 74,602</p>
+            <p>Number of Words: 74,595</p>
             <p>Number of Lines of Code 4,655</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -172,7 +172,7 @@
 <h2 id="minikube">Minikube</h2>
 <p>Minikube is a way of running a development cluster on our local PC. When running in production however, we use managed services offered by different platforms (eg, AWS, GCP, etc). To interact with <code>minikube</code> as it is running though, we use another tool called <code>kubectl</code>.</p>
 <h2 id="docker-compose-to-kubernetes">Docker Compose to Kubernetes</h2>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Docker Compose Terminology</th>
@@ -254,7 +254,7 @@
 <p>This is very challenging, here is a very thorough thread on a conversation discussing ways to do this: <a href="https://github.com/kubernetes/kubernetes/issues/33664">https://github.com/kubernetes/kubernetes/issues/33664</a></p>
 </blockquote>
 <p>To do this imperatively, we ensure that the image we will be pulling is tagged with versioning on Docker Hub. After this we are able to run the command</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl <span class="nb">set</span> image <span class="o">[</span>object_type<span class="o">]</span> / <span class="o">[</span>object_name<span class="o">]</span> <span class="o">[</span>container_name<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>new_image_to_use<span class="o">]</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kubectl <span class="nb">set</span> image <span class="o">[</span>object_type<span class="o">]</span> / <span class="o">[</span>object_name<span class="o">]</span> <span class="o">[</span>container_name<span class="o">]</span> <span class="o">=</span> <span class="o">[</span>new_image_to_use<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>After running this command, the deployment will update the running pods with the new image.</p></body>
