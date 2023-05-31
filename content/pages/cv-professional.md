@@ -26,7 +26,7 @@ My CV and honours thesis are linked below (PDF download). My professional experi
     - Freelance digital services company specialising in data services.
     - Services include data analytics, visualisation & automation.
     - Full stack development, packaging and distribution of solutions.
-**2020 - Now** Senior Software/Data Engineer at [Deckee](https://deckee.com/)
+- **2020 - Now** Senior Software/Data Engineer at [Deckee](https://deckee.com/)
     - Responsible for delivering full stack data analytics, visualisation and automation of waterway & app usage.
     - Delivered key features for keeping boaters safe on the water including: alerts, weather warnings,
 map tile servers, automated log books, on the water detection and log on log off.
@@ -35,11 +35,11 @@ a successful real world trial in Western Australia.
     - Pioneered new methodologies to capture and analyse user behaviour through
 phone sensors to guide government bodies to keep their communities informed on the water.
     - Tools: Nodejs, React, Python, git, Docker, AWS, Cordova, Capacitor
-***2022*** Senior Software Engineer at [Arrowtail](https://arrowtail.com/)
+- ***2022*** Senior Software Engineer at [Arrowtail](https://arrowtail.com/)
     - Responsible for integrating Arrowtail’s explosive delivery capture app with
 on-site inventory management.
     - Tools: Python, FastAPI, RabbitMQ, git, Docker, Azure
-**2017 - 2020** Electrical Engineer at [AECOM](https://www.aecom.com/)
+- **2017 - 2020** Electrical Engineer at [AECOM](https://www.aecom.com/)
     - Development of scientific computing software for environmental data sets.
     - Saved approximately 900 working hours through automation.
     - Pioneered and lead an Australia wide Microsoft Excel training session.
