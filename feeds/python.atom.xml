@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-05-29T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Australia Post Codes Connected</title><link href="https://jackmckew.dev/australia-post-codes-connected.html" rel="alternate"></link><published>2023-05-29T00:00:00+10:00</published><updated>2023-05-29T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-05-29:/australia-post-codes-connected.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Have you ever wondered what the sequence to postcodes were? Ever wondered who your postcode neighbour was? I definitely have, so I've built a visualisation to do exactly that, and made it interactive for everybody to play around with!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-05-29T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Australia Post Codes Connected</title><link href="https://jackmckew.dev/australia-post-codes-connected.html" rel="alternate"></link><published>2023-05-29T00:00:00+10:00</published><updated>2023-05-29T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-05-29:/australia-post-codes-connected.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Have you ever wondered what the sequence to postcodes is? Ever wondered who your postcode neighbour was? I definitely have, so I've built a visualisation to do exactly that, and made it interactive for everybody to play around with!&lt;/p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Before we get into any of the processing, let's take a …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Have you ever wondered what the sequence to postcodes were? Ever wondered who your postcode neighbour was? I definitely have, so I've built a visualisation to do exactly that, and made it interactive for everybody to play around with!&lt;/p&gt;
+&lt;p&gt;Before we get into any of the processing, let's take a …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Have you ever wondered what the sequence to postcodes is? Ever wondered who your postcode neighbour was? I definitely have, so I've built a visualisation to do exactly that, and made it interactive for everybody to play around with!&lt;/p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -708,7 +708,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -963,7 +963,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -2862,7 +2862,7 @@ z
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
