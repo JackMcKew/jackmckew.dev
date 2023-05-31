@@ -129,7 +129,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Next we can create routes as straightforward as using the corresponding method within &lt;code&gt;router&lt;/code&gt;. Pending on the type of API that is being created, if you are using Express.js, it's mostly likely a web API and thus the methods follow HTTP method routes.&lt;/p&gt;
 &lt;p&gt;The primary or most-commonly-used HTTP methods are:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Method Name&lt;/th&gt;
@@ -215,7 +215,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="express-middleware"&gt;Express Middleware&lt;/h2&gt;
 &lt;p&gt;All of the callback functions defined above are known as Middleware functions in Express.js. Middleware functions have access to 3 elements: &lt;code&gt;req&lt;/code&gt;, &lt;code&gt;res&lt;/code&gt;, and &lt;code&gt;next&lt;/code&gt;.&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Argument&lt;/th&gt;
@@ -621,7 +621,7 @@
 &lt;/blockquote&gt;
 &lt;h2 id="applications-for-random-walk"&gt;Applications for Random Walk&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;This is all well and good for making funky pictures, but what can this actually be used for?&lt;/em&gt;&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Field&lt;/th&gt;
