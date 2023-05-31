@@ -165,7 +165,7 @@
 &lt;p&gt;Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.&lt;/p&gt;
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Deploying with Kubernetes</title><link href="https://jackmckew.dev/deploying-with-kubernetes.html" rel="alternate"></link><published>2020-11-26T00:00:00+11:00</published><updated>2020-11-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-26:/deploying-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -176,7 +176,7 @@
 &lt;tr&gt;
 &lt;td&gt;Docker&lt;/td&gt;
 &lt;td&gt;Docker will be used to containerization of the services inside our …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -311,7 +311,7 @@ helm install my-release ingress-nginx/ingress-nginx
 &lt;/blockquote&gt;
 &lt;p&gt;Javascript Source(s):
 &lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Developing with Kubernetes</title><link href="https://jackmckew.dev/developing-with-kubernetes.html" rel="alternate"></link><published>2020-11-20T00:00:00+11:00</published><updated>2020-11-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-20:/developing-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -322,7 +322,7 @@ helm install my-release ingress-nginx/ingress-nginx
 &lt;tr&gt;
 &lt;td&gt;Docker&lt;/td&gt;
 &lt;td&gt;Docker will be used to containerization of the …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Technology&lt;/th&gt;
@@ -431,7 +431,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/blockquote&gt;
 &lt;h3 id="pvc-configuration"&gt;PVC Configuration&lt;/h3&gt;
 &lt;p&gt;Similar to how we attach a ClusterIP service to a pod, let's attach a PVC to a pod. What this will do, will instruct Kubernetes to 'advertise' storage space for pods to consume. If a pod consumes this claim, then it'll go and create a persistent volume or point to an already created persistent volume for us automatically. There is also many access modes we can define for our PVC:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Access Mode&lt;/th&gt;

@@ -61,8 +61,8 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 101</p>
-            <p>Number of Words: 74,737</p>
-            <p>Number of Lines of Code 4,667</p>
+            <p>Number of Words: 74,752</p>
+            <p>Number of Lines of Code 4,674</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -171,7 +171,7 @@
 <h2 id="docker-ecosystem">Docker Ecosystem</h2>
 <p><img alt="Docker Logo" class="img-fluid" src="https://jackmckew.dev/img/Moby-logo.png"/></p>
 <p>Docker isn't a single program, it's a suite of programs which we'll refer to as an ecosystem. A brief description of all the components that make the ecosystem is:</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Service</th>
@@ -210,7 +210,7 @@
 <p><a href="https://www.docker.com/products/docker-desktop">https://www.docker.com/products/docker-desktop</a></p>
 <h2 id="maintaining-docker-in-the-command-line">Maintaining Docker in the Command Line</h2>
 <p>There are many useful commands for interacting with the Docker client.</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Command</th>
@@ -331,7 +331,7 @@ This local PC port and the container port do NOT have to match.</p>
 <p>Rather than using <code>docker stop</code> with each of the IDs of the containers that we created. Luckily, we can simply run <code>docker-compose down</code> to stop all the containers after using <code>docker-compose up</code>. This is particularly useful when we run <code>docker-compose up -d</code> which will run the containers in the background, so we can't just CTRL+C out of it.</p>
 <h3 id="restart-policies">Restart Policies</h3>
 <p>If any container crashes, docker-compose defaults to the restart policy of <code>"no"</code>, which never attempts to restart the container. Potential restart policies in docker-compose are:</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Policy</th>
