@@ -35,7 +35,7 @@ a successful real world trial in Western Australia.
     - Pioneered new methodologies to capture and analyse user behaviour through
 phone sensors to guide government bodies to keep their communities informed on the water.
     - Tools: Nodejs, React, Python, git, Docker, AWS, Cordova, Capacitor
-- ***2022*** Senior Software Engineer at [Arrowtail](https://arrowtail.com/)
+- **2022** Senior Software Engineer at [Arrowtail](https://arrowtail.com/)
     - Responsible for integrating Arrowtail’s explosive delivery capture app with
 on-site inventory management.
     - Tools: Python, FastAPI, RabbitMQ, git, Docker, Azure
