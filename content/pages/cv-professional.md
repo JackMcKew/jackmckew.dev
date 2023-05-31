@@ -4,7 +4,15 @@ Author: Jack McKew
 Slug: cv-professional
 Status: published
 
-Electrical Engineer with multi-faceted background encompassing software engineering, control systems development & buildings design/construction. Developed specialties in interactive data science & visualisation, desktop & web full stack development and technical writing. Proven ability to work apart of multi-disciplinary teams to design, develop, and integrate software solutions to increase efficiency & quality and reduce human-error.
+Experienced senior software and data engineer specializing in geospatial data.
+
+Proficient in software engineering, control systems development, and buildings design/construction.
+
+Skilled in interactive data science and visualization, full stack development (desktop and web), and technical writing.
+
+Strong track record of collaborating with multidisciplinary teams to design, develop, and integrate software solutions that enhance efficiency, quality, and safety while minimizing human error.
+
+Always looking to meet new people & help let computers do the hard work for you.
 
 [Curriculum Vitae]({attach}/files/Jack_McKew_CV.pdf)
 
@@ -14,29 +22,41 @@ Electrical Engineer with multi-faceted background encompassing software engineer
 
 My CV and honours thesis are linked below (PDF download). My professional experience thus far is:
 
-- **Current** Founder & Principal Consultant at [Cyberlytica](https://cyberlytica.com.au/)
-    - Freelance digital services company specialising in data services.
-    - Services include data analytics, visualisation & automation.
-    - Full stack development, packaging and distribution of solutions.
-- **Current** Graduate Electrical Engineer at [AECOM](https://www.aecom.com/) (since Jan 2019)
-- **2017 - 2018** Undergraduate Electrical Engineer at [AECOM](https://www.aecom.com/)
-    - Development of scientific computing software for environmental data sets.
-    - Saved approximately 900 working hours through automation.
-    - Pioneered and lead an Australia wide Microsoft Excel training session.
-    - Lighting design, lightning protection system design, PLC network design.
-    - Reticulation design, switchboard & switch room design.
-    - Construction support for defence & education projects and site inspections.
-    - Electrical drafting in AutoCAD and Revit.
-    - **Tools:** Python, git, VBA, AutoCAD, Revit, MySQL, Plotly, Bokeh, Pandas
+- **2020 - Now** Founder & Principal Consultant at [Cyberlytica](https://cyberlytica.com.au/)
+  - Freelance digital services company specialising in data services.
+  - Services include data analytics, visualisation & automation.
+  - Full stack development, packaging and distribution of solutions.
+**2020 - Now** Senior Software/Data Engineer at [Deckee](https://deckee.com/)
+  - Responsible for delivering full stack data analytics, visualisation and automation of waterway & app usage.
+  - Delivered key features for keeping boaters safe on the water including: alerts, weather warnings,
+map tile servers, automated log books, on the water detection and log on log off.
+  - Designed, developed and delivered a search and rescue platform solution with
+a successful real world trial in Western Australia.
+  - Pioneered new methodologies to capture and analyse user behaviour through
+phone sensors to guide government bodies to keep their communities informed on the water.
+  - Tools: Nodejs, React, Python, git, Docker, AWS, Cordova, Capacitor
+***2022*** Senior Software Engineer at [Arrowtail](https://arrowtail.com/)
+  - Responsible for integrating Arrowtail’s explosive delivery capture app with
+on-site inventory management.
+  - Tools: Python, FastAPI, RabbitMQ, git, Docker, Azure
+**2017 - 2020** Electrical Engineer at [AECOM](https://www.aecom.com/)
+  - Development of scientific computing software for environmental data sets.
+  - Saved approximately 900 working hours through automation.
+  - Pioneered and lead an Australia wide Microsoft Excel training session.
+  - Lighting design, lightning protection system design, PLC network design.
+  - Reticulation design, switchboard & switch room design.
+  - Construction support for defence & education projects and site inspections.
+  - Electrical drafting in AutoCAD and Revit.
+  - Tools: Python, git, VBA, AutoCAD, Revit, MySQL, Plotly, Bokeh, Pandas
 - **2016 - 2018** Undergraduate Electrical Engineer at [Hunter H2O](https://www.hunterh2o.com.au)
-    - PLC, SCADA & HMI design for water network infrastructure.
-    - Telemetry system & radio network design.
-    - Cable schedules & electrical protection schemes.
-    - **Tools:** Python, SCADAPack Workbench, ViewX, Unity Pro
+  - PLC, SCADA & HMI design for water network infrastructure.
+  - Telemetry system & radio network design.
+  - Cable schedules & electrical protection schemes.
+  - **Tools:** Python, SCADAPack Workbench, ViewX, Unity Pro
 - **2014 - 2018** Timber Expert & Forklift Operator at [Bunnings Warehouse](https://www.bunnings.com.au/)
-    - Used safety procedures to reduce risk within an unrestricted workzone.
-    - Detailed advice to customers on building materials & techniques.
-    - Customer service, cashier, in store loss prevention.
+  - Used safety procedures to reduce risk within an unrestricted workzone.
+  - Detailed advice to customers on building materials & techniques.
+  - Customer service, cashier, in store loss prevention.
 
 ## Previous Projects
 
