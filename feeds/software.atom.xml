@@ -69,7 +69,7 @@
 &lt;/ol&gt;
 &lt;p&gt;For the most part, we will be making use of &lt;code&gt;run&lt;/code&gt; commands, as if we are interacting with the terminal in the runtime of ubuntu (Linux). Otherwise, we can make use of pre-made actions from the marketplace. One note to be made is that the AWS Elastic Beanstalk application has been set up to run specifically on Docker, and as such we need to upload the relevant Dockerfile (production) along with any assets.&lt;/p&gt;
 &lt;p&gt;The contents of the Github Action in whole will be:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -290,7 +290,7 @@
 &lt;h2 id="setting-up-ingress-nginx"&gt;Setting up Ingress-Nginx&lt;/h2&gt;
 &lt;p&gt;Before we can access our application through an IP or web address, we need to set up &lt;code&gt;ingress-nginx&lt;/code&gt;, similar to how we did with &lt;code&gt;docker-compose&lt;/code&gt; in previous posts. Luckily, we can make use of &lt;code&gt;helm&lt;/code&gt; to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.&lt;/p&gt;
 &lt;p&gt;Firstly which we need to install helm (&lt;a href="https://helm.sh/docs/intro/install/#from-script"&gt;https://helm.sh/docs/intro/install/#from-script&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
@@ -298,7 +298,7 @@ chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Followed by setting up &lt;code&gt;ingress-nginx&lt;/code&gt; (&lt;a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm"&gt;https://kubernetes.github.io/ingress-nginx/deploy/#using-helm&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -396,7 +396,7 @@ helm install my-release ingress-nginx/ingress-nginx
 &lt;h2 id="clusterip-service"&gt;ClusterIP Service&lt;/h2&gt;
 &lt;p&gt;We need to set up a ClusterIP service for each of our deployments except the worker deployment. This will allow our services to communicate with others inside the node.&lt;/p&gt;
 &lt;p&gt;To do this, we create a configuration &lt;code&gt;yaml&lt;/code&gt; file:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -453,7 +453,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -482,7 +482,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="environment-variables"&gt;Environment Variables&lt;/h2&gt;
 &lt;p&gt;Some of our pods depend on environment variables being set to work correctly (eg, REDIS_HOST, PGUSER, etc). We add using the &lt;code&gt;env&lt;/code&gt; key to our &lt;code&gt;spec&lt;/code&gt; &amp;gt; &lt;code&gt;containers&lt;/code&gt; configuration.&lt;/p&gt;
 &lt;p&gt;For example, for our worker to connect to the redis deployment:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -504,7 +504,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;p&gt;Note that for the value of the &lt;code&gt;REDIS_HOST&lt;/code&gt; we are stating the name of the ClusterIP service we had previously set up. Kubernetes will automatically resolve this for us to be the correct IP, how neat!&lt;/p&gt;
 &lt;h3 id="secrets"&gt;Secrets&lt;/h3&gt;
 &lt;p&gt;Secrets are another type of object inside of Kubernetes that are used to store sensitive information we don't want to live in the plain text of the configuration files. We do this through a &lt;code&gt;kubectl&lt;/code&gt; commad:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl create secret &lt;span class="o"&gt;[&lt;/span&gt;secret_type&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;secret_name&lt;span class="o"&gt;]&lt;/span&gt; --from-literal &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;value
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl create secret &lt;span class="o"&gt;[&lt;/span&gt;secret_type&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;secret_name&lt;span class="o"&gt;]&lt;/span&gt; --from-literal &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;value
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;There are 3 types of secret types, &lt;code&gt;generic&lt;/code&gt;, &lt;code&gt;docker_registry&lt;/code&gt; and &lt;code&gt;tls&lt;/code&gt;, most of the time we'll be making use of the &lt;code&gt;generic&lt;/code&gt; secret type. Similar to how we consume other services, we will be consuming the secret from the &lt;code&gt;secret_name&lt;/code&gt; parameter. The names (but not the value) can always be retrieved through &lt;code&gt;kubectl get secrets&lt;/code&gt;.&lt;/p&gt;
@@ -513,7 +513,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;/blockquote&gt;
 &lt;h3 id="consuming-secrets-as-environment-variable"&gt;Consuming Secrets as Environment Variable&lt;/h3&gt;
 &lt;p&gt;Consuming a secret as an environment variable for a container is a little different to other environment variables. As secrets can contain multiple key value pairs, we need to specify the secret and the key to retrieve the value from:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -527,7 +527,7 @@ A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is ti
 &lt;h2 id="ingress-service"&gt;Ingress Service&lt;/h2&gt;
 &lt;p&gt;The ingress service allows us to connect to other Kubernetes cluster from outside, and thus maintains how we should treat incoming requests and how to route them.&lt;/p&gt;
 &lt;p&gt;The entirety of our configuration for the ingress service is:&lt;/p&gt;
-&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
