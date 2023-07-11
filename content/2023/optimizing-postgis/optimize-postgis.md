@@ -1,5 +1,5 @@
 Title: Optimization Gotchas in PostGIS for Geospatial Queries
-Date: 2023-02-26
+Date: 2023-07-11
 Author: Jack McKew
 Category: Databases
 Tags: databases
