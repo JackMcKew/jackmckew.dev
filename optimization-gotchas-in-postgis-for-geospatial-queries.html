@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="This post will go through how techniques that are intended to speed up geospatial queries for PostGIS, sometimes have the opposite effect. The origin of this post came from building a system to evaluate whether a point was on the water or not, so we&#39;ll use that as our datasource …" />
+<meta name="keywords" content="databases">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Optimization Gotchas in PostGIS for Geospatial Queries"/>
+<meta property="og:description" content="This post will go through how techniques that are intended to speed up geospatial queries for PostGIS, sometimes have the opposite effect. The origin of this post came from building a system to evaluate whether a point was on the water or not, so we&#39;ll use that as our datasource …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/optimization-gotchas-in-postgis-for-geospatial-queries.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2023-07-11 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Databases"/>
+<meta property="article:tag" content="databases"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+    <title>Jack McKew's Blog &ndash; Optimization Gotchas in PostGIS for Geospatial Queries</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1052275056735196"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 102</p>
+            <p>Number of Words: 75,715</p>
+            <p>Number of Lines of Code 4,734</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 20px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    /* background-color: #FF813F !important; */
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="optimization-gotchas-in-postgis-for-geospatial-queries">Optimization Gotchas in PostGIS for Geospatial Queries</h1>
+    <p>
+       Posted on Tue 11 July 2023 in <a href="https://jackmckew.dev/category/databases.html">Databases</a>
+
+        &#8226; 4 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><p>This post will go through how techniques that are intended to speed up geospatial queries for PostGIS, sometimes have the opposite effect. The origin of this post came from building a system to evaluate whether a point was on the water or not, so we'll use that as our datasource for this problem:</p>
+<ul>
+<li><a href="https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip">Oceans</a></li>
+</ul>
+<h1 id="load">Load</h1>
+<p>To ensure a reproducible example, we'll use Docker to host our postgis database locally. After docker is installed and running on your machine, run the line:</p>
+<p><code>docker run --name docker-postgis --platform linux/amd64 -e POSTGRES_PASSWORD=root -e DB_HOST=docker.for.mac.host.internal -d -p 5432:5432 postgis/postgis</code></p>
+<p>Now we've got a postgis instance running on our machine, let's connect to it and upload the files we've just downloaded. We're going to use <code>ogr2ogr</code> to load the data into our postgis instance.</p>
+<p><code>ogr2ogr -f "PostgreSQL" PG:"dbname=postgres user=postgres password=root host=localhost" "water_polygons.shp" -progress -overwrite -nlt PROMOTE_TO_MULTI -nln water</code></p>
+<h2 id="generate-points">Generate points</h2>
+<p>Now that we have our polygons loaded into a table, we need to generate points to be evaluated:</p>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">points</span> <span class="p">(</span>
+    <span class="n">wkb_geometry</span> <span class="n">geometry</span>
+<span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">points</span>
+<span class="k">SELECT</span> <span class="n">ST_GeneratePoints</span><span class="p">(</span><span class="n">wkb_geometry</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">water</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<h2 id="baseline-test">Baseline test</h2>
+<p>Our baseline test of a point in polygon spatial join: count how many points are within each polygon, can demonstrate the effectiveness of indexing, point in polygon calculations and general overhead. By using the <code>EXPLAIN ANALYZE</code> operator in PostgreSQL, we can look into the inner workings of how the database plans and executes the query, along with how long the query took. We'll also take only 50% of the points as querying the entire table defeats the purpose of this task.</p>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">EXPLAIN</span> <span class="k">ANALYZE</span> <span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="n">w</span><span class="p">.</span><span class="n">ogc_fid</span>
+<span class="k">FROM</span> <span class="n">water</span> <span class="n">w</span>
+<span class="k">JOIN</span> <span class="p">(</span><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="n">points</span> <span class="n">tablesample</span> <span class="n">bernoulli</span> <span class="p">(</span><span class="mi">50</span><span class="p">))</span> <span class="n">p</span>
+<span class="k">ON</span> <span class="n">ST_Intersects</span><span class="p">(</span><span class="n">w</span><span class="p">.</span><span class="n">wkb_geometry</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">wkb_geometry</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">w</span><span class="p">.</span><span class="n">ogc_fid</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>By running without any of the following optimizations, we get the result of:</p>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>"HashAggregate  (cost=3817704.60..3818238.05 rows=53345 width=12) (actual time=39005.387..39021.370 rows=27103 loops=1)"
+"  Group Key: w.ogc_fid"
+"  Batches: 1  Memory Usage: 3857kB"
+"  -&gt;  Nested Loop  (cost=0.28..3809633.50 rows=1614220 width=4) (actual time=1041.207..38943.773 rows=28254 loops=1)"
+"        -&gt;  Sample Scan on points  (cost=0.00..747.60 rows=30260 width=32) (actual time=1038.104..1068.915 rows=26552 loops=1)"
+"              Sampling: bernoulli ('50'::real)"
+"        -&gt;  Index Scan using water_wkb_geometry_geom_idx on water w  (cost=0.28..125.82 rows=5 width=20034) (actual time=1.186..1.424 rows=1 loops=26552)"
+"              Index Cond: (wkb_geometry &amp;&amp; points.wkb_geometry)"
+"              Filter: st_intersects(wkb_geometry, points.wkb_geometry)"
+"              Rows Removed by Filter: 0"
+"Planning Time: 21.229 ms"
+"JIT:"
+"  Functions: 13"
+"  Options: Inlining true, Optimization true, Expressions true, Deforming true"
+"  Timing: Generation 6.770 ms, Inlining 225.750 ms, Optimization 480.290 ms, Emission 330.523 ms, Total 1043.333 ms"
+"Execution Time: 39036.766 ms"
+</code></pre></div>
+</td></tr></tbody></table>
+<h1 id="optimize-techniques">Optimize Techniques</h1>
+<h2 id="set-the-page-size">Set the page size</h2>
+<p>Kudos to Paul Ramsey <a href="http://blog.cleverelephant.ca/2018/09/postgis-external-storage.html">source</a> for demonstrating the effectiveness of setting the page size for postgresql (and by extension PostGIS). As the default for postgresql is to use a set amount of page size of internal memory, this results in the database only allowed to use a set amount of memory to process queries which inherently does not leverage the computing power that we have on our machines. By allowing postgresql to use external memory, this not only leverages the memory available but should also improve our query performance.</p>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">water</span>
+<span class="k">ALTER</span> <span class="k">COLUMN</span> <span class="n">wkb_geometry</span>
+<span class="k">SET</span> <span class="k">STORAGE</span> <span class="k">EXTERNAL</span><span class="p">;</span>
+<span class="c1">-- Force the column to update</span>
+<span class="k">UPDATE</span> <span class="n">water</span>
+<span class="k">SET</span> <span class="n">wkb_geometry</span> <span class="o">=</span> <span class="n">ST_SetSRID</span><span class="p">(</span><span class="n">wkb_geometry</span><span class="p">,</span> <span class="mi">4326</span><span class="p">);</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>By running the baseline test again:</p>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>"GroupAggregate  (cost=4728732.94..4731547.98 rows=67460 width=12) (actual time=40087.106..40138.918 rows=27205 loops=1)"
+"  Group Key: w.ogc_fid"
+"  -&gt;  Sort  (cost=4728732.94..4729446.42 rows=285392 width=4) (actual time=40086.611..40094.963 rows=28418 loops=1)"
+"        Sort Key: w.ogc_fid"
+"        Sort Method: quicksort  Memory: 769kB"
+"        -&gt;  Nested Loop  (cost=0.28..4698970.24 rows=285392 width=4) (actual time=505.690..40070.221 rows=28418 loops=1)"
+"              -&gt;  Sample Scan on points  (cost=0.00..711.72 rows=26672 width=40) (actual time=504.890..533.400 rows=26692 loops=1)"
+"                    Sampling: bernoulli ('50'::real)"
+"              -&gt;  Index Scan using water_wkb_geometry_geom_idx on water w  (cost=0.28..176.08 rows=7 width=20034) (actual time=1.191..1.478 rows=1 loops=26692)"
+"                    Index Cond: (wkb_geometry &amp;&amp; points.wkb_geometry)"
+"                    Filter: st_intersects(wkb_geometry, points.wkb_geometry)"
+"                    Rows Removed by Filter: 0"
+"Planning Time: 39.037 ms"
+"JIT:"
+"  Functions: 12"
+"  Options: Inlining true, Optimization true, Expressions true, Deforming true"
+"  Timing: Generation 7.761 ms, Inlining 44.777 ms, Optimization 283.510 ms, Emission 175.701 ms, Total 511.750 ms"
+"Execution Time: 40152.000 ms"
+</code></pre></div>
+</td></tr></tbody></table>
+<blockquote>
+<p>This has slowed down the query by <strong>2.8589%</strong>!</p>
+</blockquote>
+<h2 id="create-a-spatial-index">Create a spatial index</h2>
+<p>One technique that should always be used in databases is indexing, especially for geospatial databases. Creating an index on our database is as simple as:</p>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">geometry_index</span> <span class="k">ON</span> <span class="n">water</span> <span class="k">USING</span> <span class="n">GIST</span><span class="p">(</span><span class="n">wkb_geometry</span><span class="p">);</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>This works by computing the bounding box of each geometry in the dataset, and whenever a query comes in that wishes to evaluate against the geometries (ie, intersection), the query resolver will first reduce the query only to geometries which bounding box first passes the query before continuing to include the entire geometry.</p>
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>"GroupAggregate  (cost=3386133.27..3388370.65 rows=53345 width=12) (actual time=44326.518..44378.392 rows=27336 loops=1)"
+"  Group Key: w.ogc_fid"
+"  -&gt;  Sort  (cost=3386133.27..3386701.25 rows=227191 width=4) (actual time=44326.259..44334.503 rows=28513 loops=1)"
+"        Sort Key: w.ogc_fid"
+"        Sort Method: quicksort  Memory: 769kB"
+"        -&gt;  Nested Loop  (cost=0.28..3362812.60 rows=227191 width=4) (actual time=467.546..44311.772 rows=28513 loops=1)"
+"              -&gt;  Sample Scan on points  (cost=0.00..711.72 rows=26672 width=40) (actual time=466.846..495.109 rows=26779 loops=1)"
+"                    Sampling: bernoulli ('50'::real)"
+"              -&gt;  Index Scan using geometry_index on water w  (cost=0.28..126.00 rows=5 width=22430) (actual time=1.380..1.634 rows=1 loops=26779)"
+"                    Index Cond: (wkb_geometry &amp;&amp; points.wkb_geometry)"
+"                    Filter: st_intersects(wkb_geometry, points.wkb_geometry)"
+"                    Rows Removed by Filter: 0"
+"Planning Time: 37.141 ms"
+"JIT:"
+"  Functions: 12"
+"  Options: Inlining true, Optimization true, Expressions true, Deforming true"
+"  Timing: Generation 7.900 ms, Inlining 45.958 ms, Optimization 265.176 ms, Emission 154.866 ms, Total 473.900 ms"
+"Execution Time: 44391.401 ms"
+</code></pre></div>
+</td></tr></tbody></table>
+<blockquote>
+<p>This has slowed down by <strong>13.7181%</strong> compared to the original query!</p>
+</blockquote>
+<h1 id="conclusion">Conclusion</h1>
+<p>By doing these techniques that intended to improve query performance, we actually had the opposite effect! This highlights how important it is to check the impact on performance of adding optimizations!</p>
+<blockquote>
+<p>This was done on an 2023 Apple MacBook Pro with 32GB memory.</p>
+</blockquote></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/databases.html">databases</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/australia-post-codes-connected.html" title="Australia Post Codes Connected">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>

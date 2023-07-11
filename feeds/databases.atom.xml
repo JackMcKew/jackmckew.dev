@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Databases</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/databases.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-07-11T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Optimization Gotchas in PostGIS for Geospatial Queries</title><link href="https://jackmckew.dev/optimization-gotchas-in-postgis-for-geospatial-queries.html" rel="alternate"></link><published>2023-07-11T00:00:00+10:00</published><updated>2023-07-11T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-07-11:/optimization-gotchas-in-postgis-for-geospatial-queries.html</id><summary type="html">&lt;body&gt;&lt;p&gt;This post will go through how techniques that are intended to speed up geospatial queries for PostGIS, sometimes have the opposite effect. The origin of this post came from building a system to evaluate whether a point was on the water or not, so we'll use that as our datasource …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;This post will go through how techniques that are intended to speed up geospatial queries for PostGIS, sometimes have the opposite effect. The origin of this post came from building a system to evaluate whether a point was on the water or not, so we'll use that as our datasource for this problem:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip"&gt;Oceans&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="load"&gt;Load&lt;/h1&gt;
+&lt;p&gt;To ensure a reproducible example, we'll use Docker to host our postgis database locally. After docker is installed and running on your machine, run the line:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker run --name docker-postgis --platform linux/amd64 -e POSTGRES_PASSWORD=root -e DB_HOST=docker.for.mac.host.internal -d -p 5432:5432 postgis/postgis&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now we've got a postgis instance running on our machine, let's connect to it and upload the files we've just downloaded. We're going to use &lt;code&gt;ogr2ogr&lt;/code&gt; to load the data into our postgis instance.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ogr2ogr -f "PostgreSQL" PG:"dbname=postgres user=postgres password=root host=localhost" "water_polygons.shp" -progress -overwrite -nlt PROMOTE_TO_MULTI -nln water&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="generate-points"&gt;Generate points&lt;/h2&gt;
+&lt;p&gt;Now that we have our polygons loaded into a table, we need to generate points to be evaluated:&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="k"&gt;IF&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;EXISTS&lt;/span&gt; &lt;span class="n"&gt;points&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;wkb_geometry&lt;/span&gt; &lt;span class="n"&gt;geometry&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;points&lt;/span&gt;
+&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;ST_GeneratePoints&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wkb_geometry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;water&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="baseline-test"&gt;Baseline test&lt;/h2&gt;
+&lt;p&gt;Our baseline test of a point in polygon spatial join: count how many points are within each polygon, can demonstrate the effectiveness of indexing, point in polygon calculations and general overhead. By using the &lt;code&gt;EXPLAIN ANALYZE&lt;/code&gt; operator in PostgreSQL, we can look into the inner workings of how the database plans and executes the query, along with how long the query took. We'll also take only 50% of the points as querying the entire table defeats the purpose of this task.&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;EXPLAIN&lt;/span&gt; &lt;span class="k"&gt;ANALYZE&lt;/span&gt; &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ogc_fid&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;water&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;points&lt;/span&gt; &lt;span class="n"&gt;tablesample&lt;/span&gt; &lt;span class="n"&gt;bernoulli&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;
+&lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;ST_Intersects&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wkb_geometry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wkb_geometry&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ogc_fid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;By running without any of the following optimizations, we get the result of:&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;"HashAggregate  (cost=3817704.60..3818238.05 rows=53345 width=12) (actual time=39005.387..39021.370 rows=27103 loops=1)"
+"  Group Key: w.ogc_fid"
+"  Batches: 1  Memory Usage: 3857kB"
+"  -&amp;gt;  Nested Loop  (cost=0.28..3809633.50 rows=1614220 width=4) (actual time=1041.207..38943.773 rows=28254 loops=1)"
+"        -&amp;gt;  Sample Scan on points  (cost=0.00..747.60 rows=30260 width=32) (actual time=1038.104..1068.915 rows=26552 loops=1)"
+"              Sampling: bernoulli ('50'::real)"
+"        -&amp;gt;  Index Scan using water_wkb_geometry_geom_idx on water w  (cost=0.28..125.82 rows=5 width=20034) (actual time=1.186..1.424 rows=1 loops=26552)"
+"              Index Cond: (wkb_geometry &amp;amp;&amp;amp; points.wkb_geometry)"
+"              Filter: st_intersects(wkb_geometry, points.wkb_geometry)"
+"              Rows Removed by Filter: 0"
+"Planning Time: 21.229 ms"
+"JIT:"
+"  Functions: 13"
+"  Options: Inlining true, Optimization true, Expressions true, Deforming true"
+"  Timing: Generation 6.770 ms, Inlining 225.750 ms, Optimization 480.290 ms, Emission 330.523 ms, Total 1043.333 ms"
+"Execution Time: 39036.766 ms"
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h1 id="optimize-techniques"&gt;Optimize Techniques&lt;/h1&gt;
+&lt;h2 id="set-the-page-size"&gt;Set the page size&lt;/h2&gt;
+&lt;p&gt;Kudos to Paul Ramsey &lt;a href="http://blog.cleverelephant.ca/2018/09/postgis-external-storage.html"&gt;source&lt;/a&gt; for demonstrating the effectiveness of setting the page size for postgresql (and by extension PostGIS). As the default for postgresql is to use a set amount of page size of internal memory, this results in the database only allowed to use a set amount of memory to process queries which inherently does not leverage the computing power that we have on our machines. By allowing postgresql to use external memory, this not only leverages the memory available but should also improve our query performance.&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;water&lt;/span&gt;
+&lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="k"&gt;COLUMN&lt;/span&gt; &lt;span class="n"&gt;wkb_geometry&lt;/span&gt;
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="k"&gt;STORAGE&lt;/span&gt; &lt;span class="k"&gt;EXTERNAL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;-- Force the column to update&lt;/span&gt;
+&lt;span class="k"&gt;UPDATE&lt;/span&gt; &lt;span class="n"&gt;water&lt;/span&gt;
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;wkb_geometry&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ST_SetSRID&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wkb_geometry&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4326&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;By running the baseline test again:&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;"GroupAggregate  (cost=4728732.94..4731547.98 rows=67460 width=12) (actual time=40087.106..40138.918 rows=27205 loops=1)"
+"  Group Key: w.ogc_fid"
+"  -&amp;gt;  Sort  (cost=4728732.94..4729446.42 rows=285392 width=4) (actual time=40086.611..40094.963 rows=28418 loops=1)"
+"        Sort Key: w.ogc_fid"
+"        Sort Method: quicksort  Memory: 769kB"
+"        -&amp;gt;  Nested Loop  (cost=0.28..4698970.24 rows=285392 width=4) (actual time=505.690..40070.221 rows=28418 loops=1)"
+"              -&amp;gt;  Sample Scan on points  (cost=0.00..711.72 rows=26672 width=40) (actual time=504.890..533.400 rows=26692 loops=1)"
+"                    Sampling: bernoulli ('50'::real)"
+"              -&amp;gt;  Index Scan using water_wkb_geometry_geom_idx on water w  (cost=0.28..176.08 rows=7 width=20034) (actual time=1.191..1.478 rows=1 loops=26692)"
+"                    Index Cond: (wkb_geometry &amp;amp;&amp;amp; points.wkb_geometry)"
+"                    Filter: st_intersects(wkb_geometry, points.wkb_geometry)"
+"                    Rows Removed by Filter: 0"
+"Planning Time: 39.037 ms"
+"JIT:"
+"  Functions: 12"
+"  Options: Inlining true, Optimization true, Expressions true, Deforming true"
+"  Timing: Generation 7.761 ms, Inlining 44.777 ms, Optimization 283.510 ms, Emission 175.701 ms, Total 511.750 ms"
+"Execution Time: 40152.000 ms"
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This has slowed down the query by &lt;strong&gt;2.8589%&lt;/strong&gt;!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="create-a-spatial-index"&gt;Create a spatial index&lt;/h2&gt;
+&lt;p&gt;One technique that should always be used in databases is indexing, especially for geospatial databases. Creating an index on our database is as simple as:&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="n"&gt;geometry_index&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;water&lt;/span&gt; &lt;span class="k"&gt;USING&lt;/span&gt; &lt;span class="n"&gt;GIST&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wkb_geometry&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;This works by computing the bounding box of each geometry in the dataset, and whenever a query comes in that wishes to evaluate against the geometries (ie, intersection), the query resolver will first reduce the query only to geometries which bounding box first passes the query before continuing to include the entire geometry.&lt;/p&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;"GroupAggregate  (cost=3386133.27..3388370.65 rows=53345 width=12) (actual time=44326.518..44378.392 rows=27336 loops=1)"
+"  Group Key: w.ogc_fid"
+"  -&amp;gt;  Sort  (cost=3386133.27..3386701.25 rows=227191 width=4) (actual time=44326.259..44334.503 rows=28513 loops=1)"
+"        Sort Key: w.ogc_fid"
+"        Sort Method: quicksort  Memory: 769kB"
+"        -&amp;gt;  Nested Loop  (cost=0.28..3362812.60 rows=227191 width=4) (actual time=467.546..44311.772 rows=28513 loops=1)"
+"              -&amp;gt;  Sample Scan on points  (cost=0.00..711.72 rows=26672 width=40) (actual time=466.846..495.109 rows=26779 loops=1)"
+"                    Sampling: bernoulli ('50'::real)"
+"              -&amp;gt;  Index Scan using geometry_index on water w  (cost=0.28..126.00 rows=5 width=22430) (actual time=1.380..1.634 rows=1 loops=26779)"
+"                    Index Cond: (wkb_geometry &amp;amp;&amp;amp; points.wkb_geometry)"
+"                    Filter: st_intersects(wkb_geometry, points.wkb_geometry)"
+"                    Rows Removed by Filter: 0"
+"Planning Time: 37.141 ms"
+"JIT:"
+"  Functions: 12"
+"  Options: Inlining true, Optimization true, Expressions true, Deforming true"
+"  Timing: Generation 7.900 ms, Inlining 45.958 ms, Optimization 265.176 ms, Emission 154.866 ms, Total 473.900 ms"
+"Execution Time: 44391.401 ms"
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This has slowed down by &lt;strong&gt;13.7181%&lt;/strong&gt; compared to the original query!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="conclusion"&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;By doing these techniques that intended to improve query performance, we actually had the opposite effect! This highlights how important it is to check the impact on performance of adding optimizations!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This was done on an 2023 Apple MacBook Pro with 32GB memory.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/body&gt;</content><category term="Databases"></category><category term="databases"></category></entry></feed>
