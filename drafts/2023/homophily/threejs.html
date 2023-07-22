@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2D Colored Grid in Three.js</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script>
+      function generateColoredGrid(rows, cols, colorPercentages) {
+        const totalCells = rows * cols;
+        const numColors = Math.min(colorPercentages.length, 4);
+
+        if (numColors < 1) {
+          console.error("Please provide at least one color percentage.");
+          return;
+        }
+
+        const gridColors = new Array(rows)
+          .fill(0)
+          .map(() => new Array(cols).fill(0));
+        let totalPercentage = 0;
+
+        for (let i = 0; i < numColors; i++) {
+          totalPercentage += colorPercentages[i];
+        }
+
+        if (totalPercentage > 100) {
+          console.error("Total color percentages cannot exceed 100.");
+          return;
+        }
+
+        const totalColorCells = [];
+        const colors = ["red", "blue", "yellow", "white"]; // Colors to choose from
+
+        for (let i = 0; i < numColors; i++) {
+          const colorPercentage = (colorPercentages[i] / totalPercentage) * 100;
+          const colorCells = Math.round((colorPercentage / 100) * totalCells);
+
+          for (let j = 0; j < colorCells; j++) {
+            totalColorCells.push(colors[i]);
+          }
+        }
+
+        // Fisher-Yates Shuffle
+        for (let i = totalColorCells.length - 1; i > 0; i--) {
+          const randomIndex = Math.floor(Math.random() * (i + 1));
+          [totalColorCells[i], totalColorCells[randomIndex]] = [
+            totalColorCells[randomIndex],
+            totalColorCells[i],
+          ];
+        }
+
+        let cellIndex = 0;
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < cols; col++) {
+            gridColors[row][col] = totalColorCells[cellIndex];
+            cellIndex++;
+          }
+        }
+
+        return gridColors;
+      }
+
+      // Example usage:
+      const numRows = 10;
+      const numCols = 10;
+      const colorPercentages = [15, 15, 15, 55]; // Four colors, each taking 25% of the grid
+      const cellSize = 20;
+      const grid = generateColoredGrid(numRows, numCols, colorPercentages);
+      const whiteCells = [];
+      const cellMeshes = [];
+
+      const scene = new THREE.Scene();
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Create Colored Grid
+      for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col < numCols; col++) {
+          const cellColor = grid[row][col];
+          const cellGeometry = new THREE.PlaneGeometry(cellSize, cellSize);
+          const cellMaterial = new THREE.MeshBasicMaterial({
+            color: cellColor,
+          });
+          const cellMesh = new THREE.Mesh(cellGeometry, cellMaterial);
+          cellMesh.position.set(col * cellSize, -row * cellSize, 0);
+          scene.add(cellMesh);
+          cellMeshes.push(cellMesh);
+          if (cellColor === "white") {
+            whiteCells.push({ row, col });
+          }
+        }
+      }
+
+      // Camera
+      const camera = new THREE.OrthographicCamera(
+        window.innerWidth / -2,
+        window.innerWidth / 2,
+        window.innerHeight / 2,
+        window.innerHeight / -2,
+        1,
+        10
+      );
+      camera.position.z = 1;
+
+      // Check color percentage for each cell
+      function checkColorPercentage(cellRow, cellCol) {
+        const neighbors = [
+          [-1, 0],
+          [1, 0],
+          [0, -1],
+          [0, 1],
+          [-1, -1],
+          [-1, 1],
+          [1, -1],
+          [1, 1],
+        ];
+
+        const targetColor = grid[cellRow][cellCol];
+        let sameColorCount = 0;
+
+        for (const [rOffset, cOffset] of neighbors) {
+          const neighborRow = cellRow + rOffset;
+          const neighborCol = cellCol + cOffset;
+
+          if (
+            neighborRow >= 0 &&
+            neighborRow < numRows &&
+            neighborCol >= 0 &&
+            neighborCol < numCols &&
+            grid[neighborRow][neighborCol] === targetColor
+          ) {
+            sameColorCount++;
+          }
+        }
+
+        const colorPercentage = (sameColorCount / neighbors.length) * 100;
+        return colorPercentage;
+      }
+
+      function moveCellToWhiteCell(violatingCell, whiteCell) {
+        const { row: fromRow, col: fromCol } = violatingCell;
+        const { row: toRow, col: toCol } = whiteCell;
+
+        grid[toRow][toCol] = grid[fromRow][fromCol];
+        grid[fromRow][fromCol] = "white"; // Set the cell to white
+
+        cellMeshes[toRow * numCols + toCol].material.color.set(
+          grid[toRow][toCol]
+        );
+        cellMeshes[fromRow * numCols + fromCol].material.color.set(
+          grid[fromRow][fromCol]
+        );
+      }
+
+      // Render the scene
+      let previousTime = 0;
+      function animate() {
+        const currentTime = new Date().getTime();
+        const elapsedSeconds = (currentTime - previousTime) / 1000;
+
+        console.log(elapsedSeconds, previousTime);
+        if (elapsedSeconds >= 0.05) {
+          console.log("animating");
+          previousTime = currentTime;
+          // Animate the scene
+          let movedCell = false;
+
+          const limitPercentage = 20; // Set the limit percentage here (e.g., 50%)
+
+          // Check color percentage for each cell
+          if (!movedCell) {
+            for (let row = 0; row < numRows; row++) {
+              for (let col = 0; col < numCols; col++) {
+                const colorPercentage = checkColorPercentage(row, col);
+                if (
+                  colorPercentage < limitPercentage &&
+                  grid[row][col] !== "white"
+                ) {
+                  const numWhiteCells = whiteCells.length;
+                  if (numWhiteCells > 0 && !movedCell) {
+                    const randomIndex = Math.floor(
+                      Math.random() * numWhiteCells
+                    );
+                    moveCellToWhiteCell({ row, col }, whiteCells[randomIndex]);
+                    whiteCells[randomIndex] = { row, col }; // Update whiteCells with the new position
+                    movedCell = true;
+                    break; // Stop further iterations in this time step
+                  }
+                }
+              }
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
