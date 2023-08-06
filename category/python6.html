@@ -28,26 +28,16 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
-<meta name="description" content="Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy. Typically projects usually …" />
-<meta name="keywords" content="software, principles">
-
-
-<meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="Designing for Change not Requirements"/>
-<meta property="og:description" content="Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy. Typically projects usually …"/>
+<!-- End Google Analytics -->    <meta name="author" content="Jack McKew" />
+    <meta name="description" content="" /> <meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Jack McKew's Blog"/>
+<meta property="og:description" content=""/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/designing-for-change-not-requirements.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2021-01-15 00:00:00+11:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
-<meta property="article:section" content="Software"/>
-<meta property="article:tag" content="software"/>
-<meta property="article:tag" content="principles"/>
+<meta property="og:url" content="https://jackmckew.dev"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-    <title>Jack McKew's Blog &ndash; Designing for Change not Requirements</title>
+    <title>Jack McKew's Blog &ndash;  Category Python</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1052275056735196"
      crossorigin="anonymous"></script>
@@ -61,7 +51,7 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 103</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 51</p>
             <p>Number of Words: 76,795</p>
             <p>Number of Lines of Code 4,855</p>
             <form class="navbar-search" action="/search.html" role="search">
@@ -145,75 +135,35 @@
     <main>
         <nav>
             <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
-<article class="single">
-  <header>
-      
-    <h1 id="designing-for-change-not-requirements">Designing for Change not Requirements</h1>
-    <p>
-       Posted on Fri 15 January 2021 in <a href="https://jackmckew.dev/category/software.html">Software</a>
 
-        &#8226; 2 min read
+
+<article>
+  <header>
+    <h2><a href="https://jackmckew.dev/episode-1-optimization.html#episode-1-optimization">Episode 1 - Optimization</a></h2>
+    <p>
+       Posted by <a href="https://jackmckew.dev/author/jack-mckew.html">Jack McKew</a> on Fri 23 November 2018 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+
+          &#8226;  Tagged with
+              <a href="https://jackmckew.dev/tag/data.html">data</a>,              <a href="https://jackmckew.dev/tag/analysis.html">analysis</a>
+        &#8226; 1 min read
     </p>
   </header>
-
-
   <div>
-    <body><p>Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: <a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy">https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy</a>.</p>
-<p>Typically projects usually start by trying to understand what the end-user wants and deciphering what the requirements are to implement this. These requirements are then broken up into bite size chunks, and development begins. But then what (almost) always happens is, the user comes back with a new idea or something was excommunicated and the project needs to change. This can be a painful experience to implement this new feature, especially if the work done to date isn't compatible.</p>
-<p>By amending our approach to the design procedure to:</p>
-<ol>
-<li>What is the requirement?</li>
-<li>How could these requirement be achieved?</li>
-<li>What could possible change later on?</li>
-</ol>
-<p>The 3rd step above, could be viewed through many perspectives. The perspectives that are typically the most valuable are to consider for change later on, is how could we implement this that the developer can make changes easily, and how can we implement this such that the user can change their approach to using the tool. While the latter may be counterintuitive to implementing a tool that is responsible for one thing, it does pay off in the situations where users can utilise the software for more than one way!</p>
-<p>By adopting this approach along with tracer design, the end-user/client is tightly interwoven into the development cycle, which has proven successful time and time again. Tracer design is the concept of sharing the works in progress as soon as possible with the client, and determining whether it hits the target or not. Rinse and repeat, and you'll get closer and closer to the target, this idea is similar to that of tracer bullets which light up where they land to adjust your aim closer to the target. </p>
-<p>A great way to think of this during implementation is to make it as easy as possible put in &amp; take out tools in your projects. For example, if you can make it as easy as possible to swap out the database implementation without breaking your project then this will improve cohesion in your project and make the inevitable changes much, much easier to handle.</p></body>
+      <body><p>Recently I had to opportunity to optimize some workflows that involved heavy data processing, before the users were completing calculations/statistics by hand on up to 10 million rows in Excel, causing many complications (and crashes).</p>
+<p>With the use of Python this data analysis has been reduced to a matter …</p></body>
+        <br>
+        <a class="btn" href="https://jackmckew.dev/episode-1-optimization.html#episode-1-optimization"> Continue reading</a>
   </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="https://jackmckew.dev/tag/software.html">software</a>
-      <a href="https://jackmckew.dev/tag/principles.html">principles</a>
-    </p>
-  </div>
-
-
-  <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/typography-with-matplotlib.html" title="Typography With Matplotlib">
-      <i class="fa fa-angle-left"></i>  Previous Post
-    </a>
-    <a class="btn float-right" href="https://jackmckew.dev/lessons-learnt-after-100-blog-posts.html" title="Lessons Learnt After 100 Blog Posts">
-       Next Post <i class="fa fa-angle-right"></i>
-    </a>
-  </div>
-
-  <div class="related-posts">
-    <h4> You might enjoy</h4>
-    <ul class="related-posts">
-      <li><a href="https://jackmckew.dev/episode-12-what-is-git.html">Episode 12 - What is Git?</a></li>
-      <li><a href="https://jackmckew.dev/lessons-learnt-after-100-blog-posts.html">Lessons Learnt After 100 Blog Posts</a></li>
-      <li><a href="https://jackmckew.dev/book-review-never-split-the-difference.html">Book Review: Never Split the Difference</a></li>
-      <li><a href="https://jackmckew.dev/book-review-courage-to-be-disliked.html">Book Review: Courage To Be Disliked</a></li>
-      <li><a href="https://jackmckew.dev/book-review-the-power-of-habits.html">Book Review: The Power Of Habits</a></li>
-    </ul>
-  </div>
-
-
-<!-- Disqus -->
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'jackmckew-dev';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>
-     Please enable JavaScript to view comments.
-</noscript>
-<!-- End Disqus -->
 </article>
+
+  <div class="pagination">
+    <a class="btn float-right" href="https://jackmckew.dev/category/python5.html">
+       Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
 
         <footer>
 <p>&copy;  </p>

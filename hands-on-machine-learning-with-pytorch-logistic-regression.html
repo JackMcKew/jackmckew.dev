@@ -1,0 +1,1357 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="In this post we&#39;ll go through a few things typical for any project using machine learning: Data exploration &amp; analysis Build a model Train the model Evaluate the model While this is a very high level overview of what we&#39;re about to do. This process is almost the same in any …" />
+<meta name="keywords" content="python, visualisation, machine learning, ai">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Hands On Machine Learning with PyTorch - Logistic Regression"/>
+<meta property="og:description" content="In this post we&#39;ll go through a few things typical for any project using machine learning: Data exploration &amp; analysis Build a model Train the model Evaluate the model While this is a very high level overview of what we&#39;re about to do. This process is almost the same in any …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/hands-on-machine-learning-with-pytorch-logistic-regression.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2023-07-06 00:00:00+10:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="visualisation"/>
+<meta property="article:tag" content="machine learning"/>
+<meta property="article:tag" content="ai"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+    <title>Jack McKew's Blog &ndash; Hands On Machine Learning with PyTorch - Logistic Regression</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1052275056735196"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 103</p>
+            <p>Number of Words: 76,795</p>
+            <p>Number of Lines of Code 4,855</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 20px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    /* background-color: #FF813F !important; */
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a>
+            <nav>
+                <ul class="list">
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/contact.html#contact">Contact</a></li>
+                    <li><a target="_blank" href="https://jackmckew.dev/pages/cv-professional.html#cv-professional">CV/Professional</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="hands-on-machine-learning-with-pytorch-logistic-regression">Hands On Machine Learning with PyTorch - Logistic Regression</h1>
+    <p>
+       Posted on Thu 06 July 2023 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+
+        &#8226; 22 min read
+    </p>
+  </header>
+
+
+  <div>
+    <body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this post we'll go through a few things typical for any project using machine learning:</p>
+<ol>
+<li>Data exploration &amp; analysis</li>
+<li>Build a model</li>
+<li>Train the model</li>
+<li>Evaluate the model</li>
+</ol>
+<p>While this is a very high level overview of what we're about to do. This process is almost the same in any size &amp; complex machine learning project.</p>
+<p>We'll be using the iris dataset, which is a very famous hello world dataset in machine learning which contains 4 parameters which describe three species of flower (the iris flower). The sepal length &amp; width, and the petal length &amp; width are provided for 50 samples of each species. The sepals of a lower are the green leafy parts surrounding the flower head (which has the petals).</p>
+<p>We'll also be trying to classify flowers into their species from their attributes using the logistic regression model. Logistic regression predicts the probability that something is either one thing or not based on the input variables.</p>
+<p>As always, we begin by importing the neccessary libraries/packages.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Data-Exploration-&amp;-Analysis">Data Exploration &amp; Analysis<a class="anchor-link" href="#Data-Exploration-&amp;-Analysis">¶</a></h2><p>Time to dive in and take a lot at what we'll be working with. If this was a very rigourous project, we'd split the dataset into our train/validate/test set before even starting the validation as the modeller should never know what the test set looks like otherwise it introduces bias. Nevertheless in the pursuit of brevity we'll not do this here.</p>
+<p>First off we'll take a peek at the first 5 rows of data so we can at least see what type of data they are (they are given as floats or numbers with decimal points) and the species is defined as a string. We can then check how many samples of each species we've been provided with the <code>value_counts()</code> method and finally we can take a look with describe to see common statistics about each attribute of our pretty little flowers.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'iris.csv'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">'variety'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>   sepal.length  sepal.width  petal.length  petal.width variety
+0           5.1          3.5           1.4          0.2  Setosa
+1           4.9          3.0           1.4          0.2  Setosa
+2           4.7          3.2           1.3          0.2  Setosa
+3           4.6          3.1           1.5          0.2  Setosa
+4           5.0          3.6           1.4          0.2  Setosa
+Virginica     50
+Setosa        50
+Versicolor    50
+Name: variety, dtype: int64
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe table table-striped">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sepal.length</th>
+<th>sepal.width</th>
+<th>petal.length</th>
+<th>petal.width</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>count</th>
+<td>150.000000</td>
+<td>150.000000</td>
+<td>150.000000</td>
+<td>150.000000</td>
+</tr>
+<tr>
+<th>mean</th>
+<td>5.843333</td>
+<td>3.057333</td>
+<td>3.758000</td>
+<td>1.199333</td>
+</tr>
+<tr>
+<th>std</th>
+<td>0.828066</td>
+<td>0.435866</td>
+<td>1.765298</td>
+<td>0.762238</td>
+</tr>
+<tr>
+<th>min</th>
+<td>4.300000</td>
+<td>2.000000</td>
+<td>1.000000</td>
+<td>0.100000</td>
+</tr>
+<tr>
+<th>25%</th>
+<td>5.100000</td>
+<td>2.800000</td>
+<td>1.600000</td>
+<td>0.300000</td>
+</tr>
+<tr>
+<th>50%</th>
+<td>5.800000</td>
+<td>3.000000</td>
+<td>4.350000</td>
+<td>1.300000</td>
+</tr>
+<tr>
+<th>75%</th>
+<td>6.400000</td>
+<td>3.300000</td>
+<td>5.100000</td>
+<td>1.800000</td>
+</tr>
+<tr>
+<th>max</th>
+<td>7.900000</td>
+<td>4.400000</td>
+<td>6.900000</td>
+<td>2.500000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we'll extract our species into a list for use later on.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">species</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s2">"variety"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['Setosa', 'Versicolor', 'Virginica']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since the iris dataset has 4 input, and a single output feature, when we create a visualisation of all of this it'll be a 5 dimensional plot, and we'll use a scatter plot to represent this. By using the <code>plotly</code> package we can also make it interactive which is super handy for our 3D minds to visualise higher dimensional things.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_3d</span><span class="p">(</span><span class="n">iris</span><span class="p">[[</span><span class="s2">"sepal.length"</span><span class="p">,</span><span class="s2">"sepal.width"</span><span class="p">,</span><span class="s2">"petal.length"</span><span class="p">,</span><span class="s2">"petal.width"</span><span class="p">,</span><span class="s2">"variety"</span><span class="p">]],</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="s1">'sepal.length'</span><span class="p">,</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="s1">'sepal.width'</span><span class="p">,</span>
+                    <span class="n">z</span> <span class="o">=</span> <span class="s1">'petal.width'</span><span class="p">,</span>
+                    <span class="n">size</span> <span class="o">=</span> <span class="s1">'petal.length'</span><span class="p">,</span>
+                    <span class="n">color</span> <span class="o">=</span> <span class="s1">'variety'</span><span class="p">,</span>
+                    <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">margin</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'5d_iris_scatter.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<meta charset="utf-8"/>
+<div> <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <div class="plotly-graph-div" id="25df0faf-abc6-4eb9-ac8e-e4ca59d79153" style="height:100%; width:100%;"></div> <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("25df0faf-abc6-4eb9-ac8e-e4ca59d79153")) {                    Plotly.newPlot(                        "25df0faf-abc6-4eb9-ac8e-e4ca59d79153",                        [{"hovertemplate": "variety=Setosa<br>sepal.length=%{x}<br>sepal.width=%{y}<br>petal.width=%{z}<br>petal.length=%{marker.size}<extra></extra>", "legendgroup": "Setosa", "marker": {"color": "#636efa", "opacity": 0.7, "size": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.5, 1.7, 1.5, 1.0, 1.7, 1.9, 1.6, 1.6, 1.5, 1.4, 1.6, 1.6, 1.5, 1.5, 1.4, 1.5, 1.2, 1.3, 1.4, 1.3, 1.5, 1.3, 1.3, 1.3, 1.6, 1.9, 1.4, 1.6, 1.4, 1.5, 1.4], "sizemode": "area", "sizeref": 0.01725, "symbol": "circle"}, "mode": "markers", "name": "Setosa", "scene": "scene", "showlegend": true, "type": "scatter3d", "x": [5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5.1, 5.4, 5.1, 4.6, 5.1, 4.8, 5.0, 5.0, 5.2, 5.2, 4.7, 4.8, 5.4, 5.2, 5.5, 4.9, 5.0, 5.5, 4.9, 4.4, 5.1, 5.0, 4.5, 4.4, 5.0, 5.1, 4.8, 5.1, 4.6, 5.3, 5.0], "y": [3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8, 3.4, 3.7, 3.6, 3.3, 3.4, 3.0, 3.4, 3.5, 3.4, 3.2, 3.1, 3.4, 4.1, 4.2, 3.1, 3.2, 3.5, 3.6, 3.0, 3.4, 3.5, 2.3, 3.2, 3.5, 3.8, 3.0, 3.8, 3.2, 3.7, 3.3], "z": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2, 0.2, 0.2]}, {"hovertemplate": "variety=Versicolor<br>sepal.length=%{x}<br>sepal.width=%{y}<br>petal.width=%{z}<br>petal.length=%{marker.size}<extra></extra>", "legendgroup": "Versicolor", "marker": {"color": "#EF553B", "opacity": 0.7, "size": [4.7, 4.5, 4.9, 4.0, 4.6, 4.5, 4.7, 3.3, 4.6, 3.9, 3.5, 4.2, 4.0, 4.7, 3.6, 4.4, 4.5, 4.1, 4.5, 3.9, 4.8, 4.0, 4.9, 4.7, 4.3, 4.4, 4.8, 5.0, 4.5, 3.5, 3.8, 3.7, 3.9, 5.1, 4.5, 4.5, 4.7, 4.4, 4.1, 4.0, 4.4, 4.6, 4.0, 3.3, 4.2, 4.2, 4.2, 4.3, 3.0, 4.1], "sizemode": "area", "sizeref": 0.01725, "symbol": "circle"}, "mode": "markers", "name": "Versicolor", "scene": "scene", "showlegend": true, "type": "scatter3d", "x": [7.0, 6.4, 6.9, 5.5, 6.5, 5.7, 6.3, 4.9, 6.6, 5.2, 5.0, 5.9, 6.0, 6.1, 5.6, 6.7, 5.6, 5.8, 6.2, 5.6, 5.9, 6.1, 6.3, 6.1, 6.4, 6.6, 6.8, 6.7, 6.0, 5.7, 5.5, 5.5, 5.8, 6.0, 5.4, 6.0, 6.7, 6.3, 5.6, 5.5, 5.5, 6.1, 5.8, 5.0, 5.6, 5.7, 5.7, 6.2, 5.1, 5.7], "y": [3.2, 3.2, 3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2.0, 3.0, 2.2, 2.9, 2.9, 3.1, 3.0, 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3.0, 2.8, 3.0, 2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3.0, 3.4, 3.1, 2.3, 3.0, 2.5, 2.6, 3.0, 2.6, 2.3, 2.7, 3.0, 2.9, 2.9, 2.5, 2.8], "z": [1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3]}, {"hovertemplate": "variety=Virginica<br>sepal.length=%{x}<br>sepal.width=%{y}<br>petal.width=%{z}<br>petal.length=%{marker.size}<extra></extra>", "legendgroup": "Virginica", "marker": {"color": "#00cc96", "opacity": 0.7, "size": [6.0, 5.1, 5.9, 5.6, 5.8, 6.6, 4.5, 6.3, 5.8, 6.1, 5.1, 5.3, 5.5, 5.0, 5.1, 5.3, 5.5, 6.7, 6.9, 5.0, 5.7, 4.9, 6.7, 4.9, 5.7, 6.0, 4.8, 4.9, 5.6, 5.8, 6.1, 6.4, 5.6, 5.1, 5.6, 6.1, 5.6, 5.5, 4.8, 5.4, 5.6, 5.1, 5.1, 5.9, 5.7, 5.2, 5.0, 5.2, 5.4, 5.1], "sizemode": "area", "sizeref": 0.01725, "symbol": "circle"}, "mode": "markers", "name": "Virginica", "scene": "scene", "showlegend": true, "type": "scatter3d", "x": [6.3, 5.8, 7.1, 6.3, 6.5, 7.6, 4.9, 7.3, 6.7, 7.2, 6.5, 6.4, 6.8, 5.7, 5.8, 6.4, 6.5, 7.7, 7.7, 6.0, 6.9, 5.6, 7.7, 6.3, 6.7, 7.2, 6.2, 6.1, 6.4, 7.2, 7.4, 7.9, 6.4, 6.3, 6.1, 7.7, 6.3, 6.4, 6.0, 6.9, 6.7, 6.9, 5.8, 6.8, 6.7, 6.7, 6.3, 6.5, 6.2, 5.9], "y": [3.3, 2.7, 3.0, 2.9, 3.0, 3.0, 2.5, 2.9, 2.5, 3.6, 3.2, 2.7, 3.0, 2.5, 2.8, 3.2, 3.0, 3.8, 2.6, 2.2, 3.2, 2.8, 2.8, 2.7, 3.3, 3.2, 2.8, 3.0, 2.8, 3.0, 2.8, 3.8, 2.8, 2.8, 2.6, 3.0, 3.4, 3.1, 3.0, 3.1, 3.1, 3.1, 2.7, 3.2, 3.3, 3.0, 2.5, 3.0, 3.4, 3.0], "z": [2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8, 1.8, 2.5, 2.0, 1.9, 2.1, 2.0, 2.4, 2.3, 1.8, 2.2, 2.3, 1.5, 2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4, 2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8]}],                        {"legend": {"itemsizing": "constant", "title": {"text": "variety"}, "tracegroupgap": 0}, "margin": {"b": 0, "l": 0, "r": 0, "t": 0}, "scene": {"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "xaxis": {"title": {"text": "sepal.length"}}, "yaxis": {"title": {"text": "sepal.width"}}, "zaxis": {"title": {"text": "petal.width"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}},                        {"responsive": true}                    )                };                            </script> </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To try and make it easier for our 3D minds, let's just plot all the dimensions in a single plot so we can see which features correlate with each other. To do this, we'll use a scatter matrix (also known as a pairwise plot).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="s2">"sepal.width"</span><span class="p">,</span> <span class="s2">"sepal.length"</span><span class="p">,</span> <span class="s2">"petal.width"</span><span class="p">,</span> <span class="s2">"petal.length"</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">"variety"</span><span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'5d_scatter_matrix.html'</span><span class="p">,</span><span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<meta charset="utf-8"/>
+<div> <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <div class="plotly-graph-div" id="e4408c60-91fc-421d-a3b6-a66fddc8fb94" style="height:100%; width:100%;"></div> <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e4408c60-91fc-421d-a3b6-a66fddc8fb94")) {                    Plotly.newPlot(                        "e4408c60-91fc-421d-a3b6-a66fddc8fb94",                        [{"dimensions": [{"axis": {"matches": true}, "label": "sepal.width", "values": [3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8, 3.4, 3.7, 3.6, 3.3, 3.4, 3.0, 3.4, 3.5, 3.4, 3.2, 3.1, 3.4, 4.1, 4.2, 3.1, 3.2, 3.5, 3.6, 3.0, 3.4, 3.5, 2.3, 3.2, 3.5, 3.8, 3.0, 3.8, 3.2, 3.7, 3.3]}, {"axis": {"matches": true}, "label": "sepal.length", "values": [5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5.1, 5.4, 5.1, 4.6, 5.1, 4.8, 5.0, 5.0, 5.2, 5.2, 4.7, 4.8, 5.4, 5.2, 5.5, 4.9, 5.0, 5.5, 4.9, 4.4, 5.1, 5.0, 4.5, 4.4, 5.0, 5.1, 4.8, 5.1, 4.6, 5.3, 5.0]}, {"axis": {"matches": true}, "label": "petal.width", "values": [0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2, 0.2, 0.2]}, {"axis": {"matches": true}, "label": "petal.length", "values": [1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.5, 1.7, 1.5, 1.0, 1.7, 1.9, 1.6, 1.6, 1.5, 1.4, 1.6, 1.6, 1.5, 1.5, 1.4, 1.5, 1.2, 1.3, 1.4, 1.3, 1.5, 1.3, 1.3, 1.3, 1.6, 1.9, 1.4, 1.6, 1.4, 1.5, 1.4]}], "hovertemplate": "variety=Setosa<br>%{xaxis.title.text}=%{x}<br>%{yaxis.title.text}=%{y}<extra></extra>", "legendgroup": "Setosa", "marker": {"color": "#636efa", "symbol": "circle"}, "name": "Setosa", "showlegend": true, "type": "splom"}, {"dimensions": [{"axis": {"matches": true}, "label": "sepal.width", "values": [3.2, 3.2, 3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2.0, 3.0, 2.2, 2.9, 2.9, 3.1, 3.0, 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3.0, 2.8, 3.0, 2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3.0, 3.4, 3.1, 2.3, 3.0, 2.5, 2.6, 3.0, 2.6, 2.3, 2.7, 3.0, 2.9, 2.9, 2.5, 2.8]}, {"axis": {"matches": true}, "label": "sepal.length", "values": [7.0, 6.4, 6.9, 5.5, 6.5, 5.7, 6.3, 4.9, 6.6, 5.2, 5.0, 5.9, 6.0, 6.1, 5.6, 6.7, 5.6, 5.8, 6.2, 5.6, 5.9, 6.1, 6.3, 6.1, 6.4, 6.6, 6.8, 6.7, 6.0, 5.7, 5.5, 5.5, 5.8, 6.0, 5.4, 6.0, 6.7, 6.3, 5.6, 5.5, 5.5, 6.1, 5.8, 5.0, 5.6, 5.7, 5.7, 6.2, 5.1, 5.7]}, {"axis": {"matches": true}, "label": "petal.width", "values": [1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3]}, {"axis": {"matches": true}, "label": "petal.length", "values": [4.7, 4.5, 4.9, 4.0, 4.6, 4.5, 4.7, 3.3, 4.6, 3.9, 3.5, 4.2, 4.0, 4.7, 3.6, 4.4, 4.5, 4.1, 4.5, 3.9, 4.8, 4.0, 4.9, 4.7, 4.3, 4.4, 4.8, 5.0, 4.5, 3.5, 3.8, 3.7, 3.9, 5.1, 4.5, 4.5, 4.7, 4.4, 4.1, 4.0, 4.4, 4.6, 4.0, 3.3, 4.2, 4.2, 4.2, 4.3, 3.0, 4.1]}], "hovertemplate": "variety=Versicolor<br>%{xaxis.title.text}=%{x}<br>%{yaxis.title.text}=%{y}<extra></extra>", "legendgroup": "Versicolor", "marker": {"color": "#EF553B", "symbol": "circle"}, "name": "Versicolor", "showlegend": true, "type": "splom"}, {"dimensions": [{"axis": {"matches": true}, "label": "sepal.width", "values": [3.3, 2.7, 3.0, 2.9, 3.0, 3.0, 2.5, 2.9, 2.5, 3.6, 3.2, 2.7, 3.0, 2.5, 2.8, 3.2, 3.0, 3.8, 2.6, 2.2, 3.2, 2.8, 2.8, 2.7, 3.3, 3.2, 2.8, 3.0, 2.8, 3.0, 2.8, 3.8, 2.8, 2.8, 2.6, 3.0, 3.4, 3.1, 3.0, 3.1, 3.1, 3.1, 2.7, 3.2, 3.3, 3.0, 2.5, 3.0, 3.4, 3.0]}, {"axis": {"matches": true}, "label": "sepal.length", "values": [6.3, 5.8, 7.1, 6.3, 6.5, 7.6, 4.9, 7.3, 6.7, 7.2, 6.5, 6.4, 6.8, 5.7, 5.8, 6.4, 6.5, 7.7, 7.7, 6.0, 6.9, 5.6, 7.7, 6.3, 6.7, 7.2, 6.2, 6.1, 6.4, 7.2, 7.4, 7.9, 6.4, 6.3, 6.1, 7.7, 6.3, 6.4, 6.0, 6.9, 6.7, 6.9, 5.8, 6.8, 6.7, 6.7, 6.3, 6.5, 6.2, 5.9]}, {"axis": {"matches": true}, "label": "petal.width", "values": [2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8, 1.8, 2.5, 2.0, 1.9, 2.1, 2.0, 2.4, 2.3, 1.8, 2.2, 2.3, 1.5, 2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4, 2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8]}, {"axis": {"matches": true}, "label": "petal.length", "values": [6.0, 5.1, 5.9, 5.6, 5.8, 6.6, 4.5, 6.3, 5.8, 6.1, 5.1, 5.3, 5.5, 5.0, 5.1, 5.3, 5.5, 6.7, 6.9, 5.0, 5.7, 4.9, 6.7, 4.9, 5.7, 6.0, 4.8, 4.9, 5.6, 5.8, 6.1, 6.4, 5.6, 5.1, 5.6, 6.1, 5.6, 5.5, 4.8, 5.4, 5.6, 5.1, 5.1, 5.9, 5.7, 5.2, 5.0, 5.2, 5.4, 5.1]}], "hovertemplate": "variety=Virginica<br>%{xaxis.title.text}=%{x}<br>%{yaxis.title.text}=%{y}<extra></extra>", "legendgroup": "Virginica", "marker": {"color": "#00cc96", "symbol": "circle"}, "name": "Virginica", "showlegend": true, "type": "splom"}],                        {"dragmode": "select", "legend": {"title": {"text": "variety"}, "tracegroupgap": 0}, "margin": {"t": 60}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}},                        {"responsive": true}                    )                };                            </script> </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>By looking at this plots we can see that one species of flower is well separated from the others, while the others are mixed and overlapped for every pair of features. But if we use <code>petal length and width</code> that'll give us a nice separation between the species, and we'll train our first model on specifically these two features. This is known as feature selection.</p>
+<h2 id="Building-the-Model">Building the Model<a class="anchor-link" href="#Building-the-Model">¶</a></h2><p>Now it's time to prepare the data for our model, and create the model. We do this by creating tensors of the input and output data. A tensor is a general term for data with any amount of dimesion. A 2D tensor is commonly referred to as a vector, and a 1D tensor as a scalar, if that helps to think of these things as. Almost everything we'll come across in the world of machine learning makes use of tensors in one form or another.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">selected_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'petal.length'</span><span class="p">,</span> <span class="s1">'petal.width'</span><span class="p">]</span>
+
+<span class="n">input_columns_all</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">'float'</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">input_columns</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="n">selected_features</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">output_columns</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">'variety'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'category'</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input columns all: "</span><span class="p">,</span> <span class="n">input_columns_all</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">input_columns_all</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Input columns: "</span><span class="p">,</span> <span class="n">input_columns</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">input_columns</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Output columns: "</span><span class="p">,</span> <span class="n">output_columns</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">output_columns</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TensorDataset</span><span class="p">(</span><span class="n">input_columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Input columns all:  torch.Size([150, 4]) torch.float32
+Input columns:  torch.Size([150, 2]) torch.float32
+Output columns:  torch.Size([150]) torch.int8
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As mentioned before, it's time to split up the dataset into a train, validation and test set. We'll use a split of 70-20-10 for these and make use of the <code>random_split</code> tool in PyTorch to randomize which records fall into each set.</p>
+<p>Since we're using PyTorch we need to make this data iterable using <code>DataLoader</code>, and to enable many other features like shuffling, mapping and more. This also enables us to generate batches to train on.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">split</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">test_split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rows</span><span class="o">*</span><span class="n">split</span><span class="p">)</span>
+<span class="n">val_split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rows</span><span class="o">*</span><span class="n">split</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">train_split</span> <span class="o">=</span> <span class="n">rows</span> <span class="o">-</span> <span class="n">val_split</span> <span class="o">-</span> <span class="n">test_split</span>
+
+<span class="n">train_set</span><span class="p">,</span> <span class="n">val_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="n">train_split</span><span class="p">,</span> <span class="n">val_split</span><span class="p">,</span> <span class="n">test_split</span><span class="p">])</span>
+
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">val_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">val_set</span><span class="p">)</span> 
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally let's create the model! We do this by extending the <code>Module</code> class from within PyTorch, from the perspective of neural networks this could be seen as a single layer net. The class needs instructions on what to do when it's created and this is the <code>__init__</code> dunder method. With a single 'layer' inside it which makes use of the <code>Linear</code> module from PyTorch. The <code>Linear</code> module will return probabilities for each dimension in the vector that we provide. This just means that if we give it 2 things to compare against, it'll give us the probability of either one. Next up we have the forward method, which returns the output of the model.</p>
+<p>The next two methods, <code>training_step</code> and <code>validation_step</code> are what we'll be using for each respective step in the project process later on. <code>training_step</code> evaluates the given batch through the model and calculates the cross entropy loss for said batch. Cross entropy loss is the predicted probability compared to how far that is from the actual value.</p>
+<p><code>validation_step</code> repeats the same as <code>training_step</code> but also calculates the accuracy of the model by the count of correct predictions divided by the number of predictions.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LogisticRegression</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dimension</span><span class="p">,</span> <span class="n">output_dimension</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticRegression</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dimension</span><span class="p">,</span> <span class="n">output_dimension</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">outputs</span>
+
+    <span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">targets</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">loss</span>
+
+    <span class="k">def</span> <span class="nf">validation_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">targets</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Calculate the number of correct predictions over the number of predictions</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pred</span><span class="o">==</span><span class="n">targets</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">))</span>
+        <span class="c1"># Detached is used here so the values aren't included in the gradient calculation</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">loss</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">detach</span><span class="p">()]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we need a way to:</p>
+<ol>
+<li>Evaluate how well our model is performing on a dataset</li>
+<li>Train the model on a dataset</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">validation_step</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span> <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">]</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">loss</span><span class="p">,</span> <span class="n">accuracy</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">accuracy</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We fit the model by using the Adam optimizer (which could be replaced with something like gradient descent or otherwise), for a number of epochs (rounds) over the batches in the data. For each epoch, the losses from each batch are used to calculate the gradient, which in turn gets fed into the optimizer to tune the model parameters before moving onto the next batch. To ensure gradients aren't being messed up, we reset them before each batch and then we validate how well our model is performing on the validation set.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">optimizer_function</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">):</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"loss"</span> <span class="p">:</span> <span class="p">[],</span> <span class="s2">"accuracy"</span> <span class="p">:</span> <span class="p">[]}</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer_function</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">learning_rate</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Epoch "</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+        <span class="c1">#Train</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">training_step</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="c1">#Validate</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>
+            <span class="n">loss</span><span class="p">,</span> <span class="n">accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"loss: "</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s2">"accuracy: "</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">"loss"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">"accuracy"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+         
+    <span class="k">return</span> <span class="n">history</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>At last we can train the model and see how well it performs on the test set!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_features</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
+<span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">)</span>
+<span class="n">loss</span> <span class="p">,</span> <span class="n">accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Evaluation result: Loss: "</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s2">" Accuracy: "</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch  0
+loss:  1.3733323812484741 accuracy:  0.46666666865348816 
+
+Epoch  1
+loss:  1.1744035482406616 accuracy:  0.46666666865348816 
+
+Epoch  2
+loss:  1.032265067100525 accuracy:  0.5 
+
+Epoch  3
+loss:  0.9222539067268372 accuracy:  0.5333333611488342 
+
+Epoch  4
+loss:  0.857440173625946 accuracy:  0.46666666865348816 
+
+Epoch  5
+loss:  0.856093168258667 accuracy:  0.46666666865348816 
+
+Epoch  6
+loss:  0.9064297080039978 accuracy:  0.5 
+
+Epoch  7
+loss:  0.9493064880371094 accuracy:  0.3333333432674408 
+
+Epoch  8
+loss:  0.937039315700531 accuracy:  0.3333333432674408 
+
+Epoch  9
+loss:  0.9049575924873352 accuracy:  0.36666667461395264 
+
+Epoch  10
+loss:  0.866532027721405 accuracy:  0.4000000059604645 
+
+Epoch  11
+loss:  0.8370420932769775 accuracy:  0.5 
+
+Epoch  12
+loss:  0.8083135485649109 accuracy:  0.5333333611488342 
+
+Epoch  13
+loss:  0.7867664694786072 accuracy:  0.6000000238418579 
+
+Epoch  14
+loss:  0.7874231934547424 accuracy:  0.6000000238418579 
+
+Epoch  15
+loss:  0.7854987978935242 accuracy:  0.6000000238418579 
+
+Epoch  16
+loss:  0.7603756189346313 accuracy:  0.7666666507720947 
+
+Epoch  17
+loss:  0.7459529638290405 accuracy:  0.800000011920929 
+
+Epoch  18
+loss:  0.7309216856956482 accuracy:  0.8333333134651184 
+
+Epoch  19
+loss:  0.7397978901863098 accuracy:  0.7666666507720947 
+
+Epoch  20
+loss:  0.7362257838249207 accuracy:  0.699999988079071 
+
+Epoch  21
+loss:  0.721867561340332 accuracy:  0.800000011920929 
+
+Epoch  22
+loss:  0.7000483274459839 accuracy:  0.8666666746139526 
+
+Epoch  23
+loss:  0.6850998997688293 accuracy:  0.8999999761581421 
+
+Epoch  24
+loss:  0.674744725227356 accuracy:  0.8999999761581421 
+
+Epoch  25
+loss:  0.6608838438987732 accuracy:  0.8999999761581421 
+
+Epoch  26
+loss:  0.657321035861969 accuracy:  0.9333333373069763 
+
+Epoch  27
+loss:  0.652073860168457 accuracy:  0.9333333373069763 
+
+Epoch  28
+loss:  0.6370083093643188 accuracy:  0.9333333373069763 
+
+Epoch  29
+loss:  0.6409473419189453 accuracy:  0.9666666388511658 
+
+Epoch  30
+loss:  0.6353674530982971 accuracy:  0.9333333373069763 
+
+Epoch  31
+loss:  0.6202357411384583 accuracy:  0.9666666388511658 
+
+Epoch  32
+loss:  0.6090561151504517 accuracy:  0.9333333373069763 
+
+Epoch  33
+loss:  0.616327166557312 accuracy:  0.8999999761581421 
+
+Epoch  34
+loss:  0.6013180017471313 accuracy:  0.9666666388511658 
+
+Epoch  35
+loss:  0.5989049077033997 accuracy:  0.9666666388511658 
+
+Epoch  36
+loss:  0.585862398147583 accuracy:  0.9666666388511658 
+
+Epoch  37
+loss:  0.5751062035560608 accuracy:  0.9666666388511658 
+
+Epoch  38
+loss:  0.5739135146141052 accuracy:  0.9666666388511658 
+
+Epoch  39
+loss:  0.5716326832771301 accuracy:  0.9666666388511658 
+
+Epoch  40
+loss:  0.5674498677253723 accuracy:  0.9666666388511658 
+
+Epoch  41
+loss:  0.5521577596664429 accuracy:  0.9666666388511658 
+
+Epoch  42
+loss:  0.5762258172035217 accuracy:  0.9333333373069763 
+
+Epoch  43
+loss:  0.5774533748626709 accuracy:  0.8666666746139526 
+
+Epoch  44
+loss:  0.5612514019012451 accuracy:  0.9333333373069763 
+
+Epoch  45
+loss:  0.5368048548698425 accuracy:  0.9666666388511658 
+
+Epoch  46
+loss:  0.5354655981063843 accuracy:  0.9666666388511658 
+
+Epoch  47
+loss:  0.5438606142997742 accuracy:  0.9333333373069763 
+
+Epoch  48
+loss:  0.5306044816970825 accuracy:  0.9666666388511658 
+
+Epoch  49
+loss:  0.5160161852836609 accuracy:  0.9666666388511658 
+
+Epoch  50
+loss:  0.5150001645088196 accuracy:  0.9666666388511658 
+
+Epoch  51
+loss:  0.5204880237579346 accuracy:  0.9666666388511658 
+
+Epoch  52
+loss:  0.5257148146629333 accuracy:  0.9666666388511658 
+
+Epoch  53
+loss:  0.5144279599189758 accuracy:  0.9666666388511658 
+
+Epoch  54
+loss:  0.5133593678474426 accuracy:  0.9666666388511658 
+
+Epoch  55
+loss:  0.5049706697463989 accuracy:  0.9666666388511658 
+
+Epoch  56
+loss:  0.4992431104183197 accuracy:  0.9666666388511658 
+
+Epoch  57
+loss:  0.48528751730918884 accuracy:  0.9666666388511658 
+
+Epoch  58
+loss:  0.4979083240032196 accuracy:  0.9666666388511658 
+
+Epoch  59
+loss:  0.4917204678058624 accuracy:  0.9666666388511658 
+
+Epoch  60
+loss:  0.4880892336368561 accuracy:  0.9666666388511658 
+
+Epoch  61
+loss:  0.4772476553916931 accuracy:  0.9666666388511658 
+
+Epoch  62
+loss:  0.48232564330101013 accuracy:  0.9666666388511658 
+
+Epoch  63
+loss:  0.4626544415950775 accuracy:  0.9666666388511658 
+
+Epoch  64
+loss:  0.460956871509552 accuracy:  0.9666666388511658 
+
+Epoch  65
+loss:  0.47053277492523193 accuracy:  0.9666666388511658 
+
+Epoch  66
+loss:  0.47045251727104187 accuracy:  1.0 
+
+Epoch  67
+loss:  0.4672728478908539 accuracy:  1.0 
+
+Epoch  68
+loss:  0.46997493505477905 accuracy:  1.0 
+
+Epoch  69
+loss:  0.4581855535507202 accuracy:  0.9666666388511658 
+
+Epoch  70
+loss:  0.45587196946144104 accuracy:  0.9666666388511658 
+
+Epoch  71
+loss:  0.45518845319747925 accuracy:  1.0 
+
+Epoch  72
+loss:  0.43724337220191956 accuracy:  0.9666666388511658 
+
+Epoch  73
+loss:  0.44379836320877075 accuracy:  0.9666666388511658 
+
+Epoch  74
+loss:  0.4456246495246887 accuracy:  1.0 
+
+Epoch  75
+loss:  0.4562903046607971 accuracy:  1.0 
+
+Epoch  76
+loss:  0.440542608499527 accuracy:  1.0 
+
+Epoch  77
+loss:  0.45213446021080017 accuracy:  1.0 
+
+Epoch  78
+loss:  0.44089940190315247 accuracy:  1.0 
+
+Epoch  79
+loss:  0.4321136474609375 accuracy:  1.0 
+
+Epoch  80
+loss:  0.4313907027244568 accuracy:  1.0 
+
+Epoch  81
+loss:  0.4239611327648163 accuracy:  0.9666666388511658 
+
+Epoch  82
+loss:  0.4376215636730194 accuracy:  1.0 
+
+Epoch  83
+loss:  0.42454618215560913 accuracy:  1.0 
+
+Epoch  84
+loss:  0.4141182601451874 accuracy:  0.9666666388511658 
+
+Epoch  85
+loss:  0.4074815809726715 accuracy:  0.9666666388511658 
+
+Epoch  86
+loss:  0.42338821291923523 accuracy:  1.0 
+
+Epoch  87
+loss:  0.43143796920776367 accuracy:  1.0 
+
+Epoch  88
+loss:  0.41920754313468933 accuracy:  1.0 
+
+Epoch  89
+loss:  0.4175216555595398 accuracy:  1.0 
+
+Epoch  90
+loss:  0.3996005356311798 accuracy:  0.9666666388511658 
+
+Epoch  91
+loss:  0.391110360622406 accuracy:  0.9666666388511658 
+
+Epoch  92
+loss:  0.41220948100090027 accuracy:  1.0 
+
+Epoch  93
+loss:  0.4087773263454437 accuracy:  1.0 
+
+Epoch  94
+loss:  0.40749818086624146 accuracy:  1.0 
+
+Epoch  95
+loss:  0.3955965042114258 accuracy:  1.0 
+
+Epoch  96
+loss:  0.395894855260849 accuracy:  1.0 
+
+Epoch  97
+loss:  0.399051696062088 accuracy:  1.0 
+
+Epoch  98
+loss:  0.39189818501472473 accuracy:  1.0 
+
+Epoch  99
+loss:  0.38788095116615295 accuracy:  1.0 
+
+Evaluation result: Loss:  0.3645802438259125  Accuracy:  0.9333333373069763
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see after 100 epochs, we've got an accuracy of 93.3%! Now let's give it a go if it was using all the features (with no feature selection).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">data_all</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TensorDataset</span><span class="p">(</span><span class="n">input_columns_all</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">)</span>
+
+<span class="c1">#train_split, val_split and test_split defined earlier</span>
+<span class="n">train_set_all</span><span class="p">,</span> <span class="n">val_set_all</span><span class="p">,</span> <span class="n">test_set_all</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="n">data_all</span><span class="p">,</span> <span class="p">[</span><span class="n">train_split</span><span class="p">,</span> <span class="n">val_split</span><span class="p">,</span> <span class="n">test_split</span><span class="p">])</span>
+
+<span class="n">train_loader_all</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set_all</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">val_loader_all</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">val_set_all</span><span class="p">)</span>
+<span class="n">test_loader_all</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">test_set_all</span><span class="p">)</span>
+
+<span class="n">model_all</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
+<span class="n">history_all</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">model_all</span><span class="p">,</span> <span class="n">train_loader_all</span><span class="p">,</span> <span class="n">val_loader_all</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">)</span>
+<span class="n">loss</span> <span class="p">,</span> <span class="n">accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model_all</span><span class="p">,</span> <span class="n">test_loader_all</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Evaluation result: Loss: "</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s2">" Accuracy: "</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch  0
+loss:  1.0380855798721313 accuracy:  0.4333333373069763 
+
+Epoch  1
+loss:  0.9261402487754822 accuracy:  0.5 
+
+Epoch  2
+loss:  0.9148039221763611 accuracy:  0.6666666865348816 
+
+Epoch  3
+loss:  0.8054198026657104 accuracy:  0.6000000238418579 
+
+Epoch  4
+loss:  0.7064180374145508 accuracy:  0.5 
+
+Epoch  5
+loss:  0.6529492735862732 accuracy:  0.7666666507720947 
+
+Epoch  6
+loss:  0.6175327301025391 accuracy:  0.800000011920929 
+
+Epoch  7
+loss:  0.5992363095283508 accuracy:  0.8999999761581421 
+
+Epoch  8
+loss:  0.569818377494812 accuracy:  0.8999999761581421 
+
+Epoch  9
+loss:  0.5336132049560547 accuracy:  0.800000011920929 
+
+Epoch  10
+loss:  0.5291264057159424 accuracy:  0.8999999761581421 
+
+Epoch  11
+loss:  0.5121068358421326 accuracy:  0.8999999761581421 
+
+Epoch  12
+loss:  0.4883791506290436 accuracy:  0.8333333134651184 
+
+Epoch  13
+loss:  0.4751811921596527 accuracy:  0.8333333134651184 
+
+Epoch  14
+loss:  0.47150567173957825 accuracy:  0.8999999761581421 
+
+Epoch  15
+loss:  0.46534866094589233 accuracy:  0.9333333373069763 
+
+Epoch  16
+loss:  0.46108758449554443 accuracy:  0.9333333373069763 
+
+Epoch  17
+loss:  0.4389108121395111 accuracy:  0.8333333134651184 
+
+Epoch  18
+loss:  0.43451133370399475 accuracy:  0.8666666746139526 
+
+Epoch  19
+loss:  0.43520790338516235 accuracy:  0.9333333373069763 
+
+Epoch  20
+loss:  0.4287680685520172 accuracy:  0.9333333373069763 
+
+Epoch  21
+loss:  0.4153631925582886 accuracy:  0.8666666746139526 
+
+Epoch  22
+loss:  0.4099046587944031 accuracy:  0.8666666746139526 
+
+Epoch  23
+loss:  0.41186949610710144 accuracy:  0.9333333373069763 
+
+Epoch  24
+loss:  0.40758344531059265 accuracy:  0.9333333373069763 
+
+Epoch  25
+loss:  0.40735262632369995 accuracy:  0.9333333373069763 
+
+Epoch  26
+loss:  0.38762298226356506 accuracy:  0.8666666746139526 
+
+Epoch  27
+loss:  0.3855837285518646 accuracy:  0.8999999761581421 
+
+Epoch  28
+loss:  0.3935543894767761 accuracy:  0.9333333373069763 
+
+Epoch  29
+loss:  0.385096937417984 accuracy:  0.9333333373069763 
+
+Epoch  30
+loss:  0.3809642493724823 accuracy:  0.9333333373069763 
+
+Epoch  31
+loss:  0.36828091740608215 accuracy:  0.8666666746139526 
+
+Epoch  32
+loss:  0.3706659972667694 accuracy:  0.9333333373069763 
+
+Epoch  33
+loss:  0.3665415346622467 accuracy:  0.9333333373069763 
+
+Epoch  34
+loss:  0.36496639251708984 accuracy:  0.9333333373069763 
+
+Epoch  35
+loss:  0.3568505048751831 accuracy:  0.9333333373069763 
+
+Epoch  36
+loss:  0.3588642179965973 accuracy:  0.9333333373069763 
+
+Epoch  37
+loss:  0.3553452789783478 accuracy:  0.9333333373069763 
+
+Epoch  38
+loss:  0.34953799843788147 accuracy:  0.9333333373069763 
+
+Epoch  39
+loss:  0.3425033688545227 accuracy:  0.9333333373069763 
+
+Epoch  40
+loss:  0.34755852818489075 accuracy:  0.9333333373069763 
+
+Epoch  41
+loss:  0.34882432222366333 accuracy:  0.8999999761581421 
+
+Epoch  42
+loss:  0.33427709341049194 accuracy:  0.9333333373069763 
+
+Epoch  43
+loss:  0.3302716612815857 accuracy:  0.9333333373069763 
+
+Epoch  44
+loss:  0.3407600522041321 accuracy:  0.8999999761581421 
+
+Epoch  45
+loss:  0.33250272274017334 accuracy:  0.9333333373069763 
+
+Epoch  46
+loss:  0.3252996802330017 accuracy:  0.9333333373069763 
+
+Epoch  47
+loss:  0.32019010186195374 accuracy:  0.9333333373069763 
+
+Epoch  48
+loss:  0.3239607512950897 accuracy:  0.9333333373069763 
+
+Epoch  49
+loss:  0.32058006525039673 accuracy:  0.9333333373069763 
+
+Epoch  50
+loss:  0.3138344883918762 accuracy:  0.9333333373069763 
+
+Epoch  51
+loss:  0.3136472702026367 accuracy:  0.9333333373069763 
+
+Epoch  52
+loss:  0.3152977228164673 accuracy:  0.8999999761581421 
+
+Epoch  53
+loss:  0.3074900507926941 accuracy:  0.9333333373069763 
+
+Epoch  54
+loss:  0.3046126961708069 accuracy:  0.9333333373069763 
+
+Epoch  55
+loss:  0.3030826151371002 accuracy:  0.9333333373069763 
+
+Epoch  56
+loss:  0.30254852771759033 accuracy:  0.9333333373069763 
+
+Epoch  57
+loss:  0.29916849732398987 accuracy:  0.9333333373069763 
+
+Epoch  58
+loss:  0.30322736501693726 accuracy:  0.8999999761581421 
+
+Epoch  59
+loss:  0.2978363633155823 accuracy:  0.8999999761581421 
+
+Epoch  60
+loss:  0.2937186360359192 accuracy:  0.9333333373069763 
+
+Epoch  61
+loss:  0.2903176546096802 accuracy:  0.9333333373069763 
+
+Epoch  62
+loss:  0.2933221757411957 accuracy:  0.8999999761581421 
+
+Epoch  63
+loss:  0.29069578647613525 accuracy:  0.8999999761581421 
+
+Epoch  64
+loss:  0.2844267785549164 accuracy:  0.9333333373069763 
+
+Epoch  65
+loss:  0.2835501730442047 accuracy:  0.9333333373069763 
+
+Epoch  66
+loss:  0.28674691915512085 accuracy:  0.8999999761581421 
+
+Epoch  67
+loss:  0.2814694344997406 accuracy:  0.8999999761581421 
+
+Epoch  68
+loss:  0.27780818939208984 accuracy:  0.9333333373069763 
+
+Epoch  69
+loss:  0.2762349247932434 accuracy:  0.9333333373069763 
+
+Epoch  70
+loss:  0.2745935618877411 accuracy:  0.9333333373069763 
+
+Epoch  71
+loss:  0.2776546776294708 accuracy:  0.8999999761581421 
+
+Epoch  72
+loss:  0.27241477370262146 accuracy:  0.9333333373069763 
+
+Epoch  73
+loss:  0.26993533968925476 accuracy:  0.9333333373069763 
+
+Epoch  74
+loss:  0.2688852846622467 accuracy:  0.9333333373069763 
+
+Epoch  75
+loss:  0.26922425627708435 accuracy:  0.8999999761581421 
+
+Epoch  76
+loss:  0.2651296854019165 accuracy:  0.9333333373069763 
+
+Epoch  77
+loss:  0.26544901728630066 accuracy:  0.8999999761581421 
+
+Epoch  78
+loss:  0.26239722967147827 accuracy:  0.9333333373069763 
+
+Epoch  79
+loss:  0.26078179478645325 accuracy:  0.9333333373069763 
+
+Epoch  80
+loss:  0.26017817854881287 accuracy:  0.8999999761581421 
+
+Epoch  81
+loss:  0.259433776140213 accuracy:  0.8999999761581421 
+
+Epoch  82
+loss:  0.2574969530105591 accuracy:  0.8999999761581421 
+
+Epoch  83
+loss:  0.25558483600616455 accuracy:  0.9333333373069763 
+
+Epoch  84
+loss:  0.2546296715736389 accuracy:  0.8999999761581421 
+
+Epoch  85
+loss:  0.2527022659778595 accuracy:  0.9333333373069763 
+
+Epoch  86
+loss:  0.2516855299472809 accuracy:  0.9333333373069763 
+
+Epoch  87
+loss:  0.2514974772930145 accuracy:  0.8999999761581421 
+
+Epoch  88
+loss:  0.2494964450597763 accuracy:  0.9333333373069763 
+
+Epoch  89
+loss:  0.25158631801605225 accuracy:  0.8999999761581421 
+
+Epoch  90
+loss:  0.246656596660614 accuracy:  0.9333333373069763 
+
+Epoch  91
+loss:  0.24590688943862915 accuracy:  0.8999999761581421 
+
+Epoch  92
+loss:  0.24534302949905396 accuracy:  0.8999999761581421 
+
+Epoch  93
+loss:  0.24302555620670319 accuracy:  0.9333333373069763 
+
+Epoch  94
+loss:  0.2425689548254013 accuracy:  0.8999999761581421 
+
+Epoch  95
+loss:  0.24102306365966797 accuracy:  0.8999999761581421 
+
+Epoch  96
+loss:  0.23951323330402374 accuracy:  0.8999999761581421 
+
+Epoch  97
+loss:  0.23847466707229614 accuracy:  0.9333333373069763 
+
+Epoch  98
+loss:  0.23755855858325958 accuracy:  0.8999999761581421 
+
+Epoch  99
+loss:  0.23631232976913452 accuracy:  0.8999999761581421 
+
+Evaluation result: Loss:  0.16669009625911713  Accuracy:  1.0
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Wow! Using all the features got us 100% accuracy on the test set, this doesn't mean that always using all features will lead to this. It's a combination of balancing batch size, learning rates, epochs and more to get the right model for a situation.</p>
+</div>
+</div>
+</div></body>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/python.html">python</a>
+      <a href="https://jackmckew.dev/tag/visualisation.html">visualisation</a>
+      <a href="https://jackmckew.dev/tag/machine-learning.html">machine learning</a>
+      <a href="https://jackmckew.dev/tag/ai.html">ai</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/australia-post-codes-connected.html" title="Australia Post Codes Connected">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/optimization-gotchas-in-postgis-for-geospatial-queries.html" title="Optimization Gotchas in PostGIS for Geospatial Queries">
+       Next Post <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
+      <li><a href="https://jackmckew.dev/differential-privacy.html">Differential Privacy</a></li>
+      <li><a href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html">Shallow vs Deep Copy in Python</a></li>
+      <li><a href="https://jackmckew.dev/types-of-averages-means.html">Types of Averages (Means)</a></li>
+      <li><a href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html">Dataclasses vs Attrs vs Pydantic</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>

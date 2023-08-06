@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2023-08-06T15:26:16-00:00</lastmod>
+<lastmod>2023-08-06T15:34:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2023-08-06T15:26:16-00:00</lastmod>
+<lastmod>2023-08-06T15:34:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2023-08-06T15:26:16-00:00</lastmod>
+<lastmod>2023-08-06T15:34:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2023-08-06T15:26:16-00:00</lastmod>
+<lastmod>2023-08-06T15:34:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -48,6 +48,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jackmckew.dev/optimization-gotchas-in-postgis-for-geospatial-queries.html</loc>
 <lastmod>2023-07-11T00:00:00+10:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/hands-on-machine-learning-with-pytorch-logistic-regression.html</loc>
+<lastmod>2023-07-06T00:00:00+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -782,7 +789,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/data-science.html</loc>
-<lastmod>2020-12-18T00:00:00+10:05</lastmod>
+<lastmod>2023-07-06T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -845,7 +852,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/python.html</loc>
-<lastmod>2023-05-29T00:00:00+10:05</lastmod>
+<lastmod>2023-07-06T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -880,14 +887,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/tag/python.html</loc>
-<lastmod>2023-05-29T00:00:00+10:05</lastmod>
+<lastmod>2023-07-06T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tag/visualisation.html</loc>
-<lastmod>2023-05-29T00:00:00+10:05</lastmod>
+<lastmod>2023-07-06T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/machine-learning.html</loc>
+<lastmod>2023-07-06T00:00:00+10:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/tag/ai.html</loc>
+<lastmod>2023-07-06T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -999,13 +1020,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/tag/machinelearning.html</loc>
-<lastmod>2019-10-12T15:00:00+10:05</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.6</priority>
-</url>
-
-<url>
-<loc>https://jackmckew.dev/tag/ai.html</loc>
 <lastmod>2019-10-12T15:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
