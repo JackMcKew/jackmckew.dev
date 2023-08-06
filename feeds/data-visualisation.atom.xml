@@ -4,7 +4,7 @@
 &lt;p&gt;Next in the &lt;code&gt;draw&lt;/code&gt; function, which is repeatedly called while the browser has the page open, we loop through all the objects in the array and draw a circle (ellipse with equal radii) and colour it according to how big it's radius is (this is as to watch it fade as it grows). We make use of the &lt;code&gt;stroke&lt;/code&gt; function to define the colour of the lines for what we'll be drawing in that instance. If a drop has become too big we remove it from the array and add a new random drop, if it's still undersize we increase it's radius and colour.&lt;/p&gt;
 &lt;p&gt;Finally to add interactivity, we make use of the &lt;code&gt;mouseIsPressed&lt;/code&gt; variable to determine if the user has clicked on the visualization and add a drop into the array at the X &amp;amp; Y position of where the user clicked.&lt;/p&gt;
 &lt;p align="center"&gt;&lt;iframe frameborder="0" height="400" src="https://editor.p5js.org/JackMcKew/embed/u2ga-k6rk" width="100%"&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -158,7 +158,7 @@
 &lt;/blockquote&gt;
 &lt;h2 id="applications-for-random-walk"&gt;Applications for Random Walk&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;This is all well and good for making funky pictures, but what can this actually be used for?&lt;/em&gt;&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Field&lt;/th&gt;

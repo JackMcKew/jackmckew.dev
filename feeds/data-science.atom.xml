@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2020-12-18T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Differential Privacy</title><link href="https://jackmckew.dev/differential-privacy.html" rel="alternate"></link><published>2020-12-18T00:00:00+11:00</published><updated>2020-12-18T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-18:/differential-privacy.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - data science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-08-06T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Obscure Units Calculator</title><link href="https://jackmckew.dev/obscure-units-calculator.html" rel="alternate"></link><published>2023-08-06T00:00:00+10:00</published><updated>2023-08-06T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-08-06:/obscure-units-calculator.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Today we're going to go down a random thought, and build a obscure unit calculator, where you can referene a distance in the most obscure way possible!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Above is GIF for sharing on social media, see the interactive version below.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id="controls-container"&gt;
+&lt;label for="target-number"&gt;Enter target distance (in metres):&lt;/label&gt;
+&lt;input id="target-number" placeholder="Target distance (m)" type="number"/&gt;
+&lt;br/&gt;
+&lt;input onclick="findCombinations()" type="submit" value="Find Combinations"/&gt;
+&lt;br/&gt;
+&lt;table class="table center table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Count&lt;/th&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Photo&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody id="table-body"&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;There's a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Today we're going to go down a random thought, and build a obscure unit calculator, where you can referene a distance in the most obscure way possible!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Above is GIF for sharing on social media, see the interactive version below.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id="controls-container"&gt;
+&lt;label for="target-number"&gt;Enter target distance (in metres):&lt;/label&gt;
+&lt;input id="target-number" placeholder="Target distance (m)" type="number"/&gt;
+&lt;br/&gt;
+&lt;input onclick="findCombinations()" type="submit" value="Find Combinations"/&gt;
+&lt;br/&gt;
+&lt;table class="table center table-striped"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Count&lt;/th&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Photo&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody id="table-body"&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;There's a few things we need to do to get this working (and you can see my working out in this repo!):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Scrape a bunch of distances for common objects, I chose animals from &lt;a href="https://www.dimensions.com/"&gt;https://www.dimensions.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Format that data into a workable data structure (this included the biggest regex of my life)&lt;/li&gt;
+&lt;li&gt;Create an implementation of a greedy algorithm to return our results&lt;/li&gt;
+&lt;li&gt;Show this to the user!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Our greedy algorithm will be attempting to find a set of combinations which sum up to the input target, and to allow flexibilty with our dataset, I've opted to also allow the algorithm to use multiples of the input combinations, and for some variety, we use a random selection each time as our base.&lt;/p&gt;
+&lt;p&gt;To spice it up, I've also included Unsplash API to add images to the calculator to bring them to life, but sometimes this returns entirely different images, which I think adds to the fun.&lt;/p&gt;
+&lt;p&gt;The source code is provided below with comments which align with the steps above.&lt;/p&gt;
+&lt;p&gt;Javascript Source(s):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/js/obscure-units.js"&gt;obscure-units.js&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CSS Source(s):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/css/obscure-units.css"&gt;obscure-units.css&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category><category term="data-science"></category></entry><entry><title>Differential Privacy</title><link href="https://jackmckew.dev/differential-privacy.html" rel="alternate"></link><published>2020-12-18T00:00:00+11:00</published><updated>2020-12-18T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-12-18:/differential-privacy.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;It's quite clear in today's age that the biggest companies in the world, make most of their profits from harvesting and productionalising their user's data. With privacy becoming more and more of a concern in everyday life as we become more connected, it's almost becoming a human right for our …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
@@ -70,7 +129,7 @@
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -5201,7 +5260,7 @@ Harmonic Mean: 15.05101860509987
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table-striped table"&gt;
+&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
 &lt;thead&gt;&lt;tr&gt;
 &lt;th&gt;Feature&lt;/th&gt;
 &lt;th style="text-align:center"&gt;Dataclass&lt;/th&gt;
@@ -5684,231 +5743,6 @@ x
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;As we can see above, it gives the developers a nicely formatted error message when the data validation failed, and smoothly sanitises the input when it needs to.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Generators in Python</title><link href="https://jackmckew.dev/generators-in-python.html" rel="alternate"></link><published>2020-07-30T00:00:00+10:00</published><updated>2020-07-30T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-07-30:/generators-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Generators are a special type of function in python, letting you 'lazy load' data; a function becomes a generator is with the &lt;code&gt;yield&lt;/code&gt; statement. Lazy loading is when you access just a portion of a data set that you are interested in (eg, the part you are working with), as opposed to loading the entire data set. While this gives marginal increases in efficiency/speed with small data sets, it can provide dramatic improvements on larger data sets; especially if you are using a system with limited memory.&lt;/p&gt;
-&lt;p&gt;Before we dive into some examples on where you could use generators, let's look where you should &lt;strong&gt;not&lt;/strong&gt; use generators:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;the data needs to be accessed &lt;strong&gt;multiple&lt;/strong&gt; times (eg, &lt;code&gt;join&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;need to access the data &lt;strong&gt;randomly&lt;/strong&gt; (or any other method of access that's not forward)&lt;/li&gt;
-&lt;li&gt;using a different compiler&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Some examples where you should use generators are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;you don't know if you'll need &lt;strong&gt;all&lt;/strong&gt; the results&lt;/li&gt;
-&lt;li&gt;you don't want to allocate all the results into memory&lt;/li&gt;
-&lt;li&gt;you don't know how many results there may be (eg, user interaction)&lt;/li&gt;
-&lt;li&gt;a potentially infinite series&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;A great example use is that of a search, it could be implemented to gather all the elements to search and return them after the search is complete. Rather by using a generator you can return the results as they are found!&lt;/p&gt;
-&lt;p&gt;First off, let's start with the hello world of generators, the fibonacci sequence. If you don't know what the fibonacci sequence is, it's just adding the number that precedes itself and so on (eg, 1,1,2,3,5,8,etc), this is an infinite series.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="s2"&gt;"Generator version"&lt;/span&gt;
-    &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
-        &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;1
-1
-2
-3
-5
-8
-13
-21
-34
-55
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;You can also generate the entire sequence into memory by using the list function on the generator function!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fibon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;If we were to use a function for this instead, which compiles the entire list of the fibonacci sequence before returning, this would mean &lt;code&gt;fibon(number_of_elements)&lt;/code&gt; would need to be computed and stored in memory. By using generators we can provide &lt;code&gt;fibon(number_of_elements)&lt;/code&gt; any number of elements and only the latest and it's preceding value are stored in memory.&lt;/p&gt;
-&lt;p&gt;Now imagine if you had a database with 100 million records, and you needed to calculate something for every single row. If you tried to retrieve the entire database and store it in memory, it would possibly just fall over. Rather by using a generator we can iterate through the database in smaller chunks. Another handy feature is to have separate generator instances which you can interweave throughout your project if you need to maintain multiple states in a simplistic manner.&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;In this example, the entire 'data set' is stored in memory, but in a real use we'd request the small chunk from a database&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The generator function returns a generator object, so to get each 'iteration' we use the &lt;code&gt;next&lt;/code&gt; function.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_big_data&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;grouper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;iter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fillvalue&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# While big_data is currently stored entirely in memory, if you are requesting from an external database you could just fetch n results&lt;/span&gt;
-    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_big_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;grouper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-
-        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;batch_processor_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;batch_processor_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;batch_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_processor_1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;[0, 1, 2, 3, 4]
-[5, 6, 7, 8, 9]
-[0, 1, 2]
-[10, 11, 12, 13, 14]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Another good example is to use generators for user interaction (UI), where the program is waiting on the user to input something, but you don't know how long the program will have to wait for interaction. This enables the program to run until the user decides to close it.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="c1"&gt;# Do something with command&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;hello computer
-i am user
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_text output_error"&gt;
-&lt;pre&gt;&lt;span class="ansi-red-intense-fg ansi-bold"&gt;---------------------------------------------------------------------------&lt;/span&gt;
-&lt;span class="ansi-red-intense-fg ansi-bold"&gt;KeyboardInterrupt&lt;/span&gt;                         Traceback (most recent call last)
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-4-3e09f71ee7b6&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;module&amp;gt;&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt;         &lt;span class="ansi-green-intense-fg ansi-bold"&gt;yield&lt;/span&gt; cmd
-&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; 
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 6&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt; &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;for&lt;/span&gt; command &lt;span class="ansi-green-intense-fg ansi-bold"&gt;in&lt;/span&gt; user_input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;      7&lt;/span&gt;     &lt;span class="ansi-red-intense-fg ansi-bold"&gt;# Do something with command&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;      8&lt;/span&gt;     print&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;command&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
-
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;&amp;lt;ipython-input-4-3e09f71ee7b6&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;user_input&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;()&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;      1&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;def&lt;/span&gt; user_input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;      2&lt;/span&gt;     &lt;span class="ansi-green-intense-fg ansi-bold"&gt;while&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;True&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;----&amp;gt; 3&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         &lt;/span&gt;cmd &lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt; input&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;      4&lt;/span&gt;         &lt;span class="ansi-green-intense-fg ansi-bold"&gt;yield&lt;/span&gt; cmd
-&lt;span class="ansi-green-fg"&gt;      5&lt;/span&gt; 
-
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;raw_input&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(self, prompt)&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;    858&lt;/span&gt;                 &lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"raw_input was called, but this frontend does not support input requests."&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;    859&lt;/span&gt;             )
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;--&amp;gt; 860&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;         return self._input_request(str(prompt),
-&lt;/span&gt;&lt;span class="ansi-green-fg"&gt;    861&lt;/span&gt;             self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;_parent_ident&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;    862&lt;/span&gt;             self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;_parent_header&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt;
-
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;c:\Users\jackm\Documents\GitHub\jackmckew.dev\drafts\2020\generators-in-python\.env\lib\site-packages\ipykernel\kernelbase.py&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;_input_request&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;(self, prompt, ident, parent, password)&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;    902&lt;/span&gt;             &lt;span class="ansi-green-intense-fg ansi-bold"&gt;except&lt;/span&gt; KeyboardInterrupt&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;    903&lt;/span&gt;                 &lt;span class="ansi-red-intense-fg ansi-bold"&gt;# re-raise KeyboardInterrupt, to truncate traceback&lt;/span&gt;
-&lt;span class="ansi-green-intense-fg ansi-bold"&gt;--&amp;gt; 904&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;                 &lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;raise&lt;/span&gt; KeyboardInterrupt&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"Interrupted by user"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;from&lt;/span&gt; &lt;span class="ansi-green-intense-fg ansi-bold"&gt;None&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;    905&lt;/span&gt;             &lt;span class="ansi-green-intense-fg ansi-bold"&gt;except&lt;/span&gt; Exception &lt;span class="ansi-green-intense-fg ansi-bold"&gt;as&lt;/span&gt; e&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;:&lt;/span&gt;
-&lt;span class="ansi-green-fg"&gt;    906&lt;/span&gt;                 self&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;log&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;.&lt;/span&gt;warning&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;(&lt;/span&gt;&lt;span class="ansi-blue-intense-fg ansi-bold"&gt;"Invalid Message:"&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;,&lt;/span&gt; exc_info&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;=&lt;/span&gt;&lt;span class="ansi-green-intense-fg ansi-bold"&gt;True&lt;/span&gt;&lt;span class="ansi-yellow-intense-fg ansi-bold"&gt;)&lt;/span&gt;
-
-&lt;span class="ansi-red-intense-fg ansi-bold"&gt;KeyboardInterrupt&lt;/span&gt;: Interrupted by user&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry></feed>
