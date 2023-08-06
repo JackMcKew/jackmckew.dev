@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-07-06T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Hands On Machine Learning with PyTorch - Logistic Regression</title><link href="https://jackmckew.dev/hands-on-machine-learning-with-pytorch-logistic-regression.html" rel="alternate"></link><published>2023-07-06T00:00:00+10:00</published><updated>2023-07-06T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-07-06:/hands-on-machine-learning-with-pytorch-logistic-regression.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In this post we'll go through a few things typical for any project using machine learning:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-08-06T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Logistic Regression with PyTorch</title><link href="https://jackmckew.dev/logistic-regression-with-pytorch.html" rel="alternate"></link><published>2023-08-06T00:00:00+10:00</published><updated>2023-08-06T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-08-06:/logistic-regression-with-pytorch.html</id><summary type="html">&lt;body&gt;&lt;p&gt;In this post we'll go through a few things typical for any project using machine learning:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Data exploration &amp;amp; analysis&lt;/li&gt;
 &lt;li&gt;Build a model&lt;/li&gt;
 &lt;li&gt;Train the model&lt;/li&gt;
 &lt;li&gt;Evaluate the model&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;While this is a very high level overview of what we're about to do. This process is almost the same in any …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In this post we'll go through a few things typical for any project using machine learning:&lt;/p&gt;
+&lt;p&gt;While this is a very high level overview of what we're about to do. This process is almost the same in any …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;In this post we'll go through a few things typical for any project using machine learning:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Data exploration &amp;amp; analysis&lt;/li&gt;
 &lt;li&gt;Build a model&lt;/li&gt;
@@ -22,10 +16,9 @@
 &lt;p&gt;While this is a very high level overview of what we're about to do. This process is almost the same in any size &amp;amp; complex machine learning project.&lt;/p&gt;
 &lt;p&gt;We'll be using the iris dataset, which is a very famous hello world dataset in machine learning which contains 4 parameters which describe three species of flower (the iris flower). The sepal length &amp;amp; width, and the petal length &amp;amp; width are provided for 50 samples of each species. The sepals of a lower are the green leafy parts surrounding the flower head (which has the petals).&lt;/p&gt;
 &lt;p&gt;We'll also be trying to classify flowers into their species from their attributes using the logistic regression model. Logistic regression predicts the probability that something is either one thing or not based on the input variables.&lt;/p&gt;
+&lt;p&gt;Let's take a look at our dataset visualised (below is how to produce this visual and an interactive version).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="logistic regression output" class="img-fluid" src="https://jackmckew.dev/img/logistic-regression.png"/&gt;&lt;/p&gt;
 &lt;p&gt;As always, we begin by importing the neccessary libraries/packages.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
@@ -98,7 +91,7 @@ Name: variety, dtype: int64
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -460,7 +453,7 @@ Output columns:  torch.Size([150]) torch.int8
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
@@ -474,315 +467,12 @@ Output columns:  torch.Size([150]) torch.int8
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Epoch  0
-loss:  1.3733323812484741 accuracy:  0.46666666865348816 
-
-Epoch  1
-loss:  1.1744035482406616 accuracy:  0.46666666865348816 
-
-Epoch  2
-loss:  1.032265067100525 accuracy:  0.5 
-
-Epoch  3
-loss:  0.9222539067268372 accuracy:  0.5333333611488342 
-
-Epoch  4
-loss:  0.857440173625946 accuracy:  0.46666666865348816 
-
-Epoch  5
-loss:  0.856093168258667 accuracy:  0.46666666865348816 
-
-Epoch  6
-loss:  0.9064297080039978 accuracy:  0.5 
-
-Epoch  7
-loss:  0.9493064880371094 accuracy:  0.3333333432674408 
-
-Epoch  8
-loss:  0.937039315700531 accuracy:  0.3333333432674408 
-
-Epoch  9
-loss:  0.9049575924873352 accuracy:  0.36666667461395264 
-
-Epoch  10
-loss:  0.866532027721405 accuracy:  0.4000000059604645 
-
-Epoch  11
-loss:  0.8370420932769775 accuracy:  0.5 
-
-Epoch  12
-loss:  0.8083135485649109 accuracy:  0.5333333611488342 
-
-Epoch  13
-loss:  0.7867664694786072 accuracy:  0.6000000238418579 
-
-Epoch  14
-loss:  0.7874231934547424 accuracy:  0.6000000238418579 
-
-Epoch  15
-loss:  0.7854987978935242 accuracy:  0.6000000238418579 
-
-Epoch  16
-loss:  0.7603756189346313 accuracy:  0.7666666507720947 
-
-Epoch  17
-loss:  0.7459529638290405 accuracy:  0.800000011920929 
-
-Epoch  18
-loss:  0.7309216856956482 accuracy:  0.8333333134651184 
-
-Epoch  19
-loss:  0.7397978901863098 accuracy:  0.7666666507720947 
-
-Epoch  20
-loss:  0.7362257838249207 accuracy:  0.699999988079071 
-
-Epoch  21
-loss:  0.721867561340332 accuracy:  0.800000011920929 
-
-Epoch  22
-loss:  0.7000483274459839 accuracy:  0.8666666746139526 
-
-Epoch  23
-loss:  0.6850998997688293 accuracy:  0.8999999761581421 
-
-Epoch  24
-loss:  0.674744725227356 accuracy:  0.8999999761581421 
-
-Epoch  25
-loss:  0.6608838438987732 accuracy:  0.8999999761581421 
-
-Epoch  26
-loss:  0.657321035861969 accuracy:  0.9333333373069763 
-
-Epoch  27
-loss:  0.652073860168457 accuracy:  0.9333333373069763 
-
-Epoch  28
-loss:  0.6370083093643188 accuracy:  0.9333333373069763 
-
-Epoch  29
-loss:  0.6409473419189453 accuracy:  0.9666666388511658 
-
-Epoch  30
-loss:  0.6353674530982971 accuracy:  0.9333333373069763 
-
-Epoch  31
-loss:  0.6202357411384583 accuracy:  0.9666666388511658 
-
-Epoch  32
-loss:  0.6090561151504517 accuracy:  0.9333333373069763 
-
-Epoch  33
-loss:  0.616327166557312 accuracy:  0.8999999761581421 
-
-Epoch  34
-loss:  0.6013180017471313 accuracy:  0.9666666388511658 
-
-Epoch  35
-loss:  0.5989049077033997 accuracy:  0.9666666388511658 
-
-Epoch  36
-loss:  0.585862398147583 accuracy:  0.9666666388511658 
-
-Epoch  37
-loss:  0.5751062035560608 accuracy:  0.9666666388511658 
-
-Epoch  38
-loss:  0.5739135146141052 accuracy:  0.9666666388511658 
-
-Epoch  39
-loss:  0.5716326832771301 accuracy:  0.9666666388511658 
-
-Epoch  40
-loss:  0.5674498677253723 accuracy:  0.9666666388511658 
-
-Epoch  41
-loss:  0.5521577596664429 accuracy:  0.9666666388511658 
-
-Epoch  42
-loss:  0.5762258172035217 accuracy:  0.9333333373069763 
-
-Epoch  43
-loss:  0.5774533748626709 accuracy:  0.8666666746139526 
-
-Epoch  44
-loss:  0.5612514019012451 accuracy:  0.9333333373069763 
-
-Epoch  45
-loss:  0.5368048548698425 accuracy:  0.9666666388511658 
-
-Epoch  46
-loss:  0.5354655981063843 accuracy:  0.9666666388511658 
-
-Epoch  47
-loss:  0.5438606142997742 accuracy:  0.9333333373069763 
-
-Epoch  48
-loss:  0.5306044816970825 accuracy:  0.9666666388511658 
-
-Epoch  49
-loss:  0.5160161852836609 accuracy:  0.9666666388511658 
-
-Epoch  50
-loss:  0.5150001645088196 accuracy:  0.9666666388511658 
-
-Epoch  51
-loss:  0.5204880237579346 accuracy:  0.9666666388511658 
-
-Epoch  52
-loss:  0.5257148146629333 accuracy:  0.9666666388511658 
-
-Epoch  53
-loss:  0.5144279599189758 accuracy:  0.9666666388511658 
-
-Epoch  54
-loss:  0.5133593678474426 accuracy:  0.9666666388511658 
-
-Epoch  55
-loss:  0.5049706697463989 accuracy:  0.9666666388511658 
-
-Epoch  56
-loss:  0.4992431104183197 accuracy:  0.9666666388511658 
-
-Epoch  57
-loss:  0.48528751730918884 accuracy:  0.9666666388511658 
-
-Epoch  58
-loss:  0.4979083240032196 accuracy:  0.9666666388511658 
-
-Epoch  59
-loss:  0.4917204678058624 accuracy:  0.9666666388511658 
-
-Epoch  60
-loss:  0.4880892336368561 accuracy:  0.9666666388511658 
-
-Epoch  61
-loss:  0.4772476553916931 accuracy:  0.9666666388511658 
-
-Epoch  62
-loss:  0.48232564330101013 accuracy:  0.9666666388511658 
-
-Epoch  63
-loss:  0.4626544415950775 accuracy:  0.9666666388511658 
-
-Epoch  64
-loss:  0.460956871509552 accuracy:  0.9666666388511658 
-
-Epoch  65
-loss:  0.47053277492523193 accuracy:  0.9666666388511658 
-
-Epoch  66
-loss:  0.47045251727104187 accuracy:  1.0 
-
-Epoch  67
-loss:  0.4672728478908539 accuracy:  1.0 
-
-Epoch  68
-loss:  0.46997493505477905 accuracy:  1.0 
-
-Epoch  69
-loss:  0.4581855535507202 accuracy:  0.9666666388511658 
-
-Epoch  70
-loss:  0.45587196946144104 accuracy:  0.9666666388511658 
-
-Epoch  71
-loss:  0.45518845319747925 accuracy:  1.0 
-
-Epoch  72
-loss:  0.43724337220191956 accuracy:  0.9666666388511658 
-
-Epoch  73
-loss:  0.44379836320877075 accuracy:  0.9666666388511658 
-
-Epoch  74
-loss:  0.4456246495246887 accuracy:  1.0 
-
-Epoch  75
-loss:  0.4562903046607971 accuracy:  1.0 
-
-Epoch  76
-loss:  0.440542608499527 accuracy:  1.0 
-
-Epoch  77
-loss:  0.45213446021080017 accuracy:  1.0 
-
-Epoch  78
-loss:  0.44089940190315247 accuracy:  1.0 
-
-Epoch  79
-loss:  0.4321136474609375 accuracy:  1.0 
-
-Epoch  80
-loss:  0.4313907027244568 accuracy:  1.0 
-
-Epoch  81
-loss:  0.4239611327648163 accuracy:  0.9666666388511658 
-
-Epoch  82
-loss:  0.4376215636730194 accuracy:  1.0 
-
-Epoch  83
-loss:  0.42454618215560913 accuracy:  1.0 
-
-Epoch  84
-loss:  0.4141182601451874 accuracy:  0.9666666388511658 
-
-Epoch  85
-loss:  0.4074815809726715 accuracy:  0.9666666388511658 
-
-Epoch  86
-loss:  0.42338821291923523 accuracy:  1.0 
-
-Epoch  87
-loss:  0.43143796920776367 accuracy:  1.0 
-
-Epoch  88
-loss:  0.41920754313468933 accuracy:  1.0 
-
-Epoch  89
-loss:  0.4175216555595398 accuracy:  1.0 
-
-Epoch  90
-loss:  0.3996005356311798 accuracy:  0.9666666388511658 
-
-Epoch  91
-loss:  0.391110360622406 accuracy:  0.9666666388511658 
-
-Epoch  92
-loss:  0.41220948100090027 accuracy:  1.0 
-
-Epoch  93
-loss:  0.4087773263454437 accuracy:  1.0 
-
-Epoch  94
-loss:  0.40749818086624146 accuracy:  1.0 
-
-Epoch  95
-loss:  0.3955965042114258 accuracy:  1.0 
-
-Epoch  96
-loss:  0.395894855260849 accuracy:  1.0 
-
-Epoch  97
-loss:  0.399051696062088 accuracy:  1.0 
-
-Epoch  98
-loss:  0.39189818501472473 accuracy:  1.0 
-
-Epoch  99
-loss:  0.38788095116615295 accuracy:  1.0 
-
-Evaluation result: Loss:  0.3645802438259125  Accuracy:  0.9333333373069763
-&lt;/pre&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;&lt;p&gt;Evaluation result: Loss:  0.3645802438259125  Accuracy:  0.9333333373069763&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -795,7 +485,7 @@ Evaluation result: Loss:  0.3645802438259125  Accuracy:  0.9333333373069763
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [13]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;data_all&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TensorDataset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_columns_all&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;output_columns&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -815,315 +505,12 @@ Evaluation result: Loss:  0.3645802438259125  Accuracy:  0.9333333373069763
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Epoch  0
-loss:  1.0380855798721313 accuracy:  0.4333333373069763 
-
-Epoch  1
-loss:  0.9261402487754822 accuracy:  0.5 
-
-Epoch  2
-loss:  0.9148039221763611 accuracy:  0.6666666865348816 
-
-Epoch  3
-loss:  0.8054198026657104 accuracy:  0.6000000238418579 
-
-Epoch  4
-loss:  0.7064180374145508 accuracy:  0.5 
-
-Epoch  5
-loss:  0.6529492735862732 accuracy:  0.7666666507720947 
-
-Epoch  6
-loss:  0.6175327301025391 accuracy:  0.800000011920929 
-
-Epoch  7
-loss:  0.5992363095283508 accuracy:  0.8999999761581421 
-
-Epoch  8
-loss:  0.569818377494812 accuracy:  0.8999999761581421 
-
-Epoch  9
-loss:  0.5336132049560547 accuracy:  0.800000011920929 
-
-Epoch  10
-loss:  0.5291264057159424 accuracy:  0.8999999761581421 
-
-Epoch  11
-loss:  0.5121068358421326 accuracy:  0.8999999761581421 
-
-Epoch  12
-loss:  0.4883791506290436 accuracy:  0.8333333134651184 
-
-Epoch  13
-loss:  0.4751811921596527 accuracy:  0.8333333134651184 
-
-Epoch  14
-loss:  0.47150567173957825 accuracy:  0.8999999761581421 
-
-Epoch  15
-loss:  0.46534866094589233 accuracy:  0.9333333373069763 
-
-Epoch  16
-loss:  0.46108758449554443 accuracy:  0.9333333373069763 
-
-Epoch  17
-loss:  0.4389108121395111 accuracy:  0.8333333134651184 
-
-Epoch  18
-loss:  0.43451133370399475 accuracy:  0.8666666746139526 
-
-Epoch  19
-loss:  0.43520790338516235 accuracy:  0.9333333373069763 
-
-Epoch  20
-loss:  0.4287680685520172 accuracy:  0.9333333373069763 
-
-Epoch  21
-loss:  0.4153631925582886 accuracy:  0.8666666746139526 
-
-Epoch  22
-loss:  0.4099046587944031 accuracy:  0.8666666746139526 
-
-Epoch  23
-loss:  0.41186949610710144 accuracy:  0.9333333373069763 
-
-Epoch  24
-loss:  0.40758344531059265 accuracy:  0.9333333373069763 
-
-Epoch  25
-loss:  0.40735262632369995 accuracy:  0.9333333373069763 
-
-Epoch  26
-loss:  0.38762298226356506 accuracy:  0.8666666746139526 
-
-Epoch  27
-loss:  0.3855837285518646 accuracy:  0.8999999761581421 
-
-Epoch  28
-loss:  0.3935543894767761 accuracy:  0.9333333373069763 
-
-Epoch  29
-loss:  0.385096937417984 accuracy:  0.9333333373069763 
-
-Epoch  30
-loss:  0.3809642493724823 accuracy:  0.9333333373069763 
-
-Epoch  31
-loss:  0.36828091740608215 accuracy:  0.8666666746139526 
-
-Epoch  32
-loss:  0.3706659972667694 accuracy:  0.9333333373069763 
-
-Epoch  33
-loss:  0.3665415346622467 accuracy:  0.9333333373069763 
-
-Epoch  34
-loss:  0.36496639251708984 accuracy:  0.9333333373069763 
-
-Epoch  35
-loss:  0.3568505048751831 accuracy:  0.9333333373069763 
-
-Epoch  36
-loss:  0.3588642179965973 accuracy:  0.9333333373069763 
-
-Epoch  37
-loss:  0.3553452789783478 accuracy:  0.9333333373069763 
-
-Epoch  38
-loss:  0.34953799843788147 accuracy:  0.9333333373069763 
-
-Epoch  39
-loss:  0.3425033688545227 accuracy:  0.9333333373069763 
-
-Epoch  40
-loss:  0.34755852818489075 accuracy:  0.9333333373069763 
-
-Epoch  41
-loss:  0.34882432222366333 accuracy:  0.8999999761581421 
-
-Epoch  42
-loss:  0.33427709341049194 accuracy:  0.9333333373069763 
-
-Epoch  43
-loss:  0.3302716612815857 accuracy:  0.9333333373069763 
-
-Epoch  44
-loss:  0.3407600522041321 accuracy:  0.8999999761581421 
-
-Epoch  45
-loss:  0.33250272274017334 accuracy:  0.9333333373069763 
-
-Epoch  46
-loss:  0.3252996802330017 accuracy:  0.9333333373069763 
-
-Epoch  47
-loss:  0.32019010186195374 accuracy:  0.9333333373069763 
-
-Epoch  48
-loss:  0.3239607512950897 accuracy:  0.9333333373069763 
-
-Epoch  49
-loss:  0.32058006525039673 accuracy:  0.9333333373069763 
-
-Epoch  50
-loss:  0.3138344883918762 accuracy:  0.9333333373069763 
-
-Epoch  51
-loss:  0.3136472702026367 accuracy:  0.9333333373069763 
-
-Epoch  52
-loss:  0.3152977228164673 accuracy:  0.8999999761581421 
-
-Epoch  53
-loss:  0.3074900507926941 accuracy:  0.9333333373069763 
-
-Epoch  54
-loss:  0.3046126961708069 accuracy:  0.9333333373069763 
-
-Epoch  55
-loss:  0.3030826151371002 accuracy:  0.9333333373069763 
-
-Epoch  56
-loss:  0.30254852771759033 accuracy:  0.9333333373069763 
-
-Epoch  57
-loss:  0.29916849732398987 accuracy:  0.9333333373069763 
-
-Epoch  58
-loss:  0.30322736501693726 accuracy:  0.8999999761581421 
-
-Epoch  59
-loss:  0.2978363633155823 accuracy:  0.8999999761581421 
-
-Epoch  60
-loss:  0.2937186360359192 accuracy:  0.9333333373069763 
-
-Epoch  61
-loss:  0.2903176546096802 accuracy:  0.9333333373069763 
-
-Epoch  62
-loss:  0.2933221757411957 accuracy:  0.8999999761581421 
-
-Epoch  63
-loss:  0.29069578647613525 accuracy:  0.8999999761581421 
-
-Epoch  64
-loss:  0.2844267785549164 accuracy:  0.9333333373069763 
-
-Epoch  65
-loss:  0.2835501730442047 accuracy:  0.9333333373069763 
-
-Epoch  66
-loss:  0.28674691915512085 accuracy:  0.8999999761581421 
-
-Epoch  67
-loss:  0.2814694344997406 accuracy:  0.8999999761581421 
-
-Epoch  68
-loss:  0.27780818939208984 accuracy:  0.9333333373069763 
-
-Epoch  69
-loss:  0.2762349247932434 accuracy:  0.9333333373069763 
-
-Epoch  70
-loss:  0.2745935618877411 accuracy:  0.9333333373069763 
-
-Epoch  71
-loss:  0.2776546776294708 accuracy:  0.8999999761581421 
-
-Epoch  72
-loss:  0.27241477370262146 accuracy:  0.9333333373069763 
-
-Epoch  73
-loss:  0.26993533968925476 accuracy:  0.9333333373069763 
-
-Epoch  74
-loss:  0.2688852846622467 accuracy:  0.9333333373069763 
-
-Epoch  75
-loss:  0.26922425627708435 accuracy:  0.8999999761581421 
-
-Epoch  76
-loss:  0.2651296854019165 accuracy:  0.9333333373069763 
-
-Epoch  77
-loss:  0.26544901728630066 accuracy:  0.8999999761581421 
-
-Epoch  78
-loss:  0.26239722967147827 accuracy:  0.9333333373069763 
-
-Epoch  79
-loss:  0.26078179478645325 accuracy:  0.9333333373069763 
-
-Epoch  80
-loss:  0.26017817854881287 accuracy:  0.8999999761581421 
-
-Epoch  81
-loss:  0.259433776140213 accuracy:  0.8999999761581421 
-
-Epoch  82
-loss:  0.2574969530105591 accuracy:  0.8999999761581421 
-
-Epoch  83
-loss:  0.25558483600616455 accuracy:  0.9333333373069763 
-
-Epoch  84
-loss:  0.2546296715736389 accuracy:  0.8999999761581421 
-
-Epoch  85
-loss:  0.2527022659778595 accuracy:  0.9333333373069763 
-
-Epoch  86
-loss:  0.2516855299472809 accuracy:  0.9333333373069763 
-
-Epoch  87
-loss:  0.2514974772930145 accuracy:  0.8999999761581421 
-
-Epoch  88
-loss:  0.2494964450597763 accuracy:  0.9333333373069763 
-
-Epoch  89
-loss:  0.25158631801605225 accuracy:  0.8999999761581421 
-
-Epoch  90
-loss:  0.246656596660614 accuracy:  0.9333333373069763 
-
-Epoch  91
-loss:  0.24590688943862915 accuracy:  0.8999999761581421 
-
-Epoch  92
-loss:  0.24534302949905396 accuracy:  0.8999999761581421 
-
-Epoch  93
-loss:  0.24302555620670319 accuracy:  0.9333333373069763 
-
-Epoch  94
-loss:  0.2425689548254013 accuracy:  0.8999999761581421 
-
-Epoch  95
-loss:  0.24102306365966797 accuracy:  0.8999999761581421 
-
-Epoch  96
-loss:  0.23951323330402374 accuracy:  0.8999999761581421 
-
-Epoch  97
-loss:  0.23847466707229614 accuracy:  0.9333333373069763 
-
-Epoch  98
-loss:  0.23755855858325958 accuracy:  0.8999999761581421 
-
-Epoch  99
-loss:  0.23631232976913452 accuracy:  0.8999999761581421 
-
-Evaluation result: Loss:  0.16669009625911713  Accuracy:  1.0
-&lt;/pre&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;&lt;p&gt;Evaluation result: Loss:  0.16669009625911713  Accuracy:  1.0&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1204,7 +591,7 @@ Evaluation result: Loss:  0.16669009625911713  Accuracy:  1.0
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table table-striped"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -6335,7 +5722,7 @@ Harmonic Mean: 15.05101860509987
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table table-striped"&gt;
+&lt;h2 id="Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;Dataclasses vs Attrs vs Pydantic: Features&lt;a class="anchor-link" href="#Dataclasses-vs-Attrs-vs-Pydantic:-Features"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;table class="table-striped table"&gt;
 &lt;thead&gt;&lt;tr&gt;
 &lt;th&gt;Feature&lt;/th&gt;
 &lt;th style="text-align:center"&gt;Dataclass&lt;/th&gt;
