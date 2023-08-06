@@ -4,4 +4,4 @@ Author: Jack McKew
 Category: Python, Data Science
 Tags: python, visualisation, machine learning, ai
 
-{% notebook 2020/hands-on-pytorch-logistic-regression/notebooks/hands-on-pytorch-logistic-regression.ipynb %}
+{% notebook 2023/hands-on-pytorch-logistic-regression/notebooks/hands-on-pytorch-logistic-regression.ipynb %}
