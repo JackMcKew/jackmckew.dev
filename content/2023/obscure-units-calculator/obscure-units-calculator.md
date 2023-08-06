@@ -1,5 +1,5 @@
 Title: Obscure Units Calculator
-Date: 2023-05-08
+Date: 2023-08-06
 Author: Jack McKew
 Category: Javascript, data science
 Tags: javascript, data-science
