@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-08-15T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Decision Tree Classifiers in Python</title><link href="https://jackmckew.dev/decision-tree-classifiers-in-python.html" rel="alternate"></link><published>2023-08-15T00:00:00+10:00</published><updated>2023-08-15T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-08-15:/decision-tree-classifiers-in-python.html</id><summary type="html">&lt;body&gt;&lt;p&gt;What are decision trees? It's a tool to assist with making decisions, in a tree like structure, similar to a flow chart; where each branch of the tree is a decision, usually made with some boundaries that decide which branch to follow. A basic decision tree could be of a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;What are decision trees? It's a tool to assist with making decisions, in a tree like structure, similar to a flow chart; where each branch of the tree is a decision, usually made with some boundaries that decide which branch to follow. A basic decision tree could be of a coin flip, it has two branches which are heads or tails and thats it, the outcome is found at the end of the branch. In this post we'll be using a decision tree to classify the species from the iris dataset, and we'll make a visualisation of the decision surface to see where the tree's boundaries are.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Python</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/python.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-08-15T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Decision Tree Classifiers in Python</title><link href="https://jackmckew.dev/decision-tree-classifiers-in-python.html" rel="alternate"></link><published>2023-08-15T00:00:00+10:00</published><updated>2023-08-15T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-08-15:/decision-tree-classifiers-in-python.html</id><summary type="html">&lt;body&gt;&lt;p&gt;What are decision trees? It's a tool to assist with making decisions, in a tree like structure, similar to a flow chart; where each branch of the tree is a decision, usually made with some boundaries that decide which branch to follow. A basic decision tree could be of a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;What are decision trees? It's a tool to assist with making decisions, in a tree like structure, similar to a flow chart; where each branch of the tree is a decision, usually made with some boundaries that decide which branch to follow. A basic decision tree could be of a coin flip, it has two branches which are heads or tails and thats it, the outcome is found at the end of the branch. Growing on this example, another decision tree could also be when you're trying to decide what to do for dinner.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="food decision tree" class="img-fluid" src="https://jackmckew.dev/img/food-decision.jpg"/&gt;&lt;/p&gt;
+&lt;p&gt;In this post we'll be using a decision tree to classify the species from the iris dataset, and we'll make a visualisation of the decision surface to see where the tree's boundaries are.&lt;/p&gt;
 &lt;p&gt;We'll be making use of:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;sklearn&lt;/code&gt; - a machine learning package&lt;/li&gt;
@@ -2257,7 +2259,7 @@ Name: variety, dtype: int64
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -3395,7 +3397,7 @@ Output columns:  torch.Size([150]) torch.int8
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -3650,7 +3652,7 @@ Output columns:  torch.Size([150]) torch.int8
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="table dataframe table-striped"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
