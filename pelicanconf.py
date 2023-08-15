@@ -108,7 +108,7 @@ PLUGINS = [
     "deadlinks",
     "more_categories",
     "neighbors",
-    "pelican-ert",
+    # "pelican-ert",
     "liquid_tags.notebook",
     "liquid_tags.include_code",
     "representative_image",
