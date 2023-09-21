@@ -250,17 +250,6 @@ weighted avg       0.99      0.99      0.99       150
 &lt;p&gt;All of our models across the three posts in this scenario boast the same scores, however, due to our ensemble model's lower variance, it should be more adapted to multiple scenarios and perform better generally.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Decision Tree Classifiers in Python</title><link href="https://jackmckew.dev/decision-tree-classifiers-in-python.html" rel="alternate"></link><published>2023-08-15T00:00:00+10:00</published><updated>2023-08-15T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-08-15:/decision-tree-classifiers-in-python.html</id><summary type="html">&lt;body&gt;&lt;p&gt;What are decision trees? It's a tool to assist with making decisions, in a tree like structure, similar to a flow chart; where each branch of the tree is a decision, usually made with some boundaries that decide which branch to follow. A basic decision tree could be of a …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;What are decision trees? It's a tool to assist with making decisions, in a tree like structure, similar to a flow chart; where each branch of the tree is a decision, usually made with some boundaries that decide which branch to follow. A basic decision tree could be of a coin flip, it has two branches which are heads or tails and thats it, the outcome is found at the end of the branch. Growing on this example, another decision tree could also be when you're trying to decide what to do for dinner.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="food decision tree" class="img-fluid" src="https://jackmckew.dev/img/food-decision.jpg"/&gt;&lt;/p&gt;
 &lt;p&gt;In this post we'll be using a decision tree to classify the species from the iris dataset, and we'll make a visualisation of the decision surface to see where the tree's boundaries are.&lt;/p&gt;
@@ -2521,7 +2510,7 @@ Name: variety, dtype: int64
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -3659,7 +3648,7 @@ Output columns:  torch.Size([150]) torch.int8
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -3914,7 +3903,7 @@ Output columns:  torch.Size([150]) torch.int8
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table-striped dataframe table"&gt;
+&lt;table border="1" class="dataframe table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
