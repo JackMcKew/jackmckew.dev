@@ -1,5 +1,1051 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2023-09-21T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Combining Machine Learning Models in Python</title><link href="https://jackmckew.dev/combining-machine-learning-models-in-python.html" rel="alternate"></link><published>2023-09-21T00:00:00+10:00</published><updated>2023-09-21T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-09-21:/combining-machine-learning-models-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2024-02-07T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Recurrent Neural Networks with PyTorch</title><link href="https://jackmckew.dev/recurrent-neural-networks-with-pytorch.html" rel="alternate"></link><published>2024-02-07T00:00:00+11:00</published><updated>2024-02-07T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-02-07:/recurrent-neural-networks-with-pytorch.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Weather affects every single human on earth for the better or worse, and we've come to rely on weather predictions in order to plan how we spend our day. But how can we predict the weather? In this post we're going to develop a machine learning model with recurrent neural …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Weather affects every single human on earth for the better or worse, and we've come to rely on weather predictions in order to plan how we spend our day. But how can we predict the weather? In this post we're going to develop a machine learning model with recurrent neural networks to see how well we can predict the weather.&lt;/p&gt;
+&lt;p&gt;As per previous posts we're going to go through the following steps (typical of any machine learning project):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Data exploration &amp;amp; analysis&lt;/li&gt;
+&lt;li&gt;Build a model&lt;/li&gt;
+&lt;li&gt;Train the model&lt;/li&gt;
+&lt;li&gt;Evaluate the model&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;torch&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;tabulate&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;tabulate&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="Data-Exploration-&amp;amp;-Analysis"&gt;Data Exploration &amp;amp; Analysis&lt;a class="anchor-link" href="#Data-Exploration-&amp;amp;-Analysis"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;We'll be using rainfall records for Newcastle NSW retrieved from the Australian Bureau of Meteorology, this can be downloaded at: &lt;a href="http://www.bom.gov.au/jsp/ncc/cdio/weatherData/av?p_nccObsCode=136&amp;amp;p_display_type=dailyDataFile&amp;amp;p_startYear=&amp;amp;p_c=&amp;amp;p_stn_num=061055"&gt;http://www.bom.gov.au/jsp/ncc/cdio/weatherData/av?p_nccObsCode=136&amp;amp;p_display_type=dailyDataFile&amp;amp;p_startYear=&amp;amp;p_c=&amp;amp;p_stn_num=061055&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'data/IDCJAC0009_061055_1800_Data.csv'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tabulate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;    Product code      Bureau of Meteorology station number    Year    Month    Day    Rainfall amount (millimetres)    Period over which rainfall was measured (days)  Quality
+--  --------------  --------------------------------------  ------  -------  -----  -------------------------------  ------------------------------------------------  ---------
+ 0  IDCJAC0009                                       61055    1862        1      1                                0                                               nan  Y
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Let's clean it up&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'timestamp'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_datetime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Month'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Day'&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="n"&gt;rainfall&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'Product code'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Bureau of Meteorology station number'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Year'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Month'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Day'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Period over which rainfall was measured (days)'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'Quality'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;rainfall&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"Rainfall amount (millimetres)"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"value"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[3]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped=""&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;value&lt;/th&gt;
+&lt;th&gt;timestamp&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;1862-01-01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;1862-01-02&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;1862-01-03&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;1862-01-04&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;4&lt;/th&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;1862-01-05&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Now that we've reduced the dataset into it's simplest form, timestamped data points, now we can start going into some feature engineering. Firstly we'll check some generic metrics of the dataset we're working with&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"First date: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timestamp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;, last date: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timestamp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Number of points: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Number of missing points: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isna&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;First date: 1862-01-01 00:00:00, last date: 2022-04-07 00:00:00
+Number of points: 58536
+Number of missing points: 1239
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;With missing points making up around 2% of the dataset, there is a few ways we could treat this problem so our model doesn't predict invalid outputs. We could either impute these missing points, or discard them. Example ways of imputing the points could be as simple as taking the last (or next) valid recorded value for the missing point (this is known as back or forward filling), to as complex as modelling the data in different ways (ie, regression) to impute the values. For the simplicity of this experiment, we'll discard the missing timestamps as the timestamps are daily, if the time frame between points was shorter, imputing the values could be justified.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"value"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;rainfall&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'timestamp'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Feature-Engineering"&gt;Feature Engineering&lt;a class="anchor-link" href="#Feature-Engineering"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Feature engineering is arguably the most important part of machine learning, as systems are only as good as what they are given, the old adage of 'shit in, shit out' holds true in this industry. Since we are trying to predict what the next value is with our rainfall model, we'll want to give the model what the previous rainfall values were. We do this by creating new columns called 'time lags' where it takes the value from n points in past and this becomes a feature. For example, if we were to look at the &lt;code&gt;lag7&lt;/code&gt; column, that would contain the recorded rainfall a week prior to the selected data point.&lt;/p&gt;
+&lt;p&gt;For the first records in the dataset, since there is no value before it, this is a missing data point, and we have to discard these records as well, meaning that the choice on how many time lags to generate should consider the value of the first records in the dataset.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_time_lags&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_lags&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;df_n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_lags&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;lagged_values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_n&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="c1"&gt;# We use concat here for performance reasons&lt;/span&gt;
+        &lt;span class="n"&gt;df_n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;concat&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;df_n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lagged_values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"lag&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df_n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt;&lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Remove the first n rows where no 'previous' value is attainable for the number of lags&lt;/span&gt;
+    &lt;span class="n"&gt;df_n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n_lags&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;df_n&lt;/span&gt;
+
+&lt;span class="n"&gt;df_gen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_time_lags&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rainfall&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;df_gen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped=""&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;value&lt;/th&gt;
+&lt;th&gt;lag1&lt;/th&gt;
+&lt;th&gt;lag2&lt;/th&gt;
+&lt;th&gt;lag3&lt;/th&gt;
+&lt;th&gt;lag4&lt;/th&gt;
+&lt;th&gt;lag5&lt;/th&gt;
+&lt;th&gt;lag6&lt;/th&gt;
+&lt;th&gt;lag7&lt;/th&gt;
+&lt;th&gt;lag8&lt;/th&gt;
+&lt;th&gt;lag9&lt;/th&gt;
+&lt;th&gt;...&lt;/th&gt;
+&lt;th&gt;lag91&lt;/th&gt;
+&lt;th&gt;lag92&lt;/th&gt;
+&lt;th&gt;lag93&lt;/th&gt;
+&lt;th&gt;lag94&lt;/th&gt;
+&lt;th&gt;lag95&lt;/th&gt;
+&lt;th&gt;lag96&lt;/th&gt;
+&lt;th&gt;lag97&lt;/th&gt;
+&lt;th&gt;lag98&lt;/th&gt;
+&lt;th&gt;lag99&lt;/th&gt;
+&lt;th&gt;lag100&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;timestamp&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1862-04-11&lt;/th&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;0.8&lt;/td&gt;
+&lt;td&gt;10.4&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;0.8&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;3.0&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1862-04-12&lt;/th&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;0.8&lt;/td&gt;
+&lt;td&gt;10.4&lt;/td&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;0.8&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;7.6&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;2 rows × 101 columns&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Let's generate features to be from the characteristics of the timestamp of when it was recorded:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;df_features&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="n"&gt;df_gen&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;assign&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;day&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_gen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;assign&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_gen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;assign&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;day_of_week&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_gen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dayofweek&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;assign&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;week_of_year&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_gen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isocalendar&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;week&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;df_features&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped=""&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;day&lt;/th&gt;
+&lt;th&gt;month&lt;/th&gt;
+&lt;th&gt;day_of_week&lt;/th&gt;
+&lt;th&gt;week_of_year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;timestamp&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1862-04-11&lt;/th&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;While us humans recognise that there's only so many days of the week, or weeks in the year, our model isn't going to realise this unless we tell it. To maintain the cyclical nature of these properties, we'll need to encode or transform them in a cyclical nature. To preserve this cyclical nature, using our trusty friends, sine and cosine. This is done a few steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Account for any starting value (ie, our months don't start on the 0th day)&lt;/li&gt;
+&lt;li&gt;Divide by the total period (ie, up to 31 days in a month)&lt;/li&gt;
+&lt;li&gt;Use these values as the circumference of a circle (cyclical)&lt;/li&gt;
+&lt;li&gt;Take the sine and cosine components from this circle&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Ensuring that our data is consistent with how we understand dates, means we don't need to account for the different months having different number of days as the model being presented with both the month and day allowing to infer these together. One thought may be to combine these two dates to test whether it improves the performance of the model.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cyclical_transformer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;drop_original&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_sin"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pi&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;start_val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_cos"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cos&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pi&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;start_val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;drop_original&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;column&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;
+
+&lt;span class="c1"&gt;# The period and start values were determined from the min/max of the columns&lt;/span&gt;
+&lt;span class="n"&gt;cyclical_features&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"day"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;"month"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;"day_of_week"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;"week_of_year"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;53&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;cyclical_feature&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;cyclical_features&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;df_features&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cyclical_transformer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_features&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cyclical_feature&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Finally we've generated features for our model to use in it's predictions!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Number of features for the model: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_features&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;Number of features for the model: 108
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Modelling"&gt;Modelling&lt;a class="anchor-link" href="#Modelling"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Apart of modelling, we're going to achieve a few things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Split the data into training, testing and validation sets&lt;/li&gt;
+&lt;li&gt;Put the data into data loaders for PyTorch&lt;/li&gt;
+&lt;li&gt;Write an RNN model&lt;/li&gt;
+&lt;li&gt;Create a base optimisation class that we can give any model to (it contains basic common steps like train, evaluate, etc)&lt;/li&gt;
+&lt;li&gt;Train our model&lt;/li&gt;
+&lt;li&gt;See how well it goes&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="Splitting-the-data"&gt;Splitting the data&lt;a class="anchor-link" href="#Splitting-the-data"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We make use of &lt;code&gt;sklearn&lt;/code&gt;'s &lt;code&gt;train_test_split&lt;/code&gt; heavily here to split up the dataset into it's corresponding groups. Ensuring that we don't shuffle the data while splitting as since we are working with temporal data, the order matters.&lt;/p&gt;
+&lt;p&gt;To make our data friendlier to our model and training (computationally wise), we'll also scale all of our data. For this experiment, we'll use &lt;code&gt;MinMaxScaler&lt;/code&gt;, which unexpectedly scales all the inputs to a range of 0 to 1. There's lots of other scalers out there too, which all have their pros and cons, so it's always good to experiment: &lt;a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html"&gt;https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.model_selection&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;train_test_split&lt;/span&gt;
+
+&lt;span class="n"&gt;TEST_RATIO&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.25&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;feature_label_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target_col&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;target_col&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+    &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;target_col&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_validation_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target_col&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;test_ratio&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;validation_ratio&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;test_ratio&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;test_ratio&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;feature_label_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target_col&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;test_ratio&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shuffle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_validation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_validation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;validation_ratio&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shuffle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_validation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_validation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_test&lt;/span&gt;
+
+&lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_validation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_validation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_validation_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_features&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TEST_RATIO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;scaler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;X_train_scaled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;X_validation_scaled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_validation&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;X_test_scaled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;y_train_scaled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;y_validation_scaled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_validation&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;y_test_scaled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Data-loaders"&gt;Data loaders&lt;a class="anchor-link" href="#Data-loaders"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;blockquote&gt;&lt;p&gt;DataLoader ( TensorData ( Tensor( Data ) ) )&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We've got our features generated, data cleaned, scaled and now it's time to put them into the data formats required for PyTorch. The base data type that we'll use for the sets is known as &lt;code&gt;Tensor&lt;/code&gt;, which translates to n-dimensional array. We group them inside a &lt;code&gt;TensorDataset&lt;/code&gt;, and put that inside the &lt;code&gt;DataLoader&lt;/code&gt; with a specified &lt;code&gt;batch_size&lt;/code&gt; which will be how it's processed through the model. We also tell our &lt;code&gt;DataLoader&lt;/code&gt; to &lt;code&gt;drop_last&lt;/code&gt; which translates to if the last batch isn't full of points then it won't be provided to the model.&lt;/p&gt;
+&lt;p&gt;Foot note of 64 was chosen for it being my favourite number, but this is something that can and should be tweaked to for the application.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;BATCH_SIZE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;64&lt;/span&gt;
+
+&lt;span class="n"&gt;train&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TensorDataset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Tensor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_train_scaled&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Tensor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_train_scaled&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;validation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TensorDataset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Tensor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_validation_scaled&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Tensor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_validation_scaled&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TensorDataset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Tensor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_test_scaled&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Tensor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test_scaled&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="n"&gt;train_loader&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataLoader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;BATCH_SIZE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;shuffle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;drop_last&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;validation_loader&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataLoader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;validation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;BATCH_SIZE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;shuffle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;drop_last&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;test_loader&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataLoader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;BATCH_SIZE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;shuffle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;drop_last&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="RNN-Model"&gt;RNN Model&lt;a class="anchor-link" href="#RNN-Model"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Awesome! It's time for the highly coveted model building step, as we set out to use a recurrent neural network (RNN) in this experiment, we'll do exactly that following PyTorch standard guidelines.&lt;/p&gt;
+&lt;p&gt;RNN's typically take in a few inputs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Input dimension&lt;/code&gt; How many inputs are given to the model&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Hidden dimension&lt;/code&gt; How big is the vector of 'decision making' numbers that the model uses&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Layer dimension&lt;/code&gt; How many vectors of decision making numbers should there be&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Output dimension&lt;/code&gt; How many things are we trying to predict at the end&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Dropout probability&lt;/code&gt; How many things should be randomly ignored to ensure our model generalises&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We give our model it's method of forward propagation which takes the input and hidden layers and gives them to the model, which can then be looped to propagate the values through. With the final step in the model being a simple reduction from the hidden layer to our desired output.&lt;/p&gt;
+&lt;p&gt;There are many types of RNN models out there, with this being a very crude representation of one, other widely used RNN types are: LSTM, GRU, Bi directional and more which all have their pros and cons.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RNNModel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Module&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;input_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hidden_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;layer_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;output_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropout_probability&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RNNModel&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hidden_dimension&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hidden_dimension&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layer_dimension&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;layer_dimension&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rnn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RNN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;input_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;input_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hidden_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hidden_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_layers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;layer_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;batch_first&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dropout_probability&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Linear&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hidden_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;output_dimension&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;forward&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Hidden state&lt;/span&gt;
+        &lt;span class="n"&gt;h0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layer_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hidden_dimension&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;requires_grad_&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;out&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rnn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detach&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+        &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;:]&lt;/span&gt;
+
+        &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Optimisation"&gt;Optimisation&lt;a class="anchor-link" href="#Optimisation"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;One super handy tip for training machine learning models of similar type, is to generalise the optimisation step, such that models can be developed independently, which reduces boilerplate code in that you don't need to keep defining how to train. This is exactly what we'll do here.&lt;/p&gt;
+&lt;p&gt;The training step followings the process of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Feeding the raw inputs to the model&lt;/li&gt;
+&lt;li&gt;Comparing the received predictions against the actual (to compute loss)&lt;/li&gt;
+&lt;li&gt;Backward propagating to fine tune the weights of the model&lt;/li&gt;
+&lt;li&gt;Rinse and repeat&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The training of the model follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go through the above training step with the batches of the training set&lt;/li&gt;
+&lt;li&gt;Do quite the same with the validation set&lt;/li&gt;
+&lt;li&gt;Repeat this over a number of times (or epochs)&lt;/li&gt;
+&lt;li&gt;Compare the losses between the model in training and validation (if something is wildly different here we have a problem)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [13]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Optimisation&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;loss_fn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loss_fn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;loss_fn&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;optimizer&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;train_losses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val_losses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_step&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;train&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;yhat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;loss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loss_fn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;yhat&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# PyTorch automatically determines how to back propagate!&lt;/span&gt;
+        &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backward&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;step&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zero_grad&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;train_loader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val_loader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;model_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;'models/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;_&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strftime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"%Y-%m-&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; %H:%M:%S"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"_"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;epoch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+            &lt;span class="n"&gt;batch_losses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# Training set&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x_batch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_batch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;train_loader&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;x_batch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_batch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="n"&gt;loss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;train_step&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_batch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_batch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;batch_losses&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;training_loss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_losses&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;train_losses&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;training_loss&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# Validation set&lt;/span&gt;
+            &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;no_grad&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+                &lt;span class="n"&gt;batch_val_losses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+                &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x_val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_val&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;val_loader&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="n"&gt;x_val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_val&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eval&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+                    &lt;span class="n"&gt;yhat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="n"&gt;val_loss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loss_fn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;yhat&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+                    &lt;span class="n"&gt;batch_val_losses&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val_loss&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;validation_loss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;batch_val_losses&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val_losses&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;validation_loss&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epoch&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epoch&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                    &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"[&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;epoch&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;] Training loss: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;training_loss&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;.4f&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="s2"&gt; Validation loss: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;validation_loss&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;.4f&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+                &lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;state_dict&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;model_path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;evaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_loader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Test set&lt;/span&gt;
+        &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;no_grad&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="n"&gt;predictions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+            &lt;span class="n"&gt;values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_test&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;test_loader&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;x_test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x_test&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eval&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+                &lt;span class="n"&gt;yhat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;predictions&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;yhat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detach&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+                &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detach&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;predictions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;plot_losses&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;train_losses&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Training loss"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val_losses&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Validation loss"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;legend&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Losses"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Train!"&gt;Train!&lt;a class="anchor-link" href="#Train!"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;All we need to do now is set up all the variables for our model, and give them to our optimisation class to do the heavy lifting for us.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [14]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;torch.optim&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;optim&lt;/span&gt;
+
+&lt;span class="n"&gt;input_dimension&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;output_dimension&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;hidden_dimension&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;64&lt;/span&gt;
+&lt;span class="n"&gt;layer_dimension&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;dropout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;
+&lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
+&lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1e-3&lt;/span&gt;
+&lt;span class="n"&gt;weight_decay&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1e-6&lt;/span&gt;
+
+&lt;span class="n"&gt;model_params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'input_dimension'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;input_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s1"&gt;'hidden_dimension'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hidden_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s1"&gt;'layer_dimension'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;layer_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s1"&gt;'output_dimension'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;output_dimension&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s1"&gt;'dropout_probability'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dropout&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RNNModel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;model_params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;loss_fn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;torch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MSELoss&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reduction&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"mean"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;optimizer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;optim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Adam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parameters&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;learning_rate&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;weight_decay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;weight_decay&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Optimisation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;loss_fn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;loss_fn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;train&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;train_loader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;validation_loader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;input_dimension&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_losses&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[1/100] Training loss: 0.0014	 Validation loss: 0.0011
+[2/100] Training loss: 0.0013	 Validation loss: 0.0011
+[3/100] Training loss: 0.0012	 Validation loss: 0.0010
+[4/100] Training loss: 0.0012	 Validation loss: 0.0010
+[5/100] Training loss: 0.0012	 Validation loss: 0.0010
+[6/100] Training loss: 0.0012	 Validation loss: 0.0010
+[7/100] Training loss: 0.0012	 Validation loss: 0.0010
+[8/100] Training loss: 0.0012	 Validation loss: 0.0010
+[9/100] Training loss: 0.0012	 Validation loss: 0.0010
+[10/100] Training loss: 0.0012	 Validation loss: 0.0010
+[50/100] Training loss: 0.0011	 Validation loss: 0.0010
+[100/100] Training loss: 0.0012	 Validation loss: 0.0010
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea"&gt;
+&lt;img class="img-fluid" src="data:image/png;base64,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"/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As we can see above, the loss reached a steady state very quickly, which typically means that further training may not provide substantial improvement.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Evaluate"&gt;Evaluate&lt;a class="anchor-link" href="#Evaluate"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Now it's time to evaluate how our model did against what the actual values were, but to do this we'll need to undo the scaling that we applied earlier.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [15]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;predictions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;evaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;test_loader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_features&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;input_dimension&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inverse_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;inverse_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;format_predictions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;predictions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;df_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;vals&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;concatenate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ravel&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;preds&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;concatenate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;predictions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ravel&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;df_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"value"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;vals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"prediction"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;preds&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df_test&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vals&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;df_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;df_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;inverse_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;df_result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s2"&gt;"value"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"prediction"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;df_result&lt;/span&gt;
+
+
+&lt;span class="n"&gt;df_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;format_predictions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;predictions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;df_result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[15]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped=""&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="table table-striped dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;value&lt;/th&gt;
+&lt;th&gt;prediction&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;timestamp&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;1982-02-22&lt;/th&gt;
+&lt;td&gt;0.000000&lt;/td&gt;
+&lt;td&gt;1.062535&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1982-02-23&lt;/th&gt;
+&lt;td&gt;0.000000&lt;/td&gt;
+&lt;td&gt;1.145566&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1982-02-24&lt;/th&gt;
+&lt;td&gt;23.599998&lt;/td&gt;
+&lt;td&gt;0.911956&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1982-02-25&lt;/th&gt;
+&lt;td&gt;16.799999&lt;/td&gt;
+&lt;td&gt;8.584241&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1982-02-26&lt;/th&gt;
+&lt;td&gt;9.800000&lt;/td&gt;
+&lt;td&gt;7.131365&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Results"&gt;Results&lt;a class="anchor-link" href="#Results"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Sifting through the entire results comparing in a table form isn't fun, so let's use measures specifically designed to tell us how representative the predictions are.&lt;/p&gt;
+&lt;p&gt;For this we'll use:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mean Absolute Error - Sum of the prediction errors dividing by the sample size - Lower score means better fit but depends on the range of the prediction&lt;/li&gt;
+&lt;li&gt;Root Mean Squared Error - Standard deviation of the prediction errors - Lower score means better fit but depends on the range of the prediction&lt;/li&gt;
+&lt;li&gt;R squared - Variance of prediction - High score means small difference between true and predicted&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;mean_absolute_error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mean_squared_error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r2_score&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;calculate_metrics&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;source_col&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'mae'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mean_absolute_error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;source_col&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prediction&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+            &lt;span class="s1"&gt;'rmse'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mean_squared_error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;source_col&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prediction&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s1"&gt;'r2'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;r2_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;source_col&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prediction&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+
+&lt;span class="n"&gt;result_metrics&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;calculate_metrics&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;result_metrics&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[16]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;{'mae': 3.6706777, 'rmse': 8.808983500246619, 'r2': 0.07143107409593741}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [17]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.linear_model&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LinearRegression&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;build_baseline_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_ratio&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target_col&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;feature_label_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target_col&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;test_ratio&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shuffle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LinearRegression&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_numpy&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;y_train&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_numpy&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="n"&gt;prediction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_numpy&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"prediction"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prediction&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+
+&lt;span class="n"&gt;df_baseline&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;build_baseline_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_features&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TEST_RATIO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;baseline_metrics&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;calculate_metrics&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_baseline&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;baseline_metrics&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[17]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;{'mae': 4.161167894393423,
+ 'rmse': 8.772121882200775,
+ 'r2': 0.07767815563196889}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [18]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_baseline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prediction&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'blue'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;legend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;df_baseline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'red'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;legend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;df_result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prediction&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'yellow'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;legend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[18]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&amp;lt;AxesSubplot:xlabel='timestamp'&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea"&gt;
+&lt;img class="img-fluid" src="data:image/png;base64,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"/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Woohoo, we've implemented a RNN that predicts rainfall, to a degree. While the output definitely leaves some to be desired, this means there's plenty of room for improvement. Places for improving upon this model would be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Other types of RNNs (LSTM, GRU, etc)&lt;/li&gt;
+&lt;li&gt;Different features (ie, min/max temperatures, average wind speed)&lt;/li&gt;
+&lt;li&gt;Fine tuning of training variables (ie, epochs, training rate, etc)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Combining Machine Learning Models in Python</title><link href="https://jackmckew.dev/combining-machine-learning-models-in-python.html" rel="alternate"></link><published>2023-09-21T00:00:00+10:00</published><updated>2023-09-21T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2023-09-21:/combining-machine-learning-models-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Now that we've built &amp;amp; trained logistic regression and decision tree models to classify the iris dataset in these previous posts:&lt;/p&gt;
@@ -3224,406 +4270,6 @@ Private mean income: 55589.33064063336, 0.1 privacy budget
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;As we can see from the above while the outcome achieves the same result, we have protected the users privacy!&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry><entry><title>Shallow vs Deep Copy in Python</title><link href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html" rel="alternate"></link><published>2020-10-09T00:00:00+11:00</published><updated>2020-10-09T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-09:/shallow-vs-deep-copy-in-python.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5 …&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-vs-Deep-Copy-in-Python"&gt;Shallow vs Deep Copy in Python&lt;a class="anchor-link" href="#Shallow-vs-Deep-Copy-in-Python"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;One of the utmost crucial parts in all programming languages is maintaining variables. We create, modify, compare, delete our variables to build more complex systems that eventually make up the software we use. This is typically done by using the &lt;code&gt;=&lt;/code&gt; operator (eg &lt;code&gt;x = 5&lt;/code&gt;), but sometimes this doesn't always do what we expect. This is going to be a deep  dive into different types of &lt;code&gt;copy&lt;/code&gt; in Python.&lt;/p&gt;
-&lt;p&gt;When we say &lt;code&gt;x = 5&lt;/code&gt;, we're actually not creating a new object (as in object oriented software), we're creating a binding between a target and an object. We can see this in action by using the &lt;code&gt;id()&lt;/code&gt; function on our variables to see the 'identity' of an object.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;140711684720416
-140711684720416
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As we can see, both &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;5&lt;/code&gt; share an 'identity' meaning they are both the same object and the variable is merely a 'pointer' to the right object.&lt;/p&gt;
-&lt;p&gt;But sometimes we actually want to create a new object, and this comes into using the &lt;code&gt;copy&lt;/code&gt; module. But even with &lt;code&gt;copy&lt;/code&gt; there's still 2 types of copy:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;shallow copy&lt;/li&gt;
-&lt;li&gt;deep copy&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Let's take a look at this a bit closer, we'll start by creating a list (an object itself), with some integer elements and an embedded list.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A contents:  [1, 2, [3, 4], 5]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now similar to our &lt;code&gt;x = 5&lt;/code&gt; example before, let's assign a new variable &lt;code&gt;B&lt;/code&gt; and set it to &lt;code&gt;A&lt;/code&gt; to see what happens to the identities.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"B's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A's object id is 2392779886784
-B's object id is 2392779886784
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Funnily enough, the ids are the same! Meaning they are both the same object. This would mean if we were to modify the contents of the elements in &lt;code&gt;A&lt;/code&gt;, the same modifications would be made in &lt;code&gt;B&lt;/code&gt;, which is not obvious.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify A[2][0] = 100"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"B contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A == B? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's modify A[2][0] = 100
-A contents:  [1, 2, [100, 4], 5]
-B contents:  [1, 2, [100, 4], 5]
-Is A == B?  True
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now if we were trying to use &lt;code&gt;B&lt;/code&gt; as a separate entity to &lt;code&gt;A&lt;/code&gt; this could cause all sorts of grief, and be very difficult to track down.&lt;/p&gt;
-&lt;p&gt;Let's reset our variable(s) back to it's original state so we can see how shallow &amp;amp; deep copies could change this behaviour.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's reset A[2][0] = 3"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's reset A[2][0] = 3
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Shallow-Copy"&gt;Shallow Copy&lt;a class="anchor-link" href="#Shallow-Copy"&gt;¶&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;copy&lt;/span&gt;
-
-&lt;span class="n"&gt;C&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"C's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A's object id is 2392779886784
-C's object id is 2392779896256
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Fantastic! Now we can see that our &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;C&lt;/code&gt; have separate identities, now we would expect this to behave like separate entities, right? Unfortunately not, while this does have a use case, the contents inside the list still have matching identities, meaning if we modify the contents of &lt;code&gt;C&lt;/code&gt;, it'll be reflected in &lt;code&gt;A&lt;/code&gt;, again a not obvious behaviour. But this is known as a shallow copy, meaning a new object is created but it still references the original data.&lt;/p&gt;
-&lt;p&gt;Let's demonstrate this by modifying one of the elements, and seeing if it's reflected in both variables.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A[2][0]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"C[2][0]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify C[2][0] = 100 (note if this was not an embedded list this will creates a new instance of the C[0] element and won't update original list)"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"C contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A == C? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A[2][0] == C[2][0]? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A[2][0]'s object id is 140711684720352
-C[2][0]'s object id is 140711684720352
-Let's modify C[2][0] = 100 (note if this was not an embedded list this will creates a new instance of the C[0] element and won't update original list)
-A contents:  [1, 2, [100, 4], 5]
-C contents:  [1, 2, [100, 4], 5]
-Is A == C?  True
-Is A[2][0] == C[2][0]?  True
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;But why are we using an embedded list specifically? This is one percularity, that like most things in this blog post, isn't obvious. Note that if we modified the contents of an element in the shallow copy that was an integer, it wou;dn't be reflected in both variables. Let's try this out.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A[1]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"C[1]'s object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify C[1] = 100"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"A contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"C contents: "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A == C? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is A[1] == C[1]? "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;A[1]'s object id is 140711684720320
-C[1]'s object id is 140711684720320
-Let's modify C[1] = 100
-A contents:  [1, 2, [100, 4], 5]
-C contents:  [1, 100, [100, 4], 5]
-Is A == C?  False
-Is A[1] == C[1]?  False
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This is due to the fact that the only difference between shallow and deep copies is for compound objects (objects that contain other objects, like lists within lists).&lt;/p&gt;
-&lt;p&gt;Next let's reset our list, and take a look at deep copy.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's reset A[2][0] = 3 and A[1] = 2"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's reset A[2][0] = 3 and A[1] = 2
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Deep-Copy"&gt;Deep Copy&lt;a class="anchor-link" href="#Deep-Copy"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now we're at the deep copy, and as we'd expect it creates a completely new object, and recursively creates new objects for embedded objects (compound objects). This means when we edit anything inside one of these compound objects, the changes won't be reflected in the other object as we'd sometimes originally expect. Let's demonstrate this.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's do a deep copy"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;D&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deepcopy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"A's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"D's object id is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Let's modify A[2][0] = 100"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Let's do a deep copy
-A's object id is 2392779886784
-D's object id is 2392779846656
-Let's modify A[2][0] = 100
-[1, 2, [100, 4], 5]
-[1, 2, [3, 4], 5]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Hopefully being aware of how the default behaviour works, and the potential solutions will help when debugging strange behaviour when using variables in Python!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/body&gt;</content><category term="Data Science"></category><category term="datascience"></category><category term="python"></category></entry></feed>
