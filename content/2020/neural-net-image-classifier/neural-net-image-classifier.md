@@ -1,4 +1,4 @@
-Title: Recurrent Neural Networks with PyTorch
+Title: Classifying Images with PyTorch
 Date: 2024-02-26
 Author: Jack McKew
 Category: Python, Data Science
