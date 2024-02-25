@@ -31,6 +31,8 @@ Big thank you to this github thread (and user @automata) for finally leading me 
 conda create -n mlagents python==3.10.7
 ```
 
+> Ensure to download the release specifically that you are targetting which are managed by branches on the repo. IE <https://github.com/Unity-Technologies/ml-agents/tree/latest_release>. If you are using the gh CLI `gh repo clone Unity-Technologies/ml-agents -- --branch release_20`
+
 Next we need to edit `setup.py` found in `ml-agents-release_20/ml-agents/setup.py`, specifically line 71 to:
 
 ```python
