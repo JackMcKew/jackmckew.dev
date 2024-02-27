@@ -1,0 +1,3 @@
+ml-agents-project/*
+!ml-agents-project/Assets
+!*/ml-agents-project/Assets/*

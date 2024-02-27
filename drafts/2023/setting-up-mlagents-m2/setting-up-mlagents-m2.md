@@ -1,4 +1,4 @@
-Title: How to set up ML Agents for Unity on a Mac M1/M2
+Title: How to set up ML Agents for Unity on Apple Silicon (M1/M2/M3)
 Date: 2023-03-15
 Author: Jack McKew
 Category: Python, Data Science
@@ -52,6 +52,8 @@ Which was resolved through <https://stackoverflow.com/questions/72441758/typeerr
 ```sh
 pip install protobuf~=3.20
 ```
+
+> Update February 2024, after following my own guide on a Mac M3, I did not need face any further errors listed here
 
 Which gets us past the last error, and unfortunately onto the next.
 
