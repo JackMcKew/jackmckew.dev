@@ -28,7 +28,7 @@ public class RewardAgent : Agent
             // transform.rotation = Quaternion.LookRotation(movementDirection);
         }
 
-        AddReward(-1 * (StepCount / 100));
+        AddReward(-1 * (StepCount / 1000));
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -135,7 +135,6 @@ public class RewardAgent : Agent
     {
         // Reset any necessary variables at the beginning of each episode
         episodeStartTime = Time.time;
-        ResetRewardPosition();
     }
 
     // Custom method to calculate scaled rewards based on completion time
@@ -151,13 +150,14 @@ public class RewardAgent : Agent
     {
         if (collision.gameObject.name.Contains("Reward"))
         {
-            SetReward(CalculateScaledReward(100f));
+            AddReward(10f);
+            ResetRewardPosition();
             floorMeshRenderer.material = winMaterial;
             EndEpisode();
         }
         if (collision.gameObject.name.Contains("Wall"))
         {
-            SetReward(-50f);
+            AddReward(-1f);
             floorMeshRenderer.material = loseMaterial;
             ResetAgentPosition();
             EndEpisode();
