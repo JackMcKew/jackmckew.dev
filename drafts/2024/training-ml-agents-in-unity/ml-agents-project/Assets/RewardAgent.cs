@@ -137,15 +137,6 @@ public class RewardAgent : Agent
         episodeStartTime = Time.time;
     }
 
-    // Custom method to calculate scaled rewards based on completion time
-    private float CalculateScaledReward(float originalReward)
-    {
-        // We want to discourage slower completions
-        float episodeDuration = Time.time - episodeStartTime;
-        float scaledReward = originalReward - (episodeDuration * timePenaltyMultiplier);
-        return scaledReward;
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name.Contains("Reward"))
