@@ -61,7 +61,7 @@
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
             <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 108</p>
-            <p>Number of Words: 81,238</p>
+            <p>Number of Words: 81,240</p>
             <p>Number of Lines of Code 5,782</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
@@ -162,14 +162,14 @@
 <p><img alt="Redux State Diagram" class="img-fluid" src="https://jackmckew.dev/img/redux-diagram.png"/></p>
 <p>Let's use <code>react-redux</code> to build a system which we can alert users when things trigger. For this we will need to build an action, a reducer and a component to display the alert.</p>
 <p>To ensure that these three components are speaking the same language, we need to initialise types which will represent the states being passed around. These variables contain a string. For our alert system we need two variables</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">SET_ALERT</span> <span class="o">=</span> <span class="s2">"SET_ALERT"</span>
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">REMOVE_ALERT</span> <span class="o">=</span> <span class="s2">"REMOVE_ALERT"</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="action">Action</h2>
 <p>We'll start by creating the action which will signify when an alert is triggered. We want all of our alerts to be unique so multiple alerts can handled without a problem which we will use <code>uuid</code>.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -212,7 +212,7 @@
 </td></tr></tbody></table>
 <p>The action is declared as a function, which takes in 3 arguments (2 required): <code>msg</code>, <code>alertType</code> and <code>timeout</code>. Which we then use call the dispatch function with an object constructed from the arguments, and then after a specified timeout we dispatch another object to remove the same alert.</p>
 <p>Note that we curry the dispatch function in this case, this is only possible from using the middleware <code>redux-thunk</code>, which can also be represented as:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -230,7 +230,7 @@
 <blockquote>
 <p>This post won't go into detail around how to build a React component, which you can find over at another post: [INSERT REACT COMPONENT POST]</p>
 </blockquote>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -278,7 +278,7 @@
 <p>To break it down, we've created a React component (class) <code>Alert</code> which takes in <code>alerts</code> as an array, verifies it isn't null or empty, and finally iterates over each element in the <code>alerts</code> array to return a <code>div</code> stylized with the appropriate information.</p>
 <h2 id="reducer">Reducer</h2>
 <p>Lastly we have the reducer which we want to handle all the states that can be created by the <code>alert</code> action. Luckily we can do this with a switch statement:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
