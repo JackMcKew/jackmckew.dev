@@ -1,5 +1,5 @@
-Title: Hands On Machine Learning with PyTorch - Reinforcement Learning - Learn to Walk
-Date: 2023-05-xx
+Title: Reinforcement Learning with PyTorch
+Date: 2024-03-19
 Author: Jack McKew
 Category: Python, Data Science
 Tags: python, visualisation, machine learning, ai
