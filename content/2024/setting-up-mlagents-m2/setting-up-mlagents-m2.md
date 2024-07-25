@@ -1,4 +1,4 @@
-Title: How to set up ML Agents for Unity on Apple Silicon (M1/M2/M3)
+Title: ML Agents for Unity on Apple Silicon (M1/M2/M3)
 Date: 2024-07-25
 Author: Jack McKew
 Category: Python, Data Science
