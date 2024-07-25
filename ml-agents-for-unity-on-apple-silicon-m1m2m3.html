@@ -29,25 +29,26 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics --><meta name="author" content="Jack McKew" />
-<meta name="description" content="From the MicroPython docs themselves “MicroPython is a lean and efficient implementation of the Python 3 programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …" />
-<meta name="keywords" content="python, micropython">
+<meta name="description" content="If you&#39;re like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here&#39;s hoping what I found that works for me, works for you! Clone the ml-agents repo Ensure you have the ml-agents repo cloned locally! This …" />
+<meta name="keywords" content="python, machine learning, ai">
 
 
 <meta property="og:site_name" content="Jack McKew's Blog"/>
-<meta property="og:title" content="What is MicroPython?"/>
-<meta property="og:description" content="From the MicroPython docs themselves “MicroPython is a lean and efficient implementation of the Python 3 programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”. But what does all this mean? Python 3 is one of …"/>
+<meta property="og:title" content="ML Agents for Unity on Apple Silicon (M1/M2/M3)"/>
+<meta property="og:description" content="If you&#39;re like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here&#39;s hoping what I found that works for me, works for you! Clone the ml-agents repo Ensure you have the ml-agents repo cloned locally! This …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://jackmckew.dev/what-is-micropython.html"/>
+<meta property="og:url" content="https://jackmckew.dev/ml-agents-for-unity-on-apple-silicon-m1m2m3.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-03-29 06:39:00+11:00"/>
+<meta property="article:published_time" content="2024-07-25 00:00:00+10:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
 <meta property="article:section" content="Python"/>
 <meta property="article:tag" content="python"/>
-<meta property="article:tag" content="micropython"/>
+<meta property="article:tag" content="machine learning"/>
+<meta property="article:tag" content="ai"/>
 <meta property="og:image" content="/jm-photo.jpg">
 
-    <title>Jack McKew's Blog &ndash; What is MicroPython?</title>
+    <title>Jack McKew's Blog &ndash; ML Agents for Unity on Apple Silicon (M1/M2/M3)</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="
      crossorigin="anonymous"></script>
@@ -148,82 +149,128 @@
 <article class="single">
   <header>
       
-    <h1 id="what-is-micropython">What is MicroPython?</h1>
+    <h1 id="ml-agents-for-unity-on-apple-silicon-m1m2m3">ML Agents for Unity on Apple Silicon (M1/M2/M3)</h1>
     <p>
-       Posted on Fri 29 March 2019 in <a href="https://jackmckew.dev/category/python.html">Python</a>
+       Posted on Thu 25 July 2024 in <a href="https://jackmckew.dev/category/python.html">Python</a>
 
-        &#8226; 2 min read
+        &#8226; 3 min read
     </p>
   </header>
 
 
   <div>
-    <body><p>From the MicroPython docs themselves <em>“MicroPython is a lean and efficient implementation of the</em> <a href="http://www.python.org/"><em>Python 3</em></a> <em>programming language that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments.”.</em> But what does all this mean? Python 3 is one of the most widely used, easy to write/read programming languages in the world that is rapidly growing. By default Python comes with a ‘standard library’ which includes basic functions such as if statements, loops, printing, etc.</p>
-<p>Where MicroPython comes in is that the standard library for Python might take up valuable space/computations to run as efficiently it does on a PC, so MicroPython is a slice of the standard library that is able to run more efficiently and take up less space on a microcontroller (RAM and space is crucial when working with microcontrollers).</p>
-<p>MicroPython also comes with an interactive REPL (Read-Evaluate-Print Loop), which is an often overlooked amazing feature of MicroPython. The REPL allows you to connect to a microcontroller, execute code quickly without the need to compile or upload code. Which gives immediate feedback on whether your program is working as intended.</p>
-<h2 id="differences-between-micropython-python"><strong>Differences between MicroPython &amp; Python</strong></h2>
-<p>There obviously had to be some changes between Python and MicroPython to make it work efficiently on processors a fraction of the power, but what are they? If you are a beginner-intermediate Python programmer, you’ll only run into trouble in very specific scenarios, which can be easily worked around. For example you cannot delete from a list with a step greater than 1.</p>
-<h3 id="sample-python-code"><strong>Sample Python Code</strong></h3>
+    <body><p>If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!</p>
+<h2 id="clone-the-ml-agents-repo">Clone the ml-agents repo</h2>
+<p>Ensure you have the ml-agents repo cloned locally! This can be found on <a href="https://github.com/Unity-Technologies/ml-agents">https://github.com/Unity-Technologies/ml-agents</a></p>
+<h2 id="miniconda">Miniconda</h2>
+<p>Miniconda was set up through the installation instructions listed on the website for Miniconda3 macOS Apple M1 64-bit pkg:</p>
+<p><a href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a></p>
+<p>Following this, the conda-forge is added as a channel (instructions from <a href="https://conda-forge.org/docs/user/introduction.html">https://conda-forge.org/docs/user/introduction.html</a>):</p>
 <table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-<span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda config --add channels conda-forge
+conda config --set channel_priority strict
 </code></pre></div>
 </td></tr></tbody></table>
-<p>You’d expect for the output here in Python normally to be:</p>
-<table class="table-striped table">
-<thead>
-<tr>
-<th><strong>Python Output</strong></th>
-<th><strong>MicroPython Output</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>[2,4]</td>
-<td>TypeError: object 'range' isn't a tuple or list</td>
-</tr>
-</tbody>
-</table>
-<p>However this can be easily worked around with an explicit loop for example:</p>
-<h3 id="sample-micropythonpython-code"><strong>Sample MicroPython/Python Code</strong></h3>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
-        <span class="k">del</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<h2 id="conda-environment">Conda environment</h2>
+<p>Big thank you to this github thread (and user @automata) for finally leading me down a successful path <a href="https://github.com/Unity-Technologies/ml-agents/issues/5797">https://github.com/Unity-Technologies/ml-agents/issues/5797</a>:</p>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda create -n mlagents <span class="nv">python</span><span class="o">==</span><span class="m">3</span>.10.7
 </code></pre></div>
 </td></tr></tbody></table>
-<p>For more information on differences between Python (in particular CPython) and MicroPython you can find the MicroPython documentation here: <a href="http://docs.micropython.org/en/latest/genrst/index.html">http://docs.micropython.org/en/latest/genrst/index.html</a></p></body>
+<blockquote>
+<p>Ensure to download the release specifically that you are targetting which are managed by branches on the repo. IE <a href="https://github.com/Unity-Technologies/ml-agents/tree/latest_release">https://github.com/Unity-Technologies/ml-agents/tree/latest_release</a>. If you are using the gh CLI <code>gh repo clone Unity-Technologies/ml-agents -- --branch release_20</code></p>
+</blockquote>
+<p>Next we need to edit <code>setup.py</code> found in <code>ml-agents-release_20/ml-agents/setup.py</code>, specifically line 71 to:</p>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="s2">"torch&gt;=1.8.0,&lt;=1.12.0;(platform_system!='Windows' and python_version&gt;='3.9')"</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>Now we install the ml-agents package (which has a dependancy of torch) through the locally edited version:</p>
+<p><code>pip install -e /Users/jackmckew/Unity/ml-agents-release_20/ml-agents</code></p>
+<p>Theoretically, this is where we should've been done and been able to run <code>mlagents-learn</code> without any more problems, but that wasn't the case. The next error we run into is:</p>
+<p><code>TypeError: Descriptors cannot not be created directly.</code></p>
+<p>Which was resolved through <a href="https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly">https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly</a></p>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install protobuf~<span class="o">=</span><span class="m">3</span>.20
+</code></pre></div>
+</td></tr></tbody></table>
+<blockquote>
+<p>Update February 2024, after following my own guide on a Mac M3, I did not need face any further errors listed here</p>
+</blockquote>
+<p>Which gets us past the last error, and unfortunately onto the next.</p>
+<blockquote>
+<p>Interestingly, if you use pip to uninstall grpcio and conda to reinstall before you downgrade protobuf, this skips the rest of these issues and starts working</p>
+</blockquote>
+<p><code>ImportError: dlopen(/Users/jackmckew/miniconda3/envs/mlagentstest/lib/python3.10/site-packages/grpc/_cython/cygrpc.cpython-310-darwin.so, 0x0002): symbol not found in flat namespace '_CFRelease'</code></p>
+<p>Which was resolved through <a href="https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app">https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app</a></p>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip uninstall grpcio -y
+conda install grpcio -y
+</code></pre></div>
+</td></tr></tbody></table>
+<p>While writing this blog post, I tried to go through my notes that I took while going through this, and interestingly didn't need to downgrade numpy after going the process the first time, but I know I definitely did once, so this is how I resolved that floating number issue.</p>
+<p><code>pip install "numpy&lt;1.24"</code></p>
+<p>Finally we can run:</p>
+<p><code>mlagents-learn</code></p>
+<p>To be met with this glorious screen</p>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+</code></pre></div>
+</td></tr></tbody></table>
+<p>Now we can use ml-agents with Unity on a Mac M1/M2</p>
+<h2 id="things-tried-that-didnt-work">Things tried that didn't work</h2>
+<p>A lot of posts or github issues that you've likely filtered through always say what did work for them, but never what they tried and didn't work first. This leads you to try them (like I did) until you come to the same conclusion.</p>
+<ol>
+<li>Set up x86 homebrew through rosetta to set up pyenv, this got me nowhere but headaches with aliases to keep both arm64 brew installed</li>
+<li>Setting up pyenv with miniconda, also another drama as the number of Python executables in the path was causing nightmares.</li>
+<li>Setting up miniconda on x86 to get access to older versions of Python</li>
+</ol></body>
   </div>
   <div class="tag-cloud">
     <p>
       <a href="https://jackmckew.dev/tag/python.html">python</a>
-      <a href="https://jackmckew.dev/tag/micropython.html">micropython</a>
+      <a href="https://jackmckew.dev/tag/machine-learning.html">machine learning</a>
+      <a href="https://jackmckew.dev/tag/ai.html">ai</a>
     </p>
   </div>
 
 
   <div class="neighbors">
-    <a class="btn float-left" href="https://jackmckew.dev/introduction-to-esp32-esp8266.html" title="Introduction to ESP32/ESP8266">
+    <a class="btn float-left" href="https://jackmckew.dev/reinforcement-learning-with-pytorch.html" title="Reinforcement Learning with PyTorch">
       <i class="fa fa-angle-left"></i>  Previous Post
-    </a>
-    <a class="btn float-right" href="https://jackmckew.dev/how-to-program-an-esp8266-with-micropython.html" title="How to Program an ESP8266 with MicroPython">
-       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
   <div class="related-posts">
     <h4> You might enjoy</h4>
     <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/hands-on-machine-learning-chapter-3.html">Hands On Machine Learning Chapter 3</a></li>
       <li><a href="https://jackmckew.dev/differential-privacy.html">Differential Privacy</a></li>
       <li><a href="https://jackmckew.dev/shallow-vs-deep-copy-in-python.html">Shallow vs Deep Copy in Python</a></li>
       <li><a href="https://jackmckew.dev/types-of-averages-means.html">Types of Averages (Means)</a></li>
       <li><a href="https://jackmckew.dev/dataclasses-vs-attrs-vs-pydantic.html">Dataclasses vs Attrs vs Pydantic</a></li>
-      <li><a href="https://jackmckew.dev/generators-in-python.html">Generators in Python</a></li>
     </ul>
   </div>
 
