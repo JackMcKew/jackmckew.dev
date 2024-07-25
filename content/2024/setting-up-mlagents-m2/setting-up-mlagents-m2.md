@@ -1,10 +1,10 @@
 Title: How to set up ML Agents for Unity on Apple Silicon (M1/M2/M3)
-Date: 2023-03-15
+Date: 2024-07-25
 Author: Jack McKew
 Category: Python, Data Science
 Tags: python, machine learning, ai
 
-If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2, here's hoping what I found that works for me, works for you!
+If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!
 
 ## Clone the ml-agents repo
 
