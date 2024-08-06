@@ -8,21 +8,21 @@
 &lt;p&gt;Miniconda was set up through the installation instructions listed on the website for Miniconda3 macOS Apple M1 64-bit pkg:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;https://docs.conda.io/en/latest/miniconda.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Following this, the conda-forge is added as a channel (instructions from &lt;a href="https://conda-forge.org/docs/user/introduction.html"&gt;https://conda-forge.org/docs/user/introduction.html&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda config --add channels conda-forge
 conda config --set channel_priority strict
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="conda-environment"&gt;Conda environment&lt;/h2&gt;
 &lt;p&gt;Big thank you to this github thread (and user @automata) for finally leading me down a successful path &lt;a href="https://github.com/Unity-Technologies/ml-agents/issues/5797"&gt;https://github.com/Unity-Technologies/ml-agents/issues/5797&lt;/a&gt;:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda create -n mlagents &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.7
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda create -n mlagents &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.7
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Ensure to download the release specifically that you are targetting which are managed by branches on the repo. IE &lt;a href="https://github.com/Unity-Technologies/ml-agents/tree/latest_release"&gt;https://github.com/Unity-Technologies/ml-agents/tree/latest_release&lt;/a&gt;. If you are using the gh CLI &lt;code&gt;gh repo clone Unity-Technologies/ml-agents -- --branch release_20&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Next we need to edit &lt;code&gt;setup.py&lt;/code&gt; found in &lt;code&gt;ml-agents-release_20/ml-agents/setup.py&lt;/code&gt;, specifically line 71 to:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s2"&gt;"torch&amp;gt;=1.8.0,&amp;lt;=1.12.0;(platform_system!='Windows' and python_version&amp;gt;='3.9')"&lt;/span&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s2"&gt;"torch&amp;gt;=1.8.0,&amp;lt;=1.12.0;(platform_system!='Windows' and python_version&amp;gt;='3.9')"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Now we install the ml-agents package (which has a dependancy of torch) through the locally edited version:&lt;/p&gt;
@@ -30,7 +30,7 @@ conda config --set channel_priority strict
 &lt;p&gt;Theoretically, this is where we should've been done and been able to run &lt;code&gt;mlagents-learn&lt;/code&gt; without any more problems, but that wasn't the case. The next error we run into is:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;TypeError: Descriptors cannot not be created directly.&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly"&gt;https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install protobuf~&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.20
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install protobuf~&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -42,7 +42,7 @@ conda config --set channel_priority strict
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;ImportError: dlopen(/Users/jackmckew/miniconda3/envs/mlagentstest/lib/python3.10/site-packages/grpc/_cython/cygrpc.cpython-310-darwin.so, 0x0002): symbol not found in flat namespace '_CFRelease'&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app"&gt;https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip uninstall grpcio -y
 conda install grpcio -y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -52,7 +52,7 @@ conda install grpcio -y
 &lt;p&gt;Finally we can run:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;mlagents-learn&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;To be met with this glorious screen&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -1803,7 +1803,7 @@ Accuracy of truck:	 57.80%
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -1946,7 +1946,7 @@ Number of missing points: 1239
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -2099,7 +2099,7 @@ Number of missing points: 1239
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -2570,7 +2570,7 @@ Number of missing points: 1239
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="dataframe table-striped table"&gt;
+&lt;table border="1" class="table-striped dataframe table"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
