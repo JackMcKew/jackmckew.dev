@@ -10,7 +10,7 @@
 &lt;p&gt;&lt;code&gt;ogr2ogr -f "PostgreSQL" PG:"dbname=postgres user=postgres password=root host=localhost" "water_polygons.shp" -progress -overwrite -nlt PROMOTE_TO_MULTI -nln water&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id="generate-points"&gt;Generate points&lt;/h2&gt;
 &lt;p&gt;Now that we have our polygons loaded into a table, we need to generate points to be evaluated:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -25,7 +25,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="baseline-test"&gt;Baseline test&lt;/h2&gt;
 &lt;p&gt;Our baseline test of a point in polygon spatial join: count how many points are within each polygon, can demonstrate the effectiveness of indexing, point in polygon calculations and general overhead. By using the &lt;code&gt;EXPLAIN ANALYZE&lt;/code&gt; operator in PostgreSQL, we can look into the inner workings of how the database plans and executes the query, along with how long the query took. We'll also take only 50% of the points as querying the entire table defeats the purpose of this task.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -39,7 +39,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;By running without any of the following optimizations, we get the result of:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -75,7 +75,7 @@
 &lt;h1 id="optimize-techniques"&gt;Optimize Techniques&lt;/h1&gt;
 &lt;h2 id="set-the-page-size"&gt;Set the page size&lt;/h2&gt;
 &lt;p&gt;Kudos to Paul Ramsey &lt;a href="http://blog.cleverelephant.ca/2018/09/postgis-external-storage.html"&gt;source&lt;/a&gt; for demonstrating the effectiveness of setting the page size for postgresql (and by extension PostGIS). As the default for postgresql is to use a set amount of page size of internal memory, this results in the database only allowed to use a set amount of memory to process queries which inherently does not leverage the computing power that we have on our machines. By allowing postgresql to use external memory, this not only leverages the memory available but should also improve our query performance.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -89,7 +89,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;By running the baseline test again:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -131,11 +131,11 @@
 &lt;/blockquote&gt;
 &lt;h2 id="create-a-spatial-index"&gt;Create a spatial index&lt;/h2&gt;
 &lt;p&gt;One technique that should always be used in databases is indexing, especially for geospatial databases. Creating an index on our database is as simple as:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="n"&gt;geometry_index&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;water&lt;/span&gt; &lt;span class="k"&gt;USING&lt;/span&gt; &lt;span class="n"&gt;GIST&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wkb_geometry&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="n"&gt;geometry_index&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;water&lt;/span&gt; &lt;span class="k"&gt;USING&lt;/span&gt; &lt;span class="n"&gt;GIST&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wkb_geometry&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;This works by computing the bounding box of each geometry in the dataset, and whenever a query comes in that wishes to evaluate against the geometries (ie, intersection), the query resolver will first reduce the query only to geometries which bounding box first passes the query before continuing to include the entire geometry.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
