@@ -166,21 +166,21 @@
 <p>Miniconda was set up through the installation instructions listed on the website for Miniconda3 macOS Apple M1 64-bit pkg:</p>
 <p><a href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a></p>
 <p>Following this, the conda-forge is added as a channel (instructions from <a href="https://conda-forge.org/docs/user/introduction.html">https://conda-forge.org/docs/user/introduction.html</a>):</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda config --add channels conda-forge
 conda config --set channel_priority strict
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="conda-environment">Conda environment</h2>
 <p>Big thank you to this github thread (and user @automata) for finally leading me down a successful path <a href="https://github.com/Unity-Technologies/ml-agents/issues/5797">https://github.com/Unity-Technologies/ml-agents/issues/5797</a>:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda create -n mlagents <span class="nv">python</span><span class="o">==</span><span class="m">3</span>.10.7
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda create -n mlagents <span class="nv">python</span><span class="o">==</span><span class="m">3</span>.10.7
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
 <p>Ensure to download the release specifically that you are targetting which are managed by branches on the repo. IE <a href="https://github.com/Unity-Technologies/ml-agents/tree/latest_release">https://github.com/Unity-Technologies/ml-agents/tree/latest_release</a>. If you are using the gh CLI <code>gh repo clone Unity-Technologies/ml-agents -- --branch release_20</code></p>
 </blockquote>
 <p>Next we need to edit <code>setup.py</code> found in <code>ml-agents-release_20/ml-agents/setup.py</code>, specifically line 71 to:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="s2">"torch&gt;=1.8.0,&lt;=1.12.0;(platform_system!='Windows' and python_version&gt;='3.9')"</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="s2">"torch&gt;=1.8.0,&lt;=1.12.0;(platform_system!='Windows' and python_version&gt;='3.9')"</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now we install the ml-agents package (which has a dependancy of torch) through the locally edited version:</p>
@@ -188,7 +188,7 @@ conda config --set channel_priority strict
 <p>Theoretically, this is where we should've been done and been able to run <code>mlagents-learn</code> without any more problems, but that wasn't the case. The next error we run into is:</p>
 <p><code>TypeError: Descriptors cannot not be created directly.</code></p>
 <p>Which was resolved through <a href="https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly">https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly</a></p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install protobuf~<span class="o">=</span><span class="m">3</span>.20
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install protobuf~<span class="o">=</span><span class="m">3</span>.20
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -200,7 +200,7 @@ conda config --set channel_priority strict
 </blockquote>
 <p><code>ImportError: dlopen(/Users/jackmckew/miniconda3/envs/mlagentstest/lib/python3.10/site-packages/grpc/_cython/cygrpc.cpython-310-darwin.so, 0x0002): symbol not found in flat namespace '_CFRelease'</code></p>
 <p>Which was resolved through <a href="https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app">https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app</a></p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip uninstall grpcio -y
 conda install grpcio -y
 </code></pre></div>
@@ -210,7 +210,7 @@ conda install grpcio -y
 <p>Finally we can run:</p>
 <p><code>mlagents-learn</code></p>
 <p>To be met with this glorious screen</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

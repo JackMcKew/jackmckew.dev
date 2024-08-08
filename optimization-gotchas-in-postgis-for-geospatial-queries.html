@@ -168,7 +168,7 @@
 <p><code>ogr2ogr -f "PostgreSQL" PG:"dbname=postgres user=postgres password=root host=localhost" "water_polygons.shp" -progress -overwrite -nlt PROMOTE_TO_MULTI -nln water</code></p>
 <h2 id="generate-points">Generate points</h2>
 <p>Now that we have our polygons loaded into a table, we need to generate points to be evaluated:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -183,7 +183,7 @@
 </td></tr></tbody></table>
 <h2 id="baseline-test">Baseline test</h2>
 <p>Our baseline test of a point in polygon spatial join: count how many points are within each polygon, can demonstrate the effectiveness of indexing, point in polygon calculations and general overhead. By using the <code>EXPLAIN ANALYZE</code> operator in PostgreSQL, we can look into the inner workings of how the database plans and executes the query, along with how long the query took. We'll also take only 50% of the points as querying the entire table defeats the purpose of this task.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -197,7 +197,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>By running without any of the following optimizations, we get the result of:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -233,7 +233,7 @@
 <h1 id="optimize-techniques">Optimize Techniques</h1>
 <h2 id="set-the-page-size">Set the page size</h2>
 <p>Kudos to Paul Ramsey <a href="http://blog.cleverelephant.ca/2018/09/postgis-external-storage.html">source</a> for demonstrating the effectiveness of setting the page size for postgresql (and by extension PostGIS). As the default for postgresql is to use a set amount of page size of internal memory, this results in the database only allowed to use a set amount of memory to process queries which inherently does not leverage the computing power that we have on our machines. By allowing postgresql to use external memory, this not only leverages the memory available but should also improve our query performance.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -247,7 +247,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>By running the baseline test again:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -289,11 +289,11 @@
 </blockquote>
 <h2 id="create-a-spatial-index">Create a spatial index</h2>
 <p>One technique that should always be used in databases is indexing, especially for geospatial databases. Creating an index on our database is as simple as:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">geometry_index</span> <span class="k">ON</span> <span class="n">water</span> <span class="k">USING</span> <span class="n">GIST</span><span class="p">(</span><span class="n">wkb_geometry</span><span class="p">);</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">geometry_index</span> <span class="k">ON</span> <span class="n">water</span> <span class="k">USING</span> <span class="n">GIST</span><span class="p">(</span><span class="n">wkb_geometry</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This works by computing the bounding box of each geometry in the dataset, and whenever a query comes in that wishes to evaluate against the geometries (ie, intersection), the query resolver will first reduce the query only to geometries which bounding box first passes the query before continuing to include the entire geometry.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
