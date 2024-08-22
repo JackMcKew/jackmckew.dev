@@ -1,5 +1,5 @@
 Title: Reinforcement Learning in Unity
-Date: 2024-02-27
+Date: 2024-08-22
 Author: Jack McKew
 Category: Python, Data Science
 Tags: python, machine learning, ai
