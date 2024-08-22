@@ -5,30 +5,37 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/</loc>
-<lastmod>2024-08-08T04:21:55-00:00</lastmod>
+<lastmod>2024-08-22T01:27:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/archives.html</loc>
-<lastmod>2024-08-08T04:21:55-00:00</lastmod>
+<lastmod>2024-08-22T01:27:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tags.html</loc>
-<lastmod>2024-08-08T04:21:55-00:00</lastmod>
+<lastmod>2024-08-22T01:27:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/categories.html</loc>
-<lastmod>2024-08-08T04:21:55-00:00</lastmod>
+<lastmod>2024-08-22T01:27:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
+</url>
+
+<url>
+<loc>https://jackmckew.dev/reinforcement-learning-in-unity.html</loc>
+<lastmod>2024-08-22T00:00:00+10:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -817,7 +824,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/data-science.html</loc>
-<lastmod>2024-07-25T00:00:00+10:05</lastmod>
+<lastmod>2024-08-22T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -880,7 +887,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/category/python.html</loc>
-<lastmod>2024-07-25T00:00:00+10:05</lastmod>
+<lastmod>2024-08-22T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -908,21 +915,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/tag/python.html</loc>
-<lastmod>2024-07-25T00:00:00+10:05</lastmod>
+<lastmod>2024-08-22T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tag/machine-learning.html</loc>
-<lastmod>2024-07-25T00:00:00+10:05</lastmod>
+<lastmod>2024-08-22T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://jackmckew.dev/tag/ai.html</loc>
-<lastmod>2024-07-25T00:00:00+10:05</lastmod>
+<lastmod>2024-08-22T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
@@ -1223,7 +1230,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jackmckew.dev/author/jack-mckew.html</loc>
-<lastmod>2024-07-25T00:00:00+10:05</lastmod>
+<lastmod>2024-08-22T00:00:00+10:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.6</priority>
 </url>
