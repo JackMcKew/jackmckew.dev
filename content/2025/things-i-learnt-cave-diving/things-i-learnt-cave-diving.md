@@ -4,7 +4,7 @@ Author: Jack McKew
 Category: Principles
 Tags: principles
 
-I've spent 6 months this year living in Mexico to learn Spanish but also become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself. I first visited Mexico in 2023 where I dove in cenotes, which I was mesmerized by the way light dances in from the outside world, and comforted by the peace of the darkness in the caverns.
+I've spent 6 months this year living in Mexico to learn Spanish but also to become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself. I first visited Mexico in 2023 where I dove in cenotes, which I was mesmerized by the way light dances in from the outside world, and comforted by the peace of the darkness in the caverns.
 
 Discovering my personal limits when it comes to diving, finding mammoth bones, magically formed stalactites & stalagmites and more made me fall even more in love with the world we have around us. I'll never forget the places I've gotten to explore and the people I've shared this passion with along the way.
 
