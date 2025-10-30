@@ -62,9 +62,9 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 110</p>
-            <p>Number of Words: 81,726</p>
-            <p>Number of Lines of Code 5,763</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 111</p>
+            <p>Number of Words: 82,563</p>
+            <p>Number of Lines of Code 5,768</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
@@ -184,7 +184,7 @@
 <p>To give the ability for our agent to control the character, we will attach a script to the character. This can be achieved through selecting the sphere &gt; add component &gt; new script</p>
 <p><img alt="Script" class="img-fluid" src="https://jackmckew.dev/img/script-attached.png"/></p>
 <p>Inside the script, we will use Unity's <code>addForce</code> to give us the movement, and we will make use of MLAgents' heuristics such that we can toggle between agent controlled movement and controlled by us. If you leave this setting to default, it'll automatically choose for you.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -271,7 +271,7 @@
 <h3 id="addobservation">AddObservation</h3>
 <p>Overriding the public function of <code>CollectionObservations</code> enables us to give the agent the input to it's neural network. Ensure to set the <code>Vector Space</code> size correctly, in our scenario we have a space of 12, as we are passing through 4 vectors comprising of 3 elements (x, y, z).</p>
 <p><img alt="Observations" class="img-fluid" src="https://jackmckew.dev/img/observation.png"/></p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -288,7 +288,7 @@
 </td></tr></tbody></table>
 <h3 id="addreward">AddReward</h3>
 <p>Since our task is whether the character has either collided with the reward (success) or with the wall (failure), we set the collision function on our character to respectively <code>AddReward</code> and <code>EndEpisode</code> for our two outcomes. This will tell the model when it's training to reset the state of the environment, and for our sake, we'll colour the floor to whether they've succeeded or failed as well.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -325,7 +325,7 @@
 </td></tr></tbody></table>
 <p>The full script can be found within details:
 </p><details><p></p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>  1
+<table class="table-striped highlighttable table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
   4
@@ -668,6 +668,9 @@ Adding <code>--run-id</code> will give your run's a specific ID which is handy</
   <div class="neighbors">
     <a class="btn float-left" href="https://jackmckew.dev/ml-agents-for-unity-on-apple-silicon-m1m2m3.html" title="ML Agents for Unity on Apple Silicon (M1/M2/M3)">
       <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+    <a class="btn float-right" href="https://jackmckew.dev/things-i-learnt-becoming-a-cave-diver.html" title="Things I Learnt Becoming a Cave Diver">
+       Next Post <i class="fa fa-angle-right"></i>
     </a>
   </div>
 
