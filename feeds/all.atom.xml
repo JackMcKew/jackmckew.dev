@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2025-10-30T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Things I Learnt Becoming a Cave Diver</title><link href="https://jackmckew.dev/things-i-learnt-becoming-a-cave-diver.html" rel="alternate"></link><published>2025-10-30T00:00:00+11:00</published><updated>2025-10-30T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2025-10-30:/things-i-learnt-becoming-a-cave-diver.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself. I …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself. I first visited Mexico in 2023 where I dove in cenotes, which I was mesmerized by the way light dances in from the outside world, and comforted by the peace of the darkness in the caverns.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/all.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2025-10-30T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Things I Learnt Becoming a Cave Diver</title><link href="https://jackmckew.dev/things-i-learnt-becoming-a-cave-diver.html" rel="alternate"></link><published>2025-10-30T00:00:00+11:00</published><updated>2025-10-30T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2025-10-30:/things-i-learnt-becoming-a-cave-diver.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also to become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also to become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself. I first visited Mexico in 2023 where I dove in cenotes, which I was mesmerized by the way light dances in from the outside world, and comforted by the peace of the darkness in the caverns.&lt;/p&gt;
 &lt;p&gt;Discovering my personal limits when it comes to diving, finding mammoth bones, magically formed stalactites &amp;amp; stalagmites and more made me fall even more in love with the world we have around us. I'll never forget the places I've gotten to explore and the people I've shared this passion with along the way.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Cave 1" class="img-fluid" src="https://jackmckew.dev/img/cave-1.png"/&gt;&lt;/p&gt;
 &lt;h2 id="only-ever-have-one-thing-in-your-hands"&gt;Only ever have one thing in your hands&lt;/h2&gt;
@@ -53,7 +53,7 @@
 &lt;p&gt;To give the ability for our agent to control the character, we will attach a script to the character. This can be achieved through selecting the sphere &amp;gt; add component &amp;gt; new script&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Script" class="img-fluid" src="https://jackmckew.dev/img/script-attached.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Inside the script, we will use Unity's &lt;code&gt;addForce&lt;/code&gt; to give us the movement, and we will make use of MLAgents' heuristics such that we can toggle between agent controlled movement and controlled by us. If you leave this setting to default, it'll automatically choose for you.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -140,7 +140,7 @@
 &lt;h3 id="addobservation"&gt;AddObservation&lt;/h3&gt;
 &lt;p&gt;Overriding the public function of &lt;code&gt;CollectionObservations&lt;/code&gt; enables us to give the agent the input to it's neural network. Ensure to set the &lt;code&gt;Vector Space&lt;/code&gt; size correctly, in our scenario we have a space of 12, as we are passing through 4 vectors comprising of 3 elements (x, y, z).&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Observations" class="img-fluid" src="https://jackmckew.dev/img/observation.png"/&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -157,7 +157,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="addreward"&gt;AddReward&lt;/h3&gt;
 &lt;p&gt;Since our task is whether the character has either collided with the reward (success) or with the wall (failure), we set the collision function on our character to respectively &lt;code&gt;AddReward&lt;/code&gt; and &lt;code&gt;EndEpisode&lt;/code&gt; for our two outcomes. This will tell the model when it's training to reset the state of the environment, and for our sake, we'll colour the floor to whether they've succeeded or failed as well.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -194,7 +194,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The full script can be found within details:
 &lt;/p&gt;&lt;details&gt;&lt;p&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;  1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;  1
   2
   3
   4
@@ -532,21 +532,21 @@ Adding &lt;code&gt;--run-id&lt;/code&gt; will give your run's a specific ID whic
 &lt;p&gt;Miniconda was set up through the installation instructions listed on the website for Miniconda3 macOS Apple M1 64-bit pkg:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;https://docs.conda.io/en/latest/miniconda.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Following this, the conda-forge is added as a channel (instructions from &lt;a href="https://conda-forge.org/docs/user/introduction.html"&gt;https://conda-forge.org/docs/user/introduction.html&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda config --add channels conda-forge
 conda config --set channel_priority strict
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="conda-environment"&gt;Conda environment&lt;/h2&gt;
 &lt;p&gt;Big thank you to this github thread (and user @automata) for finally leading me down a successful path &lt;a href="https://github.com/Unity-Technologies/ml-agents/issues/5797"&gt;https://github.com/Unity-Technologies/ml-agents/issues/5797&lt;/a&gt;:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda create -n mlagents &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.7
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda create -n mlagents &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.7
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Ensure to download the release specifically that you are targetting which are managed by branches on the repo. IE &lt;a href="https://github.com/Unity-Technologies/ml-agents/tree/latest_release"&gt;https://github.com/Unity-Technologies/ml-agents/tree/latest_release&lt;/a&gt;. If you are using the gh CLI &lt;code&gt;gh repo clone Unity-Technologies/ml-agents -- --branch release_20&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Next we need to edit &lt;code&gt;setup.py&lt;/code&gt; found in &lt;code&gt;ml-agents-release_20/ml-agents/setup.py&lt;/code&gt;, specifically line 71 to:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s2"&gt;"torch&amp;gt;=1.8.0,&amp;lt;=1.12.0;(platform_system!='Windows' and python_version&amp;gt;='3.9')"&lt;/span&gt;
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s2"&gt;"torch&amp;gt;=1.8.0,&amp;lt;=1.12.0;(platform_system!='Windows' and python_version&amp;gt;='3.9')"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Now we install the ml-agents package (which has a dependancy of torch) through the locally edited version:&lt;/p&gt;
@@ -554,7 +554,7 @@ conda config --set channel_priority strict
 &lt;p&gt;Theoretically, this is where we should've been done and been able to run &lt;code&gt;mlagents-learn&lt;/code&gt; without any more problems, but that wasn't the case. The next error we run into is:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;TypeError: Descriptors cannot not be created directly.&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly"&gt;https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install protobuf~&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.20
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install protobuf~&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -566,7 +566,7 @@ conda config --set channel_priority strict
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;ImportError: dlopen(/Users/jackmckew/miniconda3/envs/mlagentstest/lib/python3.10/site-packages/grpc/_cython/cygrpc.cpython-310-darwin.so, 0x0002): symbol not found in flat namespace '_CFRelease'&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app"&gt;https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app&lt;/a&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip uninstall grpcio -y
 conda install grpcio -y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -576,7 +576,7 @@ conda install grpcio -y
 &lt;p&gt;Finally we can run:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;mlagents-learn&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;To be met with this glorious screen&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
