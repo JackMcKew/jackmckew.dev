@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="english">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome.css">     <script src="https://jackmckew.dev/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch.js"></script>
+    <script src="https://jackmckew.dev/theme/tipuesearch/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://jackmckew.dev/theme/tipuesearch/tipuesearch.css" />
+    <script src="https://jackmckew.dev/tipuesearch_content.js"></script>
+    <link href="https://jackmckew.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jack McKew's Blog Atom">     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131173168-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<meta name="description" content="After building the First Home Buyer Guide, I wanted to see how far I could push this approach. Not just one product - a repeatable system where I describe what I want, and AI does the actual coding, testing, and deployment. Three products later, here&#39;s what I&#39;ve learned about using Claude …" />
+<meta name="keywords" content="ai, claude, astro, side-project, automation">
+
+
+<meta property="og:site_name" content="Jack McKew's Blog"/>
+<meta property="og:title" content="Shipping Real Products with Claude Code (No Team Required)"/>
+<meta property="og:description" content="After building the First Home Buyer Guide, I wanted to see how far I could push this approach. Not just one product - a repeatable system where I describe what I want, and AI does the actual coding, testing, and deployment. Three products later, here&#39;s what I&#39;ve learned about using Claude …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://jackmckew.dev/shipping-real-products-with-claude-code-no-team-required.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2026-03-06 00:00:00+11:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://jackmckew.dev/author/jack-mckew.html">
+<meta property="article:section" content="Software"/>
+<meta property="article:tag" content="ai"/>
+<meta property="article:tag" content="claude"/>
+<meta property="article:tag" content="astro"/>
+<meta property="article:tag" content="side-project"/>
+<meta property="article:tag" content="automation"/>
+<meta property="og:image" content="/jm-photo.jpg">
+
+    <title>Jack McKew's Blog &ndash; Shipping Real Products with Claude Code (No Team Required)</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <aside>
+        <div>
+            <a href="https://jackmckew.dev">
+        <img src="/jm-photo.jpg" alt="Jack McKew's Blog" title="Jack McKew's Blog">
+      </a>
+            <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
+
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 113</p>
+            <p>Number of Words: 84,428</p>
+            <p>Number of Lines of Code 5,827</p>
+            <form class="navbar-search" action="/search.html" role="search">
+                <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
+            </form>
+            <style>
+                .bmc-button img {
+                    height: 34px !important;
+                    width: 35px !important;
+                    margin-bottom: 1px !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                    vertical-align: middle !important;
+                }
+                
+                .bmc-button {
+                    margin-top: 15px !important;
+                    margin-bottom: 20px !important;
+                    padding: 7px 15px 7px 10px !important;
+                    line-height: 35px !important;
+                    height: 51px !important;
+                    text-decoration: none !important;
+                    display: inline-flex !important;
+                    color: #ffffff !important;
+                    /* background-color: #FF813F !important; */
+                    border-radius: 5px !important;
+                    border: 1px solid transparent !important;
+                    padding: 7px 15px 7px 10px !important;
+                    font-size: 22px !important;
+                    letter-spacing: 0.6px !important;
+                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    font-family: 'Cookie', cursive !important;
+                    -webkit-box-sizing: border-box !important;
+                    box-sizing: border-box !important;
+                }
+                
+                .bmc-button:hover,
+                .bmc-button:active,
+                .bmc-button:focus {
+                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    text-decoration: none !important;
+                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+                    opacity: 0.85 !important;
+                    color: #ffffff !important;
+                }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
+            <nav>
+                <ul class="list">
+                    <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
+                    <li><a target="https://jackmckew.dev/files/Jack_McKew_Resume.pdf" href="https://jackmckew.dev/files/Jack_McKew_Resume.pdf">Resume</a></li>
+                </ul>
+            </nav>
+
+            <ul class="social">
+                <li>
+                    <a  class="sc-twitter" href="https://twitter.com/Jac_McQ" target="_blank">
+                        <i class="fab fa-twitter">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-linkedin" href="https://www.linkedin.com/in/jack-mckew/" target="_blank">
+                        <i class="fab fa-linkedin">
+            </i>
+                    </a>
+                </li>
+                <li>
+                    <a  class="sc-github" href="https://github.com/JackMcKew" target="_blank">
+                        <i class="fab fa-github">
+            </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>
+    <main>
+        <nav>
+            <a href="https://jackmckew.dev"> Home</a>             <a href="/archives.html">Archives</a>             <a href="/categories.html">Categories</a>             <a href="/tags.html">Tags</a>             <a href="/sitemap.xml">Sitemap</a>             <a href="https://jackmckew.dev/feeds/all.atom.xml"> Atom</a>         </nav>
+<article class="single">
+  <header>
+      
+    <h1 id="shipping-real-products-with-claude-code-no-team-required">Shipping Real Products with Claude Code (No Team Required)</h1>
+    <p>
+       Posted on Fri 06 March 2026 in <a href="https://jackmckew.dev/category/software.html">Software</a>
+
+        &#8226; 5 min read
+    </p>
+  </header>
+
+
+  <div>
+    </head><body><p>After <a href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html">building the First Home Buyer Guide</a>, I wanted to see how far I could push this approach. Not just one product - a repeatable system where I describe what I want, and AI does the actual coding, testing, and deployment. Three products later, here's what I've learned about using Claude Code to ship software solo.</p>
+<h2 id="the-products">The products</h2>
+<p>Quick context on what I've actually shipped with this system:</p>
+<ul>
+<li><a href="https://firsthomecalculator.com.au">First Home Calculator</a> - Australian first home buyer calculator with grants, stamp duty, FHSS scheme. 38 SEO pages. $9 one-time.</li>
+<li><a href="https://yt-script-kit.pages.dev">YT Script Kit</a> - AI script prompt templates for faceless YouTube channels. 50+ templates across 5 niches. $29 one-time.</li>
+<li><a href="https://ai-product-builder-2ay.pages.dev">AI Product Builder</a> - The system itself, packaged as a product. Templates, frameworks, deployment pipelines. $99 one-time.</li>
+</ul>
+<p>All three are live, taking payments, and were built without me writing a single line of code manually.</p>
+<h2 id="the-stack-and-why-its-deliberately-boring">The stack (and why it's deliberately boring)</h2>
+<p>Every product uses the same stack:</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">Astro 5          - Static site generation (zero JS by default)</span>
+<span class="err">Plain CSS        - Custom properties for theming, no Tailwind</span>
+<span class="err">Cloudflare Pages - Free hosting, auto-deploy from GitHub</span>
+<span class="err">Stripe           - Payment Links (no backend needed)</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>The reason I chose this stack isn't performance (though it is fast). It's AI-maintainability. Claude Code handles plain CSS better than Tailwind utility classes. Static sites mean no server state to debug. Stripe Payment Links mean no checkout backend.</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># The entire deployment pipeline</span>
+npm run build          <span class="c1"># Astro builds static HTML</span>
+git push origin main   <span class="c1"># GitHub Actions triggers</span>
+<span class="c1"># Cloudflare Pages deploys automatically - done</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>Hosting costs: $0/month across all three products. Cloudflare's free tier is absurdly generous.</p>
+<h2 id="the-claudemd-file-this-is-the-real-product">The CLAUDE.md file - this is the real product</h2>
+<p>The thing that makes this work isn't Claude Code itself - it's the instructions file. Every product has a <code>CLAUDE.md</code> that tells the AI agent how to behave. Here's a stripped-down version:</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">#</span> <span class="n">Product</span> <span class="n">Name</span>
+
+<span class="p">##</span> <span class="n">What</span> <span class="n">This</span> <span class="n">Is</span>
+<span class="n">One</span> <span class="n">paragraph</span> <span class="n">description</span><span class="p">.</span>
+
+<span class="p">##</span> <span class="n">Tech</span> <span class="n">Stack</span>
+<span class="o">-</span> <span class="n">Astro</span> <span class="mh">5</span> <span class="p">(</span><span class="n">static</span> <span class="n">only</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Plain</span> <span class="n">CSS</span> <span class="n">with</span> <span class="n">custom</span> <span class="n">properties</span>
+<span class="o">-</span> <span class="n">Cloudflare</span> <span class="n">Pages</span> <span class="n">hosting</span>
+
+<span class="p">##</span> <span class="n">Pricing</span>
+<span class="o">-</span> <span class="err">$</span><span class="mh">29</span> <span class="n">AUD</span> <span class="n">one</span><span class="o">-</span><span class="kt">time</span> <span class="p">(</span><span class="n">Aspirin</span> <span class="n">tier</span><span class="p">)</span>
+
+<span class="p">##</span> <span class="n">AI</span> <span class="n">Agent</span> <span class="n">Notes</span>
+<span class="o">-</span> <span class="n">No</span> <span class="n">em</span> <span class="n">dashes</span> <span class="o">-</span> <span class="n">use</span> <span class="n">regular</span> <span class="n">hyphens</span>
+<span class="o">-</span> <span class="n">Dark</span> <span class="n">mode</span> <span class="n">via</span> <span class="p">[</span><span class="n">data</span><span class="o">-</span><span class="n">theme</span><span class="o">=</span><span class="s">"dark"</span><span class="p">]</span>
+<span class="o">-</span> <span class="n">Never</span> <span class="n">commit</span> <span class="p">.</span><span class="n">env</span> <span class="n">files</span>
+<span class="o">-</span> <span class="n">Run</span> <span class="n">tests</span> <span class="n">after</span> <span class="n">changes</span>
+<span class="o">-</span> <span class="n">Keep</span> <span class="n">files</span> <span class="n">under</span> <span class="mh">500</span> <span class="n">lines</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>That <code>No em dashes</code> rule is worth explaining. Em dashes are an AI telltale - real humans use hyphens. I wrote a pre-commit hook that catches them:</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Check for em dashes in source files</span>
+<span class="k">if</span> grep -rn <span class="s1">$'\xe2\x80\x94'</span> src/ --include<span class="o">=</span><span class="s2">"*.astro"</span> --include<span class="o">=</span><span class="s2">"*.ts"</span> <span class="m">2</span>&gt;/dev/null<span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">"Em dashes found - use regular hyphens instead"</span>
+  <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>It's a small thing but it matters when your entire site is AI-generated.</p>
+<h2 id="setting-up-stripe-with-zero-backend-code">Setting up Stripe with zero backend code</h2>
+<p>One of the things that surprised me was how simple payments are now. No checkout page, no webhook handler, no server at all. Stripe Payment Links handle everything.</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Create the product</span>
+curl -X POST <span class="s2">"https://api.stripe.com/v1/products"</span> <span class="se">\</span>
+  -u <span class="s2">"</span><span class="nv">$STRIPE_SECRET_KEY</span><span class="s2">:"</span> <span class="se">\</span>
+  -d <span class="s2">"name=YT Script Kit"</span> <span class="se">\</span>
+  -d <span class="s2">"description=AI script prompt templates for YouTube"</span>
+
+<span class="c1"># Create a price ($29 AUD)</span>
+curl -X POST <span class="s2">"https://api.stripe.com/v1/prices"</span> <span class="se">\</span>
+  -u <span class="s2">"</span><span class="nv">$STRIPE_SECRET_KEY</span><span class="s2">:"</span> <span class="se">\</span>
+  -d <span class="s2">"product=prod_XXXXX"</span> <span class="se">\</span>
+  -d <span class="s2">"unit_amount=2900"</span> <span class="se">\</span>
+  -d <span class="s2">"currency=aud"</span>
+
+<span class="c1"># Create a payment link that redirects to your success page</span>
+curl -X POST <span class="s2">"https://api.stripe.com/v1/payment_links"</span> <span class="se">\</span>
+  -u <span class="s2">"</span><span class="nv">$STRIPE_SECRET_KEY</span><span class="s2">:"</span> <span class="se">\</span>
+  -d <span class="s2">"line_items[0][price]=price_XXXXX"</span> <span class="se">\</span>
+  -d <span class="s2">"line_items[0][quantity]=1"</span> <span class="se">\</span>
+  -d <span class="s2">"after_completion[type]=redirect"</span> <span class="se">\</span>
+  -d <span class="s2">"after_completion[redirect][url]=https://yoursite.com/success?paid=true"</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>The response gives you a <code>buy.stripe.com</code> URL. Drop it in your buy button's <code>href</code>. That's the entire payment integration.</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://buy.stripe.com/your-link-here"</span> <span class="na">class</span><span class="o">=</span><span class="s">"buy-button"</span><span class="p">&gt;</span>
+  Get the Kit - $29
+<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>No Stripe.js, no server-side session, no webhook to verify payment. For digital products with instant delivery, this is all you need.</p>
+<h2 id="cloudflare-pages-deployment-via-api">Cloudflare Pages deployment via API</h2>
+<p>Same deal with hosting. I used to manually create projects in the Cloudflare dashboard. Now I do it with one API call:</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -X POST <span class="se">\</span>
+  <span class="s2">"https://api.cloudflare.com/client/v4/accounts/</span><span class="nv">$ACCOUNT_ID</span><span class="s2">/pages/projects"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer </span><span class="nv">$CF_API_TOKEN</span><span class="s2">"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{</span>
+<span class="s1">    "name": "my-product",</span>
+<span class="s1">    "production_branch": "main",</span>
+<span class="s1">    "build_config": {</span>
+<span class="s1">      "build_command": "npm run build",</span>
+<span class="s1">      "destination_dir": "dist"</span>
+<span class="s1">    }</span>
+<span class="s1">  }'</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>Then set the GitHub secrets so the deploy workflow can push:</p>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gh secret <span class="nb">set</span> CLOUDFLARE_API_TOKEN -R <span class="s2">"org/repo"</span> --body <span class="s2">"</span><span class="nv">$CF_API_TOKEN</span><span class="s2">"</span>
+gh secret <span class="nb">set</span> CLOUDFLARE_ACCOUNT_ID -R <span class="s2">"org/repo"</span> --body <span class="s2">"</span><span class="nv">$ACCOUNT_ID</span><span class="s2">"</span>
+</code></pre></div>
+</td></tr></tbody></table>
+<p>From that point on, every <code>git push</code> builds and deploys automatically. The GitHub Actions workflow handles the build, runs some validation checks (design system compliance, em dash detection), and deploys via Wrangler.</p>
+<h2 id="the-pricing-framework">The pricing framework</h2>
+<p>I spent way too long agonising over pricing on the first product before landing on something simple. Three tiers based on how badly the buyer needs it:</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Tier</th>
+<th>Price</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vitamin</td>
+<td>$9</td>
+<td>Nice to have - calculators, cheat sheets</td>
+</tr>
+<tr>
+<td>Aspirin</td>
+<td>$29</td>
+<td>Solves a real problem - template packs, prompt kits</td>
+</tr>
+<tr>
+<td>Painkiller</td>
+<td>$99</td>
+<td>Can't live without it - complete systems</td>
+</tr>
+</tbody>
+</table>
+<p>The rule that saved me the most time: if a product gets less than 10 sales in month 1, kill it or pivot. No sunk cost fallacy allowed. I've killed two ideas using this rule (Strava automation and Google Keep integration) before writing any code.</p>
+<h2 id="what-id-do-differently">What I'd do differently</h2>
+<p>Some things I got wrong:</p>
+<ol>
+<li>
+<p><strong>Marketing from day one.</strong> My first product was 90% building, 10% marketing. Should be 50/50. No one knows your product exists unless you tell them.</p>
+</li>
+<li>
+<p><strong>Free sample on every product.</strong> I added this later but it should've been there from the start. People need to see real output before they'll pay. The <a href="https://firsthomecalculator.com.au">First Home Calculator</a> shows your full results for free - you only pay for the detailed PDF report.</p>
+</li>
+<li>
+<p><strong>Cross-sell earlier.</strong> Every product footer now links to every other product. Cross-selling existing customers is 5-8x cheaper than finding new ones. I should've built this into the template from the start instead of retrofitting it.</p>
+</li>
+<li>
+<p><strong>Blog on every product site.</strong> Each product now has its own blog at <code>/blog</code> that grows automatically as I add features. These posts link back here to jackmckew.dev and vice versa. The SEO value of this cross-linking is real.</p>
+</li>
+</ol>
+<h2 id="the-system-is-the-product">The system is the product</h2>
+<p>The meta realisation was that the system I built to make products - the templates, the CLAUDE.md conventions, the pricing framework, the deployment automation - is itself a product. That's the <a href="https://ai-product-builder-2ay.pages.dev">AI Product Builder</a>. It's $99 because it's the complete system, not a single tool.</p>
+<p>If you're thinking about building small software products with AI, the hardest part isn't the coding. It's the system around the coding: what to build, how to price it, how to deploy it, and how to know when to kill it. That's what I've been figuring out, and I'll keep sharing what works (and what doesn't) here.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://jackmckew.dev/tag/ai.html">ai</a>
+      <a href="https://jackmckew.dev/tag/claude.html">claude</a>
+      <a href="https://jackmckew.dev/tag/astro.html">astro</a>
+      <a href="https://jackmckew.dev/tag/side-project.html">side-project</a>
+      <a href="https://jackmckew.dev/tag/automation.html">automation</a>
+    </p>
+  </div>
+
+
+  <div class="neighbors">
+    <a class="btn float-left" href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html" title="Building a First Home Buyer Guide That Actually Helps">
+      <i class="fa fa-angle-left"></i>  Previous Post
+    </a>
+  </div>
+
+  <div class="related-posts">
+    <h4> You might enjoy</h4>
+    <ul class="related-posts">
+      <li><a href="https://jackmckew.dev/reinforcement-learning-in-unity.html">Reinforcement Learning in Unity</a></li>
+      <li><a href="https://jackmckew.dev/ml-agents-for-unity-on-apple-silicon-m1m2m3.html">ML Agents for Unity on Apple Silicon (M1/M2/M3)</a></li>
+      <li><a href="https://jackmckew.dev/reinforcement-learning-with-pytorch.html">Reinforcement Learning with PyTorch</a></li>
+      <li><a href="https://jackmckew.dev/classifying-images-with-pytorch.html">Classifying Images with PyTorch</a></li>
+      <li><a href="https://jackmckew.dev/recurrent-neural-networks-with-pytorch.html">Recurrent Neural Networks with PyTorch</a></li>
+    </ul>
+  </div>
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'jackmckew-dev';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+     Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+        <footer>
+<p>&copy;  </p>
+<p> Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme</p>        </footer>
+    </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jack McKew's Blog ",
+  "url" : "https://jackmckew.dev",
+  "image": "/jm-photo.jpg",
+  "description": ""
+}
+</script>    <script>
+        $(document).ready(function() {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
+</body>
+
+</html>
