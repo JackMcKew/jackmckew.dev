@@ -19,5 +19,16 @@
 {% if article.featured_image %}
 <meta property="og:image" content="{{ article.featured_image }}">
 {% else %}
-<meta property="og:image" content="{{ SITELOGO }}">
+<meta property="og:image" content="{{ SITEURL }}{{ SITELOGO }}">
+{% endif %}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ article.title|striptags|escape }}" />
+<meta name="twitter:description" content="{{ article.summary|striptags|escape }}" />
+{% if article.featured_image %}
+<meta name="twitter:image" content="{{ article.featured_image }}" />
+{% else %}
+<meta name="twitter:image" content="{{ SITEURL }}{{ SITELOGO }}" />
+{% endif %}
+{% if TWITTER_USERNAME %}
+<meta name="twitter:site" content="@{{ TWITTER_USERNAME }}" />
 {% endif %}

@@ -10,5 +10,14 @@
 <meta property="og:locale" content="{{ default_locale }}"/>
 <meta property="og:url" content="{{ SITEURL }}"/>
 {% if SITELOGO %}
-<meta property="og:image" content="{{ SITELOGO }}">
+<meta property="og:image" content="{{ SITEURL }}{{ SITELOGO }}">
+{% endif %}
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ SITENAME }}" />
+<meta name="twitter:description" content="{{ SITEDESCRIPTION }}" />
+{% if SITELOGO %}
+<meta name="twitter:image" content="{{ SITEURL }}{{ SITELOGO }}" />
+{% endif %}
+{% if TWITTER_USERNAME %}
+<meta name="twitter:site" content="@{{ TWITTER_USERNAME }}" />
 {% endif %}

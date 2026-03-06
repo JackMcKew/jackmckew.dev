@@ -162,6 +162,9 @@ AUTHOR_FEED_RSS: Any = None
 FEED_MAX_ITEMS = 5
 
 
+TWITTER_USERNAME = "Jac_McQ"
+BROWSER_COLOR = "#0f766e"
+
 # Social widget
 SOCIAL = (
     ("twitter", "https://twitter.com/Jac_McQ"),
