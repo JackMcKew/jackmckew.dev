@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,7 +28,15 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Random walks are where randomly-moving objects move around, that&#39;s it. The most fascinating part about it is how many seemingly &#39;patterns&#39; emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let&#39;s build an interactive random walk visualisation with Javascript. Let&#39;s control the …" />
 <meta name="keywords" content="javascript, data-viz">
 
@@ -46,6 +54,11 @@
 <meta property="article:tag" content="javascript"/>
 <meta property="article:tag" content="data-viz"/>
 <meta property="og:image" content="https://jackmckew.dev/img/random-walkers.gif">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Interactive Random Walkers with Javascript" />
+<meta name="twitter:description" content="Random walks are where randomly-moving objects move around, that&#39;s it. The most fascinating part about it is how many seemingly &#39;patterns&#39; emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let&#39;s build an interactive random walk visualisation with Javascript. Let&#39;s control the …" />
+<meta name="twitter:image" content="https://jackmckew.dev/img/random-walkers.gif" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash; Interactive Random Walkers with Javascript</title>
 
@@ -67,50 +80,6 @@
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -138,6 +107,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -158,7 +136,7 @@
 
 
   <div>
-    </head><body><p>Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the number of random walkers, the line thickness of each, the number of directions they can move (eg, 4 as seen in the GIF) and how fast they move.</p>
+    <body><p>Random walks are where randomly-moving objects move around, that's it. The most fascinating part about it is how many seemingly 'patterns' emerge from the random behaviour, and that everyone sees something different in the visualisations. In this post, let's build an interactive random walk visualisation with Javascript. Let's control the number of random walkers, the line thickness of each, the number of directions they can move (eg, 4 as seen in the GIF) and how fast they move.</p>
 <p>If you get a cool pattern out of the visualisation, please share it in the comments!</p>
 <p><img alt="Random Walkers GIF" class="img-fluid" src="https://jackmckew.dev/img/random-walkers.gif"/></p>
 <blockquote>
@@ -200,7 +178,7 @@
 </blockquote>
 <h2 id="applications-for-random-walk">Applications for Random Walk</h2>
 <p><em>This is all well and good for making funky pictures, but what can this actually be used for?</em></p>
-<table class="table table-striped">
+<table class="table-striped table">
 <thead>
 <tr>
 <th>Field</th>
@@ -238,7 +216,7 @@
 <p>CSS Source(s):</p>
 <ul>
 <li><a href="https://jackmckew.dev/css/random-walkers.css">random-walkers.css</a></li>
-</ul>
+</ul></body>
   </div>
   <div class="tag-cloud">
     <p>

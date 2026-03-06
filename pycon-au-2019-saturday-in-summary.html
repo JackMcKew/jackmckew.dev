@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,7 +28,15 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="My first ever conference, learning things I&#39;d never even think of, meeting lots of new people and making my to-do list full of new things to learn. All this happened over the weekend at PyConAU 2019. This post is dedicated to all the fantastic people I met that gave me …" />
 <meta name="keywords" content="pyconau, python">
 
@@ -46,6 +54,11 @@
 <meta property="article:tag" content="pyconau"/>
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="https://jackmckew.dev/img/image1.png">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="PyCon AU 2019 Saturday In Summary" />
+<meta name="twitter:description" content="My first ever conference, learning things I&#39;d never even think of, meeting lots of new people and making my to-do list full of new things to learn. All this happened over the weekend at PyConAU 2019. This post is dedicated to all the fantastic people I met that gave me …" />
+<meta name="twitter:image" content="https://jackmckew.dev/img/image1.png" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash; PyCon AU 2019 Saturday In Summary</title>
 
@@ -67,50 +80,6 @@
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -138,6 +107,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -158,7 +136,7 @@
 
 
   <div>
-    </head><body><p>My first ever conference, learning things I'd never even think of, meeting lots of new people and making my to-do list full of new things to learn. All this happened over the weekend at <a href="https://2019.pycon-au.org/">PyConAU 2019</a>. This post is dedicated to all the fantastic people I met that gave me new perspectives on python programming and all the amazing talks I had the pleasure of attending.</p>
+    <body><p>My first ever conference, learning things I'd never even think of, meeting lots of new people and making my to-do list full of new things to learn. All this happened over the weekend at <a href="https://2019.pycon-au.org/">PyConAU 2019</a>. This post is dedicated to all the fantastic people I met that gave me new perspectives on python programming and all the amazing talks I had the pleasure of attending.</p>
 <p>Please note that all the talks written about here were only the ones I was able to attend, there were many other amazing talks that I didn't get the opportunity to go to (will list the follow up ones later in the post) and would recommend to go through the youtube playlist of all the talks found here: <a href="https://www.youtube.com/user/PyConAU">https://www.youtube.com/user/PyConAU</a>. A link to all the talks and descriptions can also be found in the headings.</p>
 <p>To make this post more digestible for the reader (you!), I have broken into parts which are linked here:</p>
 <ul>
@@ -194,7 +172,7 @@
 <h4 id="how-i-auto-refactored-a-huge-oss-project-to-use-pytest-craigds2"><a href="https://2019.pycon-au.org/talks/how-i-migrated-a-huge-oss-project-to-use-pytest">How I auto-refactored a huge OSS project to use pytest</a> <a href="https://twitter.com/craigds2">\@craigds2</a></h4>
 <p>Craig gave a great talk about how he used PyBowler, Pytest and importantly pytest-sugar to automatically refactor existing testing framework for a huge open source project <a href="https://gdal.org/">GDAL</a>. This post has inspired me to do more testing &amp; refactoring on my code as I develop things!</p>
 <h4 id="the-antipodes-brandon_rhodes"><strong><a href="https://2019.pycon-au.org/talks/brandon">The Antipodes</a></strong> <a href="https://twitter.com/brandon_rhodes">\@brandon_rhodes</a></h4>
-<p>Personally this talk really resonated with a habit that I have been trying to employ in my life recently. The basic principle being behind the meaning of the idea of <a href="https://en.wiktionary.org/wiki/antipodean"></a><a href="https://en.wiktionary.org/wiki/antipodean">antipodean</a>s</p>, someone standing on the exact other side of the planet from you. I thought this was an amazing segway for moving to a new framework for structuring communications.
+<p>Personally this talk really resonated with a habit that I have been trying to employ in my life recently. The basic principle being behind the meaning of the idea of <a href="https://en.wiktionary.org/wiki/antipodean"></a><a href="https://en.wiktionary.org/wiki/antipodean">antipodean</a>s, someone standing on the exact other side of the planet from you. I thought this was an amazing segway for moving to a new framework for structuring communications.</p>
 <p>As most of us do, whenever replying to communication from someone, we normally start with me, me, me, me, you. For example, if someone asked us to make a decision, typically &amp; personally, I would start the reply with stating why I had got to the decision, finally ending the message with the decision and the next steps.</p>
 <p>A technique that I have recently started employing on my messaging is writing as I normally would and before hitting send, moving what matters most to the reader (the decision) to the top, followed by next steps and then going through all the reasons why I possibly had made that decision.</p>
 <h3 id="saturday-lightning-talks"><strong><a href="https://2019.pycon-au.org/talks/saturday-lightning-talks">Saturday Lightning Talks</a></strong></h3>
@@ -218,7 +196,7 @@
 <li>Move this website to static html with <a href="https://www.netlify.com/">netlify</a> and more,</li>
 <li>Look into <a href="https://singularity.lbl.gov/">singularity</a>,</li>
 <li>Look into <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">GitFlow Workflow</a>.</li>
-</ul>
+</ul></body>
   </div>
   <div class="tag-cloud">
     <p>

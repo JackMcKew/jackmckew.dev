@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,14 +28,27 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->    <meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e">     <meta name="author" content="Jack McKew" />
     <meta name="description" content="" /> <meta property="og:site_name" content="Jack McKew's Blog"/>
 <meta property="og:type" content="blog"/>
 <meta property="og:title" content="Jack McKew's Blog"/>
 <meta property="og:description" content=""/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://jackmckew.dev"/>
-<meta property="og:image" content="/jm-photo.jpg">
+<meta property="og:image" content="https://jackmckew.dev/jm-photo.jpg">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Jack McKew's Blog" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:image" content="https://jackmckew.dev/jm-photo.jpg" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash;  Category Engineering</title>
 
@@ -57,50 +70,6 @@
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -128,6 +97,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -149,7 +127,7 @@
     </p>
   </header>
   <div>
-      </head><body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some …</p></body>
+      <body><p>Data security is becoming more and more prevalent in today's society than ever before. We must make a conscious effort to secure both our physical lives, but also our digital lives as well. With data privacy, sharing of information and access control becoming integrated into most people's life in some …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/python-and-data-security-hashing-algorithms.html#python-and-data-security-hashing-algorithms"> Continue reading</a>
   </div>
@@ -167,7 +145,7 @@
     </p>
   </header>
   <div>
-      </head><body><p>Voltage drop is a electrical phenomenon in that wires carrying current always have resistance, or impedance to the current flow. Voltage drop is defined as the amount of loss that occurs through part of or all of a circuit due to resistance/impedance.</p>
+      <body><p>Voltage drop is a electrical phenomenon in that wires carrying current always have resistance, or impedance to the current flow. Voltage drop is defined as the amount of loss that occurs through part of or all of a circuit due to resistance/impedance.</p>
 <p>The most well known analogy for explaining …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/explained-voltage-drop.html#explained-voltage-drop"> Continue reading</a>
@@ -186,7 +164,7 @@
     </p>
   </header>
   <div>
-      </head><body><p>Following the previous two weeks of topics, <a href="https://jackmckew.dev/introduction-to-esp32-esp8266.html">Introduction to ESP32/ESP8266</a> and <a href="https://jackmckew.dev/what-is-micropython.html">What is MicroPython?</a>.  I wrote an <a href="https://maker.pro/esp8266/tutorial/how-to-program-an-esp8266-with-micropython">article on maker.pro</a> in which I describe how to program the ESP8266 with MicroPython in detail.</p>
+      <body><p>Following the previous two weeks of topics, <a href="https://jackmckew.dev/introduction-to-esp32-esp8266.html">Introduction to ESP32/ESP8266</a> and <a href="https://jackmckew.dev/what-is-micropython.html">What is MicroPython?</a>.  I wrote an <a href="https://maker.pro/esp8266/tutorial/how-to-program-an-esp8266-with-micropython">article on maker.pro</a> in which I describe how to program the ESP8266 with MicroPython in detail.</p></body>
   </div>
   <hr />
 </article>
@@ -203,7 +181,7 @@
   </header>
   <div>
         <img src="https://lh5.googleusercontent.com/YEn9Lm0l_QN1jP9Ea6uZmsv35BVp1tqf5hzIZxX3FrVzfZ1MeN6k5pgU-gR6sWmydMCJr0s0pgN8yDBWOQ3-7FqAmAd2ic81lL-QyWsL_Vmu7DAObpqPS3KbeOCC6-ZVT_yV8F9x">
-      </head><body><h2 id="what-is-an-esp32esp8266">What is an ESP32/ESP8266</h2>
+      <body><h2 id="what-is-an-esp32esp8266">What is an ESP32/ESP8266</h2>
 <p>The ESP32 and ESP8266 are low-cost Wi-Fi modules, which are perfect for DIY Internet of Things (IoT) projects. They both come with general purpose input/output pins (GPIOs), support a variety of protocols such as SPI, I2C, UART and many more. The most attractive part …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/introduction-to-esp32-esp8266.html#introduction-to-esp32-esp8266"> Continue reading</a>
@@ -222,7 +200,7 @@
     </p>
   </header>
   <div>
-      </head><body><p>Following last weeks post around network topologies, I believe the next topic to cover is routing and addressing. Routing is the process of selecting a path for traffic to flow through in a network while addressing is marking elements within a network. A real-world example of routing and addressing is …</p></body>
+      <body><p>Following last weeks post around network topologies, I believe the next topic to cover is routing and addressing. Routing is the process of selecting a path for traffic to flow through in a network while addressing is marking elements within a network. A real-world example of routing and addressing is …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-17-networking-routing-addressing.html#episode-17-networking-routing-addressing"> Continue reading</a>
   </div>
@@ -241,7 +219,7 @@
   </header>
   <div>
         <img src="https://jackmckew.dev/img/nettopo.gif">
-      </head><body><p>A network is defined as “A network is a collection of computers, servers, mainframes, network devices, peripherals, or other devices connected to one another to allow the sharing of data”. There are various configurations of networks for specific design scenarios as represented in:</p>
+      <body><p>A network is defined as “A network is a collection of computers, servers, mainframes, network devices, peripherals, or other devices connected to one another to allow the sharing of data”. There are various configurations of networks for specific design scenarios as represented in:</p>
 <p><img alt="network_topologies" class="img-fluid" src="https://jackmckew.dev/img/nettopo.gif"/></p>
 <p>Typical residential home networks are configured in …</p></body>
         <br>
@@ -262,7 +240,7 @@
   </header>
   <div>
         <img src="https://jackmckew.dev/img/trans53.gif">
-      </head><body><p>A C.T is the abbreviated form for a current transformer in electrical terms. It is a simple but effective use of magnetic circuits and transformer characteristics to monitor how power is behaving in a conductor. The C.T works by wrapping a coil of conductor around a core (typically …</p></body>
+      <body><p>A C.T is the abbreviated form for a current transformer in electrical terms. It is a simple but effective use of magnetic circuits and transformer characteristics to monitor how power is behaving in a conductor. The C.T works by wrapping a coil of conductor around a core (typically …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-15-what-is-a-c-t.html#episode-15-what-is-a-c-t"> Continue reading</a>
   </div>
@@ -280,7 +258,7 @@
     </p>
   </header>
   <div>
-      </head><body><p>Before I started in a more buildings-focused electrical engineering position, I didn't think that much went into selecting lights for buildings. Once you first get started in lighting design, it is like opening a can of worms, there is so much detail that goes into lighting design, it's unfathomable.</p>
+      <body><p>Before I started in a more buildings-focused electrical engineering position, I didn't think that much went into selecting lights for buildings. Once you first get started in lighting design, it is like opening a can of worms, there is so much detail that goes into lighting design, it's unfathomable.</p>
 <p>First …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-13-lighting-design.html#episode-13-lighting-design"> Continue reading</a>
@@ -300,7 +278,7 @@
   </header>
   <div>
         <img src="https://jackmckew.dev/img/Harmonic1_2.png">
-      </head><body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up …</p></body>
+      <body><p>I've always lived by the rule that if you can't explain something to a 5 year old then you don't know it well enough. I was asked recently by some (non-electrical focused) colleagues on a handful of electrical terms and components. One of the biggest things that kept popping up …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-11-power-quality-explained.html#episode-11-power-quality-explained"> Continue reading</a>
   </div>
@@ -319,7 +297,7 @@
   </header>
   <div>
         <img src="https://jackmckew.dev/img/Fritzing_FEKX395tbZ.png">
-      </head><body><p>I have a habit of misplacing all kinds of remotes within the house, TV, air conditioner, fans, etc, and having a different remote for everything can be quite annoying at times. So I decided to re-use some leftover components from a previous project to make a web enabled universal remote …</p></body>
+      <body><p>I have a habit of misplacing all kinds of remotes within the house, TV, air conditioner, fans, etc, and having a different remote for everything can be quite annoying at times. So I decided to re-use some leftover components from a previous project to make a web enabled universal remote …</p></body>
         <br>
         <a class="btn" href="https://jackmckew.dev/episode-9-web-enabled-universal-remote-part-1.html#episode-9-web-enabled-universal-remote-part-1"> Continue reading</a>
   </div>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,7 +28,15 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="In this post we&#39;re going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We&#39;re going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch …" />
 <meta name="keywords" content="javascript, data-viz">
 
@@ -45,7 +53,12 @@
 <meta property="article:section" content="Javascript"/>
 <meta property="article:tag" content="javascript"/>
 <meta property="article:tag" content="data-viz"/>
-<meta property="og:image" content="/jm-photo.jpg">
+<meta property="og:image" content="https://jackmckew.dev/jm-photo.jpg">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Getting Started with P5.js" />
+<meta name="twitter:description" content="In this post we&#39;re going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We&#39;re going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch …" />
+<meta name="twitter:image" content="https://jackmckew.dev/jm-photo.jpg" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash; Getting Started with P5.js</title>
 
@@ -67,50 +80,6 @@
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -138,6 +107,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -158,7 +136,7 @@
 
 
   <div>
-    </head><body><p>In this post we're going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We're going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch it expand. As such not to have an empty screen, we'll also create a bunch of random drops that will consistently 'rain' down on our pond. There's even an interactive web editor for p5.js which is extremely useful for iterating through as we're creating something, this can be reached at: https://editor.p5js.org/.</p>
+    <body><p>In this post we're going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We're going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch it expand. As such not to have an empty screen, we'll also create a bunch of random drops that will consistently 'rain' down on our pond. There's even an interactive web editor for p5.js which is extremely useful for iterating through as we're creating something, this can be reached at: https://editor.p5js.org/.</p>
 <p>There's a lot of special variable names that p5 defines for us such as <code>mouseIsPressed</code> for the state of if a user has clicked on the visualisation, or the functions <code>setup</code> and <code>draw</code> which do exactly as expected. We start by initializing a few global variables which will define how our visualisation will behave such as the number of drops, how big a drop should go before disappearing, how fast they'll expand and how big they'll start off as. After this we create an array of objects which each object represents a single raindrop to be displayed.</p>
 <p>Next in the <code>draw</code> function, which is repeatedly called while the browser has the page open, we loop through all the objects in the array and draw a circle (ellipse with equal radii) and colour it according to how big it's radius is (this is as to watch it fade as it grows). We make use of the <code>stroke</code> function to define the colour of the lines for what we'll be drawing in that instance. If a drop has become too big we remove it from the array and add a new random drop, if it's still undersize we increase it's radius and colour.</p>
 <p>Finally to add interactivity, we make use of the <code>mouseIsPressed</code> variable to determine if the user has clicked on the visualization and add a drop into the array at the X &amp; Y position of where the user clicked.</p>
@@ -275,7 +253,7 @@
 
 <span class="p">}</span>
 </code></pre></div>
-</td></tr></tbody></table>
+</td></tr></tbody></table></body>
   </div>
   <div class="tag-cloud">
     <p>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2024-08-22T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Reinforcement Learning in Unity</title><link href="https://jackmckew.dev/reinforcement-learning-in-unity.html" rel="alternate"></link><published>2024-08-22T00:00:00+10:00</published><updated>2024-08-22T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-08-22:/reinforcement-learning-in-unity.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;I find machine's working automatically to complete a task one of the most fascinating things, imagine how good it feels to watch a machine that learns to do the task on it's own! Especially if you're the teacher, in this blog post, we're going to go through:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Data Science</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/data-science.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2024-08-22T00:00:00+10:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Reinforcement Learning in Unity</title><link href="https://jackmckew.dev/reinforcement-learning-in-unity.html" rel="alternate"></link><published>2024-08-22T00:00:00+10:00</published><updated>2024-08-22T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-08-22:/reinforcement-learning-in-unity.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I find machine's working automatically to complete a task one of the most fascinating things, imagine how good it feels to watch a machine that learns to do the task on it's own! Especially if you're the teacher, in this blog post, we're going to go through:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;How to set …&lt;/li&gt;&lt;/ol&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;I find machine's working automatically to complete a task one of the most fascinating things, imagine how good it feels to watch a machine that learns to do the task on it's own! Especially if you're the teacher, in this blog post, we're going to go through:&lt;/p&gt;
+&lt;li&gt;How to set …&lt;/li&gt;&lt;/ol&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I find machine's working automatically to complete a task one of the most fascinating things, imagine how good it feels to watch a machine that learns to do the task on it's own! Especially if you're the teacher, in this blog post, we're going to go through:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;How to set up an environment in Unity&lt;/li&gt;
 &lt;li&gt;How to interface with ML Agents to train an agent to complete a task&lt;/li&gt;
@@ -166,7 +166,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The full script can be found within details:
-&lt;/p&gt;&lt;details&gt;&lt;/details&gt;&lt;p&gt;&lt;/p&gt;
+&lt;/p&gt;&lt;details&gt;&lt;p&gt;&lt;/p&gt;
 &lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;  1
   2
   3
@@ -482,7 +482,7 @@
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-
+&lt;/details&gt;
 &lt;h3 id="train"&gt;Train&lt;/h3&gt;
 &lt;p&gt;Training our model is quite straight forward with MLAgents, run in your python virtual environment &lt;code&gt;ml-agents-learn&lt;/code&gt; and then heading back to Unity's Editor and pressing the Play button.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -496,9 +496,9 @@ Adding &lt;code&gt;--run-id&lt;/code&gt; will give your run's a specific ID whic
 &lt;p&gt;&lt;img alt="wall is best" class="img-fluid" src="https://jackmckew.dev/img/wall-is-best.gif"/&gt;&lt;/p&gt;
 &lt;h3 id="run-trained-model"&gt;Run Trained Model&lt;/h3&gt;
 &lt;p&gt;To show off our model once it's complete, for clarity sake we 'disable' the remainder of our prefabs (even though they will run in the background) and we drag our model's &lt;code&gt;.onnx&lt;/code&gt; file into our character's &lt;code&gt;Behaviour Parameters&lt;/code&gt; &amp;gt; &lt;code&gt;Model&lt;/code&gt;, this will instruct the editor to use this for our character's brain.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="trained model" class="img-fluid" src="https://jackmckew.dev/img/trained-model.gif"/&gt;&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>ML Agents for Unity on Apple Silicon (M1/M2/M3)</title><link href="https://jackmckew.dev/ml-agents-for-unity-on-apple-silicon-m1m2m3.html" rel="alternate"></link><published>2024-07-25T00:00:00+10:00</published><updated>2024-07-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-07-25:/ml-agents-for-unity-on-apple-silicon-m1m2m3.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="trained model" class="img-fluid" src="https://jackmckew.dev/img/trained-model.gif"/&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>ML Agents for Unity on Apple Silicon (M1/M2/M3)</title><link href="https://jackmckew.dev/ml-agents-for-unity-on-apple-silicon-m1m2m3.html" rel="alternate"></link><published>2024-07-25T00:00:00+10:00</published><updated>2024-07-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-07-25:/ml-agents-for-unity-on-apple-silicon-m1m2m3.html</id><summary type="html">&lt;body&gt;&lt;p&gt;If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!&lt;/p&gt;
 &lt;h2 id="clone-the-ml-agents-repo"&gt;Clone the ml-agents repo&lt;/h2&gt;
-&lt;p&gt;Ensure you have the ml-agents repo cloned locally! This …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;p&gt;If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!&lt;/p&gt;
+&lt;p&gt;Ensure you have the ml-agents repo cloned locally! This …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!&lt;/p&gt;
 &lt;h2 id="clone-the-ml-agents-repo"&gt;Clone the ml-agents repo&lt;/h2&gt;
 &lt;p&gt;Ensure you have the ml-agents repo cloned locally! This can be found on &lt;a href="https://github.com/Unity-Technologies/ml-agents"&gt;https://github.com/Unity-Technologies/ml-agents&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="miniconda"&gt;Miniconda&lt;/h2&gt;
@@ -585,11 +585,11 @@ conda install grpcio -y
 &lt;li&gt;Set up x86 homebrew through rosetta to set up pyenv, this got me nowhere but headaches with aliases to keep both arm64 brew installed&lt;/li&gt;
 &lt;li&gt;Setting up pyenv with miniconda, also another drama as the number of Python executables in the path was causing nightmares.&lt;/li&gt;
 &lt;li&gt;Setting up miniconda on x86 to get access to older versions of Python&lt;/li&gt;
-&lt;/ol&gt;</content><category term="Python"></category><category term="python"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Reinforcement Learning with PyTorch</title><link href="https://jackmckew.dev/reinforcement-learning-with-pytorch.html" rel="alternate"></link><published>2024-03-19T00:00:00+11:00</published><updated>2024-03-19T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-03-19:/reinforcement-learning-with-pytorch.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/ol&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Reinforcement Learning with PyTorch</title><link href="https://jackmckew.dev/reinforcement-learning-with-pytorch.html" rel="alternate"></link><published>2024-03-19T00:00:00+11:00</published><updated>2024-03-19T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-03-19:/reinforcement-learning-with-pytorch.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;In our final exploration into machine learning with PyTorch, we're going to do something critical for lifeforms in our world, learn to walk!&lt;/p&gt;
-&lt;p&gt;This post took many trials and errors, a form of reinforcement learning I completed unsupervised as a human. The resulting code below was what ended up working …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;This post took many trials and errors, a form of reinforcement learning I completed unsupervised as a human. The resulting code below was what ended up working …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;In our final exploration into machine learning with PyTorch, we're going to do something critical for lifeforms in our world, learn to walk!&lt;/p&gt;
@@ -800,10 +800,10 @@ conda install grpcio -y
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Classifying Images with PyTorch</title><link href="https://jackmckew.dev/classifying-images-with-pytorch.html" rel="alternate"></link><published>2024-02-26T00:00:00+11:00</published><updated>2024-02-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-02-26:/classifying-images-with-pytorch.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Classifying Images with PyTorch</title><link href="https://jackmckew.dev/classifying-images-with-pytorch.html" rel="alternate"></link><published>2024-02-26T00:00:00+11:00</published><updated>2024-02-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-02-26:/classifying-images-with-pytorch.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Neural networks are something you hear about constantly in the world of machine learning, so in this post we're going to build, train and test a neural network to classify images with PyTorch! We will be using the CIFAR-10 dataset (CIFAR stands for Canadian Institute for Advanced Research), and it's …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Neural networks are something you hear about constantly in the world of machine learning, so in this post we're going to build, train and test a neural network to classify images with PyTorch! We will be using the CIFAR-10 dataset (CIFAR stands for Canadian Institute for Advanced Research), and it's …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Neural networks are something you hear about constantly in the world of machine learning, so in this post we're going to build, train and test a neural network to classify images with PyTorch! We will be using the CIFAR-10 dataset (CIFAR stands for Canadian Institute for Advanced Research), and it's a collection of 60,000 32x32 colour images of 10 different things (which we will refer to as classes). The 10 different classes represent:&lt;/p&gt;
@@ -986,10 +986,8 @@ torch.Size([5])
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="103.978507pt" version="1.1" viewBox="0 0 368.925 103.978507" width="368.925pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="103.978507pt" version="1.1" viewbox="0 0 368.925 103.978507" width="368.925pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;metadata&gt;
 &lt;rdf:rdf xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
 &lt;cc:work&gt;
@@ -1378,9 +1376,9 @@ L 361.725 10.025963
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="p89070631ff"&gt;
+&lt;clippath id="p89070631ff"&gt;
 &lt;rect height="70.074419" width="334.8" x="26.925" y="10.025963"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -1606,10 +1604,8 @@ Training Time (in minutes) = 7.611206487814585
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_svg output_subarea"&gt;
 &lt;!--?xml version="1.0" encoding="utf-8" standalone="no"?--&gt;
-
-
 &lt;!-- Created with matplotlib (https://matplotlib.org/) --&gt;
-&lt;svg height="103.978507pt" version="1.1" viewBox="0 0 368.925 103.978507" width="368.925pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+&lt;svg height="103.978507pt" version="1.1" viewbox="0 0 368.925 103.978507" width="368.925pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
 &lt;metadata&gt;
 &lt;rdf:rdf xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
 &lt;cc:work&gt;
@@ -1998,9 +1994,9 @@ L 361.725 10.025963
 &lt;/g&gt;
 &lt;/g&gt;
 &lt;defs&gt;
-&lt;clipPath id="p16c1d2d4f0"&gt;
+&lt;clippath id="p16c1d2d4f0"&gt;
 &lt;rect height="70.074419" width="334.8" x="26.925" y="10.025963"&gt;&lt;/rect&gt;
-&lt;/clipPath&gt;
+&lt;/clippath&gt;
 &lt;/defs&gt;
 &lt;/svg&gt;
 &lt;/div&gt;
@@ -2200,10 +2196,10 @@ Accuracy of truck:	 57.80%
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Recurrent Neural Networks with PyTorch</title><link href="https://jackmckew.dev/recurrent-neural-networks-with-pytorch.html" rel="alternate"></link><published>2024-02-07T00:00:00+11:00</published><updated>2024-02-07T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-02-07:/recurrent-neural-networks-with-pytorch.html</id><summary type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Recurrent Neural Networks with PyTorch</title><link href="https://jackmckew.dev/recurrent-neural-networks-with-pytorch.html" rel="alternate"></link><published>2024-02-07T00:00:00+11:00</published><updated>2024-02-07T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-02-07:/recurrent-neural-networks-with-pytorch.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Weather affects every single human on earth for the better or worse, and we've come to rely on weather predictions in order to plan how we spend our day. But how can we predict the weather? In this post we're going to develop a machine learning model with recurrent neural …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;/head&gt;&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;p&gt;Weather affects every single human on earth for the better or worse, and we've come to rely on weather predictions in order to plan how we spend our day. But how can we predict the weather? In this post we're going to develop a machine learning model with recurrent neural …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Weather affects every single human on earth for the better or worse, and we've come to rely on weather predictions in order to plan how we spend our day. But how can we predict the weather? In this post we're going to develop a machine learning model with recurrent neural networks to see how well we can predict the weather.&lt;/p&gt;
@@ -2304,7 +2300,7 @@ Accuracy of truck:	 57.80%
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table dataframe table-striped"&gt;
+&lt;table border="1" class="table-striped table dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -2447,7 +2443,7 @@ Number of missing points: 1239
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table dataframe table-striped"&gt;
+&lt;table border="1" class="table-striped table dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -2600,7 +2596,7 @@ Number of missing points: 1239
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table dataframe table-striped"&gt;
+&lt;table border="1" class="table-striped table dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -3071,7 +3067,7 @@ Number of missing points: 1239
         text-align: right;
     }
 &lt;/style&gt;
-&lt;table border="1" class="table dataframe table-striped"&gt;
+&lt;table border="1" class="table-striped table dataframe"&gt;
 &lt;thead&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
@@ -3246,4 +3242,4 @@ Number of missing points: 1239
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry></feed>
+&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry></feed>
