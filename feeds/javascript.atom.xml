@@ -4,7 +4,7 @@
 &lt;p&gt;Next in the &lt;code&gt;draw&lt;/code&gt; function, which is repeatedly called while the browser has the page open, we loop through all the objects in the array and draw a circle (ellipse with equal radii) and colour it according to how big it's radius is (this is as to watch it fade as it grows). We make use of the &lt;code&gt;stroke&lt;/code&gt; function to define the colour of the lines for what we'll be drawing in that instance. If a drop has become too big we remove it from the array and add a new random drop, if it's still undersize we increase it's radius and colour.&lt;/p&gt;
 &lt;p&gt;Finally to add interactivity, we make use of the &lt;code&gt;mouseIsPressed&lt;/code&gt; variable to determine if the user has clicked on the visualization and add a drop into the array at the X &amp;amp; Y position of where the user clicked.&lt;/p&gt;
 &lt;p align="center"&gt;&lt;iframe frameborder="0" height="400" src="https://editor.p5js.org/JackMcKew/embed/u2ga-k6rk" width="100%"&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -118,7 +118,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</content><category term="Javascript"></category><category term="javascript"></category><category term="data-viz"></category></entry><entry><title>API Routes in Node.js</title><link href="https://jackmckew.dev/api-routes-in-nodejs.html" rel="alternate"></link><published>2020-10-02T00:00:00+10:00</published><updated>2020-10-02T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-10-02:/api-routes-in-nodejs.html</id><summary type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;First off what's an API and more specifically what's an API route? API stands for Application Programming Interface, meaning it's how to communicate with the system you are creating. A route within an API is a specific path to take to get specific information or data out of. This post will dive into how to set up API routes in Nodejs with express.&lt;/p&gt;
 &lt;p&gt;We start by 'importing' express into our route and instantiating a router from the express library.&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'express'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;router&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Router&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -129,7 +129,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Next we can create routes as straightforward as using the corresponding method within &lt;code&gt;router&lt;/code&gt;. Pending on the type of API that is being created, if you are using Express.js, it's mostly likely a web API and thus the methods follow HTTP method routes.&lt;/p&gt;
 &lt;p&gt;The primary or most-commonly-used HTTP methods are:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Method Name&lt;/th&gt;
@@ -163,7 +163,7 @@
 &lt;p&gt;These 4 methods make up the basic CRUD functionality (Create, Read, Update and Delete) of an application.&lt;/p&gt;
 &lt;h2 id="post"&gt;POST&lt;/h2&gt;
 &lt;p&gt;Let's create a scaffold &lt;code&gt;POST&lt;/code&gt; method in node.js.&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -171,7 +171,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Similarly to do this asynchronously with arrow functions:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;async&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -179,7 +179,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;As we can see above, the first argument to our API route method is the path, and the following is the callback function (what should happen when this path is hit). The callback function can be a function, array of functions, series of functions (separated by commas), or a combination of all of them. This is useful if you are wanting to do validation before the final POST request is made. An example of this is:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="nx"&gt;checkInputs&lt;/span&gt;&lt;span class="p"&gt;()],&lt;/span&gt; &lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'POST request to homepage and inputs are valid'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -188,7 +188,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="get"&gt;GET&lt;/h2&gt;
 &lt;p&gt;All the methods within Express.js follow the same principles so to create a scaffold &lt;code&gt;GET&lt;/code&gt; request:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GET request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -197,7 +197,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="put"&gt;PUT&lt;/h2&gt;
 &lt;p&gt;Similarly:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;put&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'PUT request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -206,7 +206,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="delete"&gt;DELETE&lt;/h2&gt;
 &lt;p&gt;Similarly:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'PUT request to homepage'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -215,7 +215,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="express-middleware"&gt;Express Middleware&lt;/h2&gt;
 &lt;p&gt;All of the callback functions defined above are known as Middleware functions in Express.js. Middleware functions have access to 3 elements: &lt;code&gt;req&lt;/code&gt;, &lt;code&gt;res&lt;/code&gt;, and &lt;code&gt;next&lt;/code&gt;.&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Argument&lt;/th&gt;
@@ -238,7 +238,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;An example of using all of the arguments is:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -255,14 +255,14 @@
 &lt;p&gt;&lt;img alt="Redux State Diagram" class="img-fluid" src="https://jackmckew.dev/img/redux-diagram.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Let's use &lt;code&gt;react-redux&lt;/code&gt; to build a system which we can alert users when things trigger. For this we will need to build an action, a reducer and a component to display the alert.&lt;/p&gt;
 &lt;p&gt;To ensure that these three components are speaking the same language, we need to initialise types which will represent the states being passed around. These variables contain a string. For our alert system we need two variables&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;SET_ALERT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"SET_ALERT"&lt;/span&gt;
 &lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;REMOVE_ALERT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"REMOVE_ALERT"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="action"&gt;Action&lt;/h2&gt;
 &lt;p&gt;We'll start by creating the action which will signify when an alert is triggered. We want all of our alerts to be unique so multiple alerts can handled without a problem which we will use &lt;code&gt;uuid&lt;/code&gt;.&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -305,7 +305,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The action is declared as a function, which takes in 3 arguments (2 required): &lt;code&gt;msg&lt;/code&gt;, &lt;code&gt;alertType&lt;/code&gt; and &lt;code&gt;timeout&lt;/code&gt;. Which we then use call the dispatch function with an object constructed from the arguments, and then after a specified timeout we dispatch another object to remove the same alert.&lt;/p&gt;
 &lt;p&gt;Note that we curry the dispatch function in this case, this is only possible from using the middleware &lt;code&gt;redux-thunk&lt;/code&gt;, which can also be represented as:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -323,7 +323,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;This post won't go into detail around how to build a React component, which you can find over at another post: [INSERT REACT COMPONENT POST]&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -371,7 +371,7 @@
 &lt;p&gt;To break it down, we've created a React component (class) &lt;code&gt;Alert&lt;/code&gt; which takes in &lt;code&gt;alerts&lt;/code&gt; as an array, verifies it isn't null or empty, and finally iterates over each element in the &lt;code&gt;alerts&lt;/code&gt; array to return a &lt;code&gt;div&lt;/code&gt; stylized with the appropriate information.&lt;/p&gt;
 &lt;h2 id="reducer"&gt;Reducer&lt;/h2&gt;
 &lt;p&gt;Lastly we have the reducer which we want to handle all the states that can be created by the &lt;code&gt;alert&lt;/code&gt; action. Luckily we can do this with a switch statement:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -419,7 +419,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Let's create a file &lt;code&gt;Landing.js&lt;/code&gt; (similarly could be named &lt;code&gt;Landing.jsx&lt;/code&gt; for react specific file extension, &lt;code&gt;Landing.ts&lt;/code&gt; for TypeScript or &lt;code&gt;Landing.tsx&lt;/code&gt; for both react specific extension with TypeScript). This is followed by by importing all the necessary requirements for our javascript file.&lt;/p&gt;
 &lt;h2 id="import-requirements"&gt;Import Requirements&lt;/h2&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt; &lt;span class="nx"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;"react"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -434,7 +434,7 @@
 &lt;p&gt;&lt;code&gt;PropTypes&lt;/code&gt; is a way of implementing runtime type checking for React props. If TypeScript is used for the project, this is somewhat extra type checking, which we can never have enough of!&lt;/p&gt;
 &lt;h2 id="the-component"&gt;The Component&lt;/h2&gt;
 &lt;p&gt;Now that we've imported everything that we need, it's time to actually create the component! A component in React is a function, where the props are the inputs and the element to be rendered is the return statement. We do this with an arrow function (aka Lambda function) for clarity.&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -492,7 +492,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;This post is not intended to go through how to set up the redux store or interactions with it.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -507,7 +507,7 @@
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Now we can use the statement &lt;code&gt;import Landing from './Landing'&lt;/code&gt; and use our component similar to that of &lt;code&gt;Link&lt;/code&gt; in our app!&lt;/p&gt;
 &lt;p&gt;The full source of &lt;code&gt;Landing.js&lt;/code&gt; is:&lt;/p&gt;
-&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -621,7 +621,7 @@
 &lt;/blockquote&gt;
 &lt;h2 id="applications-for-random-walk"&gt;Applications for Random Walk&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;This is all well and good for making funky pictures, but what can this actually be used for?&lt;/em&gt;&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
+&lt;table class="table table-striped"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Field&lt;/th&gt;

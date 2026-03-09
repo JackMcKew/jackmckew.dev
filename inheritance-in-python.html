@@ -107,14 +107,6 @@
                 </li>
             </ul>
 
-            <div class="sidebar-products">
-                <h4>My Products</h4>
-                <ul>
-                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
-                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
-                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
-                </ul>
-            </div>
         </div>
 
 
@@ -146,7 +138,7 @@
 </ul>
 <p>This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.</p>
 <p>First off, we are going to start by defining our 'base' class (also known as abstract class) of our Animal with common properties:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -172,7 +164,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that we have our base class, we can define a subclass 'Dog' that will be able to speak if we define the function inside, but we can also see that it derives from it's parent class 'Animal' by printing out it's family.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -196,14 +188,14 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will print out:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
 <span class="n">Animal</span> <span class="n">Kingdom</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>See my post on dunders (double underscores) to get a better understanding of how the __init__ function is working: <a href="https://jackmckew.dev/dunders-in-python.html">https://jackmckew.dev/dunders-in-python.html</a></p>
 <p>Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -219,13 +211,13 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will also print:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
 <span class="n">Animal</span> <span class="n">Kingdom</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now what if we wanted to specify the family that all of our dog classes are, we can do this by overriding their parent class (similar to how we are overriding the speak function):</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -245,7 +237,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which then when we run both the below code:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -269,7 +261,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>We will now get:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>

@@ -107,14 +107,6 @@
                 </li>
             </ul>
 
-            <div class="sidebar-products">
-                <h4>My Products</h4>
-                <ul>
-                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
-                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
-                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
-                </ul>
-            </div>
         </div>
 
 
@@ -149,7 +141,7 @@
 <h2 id="docker-ecosystem">Docker Ecosystem</h2>
 <p><img alt="Docker Logo" class="img-fluid" src="https://jackmckew.dev/img/Moby-logo.png"/></p>
 <p>Docker isn't a single program, it's a suite of programs which we'll refer to as an ecosystem. A brief description of all the components that make the ecosystem is:</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Service</th>
@@ -188,7 +180,7 @@
 <p><a href="https://www.docker.com/products/docker-desktop">https://www.docker.com/products/docker-desktop</a></p>
 <h2 id="maintaining-docker-in-the-command-line">Maintaining Docker in the Command Line</h2>
 <p>There are many useful commands for interacting with the Docker client.</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Command</th>
@@ -220,7 +212,7 @@
 </table>
 <h2 id="dockerfile">Dockerfile</h2>
 <p>A Dockerfile is a read-only template with instructions for creating a Docker container/image. It's composed with a series of commands, along with their given arguments. A straightforward example of a Dockerfile is:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -269,7 +261,7 @@
 <h2 id="port-mapping">Port Mapping</h2>
 <p>By default no traffic will be routed into a container, meaning a container has it's own set of ports that are not connected to the local PC. Thus we need to set up a mapping between the local PC and the containers ports.</p>
 <p>This is not changed within the Dockerfile, but rather when we run the container with the <code>-p</code> flag. This can be done with:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -p <span class="o">[</span>local_pc_port<span class="o">]</span> : <span class="o">[</span>container_port<span class="o">]</span> <span class="o">[</span>image_name<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -285,7 +277,7 @@ This local PC port and the container port do NOT have to match.</p>
 <li>Create an container that will host a nodejs app</li>
 <li>Network the ports of the nodejs app container</li>
 </ol>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -309,7 +301,7 @@ This local PC port and the container port do NOT have to match.</p>
 <p>Rather than using <code>docker stop</code> with each of the IDs of the containers that we created. Luckily, we can simply run <code>docker-compose down</code> to stop all the containers after using <code>docker-compose up</code>. This is particularly useful when we run <code>docker-compose up -d</code> which will run the containers in the background, so we can't just CTRL+C out of it.</p>
 <h3 id="restart-policies">Restart Policies</h3>
 <p>If any container crashes, docker-compose defaults to the restart policy of <code>"no"</code>, which never attempts to restart the container. Potential restart policies in docker-compose are:</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Policy</th>

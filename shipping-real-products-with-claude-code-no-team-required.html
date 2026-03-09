@@ -111,14 +111,6 @@
                 </li>
             </ul>
 
-            <div class="sidebar-products">
-                <h4>My Products</h4>
-                <ul>
-                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
-                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
-                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
-                </ul>
-            </div>
         </div>
 
 
@@ -150,7 +142,7 @@
 <p>All three are live, taking payments, and were built without me writing a single line of code manually.</p>
 <h2 id="the-stack-and-why-its-deliberately-boring">The stack (and why it's deliberately boring)</h2>
 <p>Every product uses the same stack:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">Astro 5          - Static site generation (zero JS by default)</span>
@@ -160,7 +152,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>The reason I chose this stack isn't performance (though it is fast). It's AI-maintainability. Claude Code handles plain CSS better than Tailwind utility classes. Static sites mean no server state to debug. Stripe Payment Links mean no checkout backend.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># The entire deployment pipeline</span>
@@ -172,7 +164,7 @@ git push origin main   <span class="c1"># GitHub Actions triggers</span>
 <p>Hosting costs: $0/month across all three products. Cloudflare's free tier is absurdly generous.</p>
 <h2 id="the-claudemd-file-this-is-the-real-product">The CLAUDE.md file - this is the real product</h2>
 <p>The thing that makes this work isn't Claude Code itself - it's the instructions file. Every product has a <code>CLAUDE.md</code> that tells the AI agent how to behave. Here's a stripped-down version:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -212,7 +204,7 @@ git push origin main   <span class="c1"># GitHub Actions triggers</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>That <code>No em dashes</code> rule is worth explaining. Em dashes are an AI telltale - real humans use hyphens. I wrote a pre-commit hook that catches them:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -228,7 +220,7 @@ git push origin main   <span class="c1"># GitHub Actions triggers</span>
 <p>It's a small thing but it matters when your entire site is AI-generated.</p>
 <h2 id="setting-up-stripe-with-zero-backend-code">Setting up Stripe with zero backend code</h2>
 <p>One of the things that surprised me was how simple payments are now. No checkout page, no webhook handler, no server at all. Stripe Payment Links handle everything.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -270,7 +262,7 @@ curl -X POST <span class="s2">"https://api.stripe.com/v1/payment_links"</span> <
 </code></pre></div>
 </td></tr></tbody></table>
 <p>The response gives you a <code>buy.stripe.com</code> URL. Drop it in your buy button's <code>href</code>. That's the entire payment integration.</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://buy.stripe.com/your-link-here"</span> <span class="na">class</span><span class="o">=</span><span class="s">"buy-button"</span><span class="p">&gt;</span>
   Get the Kit - $29
@@ -280,7 +272,7 @@ curl -X POST <span class="s2">"https://api.stripe.com/v1/payment_links"</span> <
 <p>No Stripe.js, no server-side session, no webhook to verify payment. For digital products with instant delivery, this is all you need.</p>
 <h2 id="cloudflare-pages-deployment-via-api">Cloudflare Pages deployment via API</h2>
 <p>Same deal with hosting. I used to manually create projects in the Cloudflare dashboard. Now I do it with one API call:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -306,7 +298,7 @@ curl -X POST <span class="s2">"https://api.stripe.com/v1/payment_links"</span> <
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Then set the GitHub secrets so the deploy workflow can push:</p>
-<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gh secret <span class="nb">set</span> CLOUDFLARE_API_TOKEN -R <span class="s2">"org/repo"</span> --body <span class="s2">"</span><span class="nv">$CF_API_TOKEN</span><span class="s2">"</span>
 gh secret <span class="nb">set</span> CLOUDFLARE_ACCOUNT_ID -R <span class="s2">"org/repo"</span> --body <span class="s2">"</span><span class="nv">$ACCOUNT_ID</span><span class="s2">"</span>
 </code></pre></div>
@@ -314,7 +306,7 @@ gh secret <span class="nb">set</span> CLOUDFLARE_ACCOUNT_ID -R <span class="s2">
 <p>From that point on, every <code>git push</code> builds and deploys automatically. The GitHub Actions workflow handles the build, runs some validation checks (design system compliance, em dash detection), and deploys via Wrangler.</p>
 <h2 id="the-pricing-framework">The pricing framework</h2>
 <p>I spent way too long agonising over pricing on the first product before landing on something simple. Three tiers based on how badly the buyer needs it:</p>
-<table class="table-striped table">
+<table class="table table-striped">
 <thead>
 <tr>
 <th>Tier</th>
