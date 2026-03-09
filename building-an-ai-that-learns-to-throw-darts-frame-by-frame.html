@@ -136,12 +136,12 @@
     <body><p>I wanted to make a short-form video where an AI visibly learns a physical skill from scratch - starting terrible, converging to competent. Darts felt perfect: there's a clear target, a throwing motion with real biomechanics, and enough parameters to make the "learning" look genuine. The result is a 9:16 reel rendered entirely in Node.js, no browser, no Puppeteer.</p>
 <p>Here's how it actually works.</p>
 <video controls="" height="640" style="display:block;margin:1.5rem auto;border-radius:12px;max-width:100%" width="360">
-<source src="https://jackmckew.dev/2026/ai-learns-to-throw-darts/darts-gl-full.mp4" type="video/mp4"/>
+<source src="https://jackmckew.dev/2026/ai-learns-to-throw-darts/darts-v2.mp4" type="video/mp4"/>
 </video>
 <h2 id="the-rendering-pipeline">The rendering pipeline</h2>
 <p>The whole thing runs on <code>node-canvas</code> (a native binding to Cairo) piped into FFmpeg through stdin. No temporary frame files, no disk thrashing - just raw pixel buffers pushed directly to the encoder.</p>
 <p>The backpressure handling is worth showing, because if you skip it on a machine with limited RAM you'll OOM halfway through:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -156,7 +156,7 @@
 </td></tr></tbody></table>
 <p>At 720x1280 BGRA, each frame is ~3.5MB. At 24fps over a 60-second video, that's theoretically 5GB uncompressed if you tried to buffer it. The drain-and-wait pattern keeps memory flat. FFmpeg consumes frames as fast as it can encode them; we just wait when it asks us to slow down.</p>
 <p>FFmpeg is spawned with stdin as a pipe and given the raw pixel format:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -177,7 +177,7 @@
 <h2 id="cross-entropy-method-for-learning">Cross-Entropy Method for learning</h2>
 <p>The "AI" is a Cross-Entropy Method optimizer. CEM is one of those algorithms that's almost offensively simple once you understand it, but produces surprisingly good results for low-dimensional continuous problems.</p>
 <p>The idea: maintain a Gaussian distribution over your parameter space. Sample N candidates, score them all, keep the top K (the "elite" set), and update the distribution mean toward the elite average. Shrink the variance a bit each generation. Repeat.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -228,7 +228,7 @@
 <h2 id="the-arm-skeleton">The arm skeleton</h2>
 <p>The arm is a kinematic chain: shoulder (fixed) → elbow (dynamic, driven by the throw arc) → wrist → hand → fingers. Everything is Canvas 2D - no physics engine, no WebGL.</p>
 <p>The elbow tracks the upper arm rotation as a function of the current forearm angle. I parameterized the upper arm between two extreme angles (wind-up and release) and interpolated:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -240,20 +240,20 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>The wrist snap is baked in as an offset to the hand angle:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">wr_t</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span> <span class="p">(</span><span class="nx">ang</span> <span class="o">-</span> <span class="nx">WIND2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nx">OPT2</span> <span class="o">-</span> <span class="nx">WIND2</span><span class="p">)));</span>
 <span class="kd">const</span> <span class="nx">hand_ang</span> <span class="o">=</span> <span class="nx">ang</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.38</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.38</span> <span class="o">+</span> <span class="mf">0.14</span><span class="p">)</span> <span class="o">*</span> <span class="nx">wr_t</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>At wind-up the wrist is cocked back 0.38 radians. At release it snaps 0.14 radians forward. Everything distal to the wrist (hand, fingers, dart) uses <code>hand_ang</code> and its perpendicular to compute positions.</p>
 <p>Each finger is three phalanges. I store lengths and a <code>CURL</code> interpolation factor (0 = open hand, 1 = dart grip). During the throw the grip stays at 1.0. At release it fades to 0 over five frames as the fingers open.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">CURL_FULL</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">];</span> <span class="c1">// index to pinky</span>
 <span class="kd">const</span> <span class="nx">CURL</span> <span class="o">=</span> <span class="nx">CURL_FULL</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">c</span> <span class="p">=&gt;</span> <span class="nx">c</span> <span class="o">*</span> <span class="nx">grip</span> <span class="o">+</span> <span class="mf">0.04</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1</span> <span class="o">-</span> <span class="nx">grip</span><span class="p">));</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Bones are drawn as tapered quadratic bezier shapes, not just lines:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -284,7 +284,7 @@
 <h2 id="the-dart-and-its-grip">The dart and its grip</h2>
 <p>This took more iteration than I'd like to admit. The first version had the dart perfectly aligned with the forearm direction - it just looked like a longer arm. The second version had the grip position at the wrist, which meant the dart floated disconnected from the hand in any non-horizontal arm pose.</p>
 <p>The fix: give the dart its own angle (aimed at the board, tilting only slightly with the wrist snap), and anchor the grip to the actual index finger P1 joint rather than an offset from the wrist.</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -311,7 +311,7 @@
 <p>The barrel diameter is about 7mm - roughly 35% of a finger width. Worth knowing because a 13px lineWidth barrel next to 4px finger bones looks wrong; they need to be much closer in proportion.</p>
 <h2 id="the-dart-physics">The dart physics</h2>
 <p>In the top panel, the dart is a simple projectile:</p>
-<table class="table-striped table highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">dartPos2</span><span class="p">(</span><span class="nx">ang</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="nx">spd</span> <span class="o">=</span> <span class="nx">DART_SPD</span><span class="p">)</span> <span class="p">{</span>
