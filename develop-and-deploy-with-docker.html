@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,7 +28,15 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="This post is intended to work through setting up a workflow with Docker. In particular, we will be setting up a production workflow for a web app. For this web app, we will need a workflow which supports: Develop Test Deploy We also want to be able to come back …" />
 <meta name="keywords" content="software">
 
@@ -45,6 +53,11 @@
 <meta property="article:section" content="Software"/>
 <meta property="article:tag" content="software"/>
 <meta property="og:image" content="https://jackmckew.dev/img/react-application.png">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Develop and Deploy with Docker" />
+<meta name="twitter:description" content="This post is intended to work through setting up a workflow with Docker. In particular, we will be setting up a production workflow for a web app. For this web app, we will need a workflow which supports: Develop Test Deploy We also want to be able to come back …" />
+<meta name="twitter:image" content="https://jackmckew.dev/img/react-application.png" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash; Develop and Deploy with Docker</title>
 
@@ -60,56 +73,12 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 111</p>
-            <p>Number of Words: 82,564</p>
-            <p>Number of Lines of Code 5,768</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 114</p>
+            <p>Number of Words: 85,617</p>
+            <p>Number of Lines of Code 5,876</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -137,6 +106,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -181,7 +159,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </ul>
 <h2 id="the-web-application">The Web Application</h2>
 <p>For the web app we will use React, which is a javascript framework for managing the front end of applications. To generate the web app boilerplate for us, we will use <code>create-react-app</code>. For running this, ensure that Node.js is installed on the local PC. Finally run the command below, to initialise the front end component of React of our web app.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>npx create-react-app frontend --template typescript
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>npx create-react-app frontend --template typescript
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -190,7 +168,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 <h2 id="dockerfile">Dockerfile</h2>
 <p>For this workflow we're going to set up two Dockerfiles, one for developing and one for production. Let's start with the developers Dockerfile, which we will aptly name <code>Dockerfile.dev</code>, we must ensure to add the <code>-f</code> flag along with the filename when building the Docker image with <code>docker build -f Dockerfile.dev .</code>.</p>
 <p>The contents of our <code>Dockerfile.dev</code> will contain:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -220,16 +198,16 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </code></pre></div>
 </td></tr></tbody></table>
 <p>To circumvent the issue in that Docker typically takes snapshots of the code and we want our app to update on save, we use mount to create a 'reference' to our folder on the local PC. We do this by running the command:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v <span class="si">${</span><span class="nv">pwd</span><span class="si">}</span>:/app <span class="o">[</span>image_id<span class="o">]</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v <span class="si">${</span><span class="nv">pwd</span><span class="si">}</span>:/app <span class="o">[</span>image_id<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>If using Windows, replace the <code>${pwd}</code> with the full path to the folder, ensuring to swap all backslashes to forwards slashes and changing <code>C:</code> to <code>/C/</code>. Here is an example:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app <span class="o">[</span>image_id<span class="o">]</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app <span class="o">[</span>image_id<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h3 id="docker-compose">Docker Compose</h3>
 <p>Rather than using the rather large command above, let's use Docker Compose.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -263,7 +241,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 <li>We mount the current directory to the app directory in the container for updating in sync</li>
 </ol>
 <p>Again, if using Windows, we need to add some more options to our service:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">stdin_open</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -280,7 +258,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </ol>
 <p>Option 1 can be cumbersome as we will need to do this each time when running a container.</p>
 <p>Option 2 is achieved by creating a new service in our <code>docker-compose.yml</code> file:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -327,7 +305,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </ol>
 <h3 id="multi-stage-dockerfile">Multi-stage Dockerfile</h3>
 <p>To implement our multi-stage Dockerfile as above we do this we the following yaml:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

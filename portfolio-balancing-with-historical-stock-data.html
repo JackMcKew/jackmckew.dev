@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,7 +28,15 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Following last weeks&#39; post (Python for the Finance Industry). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data. First of all while attempting to tackle this problem, I stumbled across many very informative articles in which based on what I learned …" />
 <meta name="keywords" content="finance, python">
 
@@ -46,6 +54,11 @@
 <meta property="article:tag" content="finance"/>
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*IabrYvsgHE07z2CJwoE9Zw.jpeg">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Portfolio Balancing with Historical Stock Data" />
+<meta name="twitter:description" content="Following last weeks&#39; post (Python for the Finance Industry). This post is to demonstrate a method of determining an optimized portfolio based on historical stock price data. First of all while attempting to tackle this problem, I stumbled across many very informative articles in which based on what I learned …" />
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1600/1*IabrYvsgHE07z2CJwoE9Zw.jpeg" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash; Portfolio Balancing with Historical Stock Data</title>
 
@@ -61,56 +74,12 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 111</p>
-            <p>Number of Words: 82,564</p>
-            <p>Number of Lines of Code 5,768</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 114</p>
+            <p>Number of Words: 85,617</p>
+            <p>Number of Lines of Code 5,876</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -138,6 +107,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -173,7 +151,7 @@
 <li>Pick the desired solution.</li>
 </ol>
 <p>To generate random portfolios, we define a function such that we can pass it differing variables as to tweak our outcomes in the future.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -211,7 +189,7 @@
 <p><img alt="\
 Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https://cdn-images-1.medium.com/max/1600/1*IabrYvsgHE07z2CJwoE9Zw.jpeg"/></p>
 <p><a href="https://medium.com/@bbrenyah">Bernard Brenyah</a>, whom I mentioned at the beginning of the post, has provided a clear explanation of how the above formula can be expressed in matrix calculation in one of <a href="https://medium.com/python-data/assessing-risks-and-return-with-probabilities-of-events-with-python-c564d9be4db4">his blog post</a>s. In which we just take the matrix calculation and multiply by 253 for number of trading days in Australia.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -223,7 +201,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that we have X number of randomly generated portfolios, all ranked against one another, it's time to plot so that our results can be visualized.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -297,7 +275,7 @@ Assessing the riskiness of a portfolio with Python" class="img-fluid" src="https
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Using the above function 'display_random_efficient_frontier', this will determine our max sharpe ratio portfolio generated and the minimum volatility portfolio with their respective returns. Now it is entirely up to the trader on how much risk they are willing to take on board with their portfolio. With the settings below in conjunction with the previously defined functions and stock data to generate the portfolios (risk free rate determined from <a href="http://www.worldgovernmentbonds.com/country/australia/">this website</a>).</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4

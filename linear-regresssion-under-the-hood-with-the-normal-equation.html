@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,7 +28,15 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where \(\hat{y}\) is the predicted value, \(n\) is the number of features, \(x_i\) is the \(i^{th}\) feature value and \(\theta_n\) is the \(n^{th}\) model parameter. This …" />
 <meta name="keywords" content="python">
 
@@ -45,6 +53,11 @@
 <meta property="article:section" content="Data Science"/>
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="https://jackmckew.dev/img/10_6_2_gen.png">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Linear Regression: Under the Hood with the Normal Equation" />
+<meta name="twitter:description" content="Let&#39;s dive deeper into how linear regression works. Linear regression follows a general formula: $$ \hat{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n $$ Where \(\hat{y}\) is the predicted value, \(n\) is the number of features, \(x_i\) is the \(i^{th}\) feature value and \(\theta_n\) is the \(n^{th}\) model parameter. This …" />
+<meta name="twitter:image" content="https://jackmckew.dev/img/10_6_2_gen.png" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash; Linear Regression: Under the Hood with the Normal Equation</title>
 
@@ -60,56 +73,12 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 111</p>
-            <p>Number of Words: 82,564</p>
-            <p>Number of Lines of Code 5,768</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 114</p>
+            <p>Number of Words: 85,617</p>
+            <p>Number of Lines of Code 5,876</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -137,6 +106,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -183,7 +161,7 @@ $$</div>
 <p>
 Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="math">\(\theta\)</span> that minimises the cost function and <span class="math">\(y\)</span> (once vectorised) is the vector of target values containing <span class="math">\(y^{(1)}\)</span> to <span class="math">\(y^{(m)}\)</span>.</p>
 <p>For example if this equation was run on data generated from this formula:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -194,30 +172,30 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
 </td></tr></tbody></table>
 <p><img alt="10_6_2_gen" class="img-fluid" src="https://jackmckew.dev/img/10_6_2_gen.png"/></p>
 <p>Now to compute <span class="math">\(\hat{\theta}\)</span> with the normal equation, we can use the inv() function from NumPy's Linear algebra module:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">X</span><span class="p">]</span>
 <span class="n">theta_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>With the actual function being <span class="math">\(y = 6 + 2x_0 + noise\)</span>, and the equation found:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">array</span><span class="p">([[</span> <span class="mf">5.96356419</span><span class="p">],</span>
        <span class="p">[</span> <span class="mf">2.00027727</span><span class="p">]])</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Since the noise makes it impossible to recover the exact parameters of the original function now we can use <span class="math">\(\hat{\theta}\)</span> to make predictions:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span>
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">y_predict</span> <span class="o">=</span> <span class="n">X_new_b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_best</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>With y_predict being:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>
  <span class="p">[</span> <span class="mf">9.96411873</span><span class="p">]]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p><img alt="10_6_2_gen_solved" class="img-fluid" src="https://jackmckew.dev/img/10_6_2_gen_solved.png"/></p>
 <p>The equivalent code using Scikit-Learn would look like:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -229,7 +207,7 @@ Where <span class="math">\(\hat{\theta}\)</span> is the value of <span class="ma
 </code></pre></div>
 </td></tr></tbody></table>
 <p>And it finds:</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[</span> <span class="mf">5.96356419</span><span class="p">]</span> <span class="p">[[</span> <span class="mf">2.00027727</span><span class="p">]]</span>
 <span class="p">[[</span> <span class="mf">5.96356419</span><span class="p">]</span>

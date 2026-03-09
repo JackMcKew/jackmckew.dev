@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
@@ -28,7 +28,15 @@
   ga('create', 'UA-131173168-2', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics --><meta name="author" content="Jack McKew" />
+<!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f766e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Following last 2 weeks’ posts (Python for the Finance Industry &amp; Portfolio Balancing with Historical Stock Data), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios …" />
 <meta name="keywords" content="python, data, analysis">
 
@@ -47,6 +55,11 @@
 <meta property="article:tag" content="data"/>
 <meta property="article:tag" content="analysis"/>
 <meta property="og:image" content="https://jackmckew.dev/img/image-20.png">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Efficient Frontier for Balancing Portfolios" />
+<meta name="twitter:description" content="Following last 2 weeks’ posts (Python for the Finance Industry &amp; Portfolio Balancing with Historical Stock Data), we now know how to extract historical records on stock information from the ASX through an API, present it in a graph using matplotlib, and how to balance a portfolio using randomly generated portfolios …" />
+<meta name="twitter:image" content="https://jackmckew.dev/img/image-20.png" />
+<meta name="twitter:site" content="@Jac_McQ" />
 
     <title>Jack McKew's Blog &ndash; Efficient Frontier for Balancing Portfolios</title>
 
@@ -62,56 +75,12 @@
       </a>
             <h1><a href="https://jackmckew.dev">Jack McKew's Blog</a></h1>
 
-            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 111</p>
-            <p>Number of Words: 82,564</p>
-            <p>Number of Lines of Code 5,768</p>
+            <p>Engineer | Software Developer | Data Scientist</p>            <p>Number of Posts: 114</p>
+            <p>Number of Words: 85,617</p>
+            <p>Number of Lines of Code 5,876</p>
             <form class="navbar-search" action="/search.html" role="search">
                 <input type="text" name="q" id="tipue_search_input" placeholder="Search..">
             </form>
-            <style>
-                .bmc-button img {
-                    height: 34px !important;
-                    width: 35px !important;
-                    margin-bottom: 1px !important;
-                    box-shadow: none !important;
-                    border: none !important;
-                    vertical-align: middle !important;
-                }
-                
-                .bmc-button {
-                    margin-top: 15px !important;
-                    margin-bottom: 20px !important;
-                    padding: 7px 15px 7px 10px !important;
-                    line-height: 35px !important;
-                    height: 51px !important;
-                    text-decoration: none !important;
-                    display: inline-flex !important;
-                    color: #ffffff !important;
-                    /* background-color: #FF813F !important; */
-                    border-radius: 5px !important;
-                    border: 1px solid transparent !important;
-                    padding: 7px 15px 7px 10px !important;
-                    font-size: 22px !important;
-                    letter-spacing: 0.6px !important;
-                    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    font-family: 'Cookie', cursive !important;
-                    -webkit-box-sizing: border-box !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .bmc-button:hover,
-                .bmc-button:active,
-                .bmc-button:focus {
-                    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    text-decoration: none !important;
-                    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-                    opacity: 0.85 !important;
-                    color: #ffffff !important;
-                }
-            </style>
-            <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
-            <!-- <a class="bmc-button btn" target="_blank" href="https://www.buymeacoffee.com/jackmckew"><img src="https://jackmckew.dev/theme/img/pizza.png" alt="🍕"><span style="margin-left:5px;font-size:28px !important;">Buy me a Pizza</span></a> -->
             <nav>
                 <ul class="list">
                     <li><a target="https://jackmckew.github.io/" href="https://jackmckew.github.io/">Portfolio</a></li>
@@ -139,6 +108,15 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="sidebar-products">
+                <h4>My Products</h4>
+                <ul>
+                    <li><a href="https://firsthomecalculator.com.au"><span class="product-dot" style="background: #2dd4bf;"></span> First Home Calculator</a></li>
+                    <li><a href="https://yt-script-kit.pages.dev"><span class="product-dot" style="background: #dc2626;"></span> YT Script Kit</a></li>
+                    <li><a href="https://ai-product-builder-2ay.pages.dev"><span class="product-dot" style="background: #7c3aed;"></span> AI Product Builder</a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -180,7 +158,7 @@
 </li>
 <li>The result from the minimize function is returned as a <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult">OptimizeResult</a> type.</li>
 </ul>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -206,7 +184,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Similarly to the maximum sharpe ratio we do the same for determining the minimum volatility portfolio programmatically. We minimise volatility by trying different weightings on our asset allocations to find the minima.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -234,7 +212,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>As above, we can also draw a line which depicts the efficient frontier for the portfolios for a given risk rate. Below some functions are defined for computing the efficient frontier. The first function, efficient_return is calculating the most efficient portfolio for a given target return, and the second function efficient frontier is compiling the most efficient portfolio for a range of targets.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -274,7 +252,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now it's time to plot the efficient frontier on the graph with the randomly selected portfolios to check if they have been calculated correctly. It is also an opportune time to check if the maximum Sharpe ratio and minimum volatility portfolios have been calculated correctly by comparing them to the previously randomly determined portfolios.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -387,7 +365,7 @@
 <p><img alt="Code_R2bA54PriC" class="img-fluid" src="https://jackmckew.dev/img/Code_R2bA54PriC.png"/></p>
 <p>The surprising part is that the calculated result is very close to what we have previously simulated by picking from randomly generated portfolios. The slight differences in allocations between the simulated vs calculated are in most cases less than 1%, which shows how powerful randomly estimating calculations can be albeit sometimes not reliable in small sample spaces.</p>
 <p>Rather than plotting every randomly generated portfolio, we can plot the individual stocks on the plot with the corresponding values of each stock's return and risk. This way we can compare how diversification is lowering the risk by optimizing the allocations.</p>
-<table class="highlighttable table table-striped"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
