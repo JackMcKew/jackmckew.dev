@@ -10,52 +10,51 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 600;
-    line-height: 1.25;
-    color: #111827
+    font-weight: 300;
+    line-height: 1.1
 }
 
 h1 {
-    font-size: 2.2em
+    font-size: 2.4em
 }
 
 h2 {
-    font-size: 1.75em
+    font-size: 2em
 }
 
 h3 {
-    font-size: 1.4em
+    font-size: 1.6em
 }
 
 h4 {
-    font-size: 1.2em
+    font-size: 1.36em
 }
 
 h5 {
-    font-size: 1.1em
+    font-size: 1.2em
 }
 
 h6 {
-    font-size: 1em
+    font-size: 1.1em
 }
 
 body {
     margin: 0;
     padding: 0;
     background-color: #fff;
-    color: #111827;
+    color: #242121;
     font-family: Source Sans Pro, Roboto, Open Sans, Liberation Sans, DejaVu Sans, Verdana, Helvetica, Arial, sans-serif;
     font-size: 1.02em;
     line-height: 1.7em
 }
 
 a {
-    color: #0f766e;
+    color: #d9411e;
     text-decoration: none
 }
 
 a:hover {
-    color: #14b8a6
+    color: #ff5a09
 }
 
 h2:hover>a.anchor-link {
@@ -90,10 +89,13 @@ a.anchor-link:after {
     top: -5px;
     right: -15px;
     text-align: center;
-    background-color: #f0fdfa;
-    color: #0f766e;
-    border: 1px solid #ccfbf1;
-    border-radius: 4px;
+    background-color: #fef4c5;
+    color: black;
+    border: 1px solid #d4b943;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
     font-size: 0.5em;
 }
 
@@ -102,8 +104,8 @@ a.anchor-link:hover:after {
 }
 
 hr {
-    color: #e5e7eb;
-    background-color: #e5e7eb;
+    color: #eee;
+    background-color: #eee;
     height: 1px;
     border: none;
     margin-top: 40px;
@@ -115,7 +117,7 @@ img {
 }
 
 aside {
-    background-color: #111827;
+    background-color: #333;
     text-align: center
 }
 
@@ -125,7 +127,7 @@ aside a {
 }
 
 aside a:hover {
-    color: #ccfbf1
+    color: #eee
 }
 
 aside div {
@@ -135,100 +137,39 @@ aside div {
 
 aside div img {
     border-radius: 50%;
-    max-width: 140px;
-    border: 3px solid rgba(255,255,255,0.15)
+    max-width: 140px
 }
 
 aside div h1 {
-    margin: 15px 0 5px;
-    font-size: 1.4em;
-    font-weight: 700
+    margin: 15px 0 5px
 }
 
 aside div p {
     margin: 0 0 15px;
-    font-size: .88em;
-    color: rgba(255,255,255,0.7)
+    font-size: .92em
 }
 
 aside nav ul li {
     display: inline;
     line-height: 1.6em;
-    font-size: 1.1em;
-    text-transform: none
-}
-
-aside nav ul li a {
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background-color 0.15s ease
-}
-
-aside nav ul li a:hover {
-    background-color: rgba(255,255,255,0.08)
-}
-
-/* Product cross-sell in sidebar */
-.sidebar-products {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.1)
-}
-
-.sidebar-products h4 {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.45);
-    margin: 0 0 0.6rem;
-    font-weight: 600
-}
-
-.sidebar-products ul {
-    list-style: none;
-    padding: 0;
-    margin: 0
-}
-
-.sidebar-products li {
-    padding: 3px 0
-}
-
-.sidebar-products a {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.7);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem
-}
-
-.sidebar-products a:hover {
-    color: #fff
-}
-
-.sidebar-products .product-dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%
+    font-size: 1.28em;
+    text-transform: lowercase
 }
 
 main nav {
     text-align: center;
     text-transform: uppercase;
-    font-size: .75em;
-    font-weight: 500;
-    letter-spacing: 0.03em;
+    font-size: .72em;
     padding: 14px 0;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid #eee;
     margin: 0 4% 2%;
 }
 
 main .translations a,
 main nav a {
-    padding: 0 8px;
-    border-left: 1px solid #e5e7eb;
-    border-right: 1px solid #e5e7eb
+    padding: 0 4px;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee
 }
 
 main .translations :first-child,
@@ -265,7 +206,7 @@ main article header h2 {
 }
 
 main article header p {
-    color: #6b7280;
+    color: #999;
     font-size: .86em
 }
 
@@ -286,10 +227,11 @@ main article samp {
 
 main article blockquote,
 main article pre {
-    background-color: #f9fafb;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-left: 4px solid #0f766e;
+    background-color: hsla(0, 0%, 50%, .05);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 8px solid hsla(0, 0%, 50%, .075);
+    border-left-width: 10px
 }
 
 main article blockquote {
@@ -299,11 +241,9 @@ main article blockquote {
 }
 
 main article pre {
-    padding: 8px;
+    padding: 4px;
     font-size: .9em;
-    overflow-x: auto;
-    border-radius: 6px;
-    border-left: 4px solid #e5e7eb
+    overflow-x: auto
 }
 
 main article samp {
@@ -328,11 +268,11 @@ main article kbd {
 main article :not(pre)>code {
     font-size: .8em;
     white-space: nowrap;
-    color: #0f766e;
-    padding: 2px 5px;
-    background-color: #f0fdfa;
-    border: 1px solid #ccfbf1;
-    border-radius: 4px
+    color: #c25;
+    padding: 1px 3px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 3px
 }
 
 main article .comment-count {
@@ -341,22 +281,19 @@ main article .comment-count {
 
 main article table {
     border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%
+    border-spacing: 0
 }
 
 main article table thead:first-child tr:first-child th {
-    border-top: 0;
-    background-color: #f9fafb;
-    font-weight: 600
+    border-top: 0
 }
 
 main article table td,
 main article table th {
-    padding: 8px 12px;
+    padding: 8px;
     line-height: 20px;
     vertical-align: top;
-    border-top: 1px solid #e5e7eb
+    border-top: 1px solid #ddd
 }
 
 main article table.highlighttable {
@@ -380,29 +317,20 @@ main article table.highlighttable td.linenos pre {
 }
 
 main footer {
-    padding: 1.5rem 0;
-    border-top: 1px solid #e5e7eb;
-    margin-top: 2rem
+    padding-top: 4px;
+    border-top: 1px solid #eee
 }
 
 main footer p {
     margin: 2px;
     text-align: center;
     padding: 0 40px;
-    color: #6b7280;
+    color: #999;
     font-size: 11px
 }
 
-main footer a {
-    color: #6b7280
-}
-
-main footer a:hover {
-    color: #0f766e
-}
-
 .tag-cloud a {
-    background-color: #0f766e;
+    background-color: #d9411e;
     padding: .2em .6em;
     font-size: .74em;
     line-height: 1;
@@ -410,30 +338,27 @@ main footer a:hover {
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: .25em;
-    transition: background-color 0.15s ease
+    border-radius: .25em
 }
 
 .tag-cloud a:hover {
-    background-color: #14b8a6
+    background-color: #ff5a09
 }
 
 a.btn {
-    background-color: #0f766e;
-    padding: .6em .8em;
+    background-color: #d9411e;
+    padding: .6em;
     font-size: .8em;
     line-height: 1;
     color: #fff;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background-color 0.15s ease
+    border-radius: .25em
 }
 
 a.btn:hover {
-    background-color: #14b8a6
+    background-color: #ff5a09
 }
 
 .center,
@@ -459,13 +384,12 @@ a.btn:hover {
 div.related-posts {
     margin: 15px 0;
     padding-bottom: 20px;
-    border-top: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee
 }
 
 div.related-posts h4 {
-    margin: 20px 0 25px;
-    font-size: 1.1em
+    margin: 20px 0 25px
 }
 
 div.related-posts ul {
@@ -514,8 +438,7 @@ ul.social a {
     border-radius: 100%;
     text-align: center;
     font-size: .8em;
-    line-height: 36px;
-    transition: transform 0.15s ease
+    line-height: 36px
 }
 
 ul.social a.sc-facebook {
@@ -630,7 +553,7 @@ a.sc-flickr {
         padding: 36px 18px
     }
     aside div nav ul li {
-        padding: 2px 0 !important;
+        padding: 0!important;
         display: block
     }
     aside div ul.social {

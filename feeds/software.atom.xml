@@ -1,274 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2026-03-06T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Shipping Real Products with Claude Code (No Team Required)</title><link href="https://jackmckew.dev/shipping-real-products-with-claude-code-no-team-required.html" rel="alternate"></link><published>2026-03-06T00:00:00+11:00</published><updated>2026-03-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2026-03-06:/shipping-real-products-with-claude-code-no-team-required.html</id><summary type="html">&lt;body&gt;&lt;p&gt;After &lt;a href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html"&gt;building the First Home Buyer Guide&lt;/a&gt;, I wanted to see how far I could push this approach. Not just one product - a repeatable system where I describe what I want, and AI does the actual coding, testing, and deployment. Three products later, here's what I've learned about using Claude …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;After &lt;a href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html"&gt;building the First Home Buyer Guide&lt;/a&gt;, I wanted to see how far I could push this approach. Not just one product - a repeatable system where I describe what I want, and AI does the actual coding, testing, and deployment. Three products later, here's what I've learned about using Claude Code to ship software solo.&lt;/p&gt;
-&lt;h2 id="the-products"&gt;The products&lt;/h2&gt;
-&lt;p&gt;Quick context on what I've actually shipped with this system:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://firsthomecalculator.com.au"&gt;First Home Calculator&lt;/a&gt; - Australian first home buyer calculator with grants, stamp duty, FHSS scheme. 38 SEO pages. $9 one-time.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://yt-script-kit.pages.dev"&gt;YT Script Kit&lt;/a&gt; - AI script prompt templates for faceless YouTube channels. 50+ templates across 5 niches. $29 one-time.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://ai-product-builder-2ay.pages.dev"&gt;AI Product Builder&lt;/a&gt; - The system itself, packaged as a product. Templates, frameworks, deployment pipelines. $99 one-time.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All three are live, taking payments, and were built without me writing a single line of code manually.&lt;/p&gt;
-&lt;h2 id="the-stack-and-why-its-deliberately-boring"&gt;The stack (and why it's deliberately boring)&lt;/h2&gt;
-&lt;p&gt;Every product uses the same stack:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Astro 5          - Static site generation (zero JS by default)&lt;/span&gt;
-&lt;span class="err"&gt;Plain CSS        - Custom properties for theming, no Tailwind&lt;/span&gt;
-&lt;span class="err"&gt;Cloudflare Pages - Free hosting, auto-deploy from GitHub&lt;/span&gt;
-&lt;span class="err"&gt;Stripe           - Payment Links (no backend needed)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;The reason I chose this stack isn't performance (though it is fast). It's AI-maintainability. Claude Code handles plain CSS better than Tailwind utility classes. Static sites mean no server state to debug. Stripe Payment Links mean no checkout backend.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# The entire deployment pipeline&lt;/span&gt;
-npm run build          &lt;span class="c1"&gt;# Astro builds static HTML&lt;/span&gt;
-git push origin main   &lt;span class="c1"&gt;# GitHub Actions triggers&lt;/span&gt;
-&lt;span class="c1"&gt;# Cloudflare Pages deploys automatically - done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Hosting costs: $0/month across all three products. Cloudflare's free tier is absurdly generous.&lt;/p&gt;
-&lt;h2 id="the-claudemd-file-this-is-the-real-product"&gt;The CLAUDE.md file - this is the real product&lt;/h2&gt;
-&lt;p&gt;The thing that makes this work isn't Claude Code itself - it's the instructions file. Every product has a &lt;code&gt;CLAUDE.md&lt;/code&gt; that tells the AI agent how to behave. Here's a stripped-down version:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Product&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;What&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;Is&lt;/span&gt;
-&lt;span class="n"&gt;One&lt;/span&gt; &lt;span class="n"&gt;paragraph&lt;/span&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;Tech&lt;/span&gt; &lt;span class="n"&gt;Stack&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Astro&lt;/span&gt; &lt;span class="mh"&gt;5&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;static&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Plain&lt;/span&gt; &lt;span class="n"&gt;CSS&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;custom&lt;/span&gt; &lt;span class="n"&gt;properties&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Cloudflare&lt;/span&gt; &lt;span class="n"&gt;Pages&lt;/span&gt; &lt;span class="n"&gt;hosting&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;Pricing&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="mh"&gt;29&lt;/span&gt; &lt;span class="n"&gt;AUD&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;time&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Aspirin&lt;/span&gt; &lt;span class="n"&gt;tier&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;AI&lt;/span&gt; &lt;span class="n"&gt;Agent&lt;/span&gt; &lt;span class="n"&gt;Notes&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="n"&gt;em&lt;/span&gt; &lt;span class="n"&gt;dashes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="n"&gt;regular&lt;/span&gt; &lt;span class="n"&gt;hyphens&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Dark&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;via&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"dark"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Never&lt;/span&gt; &lt;span class="n"&gt;commit&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Run&lt;/span&gt; &lt;span class="n"&gt;tests&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="n"&gt;changes&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Keep&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;under&lt;/span&gt; &lt;span class="mh"&gt;500&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;That &lt;code&gt;No em dashes&lt;/code&gt; rule is worth explaining. Em dashes are an AI telltale - real humans use hyphens. I wrote a pre-commit hook that catches them:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5
-6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="c1"&gt;# Check for em dashes in source files&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; grep -rn &lt;span class="s1"&gt;$'\xe2\x80\x94'&lt;/span&gt; src/ --include&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"*.astro"&lt;/span&gt; --include&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"*.ts"&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Em dashes found - use regular hyphens instead"&lt;/span&gt;
-  &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;It's a small thing but it matters when your entire site is AI-generated.&lt;/p&gt;
-&lt;h2 id="setting-up-stripe-with-zero-backend-code"&gt;Setting up Stripe with zero backend code&lt;/h2&gt;
-&lt;p&gt;One of the things that surprised me was how simple payments are now. No checkout page, no webhook handler, no server at all. Stripe Payment Links handle everything.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Create the product&lt;/span&gt;
-curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/products"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -u &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$STRIPE_SECRET_KEY&lt;/span&gt;&lt;span class="s2"&gt;:"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"name=YT Script Kit"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"description=AI script prompt templates for YouTube"&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Create a price ($29 AUD)&lt;/span&gt;
-curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/prices"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -u &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$STRIPE_SECRET_KEY&lt;/span&gt;&lt;span class="s2"&gt;:"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"product=prod_XXXXX"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"unit_amount=2900"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"currency=aud"&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Create a payment link that redirects to your success page&lt;/span&gt;
-curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/payment_links"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -u &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$STRIPE_SECRET_KEY&lt;/span&gt;&lt;span class="s2"&gt;:"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"line_items[0][price]=price_XXXXX"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"line_items[0][quantity]=1"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"after_completion[type]=redirect"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"after_completion[redirect][url]=https://yoursite.com/success?paid=true"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;The response gives you a &lt;code&gt;buy.stripe.com&lt;/code&gt; URL. Drop it in your buy button's &lt;code&gt;href&lt;/code&gt;. That's the entire payment integration.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"https://buy.stripe.com/your-link-here"&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"buy-button"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  Get the Kit - $29
-&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;No Stripe.js, no server-side session, no webhook to verify payment. For digital products with instant delivery, this is all you need.&lt;/p&gt;
-&lt;h2 id="cloudflare-pages-deployment-via-api"&gt;Cloudflare Pages deployment via API&lt;/h2&gt;
-&lt;p&gt;Same deal with hosting. I used to manually create projects in the Cloudflare dashboard. Now I do it with one API call:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -X POST &lt;span class="se"&gt;\&lt;/span&gt;
-  &lt;span class="s2"&gt;"https://api.cloudflare.com/client/v4/accounts/&lt;/span&gt;&lt;span class="nv"&gt;$ACCOUNT_ID&lt;/span&gt;&lt;span class="s2"&gt;/pages/projects"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -H &lt;span class="s2"&gt;"Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$CF_API_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -H &lt;span class="s2"&gt;"Content-Type: application/json"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s1"&gt;'{&lt;/span&gt;
-&lt;span class="s1"&gt;    "name": "my-product",&lt;/span&gt;
-&lt;span class="s1"&gt;    "production_branch": "main",&lt;/span&gt;
-&lt;span class="s1"&gt;    "build_config": {&lt;/span&gt;
-&lt;span class="s1"&gt;      "build_command": "npm run build",&lt;/span&gt;
-&lt;span class="s1"&gt;      "destination_dir": "dist"&lt;/span&gt;
-&lt;span class="s1"&gt;    }&lt;/span&gt;
-&lt;span class="s1"&gt;  }'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Then set the GitHub secrets so the deploy workflow can push:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_API_TOKEN -R &lt;span class="s2"&gt;"org/repo"&lt;/span&gt; --body &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$CF_API_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;span class="s2"&gt;"org/repo"&lt;/span&gt; --body &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$ACCOUNT_ID&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;From that point on, every &lt;code&gt;git push&lt;/code&gt; builds and deploys automatically. The GitHub Actions workflow handles the build, runs some validation checks (design system compliance, em dash detection), and deploys via Wrangler.&lt;/p&gt;
-&lt;h2 id="the-pricing-framework"&gt;The pricing framework&lt;/h2&gt;
-&lt;p&gt;I spent way too long agonising over pricing on the first product before landing on something simple. Three tiers based on how badly the buyer needs it:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Tier&lt;/th&gt;
-&lt;th&gt;Price&lt;/th&gt;
-&lt;th&gt;When to use it&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Vitamin&lt;/td&gt;
-&lt;td&gt;$9&lt;/td&gt;
-&lt;td&gt;Nice to have - calculators, cheat sheets&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Aspirin&lt;/td&gt;
-&lt;td&gt;$29&lt;/td&gt;
-&lt;td&gt;Solves a real problem - template packs, prompt kits&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Painkiller&lt;/td&gt;
-&lt;td&gt;$99&lt;/td&gt;
-&lt;td&gt;Can't live without it - complete systems&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;The rule that saved me the most time: if a product gets less than 10 sales in month 1, kill it or pivot. No sunk cost fallacy allowed. I've killed two ideas using this rule (Strava automation and Google Keep integration) before writing any code.&lt;/p&gt;
-&lt;h2 id="what-id-do-differently"&gt;What I'd do differently&lt;/h2&gt;
-&lt;p&gt;Some things I got wrong:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Marketing from day one.&lt;/strong&gt; My first product was 90% building, 10% marketing. Should be 50/50. No one knows your product exists unless you tell them.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Free sample on every product.&lt;/strong&gt; I added this later but it should've been there from the start. People need to see real output before they'll pay. The &lt;a href="https://firsthomecalculator.com.au"&gt;First Home Calculator&lt;/a&gt; shows your full results for free - you only pay for the detailed PDF report.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Cross-sell earlier.&lt;/strong&gt; Every product footer now links to every other product. Cross-selling existing customers is 5-8x cheaper than finding new ones. I should've built this into the template from the start instead of retrofitting it.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Blog on every product site.&lt;/strong&gt; Each product now has its own blog at &lt;code&gt;/blog&lt;/code&gt; that grows automatically as I add features. These posts link back here to jackmckew.dev and vice versa. The SEO value of this cross-linking is real.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="the-system-is-the-product"&gt;The system is the product&lt;/h2&gt;
-&lt;p&gt;The meta realisation was that the system I built to make products - the templates, the CLAUDE.md conventions, the pricing framework, the deployment automation - is itself a product. That's the &lt;a href="https://ai-product-builder-2ay.pages.dev"&gt;AI Product Builder&lt;/a&gt;. It's $99 because it's the complete system, not a single tool.&lt;/p&gt;
-&lt;p&gt;If you're thinking about building small software products with AI, the hardest part isn't the coding. It's the system around the coding: what to build, how to price it, how to deploy it, and how to know when to kill it. That's what I've been figuring out, and I'll keep sharing what works (and what doesn't) here.&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="ai"></category><category term="claude"></category><category term="astro"></category><category term="side-project"></category><category term="automation"></category></entry><entry><title>Building a First Home Buyer Guide That Actually Helps</title><link href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html" rel="alternate"></link><published>2026-03-05T00:00:00+11:00</published><updated>2026-03-05T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2026-03-05:/building-a-first-home-buyer-guide-that-actually-helps.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I've been watching friends try to buy their first home in Australia and the experience is genuinely confusing. Every state has different grants, different stamp duty rules, different price caps -and most of the information out there is either buried in government PDFs or wrapped in mortgage broker marketing. So …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I've been watching friends try to buy their first home in Australia and the experience is genuinely confusing. Every state has different grants, different stamp duty rules, different price caps -and most of the information out there is either buried in government PDFs or wrapped in mortgage broker marketing. So I built a tool that cuts through all of it.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://firsthomebuyerguide.com.au"&gt;First Home Buyer Guide&lt;/a&gt; is a free calculator that tells you exactly what grants, stamp duty savings, and government schemes you qualify for based on your state, income, and property type. It grew from a simple calculator idea into a 38-page site covering everything from pre-approval to a printable buying checklist.&lt;/p&gt;
-&lt;h2 id="why-this-exists"&gt;Why this exists&lt;/h2&gt;
-&lt;p&gt;The trigger was watching someone miss out on the First Home Guarantee because they didn't know the income caps had been removed in October 2025. That's potentially tens of thousands in LMI savings, gone because the information was scattered across three different government websites. Queensland's boosted $30K FHOG expires June 2026 and I'd bet most eligible buyers don't know about it.&lt;/p&gt;
-&lt;p&gt;The existing tools out there either only cover one state, push you toward a specific lender, or make you fill out a lead form before showing you anything useful. I wanted something that just... works. Enter your details, see your results, done.&lt;/p&gt;
-&lt;h2 id="tech-stack-astro-preact"&gt;Tech stack: Astro + Preact&lt;/h2&gt;
-&lt;p&gt;I went with &lt;a href="https://astro.build/"&gt;Astro&lt;/a&gt; for static site generation with Preact islands for the interactive calculator. The reasoning was simple:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;38 static pages&lt;/strong&gt; load instantly -no JavaScript needed for content pages&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;One interactive island&lt;/strong&gt; (the calculator) hydrates with Preact, keeping the bundle tiny&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Plain CSS&lt;/strong&gt; with custom properties -no framework overhead&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// The calculator is the only interactive component&lt;/span&gt;
-&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;Calculator&lt;/span&gt; &lt;span class="nx"&gt;client&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;load&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
-
-&lt;span class="c1"&gt;// Everything else is static HTML -grants, guides, stamp duty pages&lt;/span&gt;
-&lt;span class="c1"&gt;// all rendered at build time with zero JS&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;The &lt;code&gt;client:load&lt;/code&gt; directive means the calculator JavaScript only loads on the homepage where it's needed. Every other page ships zero JS. Build time for all 38 pages: about 23 seconds.&lt;/p&gt;
-&lt;p&gt;I briefly considered Next.js but it felt like bringing a cannon to a knife fight. This is a content site with one interactive widget. Astro's island architecture was the perfect fit.&lt;/p&gt;
-&lt;h2 id="the-iteration-loop"&gt;The iteration loop&lt;/h2&gt;
-&lt;p&gt;The site didn't start as 38 pages. It started as a calculator and a homepage.&lt;/p&gt;
-&lt;p&gt;What happened next was a persona-driven iteration process -I'd imagine a specific first home buyer (nervous Adelaide renter, budget-conscious regional Victorian, frustrated Sydney renter) and ask: what would this person need that we don't have yet?&lt;/p&gt;
-&lt;p&gt;That produced:
-- A step-by-step buying process guide
-- State-by-state grant comparison tables
-- An LMI explainer (because most people don't know what it is until they're hit with the bill)
-- A "how long to save your deposit" timeline
-- A rent vs buy comparison
-- A printable 31-item checklist across 6 phases
-- A glossary of 26 terms
-- Pre-approval walkthrough
-- 10 costly mistakes to avoid&lt;/p&gt;
-&lt;p&gt;Each page has FAQ structured data for Google, cross-links to related content, and breadcrumb navigation. The SEO wasn't an afterthought -every page was built with search intent in mind.&lt;/p&gt;
-&lt;h2 id="what-surprised-me"&gt;What surprised me&lt;/h2&gt;
-&lt;p&gt;The biggest surprise was how much the calculator itself evolved. It started as a basic "enter income, see borrowing power" tool. By the end it was calculating stamp duty exemptions per state, showing FHOG eligibility, estimating LMI costs, factoring in the First Home Guarantee and Help to Buy schemes, and generating a downloadable PDF report.&lt;/p&gt;
-&lt;p&gt;The PDF generation was its own adventure. I started with &lt;code&gt;@react-pdf/renderer&lt;/code&gt; but it was heavy and didn't play well with Preact. Switched to jsPDF with code-splitting and lazy loading -the PDF code only downloads when someone actually clicks the button. The free snapshot is 4 pages, the paid report is 7 pages with detailed breakdowns.&lt;/p&gt;
-&lt;p&gt;Another thing I didn't expect: the broker referral system. After building all this content that kept recommending "talk to a mortgage broker," it made sense to actually help people find one. Built a lead capture form that redirects to an affiliate broker platform. It's on the calculator results, pre-approval page, and buying process page -the high-intent spots where someone's most likely to act.&lt;/p&gt;
-&lt;h2 id="what-id-do-differently"&gt;What I'd do differently&lt;/h2&gt;
-&lt;p&gt;If I started over:
-- I'd set up the content page template earlier. The first few pages were hand-crafted, then I found patterns and could move faster
-- I'd build the PDF report first, not last -it's the paid product and should've driven the feature set from day one
-- The CSS could be tighter. 38 pages of inline styles in Astro templates gets messy. A utility class system would've been cleaner&lt;/p&gt;
-&lt;h2 id="check-it-out"&gt;Check it out&lt;/h2&gt;
-&lt;p&gt;The calculator is live at &lt;a href="https://firsthomebuyerguide.com.au"&gt;firsthomebuyerguide.com.au&lt;/a&gt;. It's free to use -you can see all your grants, stamp duty savings, and borrowing power without signing up for anything. If you know someone buying their first home in Australia, send it their way.&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="astro"></category><category term="preact"></category><category term="static-site"></category><category term="australia"></category><category term="side-project"></category></entry><entry><title>Designing for Change not Requirements</title><link href="https://jackmckew.dev/designing-for-change-not-requirements.html" rel="alternate"></link><published>2021-01-15T00:00:00+11:00</published><updated>2021-01-15T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2021-01-15:/designing-for-change-not-requirements.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: &lt;a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy"&gt;https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jack McKew's Blog - Software</title><link href="https://jackmckew.dev/" rel="alternate"></link><link href="https://jackmckew.dev/feeds/software.atom.xml" rel="self"></link><id>https://jackmckew.dev/</id><updated>2021-01-15T00:00:00+11:00</updated><subtitle>Engineer | Software Developer | Data Scientist</subtitle><entry><title>Designing for Change not Requirements</title><link href="https://jackmckew.dev/designing-for-change-not-requirements.html" rel="alternate"></link><published>2021-01-15T00:00:00+11:00</published><updated>2021-01-15T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2021-01-15:/designing-for-change-not-requirements.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: &lt;a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy"&gt;https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Typically projects usually …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Change is inevitable in everything, so why not consider it in the design phase of a project. By designing for inevitable change this safeguards projects from a myriad of future hurdles. This post was inspired by the Weekly Dev Tips episode: &lt;a href="https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy"&gt;https://www.weeklydevtips.com/episodes/requirements-and-change-with-guest-juval-lowy&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Typically projects usually start by trying to understand what the end-user wants and deciphering what the requirements are to implement this. These requirements are then broken up into bite size chunks, and development begins. But then what (almost) always happens is, the user comes back with a new idea or something was excommunicated and the project needs to change. This can be a painful experience to implement this new feature, especially if the work done to date isn't compatible.&lt;/p&gt;
 &lt;p&gt;By amending our approach to the design procedure to:&lt;/p&gt;
@@ -433,4 +164,426 @@ gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;s
 &lt;p&gt;Since the previous post relies upon a multi-stage Dockerfile to build the app and run the app within nginx, we must ensure to use the platform &lt;code&gt;Docker running on 64bit Amazon Linux/2.15.2&lt;/code&gt;, as &lt;code&gt;Docker running on Amazon Linux 2&lt;/code&gt;, &lt;a href="https://stackoverflow.com/questions/61462646/unable-to-deploy-docker-application-in-elasticbeanstalk-using-travis-ci"&gt;does not support multi-stage Dockerfiles&lt;/a&gt;. Furthermore, we exposed the ports in the Dockerfile through docker-compose or the Docker CLI previously, we can also do this by adding the command &lt;code&gt;EXPOSE 80&lt;/code&gt; in the production Dockerfile.&lt;/p&gt;
 &lt;p&gt;Once we've set the application, and the keys as secrets, we are now able to push into our repository, and this will update our application on AWS Elastic Beanstalk.&lt;/p&gt;
 &lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry></feed>
+&lt;p&gt;This is a production grade workflow for developing web applications in React and deploying to AWS. Find the complete repository of this post over at: &lt;a href="https://github.com/JackMcKew/docker-react"&gt;https://github.com/JackMcKew/docker-react&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Deploying with Kubernetes</title><link href="https://jackmckew.dev/deploying-with-kubernetes.html" rel="alternate"></link><published>2020-11-26T00:00:00+11:00</published><updated>2020-11-26T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-26:/deploying-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Docker&lt;/td&gt;
+&lt;td&gt;Docker will be used to containerization of the services inside our …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to deploy our fibonacci application we previously built in a Kubernetes cluster. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Docker&lt;/td&gt;
+&lt;td&gt;Docker will be used to containerization of the services inside our app&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Vue&lt;/td&gt;
+&lt;td&gt;Vue is the front-end JavaScript framework that we will use&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Google Cloud&lt;/td&gt;
+&lt;td&gt;The cloud provider that will host our Kubernetes cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Express&lt;/td&gt;
+&lt;td&gt;Express is responsible for the API between Redis, PostgreSQL and Vue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Redis&lt;/td&gt;
+&lt;td&gt;Redis will store/retrieve any local data used by our users&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PostgreSQL&lt;/td&gt;
+&lt;td&gt;PostgreSQL will be our database&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nginx&lt;/td&gt;
+&lt;td&gt;Nginx will handle the routing between our services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Github Actions&lt;/td&gt;
+&lt;td&gt;The CI/CD for our project&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html"&gt;Deploy a Node Web App to AWS Elastic Beanstalk with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Previously we made use of services provided by AWS for Redis &amp;amp; PostgreSQL, in this post these services will be run inside their own pods.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="the-architecture"&gt;The Architecture&lt;/h2&gt;
+&lt;p&gt;To make our application run on Kubernetes, we need to make a few changes. In essence though the architecture will&lt;/p&gt;
+&lt;div class="mermaid"&gt;
+  graph LR
+    subgraph Node
+        tr&amp;gt;Traffic] --&amp;gt; is[Ingress Service]
+
+        is --&amp;gt; cl[Client Deployment]
+
+        is --&amp;gt; se[Server Deployment]
+
+        se --&amp;gt; re[(Redis Deployment)]
+
+        se --&amp;gt; po[(PostgreSQL Deployment)]
+
+        po --&amp;gt; pv[PostgreSQL PVC]
+
+        wo(Worker Deployment) --&amp;gt; re
+    end
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The above chart was made with &lt;a href="https://mermaid-js.github.io/mermaid/#/"&gt;mermaid.js&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;See the following posts for developing in different contexts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Container context: &lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kubernetes context: &lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="cloud-provider"&gt;Cloud Provider&lt;/h2&gt;
+&lt;p&gt;To deploy our Kubernetes cluster, we need a cloud provider, for this post we will be using Google Cloud. Other options are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Amazon Web Services (AWS)&lt;/li&gt;
+&lt;li&gt;Digital Ocean&lt;/li&gt;
+&lt;li&gt;Microsoft Azure&lt;/li&gt;
+&lt;li&gt;Many more&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="google-cloud"&gt;Google Cloud&lt;/h2&gt;
+&lt;p&gt;Now that we've logged into our Google Cloud console, we create a new project, enable billing and then head to Kubernetes Engine. This will go through some one time set up to enable the Kubernetes Engine API for our project and upon completion we can create a cluster. As soon as we hit &lt;code&gt;Create Cluster&lt;/code&gt;, this begins the billing so be careful!&lt;/p&gt;
+&lt;h3 id="service-account"&gt;Service Account&lt;/h3&gt;
+&lt;p&gt;Before moving onto the next step, we need to authorize Github Actions to be able run inside the cluster on Google Cloud. This is done by creating a service account, exporting the keys as JSON and storing it as a secret within the repository on Github.&lt;/p&gt;
+&lt;h2 id="cicd"&gt;CI/CD&lt;/h2&gt;
+&lt;p&gt;For our CI/CD we will be using GitHub Actions. Github Actions are free to public repositories, and I presented at PyconAU 2020 on the topic, find the recording at: &lt;a href="https://www.youtube.com/watch?v=7aBjzZkaGhU&amp;amp;feature=emb_logo"&gt;https://www.youtube.com/watch?v=7aBjzZkaGhU&amp;amp;feature=emb_logo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let's get into setting up the action for this project, we will be aiming to achieve a few things in this action:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Initialise &amp;amp; configure the Google Cloud SDK&lt;/li&gt;
+&lt;li&gt;Login to Docker Hub so we can push our images up&lt;/li&gt;
+&lt;li&gt;Build our application and run tests&lt;/li&gt;
+&lt;li&gt;Build and tag images ready to be pushed to Docker Hub&lt;/li&gt;
+&lt;li&gt;Push our tagged images to Docker Hub&lt;/li&gt;
+&lt;li&gt;Update the Kubernetes configuration on Google Cloud&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To see the full configuration which achieves this head to: &lt;a href="https://github.com/JackMcKew/multi-docker/blob/master/.github/workflows/google-cloud-cluster.yaml"&gt;https://github.com/JackMcKew/multi-docker/blob/master/.github/workflows/google-cloud-cluster.yaml&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We make sure to use the &lt;code&gt;${GITHUB_SHA}&lt;/code&gt;, when we're tagging our images versions, this is due to ensure that our kubernetes cluster ensures to update the images when we are running &lt;code&gt;kubectl apply -f k8s&lt;/code&gt;. If we didn't add the SHA, they would be all tagged with &lt;code&gt;:latest&lt;/code&gt;, and kubernetes wouldn't see an update.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure to update the cluster id in the command &lt;code&gt;gcloud container clusters get-credentials my-first-cluster-1&lt;/code&gt; with the cluster desired to update the kubernetes configuration, otherwise there'll be errors.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Once this action has successfully completed, we can head to the Workloads page of our project and we should be able to see all the deployment configurations that we set up to be deployed.&lt;/p&gt;
+&lt;h2 id="setting-up-ingress-nginx"&gt;Setting up Ingress-Nginx&lt;/h2&gt;
+&lt;p&gt;Before we can access our application through an IP or web address, we need to set up &lt;code&gt;ingress-nginx&lt;/code&gt;, similar to how we did with &lt;code&gt;docker-compose&lt;/code&gt; in previous posts. Luckily, we can make use of &lt;code&gt;helm&lt;/code&gt; to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.&lt;/p&gt;
+&lt;p&gt;Firstly which we need to install helm (&lt;a href="https://helm.sh/docs/intro/install/#from-script"&gt;https://helm.sh/docs/intro/install/#from-script&lt;/a&gt;):&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
+./get_helm.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Followed by setting up &lt;code&gt;ingress-nginx&lt;/code&gt; (&lt;a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm"&gt;https://kubernetes.github.io/ingress-nginx/deploy/#using-helm&lt;/a&gt;):&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="success"&gt;Success&lt;/h2&gt;
+&lt;p&gt;Now we head to our &lt;code&gt;Services &amp;amp; Ingress&lt;/code&gt; page in our project, where we can see all the pods that are used for hosting endpoints. Provided the &lt;code&gt;ingress-nginx&lt;/code&gt; service has been created, there should be a &lt;code&gt;External Load Balancer&lt;/code&gt; service with an IP, that we can access. Heading to this IP will lead us to our application!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Kubernetes In Action on Google Cloud" class="img-fluid" src="https://jackmckew.dev/img/google-cloud-kubernetes.gif"/&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If we wanted to set up an actual web address, we'd need to purchase a domain, set the A record as the IP for our external load balancer, and finally set up a certificate manager to handle the https authentication.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Javascript Source(s):
+&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry><entry><title>Developing with Kubernetes</title><link href="https://jackmckew.dev/developing-with-kubernetes.html" rel="alternate"></link><published>2020-11-20T00:00:00+11:00</published><updated>2020-11-20T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2020-11-20:/developing-with-kubernetes.html</id><summary type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Docker&lt;/td&gt;
+&lt;td&gt;Docker will be used to containerization of the …&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;Following on with previous posts on this blog. This post will be going through how to develop &amp;amp; later on deploy our fibonacci application we previously built in a multi-container context. To reiterate we will be using the following technologies:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;th&gt;Use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Docker&lt;/td&gt;
+&lt;td&gt;Docker will be used to containerization of the services inside our app&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Vue&lt;/td&gt;
+&lt;td&gt;Vue is the front-end JavaScript framework that we will use&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Express&lt;/td&gt;
+&lt;td&gt;Express is responsible for the API between Redis, PostgreSQL and Vue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Redis&lt;/td&gt;
+&lt;td&gt;Redis will store/retrieve any local data used by our users&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PostgreSQL&lt;/td&gt;
+&lt;td&gt;PostgreSQL will be our database&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nginx&lt;/td&gt;
+&lt;td&gt;Nginx will handle the routing between our services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Previously we made use of services provided by AWS for Redis &amp;amp; PostgreSQL, in this post these services will be run inside their own pods.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This post is apart of a series on Docker/Kubernetes, find the other posts at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-docker.html"&gt;Intro to Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-with-docker.html"&gt;Develop and Develop with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/develop-and-deploy-multi-container-applications.html"&gt;Develop and Develop Multi Container Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/intro-to-kubernetes.html"&gt;Intro to Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/developing-with-kubernetes.html"&gt;Developing with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/deploying-with-kubernetes.html"&gt;Deploying with Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jackmckew.dev/deploy-a-node-web-app-to-aws-elastic-beanstalk-with-docker.html"&gt;Deploy a Node Web App to AWS Elastic Beanstalk with Docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="the-architecture"&gt;The Architecture&lt;/h2&gt;
+&lt;p&gt;To make our application run on Kubernetes, we need to make a few changes. In essence though the architecture will&lt;/p&gt;
+&lt;div class="mermaid"&gt;
+  graph LR
+    subgraph Node
+        tr&amp;gt;Traffic] --&amp;gt; is[Ingress Service]
+
+        is --&amp;gt; cl[Client Deployment]
+
+        is --&amp;gt; se[Server Deployment]
+
+        se --&amp;gt; re[(Redis Deployment)]
+
+        se --&amp;gt; po[(PostgreSQL Deployment)]
+
+        po --&amp;gt; pv[PostgreSQL PVC]
+
+        wo(Worker Deployment) --&amp;gt; re
+    end
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The above chart was made with &lt;a href="https://mermaid-js.github.io/mermaid/#/"&gt;mermaid.js&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For each of the deployments (except the worker) we will be creating a ClusterIP service for maintaining the connection between each of the deployments. The PostgreSQL PVC is for a Persistent Volume Claim, which allows our node to consume abstract storage resources (we'll go into this further later on).&lt;/p&gt;
+&lt;h2 id="clusterip-service"&gt;ClusterIP Service&lt;/h2&gt;
+&lt;p&gt;We need to set up a ClusterIP service for each of our deployments except the worker deployment. This will allow our services to communicate with others inside the node.&lt;/p&gt;
+&lt;p&gt;To do this, we create a configuration &lt;code&gt;yaml&lt;/code&gt; file:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;apiVersion&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;v1&lt;/span&gt;
+&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Service&lt;/span&gt;
+&lt;span class="nt"&gt;metadata&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-clusterip-service&lt;/span&gt;
+&lt;span class="nt"&gt;spec&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;selector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;component&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;web&lt;/span&gt;
+  &lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80&lt;/span&gt;
+      &lt;span class="nt"&gt;targetPort&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Note that we keep the same selector as our deployments.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ClusterIP is the default ServiceType in kubernetes.
+We can create multiple objects in a single yaml file by separating with &lt;code&gt;---&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="persistent-volume-claim"&gt;Persistent Volume Claim&lt;/h2&gt;
+&lt;p&gt;A persistent volume allows a pod to share memory and read/write data on the host PC. The use-case for this are if our PostgreSQL database pod had crashed without a PVC, the data would essentially be lost as it was entirely contained within the pod, but with a persistent volume claim, our pod can restart by using the data that is stored on the host PC.&lt;/p&gt;
+&lt;p&gt;We use a PVC over a persistent volume or a volume, as this allows us to declare the requirement that our pod needs storage at some point, rather than create an instance of storage prematurely, and gives more control to Kubernetes to solve our storage problem for us.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Volumes on their lonesome are tied directly to pods, and thus if the pod crashes, the volume will be lost. Hence why we are not using volumes in this case. A volume is also different between Kubernetes and Docker.
+A &lt;em&gt;persistant&lt;/em&gt; volume is not tied directly to pods, but is tied to the node overall, and thus if the node as a whole crashes, the data will be lost.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="pvc-configuration"&gt;PVC Configuration&lt;/h3&gt;
+&lt;p&gt;Similar to how we attach a ClusterIP service to a pod, let's attach a PVC to a pod. What this will do, will instruct Kubernetes to 'advertise' storage space for pods to consume. If a pod consumes this claim, then it'll go and create a persistent volume or point to an already created persistent volume for us automatically. There is also many access modes we can define for our PVC:&lt;/p&gt;
+&lt;table class="table-striped table"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Access Mode&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ReadWriteOnce&lt;/td&gt;
+&lt;td&gt;Can be used by a single node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ReadOnlyMany&lt;/td&gt;
+&lt;td&gt;Multiple nodes can &lt;strong&gt;read&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ReadWriteMany&lt;/td&gt;
+&lt;td&gt;Can be &lt;strong&gt;read&lt;/strong&gt;/&lt;strong&gt;written to&lt;/strong&gt; by many nodes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;apiVersion&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;v1&lt;/span&gt;
+&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;PersistentVolumeClaim&lt;/span&gt;
+&lt;span class="nt"&gt;metadata&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;database-persistent-volume-claim&lt;/span&gt;
+&lt;span class="nt"&gt;spec&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;accessModes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ReadWriteOnce&lt;/span&gt;
+  &lt;span class="nt"&gt;resources&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;requests&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="nt"&gt;storage&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;2Gi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;This configuration will allow a single node access to 2 gigabytes of storage space available for both read &amp;amp; write operations.&lt;/p&gt;
+&lt;p&gt;Ensure that the pods that will access this volume claim have provided it under the &lt;code&gt;spec&lt;/code&gt; tag in the pod configuration.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Similarly, we can specify resource requirements/restraints in pods (eg, CPU resources).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="environment-variables"&gt;Environment Variables&lt;/h2&gt;
+&lt;p&gt;Some of our pods depend on environment variables being set to work correctly (eg, REDIS_HOST, PGUSER, etc). We add using the &lt;code&gt;env&lt;/code&gt; key to our &lt;code&gt;spec&lt;/code&gt; &amp;gt; &lt;code&gt;containers&lt;/code&gt; configuration.&lt;/p&gt;
+&lt;p&gt;For example, for our worker to connect to the redis deployment:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7
+8
+9&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;spec&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;containers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;worker&lt;/span&gt;
+      &lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;jackmckew/multi-docker-worker&lt;/span&gt;
+      &lt;span class="nt"&gt;env&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;REDIS_HOST&lt;/span&gt;
+          &lt;span class="nt"&gt;value&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;redis-cluster-ip-service&lt;/span&gt;
+        &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;REDIS_PORT&lt;/span&gt;
+          &lt;span class="nt"&gt;value&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;6379&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Note that for the value of the &lt;code&gt;REDIS_HOST&lt;/code&gt; we are stating the name of the ClusterIP service we had previously set up. Kubernetes will automatically resolve this for us to be the correct IP, how neat!&lt;/p&gt;
+&lt;h3 id="secrets"&gt;Secrets&lt;/h3&gt;
+&lt;p&gt;Secrets are another type of object inside of Kubernetes that are used to store sensitive information we don't want to live in the plain text of the configuration files. We do this through a &lt;code&gt;kubectl&lt;/code&gt; commad:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;kubectl create secret &lt;span class="o"&gt;[&lt;/span&gt;secret_type&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;secret_name&lt;span class="o"&gt;]&lt;/span&gt; --from-literal &lt;span class="nv"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;value
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;There are 3 types of secret types, &lt;code&gt;generic&lt;/code&gt;, &lt;code&gt;docker_registry&lt;/code&gt; and &lt;code&gt;tls&lt;/code&gt;, most of the time we'll be making use of the &lt;code&gt;generic&lt;/code&gt; secret type. Similar to how we consume other services, we will be consuming the secret from the &lt;code&gt;secret_name&lt;/code&gt; parameter. The names (but not the value) can always be retrieved through &lt;code&gt;kubectl get secrets&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Secrets are pertained only on the current machine, so this will not be transferred when moving to production or another machine, so be sure to repeat the process.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="consuming-secrets-as-environment-variable"&gt;Consuming Secrets as Environment Variable&lt;/h3&gt;
+&lt;p&gt;Consuming a secret as an environment variable for a container is a little different to other environment variables. As secrets can contain multiple key value pairs, we need to specify the secret and the key to retrieve the value from:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ENVIRONMENT_VAR_NAME&lt;/span&gt;
+  &lt;span class="nt"&gt;valueFrom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;secretKeyRef&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;secret_name&lt;/span&gt;
+      &lt;span class="nt"&gt;key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;key&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="ingress-service"&gt;Ingress Service&lt;/h2&gt;
+&lt;p&gt;The ingress service allows us to connect to other Kubernetes cluster from outside, and thus maintains how we should treat incoming requests and how to route them.&lt;/p&gt;
+&lt;p&gt;The entirety of our configuration for the ingress service is:&lt;/p&gt;
+&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;apiVersion&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;networking.k8s.io/v1beta1&lt;/span&gt;
+&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Ingress&lt;/span&gt;
+&lt;span class="nt"&gt;metadata&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ingress-service&lt;/span&gt;
+  &lt;span class="nt"&gt;annotations&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;kubernetes.io/ingress.class&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nginx&lt;/span&gt;
+    &lt;span class="nt"&gt;nginx.ingress.kubernetes.io/use-regex&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"true"&lt;/span&gt;
+    &lt;span class="nt"&gt;nginx.ingress.kubernetes.io/rewrite-target&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/$1&lt;/span&gt;
+&lt;span class="nt"&gt;spec&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;rules&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nt"&gt;paths&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/?(.*)&lt;/span&gt;
+            &lt;span class="nt"&gt;backend&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+              &lt;span class="nt"&gt;serviceName&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-cluster-ip-service&lt;/span&gt;
+              &lt;span class="nt"&gt;servicePort&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;8080&lt;/span&gt;
+          &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/fib/?(.*)&lt;/span&gt;
+            &lt;span class="nt"&gt;backend&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+              &lt;span class="nt"&gt;serviceName&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-cluster-ip-service&lt;/span&gt;
+              &lt;span class="nt"&gt;servicePort&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;8080&lt;/span&gt;
+          &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/api/?(.*)&lt;/span&gt;
+            &lt;span class="nt"&gt;backend&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+              &lt;span class="nt"&gt;serviceName&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;server-cluster-ip-service&lt;/span&gt;
+              &lt;span class="nt"&gt;servicePort&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;5000&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Note that we make use of rewrite-target, this means that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;test.com/something&lt;/code&gt; rewrites to &lt;code&gt;test.com/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;test.com/somethingelse&lt;/code&gt; rewrites to &lt;code&gt;test.com/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;test.com/fib&lt;/code&gt; rewrites to &lt;code&gt;test.com/fib/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Any requests for &lt;code&gt;test.com/api&lt;/code&gt; get routed to the specific server service for handling, while any others get sent to the front end.&lt;/p&gt;
+&lt;h2 id="deploy"&gt;Deploy!&lt;/h2&gt;
+&lt;p&gt;Now we are ready to deploy our Kubernetes cluster onto a cloud provider, this was originally detailed in this part of the post, but grew far longer than expected so another post was created!&lt;/p&gt;
+&lt;p&gt;Javascript Source(s):
+&lt;a href="https://jackmckew.dev/js/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="software"></category></entry></feed>
