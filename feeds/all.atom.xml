@@ -7,7 +7,7 @@
 &lt;h2 id="the-rendering-pipeline"&gt;The rendering pipeline&lt;/h2&gt;
 &lt;p&gt;The whole thing runs on &lt;code&gt;node-canvas&lt;/code&gt; (a native binding to Cairo) piped into FFmpeg through stdin. No temporary frame files, no disk thrashing - just raw pixel buffers pushed directly to the encoder.&lt;/p&gt;
 &lt;p&gt;The backpressure handling is worth showing, because if you skip it on a machine with limited RAM you'll OOM halfway through:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -22,7 +22,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At 720x1280 BGRA, each frame is ~3.5MB. At 24fps over a 60-second video, that's theoretically 5GB uncompressed if you tried to buffer it. The drain-and-wait pattern keeps memory flat. FFmpeg consumes frames as fast as it can encode them; we just wait when it asks us to slow down.&lt;/p&gt;
 &lt;p&gt;FFmpeg is spawned with stdin as a pipe and given the raw pixel format:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -43,7 +43,7 @@
 &lt;h2 id="cross-entropy-method-for-learning"&gt;Cross-Entropy Method for learning&lt;/h2&gt;
 &lt;p&gt;The "AI" is a Cross-Entropy Method optimizer. CEM is one of those algorithms that's almost offensively simple once you understand it, but produces surprisingly good results for low-dimensional continuous problems.&lt;/p&gt;
 &lt;p&gt;The idea: maintain a Gaussian distribution over your parameter space. Sample N candidates, score them all, keep the top K (the "elite" set), and update the distribution mean toward the elite average. Shrink the variance a bit each generation. Repeat.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -94,7 +94,7 @@
 &lt;h2 id="the-arm-skeleton"&gt;The arm skeleton&lt;/h2&gt;
 &lt;p&gt;The arm is a kinematic chain: shoulder (fixed) → elbow (dynamic, driven by the throw arc) → wrist → hand → fingers. Everything is Canvas 2D - no physics engine, no WebGL.&lt;/p&gt;
 &lt;p&gt;The elbow tracks the upper arm rotation as a function of the current forearm angle. I parameterized the upper arm between two extreme angles (wind-up and release) and interpolated:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -106,20 +106,20 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The wrist snap is baked in as an offset to the hand angle:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;OPT2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)));&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;hand_ang&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.14&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At wind-up the wrist is cocked back 0.38 radians. At release it snaps 0.14 radians forward. Everything distal to the wrist (hand, fingers, dart) uses &lt;code&gt;hand_ang&lt;/code&gt; and its perpendicular to compute positions.&lt;/p&gt;
 &lt;p&gt;Each finger is three phalanges. I store lengths and a &lt;code&gt;CURL&lt;/code&gt; interpolation factor (0 = open hand, 1 = dart grip). During the throw the grip stays at 1.0. At release it fades to 0 over five frames as the fingers open.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.85&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.35&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.18&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// index to pinky&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.04&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Bones are drawn as tapered quadratic bezier shapes, not just lines:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -150,7 +150,7 @@
 &lt;h2 id="the-dart-and-its-grip"&gt;The dart and its grip&lt;/h2&gt;
 &lt;p&gt;This took more iteration than I'd like to admit. The first version had the dart perfectly aligned with the forearm direction - it just looked like a longer arm. The second version had the grip position at the wrist, which meant the dart floated disconnected from the hand in any non-horizontal arm pose.&lt;/p&gt;
 &lt;p&gt;The fix: give the dart its own angle (aimed at the board, tilting only slightly with the wrist snap), and anchor the grip to the actual index finger P1 joint rather than an offset from the wrist.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -177,7 +177,7 @@
 &lt;p&gt;The barrel diameter is about 7mm - roughly 35% of a finger width. Worth knowing because a 13px lineWidth barrel next to 4px finger bones looks wrong; they need to be much closer in proportion.&lt;/p&gt;
 &lt;h2 id="the-dart-physics"&gt;The dart physics&lt;/h2&gt;
 &lt;p&gt;In the top panel, the dart is a simple projectile:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;dartPos2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;spd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;DART_SPD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -190,276 +190,7 @@
 &lt;h2 id="what-id-do-differently"&gt;What I'd do differently&lt;/h2&gt;
 &lt;p&gt;The CEM converged to throwing faster than intended (speed ~34 vs the initial target of 18) because at higher speeds the trajectory is flatter and easier to aim. I'd add a penalty term for speed deviation from a "natural" range - the physics are correct but a 34px/frame dart looks unrealistically fast compared to a real throw.&lt;/p&gt;
 &lt;p&gt;The wrist snap as a pure angle bias has a degeneracy problem: the optimizer can achieve the same bullseye result with different combinations of &lt;code&gt;ang&lt;/code&gt; and &lt;code&gt;snapBias&lt;/code&gt;. In practice it still converges to a consistent solution, but a more physically grounded model would couple wrist snap to both angular offset and speed increase simultaneously.&lt;/p&gt;
-&lt;p&gt;The full source is at &lt;a href="https://github.com/clawbot-JackMcKew"&gt;github.com/clawbot-JackMcKew/workspace&lt;/a&gt; if you want to dig into the rendering or the CEM setup for the other reels (free throw, skip stone, bowling, pancake flip - same framework, different physics).&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="canvas"></category><category term="animation"></category><category term="reinforcement-learning"></category><category term="node-canvas"></category><category term="ffmpeg"></category><category term="cross-entropy-method"></category><category term="javascript"></category></entry><entry><title>Shipping Real Products with Claude Code (No Team Required)</title><link href="https://jackmckew.dev/shipping-real-products-with-claude-code-no-team-required.html" rel="alternate"></link><published>2026-03-06T00:00:00+11:00</published><updated>2026-03-06T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2026-03-06:/shipping-real-products-with-claude-code-no-team-required.html</id><summary type="html">&lt;body&gt;&lt;p&gt;After &lt;a href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html"&gt;building the First Home Buyer Guide&lt;/a&gt;, I wanted to see how far I could push this approach. Not just one product - a repeatable system where I describe what I want, and AI does the actual coding, testing, and deployment. Three products later, here's what I've learned about using Claude …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;After &lt;a href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html"&gt;building the First Home Buyer Guide&lt;/a&gt;, I wanted to see how far I could push this approach. Not just one product - a repeatable system where I describe what I want, and AI does the actual coding, testing, and deployment. Three products later, here's what I've learned about using Claude Code to ship software solo.&lt;/p&gt;
-&lt;h2 id="the-products"&gt;The products&lt;/h2&gt;
-&lt;p&gt;Quick context on what I've actually shipped with this system:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://firsthomecalculator.com.au"&gt;First Home Calculator&lt;/a&gt; - Australian first home buyer calculator with grants, stamp duty, FHSS scheme. 38 SEO pages. $9 one-time.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://yt-script-kit.pages.dev"&gt;YT Script Kit&lt;/a&gt; - AI script prompt templates for faceless YouTube channels. 50+ templates across 5 niches. $29 one-time.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://ai-product-builder-2ay.pages.dev"&gt;AI Product Builder&lt;/a&gt; - The system itself, packaged as a product. Templates, frameworks, deployment pipelines. $99 one-time.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All three are live, taking payments, and were built without me writing a single line of code manually.&lt;/p&gt;
-&lt;h2 id="the-stack-and-why-its-deliberately-boring"&gt;The stack (and why it's deliberately boring)&lt;/h2&gt;
-&lt;p&gt;Every product uses the same stack:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Astro 5          - Static site generation (zero JS by default)&lt;/span&gt;
-&lt;span class="err"&gt;Plain CSS        - Custom properties for theming, no Tailwind&lt;/span&gt;
-&lt;span class="err"&gt;Cloudflare Pages - Free hosting, auto-deploy from GitHub&lt;/span&gt;
-&lt;span class="err"&gt;Stripe           - Payment Links (no backend needed)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;The reason I chose this stack isn't performance (though it is fast). It's AI-maintainability. Claude Code handles plain CSS better than Tailwind utility classes. Static sites mean no server state to debug. Stripe Payment Links mean no checkout backend.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# The entire deployment pipeline&lt;/span&gt;
-npm run build          &lt;span class="c1"&gt;# Astro builds static HTML&lt;/span&gt;
-git push origin main   &lt;span class="c1"&gt;# GitHub Actions triggers&lt;/span&gt;
-&lt;span class="c1"&gt;# Cloudflare Pages deploys automatically - done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Hosting costs: $0/month across all three products. Cloudflare's free tier is absurdly generous.&lt;/p&gt;
-&lt;h2 id="the-claudemd-file-this-is-the-real-product"&gt;The CLAUDE.md file - this is the real product&lt;/h2&gt;
-&lt;p&gt;The thing that makes this work isn't Claude Code itself - it's the instructions file. Every product has a &lt;code&gt;CLAUDE.md&lt;/code&gt; that tells the AI agent how to behave. Here's a stripped-down version:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Product&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;What&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;Is&lt;/span&gt;
-&lt;span class="n"&gt;One&lt;/span&gt; &lt;span class="n"&gt;paragraph&lt;/span&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;Tech&lt;/span&gt; &lt;span class="n"&gt;Stack&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Astro&lt;/span&gt; &lt;span class="mh"&gt;5&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;static&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Plain&lt;/span&gt; &lt;span class="n"&gt;CSS&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;custom&lt;/span&gt; &lt;span class="n"&gt;properties&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Cloudflare&lt;/span&gt; &lt;span class="n"&gt;Pages&lt;/span&gt; &lt;span class="n"&gt;hosting&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;Pricing&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="mh"&gt;29&lt;/span&gt; &lt;span class="n"&gt;AUD&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kt"&gt;time&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Aspirin&lt;/span&gt; &lt;span class="n"&gt;tier&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="p"&gt;##&lt;/span&gt; &lt;span class="n"&gt;AI&lt;/span&gt; &lt;span class="n"&gt;Agent&lt;/span&gt; &lt;span class="n"&gt;Notes&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="n"&gt;em&lt;/span&gt; &lt;span class="n"&gt;dashes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="n"&gt;regular&lt;/span&gt; &lt;span class="n"&gt;hyphens&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Dark&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;via&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"dark"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Never&lt;/span&gt; &lt;span class="n"&gt;commit&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Run&lt;/span&gt; &lt;span class="n"&gt;tests&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="n"&gt;changes&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Keep&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;under&lt;/span&gt; &lt;span class="mh"&gt;500&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;That &lt;code&gt;No em dashes&lt;/code&gt; rule is worth explaining. Em dashes are an AI telltale - real humans use hyphens. I wrote a pre-commit hook that catches them:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5
-6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="c1"&gt;# Check for em dashes in source files&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; grep -rn &lt;span class="s1"&gt;$'\xe2\x80\x94'&lt;/span&gt; src/ --include&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"*.astro"&lt;/span&gt; --include&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"*.ts"&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Em dashes found - use regular hyphens instead"&lt;/span&gt;
-  &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;It's a small thing but it matters when your entire site is AI-generated.&lt;/p&gt;
-&lt;h2 id="setting-up-stripe-with-zero-backend-code"&gt;Setting up Stripe with zero backend code&lt;/h2&gt;
-&lt;p&gt;One of the things that surprised me was how simple payments are now. No checkout page, no webhook handler, no server at all. Stripe Payment Links handle everything.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Create the product&lt;/span&gt;
-curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/products"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -u &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$STRIPE_SECRET_KEY&lt;/span&gt;&lt;span class="s2"&gt;:"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"name=YT Script Kit"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"description=AI script prompt templates for YouTube"&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Create a price ($29 AUD)&lt;/span&gt;
-curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/prices"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -u &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$STRIPE_SECRET_KEY&lt;/span&gt;&lt;span class="s2"&gt;:"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"product=prod_XXXXX"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"unit_amount=2900"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"currency=aud"&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Create a payment link that redirects to your success page&lt;/span&gt;
-curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/payment_links"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -u &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$STRIPE_SECRET_KEY&lt;/span&gt;&lt;span class="s2"&gt;:"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"line_items[0][price]=price_XXXXX"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"line_items[0][quantity]=1"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"after_completion[type]=redirect"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s2"&gt;"after_completion[redirect][url]=https://yoursite.com/success?paid=true"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;The response gives you a &lt;code&gt;buy.stripe.com&lt;/code&gt; URL. Drop it in your buy button's &lt;code&gt;href&lt;/code&gt;. That's the entire payment integration.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"https://buy.stripe.com/your-link-here"&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"buy-button"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  Get the Kit - $29
-&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;No Stripe.js, no server-side session, no webhook to verify payment. For digital products with instant delivery, this is all you need.&lt;/p&gt;
-&lt;h2 id="cloudflare-pages-deployment-via-api"&gt;Cloudflare Pages deployment via API&lt;/h2&gt;
-&lt;p&gt;Same deal with hosting. I used to manually create projects in the Cloudflare dashboard. Now I do it with one API call:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -X POST &lt;span class="se"&gt;\&lt;/span&gt;
-  &lt;span class="s2"&gt;"https://api.cloudflare.com/client/v4/accounts/&lt;/span&gt;&lt;span class="nv"&gt;$ACCOUNT_ID&lt;/span&gt;&lt;span class="s2"&gt;/pages/projects"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -H &lt;span class="s2"&gt;"Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$CF_API_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -H &lt;span class="s2"&gt;"Content-Type: application/json"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-  -d &lt;span class="s1"&gt;'{&lt;/span&gt;
-&lt;span class="s1"&gt;    "name": "my-product",&lt;/span&gt;
-&lt;span class="s1"&gt;    "production_branch": "main",&lt;/span&gt;
-&lt;span class="s1"&gt;    "build_config": {&lt;/span&gt;
-&lt;span class="s1"&gt;      "build_command": "npm run build",&lt;/span&gt;
-&lt;span class="s1"&gt;      "destination_dir": "dist"&lt;/span&gt;
-&lt;span class="s1"&gt;    }&lt;/span&gt;
-&lt;span class="s1"&gt;  }'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;Then set the GitHub secrets so the deploy workflow can push:&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_API_TOKEN -R &lt;span class="s2"&gt;"org/repo"&lt;/span&gt; --body &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$CF_API_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;span class="s2"&gt;"org/repo"&lt;/span&gt; --body &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$ACCOUNT_ID&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;From that point on, every &lt;code&gt;git push&lt;/code&gt; builds and deploys automatically. The GitHub Actions workflow handles the build, runs some validation checks (design system compliance, em dash detection), and deploys via Wrangler.&lt;/p&gt;
-&lt;h2 id="the-pricing-framework"&gt;The pricing framework&lt;/h2&gt;
-&lt;p&gt;I spent way too long agonising over pricing on the first product before landing on something simple. Three tiers based on how badly the buyer needs it:&lt;/p&gt;
-&lt;table class="table-striped table"&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Tier&lt;/th&gt;
-&lt;th&gt;Price&lt;/th&gt;
-&lt;th&gt;When to use it&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Vitamin&lt;/td&gt;
-&lt;td&gt;$9&lt;/td&gt;
-&lt;td&gt;Nice to have - calculators, cheat sheets&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Aspirin&lt;/td&gt;
-&lt;td&gt;$29&lt;/td&gt;
-&lt;td&gt;Solves a real problem - template packs, prompt kits&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Painkiller&lt;/td&gt;
-&lt;td&gt;$99&lt;/td&gt;
-&lt;td&gt;Can't live without it - complete systems&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;The rule that saved me the most time: if a product gets less than 10 sales in month 1, kill it or pivot. No sunk cost fallacy allowed. I've killed two ideas using this rule (Strava automation and Google Keep integration) before writing any code.&lt;/p&gt;
-&lt;h2 id="what-id-do-differently"&gt;What I'd do differently&lt;/h2&gt;
-&lt;p&gt;Some things I got wrong:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Marketing from day one.&lt;/strong&gt; My first product was 90% building, 10% marketing. Should be 50/50. No one knows your product exists unless you tell them.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Free sample on every product.&lt;/strong&gt; I added this later but it should've been there from the start. People need to see real output before they'll pay. The &lt;a href="https://firsthomecalculator.com.au"&gt;First Home Calculator&lt;/a&gt; shows your full results for free - you only pay for the detailed PDF report.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Cross-sell earlier.&lt;/strong&gt; Every product footer now links to every other product. Cross-selling existing customers is 5-8x cheaper than finding new ones. I should've built this into the template from the start instead of retrofitting it.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Blog on every product site.&lt;/strong&gt; Each product now has its own blog at &lt;code&gt;/blog&lt;/code&gt; that grows automatically as I add features. These posts link back here to jackmckew.dev and vice versa. The SEO value of this cross-linking is real.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="the-system-is-the-product"&gt;The system is the product&lt;/h2&gt;
-&lt;p&gt;The meta realisation was that the system I built to make products - the templates, the CLAUDE.md conventions, the pricing framework, the deployment automation - is itself a product. That's the &lt;a href="https://ai-product-builder-2ay.pages.dev"&gt;AI Product Builder&lt;/a&gt;. It's $99 because it's the complete system, not a single tool.&lt;/p&gt;
-&lt;p&gt;If you're thinking about building small software products with AI, the hardest part isn't the coding. It's the system around the coding: what to build, how to price it, how to deploy it, and how to know when to kill it. That's what I've been figuring out, and I'll keep sharing what works (and what doesn't) here.&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="ai"></category><category term="claude"></category><category term="astro"></category><category term="side-project"></category><category term="automation"></category></entry><entry><title>Building a First Home Buyer Guide That Actually Helps</title><link href="https://jackmckew.dev/building-a-first-home-buyer-guide-that-actually-helps.html" rel="alternate"></link><published>2026-03-05T00:00:00+11:00</published><updated>2026-03-05T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2026-03-05:/building-a-first-home-buyer-guide-that-actually-helps.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I've been watching friends try to buy their first home in Australia and the experience is genuinely confusing. Every state has different grants, different stamp duty rules, different price caps -and most of the information out there is either buried in government PDFs or wrapped in mortgage broker marketing. So …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I've been watching friends try to buy their first home in Australia and the experience is genuinely confusing. Every state has different grants, different stamp duty rules, different price caps -and most of the information out there is either buried in government PDFs or wrapped in mortgage broker marketing. So I built a tool that cuts through all of it.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://firsthomebuyerguide.com.au"&gt;First Home Buyer Guide&lt;/a&gt; is a free calculator that tells you exactly what grants, stamp duty savings, and government schemes you qualify for based on your state, income, and property type. It grew from a simple calculator idea into a 38-page site covering everything from pre-approval to a printable buying checklist.&lt;/p&gt;
-&lt;h2 id="why-this-exists"&gt;Why this exists&lt;/h2&gt;
-&lt;p&gt;The trigger was watching someone miss out on the First Home Guarantee because they didn't know the income caps had been removed in October 2025. That's potentially tens of thousands in LMI savings, gone because the information was scattered across three different government websites. Queensland's boosted $30K FHOG expires June 2026 and I'd bet most eligible buyers don't know about it.&lt;/p&gt;
-&lt;p&gt;The existing tools out there either only cover one state, push you toward a specific lender, or make you fill out a lead form before showing you anything useful. I wanted something that just... works. Enter your details, see your results, done.&lt;/p&gt;
-&lt;h2 id="tech-stack-astro-preact"&gt;Tech stack: Astro + Preact&lt;/h2&gt;
-&lt;p&gt;I went with &lt;a href="https://astro.build/"&gt;Astro&lt;/a&gt; for static site generation with Preact islands for the interactive calculator. The reasoning was simple:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;38 static pages&lt;/strong&gt; load instantly -no JavaScript needed for content pages&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;One interactive island&lt;/strong&gt; (the calculator) hydrates with Preact, keeping the bundle tiny&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Plain CSS&lt;/strong&gt; with custom properties -no framework overhead&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
-2
-3
-4
-5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// The calculator is the only interactive component&lt;/span&gt;
-&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;Calculator&lt;/span&gt; &lt;span class="nx"&gt;client&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;load&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
-
-&lt;span class="c1"&gt;// Everything else is static HTML -grants, guides, stamp duty pages&lt;/span&gt;
-&lt;span class="c1"&gt;// all rendered at build time with zero JS&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;The &lt;code&gt;client:load&lt;/code&gt; directive means the calculator JavaScript only loads on the homepage where it's needed. Every other page ships zero JS. Build time for all 38 pages: about 23 seconds.&lt;/p&gt;
-&lt;p&gt;I briefly considered Next.js but it felt like bringing a cannon to a knife fight. This is a content site with one interactive widget. Astro's island architecture was the perfect fit.&lt;/p&gt;
-&lt;h2 id="the-iteration-loop"&gt;The iteration loop&lt;/h2&gt;
-&lt;p&gt;The site didn't start as 38 pages. It started as a calculator and a homepage.&lt;/p&gt;
-&lt;p&gt;What happened next was a persona-driven iteration process -I'd imagine a specific first home buyer (nervous Adelaide renter, budget-conscious regional Victorian, frustrated Sydney renter) and ask: what would this person need that we don't have yet?&lt;/p&gt;
-&lt;p&gt;That produced:
-- A step-by-step buying process guide
-- State-by-state grant comparison tables
-- An LMI explainer (because most people don't know what it is until they're hit with the bill)
-- A "how long to save your deposit" timeline
-- A rent vs buy comparison
-- A printable 31-item checklist across 6 phases
-- A glossary of 26 terms
-- Pre-approval walkthrough
-- 10 costly mistakes to avoid&lt;/p&gt;
-&lt;p&gt;Each page has FAQ structured data for Google, cross-links to related content, and breadcrumb navigation. The SEO wasn't an afterthought -every page was built with search intent in mind.&lt;/p&gt;
-&lt;h2 id="what-surprised-me"&gt;What surprised me&lt;/h2&gt;
-&lt;p&gt;The biggest surprise was how much the calculator itself evolved. It started as a basic "enter income, see borrowing power" tool. By the end it was calculating stamp duty exemptions per state, showing FHOG eligibility, estimating LMI costs, factoring in the First Home Guarantee and Help to Buy schemes, and generating a downloadable PDF report.&lt;/p&gt;
-&lt;p&gt;The PDF generation was its own adventure. I started with &lt;code&gt;@react-pdf/renderer&lt;/code&gt; but it was heavy and didn't play well with Preact. Switched to jsPDF with code-splitting and lazy loading -the PDF code only downloads when someone actually clicks the button. The free snapshot is 4 pages, the paid report is 7 pages with detailed breakdowns.&lt;/p&gt;
-&lt;p&gt;Another thing I didn't expect: the broker referral system. After building all this content that kept recommending "talk to a mortgage broker," it made sense to actually help people find one. Built a lead capture form that redirects to an affiliate broker platform. It's on the calculator results, pre-approval page, and buying process page -the high-intent spots where someone's most likely to act.&lt;/p&gt;
-&lt;h2 id="what-id-do-differently"&gt;What I'd do differently&lt;/h2&gt;
-&lt;p&gt;If I started over:
-- I'd set up the content page template earlier. The first few pages were hand-crafted, then I found patterns and could move faster
-- I'd build the PDF report first, not last -it's the paid product and should've driven the feature set from day one
-- The CSS could be tighter. 38 pages of inline styles in Astro templates gets messy. A utility class system would've been cleaner&lt;/p&gt;
-&lt;h2 id="check-it-out"&gt;Check it out&lt;/h2&gt;
-&lt;p&gt;The calculator is live at &lt;a href="https://firsthomebuyerguide.com.au"&gt;firsthomebuyerguide.com.au&lt;/a&gt;. It's free to use -you can see all your grants, stamp duty savings, and borrowing power without signing up for anything. If you know someone buying their first home in Australia, send it their way.&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="astro"></category><category term="preact"></category><category term="static-site"></category><category term="australia"></category><category term="side-project"></category></entry><entry><title>Things I Learnt Becoming a Cave Diver</title><link href="https://jackmckew.dev/things-i-learnt-becoming-a-cave-diver.html" rel="alternate"></link><published>2025-10-30T00:00:00+11:00</published><updated>2025-10-30T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2025-10-30:/things-i-learnt-becoming-a-cave-diver.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also to become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also to become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself. I first visited Mexico in 2023 where I dove in cenotes, which I was mesmerized by the way light dances in from the outside world, and comforted by the peace of the darkness in the caverns.&lt;/p&gt;
+&lt;p&gt;The full source is at &lt;a href="https://github.com/clawbot-JackMcKew"&gt;github.com/clawbot-JackMcKew/workspace&lt;/a&gt; if you want to dig into the rendering or the CEM setup for the other reels (free throw, skip stone, bowling, pancake flip - same framework, different physics).&lt;/p&gt;&lt;/body&gt;</content><category term="Software"></category><category term="canvas"></category><category term="animation"></category><category term="reinforcement-learning"></category><category term="node-canvas"></category><category term="ffmpeg"></category><category term="cross-entropy-method"></category><category term="javascript"></category></entry><entry><title>Things I Learnt Becoming a Cave Diver</title><link href="https://jackmckew.dev/things-i-learnt-becoming-a-cave-diver.html" rel="alternate"></link><published>2025-10-30T00:00:00+11:00</published><updated>2025-10-30T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2025-10-30:/things-i-learnt-becoming-a-cave-diver.html</id><summary type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also to become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;I've spent 6 months this year living in Mexico to learn Spanish but also to become a full cave diver! This has been a life changing experience which I'll forever hold close to my heart. I can honestly say I chased my dreams and achieved them, beyond proud of myself. I first visited Mexico in 2023 where I dove in cenotes, which I was mesmerized by the way light dances in from the outside world, and comforted by the peace of the darkness in the caverns.&lt;/p&gt;
 &lt;p&gt;Discovering my personal limits when it comes to diving, finding mammoth bones, magically formed stalactites &amp;amp; stalagmites and more made me fall even more in love with the world we have around us. I'll never forget the places I've gotten to explore and the people I've shared this passion with along the way.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Cave 1" class="img-fluid" src="https://jackmckew.dev/img/cave-1.png"/&gt;&lt;/p&gt;
 &lt;h2 id="only-ever-have-one-thing-in-your-hands"&gt;Only ever have one thing in your hands&lt;/h2&gt;
@@ -513,7 +244,7 @@ gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;s
 &lt;p&gt;To give the ability for our agent to control the character, we will attach a script to the character. This can be achieved through selecting the sphere &amp;gt; add component &amp;gt; new script&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Script" class="img-fluid" src="https://jackmckew.dev/img/script-attached.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Inside the script, we will use Unity's &lt;code&gt;addForce&lt;/code&gt; to give us the movement, and we will make use of MLAgents' heuristics such that we can toggle between agent controlled movement and controlled by us. If you leave this setting to default, it'll automatically choose for you.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -600,7 +331,7 @@ gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;s
 &lt;h3 id="addobservation"&gt;AddObservation&lt;/h3&gt;
 &lt;p&gt;Overriding the public function of &lt;code&gt;CollectionObservations&lt;/code&gt; enables us to give the agent the input to it's neural network. Ensure to set the &lt;code&gt;Vector Space&lt;/code&gt; size correctly, in our scenario we have a space of 12, as we are passing through 4 vectors comprising of 3 elements (x, y, z).&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Observations" class="img-fluid" src="https://jackmckew.dev/img/observation.png"/&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -617,7 +348,7 @@ gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;s
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="addreward"&gt;AddReward&lt;/h3&gt;
 &lt;p&gt;Since our task is whether the character has either collided with the reward (success) or with the wall (failure), we set the collision function on our character to respectively &lt;code&gt;AddReward&lt;/code&gt; and &lt;code&gt;EndEpisode&lt;/code&gt; for our two outcomes. This will tell the model when it's training to reset the state of the environment, and for our sake, we'll colour the floor to whether they've succeeded or failed as well.&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -654,7 +385,7 @@ gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;s
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The full script can be found within details:
 &lt;/p&gt;&lt;details&gt;&lt;p&gt;&lt;/p&gt;
-&lt;table class="table-striped highlighttable table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;  1
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;  1
   2
   3
   4
@@ -983,4 +714,308 @@ Adding &lt;code&gt;--run-id&lt;/code&gt; will give your run's a specific ID whic
 &lt;p&gt;&lt;img alt="wall is best" class="img-fluid" src="https://jackmckew.dev/img/wall-is-best.gif"/&gt;&lt;/p&gt;
 &lt;h3 id="run-trained-model"&gt;Run Trained Model&lt;/h3&gt;
 &lt;p&gt;To show off our model once it's complete, for clarity sake we 'disable' the remainder of our prefabs (even though they will run in the background) and we drag our model's &lt;code&gt;.onnx&lt;/code&gt; file into our character's &lt;code&gt;Behaviour Parameters&lt;/code&gt; &amp;gt; &lt;code&gt;Model&lt;/code&gt;, this will instruct the editor to use this for our character's brain.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="trained model" class="img-fluid" src="https://jackmckew.dev/img/trained-model.gif"/&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="machine learning"></category><category term="ai"></category></entry></feed>
+&lt;p&gt;&lt;img alt="trained model" class="img-fluid" src="https://jackmckew.dev/img/trained-model.gif"/&gt;&lt;/p&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>ML Agents for Unity on Apple Silicon (M1/M2/M3)</title><link href="https://jackmckew.dev/ml-agents-for-unity-on-apple-silicon-m1m2m3.html" rel="alternate"></link><published>2024-07-25T00:00:00+10:00</published><updated>2024-07-25T00:00:00+10:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-07-25:/ml-agents-for-unity-on-apple-silicon-m1m2m3.html</id><summary type="html">&lt;body&gt;&lt;p&gt;If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!&lt;/p&gt;
+&lt;h2 id="clone-the-ml-agents-repo"&gt;Clone the ml-agents repo&lt;/h2&gt;
+&lt;p&gt;Ensure you have the ml-agents repo cloned locally! This …&lt;/p&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;p&gt;If you're like me, you found this blog post likely after struggling to get ML agents set up and working a Mac M1/M2/M3, here's hoping what I found that works for me, works for you!&lt;/p&gt;
+&lt;h2 id="clone-the-ml-agents-repo"&gt;Clone the ml-agents repo&lt;/h2&gt;
+&lt;p&gt;Ensure you have the ml-agents repo cloned locally! This can be found on &lt;a href="https://github.com/Unity-Technologies/ml-agents"&gt;https://github.com/Unity-Technologies/ml-agents&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="miniconda"&gt;Miniconda&lt;/h2&gt;
+&lt;p&gt;Miniconda was set up through the installation instructions listed on the website for Miniconda3 macOS Apple M1 64-bit pkg:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;https://docs.conda.io/en/latest/miniconda.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Following this, the conda-forge is added as a channel (instructions from &lt;a href="https://conda-forge.org/docs/user/introduction.html"&gt;https://conda-forge.org/docs/user/introduction.html&lt;/a&gt;):&lt;/p&gt;
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda config --add channels conda-forge
+conda config --set channel_priority strict
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id="conda-environment"&gt;Conda environment&lt;/h2&gt;
+&lt;p&gt;Big thank you to this github thread (and user @automata) for finally leading me down a successful path &lt;a href="https://github.com/Unity-Technologies/ml-agents/issues/5797"&gt;https://github.com/Unity-Technologies/ml-agents/issues/5797&lt;/a&gt;:&lt;/p&gt;
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda create -n mlagents &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ensure to download the release specifically that you are targetting which are managed by branches on the repo. IE &lt;a href="https://github.com/Unity-Technologies/ml-agents/tree/latest_release"&gt;https://github.com/Unity-Technologies/ml-agents/tree/latest_release&lt;/a&gt;. If you are using the gh CLI &lt;code&gt;gh repo clone Unity-Technologies/ml-agents -- --branch release_20&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Next we need to edit &lt;code&gt;setup.py&lt;/code&gt; found in &lt;code&gt;ml-agents-release_20/ml-agents/setup.py&lt;/code&gt;, specifically line 71 to:&lt;/p&gt;
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s2"&gt;"torch&amp;gt;=1.8.0,&amp;lt;=1.12.0;(platform_system!='Windows' and python_version&amp;gt;='3.9')"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Now we install the ml-agents package (which has a dependancy of torch) through the locally edited version:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pip install -e /Users/jackmckew/Unity/ml-agents-release_20/ml-agents&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Theoretically, this is where we should've been done and been able to run &lt;code&gt;mlagents-learn&lt;/code&gt; without any more problems, but that wasn't the case. The next error we run into is:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;TypeError: Descriptors cannot not be created directly.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly"&gt;https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly&lt;/a&gt;&lt;/p&gt;
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install protobuf~&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.20
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Update February 2024, after following my own guide on a Mac M3, I did not need face any further errors listed here&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Which gets us past the last error, and unfortunately onto the next.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Interestingly, if you use pip to uninstall grpcio and conda to reinstall before you downgrade protobuf, this skips the rest of these issues and starts working&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;ImportError: dlopen(/Users/jackmckew/miniconda3/envs/mlagentstest/lib/python3.10/site-packages/grpc/_cython/cygrpc.cpython-310-darwin.so, 0x0002): symbol not found in flat namespace '_CFRelease'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app"&gt;https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app&lt;/a&gt;&lt;/p&gt;
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip uninstall grpcio -y
+conda install grpcio -y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;While writing this blog post, I tried to go through my notes that I took while going through this, and interestingly didn't need to downgrade numpy after going the process the first time, but I know I definitely did once, so this is how I resolved that floating number issue.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pip install "numpy&amp;lt;1.24"&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Finally we can run:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mlagents-learn&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To be met with this glorious screen&lt;/p&gt;
+&lt;table class="table-striped table highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;            ┐  ╖
+        ╓╖╬│╡  ││╬╖╖
+    ╓╖╬│││││┘  ╬│││││╬╖
+ ╖╬│││││╬╜        ╙╬│││││╖╖                               ╗╗╗
+ ╬╬╬╬╖││╦╖        ╖╬││╗╣╣╣╬      ╟╣╣╬    ╟╣╣╣             ╜╜╜  ╟╣╣
+ ╬╬╬╬╬╬╬╬╖│╬╖╖╓╬╪│╓╣╣╣╣╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╒╣╣╖╗╣╣╣╗   ╣╣╣ ╣╣╣╣╣╣ ╟╣╣╖   ╣╣╣
+ ╬╬╬╬┐  ╙╬╬╬╬│╓╣╣╣╝╜  ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╣╙ ╙╣╣╣  ╣╣╣ ╙╟╣╣╜╙  ╫╣╣  ╟╣╣
+ ╬╬╬╬┐     ╙╬╬╣╣      ╫╣╣╣╬      ╟╣╣╬    ╟╣╣╣ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣     ╣╣╣┌╣╣╜
+ ╬╬╬╜       ╬╬╣╣      ╙╝╣╣╬      ╙╣╣╣╗╖╓╗╣╣╣╜ ╟╣╣╬   ╣╣╣  ╣╣╣  ╟╣╣╦╓    ╣╣╣╣╣
+ ╙   ╓╦╖    ╬╬╣╣   ╓╗╗╖            ╙╝╣╣╣╣╝╜   ╘╝╝╜   ╝╝╝  ╝╝╝   ╙╣╣╣    ╟╣╣╣
+   ╩╬╬╬╬╬╬╦╦╬╬╣╣╗╣╣╣╣╣╣╣╝                                             ╫╣╣╣╣
+      ╙╬╬╬╬╬╬╬╣╣╣╣╣╣╝╜
+          ╙╬╬╬╣╣╣╜
+             ╙
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Now we can use ml-agents with Unity on a Mac M1/M2&lt;/p&gt;
+&lt;h2 id="things-tried-that-didnt-work"&gt;Things tried that didn't work&lt;/h2&gt;
+&lt;p&gt;A lot of posts or github issues that you've likely filtered through always say what did work for them, but never what they tried and didn't work first. This leads you to try them (like I did) until you come to the same conclusion.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set up x86 homebrew through rosetta to set up pyenv, this got me nowhere but headaches with aliases to keep both arm64 brew installed&lt;/li&gt;
+&lt;li&gt;Setting up pyenv with miniconda, also another drama as the number of Python executables in the path was causing nightmares.&lt;/li&gt;
+&lt;li&gt;Setting up miniconda on x86 to get access to older versions of Python&lt;/li&gt;
+&lt;/ol&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="machine learning"></category><category term="ai"></category></entry><entry><title>Reinforcement Learning with PyTorch</title><link href="https://jackmckew.dev/reinforcement-learning-with-pytorch.html" rel="alternate"></link><published>2024-03-19T00:00:00+11:00</published><updated>2024-03-19T00:00:00+11:00</updated><author><name>Jack McKew</name></author><id>tag:jackmckew.dev,2024-03-19:/reinforcement-learning-with-pytorch.html</id><summary type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In our final exploration into machine learning with PyTorch, we're going to do something critical for lifeforms in our world, learn to walk!&lt;/p&gt;
+&lt;p&gt;This post took many trials and errors, a form of reinforcement learning I completed unsupervised as a human. The resulting code below was what ended up working …&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;</summary><content type="html">&lt;body&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In our final exploration into machine learning with PyTorch, we're going to do something critical for lifeforms in our world, learn to walk!&lt;/p&gt;
+&lt;p&gt;This post took many trials and errors, a form of reinforcement learning I completed unsupervised as a human. The resulting code below was what ended up working on a M1 (M2) macbook pro. As many other researchers have implemented much better training algorithms that I could develop on my own, we'll make use the of the work from OpenAI, MuJoCo (multi joint control) and Stable Baselines3. If you're interested in how it may be implemented, there's a separate notebook using PyTorch to implement a Deep Q Learning agent to teach our model to walk at &lt;a href="https://github.com/JackMcKew/jackmckew.dev/tree/main/content/2023/reinforcement-learning/notebooks/torch-rl.ipynb"&gt;this blogs repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Walking agent" class="img-fluid" src="https://jackmckew.dev/img/ant-walking.gif"/&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As this work is a very dependant on the environment set up, this was achieved using miniconda3, creating an environment with Python 3.11.3 and installing the following dependencies.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# # https://github.com/DLR-RM/stable-baselines3/pull/780&lt;/span&gt;
+&lt;span class="o"&gt;!&lt;/span&gt;pip install gymnasium
+&lt;span class="o"&gt;!&lt;/span&gt;pip install &lt;span class="s1"&gt;'gymnasium[mujoco]'&lt;/span&gt;
+&lt;span class="o"&gt;!&lt;/span&gt;pip install matplotlib
+&lt;span class="o"&gt;!&lt;/span&gt;pip3 install torch torchvision torchaudio
+&lt;span class="o"&gt;!&lt;/span&gt;pip install &lt;span class="s2"&gt;"sb3_contrib&amp;gt;=2.0.0a1"&lt;/span&gt; --upgrade
+&lt;span class="o"&gt;!&lt;/span&gt;pip install moviepy
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Next we are going to import the necessary libraries, in which we'll use Stable Baselines3 to implement the Proximal Policy Optimization algorithm, where in a reward based return in an environment, the agent will optimize it's choices (how to move it's limbs) to receive the highest reward, The reward function in MuJoCo is set up to be a combination of multiple factors resulting in &lt;code&gt;reward = healthy_reward + forward_reward - ctrl_cost&lt;/code&gt;. Healthy reward is where the model's 'torso' isn't touching the ground, forward reward is how far the model has moved forward, and control cost being put in place as to lessen the reward when the model tries to 'overwork' the joints it has.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;stable_baselines3.common.monitor&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Monitor&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;stable_baselines3.common.results_plotter&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;load_results&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ts2xy&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;stable_baselines3.common.callbacks&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BaseCallback&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;gymnasium&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;gym&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;stable_baselines3&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PPO&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Here we create the environment we wish to train the model in, wherein we make use of the precreated 'Ant-v4' environment.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;log_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"./tmp/gym/"&lt;/span&gt;
+&lt;span class="n"&gt;timestr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strftime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"%Y%m&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt;-%H%M%S"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;makedirs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;log_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;exist_ok&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;env_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Ant-v4"&lt;/span&gt;
+&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gym&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;render_mode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"human"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;To check on the progress of our model, we will create a monitor which will log out how our model's maximum reward is going through it's training, and also save the network weights and biases to be used later on.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SaveOnBestTrainingRewardCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BaseCallback&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Callback for saving a model (the check is done every ``check_freq`` steps)&lt;/span&gt;
+&lt;span class="sd"&gt;    based on the training reward (in practice, we recommend using ``EvalCallback``).&lt;/span&gt;
+
+&lt;span class="sd"&gt;    :param check_freq: (int)&lt;/span&gt;
+&lt;span class="sd"&gt;    :param log_dir: (str) Path to the folder where the model will be saved.&lt;/span&gt;
+&lt;span class="sd"&gt;      It must contains the file created by the ``Monitor`` wrapper.&lt;/span&gt;
+&lt;span class="sd"&gt;    :param verbose: (int)&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;env_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;check_freq&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log_dir&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verbose&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;verbose&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_freq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;check_freq&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;log_dir&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;log_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;timestr&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;env_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;best_mean_reward&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;inf&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_init_callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# Create folder if needed&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save_path&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;makedirs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save_path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;exist_ok&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_on_step&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n_calls&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_freq&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# Retrieve training reward&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ts2xy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;load_results&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log_dir&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s2"&gt;"timesteps"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="c1"&gt;# Mean training reward over the last 100 episodes&lt;/span&gt;
+                &lt;span class="n"&gt;mean_reward&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;verbose&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Num timesteps: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;num_timesteps&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                        &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Best mean reward: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;best_mean_reward&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;.2f&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; - Last mean reward per episode: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;mean_reward&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;.2f&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+                    &lt;span class="p"&gt;)&lt;/span&gt;
+
+                &lt;span class="c1"&gt;# New best model, you could save the agent here&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;mean_reward&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;best_mean_reward&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;best_mean_reward&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mean_reward&lt;/span&gt;
+                    &lt;span class="c1"&gt;# Example for saving best model&lt;/span&gt;
+                    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;verbose&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Saving new best model to &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save_path&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.zip"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save_path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+
+
+&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Monitor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log_dir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This is arguably the most important step here, where we will lean on other researchers work to find optimized hyperparameters. Hyperparameters are used for how each agent is created and evaluated into the PPO algorithm. This was likely completed by a tool such as Optuna, where a model is used to evaluate how well each hyperparameter performs for training the model.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;This took ~2 hours to train the model to result in the video at the top of this blog post.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Create the callback: check every 1000 steps&lt;/span&gt;
+&lt;span class="n"&gt;callback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SaveOnBestTrainingRewardCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;env_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;env_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;check_freq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;log_dir&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://github.com/DLR-RM/rl-baselines3-zoo/blob/master/hyperparams/ppo.yml&lt;/span&gt;
+&lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PPO&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;"MlpPolicy"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;batch_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;n_steps&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;gamma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.98&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;learning_rate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.90609e-05&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;ent_coef&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;4.9646e-07&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;clip_range&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;gae_lambda&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;max_grad_norm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;vf_coef&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.677239&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;learn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_timesteps&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1e7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;callback&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Finally, we load the created model and visualise it, creating the video you see at the top of this blog post.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gym&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrappers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RecordVideo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gym&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;render_mode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"rgb_array"&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;log_dir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PPO&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"./tmp/gym/20230417-224635_Ant-v4.zip"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;vec_env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_env&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;obs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vec_env&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reset&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;deterministic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;obs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reward&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vec_env&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;step&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;vec_env&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;</content><category term="Python"></category><category term="python"></category><category term="visualisation"></category><category term="machine learning"></category><category term="ai"></category></entry></feed>
