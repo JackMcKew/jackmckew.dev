@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Redux is a predictable state container for JavaScript applications, and React is a JavaScript library for building user interfaces. To bridge the two, you get react-redux which allows our user interfaces to interact &amp; respond to the current state of the application. In this post let&#39;s go into actions and reducers …" />
 <meta name="keywords" content="javascript">
 
@@ -140,14 +140,14 @@
 <p><img alt="Redux State Diagram" class="img-fluid" src="https://jackmckew.dev/img/redux-diagram.png"/></p>
 <p>Let's use <code>react-redux</code> to build a system which we can alert users when things trigger. For this we will need to build an action, a reducer and a component to display the alert.</p>
 <p>To ensure that these three components are speaking the same language, we need to initialise types which will represent the states being passed around. These variables contain a string. For our alert system we need two variables</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">SET_ALERT</span> <span class="o">=</span> <span class="s2">"SET_ALERT"</span>
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">REMOVE_ALERT</span> <span class="o">=</span> <span class="s2">"REMOVE_ALERT"</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h2 id="action">Action</h2>
 <p>We'll start by creating the action which will signify when an alert is triggered. We want all of our alerts to be unique so multiple alerts can handled without a problem which we will use <code>uuid</code>.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -190,7 +190,7 @@
 </td></tr></tbody></table>
 <p>The action is declared as a function, which takes in 3 arguments (2 required): <code>msg</code>, <code>alertType</code> and <code>timeout</code>. Which we then use call the dispatch function with an object constructed from the arguments, and then after a specified timeout we dispatch another object to remove the same alert.</p>
 <p>Note that we curry the dispatch function in this case, this is only possible from using the middleware <code>redux-thunk</code>, which can also be represented as:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -208,7 +208,7 @@
 <blockquote>
 <p>This post won't go into detail around how to build a React component, which you can find over at another post: [INSERT REACT COMPONENT POST]</p>
 </blockquote>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -256,7 +256,7 @@
 <p>To break it down, we've created a React component (class) <code>Alert</code> which takes in <code>alerts</code> as an array, verifies it isn't null or empty, and finally iterates over each element in the <code>alerts</code> array to return a <code>div</code> stylized with the appropriate information.</p>
 <h2 id="reducer">Reducer</h2>
 <p>Lastly we have the reducer which we want to handle all the states that can be created by the <code>alert</code> action. Luckily we can do this with a switch statement:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

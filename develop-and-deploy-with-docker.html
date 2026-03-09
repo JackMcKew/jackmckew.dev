@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="This post is intended to work through setting up a workflow with Docker. In particular, we will be setting up a production workflow for a web app. For this web app, we will need a workflow which supports: Develop Test Deploy We also want to be able to come back …" />
 <meta name="keywords" content="software">
 
@@ -159,7 +159,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </ul>
 <h2 id="the-web-application">The Web Application</h2>
 <p>For the web app we will use React, which is a javascript framework for managing the front end of applications. To generate the web app boilerplate for us, we will use <code>create-react-app</code>. For running this, ensure that Node.js is installed on the local PC. Finally run the command below, to initialise the front end component of React of our web app.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>npx create-react-app frontend --template typescript
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>npx create-react-app frontend --template typescript
 </code></pre></div>
 </td></tr></tbody></table>
 <blockquote>
@@ -168,7 +168,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 <h2 id="dockerfile">Dockerfile</h2>
 <p>For this workflow we're going to set up two Dockerfiles, one for developing and one for production. Let's start with the developers Dockerfile, which we will aptly name <code>Dockerfile.dev</code>, we must ensure to add the <code>-f</code> flag along with the filename when building the Docker image with <code>docker build -f Dockerfile.dev .</code>.</p>
 <p>The contents of our <code>Dockerfile.dev</code> will contain:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -198,16 +198,16 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </code></pre></div>
 </td></tr></tbody></table>
 <p>To circumvent the issue in that Docker typically takes snapshots of the code and we want our app to update on save, we use mount to create a 'reference' to our folder on the local PC. We do this by running the command:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v <span class="si">${</span><span class="nv">pwd</span><span class="si">}</span>:/app <span class="o">[</span>image_id<span class="o">]</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v <span class="si">${</span><span class="nv">pwd</span><span class="si">}</span>:/app <span class="o">[</span>image_id<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>If using Windows, replace the <code>${pwd}</code> with the full path to the folder, ensuring to swap all backslashes to forwards slashes and changing <code>C:</code> to <code>/C/</code>. Here is an example:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app <span class="o">[</span>image_id<span class="o">]</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it -p <span class="m">8000</span>:3000 -v /app/node_modules -v /C/Users/jackm/Documents/GitHub/docker-kubernetes-course/frontend:/app <span class="o">[</span>image_id<span class="o">]</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <h3 id="docker-compose">Docker Compose</h3>
 <p>Rather than using the rather large command above, let's use Docker Compose.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -241,7 +241,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 <li>We mount the current directory to the app directory in the container for updating in sync</li>
 </ol>
 <p>Again, if using Windows, we need to add some more options to our service:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">stdin_open</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -258,7 +258,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </ol>
 <p>Option 1 can be cumbersome as we will need to do this each time when running a container.</p>
 <p>Option 2 is achieved by creating a new service in our <code>docker-compose.yml</code> file:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -305,7 +305,7 @@ This workflow is 100% achievable without Docker, although Docker will make thing
 </ol>
 <h3 id="multi-stage-dockerfile">Multi-stage Dockerfile</h3>
 <p>To implement our multi-stage Dockerfile as above we do this we the following yaml:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

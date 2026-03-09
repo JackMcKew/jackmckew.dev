@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="As Python is a high level, general purpose programming language, which supports users to define their own types using classes, which are most often following the concept of object-oriented programming. Object-oriented programming is a type of software design in which users not only define the data type (eg, int) of …" />
 <meta name="keywords" content="python">
 
@@ -146,7 +146,7 @@
 </ul>
 <p>This post will cover an introduction to the concept of inheritance using Python and the animal kingdom.</p>
 <p>First off, we are going to start by defining our 'base' class (also known as abstract class) of our Animal with common properties:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -172,7 +172,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that we have our base class, we can define a subclass 'Dog' that will be able to speak if we define the function inside, but we can also see that it derives from it's parent class 'Animal' by printing out it's family.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -196,14 +196,14 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will print out:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
 <span class="n">Animal</span> <span class="n">Kingdom</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>See my post on dunders (double underscores) to get a better understanding of how the __init__ function is working: <a href="https://jackmckew.dev/dunders-in-python.html">https://jackmckew.dev/dunders-in-python.html</a></p>
 <p>Now we can define any subclass which can derive from our parent class 'Animal', or even more we can derive a class from 'Dog' and it will have all it's properties:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -219,13 +219,13 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will also print:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>
 <span class="n">Animal</span> <span class="n">Kingdom</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now what if we wanted to specify the family that all of our dog classes are, we can do this by overriding their parent class (similar to how we are overriding the speak function):</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -245,7 +245,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which then when we run both the below code:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -269,7 +269,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>We will now get:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Woof</span><span class="err">!</span>

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Following on from last weeks post where we analysed the amount of repeated letters within current New Zealand town names. There was still one part of that analysis that really bugged me, and if you noticed it was from the data set that was used was using the European town …" />
 <meta name="keywords" content="python">
 
@@ -211,7 +211,7 @@
 <h2 id="what-is-web-scraping">What is Web Scraping</h2>
 <p>Web scraping, web harvesting or web data extraction is the process of extracting data from websites. To do this in Python, while there is multiple ways to achieve this (requests + beautiful soup, selenium, etc), my personal favourite package to use is <a href="https://scrapy.org/">Scrapy</a>. While it may be daunting to begin with from a non object-oriented basis, you will soon appreciate it more once you've begun using it.</p>
 <p>Initially the premise around the <a href="https://scrapy.org/">Scrapy</a> package is to create 'web spiders'. If we take a look of the structure of the first example on the <a href="https://scrapy.org/">Scrapy</a> website we get an understanding on how to structure our web spiders when developing:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -236,7 +236,7 @@
 </td></tr></tbody></table>
 <p>First of all we can see that the custom spider is essentially an extension of the scrapy.Spider class. It is to be noted that the name and start_urls variables (which are apart of the class) are special in the sense the scrapy package uses them as configuration settings. When it comes to web scraping, if you have had experience using HTML, CSS and/or Javascript, this experience will become extremely useful; that is not to say it is not possible without experience, it's just a learning curve.</p>
 <p>Following on we can see a function for parsing (also specially named) in which there are 2 loops, the first for loop is going to loop through all title's marked as headers (specifically h2) and return a dictionary with the text in the heading.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -267,7 +267,7 @@
 </td></tr></tbody></table>
 <p>Now that we have created our spider that looks through each row of the table on the webpage (more information on determining this can be found: <a href="https://docs.scrapy.org/en/latest/intro/tutorial.html">https://docs.scrapy.org/en/latest/intro/tutorial.html</a>). It's time to run the spider and take a look at the output. To run a spider you go into the directory from the command line and run 'scrapy crawl \&lt;spider name&gt;' and to store an output at the same time 'scrapy crawl \&lt;spider name&gt; -o filename.csv -t csv.</p>
 <p>Now similar to the previous post, we run a similar analysis and plot with Bokeh!</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

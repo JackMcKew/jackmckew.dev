@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Pandas-Alive is an open source Python package for making animated charts from Pandas dataframes. This project was first inspired by a very specific COVID-19 visualisation, so I set out to make this visualisation a reality. This visualisation consisted of a bar chart race showing regions, a line chart showing new …" />
 <meta name="keywords" content="Python">
 
@@ -159,7 +159,7 @@
 <h2 id="base-class">Base Class</h2>
 <p>Now that we've decided to go with template design pattern, we need to implement the base chart class with the shared functionality. At this point, since there would be so many parameters going into the class constructor (<code>__init__</code>) in Python, it was frustrating having to put this information in two places.</p>
 <p>Here is a basic example, but imagine if you had 10s of arguments (eg, name, species) and had to replicate this information so many times.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
@@ -170,7 +170,7 @@
 </td></tr></tbody></table>
 <p>So once again, we research how someone else has already solved this problem, and we found attrs. Attrs allows us to create our classes and have the <code>__init__</code> and other dunder methods generated for us (see a previous post on dunder methods here).</p>
 <p>This allows us to write the same class as above like:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="A &#39;dunder&#39; (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for …" />
 <meta name="keywords" content="python">
 
@@ -137,7 +137,7 @@
   <div>
     <body><p>A 'dunder' (double underscores) in Python (also known as a magic method) are the functions within classes having two prefix and suffix underscores in the function name. These are normally used for operator overloading (eg, __init__, __add__, __len__, __repr__, etc). For this post we will build a customized class for vectors to understand how the magic methods can be used to make life easier.</p>
 <p>First of all before we get into the magic methods, let's talk about normal methods. A method in Python is a function that resides in a class. To begin with our Vector class, we initialise our class and give it a function, for example:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span>
@@ -147,15 +147,15 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now to call the method, we simply call the function name along with the Vector instance we wish to use:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Vector</span><span class="o">.</span><span class="n">say_hello</span><span class="p">()</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Vector</span><span class="o">.</span><span class="n">say_hello</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This will print:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Hello! I<span class="err">'</span>m a method
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Hello! I<span class="err">'</span>m a method
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now for our vector class, we want to be able to initialise it with certain constants or variables for both the magnitude and direction of our vector. We use the __init__ magic method for this, as it is invoked without any call, when an instance of a class is created.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Vector</span><span class="p">():</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -163,7 +163,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now when we create an instance of our Vector class, we can give it certain values that it will store in a tuple:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">vector_1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 
@@ -171,11 +171,11 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will print:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Vector</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x03E90530</span><span class="o">&gt;</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Vector</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x03E90530</span><span class="o">&gt;</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>But to us humans, this doesn't mean much more than we know what the name of the class is of that instance. What we really want to see when we call print on our class is the values inside it. To do this we use the __repr__ magic method:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -195,11 +195,11 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will print:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This is exactly what we want! Now what if we wanted to create a Vector, but we weren't sure what values we wanted to give it yet. What would happen if we didn't give it any values? Would it default to (0,0) like we would hope?</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">empty_vector</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">()</span>
 
@@ -207,11 +207,11 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will print:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">()</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">()</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Not exactly how we need it, so we would need to run a check when the class is being initialized, to ensure that there are values being provided:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -230,7 +230,7 @@
 </td></tr></tbody></table>
 <p>Which when initialise an empty instance of our Vector now, it will create a (0,0) vector for us!</p>
 <p>Now what if we wanted to be able to check how many values were inside our vector class? To do this we can use the __len__ magic method&gt;:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -262,7 +262,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Which will print:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="mi">3</span>
 </code></pre></div>

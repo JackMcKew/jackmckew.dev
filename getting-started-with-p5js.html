@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="In this post we&#39;re going to make use of the library P5.js which enables us to create interactive visualisation in the browser. We&#39;re going to create an interactive pond where users will be able to click on the screen to create a new drop in the pond and watch …" />
 <meta name="keywords" content="javascript, data-viz">
 
@@ -141,7 +141,7 @@
 <p>Next in the <code>draw</code> function, which is repeatedly called while the browser has the page open, we loop through all the objects in the array and draw a circle (ellipse with equal radii) and colour it according to how big it's radius is (this is as to watch it fade as it grows). We make use of the <code>stroke</code> function to define the colour of the lines for what we'll be drawing in that instance. If a drop has become too big we remove it from the array and add a new random drop, if it's still undersize we increase it's radius and colour.</p>
 <p>Finally to add interactivity, we make use of the <code>mouseIsPressed</code> variable to determine if the user has clicked on the visualization and add a drop into the array at the X &amp; Y position of where the user clicked.</p>
 <p align="center"><iframe frameborder="0" height="400" src="https://editor.p5js.org/JackMcKew/embed/u2ga-k6rk" width="100%"></iframe></p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

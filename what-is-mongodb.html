@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Recently after looking for a different flavour of database apart from MySQL (which is what I am personally use to), I had always heard about MongoDB. So after some investigation, I found that MongoDB has a platform MongoDB University to familiarize yourself with their product. I completed their very first …" />
 <meta name="keywords" content="database, mongodb">
 
@@ -148,14 +148,14 @@
 <p>MongoDB is a open source document-oriented database program, classified as a NoSQL database and utilizes JSON-like documents with a schema. They also provide a tool to help sift through the database called 'Compass'.</p>
 <p>Personally, I really enjoy the functionality within Compass with plotting geographical data, presenting data type variances across the fields in a document and many other features. I found Compass one of the most appealing features as someone that constantly seeks to gain insight from data.</p>
 <p>Queries within MongoDB are structured like a dictionary in Python, where the field in the document is passed the key and the criteria is the value. For example, a basic query to return all documents within a MongoDB database with score equal to 7 would be:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">score</span><span class="p">:</span><span class="mi">7</span><span class="p">}</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">score</span><span class="p">:</span><span class="mi">7</span><span class="p">}</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>As a mainly Python developer, I found this to be very appealing as I find myself using dictionaries constantly when writing Python code, and by MongoDB using this format makes for an easy connection between the two.</p>
 <p>CRUD operations, are the fundamentals on actually using a database usefully. Through the Mongo shell you are able to add documents to the MongoDB database through JSON, XML, etc data formats.</p>
 <p>Projections within MongoDB are used to specify or restrict the fields to return with the filtered documents if you are specifically looking at a few fields within a densely populated document.</p>
 <p>In addition to the way queries are structured for filtering documents, it is also possible to use one of the many query or projection operators to further filter the documents. For example a query to return all documents with a score <strong>greater than</strong> 7 would be:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">score</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="mi">7</span><span class="p">}}</span>
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">score</span><span class="p">:</span> <span class="p">{</span><span class="err">$</span><span class="n">gte</span><span class="p">:</span> <span class="mi">7</span><span class="p">}}</span>
 </code></pre></div>
 </td></tr></tbody></table>
 <p>This sums up all of the takeaways from the M001 course for MongoDB that I found. I look forward to taking more of the courses on MongoDB university to gain a greater understanding and be able to utilise MongoDB across some of my projects.</p></body>

@@ -4,7 +4,7 @@
 &lt;h2 id="the-rendering-pipeline"&gt;The rendering pipeline&lt;/h2&gt;
 &lt;p&gt;The whole thing runs on &lt;code&gt;node-canvas&lt;/code&gt; (a native binding to Cairo) piped into FFmpeg through stdin. No temporary frame files, no disk thrashing - just raw pixel buffers pushed directly to the encoder.&lt;/p&gt;
 &lt;p&gt;The backpressure handling is worth showing, because if you skip it on a machine with limited RAM you'll OOM halfway through:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -19,7 +19,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At 720x1280 BGRA, each frame is ~3.5MB. At 24fps over a 60-second video, that's theoretically 5GB uncompressed if you tried to buffer it. The drain-and-wait pattern keeps memory flat. FFmpeg consumes frames as fast as it can encode them; we just wait when it asks us to slow down.&lt;/p&gt;
 &lt;p&gt;FFmpeg is spawned with stdin as a pipe and given the raw pixel format:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -40,7 +40,7 @@
 &lt;h2 id="cross-entropy-method-for-learning"&gt;Cross-Entropy Method for learning&lt;/h2&gt;
 &lt;p&gt;The "AI" is a Cross-Entropy Method optimizer. CEM is one of those algorithms that's almost offensively simple once you understand it, but produces surprisingly good results for low-dimensional continuous problems.&lt;/p&gt;
 &lt;p&gt;The idea: maintain a Gaussian distribution over your parameter space. Sample N candidates, score them all, keep the top K (the "elite" set), and update the distribution mean toward the elite average. Shrink the variance a bit each generation. Repeat.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -91,7 +91,7 @@
 &lt;h2 id="the-arm-skeleton"&gt;The arm skeleton&lt;/h2&gt;
 &lt;p&gt;The arm is a kinematic chain: shoulder (fixed) → elbow (dynamic, driven by the throw arc) → wrist → hand → fingers. Everything is Canvas 2D - no physics engine, no WebGL.&lt;/p&gt;
 &lt;p&gt;The elbow tracks the upper arm rotation as a function of the current forearm angle. I parameterized the upper arm between two extreme angles (wind-up and release) and interpolated:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -103,20 +103,20 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The wrist snap is baked in as an offset to the hand angle:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;OPT2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)));&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;hand_ang&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.14&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At wind-up the wrist is cocked back 0.38 radians. At release it snaps 0.14 radians forward. Everything distal to the wrist (hand, fingers, dart) uses &lt;code&gt;hand_ang&lt;/code&gt; and its perpendicular to compute positions.&lt;/p&gt;
 &lt;p&gt;Each finger is three phalanges. I store lengths and a &lt;code&gt;CURL&lt;/code&gt; interpolation factor (0 = open hand, 1 = dart grip). During the throw the grip stays at 1.0. At release it fades to 0 over five frames as the fingers open.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.85&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.35&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.18&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// index to pinky&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.04&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Bones are drawn as tapered quadratic bezier shapes, not just lines:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -147,7 +147,7 @@
 &lt;h2 id="the-dart-and-its-grip"&gt;The dart and its grip&lt;/h2&gt;
 &lt;p&gt;This took more iteration than I'd like to admit. The first version had the dart perfectly aligned with the forearm direction - it just looked like a longer arm. The second version had the grip position at the wrist, which meant the dart floated disconnected from the hand in any non-horizontal arm pose.&lt;/p&gt;
 &lt;p&gt;The fix: give the dart its own angle (aimed at the board, tilting only slightly with the wrist snap), and anchor the grip to the actual index finger P1 joint rather than an offset from the wrist.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -174,7 +174,7 @@
 &lt;p&gt;The barrel diameter is about 7mm - roughly 35% of a finger width. Worth knowing because a 13px lineWidth barrel next to 4px finger bones looks wrong; they need to be much closer in proportion.&lt;/p&gt;
 &lt;h2 id="the-dart-physics"&gt;The dart physics&lt;/h2&gt;
 &lt;p&gt;In the top panel, the dart is a simple projectile:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;dartPos2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;spd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;DART_SPD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -198,7 +198,7 @@
 &lt;p&gt;All three are live, taking payments, and were built without me writing a single line of code manually.&lt;/p&gt;
 &lt;h2 id="the-stack-and-why-its-deliberately-boring"&gt;The stack (and why it's deliberately boring)&lt;/h2&gt;
 &lt;p&gt;Every product uses the same stack:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Astro 5          - Static site generation (zero JS by default)&lt;/span&gt;
@@ -208,7 +208,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The reason I chose this stack isn't performance (though it is fast). It's AI-maintainability. Claude Code handles plain CSS better than Tailwind utility classes. Static sites mean no server state to debug. Stripe Payment Links mean no checkout backend.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# The entire deployment pipeline&lt;/span&gt;
@@ -220,7 +220,7 @@ git push origin main   &lt;span class="c1"&gt;# GitHub Actions triggers&lt;/span
 &lt;p&gt;Hosting costs: $0/month across all three products. Cloudflare's free tier is absurdly generous.&lt;/p&gt;
 &lt;h2 id="the-claudemd-file-this-is-the-real-product"&gt;The CLAUDE.md file - this is the real product&lt;/h2&gt;
 &lt;p&gt;The thing that makes this work isn't Claude Code itself - it's the instructions file. Every product has a &lt;code&gt;CLAUDE.md&lt;/code&gt; that tells the AI agent how to behave. Here's a stripped-down version:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -260,7 +260,7 @@ git push origin main   &lt;span class="c1"&gt;# GitHub Actions triggers&lt;/span
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;That &lt;code&gt;No em dashes&lt;/code&gt; rule is worth explaining. Em dashes are an AI telltale - real humans use hyphens. I wrote a pre-commit hook that catches them:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -276,7 +276,7 @@ git push origin main   &lt;span class="c1"&gt;# GitHub Actions triggers&lt;/span
 &lt;p&gt;It's a small thing but it matters when your entire site is AI-generated.&lt;/p&gt;
 &lt;h2 id="setting-up-stripe-with-zero-backend-code"&gt;Setting up Stripe with zero backend code&lt;/h2&gt;
 &lt;p&gt;One of the things that surprised me was how simple payments are now. No checkout page, no webhook handler, no server at all. Stripe Payment Links handle everything.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -318,7 +318,7 @@ curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/payment_links"&lt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The response gives you a &lt;code&gt;buy.stripe.com&lt;/code&gt; URL. Drop it in your buy button's &lt;code&gt;href&lt;/code&gt;. That's the entire payment integration.&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"https://buy.stripe.com/your-link-here"&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"buy-button"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   Get the Kit - $29
@@ -328,7 +328,7 @@ curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/payment_links"&lt
 &lt;p&gt;No Stripe.js, no server-side session, no webhook to verify payment. For digital products with instant delivery, this is all you need.&lt;/p&gt;
 &lt;h2 id="cloudflare-pages-deployment-via-api"&gt;Cloudflare Pages deployment via API&lt;/h2&gt;
 &lt;p&gt;Same deal with hosting. I used to manually create projects in the Cloudflare dashboard. Now I do it with one API call:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -354,7 +354,7 @@ curl -X POST &lt;span class="s2"&gt;"https://api.stripe.com/v1/payment_links"&lt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Then set the GitHub secrets so the deploy workflow can push:&lt;/p&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_API_TOKEN -R &lt;span class="s2"&gt;"org/repo"&lt;/span&gt; --body &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$CF_API_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
 gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;span class="s2"&gt;"org/repo"&lt;/span&gt; --body &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$ACCOUNT_ID&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -362,7 +362,7 @@ gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;s
 &lt;p&gt;From that point on, every &lt;code&gt;git push&lt;/code&gt; builds and deploys automatically. The GitHub Actions workflow handles the build, runs some validation checks (design system compliance, em dash detection), and deploys via Wrangler.&lt;/p&gt;
 &lt;h2 id="the-pricing-framework"&gt;The pricing framework&lt;/h2&gt;
 &lt;p&gt;I spent way too long agonising over pricing on the first product before landing on something simple. Three tiers based on how badly the buyer needs it:&lt;/p&gt;
-&lt;table class="table table-striped"&gt;
+&lt;table class="table-striped table"&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Tier&lt;/th&gt;
@@ -419,7 +419,7 @@ gh secret &lt;span class="nb"&gt;set&lt;/span&gt; CLOUDFLARE_ACCOUNT_ID -R &lt;s
 &lt;li&gt;&lt;strong&gt;One interactive island&lt;/strong&gt; (the calculator) hydrates with Preact, keeping the bundle tiny&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Plain CSS&lt;/strong&gt; with custom properties -no framework overhead&lt;/li&gt;
 &lt;/ul&gt;
-&lt;table class="table table-striped highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="highlighttable table-striped table"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4

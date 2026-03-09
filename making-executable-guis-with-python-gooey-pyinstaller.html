@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="Today we will go through how to go from a python script to packaged executable with a guided user interface (GUI) for users. First off we still start by writing the scripts that we would like to share with others to be able to use, especially for users that may …" />
 <meta name="keywords" content="python">
 
@@ -137,7 +137,7 @@
   <div>
     <body><p>Today we will go through how to go from a python script to packaged executable with a guided user interface (GUI) for users. First off we still start by writing the scripts that we would like to share with others to be able to use, especially for users that may be uncomfortable in a programming environment and would feel at home with a GUI.</p>
 <p>My personal favourite part about <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, is that you are essentially creating a command line interface (CLI) tool, which Gooey then uses to generate a GUI. This eliminates having two separate code bases to facilitate CLI &amp; GUI users, which can be very painful at times.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -194,7 +194,7 @@
 </td></tr></tbody></table>
 <p>The 2 functions defined above are for getting information of selected files, or returning a list of files found within a folder (and subfolders).</p>
 <p>Now to use <a href="https://github.com/chriskiehl/Gooey">Gooey</a>, we need to define a 'main' function for parsing the arguments for the GUI to generate controls. As Gooey is based on the argparse library, if you have previously built CLI tools with argparse, the migration to Gooey is quite simplistic. However as there is always edge cases, ensure to check your tools functionality once you have developed it.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -242,7 +242,7 @@
 <p>By using the Gooey decorator we are able to define many different layout options for our GUI. Since we are trying to enable users to use multiple scripts which are different and separate, I personally like to the optional columns layout, but there are many other types of layouts which can be seen here: <a href="https://github.com/chriskiehl/Gooey#layout-customization">https://github.com/chriskiehl/Gooey#layout-customization</a>.</p>
 <p>Following this we create our argument parsing function, and in which we define parsers, subparsers and add the arguments. This post will not be covering how to write CLIs, but it is on the list for future posts.</p>
 <p>To complete the script, we need to put in the functionality at startup.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -265,7 +265,7 @@
 <p>This will then generate a build folder and a dist folder within your current directory. The build folder will contain all the files used in generating the executable, which is found within the dist folder.</p>
 <p><img alt="image-20191102174758361" class="img-fluid" src="https://jackmckew.dev/img/image-20191102174758361.png"/></p>
 <p>The code in it's entirety is:</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4

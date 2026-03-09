@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />     <meta name="robots" content="" />     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:400,400i,600,700" rel="stylesheet">     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/stylesheet/style.min.css"> 
-    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/github.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/pygments/native.min.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/brands.css">
     <link rel="stylesheet" type="text/css" href="https://jackmckew.dev/theme/font-awesome/css/solid.css">
@@ -29,14 +29,14 @@
   ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f766e">
+    <meta name="theme-color" content="#00c4a7">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f766e">
+    <meta name="msapplication-navbutton-color" content="#00c4a7">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
-    <meta name="msapplication-TileColor" content="#0f766e"> <meta name="author" content="Jack McKew" />
+    <meta name="msapplication-TileColor" content="#00c4a7"> <meta name="author" content="Jack McKew" />
 <meta name="description" content="This week&#39;s episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can …" />
 <meta name="keywords" content="android">
 
@@ -137,7 +137,7 @@
   <div>
     <body><p>This week's episode of Code Fridays will go into detail on how to handle multi-touch inputs within Android. Firstly to handle the location on where the screen in being touched we need to create a class to handle the interaction. By creating a public class like Finger.java as can be seen below it contains 3 values: x_pos, y_pos and id. It is also useful to create a constructor so that other classes can easily construct the Finger class.</p>
 <p><img alt="ezgif.com-video-to-gif-2" class="img-fluid" src="https://jackmckew.dev/img/ezgif.com-video-to-gif-2.gif"/></p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -167,7 +167,7 @@
 <p>Now that we have a class to store our details on how each finger is touching the screen, we now need to interact with some base level Java. Firstly we need to extend a view within the Android application so that the application knows what boundaries to deal, in my test application, I've just used the entire screen as a view.</p>
 <p>After that an array is needed to store the data of multiple inputs touching the screen. I've used a TreeMap in this example as this allows for ease later on so that they are in order on how they were input, however this comes with a downside to this example as lifting a input in the middle of the order touched crashes the array, this will be fixed in a later episode.</p>
 <p>A paint is initialized for both the stroke paint for drawing lines between the touches and a paint for the text that is to come. Generic constructors for the view are also listed below.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -233,7 +233,7 @@
 </code></pre></div>
 </td></tr></tbody></table>
 <p>Now that everything is initialized and ready to draw some graphics on the screen so that the application is interactive, now we have to interface with touch events. This is done by creating a new function within our View class, that takes in a MotionEvent on the View so that we can detect different types of touch events. Documentation on this can be found (<a href="https://developer.android.com/training/graphics/opengl/touch#java">https://developer.android.com/training/graphics/opengl/touch#java</a>).</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -344,7 +344,7 @@
 </td></tr></tbody></table>
 <p>Now that we've created a new Finger class inside our TreeMap by the order that the screen is touched in and we're removing that class when the screen input has been released, we are now ready to draw on the screen from our inputs.</p>
 <p>By iterating through the TreeMap, in each loop we know what the previous and what the next value in the array we can draw a circle for where the input is and a line between. This also allows us to determine whereabouts is the point in between these two points so we can write text. For this example, I've chosen to write the length of the distance between the two inputs to demonstrate that this can also be dynamic in nature.</p>
-<table class="table table-striped highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable table-striped table"><tbody><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
