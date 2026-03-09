@@ -7,7 +7,7 @@
 &lt;h2 id="the-rendering-pipeline"&gt;The rendering pipeline&lt;/h2&gt;
 &lt;p&gt;The whole thing runs on &lt;code&gt;node-canvas&lt;/code&gt; (a native binding to Cairo) piped into FFmpeg through stdin. No temporary frame files, no disk thrashing - just raw pixel buffers pushed directly to the encoder.&lt;/p&gt;
 &lt;p&gt;The backpressure handling is worth showing, because if you skip it on a machine with limited RAM you'll OOM halfway through:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -22,7 +22,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At 720x1280 BGRA, each frame is ~3.5MB. At 24fps over a 60-second video, that's theoretically 5GB uncompressed if you tried to buffer it. The drain-and-wait pattern keeps memory flat. FFmpeg consumes frames as fast as it can encode them; we just wait when it asks us to slow down.&lt;/p&gt;
 &lt;p&gt;FFmpeg is spawned with stdin as a pipe and given the raw pixel format:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -43,7 +43,7 @@
 &lt;h2 id="cross-entropy-method-for-learning"&gt;Cross-Entropy Method for learning&lt;/h2&gt;
 &lt;p&gt;The "AI" is a Cross-Entropy Method optimizer. CEM is one of those algorithms that's almost offensively simple once you understand it, but produces surprisingly good results for low-dimensional continuous problems.&lt;/p&gt;
 &lt;p&gt;The idea: maintain a Gaussian distribution over your parameter space. Sample N candidates, score them all, keep the top K (the "elite" set), and update the distribution mean toward the elite average. Shrink the variance a bit each generation. Repeat.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -94,7 +94,7 @@
 &lt;h2 id="the-arm-skeleton"&gt;The arm skeleton&lt;/h2&gt;
 &lt;p&gt;The arm is a kinematic chain: shoulder (fixed) → elbow (dynamic, driven by the throw arc) → wrist → hand → fingers. Everything is Canvas 2D - no physics engine, no WebGL.&lt;/p&gt;
 &lt;p&gt;The elbow tracks the upper arm rotation as a function of the current forearm angle. I parameterized the upper arm between two extreme angles (wind-up and release) and interpolated:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -106,20 +106,20 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The wrist snap is baked in as an offset to the hand angle:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;OPT2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)));&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;hand_ang&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.14&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At wind-up the wrist is cocked back 0.38 radians. At release it snaps 0.14 radians forward. Everything distal to the wrist (hand, fingers, dart) uses &lt;code&gt;hand_ang&lt;/code&gt; and its perpendicular to compute positions.&lt;/p&gt;
 &lt;p&gt;Each finger is three phalanges. I store lengths and a &lt;code&gt;CURL&lt;/code&gt; interpolation factor (0 = open hand, 1 = dart grip). During the throw the grip stays at 1.0. At release it fades to 0 over five frames as the fingers open.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.85&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.35&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.18&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// index to pinky&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.04&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Bones are drawn as tapered quadratic bezier shapes, not just lines:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -150,7 +150,7 @@
 &lt;h2 id="the-dart-and-its-grip"&gt;The dart and its grip&lt;/h2&gt;
 &lt;p&gt;This took more iteration than I'd like to admit. The first version had the dart perfectly aligned with the forearm direction - it just looked like a longer arm. The second version had the grip position at the wrist, which meant the dart floated disconnected from the hand in any non-horizontal arm pose.&lt;/p&gt;
 &lt;p&gt;The fix: give the dart its own angle (aimed at the board, tilting only slightly with the wrist snap), and anchor the grip to the actual index finger P1 joint rather than an offset from the wrist.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -177,7 +177,7 @@
 &lt;p&gt;The barrel diameter is about 7mm - roughly 35% of a finger width. Worth knowing because a 13px lineWidth barrel next to 4px finger bones looks wrong; they need to be much closer in proportion.&lt;/p&gt;
 &lt;h2 id="the-dart-physics"&gt;The dart physics&lt;/h2&gt;
 &lt;p&gt;In the top panel, the dart is a simple projectile:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;dartPos2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;spd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;DART_SPD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -260,7 +260,7 @@
 &lt;/ol&gt;
 &lt;p&gt;For the most part, we will be making use of &lt;code&gt;run&lt;/code&gt; commands, as if we are interacting with the terminal in the runtime of ubuntu (Linux). Otherwise, we can make use of pre-made actions from the marketplace. One note to be made is that the AWS Elastic Beanstalk application has been set up to run specifically on Docker, and as such we need to upload the relevant Dockerfile (production) along with any assets.&lt;/p&gt;
 &lt;p&gt;The contents of the Github Action in whole will be:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -481,7 +481,7 @@
 &lt;h2 id="setting-up-ingress-nginx"&gt;Setting up Ingress-Nginx&lt;/h2&gt;
 &lt;p&gt;Before we can access our application through an IP or web address, we need to set up &lt;code&gt;ingress-nginx&lt;/code&gt;, similar to how we did with &lt;code&gt;docker-compose&lt;/code&gt; in previous posts. Luckily, we can make use of &lt;code&gt;helm&lt;/code&gt; to add this functionality for us (provided we'd set up nginx configuration like we already have). This can be done by sshing into the terminal of our Kubernetes cluster, or similarly making use of the Cloud Shell provided by Google Cloud.&lt;/p&gt;
 &lt;p&gt;Firstly which we need to install helm (&lt;a href="https://helm.sh/docs/intro/install/#from-script"&gt;https://helm.sh/docs/intro/install/#from-script&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
@@ -489,7 +489,7 @@ chmod &lt;span class="m"&gt;700&lt;/span&gt; get_helm.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Followed by setting up &lt;code&gt;ingress-nginx&lt;/code&gt; (&lt;a href="https://kubernetes.github.io/ingress-nginx/deploy/#using-helm"&gt;https://kubernetes.github.io/ingress-nginx/deploy/#using-helm&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

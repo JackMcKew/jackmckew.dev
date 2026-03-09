@@ -7,7 +7,7 @@
 &lt;h2 id="the-rendering-pipeline"&gt;The rendering pipeline&lt;/h2&gt;
 &lt;p&gt;The whole thing runs on &lt;code&gt;node-canvas&lt;/code&gt; (a native binding to Cairo) piped into FFmpeg through stdin. No temporary frame files, no disk thrashing - just raw pixel buffers pushed directly to the encoder.&lt;/p&gt;
 &lt;p&gt;The backpressure handling is worth showing, because if you skip it on a machine with limited RAM you'll OOM halfway through:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -22,7 +22,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At 720x1280 BGRA, each frame is ~3.5MB. At 24fps over a 60-second video, that's theoretically 5GB uncompressed if you tried to buffer it. The drain-and-wait pattern keeps memory flat. FFmpeg consumes frames as fast as it can encode them; we just wait when it asks us to slow down.&lt;/p&gt;
 &lt;p&gt;FFmpeg is spawned with stdin as a pipe and given the raw pixel format:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -43,7 +43,7 @@
 &lt;h2 id="cross-entropy-method-for-learning"&gt;Cross-Entropy Method for learning&lt;/h2&gt;
 &lt;p&gt;The "AI" is a Cross-Entropy Method optimizer. CEM is one of those algorithms that's almost offensively simple once you understand it, but produces surprisingly good results for low-dimensional continuous problems.&lt;/p&gt;
 &lt;p&gt;The idea: maintain a Gaussian distribution over your parameter space. Sample N candidates, score them all, keep the top K (the "elite" set), and update the distribution mean toward the elite average. Shrink the variance a bit each generation. Repeat.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -94,7 +94,7 @@
 &lt;h2 id="the-arm-skeleton"&gt;The arm skeleton&lt;/h2&gt;
 &lt;p&gt;The arm is a kinematic chain: shoulder (fixed) → elbow (dynamic, driven by the throw arc) → wrist → hand → fingers. Everything is Canvas 2D - no physics engine, no WebGL.&lt;/p&gt;
 &lt;p&gt;The elbow tracks the upper arm rotation as a function of the current forearm angle. I parameterized the upper arm between two extreme angles (wind-up and release) and interpolated:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -106,20 +106,20 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The wrist snap is baked in as an offset to the hand angle:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;Math&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;OPT2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;WIND2&lt;/span&gt;&lt;span class="p"&gt;)));&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;hand_ang&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ang&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.38&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.14&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;wr_t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;At wind-up the wrist is cocked back 0.38 radians. At release it snaps 0.14 radians forward. Everything distal to the wrist (hand, fingers, dart) uses &lt;code&gt;hand_ang&lt;/code&gt; and its perpendicular to compute positions.&lt;/p&gt;
 &lt;p&gt;Each finger is three phalanges. I store lengths and a &lt;code&gt;CURL&lt;/code&gt; interpolation factor (0 = open hand, 1 = dart grip). During the throw the grip stays at 1.0. At release it fades to 0 over five frames as the fingers open.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.85&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.35&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.18&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c1"&gt;// index to pinky&lt;/span&gt;
 &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;CURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;CURL_FULL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mf"&gt;0.04&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;grip&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Bones are drawn as tapered quadratic bezier shapes, not just lines:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -150,7 +150,7 @@
 &lt;h2 id="the-dart-and-its-grip"&gt;The dart and its grip&lt;/h2&gt;
 &lt;p&gt;This took more iteration than I'd like to admit. The first version had the dart perfectly aligned with the forearm direction - it just looked like a longer arm. The second version had the grip position at the wrist, which meant the dart floated disconnected from the hand in any non-horizontal arm pose.&lt;/p&gt;
 &lt;p&gt;The fix: give the dart its own angle (aimed at the board, tilting only slightly with the wrist snap), and anchor the grip to the actual index finger P1 joint rather than an offset from the wrist.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -177,7 +177,7 @@
 &lt;p&gt;The barrel diameter is about 7mm - roughly 35% of a finger width. Worth knowing because a 13px lineWidth barrel next to 4px finger bones looks wrong; they need to be much closer in proportion.&lt;/p&gt;
 &lt;h2 id="the-dart-physics"&gt;The dart physics&lt;/h2&gt;
 &lt;p&gt;In the top panel, the dart is a simple projectile:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;dartPos2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ang&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;spd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;DART_SPD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -244,7 +244,7 @@
 &lt;p&gt;To give the ability for our agent to control the character, we will attach a script to the character. This can be achieved through selecting the sphere &amp;gt; add component &amp;gt; new script&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Script" class="img-fluid" src="https://jackmckew.dev/img/script-attached.png"/&gt;&lt;/p&gt;
 &lt;p&gt;Inside the script, we will use Unity's &lt;code&gt;addForce&lt;/code&gt; to give us the movement, and we will make use of MLAgents' heuristics such that we can toggle between agent controlled movement and controlled by us. If you leave this setting to default, it'll automatically choose for you.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -331,7 +331,7 @@
 &lt;h3 id="addobservation"&gt;AddObservation&lt;/h3&gt;
 &lt;p&gt;Overriding the public function of &lt;code&gt;CollectionObservations&lt;/code&gt; enables us to give the agent the input to it's neural network. Ensure to set the &lt;code&gt;Vector Space&lt;/code&gt; size correctly, in our scenario we have a space of 12, as we are passing through 4 vectors comprising of 3 elements (x, y, z).&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Observations" class="img-fluid" src="https://jackmckew.dev/img/observation.png"/&gt;&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4
@@ -348,7 +348,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h3 id="addreward"&gt;AddReward&lt;/h3&gt;
 &lt;p&gt;Since our task is whether the character has either collided with the reward (success) or with the wall (failure), we set the collision function on our character to respectively &lt;code&gt;AddReward&lt;/code&gt; and &lt;code&gt;EndEpisode&lt;/code&gt; for our two outcomes. This will tell the model when it's training to reset the state of the environment, and for our sake, we'll colour the floor to whether they've succeeded or failed as well.&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -385,7 +385,7 @@
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;The full script can be found within details:
 &lt;/p&gt;&lt;details&gt;&lt;p&gt;&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;  1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;  1
   2
   3
   4
@@ -723,21 +723,21 @@ Adding &lt;code&gt;--run-id&lt;/code&gt; will give your run's a specific ID whic
 &lt;p&gt;Miniconda was set up through the installation instructions listed on the website for Miniconda3 macOS Apple M1 64-bit pkg:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://docs.conda.io/en/latest/miniconda.html"&gt;https://docs.conda.io/en/latest/miniconda.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Following this, the conda-forge is added as a channel (instructions from &lt;a href="https://conda-forge.org/docs/user/introduction.html"&gt;https://conda-forge.org/docs/user/introduction.html&lt;/a&gt;):&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda config --add channels conda-forge
 conda config --set channel_priority strict
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id="conda-environment"&gt;Conda environment&lt;/h2&gt;
 &lt;p&gt;Big thank you to this github thread (and user @automata) for finally leading me down a successful path &lt;a href="https://github.com/Unity-Technologies/ml-agents/issues/5797"&gt;https://github.com/Unity-Technologies/ml-agents/issues/5797&lt;/a&gt;:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda create -n mlagents &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.7
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda create -n mlagents &lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.7
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Ensure to download the release specifically that you are targetting which are managed by branches on the repo. IE &lt;a href="https://github.com/Unity-Technologies/ml-agents/tree/latest_release"&gt;https://github.com/Unity-Technologies/ml-agents/tree/latest_release&lt;/a&gt;. If you are using the gh CLI &lt;code&gt;gh repo clone Unity-Technologies/ml-agents -- --branch release_20&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Next we need to edit &lt;code&gt;setup.py&lt;/code&gt; found in &lt;code&gt;ml-agents-release_20/ml-agents/setup.py&lt;/code&gt;, specifically line 71 to:&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s2"&gt;"torch&amp;gt;=1.8.0,&amp;lt;=1.12.0;(platform_system!='Windows' and python_version&amp;gt;='3.9')"&lt;/span&gt;
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s2"&gt;"torch&amp;gt;=1.8.0,&amp;lt;=1.12.0;(platform_system!='Windows' and python_version&amp;gt;='3.9')"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;p&gt;Now we install the ml-agents package (which has a dependancy of torch) through the locally edited version:&lt;/p&gt;
@@ -745,7 +745,7 @@ conda config --set channel_priority strict
 &lt;p&gt;Theoretically, this is where we should've been done and been able to run &lt;code&gt;mlagents-learn&lt;/code&gt; without any more problems, but that wasn't the case. The next error we run into is:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;TypeError: Descriptors cannot not be created directly.&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly"&gt;https://stackoverflow.com/questions/72441758/typeerror-descriptors-cannot-not-be-created-directly&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install protobuf~&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.20
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install protobuf~&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 &lt;blockquote&gt;
@@ -757,7 +757,7 @@ conda config --set channel_priority strict
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;ImportError: dlopen(/Users/jackmckew/miniconda3/envs/mlagentstest/lib/python3.10/site-packages/grpc/_cython/cygrpc.cpython-310-darwin.so, 0x0002): symbol not found in flat namespace '_CFRelease'&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Which was resolved through &lt;a href="https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app"&gt;https://stackoverflow.com/questions/72620996/apple-m1-symbol-not-found-cfrelease-while-running-python-app&lt;/a&gt;&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip uninstall grpcio -y
 conda install grpcio -y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -767,7 +767,7 @@ conda install grpcio -y
 &lt;p&gt;Finally we can run:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;mlagents-learn&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;To be met with this glorious screen&lt;/p&gt;
-&lt;table class="highlighttable table table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+&lt;table class="table highlighttable table-striped"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
