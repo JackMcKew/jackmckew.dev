@@ -127,7 +127,7 @@ rpk topic describe my-topic
 
 No mysterious Scala logging to parse. Just clear output.
 
-The performance is noticeably better for single-box setups. Redpanda's architecture assumes you're running multiple copies for HA, but even one instance is snappier. I ran a benchmark - producer throughput on a single Redpanda instance was about 20% higher than Kafka on the same hardware. That's real but not revolutionary.
+The performance is noticeably better for single-box setups. Redpanda's architecture assumes you're running multiple copies for HA, but even one instance is snappier. I ran a benchmark - producer throughput on a single Redpanda instance was about 20% higher than Kafka on the same hardware. That's real but not dramatically transformative.
 
 Here's where I hit the limits: the ecosystem. Kafka has a huge community. Tools, connectors, monitoring, integrations. Redpanda is newer and smaller. If you need a Kafka Connect source for some obscure database, you're probably out of luck with Redpanda (though they're adding support gradually). The KSQL equivalent (Redpanda Console) is... okay, but not as feature-complete as Confluent Cloud.
 

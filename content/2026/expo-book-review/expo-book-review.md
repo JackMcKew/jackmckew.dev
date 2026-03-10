@@ -36,7 +36,7 @@ For a startup that'll scale to millions of users: maybe. You'll probably hit the
 
 For a hobby project that needs Android + iOS on one device: 100%. This is Expo's sweet spot. You're shipping fast, your users get updates immediately, and you're not drowning in toolchain configuration.
 
-The experience surprised me - not because Expo is revolutionary (it's not), but because it lets you focus on building instead of fiddling with build systems. That's rarer in mobile development than it should be.
+The experience surprised me - not because Expo is uniquely innovative (it's not), but because it lets you focus on building instead of fiddling with build systems. That's rarer in mobile development than it should be.
 
 One more thing: the community around Expo is solid. The Discord is helpful, the GitHub issues get responses from maintainers, and there's a growing ecosystem of open-source libraries built on top. It doesn't feel like a dead ecosystem like some frameworks you pick up.
 
