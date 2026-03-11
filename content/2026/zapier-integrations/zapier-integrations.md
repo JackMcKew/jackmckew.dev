@@ -52,3 +52,5 @@ The free tier is worthless. Starter at $20/mo is reasonable if you're doing <500
 I'm keeping Zapier for my signups because it's not core to the product - it's admin overhead. But for anything customer-facing, anything that would lose me money if it broke? I'm writing that myself. You get what you pay for, and with integrations, you're paying for convenience, not reliability.
 
 The wild part is how much this has shifted my thinking about side project priorities. I've got a list of "nice to have" features that are basically integrations - "sync this to X" or "post to Y automatically". Before I'd ignore them because the code effort wasn't worth it. Now I can actually build them in Zapier in an afternoon. That's... actually useful.
+
+![Zapier workflow pipeline - trigger, actions, and conditional branching](images/zapier_workflow.png)

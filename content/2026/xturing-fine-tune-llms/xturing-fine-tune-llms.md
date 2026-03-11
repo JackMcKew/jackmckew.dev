@@ -119,3 +119,5 @@ If you've been intimidated by fine-tuning because all the tutorials assume a res
 But the opaqueness of what's happening underneath means it's a training-wheels library. Once you know what you're doing, you'll want to drop it and use the raw Transformers API because you'll want actual control. And that's fine - that's exactly how libraries should work.
 
 Try it. Worst case, you waste an afternoon and learn that you need more control. Best case, you ship a working fine-tuned model in a weekend. Not a bad bet.
+
+![xTuring vs Transformers - lines of code comparison and trade-off chart](images/xturing_comparison.png)

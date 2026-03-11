@@ -131,8 +131,6 @@ UCB is sharper. It allocates more pulls to uncertain machines early, then tighte
 Thompson sampling takes a Bayesian approach. For each machine, maintain a distribution over its win probability. Sample from each distribution, pick the machine with the highest sample, pull it, observe the result, update the distribution.
 
 ```python
-from scipy.stats import beta
-
 class ThompsonSamplingAgent:
     def __init__(self, k_machines):
         self.k = k_machines
@@ -225,3 +223,4 @@ The multi-armed bandit also shows up in A/B testing, ad networks, and clinical t
 
 If you implement this, spend time on Thompson sampling. It's the most interesting conceptually and often performs best in practice. Plus, explaining Bayesian updates to someone is way cooler than explaining a magic square root formula.
 
+![Multi-armed bandit comparison - cumulative regret and final performance](images/bandit_comparison.png)

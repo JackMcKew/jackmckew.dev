@@ -28,6 +28,25 @@ print(f"Min elevation: {elevation.min()}, Max: {elevation.max()}")
 
 DEMs come in flavours. 30m resolution is standard in the US (SRTM), but you can get 1m LiDAR if you dig. The bigger the array, the more detail, and the slower the computation. I started with 30m because it's clean and doesn't kill your machine.
 
+If you don't have a real DEM handy, generate synthetic terrain to test with:
+
+```python
+import numpy as np
+from scipy.ndimage import gaussian_filter
+
+x = np.linspace(0, 100, 500)
+y = np.linspace(0, 100, 500)
+X, Y = np.meshgrid(x, y)
+
+elevation = (
+    800 * np.exp(-((X - 30)**2 + (Y - 40)**2) / 500) +
+    600 * np.exp(-((X - 70)**2 + (Y - 65)**2) / 400) +
+    300 * np.exp(-((X - 50)**2 + (Y - 20)**2) / 300) +
+    50 * np.random.default_rng(42).standard_normal(X.shape)
+)
+elevation = np.clip(elevation, 0, None)
+```
+
 ## Generating contour lines
 
 Here's where the maths matters. A contour line connects all points at the same elevation. You can't just interpolate linearly between grid points - you need proper interpolation, or your contours look chunky and wrong.
@@ -117,10 +136,10 @@ I spent a frustrating hour wondering why my contours looked "off" compared to pu
 
 ## Going vector for accuracy
 
-If you really want precision, extract the contours as vector geometry:
+If you really want precision, extract the contours as vector geometry using `scikit-image` (not `sklearn`):
 
 ```python
-from sklearn.measure import find_contours
+from skimage.measure import find_contours  # Note: scikit-image, NOT scikit-learn
 import shapely.geometry as geom
 
 # Find contours at specific levels
@@ -130,7 +149,7 @@ for level in np.arange(100, 1000, 50):
     for contour in contours:
         # contour is a list of [row, col] points
         path = geom.LineString(contour)
-        print(f"Level {level}: {len(contour)} points, length {path.length:.1f}m")
+        print(f"Level {level}m: {len(contour)} points, length {path.length:.1f} grid units")
 ```
 
 This gives you shapely Geometry objects, which you can save to GeoJSON, merge with other map data, or use in a web map library like Leaflet.
@@ -142,3 +161,5 @@ The interactive Plotly map works fine for exploration, but if you wanted a prope
 One thing that bugs me: Plotly's contour rendering doesn't match professional cartographic software. The USGS QuadTopo maps are generated with ArcGIS, and the contours just look "better" - probably because cartographers manually edit them to remove artifacts and clarify terrain. Algorithms alone don't quite get there.
 
 But for a weekend project? An interactive topo map is genuinely cool. You load a DEM, run the code, and suddenly you're exploring a 3D landscape from your browser. It's the kind of thing that feels like magic until you realise it's just a few numpy operations and a clever JavaScript renderer.
+
+![Topographic contour map and 3D surface generated from synthetic DEM data](images/contour_map.png)

@@ -77,6 +77,7 @@ public class PlaneAgent : Agent
     private float altitude = 0f;
     private bool hasDropped = false;
     private float episodeDistance = 0f;
+    private Transform droppedPackage = null;
 
     void Start()
     {
@@ -164,16 +165,16 @@ public class PlaneAgent : Agent
 
         Rigidbody pkgRb = package.GetComponent<Rigidbody>();
         pkgRb.velocity = rb.velocity;
+        droppedPackage = package;
 
-        // Check where package will land
+        // Check where package lands after ~5 seconds of flight
         Invoke("CheckDropAccuracy", 5f);
     }
 
     void CheckDropAccuracy()
     {
-        // Find closest distance to target
-        // (simplified - would raytrace in real implementation)
-        float distance = Vector3.Distance(packageLandPosition, target.position);
+        if (droppedPackage == null) { EndEpisode(); return; }
+        float distance = Vector3.Distance(droppedPackage.position, target.position);
 
         // Reward for accuracy
         if (distance < 5f)
@@ -209,7 +210,8 @@ This is where the art comes in. Bad reward functions train bad agents:
 ```csharp
 void CheckDropAccuracy()
 {
-    float distance = Vector3.Distance(packageLandPosition, target.position);
+    if (droppedPackage == null) { EndEpisode(); return; }
+    float distance = Vector3.Distance(droppedPackage.position, target.position);
     float altitude = transform.position.y;
 
     // Primary: distance to target
@@ -269,3 +271,4 @@ If you build this yourself, start simple: no wind, flat terrain, fixed target. G
 
 The hardest part isn't the ML - it's the physics simulation and the reward function. Get those wrong and you're training for hours watching an agent discover creative ways to fail. Get them right and it's genuinely magical watching it learn.
 
+![Drop trajectories - parabolic path and wind effect](images/drop_trajectories.png)

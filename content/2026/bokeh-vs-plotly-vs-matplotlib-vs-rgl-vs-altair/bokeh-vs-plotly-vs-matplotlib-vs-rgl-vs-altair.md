@@ -122,3 +122,5 @@ Honestly? Matplotlib for exploration, Plotly for dashboards, Bokeh for research 
 The mistake most people make is choosing one and trying to force every plot into it. Pick the right tool for the job. Matplotlib is great for papers. Plotly is great for stakeholders. Bokeh is great for interactive analysis. Altair is great for data stories.
 
 And if you find yourself fighting a library for hours, you probably picked the wrong one.
+
+![Library comparison - performance, features, and decision tree](images/library_comparison.png)

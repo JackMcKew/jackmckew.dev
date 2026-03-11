@@ -153,3 +153,5 @@ RL agents are pattern-matching machines. If you give them a bad incentive struct
 That's both the power and the curse of RL. The agent can discover strategies you wouldn't think of. It can also discover strategies that technically maximize the reward but are useless in reality. Reward function design is the hard part. The actual training is just math.
 
 Did they play good Carcassonne? Not in a human sense. Did they learn a strategy that worked? Absolutely. And that's the whole game.
+
+![Carcassonne training curve and reward hacking tile patterns](images/carcassonne_training.png)

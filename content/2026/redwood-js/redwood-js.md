@@ -211,3 +211,5 @@ But it's not the universal framework some make it out to be. You're buying into 
 For side projects where I want to ship fast? Redwood is now my default. For complex systems where I need flexibility? Still probably separate repos with something like tRPC instead.
 
 The wild thing is that Redwood proves the monorepo model works for full-stack apps. If they'd opened up the opinions a bit more, allowed REST routes, allowed alternative databases, they'd have something truly special. As is, it's a great framework for a specific kind of project - which is actually fine.
+
+![Redwood full-stack monorepo architecture diagram](images/redwood_architecture.png)

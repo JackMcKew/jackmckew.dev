@@ -39,6 +39,8 @@ class ParkingEnv:
         self.park_width = 150
         self.park_height = 80
 
+        return self.get_obs()  # return initial observation so training loop can use it
+
     def step(self, action):
         # Action: [steering_angle, acceleration]
         steering, accel = action
@@ -86,7 +88,9 @@ class ParkingEnv:
                     self.park_y - self.park_height/2 < self.car_y < self.park_y + self.park_height/2)
 
         # Angle should be roughly 0 (aligned with space)
-        aligned = abs(self.car_angle) < 0.2 or abs(self.car_angle - 2*math.pi) < 0.2
+        # Use modulo arithmetic to handle angle wrapping correctly
+        angle_mod = self.car_angle % (2 * math.pi)
+        aligned = angle_mod < 0.2 or angle_mod > (2 * math.pi - 0.2)
 
         return in_space and aligned
 
@@ -175,12 +179,13 @@ for episode in range(1000):
     # Normalize returns
     returns = (returns - returns.mean()) / (returns.std() + 1e-8)
 
-    # Compute policy loss
-    loss = 0
+    # Compute policy loss - must be a tensor so .backward() works
+    loss = torch.tensor(0.0, requires_grad=True)
     for i, (obs_t, action_t, _) in enumerate(trajectory):
         action_pred = policy(obs_t)
-        log_prob = -0.5 * torch.sum((action_pred - action_t)**2)  # Gaussian
-        loss -= log_prob * returns[i]
+        action_tensor = torch.tensor(action_t, dtype=torch.float32)
+        log_prob = -0.5 * torch.sum((action_pred - action_tensor)**2)  # Gaussian log-prob
+        loss = loss - log_prob * returns[i]
 
     optimizer.zero_grad()
     loss.backward()
@@ -234,3 +239,5 @@ This is what I love about RL. A simple environment, a simple network, and a lear
 This scales to much harder problems (robotics, trading, game playing). The core insight stays the same: define a reward, run trajectories, optimize the policy.
 
 Also, watching a neural network do something hilariously wrong, then gradually figure it out, is endlessly entertaining. If you've got a GPU and a weekend, build this. Watching the car flail around before learning to park is comedy gold.
+
+![Car parking RL - training curve showing the four learning phases](images/training_curve.png)

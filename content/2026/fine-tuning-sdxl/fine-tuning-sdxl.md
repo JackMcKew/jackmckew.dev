@@ -69,10 +69,14 @@ The key hyperparameters that matter:
 Here's the actual training with all the boring details:
 
 ```python
+import torch.nn.functional as F
 from torch.optim import AdamW
+from torch.utils.data import DataLoader
 
+# num_epochs, batch_size, dataloader, vae assumed pre-configured
 optimizer = AdamW(unet.parameters(), lr=5e-5)
 pipeline.to("cuda")
+vae = pipeline.vae
 noise_scheduler = DDPMScheduler.from_config(
     pipeline.scheduler.config
 )
@@ -147,3 +151,5 @@ If you want to generate your face: yes, but be aware of the privacy implications
 If you're curious and have a GPU: do it. It takes a weekend and costs nothing. You'll learn how diffusion models actually work instead of just knowing the abstract theory.
 
 The frustrating part is that this whole thing - dataset curation, VRAM management, hyperparameter tuning - still feels very 2014 machine learning. You need to understand the fundamentals or you'll waste a lot of electricity spinning on hyperparameters. But if you do the work, fine-tuning is genuinely powerful. Your model, your style, your rules.
+
+![LoRA architecture diagram and training loss curve](images/lora_diagram.png)

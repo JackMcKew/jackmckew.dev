@@ -40,14 +40,20 @@ tiles = [
     Tile(3, edges=('grass', 'grass', 'water', 'grass')),      # water below
 ]
 
-# Compatibility: tile[a] can be above tile[b] if a's bottom == b's top
+# Compatibility: for each direction, which (current, neighbor) pairs are valid?
+# edges tuple: (top, right, bottom, left)
+# Match rules: neighbor's opposite edge must match our edge in that direction
 compatibility = defaultdict(set)
 for a in tiles:
     for b in tiles:
-        if a.edges[2] == b.edges[0]:  # a's bottom == b's top
-            compatibility['down'].add((a.id, b.id))
-        if a.edges[1] == b.edges[3]:  # a's right == b's left
+        if a.edges[0] == b.edges[2]:  # a's top == b's bottom -> b can be above a
+            compatibility['up'].add((a.id, b.id))
+        if a.edges[1] == b.edges[3]:  # a's right == b's left -> b can be right of a
             compatibility['right'].add((a.id, b.id))
+        if a.edges[2] == b.edges[0]:  # a's bottom == b's top -> b can be below a
+            compatibility['down'].add((a.id, b.id))
+        if a.edges[3] == b.edges[1]:  # a's left == b's right -> b can be left of a
+            compatibility['left'].add((a.id, b.id))
 
 class WFC:
     def __init__(self, width, height):
@@ -131,7 +137,7 @@ wfc = WFC(20, 20)
 success = wfc.collapse()
 
 if success:
-    result = [[self.collapsed[y][x][0] for x in range(self.width)] for y in range(self.height)]
+    result = [[wfc.collapsed[y][x][0] for x in range(wfc.width)] for y in range(wfc.height)]
     print(np.array(result))
 else:
     print("Failed - contradiction!")
@@ -155,21 +161,26 @@ Some solutions:
 
 ## Using overlapping mode (the real deal)
 
-The version above uses "simple tiling" mode. The actual WFC algorithm uses overlapping patterns learned from a sample image:
+The version above uses "simple tiling" mode. The actual WFC algorithm uses overlapping patterns learned from a sample image. The best Python implementation is `wfc-python` (or `wfc` on PyPI):
+
+```bash
+pip install wfc
+```
 
 ```python
+from PIL import Image
 from wfc import WFC
 
-# Learn from a sample image
+# Learn from a sample image - WFC extracts NxN tile patterns automatically
 sample_image = Image.open('sample_terrain.png')
-wfc = WFC(sample_image, output_width=100, output_height=100)
 
-# Generate
-result = wfc.generate(limit=0)  # limit=0 means keep trying until success
+# output_size in (width, height), limit=0 means retry until success
+wfc_model = WFC(sample_image, output_size=(100, 100), n=3)
+result = wfc_model.run()
 result.save('generated.png')
 ```
 
-The Python library handles all the heavy lifting - pattern extraction, constraint generation, backtracking. You just feed it an image and it learns what valid patterns look like.
+The library handles pattern extraction, constraint generation, and backtracking. You just feed it an image and it learns what valid patterns look like.
 
 This is how Townscaper works. You build a small town, and the algorithm learns constraints from it, then generates similar towns infinitely. It's genuinely clever.
 
@@ -190,3 +201,5 @@ I've used it to generate weird procedural cave systems and biome maps. The resul
 The main limit is still backtracking. For guaranteed generation without restarts, you need careful tile design or to accept occasional failures. Most implementations just restart - it's the pragmatic move.
 
 If you're into generative art, WFC is worth understanding. It's elegant, it's not as mathy as it sounds, and watching it generate a map is hypnotic.
+
+![WFC terrain generation process - from high-entropy superposition to fully-collapsed consistent terrain](images/wfc_terrain.png)

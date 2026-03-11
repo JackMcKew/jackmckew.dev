@@ -213,3 +213,5 @@ The strangest bit was the emergent behaviour around reward hacking. Because I re
 3D Snake is harder than 2D, but the principles are the same. Give an agent a clear goal, penalise failure, reward success, and iterate enough times - it'll figure something out. Not always elegant, but functional.
 
 If you try this, start with 2D first. Way easier to debug. And if your agent discovers weird strategies, don't patch them immediately - understanding why it found that loophole teaches you more about your reward function than ten papers would.
+
+![3D snake DQN vs Q-learning training curves](images/training_curves.png)

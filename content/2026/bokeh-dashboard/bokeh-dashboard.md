@@ -17,7 +17,7 @@ Let me build a simple example: a dashboard with a plot and a dropdown to filter 
 ```python
 from bokeh.plotting import curdoc, figure
 from bokeh.layouts import column, row
-from bokeh.models import ColumnDataSource, Select
+from bokeh.models import ColumnDataSource, Select, Div
 from bokeh.palettes import Category20
 import pandas as pd
 import numpy as np
@@ -118,27 +118,32 @@ This is where Bokeh gets genuinely clever. You can select points in one plot and
 
 ```python
 from bokeh.models import HoverTool
-from bokeh.transform import transform
+import numpy as np
 
-# Create two plots
-plot1 = figure(width=400, height=400, tools='box_select,lasso_select')
-plot2 = figure(width=400, height=400)
+# Create shared data with two sets of columns
+n = 200
+shared_data = dict(
+    x=np.random.normal(0, 1, n),
+    y=np.random.normal(0, 1, n),
+    x2=np.random.normal(0, 1, n),      # different projection
+    y2=np.random.normal(0, 1, n),
+)
 
-# Same data source for both plots
-source = ColumnDataSource(df)
+# Same ColumnDataSource for both plots - this is the key
+source = ColumnDataSource(shared_data)
 
-# Create a selection tool
-from bokeh.models import Selection
-selection = Selection()
+# Create two plots with selection tools
+plot1 = figure(width=400, height=400, tools='box_select,lasso_select,pan,wheel_zoom,reset')
+plot2 = figure(width=400, height=400, tools='pan,wheel_zoom,reset')
 
-# Draw the plots
-plot1.circle('x', 'y', source=source, size=8)
-plot2.circle('x_alt', 'y_alt', source=source, size=8)
+# Both plots reference the same source
+plot1.circle('x', 'y', source=source, size=8, selection_color='orange', nonselection_alpha=0.3)
+plot2.circle('x2', 'y2', source=source, size=8, selection_color='orange', nonselection_alpha=0.3)
 
-# Link the selection
-source.selected.on_change('indices', lambda attr, old, new: print(f'Selected: {new}'))
+# Optional: log selections
+source.selected.on_change('indices', lambda attr, old, new: print(f'Selected {len(new)} points'))
 
-# Now when you select points in plot1, they're highlighted in both
+# Now when you box-select points in plot1, they highlight in both
 layout = row(plot1, plot2)
 curdoc().add_root(layout)
 ```
@@ -183,7 +188,7 @@ layout = gridplot([[plot1, plot2], [plot3, None]])
 The workaround: give everything explicit dimensions and use spacers to pad:
 
 ```python
-from bokeh.models import Spacer
+from bokeh.models import Spacer, Div
 
 plot1 = figure(width=400, height=400)
 plot2 = figure(width=400, height=400)
@@ -203,15 +208,17 @@ This is powerful but has latency. You feel it with 100ms+ round trips.
 ```python
 from bokeh.models import ColumnDataSource
 import time
+import numpy as np
 
+# source and slider defined elsewhere in your app
 def expensive_callback(attr, old, new):
     # This runs on the server
-    print(f'Computing... new value: {new}')
-    time.sleep(2)  # Simulate expensive work
+    print(f'Slider changed to {new}, recomputing...')
+    time.sleep(2)  # Simulate a slow database query or computation
 
-    # Update the source
-    new_data = compute_something(new)
-    source.data = new_data
+    # Update the ColumnDataSource - Bokeh pushes the diff to the browser
+    filtered = df[df['value'] > new]
+    source.data = ColumnDataSource.from_df(filtered)
 
 slider.on_change('value', expensive_callback)
 ```

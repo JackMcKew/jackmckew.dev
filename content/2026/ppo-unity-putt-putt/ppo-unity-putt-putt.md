@@ -264,3 +264,4 @@ The mini golf agent taught me that RL finds strategies humans wouldn't think of.
 
 Watch it enough and you stop asking "why does it do that?" and start asking "why don't I play golf that way?"
 
+![PPO golf training curve and top-down trick shot diagram](images/ppo_golf_training.png)

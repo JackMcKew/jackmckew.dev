@@ -23,6 +23,7 @@ The conversion probability is key. I set it to roughly 0.5 per timestep per winn
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+from matplotlib.colors import ListedColormap
 
 class RPSSimulation:
     def __init__(self, width=400, height=400):
@@ -30,50 +31,36 @@ class RPSSimulation:
         self.height = height
         # 0=Rock, 1=Paper, 2=Scissors
         self.grid = np.random.randint(0, 3, (height, width))
-        self.history = [self.grid.copy()]
 
     def step(self, conversion_prob=0.5):
+        """
+        Vectorized step - no Python loops, runs ~100x faster than the naive version.
+        A cell converts to a neighbour if that neighbour beats it.
+        "a beats b" = (a - b) % 3 == 1  (Rock=0 beats Scissors=2, etc.)
+        """
         new_grid = self.grid.copy()
-
-        for i in range(self.height):
-            for j in range(self.width):
-                current = self.grid[i, j]
-                # Get 4-neighbours (or 8, your choice)
-                neighbors = [
-                    self.grid[(i-1) % self.height, j],
-                    self.grid[(i+1) % self.height, j],
-                    self.grid[i, (j-1) % self.width],
-                    self.grid[i, (j+1) % self.width],
-                ]
-
-                # Count how many neighbours beat us
-                beaters = [n for n in neighbors if self._beats(n, current)]
-
-                # If we're being beaten, maybe we convert
-                if beaters and np.random.random() < conversion_prob * len(beaters) / 4:
-                    new_grid[i, j] = np.random.choice(beaters)
-
+        for di, dj in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            neighbor = np.roll(np.roll(self.grid, di, axis=0), dj, axis=1)
+            # neighbor beats current cell where (neighbor - grid) % 3 == 1
+            beats = ((neighbor - self.grid) % 3 == 1)
+            # Each beating neighbour has conversion_prob/4 chance per step
+            rand_mask = np.random.random(self.grid.shape) < (conversion_prob / 4)
+            new_grid = np.where(beats & rand_mask, neighbor, new_grid)
         self.grid = new_grid
-        self.history.append(self.grid.copy())
         return self.grid
 
-    def _beats(self, a, b):
-        # Rock beats Scissors, Paper beats Rock, Scissors beats Paper
-        if a == 0: return b == 2  # Rock beats Scissors
-        if a == 1: return b == 0  # Paper beats Rock
-        if a == 2: return b == 1  # Scissors beats Paper
-        return False
-
 # Run it
-sim = RPSSimulation()
-for _ in range(500):
+np.random.seed(42)
+sim = RPSSimulation(width=400, height=400)
+for _ in range(300):
     sim.step(conversion_prob=0.5)
 
 # Visualize last state
 colors = ['red', 'blue', 'green']
-cmap = plt.cm.ListedColormap(colors)
+cmap = ListedColormap(colors)
+plt.figure(figsize=(8, 8))
 plt.imshow(sim.grid, cmap=cmap, interpolation='nearest')
-plt.title('Rock-Paper-Scissors Simulation (t=500)')
+plt.title('Rock-Paper-Scissors Simulation (t=300)')
 plt.axis('off')
 plt.savefig('rps_final.png', dpi=150, bbox_inches='tight')
 plt.show()
@@ -108,21 +95,32 @@ One thing that's weirdly fun: add a fourth species that doesn't fit the RPS cycl
 I used matplotlib with ListedColormap to map the three values to three colours. You can also dump frames and encode them to an mp4 with ffmpeg for a proper animation. For a 500-timestep simulation at 400x400 resolution, you're looking at 40MB of raw frames, but H.264 compression gets it down to roughly 500KB.
 
 ```python
-from matplotlib.animation import PillowWriter
+from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.colors import ListedColormap
 
-fig, ax = plt.subplots(figsize=(8, 8))
+# Capture snapshots during simulation for animation
+np.random.seed(42)
+sim = RPSSimulation(width=200, height=200)  # smaller = faster GIF
+snapshots = []
+for step_num in range(200):
+    sim.step()
+    if step_num % 5 == 0:  # keep every 5th frame
+        snapshots.append(sim.grid.copy())
+
 colors = ['red', 'blue', 'green']
-cmap = plt.cm.ListedColormap(colors)
+cmap = ListedColormap(colors)
+fig, ax = plt.subplots(figsize=(6, 6))
 
-def animate(frame):
+def animate(frame_idx):
     ax.clear()
-    ax.imshow(sim.history[frame], cmap=cmap, interpolation='nearest')
-    ax.set_title(f'RPS Simulation (t={frame})')
+    ax.imshow(snapshots[frame_idx], cmap=cmap, interpolation='nearest')
+    ax.set_title(f'RPS Simulation (t={frame_idx * 5})')
     ax.axis('off')
 
-anim = FuncAnimation(fig, animate, frames=len(sim.history), interval=50)
+anim = FuncAnimation(fig, animate, frames=len(snapshots), interval=50)
 writer = PillowWriter(fps=20)
 anim.save('rps_simulation.gif', writer=writer)
+plt.close()
 ```
 
 ## Why I Built This
@@ -131,6 +129,10 @@ Honestly? I was procrastinating on something and stumbled on a paper about spati
 
 Also it's a great teaching example. You can show students that "balanced" doesn't mean "stable in all contexts". Same way a see-saw balances on the fulcrum but wobbles in real life.
 
-The code runs fast enough that you can tweak parameters and re-run in seconds. My favourite accidental configuration was when I had the conversion probability inverted - agents spread when they're being beaten instead of when they're winning. The dynamics inverted too, which was trippy to watch.
+The vectorized step() runs fast enough that you can tweak parameters and re-run in seconds. My favourite accidental configuration was when I had the conversion probability inverted - agents spread when they're being beaten instead of when they're winning. The dynamics inverted too, which was trippy to watch.
 
 Anyway, if you want to play with cellular automata and enjoy watching things that shouldn't have patterns develop patterns, give this a go. Start with the simple 4-neighbour version and go from there.
+
+![RPS simulation evolution from t=0 to t=300](images/rps_evolution.png)
+
+![RPS population dynamics over time - boom-bust cycles](images/rps_populations.png)

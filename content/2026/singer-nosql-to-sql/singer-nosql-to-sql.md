@@ -203,3 +203,5 @@ Singer shines for "I need to copy data from X to Y and do it reliably". Once wor
 The honest take: Singer is elegant in theory, pragmatic in practice. The spec is genuinely good - line-delimited JSON is the right choice. The ecosystem is useful but incomplete. For one-off migrations it's excellent. For ongoing pipelines, it's the foundation but you'll wrap it in something else pretty quickly.
 
 If you've got data in a NoSQL system and you need it in SQL, Singer is the fastest path from "this is annoying" to "data is there". Just accept that it's not a long-term solution - more of a really good duct tape.
+
+![Singer ETL pipeline architecture - tap, protocol, and target](images/singer_architecture.png)

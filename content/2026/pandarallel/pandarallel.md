@@ -38,7 +38,7 @@ On my machine, this takes about 1.2 seconds. Not terrible, but your CPU is at 25
 ```python
 from pandarallel import pandarallel
 
-pandarallel.initialize(nb_workers=4)
+pandarallel.initialize(nb_workers=4, progress_bar=True)
 
 start = time.time()
 df['year'] = df.parallel_apply(parse_timestamp, axis=1)
@@ -94,11 +94,14 @@ Windows support is... a thing. Pandarallel needs to use multiprocessing, which o
 Progress bars are built in, which is honestly nice for long-running operations:
 
 ```python
-df['processed'] = df.parallel_apply(some_function, axis=1)
-# Shows progress bar automatically
+# Enable progress bars at initialization time
+pandarallel.initialize(nb_workers=4, progress_bar=True)
+
+# Now any parallel_apply call will show a per-worker progress bar
+df['processed'] = df.parallel_apply(your_function, axis=1)
 ```
 
-You can turn it off with `verbose=0` in the initialize call if you want quiet operation.
+You can disable them with `progress_bar=False` (the default), or pass `verbose=0` to suppress the startup message.
 
 Memory usage goes up linearly with worker count - you're copying the relevant columns to each worker process, so a 100MB DataFrame with 4 workers means roughly 400MB usage at peak. Not a deal-breaker but worth knowing.
 
@@ -111,3 +114,5 @@ The honest thing: this is such a simple library that I'm surprised it doesn't ge
 For my data pipelines, Pandarallel cut 20-30% off runtime in places where I was CPU-bound. Not as dramatic as rewriting the whole pipeline, but way better than nothing and took like 2 minutes to add.
 
 If you've got a Pandas operation that's obviously bottlenecked and you're staring at 25% CPU usage, try Pandarallel first. Might solve your problem in literally one line.
+
+![Benchmark: apply() vs parallel_apply() across worker counts](images/benchmark.png)

@@ -159,6 +159,7 @@ Plotly Express has `px.scatter_3d()` with `animation_frame` and `animation_group
 
 ```python
 import plotly.express as px
+import numpy as np
 import pandas as pd
 
 # Create trajectory data
@@ -214,3 +215,5 @@ Plotly 3D with time is genuinely useful for:
 It's not perfect. The animation model is a bit clunky, and the performance ceiling is real. But it's the path of least resistance if you want a nice 3D plot with temporal interactivity without writing WebGL yourself.
 
 For most of my projects, I use it. When I hit the limits, I reach for specialized tools. That's the pragmatic approach.
+
+![3D animated plots - static preview of helix trajectory and oscillating surface](images/3d_plots_preview.png)

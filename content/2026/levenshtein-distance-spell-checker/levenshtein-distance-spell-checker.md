@@ -63,6 +63,8 @@ For "kitten" vs "sitting":
 
 Bottom-right corner is 3. That's your answer.
 
+![Levenshtein DP matrix for "kitten" vs "sitting"](images/dp_matrix.png)
+
 ## Space optimization
 
 The matrix approach uses O(m*n) space. For a 100-character word against 10,000 words in your dictionary, that's a million cells. Doable, but wasteful.
@@ -103,15 +105,16 @@ Now for the actual spell checker. The algorithm:
 
 ```python
 class SpellChecker:
-    def __init__(self, word_list_path: str):
-        with open(word_list_path) as f:
-            self.dictionary = [word.strip().lower() for word in f]
+    def __init__(self, words: list[str]):
+        # Use a set for O(1) "is this word correct?" lookups
+        self.dictionary_set = set(w.strip().lower() for w in words)
+        self.dictionary = list(self.dictionary_set)
 
     def suggest(self, word: str, max_distance: int = 2) -> list:
         word = word.lower()
 
         # If word is in dictionary, it's correct
-        if word in self.dictionary:
+        if word in self.dictionary_set:
             return [word]
 
         # Find candidates within max_distance
@@ -123,10 +126,20 @@ class SpellChecker:
 
         # Sort by distance, then alphabetically
         candidates.sort(key=lambda x: (x[1], x[0]))
-        return [word for word, _ in candidates[:5]]  # top 5
+        return [w for w, _ in candidates[:5]]  # top 5
 
-# Usage
-checker = SpellChecker("words.txt")
+# Usage - load from /usr/share/dict/words on Linux, or inline a sample
+import os
+
+if os.path.exists('/usr/share/dict/words'):
+    with open('/usr/share/dict/words') as f:
+        word_list = [line.strip().lower() for line in f if line.strip().isalpha()]
+else:
+    # Minimal inline fallback for testing
+    word_list = ['receive', 'receipt', 'spelling', 'peeling', 'ceiling',
+                 'believe', 'achieve', 'relieve', 'retrieve', 'conceive']
+
+checker = SpellChecker(word_list)
 print(checker.suggest("recieve"))  # ['receive', 'receipt', ...]
 print(checker.suggest("speling"))  # ['spelling', 'peeling', ...]
 ```
@@ -152,6 +165,8 @@ class BKTree:
 
     def _add_recursive(self, node, word):
         dist = levenshtein_optimized(node["word"], word)
+        if dist == 0:
+            return  # duplicate word, skip it
         if dist not in node["children"]:
             node["children"][dist] = {"word": word, "children": {}}
         else:

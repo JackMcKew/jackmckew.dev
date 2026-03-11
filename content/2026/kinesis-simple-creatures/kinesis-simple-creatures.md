@@ -179,3 +179,5 @@ I've tried variations: multiple stimulus types (heat, sound, pheromone trails). 
 The honest insight: simulation teaches you something about biology and systems thinking that pure code never does. You see how local behaviour creates global patterns. You understand why swarms work, why markets are weird, why simple organisms can solve complex problems.
 
 Also: I spent way too long debugging creatures that wouldn't stay in the blue zone because their collision logic was broken. But that's the fun of it.
+
+![Kinesis simulation - density heatmap and zone speed rules](images/kinesis_simulation.png)

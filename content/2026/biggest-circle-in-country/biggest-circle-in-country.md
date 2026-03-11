@@ -16,17 +16,26 @@ First, get country boundaries. Natural Earth publishes free shapefiles at 1:10m 
 
 ```python
 import geopandas as gpd
-import shapely
 from shapely.geometry import Point
 import numpy as np
 
-# Load world geometry
-world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+# Note: gpd.datasets was removed in geopandas 1.0+
+# Use geodatasets (pip install geodatasets) or load directly from Natural Earth:
+import geodatasets
+world = gpd.read_file(geodatasets.get_path('naturalearth.land'))
 
-# Get a specific country (Australia)
-australia = world[world['name'] == 'Australia'].geometry.values[0]
+# For countries with names, use the admin_0 dataset:
+# world = gpd.read_file('ne_110m_admin_0_countries.shp')
+# australia = world[world['NAME'] == 'Australia'].geometry.values[0]
 
-# Verify it's valid
+# For testing without downloading, use a simplified polygon:
+from shapely.geometry import Polygon
+australia = Polygon([
+    (114, -22), (136, -12), (141, -11), (150, -24),
+    (153, -27), (150, -37), (141, -39), (132, -32),
+    (125, -34), (114, -34)
+])
+
 print(f"Valid: {australia.is_valid}")
 print(f"Area: {australia.area:.2f} sq degrees")
 print(f"Bounds: {australia.bounds}")
@@ -73,11 +82,10 @@ def find_inscribed_circle(polygon, grid_spacing=10000):
     # Create grid of candidate points
     xs = np.arange(minx, maxx, grid_spacing)
     ys = np.arange(miny, maxy, grid_spacing)
-    candidates = [(x, y) for x in xs for y in ys]
 
     # Filter to points inside the polygon
-    candidates = [Point(c).buffer(0) for c in candidates]
-    inside = [c for c in candidates if polygon.contains(c)]
+    # Note: use Point(x, y) directly - do NOT use .buffer(0) which returns an empty geometry
+    inside = [Point(x, y) for x in xs for y in ys if polygon.contains(Point(x, y))]
 
     if not inside:
         return None
@@ -119,55 +127,28 @@ print(f"Centre (lat/lon): ({lat:.4f}, {lon:.4f})")
 
 This is a grid search and it's slow for fine resolution, but it gets you in the ballpark. For Australia at 50km spacing, you're looking at a couple hundred thousand points, which takes a few seconds.
 
-## Better: Medial Axis
+## Better: scipy.optimize refinement
 
-If you want precision, shapely has a medial axis function (also called skeleton). Points on the medial axis are locally furthest from the boundary.
-
-```python
-from shapely.ops import unary_union
-
-# Medial axis
-skeleton = australia_projected.exterior.mediaxis(resolution=100)
-
-# The skeleton is a collection of line segments
-# Find the "fattest" point - the one furthest from the edge
-if skeleton.geom_type == 'MultiLineString':
-    all_points = []
-    for line in skeleton.geoms:
-        all_points.extend(line.coords)
-else:
-    all_points = list(skeleton.coords)
-
-# For each point on the skeleton, find distance to boundary
-max_dist = 0
-best_point = None
-
-for pt in all_points:
-    dist = australia_projected.exterior.distance(Point(pt))
-    if dist > max_dist:
-        max_dist = dist
-        best_point = pt
-
-print(f"Medial axis centre: {best_point}")
-print(f"Radius: {max_dist / 1000:.1f} km")
-```
-
-Wait, I messed up the API there. Shapely's medial axis is actually via voronoi. Let me correct that - use a proper library for this:
+The grid search gets you in the ballpark. Refine the result with `scipy.optimize.minimize` - this treats "distance to boundary" as a function to maximize, so we negate it and minimize:
 
 ```python
-# Actually, better approach: use the centroid as starting point
-# then refine with scipy.optimize
+from scipy.optimize import minimize, differential_evolution
 
-from scipy.optimize import minimize
+def neg_boundary_distance(point_xy, polygon):
+    """Return negative distance to boundary (we want to maximize distance)."""
+    pt = Point(point_xy[0], point_xy[1])
+    if not polygon.contains(pt):
+        return 0.0  # outside polygon - penalize
+    return -polygon.exterior.distance(pt)
 
-def distance_to_boundary(point, polygon):
-    return -polygon.exterior.distance(Point(point))
-
-initial_guess = (australia_projected.centroid.x, australia_projected.centroid.y)
+# Start from the centroid (a reasonable interior point)
+initial_guess = [australia_projected.centroid.x, australia_projected.centroid.y]
 result = minimize(
-    lambda p: distance_to_boundary(p, australia_projected),
+    neg_boundary_distance,
     initial_guess,
-    method='Nelder-Mead'
+    args=(australia_projected,),
+    method='Nelder-Mead',
+    options={'xatol': 100, 'fatol': 10}  # 100m tolerance
 )
 
 cx, cy = result.x
@@ -176,6 +157,8 @@ radius = -result.fun
 print(f"Optimized centre: ({cx:.0f}, {cy:.0f})")
 print(f"Radius: {radius / 1000:.1f} km")
 ```
+
+Nelder-Mead can get stuck in local optima. For better global coverage, run the grid search first, then use the best grid result as the starting point for refinement.
 
 ## Visualization
 
@@ -227,3 +210,5 @@ Mostly academic curiosity. But it's a neat way to think about country shape - th
 It also comes up in real problems: if you're placing a facility and need contiguous coverage, knowing the largest reachable circle is useful. Military folks care about this for range calculations. Biodiversity researchers use similar logic for protected area design.
 
 The code is under 100 lines and teaches you a lot about geospatial computation - projections, distance calculations, optimisation. Give it a go with your own countries.
+
+![Largest inscribed circle for Australia - grid search result](images/australia_inscribed_circle.png)

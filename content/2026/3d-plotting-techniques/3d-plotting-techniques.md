@@ -134,6 +134,8 @@ For continuous volumetric data, you're better off with a library like VTK or May
 
 ```python
 # If you want colored voxels
+import matplotlib.cm as cm
+
 fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111, projection='3d')
 
@@ -142,10 +144,13 @@ voxel_data = np.random.rand(10, 10, 10)
 
 # Only plot voxels above a threshold, colored by value
 voxels = voxel_data > 0.5
-colors = np.zeros(voxels.shape + (3,))
-colors[voxels] = voxel_data[voxels, np.newaxis]  # Color by intensity
 
-ax.voxels(voxels, facecolors=colors, edgecolor='black', alpha=0.7)
+# Map scalar values to RGBA colors via a colormap
+# cm.viridis returns (N, N, N, 4) array - shape matches voxels automatically
+colors = cm.viridis(voxel_data)
+colors[..., 3] = np.where(voxels, 0.8, 0)  # alpha: visible only where True
+
+ax.voxels(voxels, facecolors=colors, edgecolor='black', linewidth=0.3)
 
 plt.show()
 ```
@@ -248,10 +253,9 @@ Same with Plotly:
 ```python
 fig.update_layout(
     scene=dict(
-        aspectmode='data',  # Use actual data aspect ratio
-        xaxis=dict(scaleanchor='y'),
-        yaxis=dict(scaleanchor='x'),
-        zaxis=dict(scaleanchor='x')
+        aspectmode='data',  # Scale axes by actual data ranges
+        # aspectratio can also be set explicitly:
+        # aspectratio=dict(x=1, y=1, z=0.5)
     )
 )
 ```
@@ -270,3 +274,5 @@ Here's what I use:
 The honest take: 3D plotting is hard because humans are bad at perceiving depth in 2D images. Add color, add rotation, add annotations - they all help but nothing replaces a physical model you can hold.
 
 For most purposes, a 2D projection or slice (looking at a cross-section) is more informative than a fancy 3D plot. Don't use 3D because it looks cool. Use it because it's the clearest way to show your data.
+
+![Six 3D plotting techniques: surface, wireframe, mesh, voxels, scatter, triangular mesh](images/3d_techniques.png)
