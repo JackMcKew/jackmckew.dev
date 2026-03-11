@@ -4,7 +4,7 @@ Author: Jack McKew
 Category: Python
 Tags: python, pandas, polars, data-analysis, performance, dataframes
 
-I've been using pandas daily for six years. Last month I hit a wall with a 2GB dataset taking 45 seconds to pivot, so I tried Polars. It ran in 2 seconds. But I also spent three days fighting the API before I was back to productivity. Here's my honest take.
+I've been using pandas daily for six years. Last month I hit a wall with a 2GB dataset taking 45 seconds to pivot, so I tried Polars. It ran in 2 seconds. But I also spent three days fighting the API before I was back to productivity. Here's my honest take -
 
 ## The Setup
 
