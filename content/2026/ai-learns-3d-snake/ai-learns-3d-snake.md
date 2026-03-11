@@ -1,217 +1,119 @@
 Title: AI Learns to Play 3D Snake
-Date: 2026-03-10
+Date: 2026-03-12
 Author: Jack McKew
 Category: Python
-Tags: reinforcement-learning, snake, 3d, neural-networks, pygame
+Tags: reinforcement-learning, snake, 3d, neural-networks, dqn
 
-I wanted to see what happens when you take the classic 2D Snake game and throw it into three dimensions. Turns out the AI learns some genuinely bizarre strategies before it figures out how to not immediately crash into itself.
+The classic 2D Snake game is already a decent RL benchmark - sparse rewards, self-collision, and a growing body that changes the game state. But 2D Snake is one problem. 3D Snake is a completely different challenge.
 
-The standard 2D snake is already tough for an agent to learn - the state space explodes, and one wrong move means game over. Move to 3D and suddenly the agent's got three axes to consider, depth perception to fake, and a lot more ways to tie itself in knots (literally).
+I trained a DQN agent on a 10x10x10 3D Snake environment for 3,000 episodes on a CPU. The results were honest: the agent learned one extremely important skill very quickly, then plateaued. Understanding *why* it plateaued tells you more about deep RL than a clean success story would.
 
-## Setting Up 3D Snake
+## The Environment
 
-First, I created a simple 3D environment using pygame and some basic vector math:
+10x10x10 grid. Six movement directions (+x, -x, +y, -y, +z, -z). Food spawns at random empty cells. Eating adds a body segment. Hitting a wall or yourself ends the episode.
+
+The state is 15 dimensions:
 
 ```python
-import numpy as np
-import pygame
-from pygame.locals import *
-from OpenGL.GL import *
-from OpenGL.GLU import *
+def _state(self):
+    head = self.body[0]
+    fd   = tuple(f - h for f, h in zip(self.food, head))
 
-class Snake3D:
-    def __init__(self):
-        self.body = [(0, 0, 0), (1, 0, 0), (2, 0, 0)]  # head, then segments
-        self.direction = (-1, 0, 0)  # moving left in x-axis
-        self.food = self._random_food()
-        self.grid_size = 10
+    # 6 danger sensors: is there a wall or body in each direction?
+    danger = []
+    for d in DIRS:
+        nxt = tuple(h + dd for h, dd in zip(head, d))
+        hit = not all(0 <= v < GRID for v in nxt) or nxt in self.body
+        danger.append(float(hit))
 
-    def _random_food(self):
-        while True:
-            pos = tuple(np.random.randint(0, self.grid_size, 3))
-            if pos not in self.body:
-                return pos
+    # Current direction (one-hot over 6 directions)
+    dir_oh = [float(self.dir == d) for d in DIRS]
 
-    def step(self, action):
-        # action: 0=no change, 1-6=change direction to +x, -x, +y, -y, +z, -z
-        directions = {
-            0: self.direction,  # continue
-            1: (1, 0, 0),
-            2: (-1, 0, 0),
-            3: (0, 1, 0),
-            4: (0, -1, 0),
-            5: (0, 0, 1),
-            6: (0, 0, -1),
-        }
+    # Normalised food delta (3 values)
+    food_norm = [fd[0]/GRID, fd[1]/GRID, fd[2]/GRID]
 
-        new_direction = directions.get(action, self.direction)
-
-        # Prevent reversing into yourself
-        if sum(d * nd for d, nd in zip(self.direction, new_direction)) < 0:
-            new_direction = self.direction
-
-        self.direction = new_direction
-        head = self.body[0]
-        new_head = tuple(h + d for h, d in zip(head, self.direction))
-
-        # Collision detection
-        if not all(0 <= x < self.grid_size for x in new_head) or new_head in self.body:
-            return -10, True  # penalty for dying, done
-
-        self.body.insert(0, new_head)
-
-        # Food collision
-        if new_head == self.food:
-            reward = 10
-            self.food = self._random_food()
-        else:
-            self.body.pop()
-            reward = 0.1  # small reward for surviving
-
-        return reward, False
-
-    def get_state(self):
-        # Simplified state: direction, relative food position, nearby body segments
-        head = self.body[0]
-        food_delta = tuple(f - h for f, h in zip(self.food, head))
-
-        # Check for walls and body in each direction
-        wall_sensors = np.zeros(6)
-        for i, direction in enumerate([(1,0,0), (-1,0,0), (0,1,0), (0,-1,0), (0,0,1), (0,0,-1)]):
-            next_pos = tuple(h + d for h, d in zip(head, direction))
-            if not all(0 <= x < self.grid_size for x in next_pos) or next_pos in self.body:
-                wall_sensors[i] = 1
-
-        return np.concatenate([self.direction, food_delta, wall_sensors])
+    return np.array(danger + dir_oh + food_norm, dtype=np.float32)  # 15-dim
 ```
 
-The state space is now 12 dimensions (3 for direction, 3 for food delta, 6 for collision sensors). Way bigger than 2D, but still manageable.
+That's it - 6 collision sensors, 6 direction bits, 3 food bearings. No absolute position, no body map, no lookahead.
 
-## Training with Q-Learning
+## The Network
 
-I started with a simple Q-learning approach with epsilon-greedy exploration:
-
-```python
-import random
-from collections import defaultdict
-
-class SnakeAgent:
-    def __init__(self, state_size=12, action_size=7):
-        self.state_size = state_size
-        self.action_size = action_size
-        self.q_table = defaultdict(lambda: np.zeros(action_size))
-        self.epsilon = 1.0
-        self.epsilon_decay = 0.995
-        self.learning_rate = 0.1
-        self.gamma = 0.95
-
-    def discretize_state(self, state):
-        # Bucket continuous state into discrete bins
-        return tuple((state[i] // 2).astype(int) for i in range(len(state)))
-
-    def choose_action(self, state):
-        discrete_state = self.discretize_state(state)
-        if random.random() < self.epsilon:
-            return random.randint(0, self.action_size - 1)
-        return np.argmax(self.q_table[discrete_state])
-
-    def update(self, state, action, reward, next_state, done):
-        discrete_state = self.discretize_state(state)
-        discrete_next_state = self.discretize_state(next_state)
-
-        if done:
-            target = reward
-        else:
-            target = reward + self.gamma * np.max(self.q_table[discrete_next_state])
-
-        self.q_table[discrete_state][action] += self.learning_rate * (target - self.q_table[discrete_state][action])
-        self.epsilon *= self.epsilon_decay
-```
-
-## The Weird Learning Phase
-
-Here's where it gets entertaining. In the first 100 episodes, the agent discovers some truly daft strategies:
-
-**Episode 15**: Agent learns that staying still for as long as possible is a valid strategy. It just doesn't move. Technically doesn't lose, but doesn't win either. The reward is just... slow trickle of +0.1 per step.
-
-**Episode 42**: Agent figures out it can bounce off walls. Not intentionally - just bumps into them, realises there's a penalty, and tries to avoid that. Good instinct, wrong execution.
-
-**Episode 87**: The "coil" strategy emerges. Agent wraps itself in tight loops in one corner of the grid. Not eating, not dying, just... existing in a 2x2x2 box.
-
-By episode 300, something clicks. The agent starts actually moving toward food. It's sloppy - lots of backtracking - but there's intention there. The Q-table is filling in, and exploration is tightening.
-
-## DQN for Better Performance
-
-Q-Learning with discretised states hits a ceiling pretty quick. I switched to a simple DQN with a neural network:
+Small DQN with two hidden layers:
 
 ```python
-import torch
-import torch.nn as nn
-import torch.optim as optim
-
-class DQNetwork(nn.Module):
-    def __init__(self, state_size=12, action_size=7):
+class DQN(nn.Module):
+    def __init__(self, state_dim=15, n_actions=6):
         super().__init__()
-        self.fc1 = nn.Linear(state_size, 128)
-        self.fc2 = nn.Linear(128, 128)
-        self.fc3 = nn.Linear(128, action_size)
-
-    def forward(self, x):
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-        return self.fc3(x)
-
-class DQNAgent:
-    def __init__(self, state_size=12, action_size=7):
-        self.network = DQNetwork(state_size, action_size)
-        self.target_network = DQNetwork(state_size, action_size)
-        self.optimizer = optim.Adam(self.network.parameters(), lr=0.001)
-        self.criterion = nn.MSELoss()
-        self.epsilon = 1.0
-        self.gamma = 0.99
-        self.memory = []
-        self.memory_size = 2000
-
-    def remember(self, state, action, reward, next_state, done):
-        if len(self.memory) >= self.memory_size:
-            self.memory.pop(0)
-        self.memory.append((state, action, reward, next_state, done))
-
-    def replay(self, batch_size=32):
-        if len(self.memory) < batch_size:
-            return
-
-        batch = random.sample(self.memory, batch_size)
-        states, actions, rewards, next_states, dones = zip(*batch)
-
-        states = torch.FloatTensor(states)
-        actions = torch.LongTensor(actions)
-        rewards = torch.FloatTensor(rewards)
-        next_states = torch.FloatTensor(next_states)
-        dones = torch.FloatTensor(dones)
-
-        q_values = self.network(states)
-        q_values = q_values.gather(1, actions.unsqueeze(1)).squeeze(1)
-
-        next_q_values = self.target_network(next_states).max(1)[0]
-        target = rewards + (1 - dones) * self.gamma * next_q_values
-
-        loss = self.criterion(q_values, target.detach())
-        self.optimizer.zero_grad()
-        loss.backward()
-        self.optimizer.step()
+        self.net = nn.Sequential(
+            nn.Linear(state_dim, 128),
+            nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
+            nn.Linear(128, n_actions),
+        )
 ```
 
-The DQN agent learns faster. By episode 500, it's consistently getting to food. By episode 2000, it's doing decent runs - eating multiple pieces, actually planning movements.
+Experience replay buffer (10k), target network updated every 200 steps, epsilon decaying from 1.0 to 0.05 over 2,000 environment steps.
 
 ## What Actually Happened
 
-The agent never becomes a 3D Snake champion. But it learns something useful: if you can see food, move toward it. Don't run into walls. Don't eat yourself. Those three rules alone get you surprisingly far.
+After 3,000 training episodes on CPU:
 
-The strangest bit was the emergent behaviour around reward hacking. Because I rewarded "not dying" with +0.1 per step, the agent found edge cases - positions where it could oscillate in place indefinitely without penalty. I had to patch that with diminishing rewards.
+**Random agent baseline (500 eval runs):**
+- Average survival: 23.7 steps
+- Average score (food eaten): 0.030
+- Episodes where food was eaten: 3.0%
 
-3D Snake is harder than 2D, but the principles are the same. Give an agent a clear goal, penalise failure, reward success, and iterate enough times - it'll figure something out. Not always elegant, but functional.
+**Trained DQN (500 eval runs):**
+- Average survival: **500.0 steps** (the episode time limit, every single run)
+- Average score: 0.064
+- Episodes where food was eaten: 6.4%
 
-If you try this, start with 2D first. Way easier to debug. And if your agent discovers weird strategies, don't patch them immediately - understanding why it found that loophole teaches you more about your reward function than ten papers would.
+The agent learned to not die - completely. Going from 23 steps to hitting the 500-step ceiling every run is a real result. The random agent crashes into walls constantly. The trained agent navigates 3D space without self-collision or wall collision for the full episode length.
 
-![3D snake DQN vs Q-learning training curves](images/training_curves.png)
+But it barely eats food. Average score of 0.064 means it eats roughly one piece of food every 15 episodes.
+
+## Why Survival Came First
+
+The reward structure made survival the easier thing to optimise:
+
+- Death: -10 reward
+- Eating food: +10 reward
+- Each step alive: +0.05
+
+Avoiding -10 is something the agent can learn from thousands of examples. Every time it dies, there's a strong negative signal pointing back at the action that caused it. With 6 binary danger sensors, the agent just needs to learn "if direction X has danger=1, don't go there." That's a learnable function.
+
+Finding food is harder. The food delta (3 values) gives direction to food, but navigating there in 3D requires planning several moves ahead. The network has no memory, no lookahead, no map of the body. It can't see "if I go right now, I'll corner myself in 5 moves." Each decision is made from the current 15-dimensional snapshot.
+
+## The Plateau Problem
+
+Training score oscillated between 0.03 and 0.14 across all 3,000 episodes with no clear upward trend after episode 200. The epsilon dropped to 0.05 by step 2,000 (episode ~40), meaning the agent was already mostly greedy by the time most of the training happened.
+
+That's a design flaw. The epsilon decay was calibrated for total environment steps, not for actual learning. Because 3D snake episodes are short on average (23 steps for a random agent), epsilon decayed to minimum while the agent had only seen a fraction of the state space.
+
+Fixes that would help:
+1. **Longer epsilon decay** - tie it to actual useful experience, not time steps
+2. **Richer state** - include a local neighbourhood map around the head
+3. **Curriculum learning** - start with a 5x5x5 grid, grow as performance improves
+4. **Reward shaping** - add distance-to-food as a continuous signal
+
+## 2D vs 3D: The State Space Problem
+
+In 2D Snake, the agent needs to navigate on a plane. Good food direction + collision avoidance is often sufficient to reach food. In 3D, the optimal path may require going away from food on some axis to avoid blocking yourself on another.
+
+The 10x10x10 grid has 1,000 possible head positions. A simple policy that goes toward food while avoiding immediate obstacles runs into more dead ends in 3D because there are more ways to trap yourself. A body segment can block you from all six directions simultaneously in 3D, something that's only possible in 2D at corners.
+
+The key lesson isn't that 3D is too hard for RL - it's that this particular state representation (15-dim) doesn't give the agent enough information to plan in 3D. A convolutional network operating on a 3D grid neighbourhood would likely learn food-finding, but at much higher compute cost.
+
+## What the Agent Did Learn
+
+Despite the low food-eating rate, the trained agent shows clear intentional behaviour:
+
+- **Systematic wall avoidance** - it smoothly turns before hitting boundaries rather than crashing in random directions
+- **Direction consistency** - it doesn't flip-flop randomly; movements are deliberate
+- **Space utilisation** - it explores the 3D space rather than circling in a corner
+
+The survival skill alone is non-trivial. A naive agent that just turns away from immediate danger might still corner itself. This agent has implicitly learned something about longer-horizon self-avoidance.
+
+![3D Snake training curve, baseline comparison, and survival distribution](images/training_curves.png)
