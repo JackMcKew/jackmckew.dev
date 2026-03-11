@@ -6,11 +6,17 @@ Tags: reinforcement-learning, dqn, reward-shaping, mountain-car, deep-learning
 
 Mountain Car is one of the simplest RL benchmarks: a car in a valley needs to reach a flag at the top of a hill. Two actions: push left, push right. The car isn't powerful enough to drive straight up - it needs to swing back and forth to build momentum.
 
-DQN should handle this easily. And yet:
+DQN should handle this easily. And yet the sparse agent's training curve looks like this:
 
-**Sparse DQN: 0-5% success rate after 3,000 episodes.**
+```
+Ep  100: success= 0%  (timing out every episode)
+Ep  300: success=52%  (found the strategy!)
+Ep  500: success= 0%  (forgot it completely)
+Ep  700: success=98%  (found it again!)
+Ep  800: success= 0%  (lost it again)
+```
 
-The reason is one of the most important concepts in RL: **reward sparsity**. And the fix - reward shaping - reveals something fundamental about how learning actually works.
+This violent oscillation - not a clean failure, not a clean success - is the actual face of sparse reward training. And the fix - reward shaping - reveals something fundamental about why it happens.
 
 ## The Environment
 
@@ -24,17 +30,21 @@ Physics: the car's acceleration includes a gravity term based on the slope, so i
 
 Episode terminates when position >= 0.45 (goal) or after 200 steps.
 
-## Why Sparse Reward Fails
+## Why Sparse Reward Is Unstable
 
-The sparse reward: **-1 per step until reaching the goal, 0 at the goal.** This looks reasonable. It penalises taking too long and rewards reaching the goal.
+The sparse reward: **-1 per step until reaching the goal, 0 at the goal.** This looks reasonable - it penalises slow play and rewards reaching the flag.
 
-The problem: **with random exploration, a car starting at position -0.5 almost never reaches position 0.45 in 200 steps.**
+The problem is two-fold.
 
-Here's the physics: the car starts near the bottom. To reach the goal, it needs to swing repeatedly back and forth, gaining momentum each pass. A random policy doesn't do this - it pushes randomly, which averages out to near-zero net force. The car bounces around the bottom of the valley and times out.
+**First**: with random exploration, a car starting at position -0.5 almost never reaches position 0.45 in 200 steps. The car needs to swing back and forth to build momentum - random pushes cancel out. In 3,000 episodes, a random agent might reach the goal 2-5 times by accident. Q-values are estimated from almost no successful data.
 
-**In 3,000 training episodes, a random agent might reach the goal 2-5 times by accident.** That's 5 successful experiences out of 600,000 steps. Q-values for the "push in the right direction" actions are estimated from almost no data.
+**Second, and more important**: when the agent *does* find the goal policy, it can't hold onto it.
 
-DQN can't learn what it can't observe.
+Here's what happens at episode 700 (success rate 98%): the replay buffer is full of successful trajectories. Q-values correctly estimate that pushing in the direction of motion leads to high-energy states that eventually reach the goal. The policy is excellent.
+
+Then at episode 800 (success rate 0%): the replay buffer has been partially overwritten with new episodes. The new Q-values, trained on a mix of old successes and new failures, diverge. The target network update (every N steps) propagates these bad estimates back. The policy collapses.
+
+This is **catastrophic forgetting** - not a failure to learn, but a failure to *retain* learning. The sparse agent learns the right strategy multiple times and forgets it multiple times. It's stuck in a loop where it can occasionally discover the solution but can never stabilise around it.
 
 ## Reward Shaping: The Energy Trick
 
@@ -57,16 +67,20 @@ This gives the agent positive reward whenever it has:
 
 ## Results
 
-| Agent | Success Rate | Avg Steps to Goal |
-|-------|-------------|-------------------|
-| Sparse DQN | ~3% | 198 (barely makes it) |
-| Shaped DQN | ~85%+ | ~140 |
+| Episode | Sparse Success % | Shaped Success % |
+|---------|-----------------|-----------------|
+| 100 | 0% | (training) |
+| 300 | 52% | ~75% |
+| 500 | 0% | ~90% |
+| 700 | 98% | ~95% |
+| 800 | 0% | ~95% |
+| 3,000 | oscillating | stable 90%+ |
 
-**Shaped DQN:** starts succeeding by episode 300-500. By episode 2,000 it's consistently reaching the goal.
+**Shaped DQN:** reaches high success by episode 300-500 and stays there. No oscillation. Once it finds the momentum-building strategy, the dense shaping reward keeps that strategy reinforced on every episode, preventing the forgetting loop.
 
-**Sparse DQN:** flat at ~0-5% for the entire 3,000 episodes. The few successes it has are essentially accidents.
+**Sparse DQN:** oscillates violently. It genuinely finds the solution multiple times (52%, 98%) but can't maintain it. The net success rate averaged across 3,000 episodes is much lower than the peaks suggest.
 
-The shaped agent doesn't just succeed more - it finds a better strategy. The shaped reward teaches momentum-building as an intermediate goal, so the agent executes clean left-right swings before pushing up the hill. The sparse agent (if it ever succeeds) tends to thrash randomly until it stumbles into the goal.
+The shaped agent doesn't just succeed more - it finds a *stable* policy. The shaped reward teaches momentum-building as an intermediate goal on every episode, so the replay buffer always contains useful signal. The sparse agent's replay buffer alternates between "good strategy" episodes and "timeout" episodes, diluting the Q-value estimates each cycle.
 
 ## The Shaping Looks Like Cheating - Is It?
 
@@ -143,10 +157,14 @@ It learned: **align your push with your momentum**. That's the right physics. Th
 
 ## The Takeaway
 
-Mountain Car is a perfect example of why reward function design is often more important than algorithm choice.
+Mountain Car demonstrates something more subtle than "sparse reward = failure."
 
-Switch from DQN to PPO with sparse reward: still fails. Switch from DQN to DQN with shaped reward: 85%+ success.
+The sparse DQN *can* solve Mountain Car. It discovers the momentum-building strategy multiple times, reaching 98% success rates. The problem is it can't hold onto the knowledge - the sparse signal creates a feedback loop where successful episodes get diluted by failures, Q-values drift, and the policy collapses.
 
-The algorithm doesn't matter if the agent can't learn from the signal. Reward shaping - done correctly - encodes the domain knowledge that makes learning tractable.
+Reward shaping fixes this by ensuring every episode - successful or not - provides useful gradient signal. The energy-based reward means even a "failed" episode (car doesn't reach the top) still updates Q-values in the right direction based on how much energy the car built up.
+
+**The algorithm doesn't change. The replay buffer contents do.** With shaped reward, the buffer always contains informative trajectories. With sparse reward, most buffer entries are low-quality timeout episodes that overwhelm the occasional successful ones.
+
+This is why reward function design often matters more than algorithm choice. Fix the signal quality first, then worry about the algorithm.
 
 ![Training curves: sparse vs shaped DQN comparison]({static}images/training_curves.png)
