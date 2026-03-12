@@ -1026,27 +1026,25 @@ async function genAcrobat(outPath) {
   const canvas = createCanvas(W, H);
   const ctx = canvas.getContext('2d');
 
-  const L1 = 85, L2 = 85;
+  const L_PX = 85;         // display length in pixels
+  const L = 1.0;           // physics length in metres (natural period ~2s at g=9.8)
   const OX = W / 2, OY = H / 2 - 10;
   const g = 9.8, m1 = 1, m2 = 1;
 
   // Correct Acrobot equations of motion (Lagrangian, angles from downward vertical)
   // th1: angle of link1 from down, th2: relative angle of link2 to link1
-  // Torque applied at joint2 only (Acrobot constraint)
+  // Physics uses L (metres); display uses L_PX (pixels)
   function acrobotDerivs(th1, th2, dth1, dth2, tau) {
     const c2 = Math.cos(th2);
     const s1 = Math.sin(th1), s12 = Math.sin(th1 + th2);
-    const d = (m1 + m2) * L1 * L1 + m2 * L2 * L2 + 2 * m2 * L1 * L2 * c2;
-    const d12 = m2 * L2 * L2 + m2 * L1 * L2 * c2;
-    const det = (m1 + m2) * L1 * L1 * (m2 * L2 * L2) - d12 * d12;
-    const c12_2 = Math.sin(th2); // sin(th2) for Coriolis
-    const C1 = -m2 * L1 * L2 * c12_2 * (2 * dth1 * dth2 + dth2 * dth2)
-               + (m1 + m2) * g * L1 * s1 + m2 * g * L2 * s12;
-    const C2 =  m2 * L1 * L2 * c12_2 * dth1 * dth1
-               + m2 * g * L2 * s12 - tau;
-    // Solve M * [ddth1, ddth2] = [-C1, -C2]
-    // M = [[d, d12],[d12, m2*L2*L2]]
-    const M11 = d, M12 = d12, M21 = d12, M22 = m2 * L2 * L2;
+    const d12 = m2 * L * L + m2 * L * L * c2;
+    const c12_2 = Math.sin(th2);
+    const C1 = -m2 * L * L * c12_2 * (2 * dth1 * dth2 + dth2 * dth2)
+               + (m1 + m2) * g * L * s1 + m2 * g * L * s12;
+    const C2 =  m2 * L * L * c12_2 * dth1 * dth1
+               + m2 * g * L * s12 - tau;
+    const M11 = (m1 + m2) * L * L + m2 * L * L + 2 * m2 * L * L * c2;
+    const M12 = d12, M21 = d12, M22 = m2 * L * L;
     const detM = M11 * M22 - M12 * M21;
     const ddth1 = (M22 * (-C1) - M12 * (-C2)) / detM;
     const ddth2 = (M11 * (-C2) - M21 * (-C1)) / detM;
@@ -1067,40 +1065,31 @@ async function genAcrobat(outPath) {
     ];
   }
 
-  // Pre-compute swing-up sequence
-  // Phase 1: build energy by pumping (0-40%), Phase 2: swing up (40-70%), Phase 3: hold (70-100%)
-  const dt = 1 / FPS;
+  // Pre-compute swing-up sequence. dt=0.05s per frame = 1.5x real-time for snappy animation.
+  const dt = 0.05;
   const angles = [];
-  let th1 = Math.PI, th2 = 0.1; // hanging down with slight perturbation
+  let th1 = Math.PI, th2 = 0.1;
   let dth1 = 0, dth2 = 0;
 
   for (let i = 0; i < FRAMES; i++) {
     const frac = i / FRAMES;
-    // Energy-based swing-up torque
-    const tipY = -L1 * Math.cos(th1) - L2 * Math.cos(th1 + th2); // positive = up
-    const E_target = m2 * g * L2 * 1.0;
-    const E = 0.5 * (m1 + m2) * L1 * L1 * dth1 * dth1 + m2 * g * L1 * (1 - Math.cos(th1));
     let tau = 0;
     if (frac < 0.6) {
-      // Energy pumping: inject torque in direction that increases energy
       tau = Math.sign(dth2) * 4.0;
     } else {
-      // Near top: LQR-inspired stabilisation
-      const err1 = th1 % (2 * Math.PI); // want th1 near 0 (upright)
-      const e1 = Math.atan2(Math.sin(th1), Math.cos(th1)); // wrap to [-pi, pi]
+      const e1 = Math.atan2(Math.sin(th1), Math.cos(th1));
       tau = -(e1 * 6 + dth1 * 2 + Math.atan2(Math.sin(th2), Math.cos(th2)) * 3 + dth2 * 1);
       tau = Math.max(-8, Math.min(8, tau));
     }
     const next = rk4(th1, th2, dth1, dth2, tau, dt);
     [th1, th2, dth1, dth2] = next;
-    // Clamp velocities to prevent runaway
     dth1 = Math.max(-12, Math.min(12, dth1));
     dth2 = Math.max(-12, Math.min(12, dth2));
     angles.push([th1, th2]);
   }
 
-  // Goal: tip above pivot (tipY < pivot_y - L1 - L2 + some margin)
-  const goalY = OY - L1 - L2 + 20;
+  // Goal: tip above pivot
+  const goalY = OY - L_PX - L_PX + 20;
   const trail = [];
 
   for (let f = 0; f < FRAMES; f++) {
@@ -1116,10 +1105,10 @@ async function genAcrobat(outPath) {
     label(ctx, 'Goal', 100, goalY - 6, 11, GREEN);
 
     const [a1, a2] = angles[f];
-    const x1 = OX + L1 * Math.sin(a1);
-    const y1 = OY - L1 * Math.cos(a1);
-    const x2 = x1 + L2 * Math.sin(a1 + a2);
-    const y2 = y1 - L2 * Math.cos(a1 + a2);
+    const x1 = OX + L_PX * Math.sin(a1);
+    const y1 = OY - L_PX * Math.cos(a1);
+    const x2 = x1 + L_PX * Math.sin(a1 + a2);
+    const y2 = y1 - L_PX * Math.cos(a1 + a2);
 
     // Tip trail
     trail.push({ x: x2, y: y2 });
