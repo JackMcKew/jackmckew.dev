@@ -986,114 +986,142 @@ async function genAcrobat(outPath) {
   const canvas = createCanvas(W, H);
   const ctx = canvas.getContext('2d');
 
-  const L1 = 80, L2 = 80;
-  const OX2 = W / 2, OY2 = H / 2 - 20;
+  const L1 = 85, L2 = 85;
+  const OX = W / 2, OY = H / 2 - 10;
+  const g = 9.8, m1 = 1, m2 = 1;
 
-  // Pre-compute a scripted swing-up sequence
-  // th1, th2: angles from vertical. Start hanging (pi, pi), swing to ~0,0
-  const steps = FRAMES;
+  // Correct Acrobot equations of motion (Lagrangian, angles from downward vertical)
+  // th1: angle of link1 from down, th2: relative angle of link2 to link1
+  // Torque applied at joint2 only (Acrobot constraint)
+  function acrobotDerivs(th1, th2, dth1, dth2, tau) {
+    const c2 = Math.cos(th2);
+    const s1 = Math.sin(th1), s12 = Math.sin(th1 + th2);
+    const d = (m1 + m2) * L1 * L1 + m2 * L2 * L2 + 2 * m2 * L1 * L2 * c2;
+    const d12 = m2 * L2 * L2 + m2 * L1 * L2 * c2;
+    const det = (m1 + m2) * L1 * L1 * (m2 * L2 * L2) - d12 * d12;
+    const c12_2 = Math.sin(th2); // sin(th2) for Coriolis
+    const C1 = -m2 * L1 * L2 * c12_2 * (2 * dth1 * dth2 + dth2 * dth2)
+               + (m1 + m2) * g * L1 * s1 + m2 * g * L2 * s12;
+    const C2 =  m2 * L1 * L2 * c12_2 * dth1 * dth1
+               + m2 * g * L2 * s12 - tau;
+    // Solve M * [ddth1, ddth2] = [-C1, -C2]
+    // M = [[d, d12],[d12, m2*L2*L2]]
+    const M11 = d, M12 = d12, M21 = d12, M22 = m2 * L2 * L2;
+    const detM = M11 * M22 - M12 * M21;
+    const ddth1 = (M22 * (-C1) - M12 * (-C2)) / detM;
+    const ddth2 = (M11 * (-C2) - M21 * (-C1)) / detM;
+    return [dth1, dth2, ddth1, ddth2];
+  }
+
+  // RK4 integration step
+  function rk4(th1, th2, dth1, dth2, tau, dt) {
+    const k1 = acrobotDerivs(th1, th2, dth1, dth2, tau);
+    const k2 = acrobotDerivs(th1 + k1[0]*dt/2, th2 + k1[1]*dt/2, dth1 + k1[2]*dt/2, dth2 + k1[3]*dt/2, tau);
+    const k3 = acrobotDerivs(th1 + k2[0]*dt/2, th2 + k2[1]*dt/2, dth1 + k2[2]*dt/2, dth2 + k2[3]*dt/2, tau);
+    const k4 = acrobotDerivs(th1 + k3[0]*dt, th2 + k3[1]*dt, dth1 + k3[2]*dt, dth2 + k3[3]*dt, tau);
+    return [
+      th1  + (k1[0] + 2*k2[0] + 2*k3[0] + k4[0]) * dt / 6,
+      th2  + (k1[1] + 2*k2[1] + 2*k3[1] + k4[1]) * dt / 6,
+      dth1 + (k1[2] + 2*k2[2] + 2*k3[2] + k4[2]) * dt / 6,
+      dth2 + (k1[3] + 2*k2[3] + 2*k3[3] + k4[3]) * dt / 6,
+    ];
+  }
+
+  // Pre-compute swing-up sequence
+  // Phase 1: build energy by pumping (0-40%), Phase 2: swing up (40-70%), Phase 3: hold (70-100%)
+  const dt = 1 / FPS;
   const angles = [];
-  let th1 = Math.PI * 0.98, th2 = Math.PI * 0.98;
+  let th1 = Math.PI, th2 = 0.1; // hanging down with slight perturbation
   let dth1 = 0, dth2 = 0;
-  const dt = 0.05;
 
-  // Torque drives - scripted to swing up over ~10s
-  for (let i = 0; i < steps; i++) {
-    const frac = i / steps;
-    // Phase 1 (0-0.4): build momentum
-    // Phase 2 (0.4-0.7): swing up
-    // Phase 3 (0.7-1): stabilise at top
-    let torque = 0;
-    if (frac < 0.35) {
-      torque = Math.sin(frac * Math.PI * 6) * 2.5; // pumping
-    } else if (frac < 0.65) {
-      torque = -Math.sign(dth1 + dth2) * 3.0; // energy injection
+  for (let i = 0; i < FRAMES; i++) {
+    const frac = i / FRAMES;
+    // Energy-based swing-up torque
+    const tipY = -L1 * Math.cos(th1) - L2 * Math.cos(th1 + th2); // positive = up
+    const E_target = m2 * g * L2 * 1.0;
+    const E = 0.5 * (m1 + m2) * L1 * L1 * dth1 * dth1 + m2 * g * L1 * (1 - Math.cos(th1));
+    let tau = 0;
+    if (frac < 0.6) {
+      // Energy pumping: inject torque in direction that increases energy
+      tau = Math.sign(dth2) * 4.0;
     } else {
-      // stabilise near upright: LQR-like
-      const errTh1 = th1 - 0; // want th1 near 0
-      torque = -(errTh1 * 2 + dth1 * 1.5 + th2 * 1 + dth2 * 0.5);
-      torque = Math.max(-4, Math.min(4, torque));
+      // Near top: LQR-inspired stabilisation
+      const err1 = th1 % (2 * Math.PI); // want th1 near 0 (upright)
+      const e1 = Math.atan2(Math.sin(th1), Math.cos(th1)); // wrap to [-pi, pi]
+      tau = -(e1 * 6 + dth1 * 2 + Math.atan2(Math.sin(th2), Math.cos(th2)) * 3 + dth2 * 1);
+      tau = Math.max(-8, Math.min(8, tau));
     }
-
-    // Acrobot physics (simplified)
-    const g = 9.8;
-    const m1 = 1, m2 = 1;
-    const d1 = m1 + m2, d2 = m2 * L2;
-    const phi2 = -m2 * L2 * dth2 * dth2 * Math.sin(th2 - th1) - (m1 + m2) * g * Math.sin(th1);
-    const phi1 = m2 * L2 * dth1 * dth1 * Math.sin(th2 - th1) - m2 * g * Math.sin(th2) + torque;
-    const ddth1 = (phi2 - phi1 / 2) / (d1 - m2 / 2);
-    const ddth2 = (phi1 - ddth1) / m2;
-
-    dth1 += ddth1 * dt; dth2 += ddth2 * dt;
-    dth1 = Math.max(-8, Math.min(8, dth1));
-    dth2 = Math.max(-8, Math.min(8, dth2));
-    th1 += dth1 * dt; th2 += dth2 * dt;
-
+    const next = rk4(th1, th2, dth1, dth2, tau, dt);
+    [th1, th2, dth1, dth2] = next;
+    // Clamp velocities to prevent runaway
+    dth1 = Math.max(-12, Math.min(12, dth1));
+    dth2 = Math.max(-12, Math.min(12, dth2));
     angles.push([th1, th2]);
   }
 
-  // Draw goal line (reach with tip)
-  const goalY = OY2 - L1 - L2 - 10;
+  // Goal: tip above pivot (tipY < pivot_y - L1 - L2 + some margin)
+  const goalY = OY - L1 - L2 + 20;
+  const trail = [];
 
   for (let f = 0; f < FRAMES; f++) {
     drawBg(ctx);
     label(ctx, 'ACROBOT  (Swing-Up)', W/2, 28, 14, MUTED);
 
-    // Goal
+    // Goal line
     ctx.setLineDash([5, 5]);
-    ctx.strokeStyle = GREEN + '88';
+    ctx.strokeStyle = GREEN + '66';
     ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(60, goalY); ctx.lineTo(W - 60, goalY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(80, goalY); ctx.lineTo(W - 80, goalY); ctx.stroke();
     ctx.setLineDash([]);
-    label(ctx, 'Goal', 90, goalY - 5, 11, GREEN);
+    label(ctx, 'Goal', 100, goalY - 6, 11, GREEN);
 
     const [a1, a2] = angles[f];
-    const x1 = OX2 + L1 * Math.sin(a1);
-    const y1 = OY2 + L1 * Math.cos(a1);
-    const x2 = x1  + L2 * Math.sin(a2);
-    const y2 = y1  + L2 * Math.cos(a2);
+    const x1 = OX + L1 * Math.sin(a1);
+    const y1 = OY - L1 * Math.cos(a1);
+    const x2 = x1 + L2 * Math.sin(a1 + a2);
+    const y2 = y1 - L2 * Math.cos(a1 + a2);
 
-    // Joint traces (faint)
-    if (f > 5) {
-      for (let i = Math.max(0, f - 40); i < f; i++) {
-        const [pa1, pa2] = angles[i];
-        const px1 = OX2 + L1 * Math.sin(pa1) + L2 * Math.sin(pa2);
-        const py1 = OY2 + L1 * Math.cos(pa1) + L2 * Math.cos(pa2);
-        const alpha = (i - (f - 40)) / 40;
-        ctx.fillStyle = ACC + Math.round(alpha * 100).toString(16).padStart(2, '0');
-        ctx.beginPath(); ctx.arc(px1, py1, 2, 0, Math.PI*2); ctx.fill();
-      }
+    // Tip trail
+    trail.push({ x: x2, y: y2 });
+    if (trail.length > 60) trail.shift();
+    for (let i = 1; i < trail.length; i++) {
+      const alpha = i / trail.length;
+      const hex = Math.round(alpha * 180).toString(16).padStart(2, '0');
+      ctx.strokeStyle = ACC + hex;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(trail[i-1].x, trail[i-1].y);
+      ctx.lineTo(trail[i].x, trail[i].y);
+      ctx.stroke();
     }
 
     // Links
-    ctx.lineWidth = 6;
+    ctx.lineWidth = 7; ctx.lineCap = 'round';
     ctx.strokeStyle = WHITE + 'cc';
-    ctx.lineCap = 'round';
-    ctx.beginPath(); ctx.moveTo(OX2, OY2); ctx.lineTo(x1, y1); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(OX, OY); ctx.lineTo(x1, y1); ctx.stroke();
     ctx.strokeStyle = ACC + 'cc';
     ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
 
     // Joints
     ctx.fillStyle = WHITE;
-    ctx.beginPath(); ctx.arc(OX2, OY2, 8, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(OX, OY, 9, 0, Math.PI*2); ctx.fill();
     ctx.fillStyle = SURF; ctx.lineWidth = 2; ctx.strokeStyle = WHITE;
-    ctx.beginPath(); ctx.arc(OX2, OY2, 4, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-
+    ctx.beginPath(); ctx.arc(OX, OY, 4, 0, Math.PI*2); ctx.fill(); ctx.stroke();
     ctx.fillStyle = ACC;
-    ctx.beginPath(); ctx.arc(x1, y1, 7, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x1, y1, 8, 0, Math.PI*2); ctx.fill();
     ctx.fillStyle = GREEN;
-    ctx.beginPath(); ctx.arc(x2, y2, 7, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x2, y2, 8, 0, Math.PI*2); ctx.fill();
 
-    // Tip height relative to goal
-    const tipY = y2;
-    if (tipY < goalY + 20) {
+    // Success banner
+    if (y2 < goalY + 15) {
       ctx.fillStyle = GREEN + 'cc';
-      roundRect(ctx, W/2 - 80, H - 45, 160, 30, 8);
+      roundRect(ctx, W/2 - 85, H - 50, 170, 32, 8);
       ctx.fill();
-      label(ctx, 'Goal reached! ✓', W/2, H - 24, 13, WHITE);
+      label(ctx, 'Goal reached! ✓', W/2, H - 27, 13, WHITE);
     }
 
-    label(ctx, `θ₁=${(a1 * 180 / Math.PI).toFixed(0)}°  θ₂=${(a2 * 180 / Math.PI).toFixed(0)}°`, W/2, H - 10, 11, MUTED);
+    const phase = f / FRAMES < 0.6 ? 'Exploring' : 'Swing-up';
+    label(ctx, phase, W/2, H - 10, 11, MUTED);
 
     await writeFrame(proc, canvas);
   }
