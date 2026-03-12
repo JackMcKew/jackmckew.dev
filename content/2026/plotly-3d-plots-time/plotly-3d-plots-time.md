@@ -216,4 +216,4 @@ It's not perfect. The animation model is a bit clunky, and the performance ceili
 
 For most of my projects, I use it. When I hit the limits, I reach for specialized tools. That's the pragmatic approach.
 
-![3D animated plots - static preview of helix trajectory and oscillating surface](images/3d_plots_preview.png)
+![3D animated plots - static preview of helix trajectory and oscillating surface]({static}images/3d_plots_preview.png)

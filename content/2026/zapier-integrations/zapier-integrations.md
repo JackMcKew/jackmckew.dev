@@ -53,4 +53,4 @@ I'm keeping Zapier for my signups because it's not core to the product - it's ad
 
 The wild part is how much this has shifted my thinking about side project priorities. I've got a list of "nice to have" features that are basically integrations - "sync this to X" or "post to Y automatically". Before I'd ignore them because the code effort wasn't worth it. Now I can actually build them in Zapier in an afternoon. That's... actually useful.
 
-![Zapier workflow pipeline - trigger, actions, and conditional branching](images/zapier_workflow.png)
+![Zapier workflow pipeline - trigger, actions, and conditional branching]({static}images/zapier_workflow.png)

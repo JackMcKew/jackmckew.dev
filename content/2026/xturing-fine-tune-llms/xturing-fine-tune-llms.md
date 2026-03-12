@@ -120,4 +120,4 @@ But the opaqueness of what's happening underneath means it's a training-wheels l
 
 Try it. Worst case, you waste an afternoon and learn that you need more control. Best case, you ship a working fine-tuned model in a weekend. Not a bad bet.
 
-![xTuring vs Transformers - lines of code comparison and trade-off chart](images/xturing_comparison.png)
+![xTuring vs Transformers - lines of code comparison and trade-off chart]({static}images/xturing_comparison.png)

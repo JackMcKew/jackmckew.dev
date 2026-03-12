@@ -275,4 +275,4 @@ The honest take: 3D plotting is hard because humans are bad at perceiving depth 
 
 For most purposes, a 2D projection or slice (looking at a cross-section) is more informative than a fancy 3D plot. Don't use 3D because it looks cool. Use it because it's the clearest way to show your data.
 
-![Six 3D plotting techniques: surface, wireframe, mesh, voxels, scatter, triangular mesh](images/3d_techniques.png)
+![Six 3D plotting techniques: surface, wireframe, mesh, voxels, scatter, triangular mesh]({static}images/3d_techniques.png)

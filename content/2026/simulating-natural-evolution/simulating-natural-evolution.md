@@ -48,6 +48,12 @@ class DNA:
     def get_mutation_rate(self):
         return 0.01 + self.genes[5] * 0.1
 
+    def get_aggressiveness(self):
+        return self.genes[6]
+
+    def get_prefer_plants(self):
+        return self.genes[7]
+
     def mutate(self):
         mutation_rate = self.get_mutation_rate()
         mutated_genes = self.genes.copy()
