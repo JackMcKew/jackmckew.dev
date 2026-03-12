@@ -1028,41 +1028,108 @@ async function genPutt(out) {
 }
 
 async function genParkCar(out) {
-  const F=FPS*9, proc=spawnFf(out), canvas=createCanvas(W,H), ctx=canvas.getContext('2d');
-  // Car parking lot with car navigating to spot
-  const SPOT={x:280,y:200,w:60,h:100};
-  let cx=500,cy=300,cang=0,cv=0,csteer=0; let parked=false,parkedAt=-1;
-  function drawCar(x,y,ang,c='#7c9ef8'){
+  const F=FPS*10, proc=spawnFf(out), canvas=createCanvas(W,H), ctx=canvas.getContext('2d');
+
+  // Layout: 5 spots across, 2 rows. Target = col 2, row 1 (bottom, centre)
+  const SPOT_W=76, SPOT_H=100, SPOTS_X=60, SPOTS_Y0=60, SPOTS_Y1=200;
+  function spotCx(c){ return SPOTS_X+c*SPOT_W+SPOT_W/2; }
+  const TARGET_X=spotCx(2), TARGET_Y=SPOTS_Y1+SPOT_H/2; // row1 centre = y:250
+
+  // Parked cars at every spot except target (col2,row1)
+  const parkedCars=[];
+  for(let c=0;c<5;c++) for(let r=0;r<2;r++){
+    if(c===2&&r===1) continue;
+    parkedCars.push({x:SPOTS_X+c*SPOT_W+SPOT_W/2,y:(r===0?SPOTS_Y0:SPOTS_Y1)+SPOT_H/2});
+  }
+  const CAR_R=22;
+
+  function drawCar(x,y,ang,col){
     ctx.save(); ctx.translate(x,y); ctx.rotate(ang);
-    ctx.fillStyle=c; rr(ctx,-25,-14,50,28,5); ctx.fill();
+    ctx.fillStyle=col; rr(ctx,-25,-14,50,28,5); ctx.fill();
     ctx.fillStyle='#94a3b8'; ctx.fillRect(-15,-14,30,8); ctx.fillRect(-15,6,30,8);
     ctx.fillStyle=GOLD; ctx.fillRect(-25,-14,6,6); ctx.fillRect(19,-14,6,6);
-    ctx.fillStyle=RED; ctx.fillRect(-25,8,6,6); ctx.fillRect(19,8,6,6);
+    ctx.fillStyle=RED;  ctx.fillRect(-25,8,6,6);  ctx.fillRect(19,8,6,6);
     ctx.restore();
   }
+
+  function hitParked(cx,cy){ return parkedCars.some(p=>Math.hypot(cx-p.x,cy-p.y)<CAR_R*1.8); }
+  function hitWall(cx,cy){ return cx<65||cx>575||cy<58||cy>342; }
+
+  function simAttempt(waypoints){
+    const states=[]; let cx=555,cy=182,ang=Math.PI,v=0,wpIdx=0,crashed=false,crashTimer=0,done=false;
+    const frames=Math.floor(F/2);
+    for(let f=0;f<frames;f++){
+      if(crashed){
+        crashTimer--; if(crashTimer<=0) crashed=false;
+        states.push({cx,cy,ang,crashed:true,done:false}); continue;
+      }
+      if(!done&&wpIdx<waypoints.length){
+        const wp=waypoints[wpIdx];
+        const dx=wp.x-cx,dy=wp.y-cy,dist=Math.hypot(dx,dy);
+        if(dist<8){ wpIdx++; }
+        else{
+          let dA=Math.atan2(dy,dx)-ang;
+          while(dA>Math.PI)dA-=Math.PI*2; while(dA<-Math.PI)dA+=Math.PI*2;
+          ang+=Math.max(-0.07,Math.min(0.07,dA));
+          v=Math.min(2.5,dist*0.15);
+          const nx=cx+Math.cos(ang)*v,ny=cy+Math.sin(ang)*v;
+          if(hitParked(nx,ny)||hitWall(nx,ny)){
+            crashed=true; crashTimer=24;
+            states.push({cx,cy,ang,crashed:true,done:false}); continue;
+          }
+          cx=nx; cy=ny;
+        }
+      } else if(wpIdx>=waypoints.length) done=true;
+      states.push({cx,cy,ang,crashed:false,done});
+    }
+    return states;
+  }
+
+  // Attempt 1: bad path - drives directly, clips col3 row1 car
+  const s1=simAttempt([{x:TARGET_X-60,y:TARGET_Y},{x:TARGET_X,y:TARGET_Y}]);
+  // Attempt 2: proper path - use aisle (y~182) then pull straight in
+  const s2=simAttempt([{x:380,y:182},{x:TARGET_X+30,y:182},{x:TARGET_X,y:210},{x:TARGET_X,y:TARGET_Y}]);
+  const allStates=[...s1,...s2];
+
   for(let f=0;f<F;f++){
-    bg(ctx); lbl(ctx,'Parking Neural Network',W/2,26,14,MUTED);
-    // Lot
-    ctx.fillStyle='#1a1a2e'; ctx.fillRect(40,40,W-80,H-80);
-    // Parking spots
+    bg(ctx); lbl(ctx,'Car Park Simulator  (Neural Network)',W/2,26,14,MUTED);
+    // Lot floor
+    ctx.fillStyle='#12161e'; ctx.fillRect(50,50,540,300);
+    // Aisle divider
+    ctx.strokeStyle='#ffffff15'; ctx.lineWidth=1; ctx.setLineDash([8,8]);
+    ctx.beginPath(); ctx.moveTo(50,168); ctx.lineTo(590,168); ctx.stroke();
+    ctx.setLineDash([]);
+    // Spots
     for(let c=0;c<5;c++) for(let r=0;r<2;r++){
-      const sx=80+c*110, sy=150+r*130;
-      ctx.strokeStyle=sx===280&&sy===150?GREEN+'88':WHITE+'33'; ctx.lineWidth=1;
-      ctx.setLineDash([4,4]); ctx.strokeRect(sx,sy,60,100); ctx.setLineDash([]);
+      const sx=SPOTS_X+c*SPOT_W,sy=r===0?SPOTS_Y0:SPOTS_Y1;
+      const isTarget=c===2&&r===0;
+      const isT=c===2&&r===1;
+      ctx.strokeStyle=isT?GREEN+'aa':WHITE+'22'; ctx.lineWidth=1.5;
+      ctx.setLineDash(isT?[]:[4,4]); ctx.strokeRect(sx,sy,SPOT_W,SPOT_H); ctx.setLineDash([]);
+      if(isT) lbl(ctx,'TARGET',sx+SPOT_W/2,sy+14,9,GREEN);
     }
-    if(!parked){
-      // AI steering toward spot
-      const tx=SPOT.x+30, ty=SPOT.y+50;
-      const da=Math.atan2(ty-cy,tx-cx)-cang;
-      csteer=Math.sin(da)*0.08; cv=2;
-      cang+=csteer; cx+=Math.cos(cang)*cv; cy+=Math.sin(cang)*cv;
-      if(Math.abs(cx-tx)<10&&Math.abs(cy-ty)<10){ parked=true; parkedAt=f; }
+    ctx.strokeStyle=WHITE+'44'; ctx.lineWidth=2; ctx.strokeRect(50,50,540,300);
+
+    parkedCars.forEach(p=>drawCar(p.x,p.y,Math.PI/2,MUTED));
+
+    const s=allStates[Math.min(allStates.length-1,f)];
+    const attempt=f<Math.floor(F/2)?1:2;
+    drawCar(s.cx,s.cy,s.ang,s.crashed?RED:s.done&&attempt===2?GREEN:ACC);
+
+    if(s.crashed){
+      ctx.fillStyle=RED+'33'; ctx.fillRect(0,0,W,H);
+      lbl(ctx,'COLLISION!',s.cx,s.cy-38,14,RED);
     }
-    drawCar(cx,cy,cang);
-    // Other parked cars
-    [[80+30,150+50],[80+110+30,150+50],[80+220+30,150+50],[80+330+30,150+50]].forEach(([x,y])=>drawCar(x,y,Math.PI/2,MUTED));
-    [[80+30,280+50],[80+110+30,280+50],[80+220+30,280+50],[80+330+30,280+50],[80+440+30,280+50]].forEach(([x,y])=>drawCar(x,y,Math.PI/2,MUTED));
-    if(parked&&f-parkedAt>20){ ctx.fillStyle=GREEN+'dd'; rr(ctx,W/2-80,H-50,160,32,8); ctx.fill(); lbl(ctx,'Parked successfully ✓',W/2,H-28,13,WHITE); }
+    if(s.done&&attempt===2){
+      ctx.fillStyle=GREEN+'dd'; rr(ctx,W/2-90,H-50,180,32,8); ctx.fill();
+      lbl(ctx,'Parked successfully ✓',W/2,H-28,13,WHITE);
+    }
+    // Attempt badge
+    const al=attempt===1?'Attempt 1  (collision)':'Attempt 2  (success)';
+    const ac=attempt===1?RED:GREEN;
+    ctx.fillStyle=ac+'22'; rr(ctx,W/2-72,44,144,20,4); ctx.fill();
+    lbl(ctx,al,W/2,57,10,ac);
+
     await writeFrame(proc,canvas);
   }
   return end(proc);
