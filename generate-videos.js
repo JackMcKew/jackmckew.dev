@@ -1071,20 +1071,29 @@ async function genAcrobat(outPath) {
   let th1 = Math.PI, th2 = 0.1;
   let dth1 = 0, dth2 = 0;
 
+  // goalY in canvas coords: tip must be above this line
+  const goalYCheck = OY - L_PX - L_PX + 20;
+
   for (let i = 0; i < FRAMES; i++) {
-    const frac = i / FRAMES;
-    let tau = 0;
-    if (frac < 0.6) {
-      tau = Math.sign(dth2) * 4.0;
-    } else {
+    // Switch to stabilisation when tip is near the goal - NOT based on frame count
+    const tipYCanvas = OY - L_PX * Math.cos(th1) - L_PX * Math.cos(th1 + th2);
+    const nearTop = tipYCanvas < goalYCheck + 60;
+
+    let tau;
+    if (nearTop) {
+      // Strong LQR-like stabilisation around upright (th1=0, th2=0)
       const e1 = Math.atan2(Math.sin(th1), Math.cos(th1));
-      tau = -(e1 * 6 + dth1 * 2 + Math.atan2(Math.sin(th2), Math.cos(th2)) * 3 + dth2 * 1);
-      tau = Math.max(-8, Math.min(8, tau));
+      const e2 = Math.atan2(Math.sin(th2), Math.cos(th2));
+      tau = -(e1 * 20 + dth1 * 5 + e2 * 8 + dth2 * 3);
+      tau = Math.max(-10, Math.min(10, tau));
+    } else {
+      // Energy pumping: dE/dt = tau * dth2, so sign(dth2) injects energy
+      tau = Math.sign(dth2) * 8.0;
     }
     const next = rk4(th1, th2, dth1, dth2, tau, dt);
     [th1, th2, dth1, dth2] = next;
-    dth1 = Math.max(-12, Math.min(12, dth1));
-    dth2 = Math.max(-12, Math.min(12, dth2));
+    dth1 = Math.max(-15, Math.min(15, dth1));
+    dth2 = Math.max(-15, Math.min(15, dth2));
     angles.push([th1, th2]);
   }
 
