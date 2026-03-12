@@ -259,23 +259,38 @@ async function genFlappyBird(outPath) {
   const canvas = createCanvas(W, H);
   const ctx = canvas.getContext('2d');
 
-  const PIPE_W = 52, GAP = 120, PIPE_SPEED = 3.5;
-  const BIRD_X = 100;
+  const PIPE_W = 52, GAP = 130, PIPE_SPEED = 3.5;
+  const BIRD_X = 100, BIRD_R = 13;
+  const GROUND_Y = H - 25;
   let by = H / 2, bvy = 0;
   let score = 0;
+  let dead = false, deadTimer = 0;
   const pipes = [
-    { x: W + 50,  gapY: 180 },
-    { x: W + 250, gapY: 220 },
-    { x: W + 450, gapY: 160 },
-    { x: W + 650, gapY: 240 },
+    { x: W + 100, gapY: 190 },
+    { x: W + 300, gapY: 230 },
+    { x: W + 500, gapY: 165 },
+    { x: W + 700, gapY: 245 },
   ];
 
-  // Pre-compute optimal jump points
   function shouldJump(birdY, birdVy, pipeX, gapY) {
     const dist = pipeX - BIRD_X;
-    if (dist < 0 || dist > 200) return false;
-    const targetY = gapY;
-    return birdY > targetY + 10 && birdVy > -4;
+    if (dist < 0 || dist > 220) return false;
+    return birdY > gapY + 5 && birdVy > -5;
+  }
+
+  function checkCollision() {
+    // Ground
+    if (by + BIRD_R >= GROUND_Y) return true;
+    // Ceiling
+    if (by - BIRD_R <= 0) return true;
+    // Pipes
+    for (const p of pipes) {
+      const topH = p.gapY - GAP / 2;
+      const botY = p.gapY + GAP / 2;
+      const inXRange = BIRD_X + BIRD_R > p.x && BIRD_X - BIRD_R < p.x + PIPE_W;
+      if (inXRange && (by - BIRD_R < topH || by + BIRD_R > botY)) return true;
+    }
+    return false;
   }
 
   for (let f = 0; f < FRAMES; f++) {
@@ -286,59 +301,84 @@ async function genFlappyBird(outPath) {
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, W, H);
 
-    // Move pipes
-    for (const p of pipes) {
-      p.x -= PIPE_SPEED;
-      if (p.x + PIPE_W < 0) {
-        p.x = pipes.reduce((mx, q) => Math.max(mx, q.x), 0) + 200;
-        p.gapY = 140 + Math.floor((f * 37 + score * 83) % 140);
-        score++;
+    if (dead) {
+      deadTimer--;
+      if (deadTimer <= 0) {
+        dead = false;
+        by = H / 2; bvy = 0;
+      }
+    } else {
+      // Move pipes
+      for (const p of pipes) {
+        p.x -= PIPE_SPEED;
+        if (p.x + PIPE_W < 0) {
+          p.x = pipes.reduce((mx, q) => Math.max(mx, q.x), 0) + 200;
+          p.gapY = 140 + Math.floor((f * 37 + score * 83) % 140);
+          score++;
+        }
+      }
+
+      // AI jump decision
+      const nextPipe = pipes.filter(p => p.x + PIPE_W > BIRD_X - BIRD_R).sort((a, b) => a.x - b.x)[0];
+      if (nextPipe && shouldJump(by, bvy, nextPipe.x, nextPipe.gapY)) {
+        bvy = -7.5;
+      }
+
+      // Bird physics
+      bvy += 0.42;
+      by += bvy;
+
+      // Collision detection
+      if (checkCollision()) {
+        dead = true;
+        deadTimer = 28;
+        bvy = 0;
+        by = Math.min(by, GROUND_Y - BIRD_R); // snap to ground if ground hit
       }
     }
-
-    // AI jump decision
-    const nextPipe = pipes.filter(p => p.x + PIPE_W > BIRD_X).sort((a, b) => a.x - b.x)[0];
-    if (nextPipe && shouldJump(by, bvy, nextPipe.x, nextPipe.gapY)) {
-      bvy = -7;
-    }
-
-    // Bird physics
-    bvy += 0.4;
-    by += bvy;
-    by = Math.max(20, Math.min(H - 20, by));
 
     // Draw pipes
     for (const p of pipes) {
       const topH = p.gapY - GAP / 2;
       const botY = p.gapY + GAP / 2;
-
       ctx.fillStyle = '#2d7a2d';
       ctx.fillRect(p.x, 0, PIPE_W, topH);
-      ctx.fillRect(p.x, botY, PIPE_W, H - botY);
+      ctx.fillRect(p.x, botY, PIPE_W, GROUND_Y - botY);
+      // Pipe caps
       ctx.fillStyle = '#4ade80';
       ctx.fillRect(p.x - 4, topH - 18, PIPE_W + 8, 18);
       ctx.fillRect(p.x - 4, botY, PIPE_W + 8, 18);
     }
 
     // Ground
+    ctx.fillStyle = '#4a7c2d';
+    ctx.fillRect(0, GROUND_Y, W, H - GROUND_Y);
     ctx.fillStyle = '#2d4a1e';
-    ctx.fillRect(0, H - 20, W, 20);
+    ctx.fillRect(0, GROUND_Y, W, 4);
 
-    // Bird (circle with eye)
-    ctx.fillStyle = GOLD;
-    ctx.beginPath(); ctx.arc(BIRD_X, by, 14, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#fff';
-    ctx.beginPath(); ctx.arc(BIRD_X + 5, by - 3, 5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#000';
-    ctx.beginPath(); ctx.arc(BIRD_X + 7, by - 3, 2.5, 0, Math.PI * 2); ctx.fill();
-    // wing
-    ctx.fillStyle = '#f59e0b';
-    ctx.beginPath();
-    ctx.ellipse(BIRD_X - 6, by + 4, 9, 5, Math.PI * 0.2, 0, Math.PI * 2);
-    ctx.fill();
+    // Bird
+    const birdColor = dead ? RED : GOLD;
+    ctx.fillStyle = birdColor;
+    ctx.beginPath(); ctx.arc(BIRD_X, by, BIRD_R, 0, Math.PI * 2); ctx.fill();
+    if (!dead) {
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(BIRD_X + 5, by - 3, 4.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#000';
+      ctx.beginPath(); ctx.arc(BIRD_X + 7, by - 3, 2, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath();
+      ctx.ellipse(BIRD_X - 5, by + 3, 8, 4, Math.PI * 0.2, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      // X eyes on death
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(BIRD_X + 2, by - 5); ctx.lineTo(BIRD_X + 7, by); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(BIRD_X + 7, by - 5); ctx.lineTo(BIRD_X + 2, by); ctx.stroke();
+    }
 
     // Score
     label(ctx, `Score: ${score}`, W / 2, 30, 16, WHITE);
+    if (dead) label(ctx, 'Hit!', BIRD_X, by - 25, 13, RED);
 
     await writeFrame(proc, canvas);
   }
