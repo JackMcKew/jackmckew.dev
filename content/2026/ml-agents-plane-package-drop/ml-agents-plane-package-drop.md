@@ -109,4 +109,4 @@ The other 25-30% of misses are genuine timing errors: dropped too early (package
 
 The DQN sits in the interesting middle: it learned *something* about parabolic flight from purely observational data, but can't match a solver that's given the equations. That gap is exactly where the value of incorporating physics priors into RL lies.
 
-![Drop trajectories, learning curve, and optimal drop analysis](images/drop_trajectories.png)
+![Drop trajectories, learning curve, and optimal drop analysis]({static}images/drop_trajectories.png)

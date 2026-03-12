@@ -211,4 +211,4 @@ It also comes up in real problems: if you're placing a facility and need contigu
 
 The code is under 100 lines and teaches you a lot about geospatial computation - projections, distance calculations, optimisation. Give it a go with your own countries.
 
-![Largest inscribed circle for Australia - grid search result](images/australia_inscribed_circle.png)
+![Largest inscribed circle for Australia - grid search result]({static}images/australia_inscribed_circle.png)

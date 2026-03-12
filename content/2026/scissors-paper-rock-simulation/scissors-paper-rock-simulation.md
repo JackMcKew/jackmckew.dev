@@ -133,6 +133,6 @@ The vectorized step() runs fast enough that you can tweak parameters and re-run 
 
 Anyway, if you want to play with cellular automata and enjoy watching things that shouldn't have patterns develop patterns, give this a go. Start with the simple 4-neighbour version and go from there.
 
-![RPS simulation evolution from t=0 to t=300](images/rps_evolution.png)
+![RPS simulation evolution from t=0 to t=300]({static}images/rps_evolution.png)
 
-![RPS population dynamics over time - boom-bust cycles](images/rps_populations.png)
+![RPS population dynamics over time - boom-bust cycles]({static}images/rps_populations.png)

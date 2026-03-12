@@ -152,4 +152,4 @@ If you're curious and have a GPU: do it. It takes a weekend and costs nothing. Y
 
 The frustrating part is that this whole thing - dataset curation, VRAM management, hyperparameter tuning - still feels very 2014 machine learning. You need to understand the fundamentals or you'll waste a lot of electricity spinning on hyperparameters. But if you do the work, fine-tuning is genuinely powerful. Your model, your style, your rules.
 
-![LoRA architecture diagram and training loss curve](images/lora_diagram.png)
+![LoRA architecture diagram and training loss curve]({static}images/lora_diagram.png)

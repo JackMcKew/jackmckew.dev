@@ -240,4 +240,4 @@ This scales to much harder problems (robotics, trading, game playing). The core 
 
 Also, watching a neural network do something hilariously wrong, then gradually figure it out, is endlessly entertaining. If you've got a GPU and a weekend, build this. Watching the car flail around before learning to park is comedy gold.
 
-![Car parking RL - training curve showing the four learning phases](images/training_curve.png)
+![Car parking RL - training curve showing the four learning phases]({static}images/training_curve.png)

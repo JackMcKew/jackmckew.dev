@@ -157,7 +157,7 @@ Some solutions:
 1. **Backtracking**: Instead of restarting, undo the last N collapses and try different choices. This works but is complex and slow.
 2. **Smaller maps**: 20x20 works great. 30x30 is iffy. 50x50 requires careful tile design.
 3. **Bias the entropy**: Don't pick randomly from all valid tiles - weight by likelihood. This reduces dead ends.
-4. **Pre-compute valid sequences**: This is what the actual WFC algorithm (Karth & Lim's version) does - it learns which tile patterns work from a sample image.
+4. **Pre-compute valid sequences**: This is what the actual WFC algorithm (Maxim Gumin's original) does - it learns which tile patterns work from a sample image.
 
 ## Using overlapping mode (the real deal)
 
@@ -202,4 +202,4 @@ The main limit is still backtracking. For guaranteed generation without restarts
 
 If you're into generative art, WFC is worth understanding. It's elegant, it's not as mathy as it sounds, and watching it generate a map is hypnotic.
 
-![WFC terrain generation process - from high-entropy superposition to fully-collapsed consistent terrain](images/wfc_terrain.png)
+![WFC terrain generation process - from high-entropy superposition to fully-collapsed consistent terrain]({static}images/wfc_terrain.png)

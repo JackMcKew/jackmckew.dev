@@ -115,4 +115,4 @@ For my data pipelines, Pandarallel cut 20-30% off runtime in places where I was 
 
 If you've got a Pandas operation that's obviously bottlenecked and you're staring at 25% CPU usage, try Pandarallel first. Might solve your problem in literally one line.
 
-![Benchmark: apply() vs parallel_apply() across worker counts](images/benchmark.png)
+![Benchmark: apply() vs parallel_apply() across worker counts]({static}images/benchmark.png)

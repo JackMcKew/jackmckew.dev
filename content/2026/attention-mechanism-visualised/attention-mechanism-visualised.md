@@ -33,6 +33,7 @@ class MultiHeadAttention(torch.nn.Module):
     def __init__(self, d_model, num_heads):
         super().__init__()
         self.num_heads = num_heads
+        self.d_model = d_model
         self.d_k = d_model // num_heads
 
         self.W_q = torch.nn.Linear(d_model, d_model)

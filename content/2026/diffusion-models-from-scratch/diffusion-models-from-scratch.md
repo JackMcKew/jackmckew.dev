@@ -48,7 +48,7 @@ class UNet(nn.Module):
         self.down2 = nn.Sequential(nn.MaxPool2d(2), nn.Conv2d(64, 128, 3, padding=1), nn.ReLU())
         self.bottleneck = nn.Sequential(nn.Conv2d(128, 256, 3, padding=1), nn.ReLU())
         self.up2 = nn.Sequential(nn.ConvTranspose2d(256, 128, 4, stride=2, padding=1), nn.ReLU())
-        self.up1 = nn.ConvTranspose2d(128, channels, 3, padding=1)
+        self.up1 = nn.ConvTranspose2d(192, channels, 3, padding=1)  # 128 (up2 output) + 64 (d1 skip connection)
 
     def forward(self, x, t):
         t_embed = t.unsqueeze(-1).unsqueeze(-1).expand(-1, -1, x.shape[2], x.shape[3])

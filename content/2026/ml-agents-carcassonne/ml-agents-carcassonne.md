@@ -40,7 +40,7 @@ The action space is window x window x 4 rotations x 5 meeple options = 1,620 dis
 
 ## The deck
 
-Carcassonne has 15 tile types, 54 tiles total:
+Carcassonne has 15 tile types, 53 tiles total:
 
 | Type | Count | Description |
 |------|-------|-------------|
@@ -60,7 +60,7 @@ Carcassonne has 15 tile types, 54 tiles total:
 | CCCC | 1 | four-city (all city) |
 | RRRRx | 1 | crossroads |
 
-Roads dominate the deck (9+8+4+3+3+2+1 = 30 road tiles). Cities are present but less frequent per tile (many tiles have only one city edge). This matters for what the agent learned.
+Roads dominate the deck (9+8+4+3+3+3+2+1 = 33 road tiles). Cities are present but less frequent per tile (many tiles have only one city edge). This matters for what the agent learned.
 
 ## Training setup
 

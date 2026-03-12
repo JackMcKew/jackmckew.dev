@@ -147,11 +147,8 @@ public class GolfAgent : Agent
         else
             AddReward(-distanceToHole * 0.1f);
 
-        // Allow multiple shots per episode (up to 5)
-        if (MaxStepReached)
-        {
-            EndEpisode();
-        }
+        // Allow multiple shots per episode - ML-Agents ends the episode automatically when max_steps is reached
+        EndEpisode();
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -172,7 +169,6 @@ The action space is 2D continuous: force in X and Z directions. The agent learns
 ```yaml
 behaviors:
   GolfPlayer:
-    framework_version: pytorch
     trainer_type: ppo
     hyperparameters:
       batch_size: 256
@@ -264,4 +260,4 @@ The mini golf agent taught me that RL finds strategies humans wouldn't think of.
 
 Watch it enough and you stop asking "why does it do that?" and start asking "why don't I play golf that way?"
 
-![PPO golf training curve and top-down trick shot diagram](images/ppo_golf_training.png)
+![PPO golf training curve and top-down trick shot diagram]({static}images/ppo_golf_training.png)

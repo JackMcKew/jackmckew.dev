@@ -116,4 +116,4 @@ Despite the low food-eating rate, the trained agent shows clear intentional beha
 
 The survival skill alone is non-trivial. A naive agent that just turns away from immediate danger might still corner itself. This agent has implicitly learned something about longer-horizon self-avoidance.
 
-![3D Snake training curve, baseline comparison, and survival distribution](images/training_curves.png)
+![3D Snake training curve, baseline comparison, and survival distribution]({static}images/training_curves.png)

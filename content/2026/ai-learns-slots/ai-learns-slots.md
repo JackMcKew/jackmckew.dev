@@ -168,4 +168,4 @@ You can't run 500 simulations per visit. You have maybe 50-100 pulls before budg
 
 The multi-armed bandit appears everywhere: A/B testing, ad serving, clinical trials, recommendation systems. Thompson sampling is used in production at Netflix, Spotify, and most major ad networks. When the cost of exploration is real - money, user experience, patient welfare - the difference between 54 and 28 regret compounds quickly at scale.
 
-![Multi-armed bandit: cumulative regret, distribution, and arm selection across 500 runs](images/bandit_comparison.png)
+![Multi-armed bandit: cumulative regret, distribution, and arm selection across 500 runs]({static}images/bandit_comparison.png)

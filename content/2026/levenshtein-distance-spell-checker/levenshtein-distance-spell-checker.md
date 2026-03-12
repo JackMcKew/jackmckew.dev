@@ -63,7 +63,7 @@ For "kitten" vs "sitting":
 
 Bottom-right corner is 3. That's your answer.
 
-![Levenshtein DP matrix for "kitten" vs "sitting"](images/dp_matrix.png)
+![Levenshtein DP matrix for "kitten" vs "sitting"]({static}images/dp_matrix.png)
 
 ## Space optimization
 

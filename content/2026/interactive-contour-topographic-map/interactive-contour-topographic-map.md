@@ -162,4 +162,4 @@ One thing that bugs me: Plotly's contour rendering doesn't match professional ca
 
 But for a weekend project? An interactive topo map is genuinely cool. You load a DEM, run the code, and suddenly you're exploring a 3D landscape from your browser. It's the kind of thing that feels like magic until you realise it's just a few numpy operations and a clever JavaScript renderer.
 
-![Topographic contour map and 3D surface generated from synthetic DEM data](images/contour_map.png)
+![Topographic contour map and 3D surface generated from synthetic DEM data]({static}images/contour_map.png)

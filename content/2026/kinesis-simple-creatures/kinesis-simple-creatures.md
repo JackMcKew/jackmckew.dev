@@ -180,4 +180,4 @@ The honest insight: simulation teaches you something about biology and systems t
 
 Also: I spent way too long debugging creatures that wouldn't stay in the blue zone because their collision logic was broken. But that's the fun of it.
 
-![Kinesis simulation - density heatmap and zone speed rules](images/kinesis_simulation.png)
+![Kinesis simulation - density heatmap and zone speed rules]({static}images/kinesis_simulation.png)
