@@ -1424,73 +1424,104 @@ async function genCartpole(outPath) {
   const ctx = canvas.getContext('2d');
 
   const GROUND_Y = H - 80;
-  let cx = W / 2, cvx = 0;
-  let th = 0.05, dth = 0;
-  const POLE_L = 140;
-  let alive = true, failAt = -1;
-  let gen = 1, episode = 1;
+  const CART_W = 70, CART_H = 28;
+  const POLE_L = 130;
+  const CART_BASE_Y = GROUND_Y - CART_H; // where the pole is attached
 
-  const records = []; // pre-simulate
-
-  // Simulate multiple episodes: early ones fail, later ones succeed
-  const episodes = [];
-  // Episode 1: fail at frame 40
-  let s = { cx: W/2, cvx: 0, th: 0.15, dth: 0.02 };
-  for (let f = 0; f < FRAMES; f++) {
-    const force = s.th > 0 ? 8 : -8; // bad controller
-    const acc = force - 0.3 * Math.sign(s.cvx);
-    s.cvx += acc * 0.02; s.cx += s.cvx * 0.02;
-    const ddth = (9.8 * Math.sin(s.th) - Math.cos(s.th) * force) / 1.5;
-    s.dth += ddth * 0.02; s.th += s.dth * 0.02;
-    episodes.push({ cx: s.cx, th: s.th, alive: Math.abs(s.th) < Math.PI/4 && Math.abs(s.cx - W/2) < W/3 });
-    if (!episodes[episodes.length-1].alive) { while (episodes.length < FRAMES) episodes.push({ cx: W/2, th: 0.05, dth: 0, alive: true, newEp: true }); break; }
+  // Cartpole dynamics: returns [ddcx, ddth]
+  // Standard equations: m_c=1, m_p=0.1, l=1 (scaled), g=9.8
+  function cartpoleDerivs(th, dth, cvx, force) {
+    const g = 9.8, mc = 1.0, mp = 0.1, l = 0.5;
+    const costh = Math.cos(th), sinth = Math.sin(th);
+    const total_mass = mc + mp;
+    const polemass_length = mp * l;
+    const temp = (force + polemass_length * dth * dth * sinth) / total_mass;
+    const ddth = (g * sinth - costh * temp) / (l * (4/3 - mp * costh * costh / total_mass));
+    const ddcx = temp - polemass_length * ddth * costh / total_mass;
+    return [ddcx, ddth];
   }
 
-  // Simulate "trained" agent running from some point
-  const trainedStart = Math.floor(FRAMES * 0.3);
+  // Pre-simulate three episodes at different skill levels
+  const DT = 1 / FPS;
+  const episodeFrames = Math.floor(FRAMES / 3);
+
+  function simulate(frames, controller, startTh = 0.1, startDth = 0.05) {
+    const states = [];
+    let cx = W / 2, cvx = 0, th = startTh, dth = startDth;
+    let dead = false, deadFrames = 0;
+    for (let f = 0; f < frames; f++) {
+      if (dead) {
+        // Keep falling under gravity (no control)
+        const [, ddth] = cartpoleDerivs(th, dth, cvx, 0);
+        dth += ddth * DT; th += dth * DT;
+        // Clamp pole to ground contact
+        const poleEndY = CART_BASE_Y - POLE_L * Math.cos(th);
+        if (poleEndY >= GROUND_Y) {
+          // Pole hit the ground - freeze at ground
+          const thMax = Math.acos(Math.max(-1, (CART_BASE_Y - GROUND_Y) / POLE_L));
+          th = th > 0 ? thMax : -thMax;
+          dth = 0;
+        }
+        deadFrames++;
+        states.push({ cx, th, dead: true, crashed: poleEndY >= GROUND_Y - 2 });
+        // Reset after 25 frames on the ground
+        if (deadFrames > 25 && poleEndY >= GROUND_Y - 5) {
+          cx = W / 2; cvx = 0; th = startTh; dth = startDth; dead = false; deadFrames = 0;
+        }
+        continue;
+      }
+
+      const force = controller(th, dth, cx, cvx, f);
+      const [ddcx, ddth] = cartpoleDerivs(th, dth, cvx, force);
+      cvx += ddcx * DT; cvx = Math.max(-6, Math.min(6, cvx));
+      cx += cvx * 30; // scale to pixels
+      cx = Math.max(60, Math.min(W - 60, cx));
+      dth += ddth * DT; th += dth * DT;
+
+      // Fail if pole falls past ~50 degrees
+      if (Math.abs(th) > 0.87) {
+        dead = true; deadFrames = 0;
+        states.push({ cx, th, dead: true, crashed: false });
+        continue;
+      }
+      states.push({ cx, th, dead: false, crashed: false });
+    }
+    return states;
+  }
+
+  // Gen 1: random controller - fails immediately
+  const gen1 = simulate(episodeFrames,
+    (th, dth, cx, cvx, f) => (Math.sin(f * 0.8) > 0 ? 8 : -8),
+    0.12, 0.03
+  );
+  // Gen 5: weak PD controller - survives longer but fails
+  const gen5 = simulate(episodeFrames,
+    (th, dth) => Math.max(-10, Math.min(10, -th * 6 - dth * 1.5)),
+    0.1, 0.04
+  );
+  // Gen 12: strong PD controller - stays balanced
+  const gen12 = simulate(episodeFrames,
+    (th, dth, cx, cvx) => Math.max(-10, Math.min(10, -th * 18 - dth * 4 + (W/2 - cx) * 0.004 - cvx * 0.6)),
+    0.05, 0.01
+  );
+
+  const allStates = [...gen1, ...gen5, ...gen12];
+  const genLabels = [
+    { label: 'Gen 1  (random)', color: RED },
+    { label: 'Gen 5  (learning)', color: GOLD },
+    { label: 'Gen 12  (trained)', color: GREEN },
+  ];
 
   for (let f = 0; f < FRAMES; f++) {
     drawBg(ctx);
 
-    // Phase label
-    const phase = f < trainedStart * 0.5 ? 'Gen 1 (random)' : f < trainedStart ? 'Gen 5 (improving)' : 'Gen 12 (trained)';
-    const phaseColor = f < trainedStart * 0.5 ? RED : f < trainedStart ? GOLD : GREEN;
-    label(ctx, `CARTPOLE  (Neuroevolution)`, W/2, 26, 14, MUTED);
-    pill(ctx, phase, W/2, 50, phaseColor.replace('#','#'));
+    const genIdx = Math.min(2, Math.floor(f / episodeFrames));
+    const { label: genLabel, color: genColor } = genLabels[genIdx];
+    label(ctx, 'CARTPOLE  (Neuroevolution)', W/2, 26, 14, MUTED);
+    pill(ctx, genLabel, W/2, 50, genColor);
 
-    // Simple simulation
-    let ctrl;
-    if (f < trainedStart * 0.5) {
-      // Random / bad
-      ctrl = (Math.sin(f * 0.3) > 0) ? 5 : -5;
-    } else if (f < trainedStart) {
-      // Getting better
-      ctrl = -th * 8 - dth * 2 + (W/2 - cx) * 0.01;
-    } else {
-      // Expert
-      ctrl = -th * 15 - dth * 4 + (W/2 - cx) * 0.05 - cvx * 1.5;
-    }
-    ctrl = Math.max(-12, Math.min(12, ctrl));
-
-    if (alive) {
-      cvx += ctrl * 0.015; cvx *= 0.98;
-      cx += cvx;
-      const ddth2 = (9.8 * Math.sin(th) - 0.5 * Math.cos(th) * ctrl) / 1.8;
-      dth += ddth2 * 0.02; dth *= 0.995;
-      th += dth;
-
-      if (Math.abs(th) > 0.6 && f < trainedStart * 0.9) {
-        alive = false; failAt = f;
-      }
-      if (cx < 60 || cx > W - 60) { cx = W/2; cvx = 0; }
-    }
-
-    if (!alive && f < trainedStart) {
-      if (f > failAt + 20) {
-        alive = true; cx = W/2; cvx = 0;
-        th = 0.08; dth = 0.01;
-      }
-    }
+    const state = allStates[Math.min(allStates.length - 1, f)];
+    const { cx, th, dead, crashed } = state;
 
     // Ground
     ctx.fillStyle = SURF;
@@ -1499,15 +1530,12 @@ async function genCartpole(outPath) {
     ctx.fillRect(0, GROUND_Y, W, 2);
 
     // Track
-    ctx.strokeStyle = MUTED;
-    ctx.lineWidth = 1;
-    ctx.setLineDash([8, 8]);
+    ctx.strokeStyle = MUTED; ctx.lineWidth = 1; ctx.setLineDash([8, 8]);
     ctx.beginPath(); ctx.moveTo(60, GROUND_Y + 1); ctx.lineTo(W - 60, GROUND_Y + 1); ctx.stroke();
     ctx.setLineDash([]);
 
     // Cart
-    const CART_W = 70, CART_H = 28;
-    ctx.fillStyle = WHITE;
+    ctx.fillStyle = dead ? '#444' : WHITE;
     roundRect(ctx, cx - CART_W/2, GROUND_Y - CART_H, CART_W, CART_H, 6);
     ctx.fill();
     ctx.fillStyle = BG;
@@ -1518,18 +1546,27 @@ async function genCartpole(outPath) {
     ctx.beginPath(); ctx.arc(cx + 20, GROUND_Y - 2, 4, 0, Math.PI*2); ctx.fill();
 
     // Pole
-    const poleEndX = cx + POLE_L * Math.sin(th);
-    const poleEndY = GROUND_Y - CART_H - POLE_L * Math.cos(th);
-    const poleColor = alive ? (f >= trainedStart ? GREEN : GOLD) : RED;
+    const poleBaseX = cx;
+    const poleBaseY = CART_BASE_Y;
+    const poleEndX = poleBaseX + POLE_L * Math.sin(th);
+    const poleEndY = poleBaseY - POLE_L * Math.cos(th);
+    const poleColor = dead ? RED : genColor;
     ctx.strokeStyle = poleColor;
-    ctx.lineWidth = 8;
-    ctx.lineCap = 'round';
-    ctx.beginPath(); ctx.moveTo(cx, GROUND_Y - CART_H); ctx.lineTo(poleEndX, poleEndY); ctx.stroke();
+    ctx.lineWidth = 8; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(poleBaseX, poleBaseY); ctx.lineTo(poleEndX, poleEndY); ctx.stroke();
     ctx.fillStyle = poleColor;
-    ctx.beginPath(); ctx.arc(poleEndX, poleEndY, 6, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(poleEndX, poleEndY, 7, 0, Math.PI*2); ctx.fill();
 
-    // Stats
-    label(ctx, `θ: ${(th * 180 / Math.PI).toFixed(1)}°  |  x: ${(cx - W/2).toFixed(0)}px`, W/2, H - 25, 12, MUTED);
+    // Crash flash
+    if (crashed) {
+      ctx.fillStyle = RED + '44';
+      ctx.fillRect(0, 0, W, H);
+      label(ctx, 'FAILED', cx, GROUND_Y - CART_H - 20, 16, RED);
+    }
+
+    // Angle indicator
+    const deg = (th * 180 / Math.PI).toFixed(1);
+    label(ctx, `θ: ${deg}°  |  x: ${(cx - W/2).toFixed(0)}px`, W/2, H - 25, 12, MUTED);
 
     await writeFrame(proc, canvas);
   }
