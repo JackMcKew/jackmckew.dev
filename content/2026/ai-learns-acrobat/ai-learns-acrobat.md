@@ -10,6 +10,17 @@ Acrobat flips that challenge: instead of balancing a pendulum from above, you're
 
 Same physics domain, completely different objective. Same DQN algorithm, different dynamics. Let's see what changes.
 
+## After 5,000 Episodes
+
+| Episode | Solve Rate | Avg Steps |
+|---------|-----------|-----------|
+| 200 | ~5-10% | 480 |
+| 1,000 | ~50-70% | 350 |
+| 2,000 | ~80-90% | 250 |
+| 5,000 | ~90-95% | 180-200 |
+
+90-95% solve rate. ~180 steps to reach goal vs ~490 for a random solver. The agent discovered energy pumping and resonance timing purely from a -1/step reward signal. Here's how.
+
 ## The Acrobat System
 
 Two rigid links connected by a motorised joint. The upper link hangs from a fixed pivot (no motor there). Only the joint between link 1 and link 2 can apply torque.

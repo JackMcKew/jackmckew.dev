@@ -8,6 +8,16 @@ A rat in a maze learns by trial and error. Put it in a new maze and it explores 
 
 This is the key property this post is about: **generalisation**. Not memorising one maze, but learning to navigate mazes in general.
 
+## After 5,000 Episodes (per maze size)
+
+| Maze Size | DQN Solve Rate | DQN Avg Steps | Random Avg Steps | Speedup |
+|-----------|---------------|---------------|-----------------|---------|
+| 7x7 | ~95% | ~35 | ~280 | ~8x |
+| 11x11 | ~85% | ~90 | ~1,800 | ~20x |
+| 15x15 | ~70% | ~200 | ~8,000+ | ~40x |
+
+95% solve rate on mazes it has never seen, averaging 35 steps where a random walk takes 280. The efficiency advantage grows with maze size. Here's how a single network learns to navigate any random maze.
+
 ## The Environment
 
 Mazes are generated fresh every episode using recursive backtracking - a standard algorithm that produces perfect mazes (exactly one path between any two points, no loops).

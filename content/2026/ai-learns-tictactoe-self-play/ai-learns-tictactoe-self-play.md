@@ -10,6 +10,17 @@ Because *how* it gets there is the interesting part. The agent starts knowing ab
 
 After 10,000 episodes of self-play, the agent draws 100% of games against a perfect minimax solver. It discovered the optimal strategy without ever being told what "optimal" means.
 
+## Fully Trained
+
+| Opponent | Win | Draw | Loss |
+|----------|-----|------|------|
+| Random | 92.2% | 7.8% | 0% |
+| Minimax (perfect) | 0% | **100%** | 0% |
+
+Open any game - the trained agent takes the centre square immediately. Play optimally and every game ends in a draw. Play carelessly and you'll lose. It discovered these rules from nothing but +1/-1 outcomes across 10,000 self-play games.
+
+Here's how it learned them.
+
 ## The Setup
 
 The board is a 9-element vector: `{-1 = O, 0 = empty, 1 = X}`, always from the current player's perspective. The DQN outputs Q-values for all 9 positions; invalid moves (occupied cells) are masked to -∞ so the agent can never learn to play on taken squares.

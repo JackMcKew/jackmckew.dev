@@ -10,6 +10,17 @@ Blackjack is different. The optimal strategy - basic strategy - is analytically 
 
 Three agents. One optimal baseline. 500,000 hands each.
 
+## Final Results (50,000 Evaluation Hands)
+
+| Agent | Win % | Draw % | Loss % | vs Optimal |
+|-------|-------|--------|--------|-----------|
+| Random | 28.8 | 8.2 | 63.0 | -15.0pp |
+| Monte Carlo | 43.1 | 8.7 | 48.2 | -0.7pp |
+| DQN | 42.6 | 8.5 | 48.9 | -1.2pp |
+| **Optimal (basic strategy)** | **43.8** | **8.6** | **47.6** | 0 |
+
+Monte Carlo gets within 0.7 percentage points of the mathematically proven optimal, independently discovering the key rules of basic strategy from 500,000 hands of +1/-1 outcomes. Here's how each approach works and why MC beats DQN here.
+
 ## The Setup
 
 Simplified blackjack - no splitting, no doubling down. One dealer, one player.

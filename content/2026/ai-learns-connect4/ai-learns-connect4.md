@@ -8,6 +8,18 @@ Tic-Tac-Toe has 255,168 possible games. Connect 4 has 4,531,985,219,092. That's 
 
 When we trained DQN on Tic-Tac-Toe using self-play, it achieved perfect play - 100% draws against minimax - in 10,000 episodes. Connect 4 is a different beast entirely. Let's see how far self-play gets on a genuinely hard game.
 
+## After 15,000 Episodes
+
+| Episode | Win % vs Random | Draw % | Loss % |
+|---------|----------------|--------|--------|
+| 500 | ~55% | ~10% | ~35% |
+| 2,000 | ~70% | ~15% | ~15% |
+| 5,000 | ~82% | ~12% | ~6% |
+| 10,000 | ~88% | ~8% | ~4% |
+| 15,000 | ~90%+ | ~7% | ~3% |
+
+~90% win rate against random opponents. The agent opens with the centre column, blocks three-in-a-row threats reliably, and recognises forced-win sequences. It competes meaningfully against depth-4 minimax. Here's the full training story.
+
 ## Why Connect 4 Is Hard
 
 The board is 7 columns x 6 rows. Players alternate dropping pieces from the top. First to connect 4 in a row - horizontal, vertical, or diagonal - wins.

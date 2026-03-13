@@ -8,6 +8,18 @@ Pong is the original video game and arguably the cleanest testbed for learning f
 
 We built a Pong simulator from scratch - no game library, pure Python physics - and trained a DQN agent to beat a scripted heuristic opponent. Here's what happened.
 
+## After 8,000 Episodes
+
+| Episode | Win % | Agent Score | Opp Score |
+|---------|-------|-------------|-----------|
+| 200 | ~8% | ~4 | ~16 |
+| 1,000 | ~25% | ~8 | ~13 |
+| 3,000 | ~55% | ~12 | ~9 |
+| 6,000 | ~72% | ~15 | ~6 |
+| 8,000 | ~78% | ~16 | ~5 |
+
+78% win rate. Average 16 points per game to the opponent's 5. The agent learned to exploit the paddle deflection physics - angling shots to corners, forcing unreachable returns. Here's how it discovered that.
+
 ## The Environment
 
 Custom physics, no external dependencies:

@@ -8,6 +8,16 @@ The multi-armed bandit problem is where machine learning meets Vegas. You've got
 
 I built a 5-machine simulator and tested three strategies across 500 independent runs. The differences were striking - not just in final score, but in *how* each strategy figured out which machine was best.
 
+## The Result: 500 Runs, 1,000 Pulls Each
+
+| Strategy | Mean regret | Std dev | Best arm % |
+|---|---|---|---|
+| Epsilon-greedy (e=0.1) | 54.0 | 32.7 | 57.2% |
+| UCB (c=1.0) | 50.7 | 17.7 | 58.5% |
+| Thompson sampling | **28.6** | 19.7 | **71.1%** |
+
+Thompson sampling pulls the best machine 71% of the time and accumulates roughly half the regret of epsilon-greedy. Here's how each strategy works and why the gap exists.
+
 ## The Setup
 
 Five slot machines with true win probabilities of 0.10, 0.15, 0.30, 0.45, and 0.50. Machine 5 is the best, but you don't know that upfront. Every pull gives you one data point.

@@ -10,6 +10,20 @@ It didn't.
 
 This is the story of what happened instead, and what it reveals about the gap between "simple-looking" control problems and what RL actually finds hard.
 
+## After 8,000 Episodes
+
+| Episode | Reward | Land % | Crash % |
+|---------|--------|--------|---------|
+| 200 | -80.9 | 0% | 29.5% |
+| 400 | -79.8 | 0% | 0% |
+| 800 | -50.9 | 0% | 0% |
+| 1,000 | -61.7 | 0% | 50% |
+| 1,400 | -83.2 | 0% | 68% |
+| 2,000 | -68.6 | 0% | 5.5% |
+| 2,200 | -51.3 | 0% | 0% |
+
+Landing rate: 0%. But that oscillation between 0% and 68% crash rates isn't noise - it's the agent repeatedly discovering the right direction, failing to execute, and retreating to a safer policy. Here's what that pattern reveals about sparse-reward control.
+
 ## The Environment
 
 A 2D rocket starts in the upper half of the world. It has:

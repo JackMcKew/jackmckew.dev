@@ -8,6 +8,16 @@ The classic 2D Snake game is already a decent RL benchmark - sparse rewards, sel
 
 I trained a DQN agent on a 10x10x10 3D Snake environment for 3,000 episodes on a CPU. The results were honest: the agent learned one extremely important skill very quickly, then plateaued. Understanding *why* it plateaued tells you more about deep RL than a clean success story would.
 
+## After 3,000 Episodes
+
+| | Random (500 runs) | Trained DQN (500 runs) |
+|---|---|---|
+| Avg survival | 23.7 steps | **500.0 steps** (always hits limit) |
+| Avg score (food eaten) | 0.030 | 0.064 |
+| Episodes with food | 3.0% | 6.4% |
+
+Perfect survival - it hits the 500-step time limit every single run without crashing into walls or itself. Food-finding is another story: roughly one piece of food every 15 episodes. Here's what happened and why.
+
 ## The Environment
 
 10x10x10 grid. Six movement directions (+x, -x, +y, -y, +z, -z). Food spawns at random empty cells. Eating adds a body segment. Hitting a wall or yourself ends the episode.

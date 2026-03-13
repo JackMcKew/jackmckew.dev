@@ -10,6 +10,16 @@ A DQN agent took 5,000 training episodes and still only averages 0.42 pipes pass
 
 That gap between human intuition and agent performance tells you a lot about where deep RL actually struggles.
 
+## After 5,000 Episodes
+
+| Metric | Random | Trained (5K eps) |
+|--------|--------|-------------------|
+| Avg pipes passed | ~0.05 | 0.42 |
+| Avg steps survived | 30 | 105 |
+| Best run (eval) | 1 | 8+ |
+
+8x better than random on pipe count. 3.5x longer survival. The agent has a policy - maintain mid-altitude, correct near gaps - but it's not reliable and it's nowhere near human-level (50+ pipes). Here's why, and what that reveals about DQN on sparse-reward problems.
+
 ## The Environment
 
 Pure Python physics simulation - no game library. The bird falls under gravity (0.5 px/step²). Tapping sets velocity to -8 px/step (upward). Pipes scroll left at 3 px/step. Gap height: 80px. World height: 300px.
