@@ -18,7 +18,11 @@ We built a Breakout simulator from scratch (no game library) and trained a DQN o
 | 6,000 | ~30-35 | 40-60% |
 | 8,000 | ~35+ | 60-75% |
 
-60-75% win rate, averaging 35+ bricks per game out of 40. The agent taught itself paddle deflection angles to steer the ball toward remaining bricks, working up through all 5 rows. Here's how.
+60-75% win rate, averaging 35+ bricks per game out of 40. The agent taught itself paddle deflection angles to steer the ball toward remaining bricks, working up through all 5 rows.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-breakout.mp4" type="video/mp4"></video>
+
+Here's how.
 
 ## The Environment
 

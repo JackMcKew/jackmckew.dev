@@ -19,7 +19,11 @@ Three agents. One optimal baseline. 500,000 hands each.
 | DQN | 42.6 | 8.5 | 48.9 | -1.2pp |
 | **Optimal (basic strategy)** | **43.8** | **8.6** | **47.6** | 0 |
 
-Monte Carlo gets within 0.7 percentage points of the mathematically proven optimal, independently discovering the key rules of basic strategy from 500,000 hands of +1/-1 outcomes. Here's how each approach works and why MC beats DQN here.
+Monte Carlo gets within 0.7 percentage points of the mathematically proven optimal, independently discovering the key rules of basic strategy from 500,000 hands of +1/-1 outcomes.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-blackjack.mp4" type="video/mp4"></video>
+
+Here's how each approach works and why MC beats DQN here.
 
 ## The Setup
 

@@ -18,7 +18,11 @@ When we trained DQN on Tic-Tac-Toe using self-play, it achieved perfect play - 1
 | 10,000 | ~88% | ~8% | ~4% |
 | 15,000 | ~90%+ | ~7% | ~3% |
 
-~90% win rate against random opponents. The agent opens with the centre column, blocks three-in-a-row threats reliably, and recognises forced-win sequences. It competes meaningfully against depth-4 minimax. Here's the full training story.
+~90% win rate against random opponents. The agent opens with the centre column, blocks three-in-a-row threats reliably, and recognises forced-win sequences. It competes meaningfully against depth-4 minimax.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-connect4.mp4" type="video/mp4"></video>
+
+Here's the full training story.
 
 ## Why Connect 4 Is Hard
 

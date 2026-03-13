@@ -16,7 +16,11 @@ I trained a DQN agent on a 10x10x10 3D Snake environment for 3,000 episodes on a
 | Avg score (food eaten) | 0.030 | 0.064 |
 | Episodes with food | 3.0% | 6.4% |
 
-Perfect survival - it hits the 500-step time limit every single run without crashing into walls or itself. Food-finding is another story: roughly one piece of food every 15 episodes. Here's what happened and why.
+Perfect survival - it hits the 500-step time limit every single run without crashing into walls or itself. Food-finding is another story: roughly one piece of food every 15 episodes.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-3d-snake.mp4" type="video/mp4"></video>
+
+Here's what happened and why.
 
 ## The Environment
 

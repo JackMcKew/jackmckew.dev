@@ -19,6 +19,8 @@ After 10,000 episodes of self-play, the agent draws 100% of games against a perf
 
 Open any game - the trained agent takes the centre square immediately. Play optimally and every game ends in a draw. Play carelessly and you'll lose. It discovered these rules from nothing but +1/-1 outcomes across 10,000 self-play games.
 
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-tictactoe-self-play.mp4" type="video/mp4"></video>
+
 Here's how it learned them.
 
 ## The Setup

@@ -19,7 +19,11 @@ Same physics domain, completely different objective. Same DQN algorithm, differe
 | 2,000 | ~80-90% | 250 |
 | 5,000 | ~90-95% | 180-200 |
 
-90-95% solve rate. ~180 steps to reach goal vs ~490 for a random solver. The agent discovered energy pumping and resonance timing purely from a -1/step reward signal. Here's how.
+90-95% solve rate. ~180 steps to reach goal vs ~490 for a random solver. The agent discovered energy pumping and resonance timing purely from a -1/step reward signal.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-acrobat.mp4" type="video/mp4"></video>
+
+Here's how.
 
 ## The Acrobat System
 

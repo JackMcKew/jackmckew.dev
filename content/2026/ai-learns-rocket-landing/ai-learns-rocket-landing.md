@@ -22,7 +22,11 @@ This is the story of what happened instead, and what it reveals about the gap be
 | 2,000 | -68.6 | 0% | 5.5% |
 | 2,200 | -51.3 | 0% | 0% |
 
-Landing rate: 0%. But that oscillation between 0% and 68% crash rates isn't noise - it's the agent repeatedly discovering the right direction, failing to execute, and retreating to a safer policy. Here's what that pattern reveals about sparse-reward control.
+Landing rate: 0%. But that oscillation between 0% and 68% crash rates isn't noise - it's the agent repeatedly discovering the right direction, failing to execute, and retreating to a safer policy.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-rocket-landing.mp4" type="video/mp4"></video>
+
+Here's what that pattern reveals about sparse-reward control.
 
 ## The Environment
 

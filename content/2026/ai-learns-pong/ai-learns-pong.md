@@ -18,7 +18,11 @@ We built a Pong simulator from scratch - no game library, pure Python physics - 
 | 6,000 | ~72% | ~15 | ~6 |
 | 8,000 | ~78% | ~16 | ~5 |
 
-78% win rate. Average 16 points per game to the opponent's 5. The agent learned to exploit the paddle deflection physics - angling shots to corners, forcing unreachable returns. Here's how it discovered that.
+78% win rate. Average 16 points per game to the opponent's 5. The agent learned to exploit the paddle deflection physics - angling shots to corners, forcing unreachable returns.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-pong.mp4" type="video/mp4"></video>
+
+Here's how it discovered that.
 
 ## The Environment
 

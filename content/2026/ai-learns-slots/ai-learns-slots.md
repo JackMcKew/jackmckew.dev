@@ -16,7 +16,11 @@ I built a 5-machine simulator and tested three strategies across 500 independent
 | UCB (c=1.0) | 50.7 | 17.7 | 58.5% |
 | Thompson sampling | **28.6** | 19.7 | **71.1%** |
 
-Thompson sampling pulls the best machine 71% of the time and accumulates roughly half the regret of epsilon-greedy. Here's how each strategy works and why the gap exists.
+Thompson sampling pulls the best machine 71% of the time and accumulates roughly half the regret of epsilon-greedy.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-slots.mp4" type="video/mp4"></video>
+
+Here's how each strategy works and why the gap exists.
 
 ## The Setup
 

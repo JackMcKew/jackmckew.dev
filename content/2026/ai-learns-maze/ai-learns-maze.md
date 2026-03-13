@@ -16,7 +16,11 @@ This is the key property this post is about: **generalisation**. Not memorising 
 | 11x11 | ~85% | ~90 | ~1,800 | ~20x |
 | 15x15 | ~70% | ~200 | ~8,000+ | ~40x |
 
-95% solve rate on mazes it has never seen, averaging 35 steps where a random walk takes 280. The efficiency advantage grows with maze size. Here's how a single network learns to navigate any random maze.
+95% solve rate on mazes it has never seen, averaging 35 steps where a random walk takes 280. The efficiency advantage grows with maze size.
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-maze.mp4" type="video/mp4"></video>
+
+Here's how a single network learns to navigate any random maze.
 
 ## The Environment
 

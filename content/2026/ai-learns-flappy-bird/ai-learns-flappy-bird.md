@@ -18,7 +18,11 @@ That gap between human intuition and agent performance tells you a lot about whe
 | Avg steps survived | 30 | 105 |
 | Best run (eval) | 1 | 8+ |
 
-8x better than random on pipe count. 3.5x longer survival. The agent has a policy - maintain mid-altitude, correct near gaps - but it's not reliable and it's nowhere near human-level (50+ pipes). Here's why, and what that reveals about DQN on sparse-reward problems.
+8x better than random on pipe count. 3.5x longer survival. The agent has a policy - maintain mid-altitude, correct near gaps - but it's not reliable and it's nowhere near human-level (50+ pipes).
+
+<video autoplay loop muted playsinline width="100%"><source src="{static}images/ai-learns-flappy-bird.mp4" type="video/mp4"></video>
+
+Here's why, and what that reveals about DQN on sparse-reward problems.
 
 ## The Environment
 
